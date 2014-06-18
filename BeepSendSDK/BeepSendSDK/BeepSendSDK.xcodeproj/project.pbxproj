@@ -1,0 +1,822 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6E653818194730EB00FC6349 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E653817194730EB00FC6349 /* Foundation.framework */; };
+		6E65381D194730EB00FC6349 /* BeepSendSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6E65381C194730EB00FC6349 /* BeepSendSDK.h */; };
+		6E65381F194730EB00FC6349 /* BeepSendSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E65381E194730EB00FC6349 /* BeepSendSDK.m */; };
+		6E653826194730EB00FC6349 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E653825194730EB00FC6349 /* XCTest.framework */; };
+		6E653827194730EB00FC6349 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E653817194730EB00FC6349 /* Foundation.framework */; };
+		6E65382C194730EB00FC6349 /* libBeepSendSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E653814194730EB00FC6349 /* libBeepSendSDK.a */; };
+		6E653832194730EB00FC6349 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E653830194730EB00FC6349 /* InfoPlist.strings */; };
+		6E653834194730EB00FC6349 /* BeepSendSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E653833194730EB00FC6349 /* BeepSendSDKTests.m */; };
+		6EB685581949ED8B0010FC73 /* BSAFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685461949ED8B0010FC73 /* BSAFHTTPRequestOperation.m */; };
+		6EB685591949ED8B0010FC73 /* BSAFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685481949ED8B0010FC73 /* BSAFHTTPRequestOperationManager.m */; };
+		6EB6855A1949ED8B0010FC73 /* BSAFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6854A1949ED8B0010FC73 /* BSAFHTTPSessionManager.m */; };
+		6EB6855B1949ED8B0010FC73 /* BSAFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6854D1949ED8B0010FC73 /* BSAFNetworkReachabilityManager.m */; };
+		6EB6855C1949ED8B0010FC73 /* BSAFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6854F1949ED8B0010FC73 /* BSAFSecurityPolicy.m */; };
+		6EB6855D1949ED8B0010FC73 /* BSAFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685511949ED8B0010FC73 /* BSAFURLConnectionOperation.m */; };
+		6EB6855E1949ED8B0010FC73 /* BSAFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685531949ED8B0010FC73 /* BSAFURLRequestSerialization.m */; };
+		6EB6855F1949ED8B0010FC73 /* BSAFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685551949ED8B0010FC73 /* BSAFURLResponseSerialization.m */; };
+		6EB685601949ED8B0010FC73 /* BSAFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685571949ED8B0010FC73 /* BSAFURLSessionManager.m */; };
+		6EB96ED519518A2300AD77E2 /* HTSerializableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB96ED419518A2300AD77E2 /* HTSerializableObject.m */; };
+		6EB96EDF1951927500AD77E2 /* BSAPCAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB96EDE1951927500AD77E2 /* BSAPCAccountManager.m */; };
+		6EB96EE2195192A600AD77E2 /* BSAPCPriceListSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB96EE1195192A600AD77E2 /* BSAPCPriceListSchedule.m */; };
+		6EB96EE6195192C100AD77E2 /* BSAPCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB96EE5195192C100AD77E2 /* BSAPCustomer.m */; };
+		6EB96EEA195199AD00AD77E2 /* HTSerializableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB96ED419518A2300AD77E2 /* HTSerializableObject.m */; };
+		6EB96EEB195199AD00AD77E2 /* BSAPCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB96EE5195192C100AD77E2 /* BSAPCustomer.m */; };
+		6EBA76A7194AF28600941E85 /* BSBaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA76A6194AF28600941E85 /* BSBaseService.m */; };
+		6EBA76AB194AF28C00941E85 /* BSNetworkLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA76AA194AF28C00941E85 /* BSNetworkLayer.m */; };
+		6EBA76B0194B2CD600941E85 /* BSAPIConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA76AF194B2CD600941E85 /* BSAPIConfiguration.m */; };
+		6EBA76B9194B38D800941E85 /* BSConnectionsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA76B8194B38D800941E85 /* BSConnectionsService.m */; };
+		6EBA76BD194B3C8300941E85 /* BSHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA76BC194B3C8300941E85 /* BSHelper.m */; };
+		6EBA76BE194B3EB300941E85 /* BSConnectionsService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBA76B7194B38D800941E85 /* BSConnectionsService.h */; };
+		6EBC77E2194EF4F900666099 /* BSNetworkLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA76AA194AF28C00941E85 /* BSNetworkLayer.m */; };
+		6EBC77E3194EF4F900666099 /* BSConnectionsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA76B8194B38D800941E85 /* BSConnectionsService.m */; };
+		6EBC77E5194EF50B00666099 /* BSAFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685461949ED8B0010FC73 /* BSAFHTTPRequestOperation.m */; };
+		6EBC77E6194EF50B00666099 /* BSAFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685481949ED8B0010FC73 /* BSAFHTTPRequestOperationManager.m */; };
+		6EBC77E7194EF50B00666099 /* BSAFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6854A1949ED8B0010FC73 /* BSAFHTTPSessionManager.m */; };
+		6EBC77E8194EF50B00666099 /* BSAFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6854D1949ED8B0010FC73 /* BSAFNetworkReachabilityManager.m */; };
+		6EBC77E9194EF50B00666099 /* BSAFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6854F1949ED8B0010FC73 /* BSAFSecurityPolicy.m */; };
+		6EBC77EA194EF50B00666099 /* BSAFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685511949ED8B0010FC73 /* BSAFURLConnectionOperation.m */; };
+		6EBC77EB194EF50B00666099 /* BSAFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685531949ED8B0010FC73 /* BSAFURLRequestSerialization.m */; };
+		6EBC77EC194EF50B00666099 /* BSAFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685551949ED8B0010FC73 /* BSAFURLResponseSerialization.m */; };
+		6EBC77ED194EF50B00666099 /* BSAFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685571949ED8B0010FC73 /* BSAFURLSessionManager.m */; };
+		6EBC77F5194F2E6300666099 /* BSCustomerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC77F4194F2E6300666099 /* BSCustomerService.m */; };
+		6EBC77F6194F2E6300666099 /* BSCustomerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC77F4194F2E6300666099 /* BSCustomerService.m */; };
+		6EBC7807194F356A00666099 /* BSBaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA76A6194AF28600941E85 /* BSBaseService.m */; };
+		6EBC7808194F3C4C00666099 /* BSCustomerService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBC77F3194F2E6300666099 /* BSCustomerService.h */; };
+		6EC3166519502ADC004D8F87 /* BSTestSemaphor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC3166419502ADC004D8F87 /* BSTestSemaphor.m */; };
+		6EC31686195030D0004D8F87 /* BSSMSService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC31685195030D0004D8F87 /* BSSMSService.m */; };
+		6EC31687195030D0004D8F87 /* BSSMSService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC31685195030D0004D8F87 /* BSSMSService.m */; };
+		6EC31688195032AE004D8F87 /* BSSMSService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EC31684195030D0004D8F87 /* BSSMSService.h */; };
+		6EC3168D19504CEB004D8F87 /* BSGeneralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC3168C19504CEB004D8F87 /* BSGeneralModel.m */; };
+		6EC3168E19504CEB004D8F87 /* BSGeneralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC3168C19504CEB004D8F87 /* BSGeneralModel.m */; };
+		6EC3169119504D27004D8F87 /* BSCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC3169019504D27004D8F87 /* BSCustomerModel.m */; };
+		6EC3169219504D27004D8F87 /* BSCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC3169019504D27004D8F87 /* BSCustomerModel.m */; };
+		6ECA48391950767A003E2B8E /* BSAccountManagerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA48381950767A003E2B8E /* BSAccountManagerModel.m */; };
+		6ECA483D19507F51003E2B8E /* BSCustomerPriceListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA483C19507F51003E2B8E /* BSCustomerPriceListModel.m */; };
+		6ECA4841195080C6003E2B8E /* BSCustomerPriceListScheduleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ECA4840195080C6003E2B8E /* BSCustomerPriceListScheduleModel.m */; };
+		6ECA484219508B1A003E2B8E /* BSCustomerModel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EC3168F19504D27004D8F87 /* BSCustomerModel.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6E65382A194730EB00FC6349 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6E65380C194730EB00FC6349 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6E653813194730EB00FC6349;
+			remoteInfo = BeepSendSDK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6E653812194730EB00FC6349 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				6ECA484219508B1A003E2B8E /* BSCustomerModel.h in CopyFiles */,
+				6EC31688195032AE004D8F87 /* BSSMSService.h in CopyFiles */,
+				6EBC7808194F3C4C00666099 /* BSCustomerService.h in CopyFiles */,
+				6EBA76BE194B3EB300941E85 /* BSConnectionsService.h in CopyFiles */,
+				6E65381D194730EB00FC6349 /* BeepSendSDK.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		6E653814194730EB00FC6349 /* libBeepSendSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBeepSendSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E653817194730EB00FC6349 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6E65381B194730EB00FC6349 /* BeepSendSDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BeepSendSDK-Prefix.pch"; sourceTree = "<group>"; };
+		6E65381C194730EB00FC6349 /* BeepSendSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeepSendSDK.h; sourceTree = "<group>"; };
+		6E65381E194730EB00FC6349 /* BeepSendSDK.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeepSendSDK.m; sourceTree = "<group>"; };
+		6E653824194730EB00FC6349 /* BeepSendSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeepSendSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E653825194730EB00FC6349 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		6E65382F194730EB00FC6349 /* BeepSendSDKTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BeepSendSDKTests-Info.plist"; sourceTree = "<group>"; };
+		6E653831194730EB00FC6349 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6E653833194730EB00FC6349 /* BeepSendSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeepSendSDKTests.m; sourceTree = "<group>"; };
+		6EB685451949ED8B0010FC73 /* BSAFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		6EB685461949ED8B0010FC73 /* BSAFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		6EB685471949ED8B0010FC73 /* BSAFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
+		6EB685481949ED8B0010FC73 /* BSAFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
+		6EB685491949ED8B0010FC73 /* BSAFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAFHTTPSessionManager.h; sourceTree = "<group>"; };
+		6EB6854A1949ED8B0010FC73 /* BSAFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAFHTTPSessionManager.m; sourceTree = "<group>"; };
+		6EB6854B1949ED8B0010FC73 /* BSAFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAFNetworking.h; sourceTree = "<group>"; };
+		6EB6854C1949ED8B0010FC73 /* BSAFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		6EB6854D1949ED8B0010FC73 /* BSAFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		6EB6854E1949ED8B0010FC73 /* BSAFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAFSecurityPolicy.h; sourceTree = "<group>"; };
+		6EB6854F1949ED8B0010FC73 /* BSAFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAFSecurityPolicy.m; sourceTree = "<group>"; };
+		6EB685501949ED8B0010FC73 /* BSAFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAFURLConnectionOperation.h; sourceTree = "<group>"; };
+		6EB685511949ED8B0010FC73 /* BSAFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAFURLConnectionOperation.m; sourceTree = "<group>"; };
+		6EB685521949ED8B0010FC73 /* BSAFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAFURLRequestSerialization.h; sourceTree = "<group>"; };
+		6EB685531949ED8B0010FC73 /* BSAFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAFURLRequestSerialization.m; sourceTree = "<group>"; };
+		6EB685541949ED8B0010FC73 /* BSAFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAFURLResponseSerialization.h; sourceTree = "<group>"; };
+		6EB685551949ED8B0010FC73 /* BSAFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAFURLResponseSerialization.m; sourceTree = "<group>"; };
+		6EB685561949ED8B0010FC73 /* BSAFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAFURLSessionManager.h; sourceTree = "<group>"; };
+		6EB685571949ED8B0010FC73 /* BSAFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAFURLSessionManager.m; sourceTree = "<group>"; };
+		6EB96ED319518A2300AD77E2 /* HTSerializableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTSerializableObject.h; sourceTree = "<group>"; };
+		6EB96ED419518A2300AD77E2 /* HTSerializableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTSerializableObject.m; sourceTree = "<group>"; };
+		6EB96EDD1951927500AD77E2 /* BSAPCAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPCAccountManager.h; path = Models/AutomatedParsing/APCAccountManager/BSAPCAccountManager.h; sourceTree = "<group>"; };
+		6EB96EDE1951927500AD77E2 /* BSAPCAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPCAccountManager.m; path = Models/AutomatedParsing/APCAccountManager/BSAPCAccountManager.m; sourceTree = "<group>"; };
+		6EB96EE0195192A600AD77E2 /* BSAPCPriceListSchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPCPriceListSchedule.h; path = Models/AutomatedParsing/APCPriceListSchedule/BSAPCPriceListSchedule.h; sourceTree = "<group>"; };
+		6EB96EE1195192A600AD77E2 /* BSAPCPriceListSchedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPCPriceListSchedule.m; path = Models/AutomatedParsing/APCPriceListSchedule/BSAPCPriceListSchedule.m; sourceTree = "<group>"; };
+		6EB96EE4195192C100AD77E2 /* BSAPCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAPCustomer.h; sourceTree = "<group>"; };
+		6EB96EE5195192C100AD77E2 /* BSAPCustomer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAPCustomer.m; sourceTree = "<group>"; };
+		6EBA76A5194AF28600941E85 /* BSBaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSBaseService.h; sourceTree = "<group>"; };
+		6EBA76A6194AF28600941E85 /* BSBaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSBaseService.m; sourceTree = "<group>"; };
+		6EBA76A9194AF28C00941E85 /* BSNetworkLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSNetworkLayer.h; sourceTree = "<group>"; };
+		6EBA76AA194AF28C00941E85 /* BSNetworkLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSNetworkLayer.m; sourceTree = "<group>"; };
+		6EBA76AE194B2CD600941E85 /* BSAPIConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPIConfiguration.h; path = Configuration/APIConfiguration/BSAPIConfiguration.h; sourceTree = "<group>"; };
+		6EBA76AF194B2CD600941E85 /* BSAPIConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPIConfiguration.m; path = Configuration/APIConfiguration/BSAPIConfiguration.m; sourceTree = "<group>"; };
+		6EBA76B1194B2CFF00941E85 /* InputData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputData.h; sourceTree = "<group>"; };
+		6EBA76B7194B38D800941E85 /* BSConnectionsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSConnectionsService.h; sourceTree = "<group>"; };
+		6EBA76B8194B38D800941E85 /* BSConnectionsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSConnectionsService.m; sourceTree = "<group>"; };
+		6EBA76BB194B3C8300941E85 /* BSHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSHelper.h; path = Utilities/Helper/BSHelper.h; sourceTree = "<group>"; };
+		6EBA76BC194B3C8300941E85 /* BSHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSHelper.m; path = Utilities/Helper/BSHelper.m; sourceTree = "<group>"; };
+		6EBC77F3194F2E6300666099 /* BSCustomerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSCustomerService.h; path = Customer/BSCustomerService.h; sourceTree = "<group>"; };
+		6EBC77F4194F2E6300666099 /* BSCustomerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSCustomerService.m; path = Customer/BSCustomerService.m; sourceTree = "<group>"; };
+		6EC3166319502ADC004D8F87 /* BSTestSemaphor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTestSemaphor.h; sourceTree = "<group>"; };
+		6EC3166419502ADC004D8F87 /* BSTestSemaphor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSTestSemaphor.m; sourceTree = "<group>"; };
+		6EC31684195030D0004D8F87 /* BSSMSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSSMSService.h; path = SMS/BSSMSService.h; sourceTree = "<group>"; };
+		6EC31685195030D0004D8F87 /* BSSMSService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSSMSService.m; path = SMS/BSSMSService.m; sourceTree = "<group>"; };
+		6EC3168B19504CEB004D8F87 /* BSGeneralModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSGeneralModel.h; path = Models/GeneralModel/BSGeneralModel.h; sourceTree = "<group>"; };
+		6EC3168C19504CEB004D8F87 /* BSGeneralModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSGeneralModel.m; path = Models/GeneralModel/BSGeneralModel.m; sourceTree = "<group>"; };
+		6EC3168F19504D27004D8F87 /* BSCustomerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSCustomerModel.h; path = Models/Customer/BSCustomerModel.h; sourceTree = "<group>"; };
+		6EC3169019504D27004D8F87 /* BSCustomerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSCustomerModel.m; path = Models/Customer/BSCustomerModel.m; sourceTree = "<group>"; };
+		6ECA48371950767A003E2B8E /* BSAccountManagerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAccountManagerModel.h; path = Models/AccountManager/BSAccountManagerModel.h; sourceTree = "<group>"; };
+		6ECA48381950767A003E2B8E /* BSAccountManagerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAccountManagerModel.m; path = Models/AccountManager/BSAccountManagerModel.m; sourceTree = "<group>"; };
+		6ECA483B19507F51003E2B8E /* BSCustomerPriceListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSCustomerPriceListModel.h; path = Models/CustomerPriceList/BSCustomerPriceListModel.h; sourceTree = "<group>"; };
+		6ECA483C19507F51003E2B8E /* BSCustomerPriceListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSCustomerPriceListModel.m; path = Models/CustomerPriceList/BSCustomerPriceListModel.m; sourceTree = "<group>"; };
+		6ECA483F195080C6003E2B8E /* BSCustomerPriceListScheduleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSCustomerPriceListScheduleModel.h; path = Models/CustomerPriceListSchedule/BSCustomerPriceListScheduleModel.h; sourceTree = "<group>"; };
+		6ECA4840195080C6003E2B8E /* BSCustomerPriceListScheduleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSCustomerPriceListScheduleModel.m; path = Models/CustomerPriceListSchedule/BSCustomerPriceListScheduleModel.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6E653811194730EB00FC6349 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E653818194730EB00FC6349 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E653821194730EB00FC6349 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E653826194730EB00FC6349 /* XCTest.framework in Frameworks */,
+				6E65382C194730EB00FC6349 /* libBeepSendSDK.a in Frameworks */,
+				6E653827194730EB00FC6349 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6E65380B194730EB00FC6349 = {
+			isa = PBXGroup;
+			children = (
+				6E653819194730EB00FC6349 /* BeepSendSDK */,
+				6E65382D194730EB00FC6349 /* BeepSendSDKTests */,
+				6E653816194730EB00FC6349 /* Frameworks */,
+				6E653815194730EB00FC6349 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6E653815194730EB00FC6349 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6E653814194730EB00FC6349 /* libBeepSendSDK.a */,
+				6E653824194730EB00FC6349 /* BeepSendSDKTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6E653816194730EB00FC6349 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6E653817194730EB00FC6349 /* Foundation.framework */,
+				6E653825194730EB00FC6349 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6E653819194730EB00FC6349 /* BeepSendSDK */ = {
+			isa = PBXGroup;
+			children = (
+				6EB685431949ED840010FC73 /* 3rdParty */,
+				6EBA76AC194B2C8200941E85 /* Configuration */,
+				6EBA7689194ADE6F00941E85 /* Utilities */,
+				6EB685421949ED7F0010FC73 /* Networking */,
+				6EBC77CA194EE04E00666099 /* Models */,
+				6EBA76B1194B2CFF00941E85 /* InputData.h */,
+				6E65381C194730EB00FC6349 /* BeepSendSDK.h */,
+				6E65381E194730EB00FC6349 /* BeepSendSDK.m */,
+				6E65381A194730EB00FC6349 /* Supporting Files */,
+			);
+			path = BeepSendSDK;
+			sourceTree = "<group>";
+		};
+		6E65381A194730EB00FC6349 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6E65381B194730EB00FC6349 /* BeepSendSDK-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6E65382D194730EB00FC6349 /* BeepSendSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				6E653833194730EB00FC6349 /* BeepSendSDKTests.m */,
+				6E65382E194730EB00FC6349 /* Supporting Files */,
+			);
+			path = BeepSendSDKTests;
+			sourceTree = "<group>";
+		};
+		6E65382E194730EB00FC6349 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6E65382F194730EB00FC6349 /* BeepSendSDKTests-Info.plist */,
+				6E653830194730EB00FC6349 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6EB685421949ED7F0010FC73 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				6EBA76A4194AF28600941E85 /* BaseService */,
+				6EBC77F2194F2DF600666099 /* Customer */,
+				6EBA76B6194B38D800941E85 /* Connections */,
+				6EC31683195030A2004D8F87 /* SMS */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		6EB685431949ED840010FC73 /* 3rdParty */ = {
+			isa = PBXGroup;
+			children = (
+				6EB685441949ED8B0010FC73 /* BSAFNetworking */,
+				6EC3166219502ADC004D8F87 /* BSTestSemaphore */,
+			);
+			path = 3rdParty;
+			sourceTree = "<group>";
+		};
+		6EB685441949ED8B0010FC73 /* BSAFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				6EB685451949ED8B0010FC73 /* BSAFHTTPRequestOperation.h */,
+				6EB685461949ED8B0010FC73 /* BSAFHTTPRequestOperation.m */,
+				6EB685471949ED8B0010FC73 /* BSAFHTTPRequestOperationManager.h */,
+				6EB685481949ED8B0010FC73 /* BSAFHTTPRequestOperationManager.m */,
+				6EB685491949ED8B0010FC73 /* BSAFHTTPSessionManager.h */,
+				6EB6854A1949ED8B0010FC73 /* BSAFHTTPSessionManager.m */,
+				6EB6854B1949ED8B0010FC73 /* BSAFNetworking.h */,
+				6EB6854C1949ED8B0010FC73 /* BSAFNetworkReachabilityManager.h */,
+				6EB6854D1949ED8B0010FC73 /* BSAFNetworkReachabilityManager.m */,
+				6EB6854E1949ED8B0010FC73 /* BSAFSecurityPolicy.h */,
+				6EB6854F1949ED8B0010FC73 /* BSAFSecurityPolicy.m */,
+				6EB685501949ED8B0010FC73 /* BSAFURLConnectionOperation.h */,
+				6EB685511949ED8B0010FC73 /* BSAFURLConnectionOperation.m */,
+				6EB685521949ED8B0010FC73 /* BSAFURLRequestSerialization.h */,
+				6EB685531949ED8B0010FC73 /* BSAFURLRequestSerialization.m */,
+				6EB685541949ED8B0010FC73 /* BSAFURLResponseSerialization.h */,
+				6EB685551949ED8B0010FC73 /* BSAFURLResponseSerialization.m */,
+				6EB685561949ED8B0010FC73 /* BSAFURLSessionManager.h */,
+				6EB685571949ED8B0010FC73 /* BSAFURLSessionManager.m */,
+			);
+			path = BSAFNetworking;
+			sourceTree = "<group>";
+		};
+		6EB96ED219518A2300AD77E2 /* HTSerialazibleObject */ = {
+			isa = PBXGroup;
+			children = (
+				6EB96ED319518A2300AD77E2 /* HTSerializableObject.h */,
+				6EB96ED419518A2300AD77E2 /* HTSerializableObject.m */,
+			);
+			path = HTSerialazibleObject;
+			sourceTree = "<group>";
+		};
+		6EB96ED61951902C00AD77E2 /* AutomatedParsing */ = {
+			isa = PBXGroup;
+			children = (
+				6EB96ED91951920300AD77E2 /* APCPriceListSchedule */,
+				6EB96ED8195191DF00AD77E2 /* APCAccountManager */,
+				6EB96EE3195192C100AD77E2 /* APCustomer */,
+			);
+			name = AutomatedParsing;
+			sourceTree = "<group>";
+		};
+		6EB96ED8195191DF00AD77E2 /* APCAccountManager */ = {
+			isa = PBXGroup;
+			children = (
+				6EB96EDD1951927500AD77E2 /* BSAPCAccountManager.h */,
+				6EB96EDE1951927500AD77E2 /* BSAPCAccountManager.m */,
+			);
+			name = APCAccountManager;
+			sourceTree = "<group>";
+		};
+		6EB96ED91951920300AD77E2 /* APCPriceListSchedule */ = {
+			isa = PBXGroup;
+			children = (
+				6EB96EE0195192A600AD77E2 /* BSAPCPriceListSchedule.h */,
+				6EB96EE1195192A600AD77E2 /* BSAPCPriceListSchedule.m */,
+			);
+			name = APCPriceListSchedule;
+			sourceTree = "<group>";
+		};
+		6EB96EE3195192C100AD77E2 /* APCustomer */ = {
+			isa = PBXGroup;
+			children = (
+				6EB96EE4195192C100AD77E2 /* BSAPCustomer.h */,
+				6EB96EE5195192C100AD77E2 /* BSAPCustomer.m */,
+			);
+			name = APCustomer;
+			path = Models/AutomatedParsing/APCustomer;
+			sourceTree = "<group>";
+		};
+		6EBA7689194ADE6F00941E85 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				6EBA76BA194B3C5900941E85 /* Helper */,
+				6EBA76A8194AF28C00941E85 /* NetworkLayer */,
+				6EB96ED219518A2300AD77E2 /* HTSerialazibleObject */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		6EBA76A4194AF28600941E85 /* BaseService */ = {
+			isa = PBXGroup;
+			children = (
+				6EBA76A5194AF28600941E85 /* BSBaseService.h */,
+				6EBA76A6194AF28600941E85 /* BSBaseService.m */,
+			);
+			path = BaseService;
+			sourceTree = "<group>";
+		};
+		6EBA76A8194AF28C00941E85 /* NetworkLayer */ = {
+			isa = PBXGroup;
+			children = (
+				6EBA76A9194AF28C00941E85 /* BSNetworkLayer.h */,
+				6EBA76AA194AF28C00941E85 /* BSNetworkLayer.m */,
+			);
+			name = NetworkLayer;
+			path = Utilities/NetworkLayer;
+			sourceTree = "<group>";
+		};
+		6EBA76AC194B2C8200941E85 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				6EBA76AD194B2CA000941E85 /* APIConfiguration */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
+		6EBA76AD194B2CA000941E85 /* APIConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				6EBA76AE194B2CD600941E85 /* BSAPIConfiguration.h */,
+				6EBA76AF194B2CD600941E85 /* BSAPIConfiguration.m */,
+			);
+			name = APIConfiguration;
+			sourceTree = "<group>";
+		};
+		6EBA76B6194B38D800941E85 /* Connections */ = {
+			isa = PBXGroup;
+			children = (
+				6EBA76B7194B38D800941E85 /* BSConnectionsService.h */,
+				6EBA76B8194B38D800941E85 /* BSConnectionsService.m */,
+			);
+			path = Connections;
+			sourceTree = "<group>";
+		};
+		6EBA76BA194B3C5900941E85 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				6EBA76BB194B3C8300941E85 /* BSHelper.h */,
+				6EBA76BC194B3C8300941E85 /* BSHelper.m */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
+		6EBC77CA194EE04E00666099 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6EB96ED61951902C00AD77E2 /* AutomatedParsing */,
+				6EC3168A19504CBE004D8F87 /* GeneralModel */,
+				6EC3168919504C74004D8F87 /* Customer */,
+				6ECA483619507642003E2B8E /* AccountManager */,
+				6ECA483A19507F08003E2B8E /* CustomerPriceList */,
+				6ECA483E19508087003E2B8E /* CustomerPriceListSchedule */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		6EBC77F2194F2DF600666099 /* Customer */ = {
+			isa = PBXGroup;
+			children = (
+				6EBC77F3194F2E6300666099 /* BSCustomerService.h */,
+				6EBC77F4194F2E6300666099 /* BSCustomerService.m */,
+			);
+			name = Customer;
+			sourceTree = "<group>";
+		};
+		6EC3166219502ADC004D8F87 /* BSTestSemaphore */ = {
+			isa = PBXGroup;
+			children = (
+				6EC3166319502ADC004D8F87 /* BSTestSemaphor.h */,
+				6EC3166419502ADC004D8F87 /* BSTestSemaphor.m */,
+			);
+			path = BSTestSemaphore;
+			sourceTree = "<group>";
+		};
+		6EC31683195030A2004D8F87 /* SMS */ = {
+			isa = PBXGroup;
+			children = (
+				6EC31684195030D0004D8F87 /* BSSMSService.h */,
+				6EC31685195030D0004D8F87 /* BSSMSService.m */,
+			);
+			name = SMS;
+			sourceTree = "<group>";
+		};
+		6EC3168919504C74004D8F87 /* Customer */ = {
+			isa = PBXGroup;
+			children = (
+				6EC3168F19504D27004D8F87 /* BSCustomerModel.h */,
+				6EC3169019504D27004D8F87 /* BSCustomerModel.m */,
+			);
+			name = Customer;
+			sourceTree = "<group>";
+		};
+		6EC3168A19504CBE004D8F87 /* GeneralModel */ = {
+			isa = PBXGroup;
+			children = (
+				6EC3168B19504CEB004D8F87 /* BSGeneralModel.h */,
+				6EC3168C19504CEB004D8F87 /* BSGeneralModel.m */,
+			);
+			name = GeneralModel;
+			sourceTree = "<group>";
+		};
+		6ECA483619507642003E2B8E /* AccountManager */ = {
+			isa = PBXGroup;
+			children = (
+				6ECA48371950767A003E2B8E /* BSAccountManagerModel.h */,
+				6ECA48381950767A003E2B8E /* BSAccountManagerModel.m */,
+			);
+			name = AccountManager;
+			sourceTree = "<group>";
+		};
+		6ECA483A19507F08003E2B8E /* CustomerPriceList */ = {
+			isa = PBXGroup;
+			children = (
+				6ECA483B19507F51003E2B8E /* BSCustomerPriceListModel.h */,
+				6ECA483C19507F51003E2B8E /* BSCustomerPriceListModel.m */,
+			);
+			name = CustomerPriceList;
+			sourceTree = "<group>";
+		};
+		6ECA483E19508087003E2B8E /* CustomerPriceListSchedule */ = {
+			isa = PBXGroup;
+			children = (
+				6ECA483F195080C6003E2B8E /* BSCustomerPriceListScheduleModel.h */,
+				6ECA4840195080C6003E2B8E /* BSCustomerPriceListScheduleModel.m */,
+			);
+			name = CustomerPriceListSchedule;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6E653813194730EB00FC6349 /* BeepSendSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E653837194730EB00FC6349 /* Build configuration list for PBXNativeTarget "BeepSendSDK" */;
+			buildPhases = (
+				6E653810194730EB00FC6349 /* Sources */,
+				6E653811194730EB00FC6349 /* Frameworks */,
+				6E653812194730EB00FC6349 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BeepSendSDK;
+			productName = BeepSendSDK;
+			productReference = 6E653814194730EB00FC6349 /* libBeepSendSDK.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		6E653823194730EB00FC6349 /* BeepSendSDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E65383A194730EB00FC6349 /* Build configuration list for PBXNativeTarget "BeepSendSDKTests" */;
+			buildPhases = (
+				6E653820194730EB00FC6349 /* Sources */,
+				6E653821194730EB00FC6349 /* Frameworks */,
+				6E653822194730EB00FC6349 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6E65382B194730EB00FC6349 /* PBXTargetDependency */,
+			);
+			name = BeepSendSDKTests;
+			productName = BeepSendSDKTests;
+			productReference = 6E653824194730EB00FC6349 /* BeepSendSDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6E65380C194730EB00FC6349 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = BeepSend;
+			};
+			buildConfigurationList = 6E65380F194730EB00FC6349 /* Build configuration list for PBXProject "BeepSendSDK" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6E65380B194730EB00FC6349;
+			productRefGroup = 6E653815194730EB00FC6349 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6E653813194730EB00FC6349 /* BeepSendSDK */,
+				6E653823194730EB00FC6349 /* BeepSendSDKTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6E653822194730EB00FC6349 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E653832194730EB00FC6349 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6E653810194730EB00FC6349 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EB96EEA195199AD00AD77E2 /* HTSerializableObject.m in Sources */,
+				6EB96EEB195199AD00AD77E2 /* BSAPCustomer.m in Sources */,
+				6EBC77E5194EF50B00666099 /* BSAFHTTPRequestOperation.m in Sources */,
+				6EBC77E6194EF50B00666099 /* BSAFHTTPRequestOperationManager.m in Sources */,
+				6EBC77E7194EF50B00666099 /* BSAFHTTPSessionManager.m in Sources */,
+				6EBC77E8194EF50B00666099 /* BSAFNetworkReachabilityManager.m in Sources */,
+				6EBC77E9194EF50B00666099 /* BSAFSecurityPolicy.m in Sources */,
+				6EBC77EA194EF50B00666099 /* BSAFURLConnectionOperation.m in Sources */,
+				6EBC77EB194EF50B00666099 /* BSAFURLRequestSerialization.m in Sources */,
+				6EBC77EC194EF50B00666099 /* BSAFURLResponseSerialization.m in Sources */,
+				6EBC77ED194EF50B00666099 /* BSAFURLSessionManager.m in Sources */,
+				6EBA76BD194B3C8300941E85 /* BSHelper.m in Sources */,
+				6EBC77E2194EF4F900666099 /* BSNetworkLayer.m in Sources */,
+				6EBA76B0194B2CD600941E85 /* BSAPIConfiguration.m in Sources */,
+				6EBC7807194F356A00666099 /* BSBaseService.m in Sources */,
+				6EB96EE2195192A600AD77E2 /* BSAPCPriceListSchedule.m in Sources */,
+				6EBC77E3194EF4F900666099 /* BSConnectionsService.m in Sources */,
+				6EBC77F5194F2E6300666099 /* BSCustomerService.m in Sources */,
+				6EC31686195030D0004D8F87 /* BSSMSService.m in Sources */,
+				6EC3168D19504CEB004D8F87 /* BSGeneralModel.m in Sources */,
+				6EB96EDF1951927500AD77E2 /* BSAPCAccountManager.m in Sources */,
+				6EC3169119504D27004D8F87 /* BSCustomerModel.m in Sources */,
+				6ECA48391950767A003E2B8E /* BSAccountManagerModel.m in Sources */,
+				6ECA483D19507F51003E2B8E /* BSCustomerPriceListModel.m in Sources */,
+				6ECA4841195080C6003E2B8E /* BSCustomerPriceListScheduleModel.m in Sources */,
+				6E65381F194730EB00FC6349 /* BeepSendSDK.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6E653820194730EB00FC6349 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EBA76A7194AF28600941E85 /* BSBaseService.m in Sources */,
+				6EB96EE6195192C100AD77E2 /* BSAPCustomer.m in Sources */,
+				6EB6855D1949ED8B0010FC73 /* BSAFURLConnectionOperation.m in Sources */,
+				6EBC77F6194F2E6300666099 /* BSCustomerService.m in Sources */,
+				6EB6855F1949ED8B0010FC73 /* BSAFURLResponseSerialization.m in Sources */,
+				6EB685601949ED8B0010FC73 /* BSAFURLSessionManager.m in Sources */,
+				6EB685591949ED8B0010FC73 /* BSAFHTTPRequestOperationManager.m in Sources */,
+				6E653834194730EB00FC6349 /* BeepSendSDKTests.m in Sources */,
+				6EB6855B1949ED8B0010FC73 /* BSAFNetworkReachabilityManager.m in Sources */,
+				6EB96ED519518A2300AD77E2 /* HTSerializableObject.m in Sources */,
+				6EC3169219504D27004D8F87 /* BSCustomerModel.m in Sources */,
+				6EC31687195030D0004D8F87 /* BSSMSService.m in Sources */,
+				6EB6855C1949ED8B0010FC73 /* BSAFSecurityPolicy.m in Sources */,
+				6EC3168E19504CEB004D8F87 /* BSGeneralModel.m in Sources */,
+				6EB6855A1949ED8B0010FC73 /* BSAFHTTPSessionManager.m in Sources */,
+				6EB6855E1949ED8B0010FC73 /* BSAFURLRequestSerialization.m in Sources */,
+				6EB685581949ED8B0010FC73 /* BSAFHTTPRequestOperation.m in Sources */,
+				6EC3166519502ADC004D8F87 /* BSTestSemaphor.m in Sources */,
+				6EBA76AB194AF28C00941E85 /* BSNetworkLayer.m in Sources */,
+				6EBA76B9194B38D800941E85 /* BSConnectionsService.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6E65382B194730EB00FC6349 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6E653813194730EB00FC6349 /* BeepSendSDK */;
+			targetProxy = 6E65382A194730EB00FC6349 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6E653830194730EB00FC6349 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E653831194730EB00FC6349 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6E653835194730EB00FC6349 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6E653836194730EB00FC6349 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6E653838194730EB00FC6349 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				DSTROOT = /tmp/BeepSendSDK.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BeepSendSDK/BeepSendSDK-Prefix.pch";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		6E653839194730EB00FC6349 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				DSTROOT = /tmp/BeepSendSDK.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BeepSendSDK/BeepSendSDK-Prefix.pch";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		6E65383B194730EB00FC6349 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BeepSendSDK/BeepSendSDK-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "BeepSendSDKTests/BeepSendSDKTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		6E65383C194730EB00FC6349 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BeepSendSDK/BeepSendSDK-Prefix.pch";
+				INFOPLIST_FILE = "BeepSendSDKTests/BeepSendSDKTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6E65380F194730EB00FC6349 /* Build configuration list for PBXProject "BeepSendSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E653835194730EB00FC6349 /* Debug */,
+				6E653836194730EB00FC6349 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E653837194730EB00FC6349 /* Build configuration list for PBXNativeTarget "BeepSendSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E653838194730EB00FC6349 /* Debug */,
+				6E653839194730EB00FC6349 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E65383A194730EB00FC6349 /* Build configuration list for PBXNativeTarget "BeepSendSDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E65383B194730EB00FC6349 /* Debug */,
+				6E65383C194730EB00FC6349 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6E65380C194730EB00FC6349 /* Project object */;
+}
