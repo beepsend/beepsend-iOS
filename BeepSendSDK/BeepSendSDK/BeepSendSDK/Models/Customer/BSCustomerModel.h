@@ -13,18 +13,31 @@
 
 @interface BSCustomerModel : BSGeneralModel
 
-@property (nonatomic, strong) NSString *customerName;
-@property (nonatomic, strong) NSString *customerPhoneNumber;
-@property (nonatomic, strong) NSString *customerAddress;
-@property (nonatomic, strong) NSString *customerCity;
-@property (nonatomic, strong) NSString *customerPostBox;
-@property (nonatomic, strong) NSString *customerCountry;
-@property (nonatomic, strong) NSString *customerVAT;
-@property (nonatomic, strong) NSString *customerEmail;
-@property (nonatomic, strong) NSString *customerInvoiceType;
+@property (nonatomic, strong, readonly) NSString *customerName;
+@property (nonatomic, strong, readonly) NSString *customerPhoneNumber;
+@property (nonatomic, strong, readonly) NSString *customerAddress;
+@property (nonatomic, strong, readonly) NSString *customerCity;
+@property (nonatomic, strong, readonly) NSString *customerPostBox;
+@property (nonatomic, strong, readonly) NSString *customerCountry;
+@property (nonatomic, strong, readonly) NSString *customerVAT;
+@property (nonatomic, strong, readonly) NSString *customerEmail;
+@property (nonatomic, strong, readonly) NSString *customerInvoiceType;
 
-@property (nonatomic, strong) BSAccountManagerModel *customerAccountManager;
+@property (nonatomic, strong, readonly) BSAccountManagerModel *customerAccountManager;
 
-@property (nonatomic, strong) BSCustomerPriceListModel *customerPriceListDetails;
+@property (nonatomic, strong, readonly) BSCustomerPriceListModel *customerPriceListDetails;
+
+- (BSCustomerModel *)initCustomerWithID:(NSString *)cID
+								   name:(NSString *)cName
+								  phone:(NSString *)cPhone
+								address:(NSString *)cAddress
+								   city:(NSString *)cCity
+								postBox:(NSString *)cPostBox
+								country:(NSString *)cCountry
+									vat:(NSString *)cVat
+								  email:(NSString *)cEmail
+							invoiceType:(NSString *)cInvoiceType
+						 accountManager:(BSAccountManagerModel *)cAccountManager
+					   priceListDetails:(BSCustomerPriceListModel *)cPriceListModel;
 
 @end

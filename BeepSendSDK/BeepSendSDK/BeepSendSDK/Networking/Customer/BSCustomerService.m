@@ -33,13 +33,10 @@
 				withParameters:@{}
 				  onCompletion:^(id response, id error) {
 					  
-					  BSAPCAccountManager *accManager;
-					  BSAPCPriceListSchedule *priceList;
-					  BSAPCustomer *customer = [BSAPCustomer classFromDict:response];
+					  if (!error) {
+						  block([[BSAPCustomer classFromDict:response] convertToCustomerModel], error);
+					  }
 					  
-					  BSLog(@"%@", customer);
-					  
-					  block(response, error);
 				  }];
 }
 

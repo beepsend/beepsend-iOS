@@ -10,7 +10,10 @@
 
 @interface BSAccountManagerModel : BSGeneralModel
 
-@property (nonatomic, strong) NSString *accountManagerName;
-@property (nonatomic, strong) NSString *accountManagerEmail;
+@property (nonatomic, strong, readonly) NSString *accountManagerName;
+@property (nonatomic, strong, readonly) NSString *accountManagerEmail;
+
+- (BSAccountManagerModel *)initAccountManagerWithName:(NSString *)amName
+											 andEmail:(NSString *)amEmail;
 
 @end

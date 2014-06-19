@@ -8,15 +8,31 @@
 
 #import "BSGeneralModel.h"
 
+@interface BSGeneralModel ()
+
+@property (nonatomic, strong, readwrite) NSString *objectID;
+@property (nonatomic, strong, readwrite) NSString *title;
+
+@end
+
 @implementation BSGeneralModel
 
 #pragma mark - Initialization
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+- (id)init
 {
 	if (self = [super init]) {
-		_objectID = @0;
-		_title = @"Initial Object";
+		_objectID = @"-1";
+		_title = @"Irregular object";
+	}
+	return self;
+}
+
+- (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title
+{
+	if (self = [super init]) {
+		_objectID = objectID;
+		_title = title;
 	}
 	return self;
 }

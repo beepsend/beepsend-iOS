@@ -8,22 +8,41 @@
 
 #import "BSCustomerPriceListModel.h"
 
+@interface BSCustomerPriceListModel ()
+
+@property (nonatomic, strong, readwrite) NSNumber *priceListType;
+@property (nonatomic, strong, readwrite) NSString *priceListDelimiter;
+
+@property (nonatomic, strong, readwrite) BSCustomerPriceListScheduleModel *priceListSchedule;
+
+@property (nonatomic, strong, readwrite) NSArray *priceListFields;
+
+@end
+
 @implementation BSCustomerPriceListModel
 
 #pragma mark - Initialization
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+- (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title
 {
-	if (self = [super initWithDictionary:dictionary]) {
+	if (self = [super initWithID:@"-1" andTitle:@"Irregular pricelist details"]) {
 		
 	}
 	return self;
 }
-//    "pricelist_type": 1,
-//    "pricelist_delimiter": null,
-//    "pricelist_schedule": {
-//        "id": 1,
-//        "name": "Immediately"
-//    },
-//    "pricelist_fields": []
+
+- (BSCustomerPriceListModel *)initPricelistDetailsWithType:(NSNumber *)pType
+												 delimiter:(NSString *)pDelimiter
+										 pricelistSchedule:(BSCustomerPriceListScheduleModel *)pSchedule
+													fields:(NSArray *)pFields
+{
+	if (self = [super initWithID:@"0" andTitle:[NSString stringWithFormat:@"Price list with type: %@", pType]]) {
+		_priceListType = pType;
+		_priceListDelimiter = pDelimiter;
+		_priceListSchedule = pSchedule;
+		_priceListFields = pFields;
+	}
+	return self;
+}
+
 @end

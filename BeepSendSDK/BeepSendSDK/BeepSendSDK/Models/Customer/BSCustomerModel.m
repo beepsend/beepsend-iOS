@@ -8,38 +8,65 @@
 
 #import "BSCustomerModel.h"
 
+@interface BSCustomerModel ()
+
+@property (nonatomic, strong, readwrite) NSString *customerName;
+@property (nonatomic, strong, readwrite) NSString *customerPhoneNumber;
+@property (nonatomic, strong, readwrite) NSString *customerAddress;
+@property (nonatomic, strong, readwrite) NSString *customerCity;
+@property (nonatomic, strong, readwrite) NSString *customerPostBox;
+@property (nonatomic, strong, readwrite) NSString *customerCountry;
+@property (nonatomic, strong, readwrite) NSString *customerVAT;
+@property (nonatomic, strong, readwrite) NSString *customerEmail;
+@property (nonatomic, strong, readwrite) NSString *customerInvoiceType;
+
+@property (nonatomic, strong, readwrite) BSAccountManagerModel *customerAccountManager;
+
+@property (nonatomic, strong, readwrite) BSCustomerPriceListModel *customerPriceListDetails;
+
+@end
+
 @implementation BSCustomerModel
 
 #pragma mark - Initialization
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+- (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title
 {
-	if (self = [super initWithDictionary:dictionary]) {
+	if (self = [super initWithID:@"-1" andTitle:@"Irregular customer"]) {
 		
 	}
 	return self;
 }
-//{
-//    "id": 1,
-//    "phone": "46406007500",
-//    "name": "Beepsend AB",
-//    "address": "Gustav Adolfs Torg 12",
-//    "city": "Malmö",
-//    "post_box": "21139",
-//    "country": "Sweden",
-//    "vat": "",
-//    "email": "beepsend@beepsend.se",
-//    "invoice_type": "pre-pay",
-//    "account_manager": {
-//        "name": "Account Manager",
-//        "email": "account.manager@beepsend.se"
-//    },
-//    "pricelist_type": 1,
-//    "pricelist_delimiter": null,
-//    "pricelist_schedule": {
-//        "id": 1,
-//        "name": "Immediately"
-//    },
-//    "pricelist_fields": []
-//}
+
+- (BSCustomerModel *)initCustomerWithID:(NSString *)cID
+								   name:(NSString *)cName
+								  phone:(NSString *)cPhone
+								address:(NSString *)cAddress
+								   city:(NSString *)cCity
+								postBox:(NSString *)cPostBox
+								country:(NSString *)cCountry
+									vat:(NSString *)cVat
+								  email:(NSString *)cEmail
+							invoiceType:(NSString *)cInvoiceType
+						 accountManager:(BSAccountManagerModel *)cAccountManager
+					   priceListDetails:(BSCustomerPriceListModel *)cPriceListModel
+{
+	if (self = [super initWithID:cID andTitle:cName]) {
+		_customerName = cName;
+		_customerPhoneNumber = cPhone;
+		_customerAddress = cAddress;
+		_customerCity = cCity;
+		_customerPostBox = cPostBox;
+		_customerCountry = cCountry;
+		_customerVAT = cVat;
+		_customerEmail = cEmail;
+		_customerInvoiceType = cInvoiceType;
+		
+		_customerAccountManager = cAccountManager;
+		
+		_customerPriceListDetails = cPriceListModel;
+	}
+	return self;
+}
+
 @end

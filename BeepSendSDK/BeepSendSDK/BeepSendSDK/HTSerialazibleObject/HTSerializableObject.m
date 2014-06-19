@@ -144,6 +144,7 @@
 					{
 						NSString *className = propetyTypes[zz];
 						Class class1 = NSClassFromString(className);
+						
 						if([class1 isSubclassOfClass:[HTSerializableObject class]])
 						{
 							////////////////////////////////////////////

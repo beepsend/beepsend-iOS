@@ -8,17 +8,33 @@
 
 #import "BSAccountManagerModel.h"
 
+@interface BSAccountManagerModel ()
+
+@property (nonatomic, strong, readwrite) NSString *accountManagerName;
+@property (nonatomic, strong, readwrite) NSString *accountManagerEmail;
+
+@end
+
 @implementation BSAccountManagerModel
 
 #pragma mark - Initialization
 
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+- (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title
 {
-	if (self = [super initWithDictionary:dictionary]) {
+	if (self = [super initWithID:@"-1" andTitle:@"Irregular account manager"]) {
 		
 	}
 	return self;
 }
-//        "name": "Account Manager",
-//        "email": "account.manager@beepsend.se"
+
+- (BSAccountManagerModel *)initAccountManagerWithName:(NSString *)amName
+											 andEmail:(NSString *)amEmail
+{
+	if (self = [super initWithID:@"0" andTitle:amName]) {
+		_accountManagerName = amName;
+		_accountManagerEmail = amEmail;
+	}
+	return self;
+}
+
 @end

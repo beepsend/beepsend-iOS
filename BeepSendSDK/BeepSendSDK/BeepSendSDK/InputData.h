@@ -15,6 +15,6 @@
 #ifndef BeepSendSDK_InputData_h
 #define BeepSendSDK_InputData_h
 
-#define APIToken @"5b36836d23ada4d45deb21fc6d69b05a97c856754d4592104829b5d866bf32ca"
-
+#define APIToken @"6b36836d23ada4d45deb21fc6d69b05a97c856754d4592104829b5d866bf32ca"
+//5
 #endif

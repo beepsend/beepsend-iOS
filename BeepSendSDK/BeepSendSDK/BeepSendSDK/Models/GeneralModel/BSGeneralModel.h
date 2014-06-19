@@ -10,9 +10,9 @@
 
 @interface BSGeneralModel : NSObject
 
-@property (nonatomic, strong) NSNumber *objectID;
-@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong, readonly) NSString *objectID;
+@property (nonatomic, strong, readonly) NSString *title;
  
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+- (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title;
 
 @end

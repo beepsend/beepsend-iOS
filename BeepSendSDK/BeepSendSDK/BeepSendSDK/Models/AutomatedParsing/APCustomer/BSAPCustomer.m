@@ -10,28 +10,46 @@
 
 @implementation BSAPCustomer
 
-//{
-//    "id": 1,
-//    "phone": "46406007500",
-//    "name": "Beepsend AB",
-//    "address": "Gustav Adolfs Torg 12",
-//    "city": "Malmö",
-//    "post_box": "21139",
-//    "country": "Sweden",
-//    "vat": "",
-//    "email": "beepsend@beepsend.se",
-//    "invoice_type": "pre-pay",
-//    "account_manager": {
-//        "name": "Account Manager",
-//        "email": "account.manager@beepsend.se"
-//    },
-//    "pricelist_type": 1,
-//    "pricelist_delimiter": null,
-//    "pricelist_schedule": {
-//        "id": 1,
-//        "name": "Immediately"
-//    },
-//    "pricelist_fields": []
-//}
+#pragma mark - Inherited methods
+
++ (id)classFromDict:(NSDictionary *)dictionary
+{
+	//We need to register all classes before load
+	[BSAPCAccountManager class];
+	[BSAPCPriceListSchedule class];
+	
+	return [super classFromDict:dictionary];
+}
+
+#pragma mark - Public methods
+
+- (BSCustomerModel *)convertToCustomerModel {
+	
+	BSCustomerPriceListScheduleModel *pricelistSchedule = [[BSCustomerPriceListScheduleModel alloc] initPricelistScheduleWithID:_pricelist_schedule.id
+																														andName:_pricelist_schedule.name];
+	
+	BSCustomerPriceListModel *customerPricelistDetails = [[BSCustomerPriceListModel alloc] initPricelistDetailsWithType:_pricelist_type
+																											  delimiter:_pricelist_delimiter
+																									  pricelistSchedule:pricelistSchedule
+																												 fields:_pricelist_fields];
+	
+	BSAccountManagerModel *accountManager = [[BSAccountManagerModel alloc] initAccountManagerWithName:_account_manager.name
+																							 andEmail:_account_manager.email];
+	
+	BSCustomerModel *customer = [[BSCustomerModel alloc] initCustomerWithID:_id
+																	   name:_name
+																	  phone:_phone
+																	address:_address
+																	   city:_city
+																	postBox:_post_box
+																	country:_country
+																		vat:_vat
+																	  email:_email
+																invoiceType:_invoice_type
+															 accountManager:accountManager
+														   priceListDetails:customerPricelistDetails];
+		
+	return customer;
+}
 
 @end
