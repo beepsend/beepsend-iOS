@@ -8,9 +8,11 @@
 
 #import "BSBaseService.h"
 
+#import "BSConnectionModel.h"
+
 @interface BSConnectionsService : BSBaseService
 
-- (void)getAllAvailableConnectsionOnCompletion:(void(^)(id response, id error))block;
-- (void)getConnectionOnCompletion:(void(^)(id response, id error))block;
+- (void)getAllAvailableConnectsionOnCompletion:(void(^)(NSArray *connections, id error))block;
+- (void)getMeConnectionOnCompletion:(void(^)(BSConnectionModel *connection, id error))block;
 
 @end

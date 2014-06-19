@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "HTSerializableObject.h"
+#import "BSSerializableObject.h"
 
-@interface BSAPCAccountManager : HTSerializableObject
+@interface BSAPCAccountManager : BSSerializableObject
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *email;

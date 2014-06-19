@@ -6,20 +6,20 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSCustomerPriceListModel.h"
+#import "BSPriceListDetailsModel.h"
 
-@interface BSCustomerPriceListModel ()
+@interface BSPriceListDetailsModel ()
 
 @property (nonatomic, strong, readwrite) NSNumber *priceListType;
 @property (nonatomic, strong, readwrite) NSString *priceListDelimiter;
 
-@property (nonatomic, strong, readwrite) BSCustomerPriceListScheduleModel *priceListSchedule;
+@property (nonatomic, strong, readwrite) BSPriceListScheduleModel *priceListSchedule;
 
 @property (nonatomic, strong, readwrite) NSArray *priceListFields;
 
 @end
 
-@implementation BSCustomerPriceListModel
+@implementation BSPriceListDetailsModel
 
 #pragma mark - Initialization
 
@@ -31,10 +31,10 @@
 	return self;
 }
 
-- (BSCustomerPriceListModel *)initPricelistDetailsWithType:(NSNumber *)pType
-												 delimiter:(NSString *)pDelimiter
-										 pricelistSchedule:(BSCustomerPriceListScheduleModel *)pSchedule
-													fields:(NSArray *)pFields
+- (BSPriceListDetailsModel *)initPricelistDetailsWithType:(NSNumber *)pType
+												delimiter:(NSString *)pDelimiter
+										pricelistSchedule:(BSPriceListScheduleModel *)pSchedule
+												   fields:(NSArray *)pFields
 {
 	if (self = [super initWithID:@"0" andTitle:[NSString stringWithFormat:@"Price list with type: %@", pType]]) {
 		_priceListType = pType;

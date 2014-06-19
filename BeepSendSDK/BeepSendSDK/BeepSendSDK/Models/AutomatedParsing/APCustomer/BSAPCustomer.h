@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "HTSerializableObject.h"
+#import "BSSerializableObject.h"
 
 #import "BSAPCAccountManager.h"
 #import "BSAPCPriceListSchedule.h"
 
 #import "BSCustomerModel.h"
 
-@interface BSAPCustomer : HTSerializableObject
+@interface BSAPCustomer : BSSerializableObject
 
 @property (nonatomic, strong) NSString *id;
 @property (nonatomic, strong) NSString *phone;

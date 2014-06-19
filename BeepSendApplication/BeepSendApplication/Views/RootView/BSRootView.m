@@ -82,7 +82,7 @@
 		
 		////////////////////////////////////////////////////////////////////////
 		//Text field recipient
-		_textFieldTo = [[BSTextFieldCustomTextInset alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, CGRectGetMaxY(_textFieldFrom.frame) + kSeparatorDefaultSpacing, frame.size.width - kViewDefaultBorderInset*2 - kDoneButtonWidth - kSeparatorDefaultSpacing, kTextFieldDefaultHeight)];
+		_textFieldTo = [[BSTextFieldCustomTextInset alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, CGRectGetMaxY(_textFieldFrom.frame) + kSeparatorDefaultSpacing, frame.size.width - kViewDefaultBorderInset*2 - kTextFieldDefaultHeight - kSeparatorDefaultSpacing, kTextFieldDefaultHeight)];
 		_textFieldTo.font = [UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultTextSize];
 		_textFieldTo.backgroundColor = [UIColor whiteColor];
 		_textFieldTo.textColor = [UIColor blackColor];
@@ -126,14 +126,14 @@
 		
 		////////////////////////////////////////////////////////////////////////
 		//Check number button
-		_buttonCheckDestinationNumber = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_textFieldTo.frame) + kSeparatorDefaultSpacing, CGRectGetMinY(_textFieldTo.frame), kDoneButtonWidth, CGRectGetHeight(_textFieldTo.frame))];
+		_buttonCheckDestinationNumber = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_textFieldTo.frame) + kSeparatorDefaultSpacing, CGRectGetMinY(_textFieldTo.frame), CGRectGetHeight(_textFieldTo.frame), CGRectGetHeight(_textFieldTo.frame))];
 		_buttonCheckDestinationNumber.backgroundColor = [UIColor lightGrayColor];
 		_buttonCheckDestinationNumber.showsTouchWhenHighlighted = YES;
 		_buttonCheckDestinationNumber.clipsToBounds = YES;
-		[_buttonCheckDestinationNumber setTitle:NSLocalizedString(@"CHECK", @"") forState:UIControlStateNormal];
+		[_buttonCheckDestinationNumber setTitle:NSLocalizedString(@"", @"") forState:UIControlStateNormal];
 		[_buttonCheckDestinationNumber setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 		[_buttonCheckDestinationNumber setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
-		_buttonCheckDestinationNumber.titleLabel.font = [UIFont boldSystemFontOfSize:11.0];
+		_buttonCheckDestinationNumber.titleLabel.font = [UIFont boldSystemFontOfSize:16.0];
 		
 		_buttonCheckDestinationNumber.layer.cornerRadius = _textFieldTo.layer.cornerRadius;
 		_buttonCheckDestinationNumber.layer.borderWidth = kDefaultBorderWidth;

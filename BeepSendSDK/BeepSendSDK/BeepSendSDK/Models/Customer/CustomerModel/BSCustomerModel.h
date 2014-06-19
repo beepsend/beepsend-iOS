@@ -9,7 +9,7 @@
 #import "BSGeneralModel.h"
 
 #import "BSAccountManagerModel.h"
-#import "BSCustomerPriceListModel.h"
+#import "BSPriceListDetailsModel.h"
 
 @interface BSCustomerModel : BSGeneralModel
 
@@ -25,7 +25,7 @@
 
 @property (nonatomic, strong, readonly) BSAccountManagerModel *customerAccountManager;
 
-@property (nonatomic, strong, readonly) BSCustomerPriceListModel *customerPriceListDetails;
+@property (nonatomic, strong, readonly) BSPriceListDetailsModel *customerPriceListDetails;
 
 - (BSCustomerModel *)initCustomerWithID:(NSString *)cID
 								   name:(NSString *)cName
@@ -38,6 +38,6 @@
 								  email:(NSString *)cEmail
 							invoiceType:(NSString *)cInvoiceType
 						 accountManager:(BSAccountManagerModel *)cAccountManager
-					   priceListDetails:(BSCustomerPriceListModel *)cPriceListModel;
+					   priceListDetails:(BSPriceListDetailsModel *)cPriceListModel;
 
 @end

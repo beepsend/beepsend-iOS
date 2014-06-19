@@ -10,6 +10,8 @@
 
 #import "BSAPIConfiguration.h"
 
+#import "BSAPConnection.h"
+
 @implementation BSConnectionsService
 
 #pragma mark - Initialization
@@ -26,21 +28,37 @@
 
 #pragma mark - Public methods
 
-- (void)getAllAvailableConnectsionOnCompletion:(void(^)(id response, id error))block {
+- (void)getAllAvailableConnectsionOnCompletion:(void(^)(NSArray *connections, id error))block {
 	[super executeGETForMethod:[BSAPIConfiguration connections]
 				withParameters:@{}
 				  onCompletion:^(id response, id error) {
 					  
-					  block(response, error);
+					  if (!error) {
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  for (BSAPConnection *conn in [BSAPConnection arrayOfObjectsFromArrayOfDictionaries:response]) {
+							  [mArr addObject:[conn convertToConnectionModel]];
+						  }
+						  block([NSArray arrayWithArray:mArr], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
 	}];
 }
 
-- (void)getConnectionOnCompletion:(void(^)(id response, id error))block {
+- (void)getMeConnectionOnCompletion:(void(^)(BSConnectionModel *connection, id error))block {
 	[super executeGETForMethod:[BSAPIConfiguration connectionsMe]
 				withParameters:@{}
 				  onCompletion:^(id response, id error) {
 		
-					  block(response, error);
+					  if (!error) {
+						  block([[BSAPConnection classFromDict:response] convertToConnectionModel], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
 	}];
 }
 

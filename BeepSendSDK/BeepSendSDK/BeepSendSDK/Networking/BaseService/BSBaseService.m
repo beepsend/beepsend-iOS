@@ -38,7 +38,8 @@
 	   andResponseSerializer:ResponseSerializerJSON
 				   forMethod:method
 			  withParameters:parameters
-		   additionalHeaders:[BSAPIConfiguration authorizationHeader] onCompletion:^(id response, id error) {
+		   additionalHeaders:[BSAPIConfiguration authorizationHeader]
+				onCompletion:^(id response, id error) {
 			   
 			   block(response, error);
 			   
@@ -56,7 +57,8 @@
 	   andResponseSerializer:ResponseSerializerJSON
 				   forMethod:method
 			  withParameters:parameters
-		   additionalHeaders:[BSAPIConfiguration authorizationHeader] onCompletion:^(id response, id error) {
+		   additionalHeaders:[BSAPIConfiguration authorizationHeader]
+				onCompletion:^(id response, id error) {
 			   
 			   block(response, error);
 			   
@@ -74,7 +76,8 @@
 	   andResponseSerializer:ResponseSerializerJSON
 				   forMethod:method
 			  withParameters:parameters
-		   additionalHeaders:[BSAPIConfiguration authorizationHeader] onCompletion:^(id response, id error) {
+		   additionalHeaders:[BSAPIConfiguration authorizationHeader]
+				onCompletion:^(id response, id error) {
 			   
 			   block(response, error);
 			   
@@ -92,7 +95,8 @@
 	   andResponseSerializer:ResponseSerializerJSON
 				   forMethod:method
 			  withParameters:parameters
-		   additionalHeaders:[BSAPIConfiguration authorizationHeader] onCompletion:^(id response, id error) {
+		   additionalHeaders:[BSAPIConfiguration authorizationHeader]
+				onCompletion:^(id response, id error) {
 			   
 			   block(response, error);
 			   

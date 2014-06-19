@@ -22,7 +22,7 @@
 
 @property (nonatomic, strong, readwrite) BSAccountManagerModel *customerAccountManager;
 
-@property (nonatomic, strong, readwrite) BSCustomerPriceListModel *customerPriceListDetails;
+@property (nonatomic, strong, readwrite) BSPriceListDetailsModel *customerPriceListDetails;
 
 @end
 
@@ -49,7 +49,7 @@
 								  email:(NSString *)cEmail
 							invoiceType:(NSString *)cInvoiceType
 						 accountManager:(BSAccountManagerModel *)cAccountManager
-					   priceListDetails:(BSCustomerPriceListModel *)cPriceListModel
+					   priceListDetails:(BSPriceListDetailsModel *)cPriceListModel
 {
 	if (self = [super initWithID:cID andTitle:cName]) {
 		_customerName = cName;

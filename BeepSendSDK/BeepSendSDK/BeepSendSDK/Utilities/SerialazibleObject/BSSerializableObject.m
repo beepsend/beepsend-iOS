@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 HTEC. All rights reserved.
 //
 
-#import "HTSerializableObject.h"
+#import "BSSerializableObject.h"
 #import <objc/runtime.h>
 
-@implementation HTSerializableObject
+@implementation BSSerializableObject
 
 
 /**
@@ -17,7 +17,7 @@
  * whole logic that does the pasing.
  *
  **/
--(NSDictionary *)dictionaryFromClass
+- (NSDictionary *)dictionaryFromClass
 {
 	return [self dictFromClass:self];
 }
@@ -26,18 +26,18 @@
  * Method that determins if class inherits from HTSerialazibleObject and calls proper method.
  *
  **/
--(id)dictFromClass:(HTSerializableObject *)object
+- (id)dictFromClass:(BSSerializableObject *)object
 {
 	////////////////////////////////////////////////////////////
 	//if class inherits from HTSerialazibleObject class call its
 	// dictFromClass method in case overriden
-	if([[object class] isSubclassOfClass:[HTSerializableObject class]])
+	if([[object class] isSubclassOfClass:[BSSerializableObject class]])
 	{
 		return [object  dictFromClass];
 	}
 	else
 	{
-		return [HTSerializableObject dictFromClass:object];
+		return [BSSerializableObject dictFromClass:object];
 	}
 }
 
@@ -48,7 +48,7 @@
  **/
 - (id)dictFromClass
 {
-	return [HTSerializableObject dictFromClass:self];
+	return [BSSerializableObject dictFromClass:self];
 }
 
 /**
@@ -66,14 +66,14 @@
 		dict = [@[] mutableCopy];
 		for (id node in classForDict)
 		{
-			[dict addObject:[HTSerializableObject dictFromClass:node]];
+			[dict addObject:[BSSerializableObject dictFromClass:node]];
 		}
 		return dict;
 	}
 	else
 	{
 		dict = [@{} mutableCopy];
-		NSArray *propertyList = [HTSerializableObject propetyListForClass:classForDict];
+		NSArray *propertyList = [BSSerializableObject propetyListForClass:classForDict];
 		///////////////////////////////////////////////////////////////
 		//if class has no properties it is primitive and just return it
 		if(propertyList.count == 0)
@@ -86,7 +86,7 @@
 		for (NSString *zz in propertyList) {
 			if([classForDict valueForKey:zz])
 			{
-				[dict setObject:[HTSerializableObject dictFromClass:[classForDict valueForKey:zz]] forKey:zz];
+				[dict setObject:[BSSerializableObject dictFromClass:[classForDict valueForKey:zz]] forKey:zz];
 			}
 		}
 		return dict;
@@ -124,7 +124,7 @@
 	}
 	else
 	{
-		NSArray *propertyList = [HTSerializableObject propetyListForClass:klass];
+		NSArray *propertyList = [BSSerializableObject propetyListForClass:klass];
 		
 		if(propertyList.count ==0)
 		{
@@ -132,7 +132,7 @@
 		}
 		else
 		{
-			NSDictionary *propetyTypes = [HTSerializableObject classPropsFor:klass];
+			NSDictionary *propetyTypes = [BSSerializableObject classPropsFor:klass];
 			NSObject *object = [[klass alloc] init];
 			
 			if(object)
@@ -145,17 +145,27 @@
 						NSString *className = propetyTypes[zz];
 						Class class1 = NSClassFromString(className);
 						
-						if([class1 isSubclassOfClass:[HTSerializableObject class]])
+						if([class1 isSubclassOfClass:[BSSerializableObject class]])
 						{
 							////////////////////////////////////////////
 							//if implements serialazible call recursivly
-							[object setValue:[self classFromDict:[dictionary objectForKey:zz] withClass:NSClassFromString([propetyTypes objectForKey:zz])] forKey:zz];
+							[object setValue:[self classFromDict:dictionary[zz] withClass:NSClassFromString(propetyTypes[zz])] forKey:zz];
 						}
+//						else if ([class1 isSubclassOfClass:[NSArray class]])
+//						{
+//							///////////////////////
+//							//Array
+//							NSMutableArray *results = [@[] mutableCopy];
+//							for (id obj in dictionary[zz]) {
+//								[results addObject:[self classFromDict:obj withClass:class1]];
+//							}
+//							[object setValue:[NSArray arrayWithArray:results] forKeyPath:zz];
+//						}
 						else
 						{
 							///////////////
 							//else just add
-							[object setValue:[dictionary objectForKey:zz] forKey:zz];
+							[object setValue:dictionary[zz] forKey:zz];
 						}
 					}
 				}

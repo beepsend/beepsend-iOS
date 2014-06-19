@@ -77,10 +77,10 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameActive:) name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
 	
-	BSCustomerService *s = [BSCustomerService sharedService];
+	BSConnectionsService *cs = [BSConnectionsService sharedService];
 	
-	[s getCustomerOnCompletion:^(BSCustomerModel *customer, id error) {
-		DLog(@"%@", customer);
+	[cs getAllAvailableConnectsionOnCompletion:^(id response, id error) {
+		DLog(@"%@", response);
 	}];
 }
 
@@ -129,10 +129,11 @@
 }
 
 - (void)buttonCheckClicked {
-	BSConnectionsService *cs = [BSConnectionsService sharedService];
-
-	[cs getAllAvailableConnectsionOnCompletion:^(id response, id error) {
-		DLog(@"%@", response);
+	
+	BSCustomerService *s = [BSCustomerService sharedService];
+	
+	[s getCustomerOnCompletion:^(BSCustomerModel *customer, id error) {
+		DLog(@"\nCustomer: %@, \nWith error: %@\n", customer, error);
 	}];
 }
 

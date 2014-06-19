@@ -23,15 +23,16 @@
 
 #pragma mark - Public methods
 
-- (BSCustomerModel *)convertToCustomerModel {
+- (BSCustomerModel *)convertToCustomerModel
+{
 	
-	BSCustomerPriceListScheduleModel *pricelistSchedule = [[BSCustomerPriceListScheduleModel alloc] initPricelistScheduleWithID:_pricelist_schedule.id
-																														andName:_pricelist_schedule.name];
+	BSPriceListScheduleModel *pricelistSchedule = [[BSPriceListScheduleModel alloc] initPricelistScheduleWithID:_pricelist_schedule.id
+																										andName:_pricelist_schedule.name];
 	
-	BSCustomerPriceListModel *customerPricelistDetails = [[BSCustomerPriceListModel alloc] initPricelistDetailsWithType:_pricelist_type
-																											  delimiter:_pricelist_delimiter
-																									  pricelistSchedule:pricelistSchedule
-																												 fields:_pricelist_fields];
+	BSPriceListDetailsModel *customerPricelistDetails = [[BSPriceListDetailsModel alloc] initPricelistDetailsWithType:_pricelist_type
+																											delimiter:_pricelist_delimiter
+																									pricelistSchedule:pricelistSchedule
+																											   fields:_pricelist_fields];
 	
 	BSAccountManagerModel *accountManager = [[BSAccountManagerModel alloc] initAccountManagerWithName:_account_manager.name
 																							 andEmail:_account_manager.email];

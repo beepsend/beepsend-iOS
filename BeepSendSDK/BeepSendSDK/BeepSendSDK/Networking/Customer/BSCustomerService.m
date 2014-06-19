@@ -36,6 +36,10 @@
 					  if (!error) {
 						  block([[BSAPCustomer classFromDict:response] convertToCustomerModel], error);
 					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
 					  
 				  }];
 }

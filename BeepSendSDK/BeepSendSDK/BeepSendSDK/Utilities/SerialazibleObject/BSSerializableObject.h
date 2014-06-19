@@ -1,14 +1,14 @@
 //
-//  TRZSerialazibleObject.h
-//  Tripzzy
+//  ConnectionsService.h
+//  BeepSendSDK
 //
-//  Created by Nikola Mitic on 6/17/14.
-//  Copyright (c) 2014 HTEC. All rights reserved.
+//  Created by Vladica Pesic on 6/13/14.
+//  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface HTSerializableObject : NSObject
+@interface BSSerializableObject : NSObject
 
 /**
  * Method that should be called for converting. Override this method if you want to change
@@ -16,7 +16,7 @@
  * class called upon on.
  *
  **/
--(NSDictionary *)dictionaryFromClass;
+- (NSDictionary *)dictionaryFromClass;
 
 
 /**
