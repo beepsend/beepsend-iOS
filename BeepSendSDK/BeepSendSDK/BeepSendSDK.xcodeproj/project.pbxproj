@@ -78,6 +78,7 @@
 		6EC31688195032AE004D8F87 /* BSSMSService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EC31684195030D0004D8F87 /* BSSMSService.h */; };
 		6EC3168D19504CEB004D8F87 /* BSGeneralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC3168C19504CEB004D8F87 /* BSGeneralModel.m */; };
 		6EC3168E19504CEB004D8F87 /* BSGeneralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC3168C19504CEB004D8F87 /* BSGeneralModel.m */; };
+		6EC82C3F19547D90001AD1F2 /* BSPricelistService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC82C3E19547D90001AD1F2 /* BSPricelistService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,6 +188,8 @@
 		6EC31685195030D0004D8F87 /* BSSMSService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSSMSService.m; path = SMS/BSSMSService.m; sourceTree = "<group>"; };
 		6EC3168B19504CEB004D8F87 /* BSGeneralModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSGeneralModel.h; path = Models/GeneralModel/BSGeneralModel.h; sourceTree = "<group>"; };
 		6EC3168C19504CEB004D8F87 /* BSGeneralModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSGeneralModel.m; path = Models/GeneralModel/BSGeneralModel.m; sourceTree = "<group>"; };
+		6EC82C3D19547D90001AD1F2 /* BSPricelistService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSPricelistService.h; path = Pricelist/BSPricelistService.h; sourceTree = "<group>"; };
+		6EC82C3E19547D90001AD1F2 /* BSPricelistService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSPricelistService.m; path = Pricelist/BSPricelistService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,6 +290,7 @@
 				6EBA76A4194AF28600941E85 /* BaseService */,
 				6EBC77F2194F2DF600666099 /* Customer */,
 				6EBA76B6194B38D800941E85 /* Connections */,
+				6EC82C3C19547D22001AD1F2 /* Pricelist */,
 				6EC31683195030A2004D8F87 /* SMS */,
 			);
 			path = Networking;
@@ -629,6 +633,15 @@
 			name = GeneralModel;
 			sourceTree = "<group>";
 		};
+		6EC82C3C19547D22001AD1F2 /* Pricelist */ = {
+			isa = PBXGroup;
+			children = (
+				6EC82C3D19547D90001AD1F2 /* BSPricelistService.h */,
+				6EC82C3E19547D90001AD1F2 /* BSPricelistService.m */,
+			);
+			name = Pricelist;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -714,6 +727,7 @@
 				6EB877B31953113C0070B749 /* BSAPCCallback.m in Sources */,
 				6EB96EEB195199AD00AD77E2 /* BSAPCustomer.m in Sources */,
 				6EBC77E5194EF50B00666099 /* BSAFHTTPRequestOperation.m in Sources */,
+				6EC82C3F19547D90001AD1F2 /* BSPricelistService.m in Sources */,
 				6EB877AF195311160070B749 /* BSAPCWallet.m in Sources */,
 				6EB877961952ED7C0070B749 /* BSPriceListDetailsModel.m in Sources */,
 				6EBC77E6194EF50B00666099 /* BSAFHTTPRequestOperationManager.m in Sources */,

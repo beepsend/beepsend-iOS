@@ -97,6 +97,38 @@
  */
 + (NSString *)connectionPasswordResetForID:(NSString *)connectionID;
 
+#pragma mark - Pricelist
+
+/*
+	The API offers the ability to see every revision made of price lists for 
+	each connection. When specifying a revision ID one can fetch the detailed 
+	price list at that point in time. If authenticated using a User token, 
+	a connection ID needs to be provided too.
+ */
++ (NSString *)pricelistCurrentWithID:(NSString *)connectionID;
+
+/*
+	For simplicity the tag "me" can be used to select the default assigned 
+	connection for the User.
+ */
++ (NSString *)pricelistCurrentMe;
+
+/*
+	Receive all price lists revisions for a specific connection related to
+	the authenticated user.
+ */
++ (NSString *)pricelistAllForID:(NSString *)connectionID;
+
+/*
+	A connection ID or alias tag "me" must be provided as reference.
+ */
++ (NSString *)pricelistAllMe;
+
+/*
+	Receive price list (.csv) for given connection.
+ */
++ (NSString *)pricelistCSVForID:(NSString *)connectionID;
+
 #pragma mark - Send SMS
 
 /*

@@ -74,6 +74,33 @@
 	return [NSString stringWithFormat:@"connections/%@/passwordreset", connectionID];
 }
 
+#pragma mark - Pricelist
+
++ (NSString *)pricelistCurrentWithID:(NSString *)connectionID
+{
+	return [NSString stringWithFormat:@"connections/%@/pricelists/current", connectionID];
+}
+
++ (NSString *)pricelistCurrentMe
+{
+	return @"/connections/me/pricelists/current";
+}
+
++ (NSString *)pricelistAllForID:(NSString *)connectionID
+{
+	return [NSString stringWithFormat:@"/connections/%@/pricelists/", connectionID];
+}
+
++ (NSString *)pricelistAllMe
+{
+	return @"/connections/me/pricelists/";
+}
+
++ (NSString *)pricelistCSVForID:(NSString *)connectionID
+{
+	return [NSString stringWithFormat:@"/pricelists/%@.csv", connectionID];
+}
+
 #pragma mark - Send SMS
 
 + (NSString *)sms
