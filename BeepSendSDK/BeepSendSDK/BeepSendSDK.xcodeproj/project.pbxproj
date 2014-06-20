@@ -79,6 +79,7 @@
 		6EC3168D19504CEB004D8F87 /* BSGeneralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC3168C19504CEB004D8F87 /* BSGeneralModel.m */; };
 		6EC3168E19504CEB004D8F87 /* BSGeneralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC3168C19504CEB004D8F87 /* BSGeneralModel.m */; };
 		6EC82C3F19547D90001AD1F2 /* BSPricelistService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC82C3E19547D90001AD1F2 /* BSPricelistService.m */; };
+		6EC82C4019547E5F001AD1F2 /* BSPricelistService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EC82C3D19547D90001AD1F2 /* BSPricelistService.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				6EC82C4019547E5F001AD1F2 /* BSPricelistService.h in CopyFiles */,
 				6EC31688195032AE004D8F87 /* BSSMSService.h in CopyFiles */,
 				6EBC7808194F3C4C00666099 /* BSCustomerService.h in CopyFiles */,
 				6EBA76BE194B3EB300941E85 /* BSConnectionsService.h in CopyFiles */,

@@ -13,6 +13,7 @@
 //TODO: IMPORT SDK FOR TESTING
 #import "BSConnectionsService.h"
 #import "BSCustomerService.h"
+#import "BSPricelistService.h"
 #import "BSSMSService.h"
 
 @interface BSRootViewController () <UITextFieldDelegate>
