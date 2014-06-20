@@ -10,8 +10,8 @@
 
 @interface BSWalletModel : BSGeneralModel
 
-@property (nonatomic, strong, readonly) NSString *walletName;
-@property (nonatomic, strong, readonly) NSNumber *walletBalance;
+@property (nonatomic, strong, readonly) NSString *name;
+@property (nonatomic, strong, readonly) NSNumber *balance;
 
 - (BSWalletModel *)initWalletWithID:(NSString *)wID
 							   name:(NSString *)wName

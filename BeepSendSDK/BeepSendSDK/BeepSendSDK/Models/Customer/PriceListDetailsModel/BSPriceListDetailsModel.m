@@ -10,12 +10,12 @@
 
 @interface BSPriceListDetailsModel ()
 
-@property (nonatomic, strong, readwrite) NSNumber *priceListType;
-@property (nonatomic, strong, readwrite) NSString *priceListDelimiter;
+@property (nonatomic, strong, readwrite) NSNumber *type;
+@property (nonatomic, strong, readwrite) NSString *delimiter;
 
-@property (nonatomic, strong, readwrite) BSPriceListScheduleModel *priceListSchedule;
+@property (nonatomic, strong, readwrite) BSPriceListScheduleModel *schedule;
 
-@property (nonatomic, strong, readwrite) NSArray *priceListFields;
+@property (nonatomic, strong, readwrite) NSArray *fields;
 
 @end
 
@@ -37,10 +37,10 @@
 												   fields:(NSArray *)pFields
 {
 	if (self = [super initWithID:@"0" andTitle:[NSString stringWithFormat:@"Price list with type: %@", pType]]) {
-		_priceListType = pType;
-		_priceListDelimiter = pDelimiter;
-		_priceListSchedule = pSchedule;
-		_priceListFields = pFields;
+		_type = pType;
+		_delimiter = pDelimiter;
+		_schedule = pSchedule;
+		_fields = pFields;
 	}
 	return self;
 }

@@ -10,9 +10,9 @@
 
 @interface BSCallbacksModel ()
 
-@property (nonatomic, strong, readwrite) NSString *callbackDLR;
-@property (nonatomic, strong, readwrite) NSString *callbackMO;
-@property (nonatomic, strong, readwrite) NSString *callbackMethod;
+@property (nonatomic, strong, readwrite) NSString *DLR;
+@property (nonatomic, strong, readwrite) NSString *MO;
+@property (nonatomic, strong, readwrite) NSString *method;
 
 @end
 
@@ -33,9 +33,9 @@
 										  mo:(NSString *)cMo
 {
 	if (self = [super initWithID:@"0" andTitle:@"Callback"]) {
-		_callbackDLR = cDlr;
-		_callbackMO = cMo;
-		_callbackMethod = cMethod;
+		_DLR = cDlr;
+		_MO = cMo;
+		_method = cMethod;
 	}
 	return self;
 }

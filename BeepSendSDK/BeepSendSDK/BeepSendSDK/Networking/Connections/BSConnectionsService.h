@@ -15,4 +15,11 @@
 - (void)getAllAvailableConnectsionOnCompletion:(void(^)(NSArray *connections, id error))block;
 - (void)getMeConnectionOnCompletion:(void(^)(BSConnectionModel *connection, id error))block;
 
+- (void)updateConnection:(BSConnectionModel *)connection
+		 withCallbackDLR:(NSString *)calbackDLR
+				systemID:(NSString *)systemID
+				   label:(NSString *)label
+			 description:(NSString *)description
+	 withCompletionBlock:(void(^)(BSConnectionModel *connection, id error))block;
+
 @end

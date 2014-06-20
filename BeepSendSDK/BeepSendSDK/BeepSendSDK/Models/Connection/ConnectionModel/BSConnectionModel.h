@@ -14,23 +14,22 @@
 
 @interface BSConnectionModel : BSGeneralModel
 
-@property (nonatomic, strong, readonly) NSString *connectionAPIToken;
+@property (nonatomic, strong, readonly) NSString *apiToken;
 
-@property (nonatomic, strong, readonly) BSCallbacksModel *connectionCallbacks;
+@property (nonatomic, strong, readonly) BSCallbacksModel *callbacks;
 
-@property (nonatomic, strong, readonly) NSString *connectionCustomer;
-@property (nonatomic, strong, readonly) NSString *connectionDescription;
-@property (nonatomic, strong, readonly) NSString *connectionID;
-@property (nonatomic, strong, readonly) NSString *connectionLabel;
-@property (nonatomic, strong, readonly) NSString *connectionSystemID;
-@property (nonatomic, strong, readonly) NSNumber *connectionTLVForMCCAndMNC;//Tag-Length-Value field for returning mcc and mnc in DLR.
-@property (nonatomic, strong, readonly) NSNumber *connectionType;//Type of connection, 1 for SMS connection or 2 for HLR connection.
+@property (nonatomic, strong, readonly) NSString *customer;
+@property (nonatomic, strong, readonly) NSString *description;
+@property (nonatomic, strong, readonly) NSString *label;
+@property (nonatomic, strong, readonly) NSString *systemID;
+@property (nonatomic, strong, readonly) NSNumber *TLVForMCCAndMNC;//Tag-Length-Value field for returning mcc and mnc in DLR.
+@property (nonatomic, strong, readonly) NSNumber *type;//Type of connection, 1 for SMS connection or 2 for HLR connection.
 
-@property (nonatomic, strong, readonly) NSArray *connectionUsers;
+@property (nonatomic, strong, readonly) NSArray *users;
 
-@property (nonatomic, strong, readonly) BSWalletModel *connectionWallet;
+@property (nonatomic, strong, readonly) BSWalletModel *wallet;
 
-@property (nonatomic, strong, readonly) NSString *connectionWhitelist;
+@property (nonatomic, strong, readonly) NSString *whitelist;
 
 - (BSConnectionModel *)initConnectionWithID:(NSString *)cID
 								   apiToken:(NSString *)cAPIToken

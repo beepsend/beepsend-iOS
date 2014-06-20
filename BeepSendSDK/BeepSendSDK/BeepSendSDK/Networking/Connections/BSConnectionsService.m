@@ -28,7 +28,8 @@
 
 #pragma mark - Public methods
 
-- (void)getAllAvailableConnectsionOnCompletion:(void(^)(NSArray *connections, id error))block {
+- (void)getAllAvailableConnectsionOnCompletion:(void(^)(NSArray *connections, id error))block
+{
 	[super executeGETForMethod:[BSAPIConfiguration connections]
 				withParameters:@{}
 				  onCompletion:^(id response, id error) {
@@ -47,7 +48,8 @@
 	}];
 }
 
-- (void)getMeConnectionOnCompletion:(void(^)(BSConnectionModel *connection, id error))block {
+- (void)getMeConnectionOnCompletion:(void(^)(BSConnectionModel *connection, id error))block
+{
 	[super executeGETForMethod:[BSAPIConfiguration connectionsMe]
 				withParameters:@{}
 				  onCompletion:^(id response, id error) {
@@ -60,6 +62,57 @@
 						  block(nil, response);
 					  }
 	}];
+}
+
+- (void)updateConnection:(BSConnectionModel *)connection
+		 withCallbackDLR:(NSString *)calbackDLR
+				systemID:(NSString *)systemID
+				   label:(NSString *)label
+			 description:(NSString *)description
+	 withCompletionBlock:(void(^)(BSConnectionModel *connection, id error))block
+{
+	//	{
+	//		"callbacks": {
+	//			"dlr": "https://beepsend.com/securedlr"
+	//		},
+	//		"system_id": "crossover",
+	//		"label": "Pawnee-connection",
+	/*
+	 //		"password": "cake",
+	 */
+	//		"description": "Cool. Cool, cool, cool"
+	//	}
+	
+	//	If authenticating with a user API Token you can even set specified connection to be your default.
+	//
+	//	{
+	//		"default_connection": true
+	//	}
+	
+	BSAPConnection *conn = [[BSAPConnection alloc] init];
+	
+	BSAPCCallback *call = [[BSAPCCallback alloc] init];
+	call.dlr = calbackDLR;
+	
+	conn.callbacks = call;
+	conn.system_id = systemID;
+	conn.label = label;
+	conn.description = description;
+	
+	NSString *method = connection ? [BSAPIConfiguration connectionsWithID:connection.objectID] : [BSAPIConfiguration connectionsMe];
+	
+	[super executePUTForMethod:method
+				withParameters:[conn dictionaryFromClass]
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  block([[BSAPConnection classFromDict:response] convertToConnectionModel], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, error);
+					  }
+				  }];
 }
 
 @end

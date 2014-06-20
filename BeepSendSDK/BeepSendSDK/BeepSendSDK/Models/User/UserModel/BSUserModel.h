@@ -10,8 +10,8 @@
 
 @interface BSUserModel : BSGeneralModel
 
-@property (nonatomic, strong, readonly) NSString *userName;
-@property (nonatomic, strong, readonly) NSString *userEmail;
+@property (nonatomic, strong, readonly) NSString *name;
+@property (nonatomic, strong, readonly) NSString *email;
 
 - (BSUserModel *)initUserWithID:(NSString *)uID
 						   name:(NSString *)uName

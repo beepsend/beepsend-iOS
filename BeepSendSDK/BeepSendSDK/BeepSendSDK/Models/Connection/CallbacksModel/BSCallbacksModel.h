@@ -10,9 +10,9 @@
 
 @interface BSCallbacksModel : BSGeneralModel
 
-@property (nonatomic, strong, readonly) NSString *callbackDLR;
-@property (nonatomic, strong, readonly) NSString *callbackMO;
-@property (nonatomic, strong, readonly) NSString *callbackMethod;
+@property (nonatomic, strong, readonly) NSString *DLR;
+@property (nonatomic, strong, readonly) NSString *MO;
+@property (nonatomic, strong, readonly) NSString *method;
 
 - (BSCallbacksModel *)initCallbackWithMethod:(NSString *)cMethod
 										 dlr:(NSString *)cDlr

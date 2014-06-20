@@ -17,6 +17,21 @@
 
 @implementation BSGeneralModel
 
+#pragma mark - Properties
+
+- (NSString *)objectID
+{
+	if ([_objectID isKindOfClass:[NSNumber class]]) {
+		return [(NSNumber *)_objectID stringValue];
+	}
+	else if	([_objectID isKindOfClass:[NSNumber class]]) {
+		return _objectID;
+	}
+	else {
+		return @"-1";
+	}
+}
+
 #pragma mark - Initialization
 
 - (id)init

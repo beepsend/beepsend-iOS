@@ -77,10 +77,14 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameActive:) name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
 	
-	BSConnectionsService *cs = [BSConnectionsService sharedService];
+	__block BSConnectionsService *cs = [BSConnectionsService sharedService];
 	
-	[cs getAllAvailableConnectsionOnCompletion:^(id response, id error) {
-		DLog(@"%@", response);
+	[cs getMeConnectionOnCompletion:^(BSConnectionModel *connection, id error) {
+		
+		[cs updateConnection:connection withCallbackDLR:@"DLR URL" systemID:nil label:nil description:nil withCompletionBlock:^(BSConnectionModel *connection, id error) {
+			DLog(@"%@", connection);
+		}];
+		
 	}];
 }
 

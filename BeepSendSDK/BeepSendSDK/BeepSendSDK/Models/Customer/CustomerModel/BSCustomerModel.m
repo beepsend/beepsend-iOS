@@ -10,19 +10,19 @@
 
 @interface BSCustomerModel ()
 
-@property (nonatomic, strong, readwrite) NSString *customerName;
-@property (nonatomic, strong, readwrite) NSString *customerPhoneNumber;
-@property (nonatomic, strong, readwrite) NSString *customerAddress;
-@property (nonatomic, strong, readwrite) NSString *customerCity;
-@property (nonatomic, strong, readwrite) NSString *customerPostBox;
-@property (nonatomic, strong, readwrite) NSString *customerCountry;
-@property (nonatomic, strong, readwrite) NSString *customerVAT;
-@property (nonatomic, strong, readwrite) NSString *customerEmail;
-@property (nonatomic, strong, readwrite) NSString *customerInvoiceType;
+@property (nonatomic, strong, readwrite) NSString *name;
+@property (nonatomic, strong, readwrite) NSString *phoneNumber;
+@property (nonatomic, strong, readwrite) NSString *address;
+@property (nonatomic, strong, readwrite) NSString *city;
+@property (nonatomic, strong, readwrite) NSString *postBox;
+@property (nonatomic, strong, readwrite) NSString *country;
+@property (nonatomic, strong, readwrite) NSString *vat;
+@property (nonatomic, strong, readwrite) NSString *email;
+@property (nonatomic, strong, readwrite) NSString *invoiceType;
 
-@property (nonatomic, strong, readwrite) BSAccountManagerModel *customerAccountManager;
+@property (nonatomic, strong, readwrite) BSAccountManagerModel *accountManager;
 
-@property (nonatomic, strong, readwrite) BSPriceListDetailsModel *customerPriceListDetails;
+@property (nonatomic, strong, readwrite) BSPriceListDetailsModel *priceListDetails;
 
 @end
 
@@ -52,19 +52,19 @@
 					   priceListDetails:(BSPriceListDetailsModel *)cPriceListModel
 {
 	if (self = [super initWithID:cID andTitle:cName]) {
-		_customerName = cName;
-		_customerPhoneNumber = cPhone;
-		_customerAddress = cAddress;
-		_customerCity = cCity;
-		_customerPostBox = cPostBox;
-		_customerCountry = cCountry;
-		_customerVAT = cVat;
-		_customerEmail = cEmail;
-		_customerInvoiceType = cInvoiceType;
+		_name = cName;
+		_phoneNumber = cPhone;
+		_address = cAddress;
+		_city = cCity;
+		_postBox = cPostBox;
+		_country = cCountry;
+		_vat = cVat;
+		_email = cEmail;
+		_invoiceType = cInvoiceType;
 		
-		_customerAccountManager = cAccountManager;
+		_accountManager = cAccountManager;
 		
-		_customerPriceListDetails = cPriceListModel;
+		_priceListDetails = cPriceListModel;
 	}
 	return self;
 }

@@ -10,8 +10,8 @@
 
 @interface BSWalletModel ()
 
-@property (nonatomic, strong, readwrite) NSString *walletName;
-@property (nonatomic, strong, readwrite) NSNumber *walletBalance;
+@property (nonatomic, strong, readwrite) NSString *name;
+@property (nonatomic, strong, readwrite) NSNumber *balance;
 
 @end
 
@@ -32,8 +32,8 @@
 							balance:(NSNumber *)wBalance
 {
 	if (self = [super initWithID:wID andTitle:wName]) {
-		_walletName = wName;
-		_walletBalance = wBalance;
+		_name = wName;
+		_balance = wBalance;
 	}
 	return self;
 }

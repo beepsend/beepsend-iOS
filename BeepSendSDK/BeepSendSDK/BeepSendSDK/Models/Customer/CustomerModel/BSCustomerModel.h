@@ -13,19 +13,19 @@
 
 @interface BSCustomerModel : BSGeneralModel
 
-@property (nonatomic, strong, readonly) NSString *customerName;
-@property (nonatomic, strong, readonly) NSString *customerPhoneNumber;
-@property (nonatomic, strong, readonly) NSString *customerAddress;
-@property (nonatomic, strong, readonly) NSString *customerCity;
-@property (nonatomic, strong, readonly) NSString *customerPostBox;
-@property (nonatomic, strong, readonly) NSString *customerCountry;
-@property (nonatomic, strong, readonly) NSString *customerVAT;
-@property (nonatomic, strong, readonly) NSString *customerEmail;
-@property (nonatomic, strong, readonly) NSString *customerInvoiceType;
+@property (nonatomic, strong, readonly) NSString *name;
+@property (nonatomic, strong, readonly) NSString *phoneNumber;
+@property (nonatomic, strong, readonly) NSString *address;
+@property (nonatomic, strong, readonly) NSString *city;
+@property (nonatomic, strong, readonly) NSString *postBox;
+@property (nonatomic, strong, readonly) NSString *country;
+@property (nonatomic, strong, readonly) NSString *vat;
+@property (nonatomic, strong, readonly) NSString *email;
+@property (nonatomic, strong, readonly) NSString *type;
 
-@property (nonatomic, strong, readonly) BSAccountManagerModel *customerAccountManager;
+@property (nonatomic, strong, readonly) BSAccountManagerModel *accountManager;
 
-@property (nonatomic, strong, readonly) BSPriceListDetailsModel *customerPriceListDetails;
+@property (nonatomic, strong, readonly) BSPriceListDetailsModel *priceListDetails;
 
 - (BSCustomerModel *)initCustomerWithID:(NSString *)cID
 								   name:(NSString *)cName

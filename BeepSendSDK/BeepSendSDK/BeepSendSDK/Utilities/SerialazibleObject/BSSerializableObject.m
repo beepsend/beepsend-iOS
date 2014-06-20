@@ -1,9 +1,9 @@
 //
-//  TRZSerialazibleObject.m
-//  Tripzzy
+//  BSSerializableObject.m
+//  BeepSendSDK
 //
-//  Created by Nikola Mitic on 6/17/14.
-//  Copyright (c) 2014 HTEC. All rights reserved.
+//  Created by Vladica Pesic on 6/13/14.
+//  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
 #import "BSSerializableObject.h"
@@ -86,7 +86,10 @@
 		for (NSString *zz in propertyList) {
 			if([classForDict valueForKey:zz])
 			{
-				[dict setObject:[BSSerializableObject dictFromClass:[classForDict valueForKey:zz]] forKey:zz];
+				id value = [BSSerializableObject dictFromClass:[classForDict valueForKey:zz]];
+				if (value) {
+					[dict setObject:value forKey:zz];
+				}
 			}
 		}
 		return dict;

@@ -12,12 +12,12 @@
 
 @interface BSPriceListDetailsModel : BSGeneralModel
 
-@property (nonatomic, strong, readonly) NSNumber *priceListType;
-@property (nonatomic, strong, readonly) NSString *priceListDelimiter;
+@property (nonatomic, strong, readonly) NSNumber *type;
+@property (nonatomic, strong, readonly) NSString *delimiter;
 
-@property (nonatomic, strong, readonly) BSPriceListScheduleModel *priceListSchedule;
+@property (nonatomic, strong, readonly) BSPriceListScheduleModel *schedule;
 
-@property (nonatomic, strong, readonly) NSArray *priceListFields;
+@property (nonatomic, strong, readonly) NSArray *fields;
 
 - (BSPriceListDetailsModel *)initPricelistDetailsWithType:(NSNumber *)pType
 												delimiter:(NSString *)pDelimiter

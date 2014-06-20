@@ -10,23 +10,22 @@
 
 @interface BSConnectionModel ()
 
-@property (nonatomic, strong, readwrite) NSString *connectionAPIToken;
+@property (nonatomic, strong, readwrite) NSString *cAPIToken;
 
-@property (nonatomic, strong, readwrite) BSCallbacksModel *connectionCallbacks;
+@property (nonatomic, strong, readwrite) BSCallbacksModel *callbacks;
 
-@property (nonatomic, strong, readwrite) NSString *connectionCustomer;
-@property (nonatomic, strong, readwrite) NSString *connectionDescription;
-@property (nonatomic, strong, readwrite) NSString *connectionID;
-@property (nonatomic, strong, readwrite) NSString *connectionLabel;
-@property (nonatomic, strong, readwrite) NSString *connectionSystemID;
-@property (nonatomic, strong, readwrite) NSNumber *connectionTLVForMCCAndMNC;//Tag-Length-Value field for returning mcc and mnc in DLR.
-@property (nonatomic, strong, readwrite) NSNumber *connectionType;//Type of connection, 1 for SMS connection or 2 for HLR connection.
+@property (nonatomic, strong, readwrite) NSString *customer;
+@property (nonatomic, strong, readwrite) NSString *description;
+@property (nonatomic, strong, readwrite) NSString *label;
+@property (nonatomic, strong, readwrite) NSString *systemID;
+@property (nonatomic, strong, readwrite) NSNumber *cTLVForMCCAndMNC;//Tag-Length-Value field for returning mcc and mnc in DLR.
+@property (nonatomic, strong, readwrite) NSNumber *type;//Type of connection, 1 for SMS connection or 2 for HLR connection.
 
-@property (nonatomic, strong, readwrite) NSArray *connectionUsers;
+@property (nonatomic, strong, readwrite) NSArray *users;
 
-@property (nonatomic, strong, readwrite) BSWalletModel *connectionWallet;
+@property (nonatomic, strong, readwrite) BSWalletModel *wallet;
 
-@property (nonatomic, strong, readwrite) NSString *connectionWhitelist;
+@property (nonatomic, strong, readwrite) NSString *whitelist;
 
 @end
 
@@ -56,17 +55,17 @@
 								  whitelist:(NSString *)cWhitelist
 {
 	if (self = [super initWithID:cID andTitle:cLabel]) {
-		_connectionAPIToken = cAPIToken;
-		_connectionCallbacks = cCallbacks;
-		_connectionCustomer = cCustomer;
-		_connectionDescription = cDescription;
-		_connectionLabel = cLabel;
-		_connectionSystemID = cSystemID;
-		_connectionTLVForMCCAndMNC = cTlvformccandmnc;
-		_connectionType = cType;
-		_connectionUsers = cUsers;
-		_connectionWallet = cWallet;
-		_connectionWhitelist = cWhitelist;
+		_apiToken = cAPIToken;
+		_callbacks = cCallbacks;
+		_customer = cCustomer;
+		_description = cDescription;
+		_label = cLabel;
+		_systemID = cSystemID;
+		_TLVForMCCAndMNC = cTlvformccandmnc;
+		_type = cType;
+		_users = cUsers;
+		_wallet = cWallet;
+		_whitelist = cWhitelist;
 	}
 	return self;
 }

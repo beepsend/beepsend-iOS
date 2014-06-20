@@ -10,7 +10,7 @@
 
 @interface BSPriceListScheduleModel : BSGeneralModel
 
-@property (nonatomic, strong, readonly) NSString *priceListScheduleName;
+@property (nonatomic, strong, readonly) NSString *scheduleName;
 
 - (BSPriceListScheduleModel *)initPricelistScheduleWithID:(NSString *)psID
 												  andName:(NSString *)psName;

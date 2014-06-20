@@ -1,5 +1,5 @@
 //
-//  ConnectionsService.h
+//  BSSerializableObject.m
 //  BeepSendSDK
 //
 //  Created by Vladica Pesic on 6/13/14.

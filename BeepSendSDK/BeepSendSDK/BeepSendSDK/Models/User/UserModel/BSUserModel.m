@@ -10,7 +10,7 @@
 
 @interface BSUserModel ()
 
-@property (nonatomic, strong, readwrite) NSString *userName;
+@property (nonatomic, strong, readwrite) NSString *name;
 @property (nonatomic, strong, readwrite) NSString *email;
 
 @end
@@ -32,8 +32,8 @@
 						  email:(NSString *)uEmail
 {
 	if (self = [super initWithID:uID andTitle:uName]) {
-		_userName = uName;
-		_userEmail = uEmail;
+		_name = uName;
+		_email = uEmail;
 	}
 	return self;
 }

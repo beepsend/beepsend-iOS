@@ -10,7 +10,7 @@
 
 @interface BSPriceListScheduleModel ()
 
-@property (nonatomic, strong, readwrite) NSString *priceListScheduleName;
+@property (nonatomic, strong, readwrite) NSString *scheduleName;
 
 @end
 
@@ -30,7 +30,7 @@
 												  andName:(NSString *)psName
 {
 	if (self = [super initWithID:psID andTitle:psName]) {
-		_priceListScheduleName = psName;
+		_scheduleName = psName;
 	}
 	return self;
 }
