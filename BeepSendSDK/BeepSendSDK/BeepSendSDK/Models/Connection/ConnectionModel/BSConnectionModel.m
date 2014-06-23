@@ -70,4 +70,22 @@
 	return self;
 }
 
+- (BSConnectionModel *)initWithConnectionModel:(BSConnectionModel *)connectionModel withNewToken:(NSString *)newToken
+{
+	if (self = [super initWithID:connectionModel.objectID andTitle:connectionModel.label]) {
+		_apiToken = newToken;
+		_callbacks = connectionModel.callbacks;
+		_customer = connectionModel.customer;
+		_description = connectionModel.description;
+		_label = connectionModel.label;
+		_systemID = connectionModel.systemID;
+		_TLVForMCCAndMNC = connectionModel.TLVForMCCAndMNC;
+		_type = connectionModel.type;
+		_users = connectionModel.users;
+		_wallet = connectionModel.wallet;
+		_whitelist = connectionModel.whitelist;
+	}
+	return self;
+}
+
 @end

@@ -10,6 +10,8 @@
 
 #import "BSAPIConfiguration.h"
 
+#import "BSAPPricelist.h"
+
 @implementation BSPricelistService
 
 #pragma mark - Initialization
@@ -25,5 +27,81 @@
 }
 
 #pragma mark - Public methods
+
+- (void)getCurrentPricelistsForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(id result, id error))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration pricelistCurrentWithID:connection.objectID]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  
+						  BSAPPricelist *pricelist = [BSAPPricelist classFromDict:response];
+						  
+						  block(pricelist, error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
+- (void)getCurrentPricelistsForMeWithCompletionBlock:(void(^)(id result, id error))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration pricelistCurrentMe]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  
+						  BSAPPricelist *pricelist = [BSAPPricelist classFromDict:response];
+						  
+						  block(pricelist, error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
+- (void)getPricelistsForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(id result, id error))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration pricelistAllForID:connection.objectID]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  
+						  BSAPPricelist *pricelist = [BSAPPricelist classFromDict:response];
+						  
+						  block(pricelist, error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
+- (void)getPriceListsForMeWithCompletionBlock:(void(^)(id result, id error))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration pricelistAllMe]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  
+						  BSAPPricelist *pricelist = [BSAPPricelist classFromDict:response];
+						  
+						  block(pricelist, error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
 
 @end

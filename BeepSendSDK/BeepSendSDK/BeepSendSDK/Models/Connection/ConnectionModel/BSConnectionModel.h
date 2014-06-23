@@ -44,4 +44,6 @@
 									 wallet:(BSWalletModel *)cWallet
 								  whitelist:(NSString *)cWhitelist;
 
+- (BSConnectionModel *)initWithConnectionModel:(BSConnectionModel *)connectionModel withNewToken:(NSString *)newToken;
+
 @end

@@ -116,7 +116,7 @@
 }
 
 - (NSURL *)urlWithMethod:(NSString *)method {
-	return [NSURL URLWithString:method relativeToURL:_baseURL];
+	return [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", _baseURL.absoluteString, method]];
 }
 
 #pragma mark - Public methods

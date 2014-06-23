@@ -115,4 +115,23 @@
 				  }];
 }
 
+- (void)resetTokenForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(BSConnectionModel *updatedModel, id error))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration connectionResetForID:connection.objectID]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  BSConnectionModel *newToken = [[BSConnectionModel alloc] initWithConnectionModel:connection
+																						  withNewToken:[[BSAPConnection classFromDict:response] convertToConnectionModel].apiToken];
+					  
+					  if (!error) {
+						  block(newToken, error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, error);
+					  }
+				  }];
+}
+
 @end

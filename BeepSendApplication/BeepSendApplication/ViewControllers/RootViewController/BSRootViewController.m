@@ -82,9 +82,22 @@
 	
 	[cs getMeConnectionOnCompletion:^(BSConnectionModel *connection, id error) {
 		
-		[cs updateConnection:connection withCallbackDLR:@"DLR URL" systemID:nil label:nil description:nil withCompletionBlock:^(BSConnectionModel *connection, id error) {
-			DLog(@"%@", connection);
+		BSPricelistService *pricelistService = [BSPricelistService sharedService];
+		[pricelistService getCurrentPricelistsForConnection:connection withCompletionBlock:^(id result, id error) {
+			DLog(@"%@", result);
 		}];
+		
+//		[pricelistService getCurrentPricelistsForMeWithCompletionBlock:^(id result, id error) {
+//			DLog(@"%@", result);
+//		}];
+//		
+//		[pricelistService getPricelistsForConnection:connection withCompletionBlock:^(id result, id error) {
+//			DLog(@"%@", result);
+//		}];
+//		
+//		[pricelistService getPriceListsForMeWithCompletionBlock:^(id result, id error) {
+//			DLog(@"%@", result);
+//		}];
 		
 	}];
 }

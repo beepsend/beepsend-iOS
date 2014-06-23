@@ -22,4 +22,6 @@
 			 description:(NSString *)description
 	 withCompletionBlock:(void(^)(BSConnectionModel *connection, id error))block;
 
+- (void)resetTokenForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(BSConnectionModel *updatedModel, id error))block;
+
 @end
