@@ -10,8 +10,8 @@
 
 @interface BSAPPMCCMNC : BSSerializableObject
 
-@property (nonatomic, strong) NSString *mcc;
-@property (nonatomic, strong) NSString *mnc;
+@property (nonatomic, strong) NSNumber *mcc;
+@property (nonatomic, strong) NSNumber *mnc;
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
 

@@ -28,7 +28,7 @@
 
 #pragma mark - Public methods
 
-- (void)getCurrentPricelistsForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(id result, id error))block
+- (void)getCurrentPricelistsForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(BSPricelistModel *pricelist, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration pricelistCurrentWithID:connection.objectID]
 				withParameters:@{}
@@ -36,7 +36,7 @@
 					  
 					  if (!error) {
 						  
-						  BSAPPricelist *pricelist = [BSAPPricelist classFromDict:response];
+						  BSPricelistModel *pricelist = [[BSAPPricelist classFromDict:response] convertToPricelistModel];
 						  
 						  block(pricelist, error);
 					  }
@@ -47,7 +47,7 @@
 				  }];
 }
 
-- (void)getCurrentPricelistsForMeWithCompletionBlock:(void(^)(id result, id error))block
+- (void)getCurrentPricelistsForMeWithCompletionBlock:(void(^)(BSPricelistModel *pricelist, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration pricelistCurrentMe]
 				withParameters:@{}
@@ -55,7 +55,7 @@
 					  
 					  if (!error) {
 						  
-						  BSAPPricelist *pricelist = [BSAPPricelist classFromDict:response];
+						  BSPricelistModel *pricelist = [[BSAPPricelist classFromDict:response] convertToPricelistModel];
 						  
 						  block(pricelist, error);
 					  }
@@ -66,7 +66,7 @@
 				  }];
 }
 
-- (void)getPricelistsForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(id result, id error))block
+- (void)getPricelistsForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *pricelists, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration pricelistAllForID:connection.objectID]
 				withParameters:@{}
@@ -74,9 +74,13 @@
 					  
 					  if (!error) {
 						  
-						  BSAPPricelist *pricelist = [BSAPPricelist classFromDict:response];
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  for (BSAPPricelist *pricelist in [BSAPPricelist arrayOfObjectsFromArrayOfDictionaries:response]) {
+							  
+							  [mArr addObject:[pricelist convertToPricelistModel]];
+						  }
+						  block([NSArray arrayWithArray:mArr], error);
 						  
-						  block(pricelist, error);
 					  }
 					  else {
 						  //TODO: Create error handling
@@ -85,7 +89,7 @@
 				  }];
 }
 
-- (void)getPriceListsForMeWithCompletionBlock:(void(^)(id result, id error))block
+- (void)getPriceListsForMeWithCompletionBlock:(void(^)(NSArray *pricelists, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration pricelistAllMe]
 				withParameters:@{}
@@ -93,9 +97,13 @@
 					  
 					  if (!error) {
 						  
-						  BSAPPricelist *pricelist = [BSAPPricelist classFromDict:response];
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  for (BSAPPricelist *pricelist in [BSAPPricelist arrayOfObjectsFromArrayOfDictionaries:response]) {
+							  
+							  [mArr addObject:[pricelist convertToPricelistModel]];
+						  }
+						  block([NSArray arrayWithArray:mArr], error);
 						  
-						  block(pricelist, error);
 					  }
 					  else {
 						  //TODO: Create error handling

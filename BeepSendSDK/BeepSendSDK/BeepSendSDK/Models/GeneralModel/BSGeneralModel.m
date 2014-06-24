@@ -24,7 +24,7 @@
 	if ([_objectID isKindOfClass:[NSNumber class]]) {
 		return [(NSNumber *)_objectID stringValue];
 	}
-	else if	([_objectID isKindOfClass:[NSNumber class]]) {
+	else if	([_objectID isKindOfClass:[NSString class]]) {
 		return _objectID;
 	}
 	else {

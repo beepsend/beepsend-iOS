@@ -83,22 +83,22 @@
 
 + (NSString *)pricelistCurrentMe
 {
-	return @"/connections/me/pricelists/current";
+	return @"connections/me/pricelists/current";
 }
 
 + (NSString *)pricelistAllForID:(NSString *)connectionID
 {
-	return [NSString stringWithFormat:@"/connections/%@/pricelists/", connectionID];
+	return [NSString stringWithFormat:@"connections/%@/pricelists/", connectionID];
 }
 
 + (NSString *)pricelistAllMe
 {
-	return @"/connections/me/pricelists/";
+	return @"connections/me/pricelists/";
 }
 
 + (NSString *)pricelistCSVForID:(NSString *)connectionID
 {
-	return [NSString stringWithFormat:@"/pricelists/%@.csv", connectionID];
+	return [NSString stringWithFormat:@"pricelists/%@.csv", connectionID];
 }
 
 #pragma mark - Send SMS

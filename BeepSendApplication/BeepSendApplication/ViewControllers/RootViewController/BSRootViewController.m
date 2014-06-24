@@ -83,22 +83,10 @@
 	[cs getMeConnectionOnCompletion:^(BSConnectionModel *connection, id error) {
 		
 		BSPricelistService *pricelistService = [BSPricelistService sharedService];
-		[pricelistService getCurrentPricelistsForConnection:connection withCompletionBlock:^(id result, id error) {
-			DLog(@"%@", result);
+		[pricelistService getPriceListsForMeWithCompletionBlock:^(NSArray *pricelists, id error) {
+			DLog(@"%@", pricelists);
 		}];
-		
-//		[pricelistService getCurrentPricelistsForMeWithCompletionBlock:^(id result, id error) {
-//			DLog(@"%@", result);
-//		}];
-//		
-//		[pricelistService getPricelistsForConnection:connection withCompletionBlock:^(id result, id error) {
-//			DLog(@"%@", result);
-//		}];
-//		
-//		[pricelistService getPriceListsForMeWithCompletionBlock:^(id result, id error) {
-//			DLog(@"%@", result);
-//		}];
-		
+
 	}];
 }
 

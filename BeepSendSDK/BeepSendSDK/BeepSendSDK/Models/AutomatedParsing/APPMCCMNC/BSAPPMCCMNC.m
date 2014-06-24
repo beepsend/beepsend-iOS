@@ -10,6 +10,36 @@
 
 @implementation BSAPPMCCMNC
 
+#pragma mark - Properties
+
+- (NSNumber *)mcc
+{
+	if ([_mcc isKindOfClass:[NSNumber class]]) {
+		return _mcc;
+	}
+	else if	([_mcc isKindOfClass:[NSString class]]) {
+		return [NSNumber numberWithInteger:[(NSString *)_mcc integerValue]];
+	}
+	else {
+		return @0;
+	}
+}
+
+- (NSNumber *)mnc
+{
+	if ([_mnc isKindOfClass:[NSNumber class]]) {
+		return _mnc;
+	}
+	else if	([_mnc isKindOfClass:[NSString class]]) {
+		return [NSNumber numberWithInteger:[(NSString *)_mnc integerValue]];
+	}
+	else {
+		return @0;
+	}
+}
+
+#pragma mark - Inherited methods
+
 + (id)classFromDict:(NSDictionary *)dictionary
 {
 	if (![dictionary isKindOfClass:[NSDictionary class]]) {

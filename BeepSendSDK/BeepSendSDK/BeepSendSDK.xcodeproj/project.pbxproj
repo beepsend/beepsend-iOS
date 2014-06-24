@@ -86,6 +86,8 @@
 		6EC3168E19504CEB004D8F87 /* BSGeneralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC3168C19504CEB004D8F87 /* BSGeneralModel.m */; };
 		6EC82C3F19547D90001AD1F2 /* BSPricelistService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC82C3E19547D90001AD1F2 /* BSPricelistService.m */; };
 		6EC82C4019547E5F001AD1F2 /* BSPricelistService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EC82C3D19547D90001AD1F2 /* BSPricelistService.h */; };
+		6EF46E08195960B3002C6F56 /* BSCountryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF46E07195960B3002C6F56 /* BSCountryModel.m */; };
+		6EF46E0C19596133002C6F56 /* BSMCCMNCModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF46E0B19596133002C6F56 /* BSMCCMNCModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -210,6 +212,10 @@
 		6EC3168C19504CEB004D8F87 /* BSGeneralModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSGeneralModel.m; path = Models/GeneralModel/BSGeneralModel.m; sourceTree = "<group>"; };
 		6EC82C3D19547D90001AD1F2 /* BSPricelistService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSPricelistService.h; path = Pricelist/BSPricelistService.h; sourceTree = "<group>"; };
 		6EC82C3E19547D90001AD1F2 /* BSPricelistService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSPricelistService.m; path = Pricelist/BSPricelistService.m; sourceTree = "<group>"; };
+		6EF46E06195960B3002C6F56 /* BSCountryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSCountryModel.h; path = Models/Pricelist/CountryModel/BSCountryModel.h; sourceTree = "<group>"; };
+		6EF46E07195960B3002C6F56 /* BSCountryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSCountryModel.m; path = Models/Pricelist/CountryModel/BSCountryModel.m; sourceTree = "<group>"; };
+		6EF46E0A19596133002C6F56 /* BSMCCMNCModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSMCCMNCModel.h; path = Models/Pricelist/MCCMNCModel/BSMCCMNCModel.h; sourceTree = "<group>"; };
+		6EF46E0B19596133002C6F56 /* BSMCCMNCModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSMCCMNCModel.m; path = Models/Pricelist/MCCMNCModel/BSMCCMNCModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -343,6 +349,8 @@
 		6EB3EA77195866DD00951E57 /* Pricelist */ = {
 			isa = PBXGroup;
 			children = (
+				6EF46E091959610F002C6F56 /* MCCMNCModel */,
+				6EF46E051959608F002C6F56 /* CountryModel */,
 				6EB3EA7C195867C300951E57 /* NetworkModel */,
 				6EB3EA78195866FE00951E57 /* PricelistModel */,
 			);
@@ -730,6 +738,24 @@
 			name = Pricelist;
 			sourceTree = "<group>";
 		};
+		6EF46E051959608F002C6F56 /* CountryModel */ = {
+			isa = PBXGroup;
+			children = (
+				6EF46E06195960B3002C6F56 /* BSCountryModel.h */,
+				6EF46E07195960B3002C6F56 /* BSCountryModel.m */,
+			);
+			name = CountryModel;
+			sourceTree = "<group>";
+		};
+		6EF46E091959610F002C6F56 /* MCCMNCModel */ = {
+			isa = PBXGroup;
+			children = (
+				6EF46E0A19596133002C6F56 /* BSMCCMNCModel.h */,
+				6EF46E0B19596133002C6F56 /* BSMCCMNCModel.m */,
+			);
+			name = MCCMNCModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -827,11 +853,13 @@
 				6EB877841952EC9D0070B749 /* BSWalletModel.m in Sources */,
 				6EB877981952ED7C0070B749 /* BSPriceListScheduleModel.m in Sources */,
 				6EB877B7195311660070B749 /* BSAPCUser.m in Sources */,
+				6EF46E0C19596133002C6F56 /* BSMCCMNCModel.m in Sources */,
 				6EB877941952ED7C0070B749 /* BSCustomerModel.m in Sources */,
 				6EBC77EB194EF50B00666099 /* BSAFURLRequestSerialization.m in Sources */,
 				6EB3EA7B1958679D00951E57 /* BSPricelistModel.m in Sources */,
 				6EB8779E1952EFA30070B749 /* BSUserModel.m in Sources */,
 				6EBC77EC194EF50B00666099 /* BSAFURLResponseSerialization.m in Sources */,
+				6EF46E08195960B3002C6F56 /* BSCountryModel.m in Sources */,
 				6EB8777C1952E5B90070B749 /* BSConnectionModel.m in Sources */,
 				6EBC77ED194EF50B00666099 /* BSAFURLSessionManager.m in Sources */,
 				6EBA76BD194B3C8300941E85 /* BSHelper.m in Sources */,
