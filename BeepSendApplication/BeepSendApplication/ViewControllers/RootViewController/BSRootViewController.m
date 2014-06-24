@@ -15,6 +15,7 @@
 #import "BSCustomerService.h"
 #import "BSPricelistService.h"
 #import "BSSMSService.h"
+#import "BSUserService.h"
 
 @interface BSRootViewController () <UITextFieldDelegate>
 
@@ -78,15 +79,9 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameActive:) name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
 	
-	__block BSConnectionsService *cs = [BSConnectionsService sharedService];
-	
-	[cs getMeConnectionOnCompletion:^(BSConnectionModel *connection, id error) {
-		
-		BSPricelistService *pricelistService = [BSPricelistService sharedService];
-		[pricelistService getPriceListsForMeWithCompletionBlock:^(NSArray *pricelists, id error) {
-			DLog(@"%@", pricelists);
-		}];
-
+	__block BSUserService *us = [BSUserService sharedService];
+	[us getUserDetailsWithCompletionBlock:^(BSUserModel *user, id error) {
+		DLog(@"%@", user);
 	}];
 }
 

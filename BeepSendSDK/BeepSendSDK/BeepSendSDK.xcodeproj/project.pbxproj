@@ -92,6 +92,8 @@
 		6EF46E151959A0EE002C6F56 /* BSAPUserType.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF46E141959A0EE002C6F56 /* BSAPUserType.m */; };
 		6EF46E181959A108002C6F56 /* BSAPVerified.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF46E171959A108002C6F56 /* BSAPVerified.m */; };
 		6EF46E1C1959A604002C6F56 /* BSUserTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF46E1B1959A604002C6F56 /* BSUserTypeModel.m */; };
+		6EF46E241959B770002C6F56 /* BSUserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EF46E231959B770002C6F56 /* BSUserService.m */; };
+		6EF46E251959B786002C6F56 /* BSUserService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EF46E221959B770002C6F56 /* BSUserService.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +113,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				6EF46E251959B786002C6F56 /* BSUserService.h in CopyFiles */,
 				6EC82C4019547E5F001AD1F2 /* BSPricelistService.h in CopyFiles */,
 				6EC31688195032AE004D8F87 /* BSSMSService.h in CopyFiles */,
 				6EBC7808194F3C4C00666099 /* BSCustomerService.h in CopyFiles */,
@@ -228,6 +231,8 @@
 		6EF46E171959A108002C6F56 /* BSAPVerified.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPVerified.m; path = Models/AutomatedParsing/APVerified/BSAPVerified.m; sourceTree = "<group>"; };
 		6EF46E1A1959A604002C6F56 /* BSUserTypeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSUserTypeModel.h; path = Models/User/UserTypeModel/BSUserTypeModel.h; sourceTree = "<group>"; };
 		6EF46E1B1959A604002C6F56 /* BSUserTypeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSUserTypeModel.m; path = Models/User/UserTypeModel/BSUserTypeModel.m; sourceTree = "<group>"; };
+		6EF46E221959B770002C6F56 /* BSUserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSUserService.h; sourceTree = "<group>"; };
+		6EF46E231959B770002C6F56 /* BSUserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSUserService.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,6 +399,7 @@
 				6EBC77F2194F2DF600666099 /* Customer */,
 				6EBA76B6194B38D800941E85 /* Connections */,
 				6EC82C3C19547D22001AD1F2 /* Pricelist */,
+				6EF46E211959B770002C6F56 /* User */,
 				6EC31683195030A2004D8F87 /* SMS */,
 			);
 			path = Networking;
@@ -808,6 +814,15 @@
 			name = UserTypeModel;
 			sourceTree = "<group>";
 		};
+		6EF46E211959B770002C6F56 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				6EF46E221959B770002C6F56 /* BSUserService.h */,
+				6EF46E231959B770002C6F56 /* BSUserService.m */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -920,6 +935,7 @@
 				6EBA76BD194B3C8300941E85 /* BSHelper.m in Sources */,
 				6EBC77E2194EF4F900666099 /* BSNetworkLayer.m in Sources */,
 				6EBA76B0194B2CD600941E85 /* BSAPIConfiguration.m in Sources */,
+				6EF46E241959B770002C6F56 /* BSUserService.m in Sources */,
 				6EBC7807194F356A00666099 /* BSBaseService.m in Sources */,
 				6EB3EA721958270B00951E57 /* BSAPPNetwork.m in Sources */,
 				6EB96EE2195192A600AD77E2 /* BSAPCPriceListSchedule.m in Sources */,
