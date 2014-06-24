@@ -14,4 +14,11 @@
 
 - (void)getUserDetailsWithCompletionBlock:(void(^)(BSUserModel *user, id error))block;
 
+- (void)updateUserWithName:(NSString *)uName
+					 phone:(NSString *)uPhone
+		 defaultConnection:(BSConnectionModel *)uConnection
+				 userTypes:(NSArray *)uTypes
+			 verifiedTerms:(BOOL)uVerifiedTerms
+	   withCompletionBlock:(void(^)(BSUserModel *user, id error))block;
+
 @end

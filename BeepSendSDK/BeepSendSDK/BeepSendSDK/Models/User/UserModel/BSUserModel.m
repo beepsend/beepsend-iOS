@@ -38,6 +38,22 @@
 	return self;
 }
 
+- (BSUserModel *)initWithName:(NSString *)uName
+						phone:(NSString *)uPhone
+			defaultConnection:(BSConnectionModel *)uConnection
+					userTypes:(NSArray *)uTypes
+					 verified:(BSVerifiedModel *)uVerified
+{
+	if (self = [super initWithID:@"0" andTitle:uName]) {
+		_name = uName;
+		_phoneNumber = uPhone;
+		_defaultConnection = uConnection;
+		_userTypes = uTypes;
+		_verified = uVerified;
+	}
+	return self;
+}
+
 - (BSUserModel *)initUserWithID:(NSString *)uID
 						   name:(NSString *)uName
 						  email:(NSString *)uEmail

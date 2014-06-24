@@ -28,6 +28,14 @@
 	return self;
 }
 
+- (BSVerifiedModel *)initUserWithTermsVerified:(BOOL)termsVerified
+{
+	if (self = [super initWithID:@"0" andTitle:@"Verified"]) {
+		_termsVerified = termsVerified;
+	}
+	return self;
+}
+
 - (BSVerifiedModel *)initUserWithEmailVerified:(BOOL)emailVerified
 								 phoneVerified:(BOOL)phoneVerified
 								 termsVerified:(BOOL)termsVerified

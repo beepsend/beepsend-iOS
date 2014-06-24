@@ -42,6 +42,14 @@
 }
 
 - (BSConnectionModel *)initConnectionWithID:(NSString *)cID
+{
+	if (self = [super initWithID:cID andTitle:@"ID Connection"]) {
+		
+	}
+	return self;
+}
+
+- (BSConnectionModel *)initConnectionWithID:(NSString *)cID
 								   apiToken:(NSString *)cAPIToken
 								  callbacks:(BSCallbacksModel *)cCallbacks
 								   customer:(NSString *)cCustomer

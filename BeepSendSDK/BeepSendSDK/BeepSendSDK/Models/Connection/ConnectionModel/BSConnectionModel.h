@@ -30,6 +30,8 @@
 
 @property (nonatomic, strong, readonly) NSString *whitelist;
 
+- (BSConnectionModel *)initConnectionWithID:(NSString *)cID;
+
 - (BSConnectionModel *)initConnectionWithID:(NSString *)cID
 								   apiToken:(NSString *)cAPIToken
 								  callbacks:(BSCallbacksModel *)cCallbacks

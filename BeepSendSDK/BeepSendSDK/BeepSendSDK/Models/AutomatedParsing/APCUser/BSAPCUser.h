@@ -31,5 +31,6 @@
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
 
 - (BSUserModel *)convertToUserModel;
++ (BSAPCUser *)convertFromConnectionModel:(BSUserModel *)connectionModel;
 
 @end

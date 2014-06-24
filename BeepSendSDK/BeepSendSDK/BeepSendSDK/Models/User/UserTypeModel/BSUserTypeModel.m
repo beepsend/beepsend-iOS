@@ -27,6 +27,14 @@
 }
 
 - (BSUserTypeModel *)initUserTypeWithID:(NSString *)uID
+{
+	if (self = [super initWithID:uID andTitle:@"ID User type"]) {
+		
+	}
+	return self;
+}
+
+- (BSUserTypeModel *)initUserTypeWithID:(NSString *)uID
 								   name:(NSString *)uName
 {
 	if (self = [super initWithID:uID andTitle:uName]) {

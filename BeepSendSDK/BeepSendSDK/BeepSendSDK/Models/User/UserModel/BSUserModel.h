@@ -28,6 +28,12 @@
 						   name:(NSString *)uName
 						  email:(NSString *)uEmail;
 
+- (BSUserModel *)initWithName:(NSString *)uName
+						phone:(NSString *)uPhone
+			defaultConnection:(BSConnectionModel *)uConnection
+					userTypes:(NSArray *)uTypes
+					 verified:(BSVerifiedModel *)uVerified;
+
 - (BSUserModel *)initUserWithID:(NSString *)uID
 						   name:(NSString *)uName
 						  email:(NSString *)uEmail

@@ -79,9 +79,15 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameActive:) name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
 	
-	__block BSUserService *us = [BSUserService sharedService];
-	[us getUserDetailsWithCompletionBlock:^(BSUserModel *user, id error) {
-		DLog(@"%@", user);
+	__block BSConnectionsService *cs = [BSConnectionsService sharedService];
+	
+	[cs getMeConnectionOnCompletion:^(BSConnectionModel *connection, id error) {
+		
+		BSUserService *userService = [BSUserService sharedService];
+		[userService updateUserWithName:@"new name" phone:@"new phone" defaultConnection:connection userTypes:nil verifiedTerms:YES withCompletionBlock:^(BSUserModel *user, id error) {
+			DLog(@"%@", user);
+		}];
+
 	}];
 }
 

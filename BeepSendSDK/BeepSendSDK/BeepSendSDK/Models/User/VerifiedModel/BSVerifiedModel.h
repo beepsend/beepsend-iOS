@@ -14,6 +14,7 @@
 @property (nonatomic, assign, readonly, getter = isPhoneVerified) BOOL phoneVerified;
 @property (nonatomic, assign, readonly, getter = isTermsVerified) BOOL termsVerified;
 
+- (BSVerifiedModel *)initUserWithTermsVerified:(BOOL)termsVerified;
 - (BSVerifiedModel *)initUserWithEmailVerified:(BOOL)emailVerified
 								 phoneVerified:(BOOL)phoneVerified
 								 termsVerified:(BOOL)termsVerified;

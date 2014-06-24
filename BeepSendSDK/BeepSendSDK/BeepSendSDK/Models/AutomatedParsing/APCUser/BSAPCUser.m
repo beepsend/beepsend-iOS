@@ -79,4 +79,41 @@
 	return usrModel;
 }
 
++ (BSAPCUser *)convertFromConnectionModel:(BSUserModel *)userModel
+{
+
+	BSAPCUser *user = [[BSAPCUser alloc] init];
+	user.id = userModel.objectID;
+	user.name = userModel.name;
+	user.username = userModel.email;
+	user.email = userModel.email;
+	user.phone = userModel.phoneNumber;
+	user.customer = userModel.customer;
+	user.api_token = userModel.apiToken;
+	
+	BSAPConnection *defaultConnection = [BSAPConnection convertFromConnectionModel:userModel.defaultConnection];
+	user.default_connection = defaultConnection;
+	
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSUserTypeModel *uType in userModel.userTypes) {
+		BSAPUserType *ut = [[BSAPUserType alloc] init];
+		
+		ut.id = uType.objectID;
+		ut.name = uType.name;
+		
+		[mArr addObject:ut];
+	}
+	user.user_types = [NSArray arrayWithArray:mArr];
+	
+	user.max_level = userModel.maxLevel;
+	
+	BSAPVerified *verified = [[BSAPVerified alloc] init];
+	verified.terms = [NSNumber numberWithBool:userModel.verified.termsVerified];
+	verified.email = [NSNumber numberWithBool:userModel.verified.emailVerified];
+	verified.phone = [NSNumber numberWithBool:userModel.verified.phoneVerified];
+	user.verified = verified;
+	
+	return user;
+}
+
 @end

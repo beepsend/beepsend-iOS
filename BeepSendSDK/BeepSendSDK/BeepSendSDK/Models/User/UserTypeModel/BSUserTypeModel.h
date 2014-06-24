@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong, readonly) NSString *name;
 
+- (BSUserTypeModel *)initUserTypeWithID:(NSString *)uID;
 - (BSUserTypeModel *)initUserTypeWithID:(NSString *)uID
 								   name:(NSString *)uName;
 
