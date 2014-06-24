@@ -8,24 +8,12 @@
 
 #import "BSAPPricelist.h"
 
+#import "BSAPPNetwork.h"
+#import "BSAPPMCCMNC.h"
+
 @implementation BSAPPricelist
 
 #pragma mark - Properties
-
-- (NSArray *)networks
-{
-	return _networks;
-}
-
-- (NSNumber *)networks_count
-{
-	return _networks_count;
-}
-
-- (NSString *)id
-{
-	return _id;
-}
 
 - (NSString *)timestamp
 {
@@ -35,11 +23,6 @@
 	else {
 		return _timestamp;
 	}
-}
-
-- (NSNumber *)active
-{
-	return _active;
 }
 
 - (NSString *)first_viewed
@@ -119,7 +102,7 @@
 										 networks:[NSArray arrayWithArray:mNetworks]
 									 networkCount:networksCount
 									   timeOfSave:dateOfSave
-										   active:_active
+										   active:[_active boolValue]
 								  timeOfFirstView:dateOfFirstViewed];
 	
 	return pricelistModel;

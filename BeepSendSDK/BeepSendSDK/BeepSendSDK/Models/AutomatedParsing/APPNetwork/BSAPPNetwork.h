@@ -8,7 +8,6 @@
 
 #import "BSSerializableObject.h"
 
-#import "BSAPPMCCMNC.h"
 #import "BSAPPCountry.h"
 
 @interface BSAPPNetwork : BSSerializableObject

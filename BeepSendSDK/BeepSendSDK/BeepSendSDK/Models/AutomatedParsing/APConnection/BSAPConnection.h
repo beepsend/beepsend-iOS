@@ -9,7 +9,6 @@
 #import "BSSerializableObject.h"
 
 #import "BSAPCCallback.h"
-#import "BSAPCUser.h"
 #import "BSAPCWallet.h"
 
 #import "BSConnectionModel.h"

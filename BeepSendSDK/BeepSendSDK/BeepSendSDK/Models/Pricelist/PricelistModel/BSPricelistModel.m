@@ -13,7 +13,7 @@
 @property (nonatomic, strong, readwrite) NSArray *networks;
 @property (nonatomic, strong, readwrite) NSNumber *networkCount;
 @property (nonatomic, strong, readwrite) NSDate *saved;
-@property (nonatomic, strong, readwrite) NSNumber *active;
+@property (nonatomic, assign, readwrite, getter = isActive) BOOL active;
 @property (nonatomic, strong, readwrite) NSDate *firstViewed;
 
 @end
@@ -34,7 +34,7 @@
 								 networks:(NSArray *)pNetworks
 							 networkCount:(NSNumber *)nCount
 							   timeOfSave:(NSDate *)nSaved
-								   active:(NSNumber *)active
+								   active:(BOOL)active
 						  timeOfFirstView:(NSDate *)nFirstView
 {
 	if (self = [super initWithID:pID andTitle:@"Pricelist"]) {

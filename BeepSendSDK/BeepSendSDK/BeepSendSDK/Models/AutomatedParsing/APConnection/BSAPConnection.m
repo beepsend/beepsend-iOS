@@ -8,6 +8,10 @@
 
 #import "BSAPConnection.h"
 
+#import "BSAPCUser.h"
+
+#import "BSUserModel.h"
+
 @implementation BSAPConnection
 
 #pragma mark - Inherited methods

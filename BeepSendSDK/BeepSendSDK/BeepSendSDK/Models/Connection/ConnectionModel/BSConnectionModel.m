@@ -88,4 +88,18 @@
 	return self;
 }
 
+- (BSConnectionModel *)initConnectionWithID:(NSString *)cID
+									  label:(NSString *)cLabel
+								   systemID:(NSString *)cSystemID
+									   type:(NSNumber *)cType
+{
+	if (self = [super initWithID:cID andTitle:cLabel]) {
+		_label = cLabel;
+		_systemID = cSystemID;
+		_type = cType;
+
+	}
+	return self;
+}
+
 @end

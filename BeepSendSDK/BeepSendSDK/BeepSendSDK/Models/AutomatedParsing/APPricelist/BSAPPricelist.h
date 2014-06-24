@@ -8,8 +8,6 @@
 
 #import "BSSerializableObject.h"
 
-#import "BSAPPNetwork.h"
-
 #import "BSPricelistModel.h"
 
 @interface BSAPPricelist : BSSerializableObject

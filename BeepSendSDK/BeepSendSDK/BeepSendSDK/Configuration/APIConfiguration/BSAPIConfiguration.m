@@ -101,6 +101,43 @@
 	return [NSString stringWithFormat:@"pricelists/%@.csv", connectionID];
 }
 
+#pragma mark - Users
+
++ (NSString *)userMe
+{
+	return @"users/me";
+}
+
++ (NSString *)updateUserEmail
+{
+	return @"users/me/email";
+}
+
++ (NSString *)updateUserPassword
+{
+	return @"users/me/password";
+}
+
++ (NSString *)resetPassword
+{
+	return @"users/passwordreset";
+}
+
++ (NSString *)setNewPasswordWithHash:(NSString *)hash
+{
+	return [NSString stringWithFormat:@"users/password/%@", hash];
+}
+
++ (NSString *)resetTokenMe
+{
+	return @"users/me/tokenreset";
+}
+
++ (NSString *)resetTokenForID:(NSString *)userID
+{
+	return [NSString stringWithFormat:@"users/%@/tokenreset", userID];
+}
+
 #pragma mark - Send SMS
 
 + (NSString *)sms

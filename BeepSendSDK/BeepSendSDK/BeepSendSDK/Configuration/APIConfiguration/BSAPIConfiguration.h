@@ -129,6 +129,39 @@
  */
 + (NSString *)pricelistCSVForID:(NSString *)connectionID;
 
+#pragma mark - Users
+
+/*
+	Get details regarding your user.
+ */
++ (NSString *)userMe;
+
+/*
+	Update email for your user.
+ */
++ (NSString *)updateUserEmail;
+
+/*
+	Update user password.
+ */
++ (NSString *)updateUserPassword;
+
+/*
+	If you have forgotten or in other ways lost control over your password, 
+	you can issue a reset. When doing so, Beepsend will send an email with 
+	a link to where you can get your new password.
+ */
++ (NSString *)resetPassword;
++ (NSString *)setNewPasswordWithHash:(NSString *)hash;
+
+/*
+	If you think that the user token used for authenticating with the 
+	Beepsend API has been compromised you can use this method (with your 
+	current user token and password) to reset the user token.
+ */
++ (NSString *)resetTokenMe;
++ (NSString *)resetTokenForID:(NSString *)userID;
+
 #pragma mark - Send SMS
 
 /*

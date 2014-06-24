@@ -38,4 +38,29 @@
 	return self;
 }
 
+- (BSUserModel *)initUserWithID:(NSString *)uID
+						   name:(NSString *)uName
+						  email:(NSString *)uEmail
+						  phone:(NSString *)uPhone
+					   customer:(NSString *)uCustomer
+					   apiToken:(NSString *)uAPIToken
+			  defaultConnection:(BSConnectionModel *)uConnection
+					  userTypes:(NSArray *)uUserTypes
+					   maxLevel:(NSNumber *)uMaxLevel
+					   verified:(BSVerifiedModel *)uVerified
+{
+	if (self = [super initWithID:uID andTitle:uName]) {
+		_name = uName;
+		_email = uEmail;
+		_phoneNumber = uPhone;
+		_customer = uCustomer;
+		_apiToken = uAPIToken;
+		_defaultConnection = uConnection;
+		_userTypes = uUserTypes;
+		_maxLevel = uMaxLevel;
+		_verified = uVerified;
+	}
+	return self;
+}
+
 @end

@@ -8,6 +8,8 @@
 
 #import "BSAPPNetwork.h"
 
+#import "BSAPPMCCMNC.h"
+
 @implementation BSAPPNetwork
 
 #pragma mark - Inherited methods

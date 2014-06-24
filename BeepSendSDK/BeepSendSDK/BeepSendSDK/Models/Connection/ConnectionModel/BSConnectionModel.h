@@ -9,7 +9,6 @@
 #import "BSGeneralModel.h"
 
 #import "BSCallbacksModel.h"
-#import "BSUserModel.h"
 #import "BSWalletModel.h"
 
 @interface BSConnectionModel : BSGeneralModel
@@ -44,6 +43,12 @@
 									 wallet:(BSWalletModel *)cWallet
 								  whitelist:(NSString *)cWhitelist;
 
-- (BSConnectionModel *)initWithConnectionModel:(BSConnectionModel *)connectionModel withNewToken:(NSString *)newToken;
+- (BSConnectionModel *)initWithConnectionModel:(BSConnectionModel *)connectionModel
+								  withNewToken:(NSString *)newToken;
+
+- (BSConnectionModel *)initConnectionWithID:(NSString *)cID
+									  label:(NSString *)cLabel
+								   systemID:(NSString *)cSystemID
+									   type:(NSNumber *)cType;
 
 @end
