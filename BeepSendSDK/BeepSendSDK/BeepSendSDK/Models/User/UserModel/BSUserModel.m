@@ -13,6 +13,17 @@
 @property (nonatomic, strong, readwrite) NSString *name;
 @property (nonatomic, strong, readwrite) NSString *email;
 
+@property (nonatomic, strong, readwrite) NSString *phoneNumber;
+@property (nonatomic, strong, readwrite) NSString *customer;
+@property (nonatomic, strong, readwrite) NSString *apiToken;
+@property (nonatomic, strong, readwrite) BSConnectionModel *defaultConnection;
+@property (nonatomic, strong, readwrite) NSArray *userTypes;
+@property (nonatomic, strong, readwrite) NSNumber *maxLevel;//Simple permission model. Allows access to all version 2 endpoints.
+@property (nonatomic, strong, readwrite) BSVerifiedModel *verified;
+
+@property (nonatomic, strong, readwrite) NSString *password;
+@property (nonatomic, strong, readwrite) NSString *theNewPassword;
+
 @end
 
 @implementation BSUserModel
@@ -34,6 +45,26 @@
 	if (self = [super initWithID:uID andTitle:uName]) {
 		_name = uName;
 		_email = uEmail;
+	}
+	return self;
+}
+
+- (BSUserModel *)initUserWithEmail:(NSString *)uEmail
+					   andPassword:(NSString *)uPassword
+{
+	if (self = [super initWithID:@"0" andTitle:@"Update email user"]) {
+		_email = uEmail;
+		_password = uPassword;
+	}
+	return self;
+}
+
+- (BSUserModel *)initUserWithPassword:(NSString *)uPassword
+					   andNewPassword:(NSString *)uNewPassword
+{
+	if (self = [super initWithID:@"0" andTitle:@"Update user password"]) {
+		_password = uPassword;
+		_theNewPassword = uNewPassword;
 	}
 	return self;
 }

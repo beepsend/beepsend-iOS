@@ -13,8 +13,6 @@
 
 #import "BSAPCUser.h"
 
-#import "BSUserTypeModel.h"
-
 @implementation BSUserService
 
 #pragma mark - Initialization
@@ -54,7 +52,7 @@
 					 phone:(NSString *)uPhone
 		 defaultConnection:(BSConnectionModel *)uConnection
 				 userTypes:(NSArray *)uTypes
-			 verifiedTerms:(BOOL)uVerifiedTerms
+			 verifiedTerms:(NSNumber *)uVerifiedTerms
 	   withCompletionBlock:(void(^)(BSUserModel *user, id error))block
 {
 	
@@ -66,7 +64,11 @@
 		[mArr addObject:t];
 	}
 	
-	BSVerifiedModel *verified = [[BSVerifiedModel alloc] initUserWithTermsVerified:uVerifiedTerms];
+	BSVerifiedModel *verified = nil;
+	if (uVerifiedTerms) {
+		verified = [[BSVerifiedModel alloc] initUserWithTermsVerified:[uVerifiedTerms boolValue]];
+	}
+	
 	
 	BSUserModel *userUpdate =
 	[[BSUserModel alloc] initWithName:uName
@@ -75,12 +77,12 @@
 							userTypes:[NSArray arrayWithArray:mArr]
 							 verified:verified];
 	
-	BSAPCUser *user = [BSAPCUser convertFromConnectionModel:userUpdate];
+	NSDictionary *userUpdateDictionary = [[BSAPCUser convertFromConnectionModel:userUpdate] dictFromClass];
 	
-	BSLog(@"%@", [user dictFromClass]);
+	BSLog(@"%@", userUpdateDictionary);
 	
 	[super executePUTForMethod:[BSAPIConfiguration userMe]
-				withParameters:@{}
+				withParameters:userUpdateDictionary
 				  onCompletion:^(id response, id error) {
 					  
 					  if (!error) {
@@ -88,6 +90,70 @@
 						  BSUserModel *userModel = [[BSAPCUser classFromDict:response] convertToUserModel];
 						  
 						  block(userModel, error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
+- (void)updateUserEmail:(NSString *)newEmail
+		   userPassword:(NSString *)password
+	withCompletionBlock:(void(^)(BOOL success, id error))block
+{
+	BSUserModel *userUpdate = [[BSUserModel alloc] initUserWithEmail:newEmail andPassword:password];
+	
+	NSDictionary *userUpdateDictionary = [[BSAPCUser convertFromConnectionModel:userUpdate] dictFromClass];
+	
+	BSLog(@"%@", userUpdateDictionary);
+	
+	[super executePUTForMethod:[BSAPIConfiguration updateUserEmail]
+				withParameters:userUpdateDictionary
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  block(YES, error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(NO, response);
+					  }
+				  }];
+}
+
+- (void)updateUserPassword:(NSString *)password
+		   userNewPassword:(NSString *)newPassword
+	   withCompletionBlock:(void(^)(BOOL success, id error))block
+{
+	BSUserModel *userUpdate = [[BSUserModel alloc] initUserWithPassword:password andNewPassword:newPassword];
+	
+	NSDictionary *userUpdateDictionary = [[BSAPCUser convertFromConnectionModel:userUpdate] dictFromClass];
+	
+	BSLog(@"%@", userUpdateDictionary);
+	
+	[super executePUTForMethod:[BSAPIConfiguration updateUserPassword]
+				withParameters:userUpdateDictionary
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  block(YES, error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(NO, response);
+					  }
+				  }];
+}
+
+- (void)resetUserTokenWithCompletionBlock:(void(^)(NSString *apiToken, id error))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration resetTokenMe]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  block(response, error);
 					  }
 					  else {
 						  //TODO: Create error handling

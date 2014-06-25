@@ -28,6 +28,9 @@
 @property (nonatomic, strong) NSNumber *max_level;
 @property (nonatomic, strong) BSAPVerified *verified;
 
+@property (nonatomic, strong) NSString *password;
+@property (nonatomic, strong, getter = the_new_password) NSString *new_password;
+
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
 
 - (BSUserModel *)convertToUserModel;

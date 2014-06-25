@@ -84,7 +84,7 @@
 	[cs getMeConnectionOnCompletion:^(BSConnectionModel *connection, id error) {
 		
 		BSUserService *userService = [BSUserService sharedService];
-		[userService updateUserWithName:@"new name" phone:@"new phone" defaultConnection:connection userTypes:nil verifiedTerms:YES withCompletionBlock:^(BSUserModel *user, id error) {
+		[userService updateUserWithName:@"Vladica" phone:nil defaultConnection:connection userTypes:nil verifiedTerms:nil withCompletionBlock:^(BSUserModel *user, id error) {
 			DLog(@"%@", user);
 		}];
 

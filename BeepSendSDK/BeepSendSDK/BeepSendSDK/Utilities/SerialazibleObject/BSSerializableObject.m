@@ -88,7 +88,14 @@
 			{
 				id value = [BSSerializableObject dictFromClass:[classForDict valueForKey:zz]];
 				if (value) {
-					[dict setObject:value forKey:zz];
+					if ([value respondsToSelector:@selector(count)]) {
+						if ([value count]) {
+							[dict setObject:value forKey:zz];
+						}
+					}
+					else {
+						[dict setObject:value forKey:zz];
+					}
 				}
 			}
 		}

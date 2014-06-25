@@ -81,15 +81,23 @@
 
 + (BSAPCUser *)convertFromConnectionModel:(BSUserModel *)userModel
 {
-
+	
 	BSAPCUser *user = [[BSAPCUser alloc] init];
-	user.id = userModel.objectID;
+	
+	if ([userModel.objectID isEqualToString:@"-1"]) {
+		return user;
+	}
+	
+	user.id = [userModel.objectID isEqualToString:@"0"] ? nil : userModel.objectID;
 	user.name = userModel.name;
 	user.username = userModel.email;
 	user.email = userModel.email;
 	user.phone = userModel.phoneNumber;
 	user.customer = userModel.customer;
 	user.api_token = userModel.apiToken;
+	
+	user.password = userModel.password;
+	user.new_password = userModel.theNewPassword;
 	
 	BSAPConnection *defaultConnection = [BSAPConnection convertFromConnectionModel:userModel.defaultConnection];
 	user.default_connection = defaultConnection;
@@ -108,9 +116,11 @@
 	user.max_level = userModel.maxLevel;
 	
 	BSAPVerified *verified = [[BSAPVerified alloc] init];
-	verified.terms = [NSNumber numberWithBool:userModel.verified.termsVerified];
-	verified.email = [NSNumber numberWithBool:userModel.verified.emailVerified];
-	verified.phone = [NSNumber numberWithBool:userModel.verified.phoneVerified];
+	if (userModel.verified) {
+		verified.terms = [NSNumber numberWithBool:userModel.verified.termsVerified];
+		verified.email = [NSNumber numberWithBool:userModel.verified.emailVerified];
+		verified.phone = [NSNumber numberWithBool:userModel.verified.phoneVerified];
+	}
 	user.verified = verified;
 	
 	return user;

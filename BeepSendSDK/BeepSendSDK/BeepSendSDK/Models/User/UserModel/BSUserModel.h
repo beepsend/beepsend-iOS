@@ -24,9 +24,18 @@
 @property (nonatomic, strong, readonly) NSNumber *maxLevel;//Simple permission model. Allows access to all version 2 endpoints.
 @property (nonatomic, strong, readonly) BSVerifiedModel *verified;
 
+@property (nonatomic, strong, readonly) NSString *password;
+@property (nonatomic, strong, readonly) NSString *theNewPassword;
+
 - (BSUserModel *)initUserWithID:(NSString *)uID
 						   name:(NSString *)uName
 						  email:(NSString *)uEmail;
+
+- (BSUserModel *)initUserWithEmail:(NSString *)uEmail
+					   andPassword:(NSString *)uPassword;
+
+- (BSUserModel *)initUserWithPassword:(NSString *)uPassword
+					   andNewPassword:(NSString *)uNewPassword;
 
 - (BSUserModel *)initWithName:(NSString *)uName
 						phone:(NSString *)uPhone
