@@ -17,6 +17,7 @@
 #import "BSSMSService.h"
 #import "BSUserService.h"
 #import "BSHLRService.h"
+#import "BSContactsService.h"
 
 @interface BSRootViewController () <UITextFieldDelegate>
 
@@ -80,6 +81,11 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameActive:) name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
 	
+	
+	BSContactsService *cs = [BSContactsService sharedService];
+	[cs getAllContactsWithCompletionBlock:^(id response, id error) {
+		DLog(@"%@", response);
+	}];
 }
 
 - (void)didReceiveMemoryWarning

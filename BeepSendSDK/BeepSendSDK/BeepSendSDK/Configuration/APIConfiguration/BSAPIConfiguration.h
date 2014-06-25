@@ -206,4 +206,21 @@
  */
 + (NSString *)smsCostEstimate;
 
+#pragma mark - Contacts
+
+/*
+	Get all contacts belonging to your user. 
+	Specify a group ID or name to filter your results.
+ 
+	Update a contact
+	Delete a contact
+ */
++ (NSString *)contactsForID:(NSString *)groupID;
+
+/*
+	Get all contacts
+	Add new contacts
+ */
++ (NSString *)contacts;
+
 @end

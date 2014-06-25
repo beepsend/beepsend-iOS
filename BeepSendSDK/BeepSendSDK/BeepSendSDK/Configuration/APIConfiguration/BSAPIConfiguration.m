@@ -176,4 +176,16 @@
 	return @"/sms/costestimate/";
 }
 
+#pragma mark - Contacts
+
++ (NSString *)contactsForID:(NSString *)groupID
+{
+	return [@"/contacts/%@" stringByAppendingString:groupID];
+}
+
++ (NSString *)contacts
+{
+	return @"/contacts/";
+}
+
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E42E57A195B091B00343B2E /* BSContactsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E42E579195B091B00343B2E /* BSContactsService.m */; };
 		6E653818194730EB00FC6349 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E653817194730EB00FC6349 /* Foundation.framework */; };
 		6E65381D194730EB00FC6349 /* BeepSendSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6E65381C194730EB00FC6349 /* BeepSendSDK.h */; };
 		6E65381F194730EB00FC6349 /* BeepSendSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E65381E194730EB00FC6349 /* BeepSendSDK.m */; };
@@ -15,6 +16,9 @@
 		6E65382C194730EB00FC6349 /* libBeepSendSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E653814194730EB00FC6349 /* libBeepSendSDK.a */; };
 		6E653832194730EB00FC6349 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E653830194730EB00FC6349 /* InfoPlist.strings */; };
 		6E653834194730EB00FC6349 /* BeepSendSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E653833194730EB00FC6349 /* BeepSendSDKTests.m */; };
+		6E74C073195B0A13001B9304 /* BSContactsService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6E42E578195B091B00343B2E /* BSContactsService.h */; };
+		6E74C077195B0C59001B9304 /* BSAPContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74C076195B0C59001B9304 /* BSAPContact.m */; };
+		6E74C07C195B0DC3001B9304 /* BSContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E74C07B195B0DC3001B9304 /* BSContactModel.m */; };
 		6EB3EA6A195824B100951E57 /* BSAPPricelist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA69195824B100951E57 /* BSAPPricelist.m */; };
 		6EB3EA6E195825FD00951E57 /* BSAPPCountry.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA6D195825FD00951E57 /* BSAPPCountry.m */; };
 		6EB3EA721958270B00951E57 /* BSAPPNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA711958270B00951E57 /* BSAPPNetwork.m */; };
@@ -123,6 +127,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				6E74C073195B0A13001B9304 /* BSContactsService.h in CopyFiles */,
 				6EB59088195AC33A009456B0 /* BSHLRService.h in CopyFiles */,
 				6EF46E251959B786002C6F56 /* BSUserService.h in CopyFiles */,
 				6EC82C4019547E5F001AD1F2 /* BSPricelistService.h in CopyFiles */,
@@ -136,6 +141,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6E42E578195B091B00343B2E /* BSContactsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSContactsService.h; path = Contacts/BSContactsService.h; sourceTree = "<group>"; };
+		6E42E579195B091B00343B2E /* BSContactsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSContactsService.m; path = Contacts/BSContactsService.m; sourceTree = "<group>"; };
 		6E653814194730EB00FC6349 /* libBeepSendSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBeepSendSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E653817194730EB00FC6349 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6E65381B194730EB00FC6349 /* BeepSendSDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BeepSendSDK-Prefix.pch"; sourceTree = "<group>"; };
@@ -146,6 +153,10 @@
 		6E65382F194730EB00FC6349 /* BeepSendSDKTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BeepSendSDKTests-Info.plist"; sourceTree = "<group>"; };
 		6E653831194730EB00FC6349 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6E653833194730EB00FC6349 /* BeepSendSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeepSendSDKTests.m; sourceTree = "<group>"; };
+		6E74C075195B0C59001B9304 /* BSAPContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPContact.h; path = Models/AutomatedParsing/APContact/BSAPContact.h; sourceTree = "<group>"; };
+		6E74C076195B0C59001B9304 /* BSAPContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPContact.m; path = Models/AutomatedParsing/APContact/BSAPContact.m; sourceTree = "<group>"; };
+		6E74C07A195B0DC3001B9304 /* BSContactModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSContactModel.h; path = Models/Contact/ContactModel/BSContactModel.h; sourceTree = "<group>"; };
+		6E74C07B195B0DC3001B9304 /* BSContactModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSContactModel.m; path = Models/Contact/ContactModel/BSContactModel.m; sourceTree = "<group>"; };
 		6EB3EA68195824B100951E57 /* BSAPPricelist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPPricelist.h; path = Models/AutomatedParsing/APPricelist/BSAPPricelist.h; sourceTree = "<group>"; };
 		6EB3EA69195824B100951E57 /* BSAPPricelist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPPricelist.m; path = Models/AutomatedParsing/APPricelist/BSAPPricelist.m; sourceTree = "<group>"; };
 		6EB3EA6C195825FD00951E57 /* BSAPPCountry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPPCountry.h; path = Models/AutomatedParsing/APPCountry/BSAPPCountry.h; sourceTree = "<group>"; };
@@ -286,6 +297,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E42E577195B08F000343B2E /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				6E42E578195B091B00343B2E /* BSContactsService.h */,
+				6E42E579195B091B00343B2E /* BSContactsService.m */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
 		6E65380B194730EB00FC6349 = {
 			isa = PBXGroup;
 			children = (
@@ -354,6 +374,32 @@
 				6E653830194730EB00FC6349 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6E74C074195B0C12001B9304 /* APContact */ = {
+			isa = PBXGroup;
+			children = (
+				6E74C075195B0C59001B9304 /* BSAPContact.h */,
+				6E74C076195B0C59001B9304 /* BSAPContact.m */,
+			);
+			name = APContact;
+			sourceTree = "<group>";
+		};
+		6E74C078195B0D7D001B9304 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				6E74C079195B0D9A001B9304 /* ContactModel */,
+			);
+			name = Contact;
+			sourceTree = "<group>";
+		};
+		6E74C079195B0D9A001B9304 /* ContactModel */ = {
+			isa = PBXGroup;
+			children = (
+				6E74C07A195B0DC3001B9304 /* BSContactModel.h */,
+				6E74C07B195B0DC3001B9304 /* BSContactModel.m */,
+			);
+			name = ContactModel;
 			sourceTree = "<group>";
 		};
 		6EB3EA671958243E00951E57 /* APPricelist */ = {
@@ -524,6 +570,7 @@
 				6EF46E211959B770002C6F56 /* User */,
 				6EC31683195030A2004D8F87 /* SMS */,
 				6EB59084195ABFDF009456B0 /* HLR */,
+				6E42E577195B08F000343B2E /* Contacts */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -716,6 +763,7 @@
 		6EB96ED61951902C00AD77E2 /* AutomatedParsing */ = {
 			isa = PBXGroup;
 			children = (
+				6E74C074195B0C12001B9304 /* APContact */,
 				6EB59095195ACE1D009456B0 /* APTimestamps */,
 				6EB59091195ACCFA009456B0 /* APHLRReport */,
 				6EB59099195ACF22009456B0 /* APDLRReport */,
@@ -839,6 +887,7 @@
 				6EB3EA77195866DD00951E57 /* Pricelist */,
 				6EB8779A1952EF790070B749 /* User */,
 				6EB5909D195AD6D3009456B0 /* HLR */,
+				6E74C078195B0D7D001B9304 /* Contact */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1032,6 +1081,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E42E57A195B091B00343B2E /* BSContactsService.m in Sources */,
 				6EB877AB195310D10070B749 /* BSAPConnection.m in Sources */,
 				6EB877B31953113C0070B749 /* BSAPCCallback.m in Sources */,
 				6EB96EEB195199AD00AD77E2 /* BSAPCustomer.m in Sources */,
@@ -1064,6 +1114,7 @@
 				6EF46E08195960B3002C6F56 /* BSCountryModel.m in Sources */,
 				6EB8777C1952E5B90070B749 /* BSConnectionModel.m in Sources */,
 				6EF46E151959A0EE002C6F56 /* BSAPUserType.m in Sources */,
+				6E74C07C195B0DC3001B9304 /* BSContactModel.m in Sources */,
 				6EBC77ED194EF50B00666099 /* BSAFURLSessionManager.m in Sources */,
 				6EB59087195AC020009456B0 /* BSHLRService.m in Sources */,
 				6EBA76BD194B3C8300941E85 /* BSHelper.m in Sources */,
@@ -1086,6 +1137,7 @@
 				6EB96EDF1951927500AD77E2 /* BSAPCAccountManager.m in Sources */,
 				6EB590A9195AD87D009456B0 /* BSTimestampsModel.m in Sources */,
 				6E65381F194730EB00FC6349 /* BeepSendSDK.m in Sources */,
+				6E74C077195B0C59001B9304 /* BSAPContact.m in Sources */,
 				6EB877921952ED7C0070B749 /* BSAccountManagerModel.m in Sources */,
 				6EB877801952EC050070B749 /* BSCallbacksModel.m in Sources */,
 				6EB3EA761958277A00951E57 /* BSAPPMCCMNC.m in Sources */,
