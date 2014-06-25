@@ -12,6 +12,11 @@
 
 @interface BSHLRService : BSBaseService
 
+/*
+ 
+	Method might require longer time for execution
+ 
+ */
 - (void)doImmediateHLRForNumber:(NSString *)number
 				 withConnection:(BSConnectionModel *)connection
 			withCompletionBlock:(void(^)(id response, id error))block;

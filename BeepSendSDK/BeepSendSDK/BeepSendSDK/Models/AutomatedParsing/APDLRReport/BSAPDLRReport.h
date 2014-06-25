@@ -11,6 +11,6 @@
 @interface BSAPDLRReport : BSSerializableObject
 
 @property (nonatomic, strong) NSString *status;
-@property (nonatomic, strong) NSString *error;
+@property (nonatomic, strong) NSNumber *error;
 
 @end

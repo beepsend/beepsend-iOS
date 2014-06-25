@@ -27,6 +27,10 @@
 		6EB59094195ACD37009456B0 /* BSAPHLRReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB59093195ACD37009456B0 /* BSAPHLRReport.m */; };
 		6EB59098195ACEE1009456B0 /* BSAPTimestamps.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB59097195ACEE1009456B0 /* BSAPTimestamps.m */; };
 		6EB5909C195ACF22009456B0 /* BSAPDLRReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB5909B195ACF22009456B0 /* BSAPDLRReport.m */; };
+		6EB590A1195AD712009456B0 /* BSHLRModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB590A0195AD712009456B0 /* BSHLRModel.m */; };
+		6EB590A5195AD7E8009456B0 /* BSDLRReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB590A4195AD7E8009456B0 /* BSDLRReportModel.m */; };
+		6EB590A9195AD87D009456B0 /* BSTimestampsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB590A8195AD87D009456B0 /* BSTimestampsModel.m */; };
+		6EB590AD195AD8DD009456B0 /* BSHLRReportModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB590AC195AD8DD009456B0 /* BSHLRReportModel.m */; };
 		6EB685581949ED8B0010FC73 /* BSAFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685461949ED8B0010FC73 /* BSAFHTTPRequestOperation.m */; };
 		6EB685591949ED8B0010FC73 /* BSAFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685481949ED8B0010FC73 /* BSAFHTTPRequestOperationManager.m */; };
 		6EB6855A1949ED8B0010FC73 /* BSAFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6854A1949ED8B0010FC73 /* BSAFHTTPSessionManager.m */; };
@@ -164,6 +168,14 @@
 		6EB59097195ACEE1009456B0 /* BSAPTimestamps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPTimestamps.m; path = Models/AutomatedParsing/APTimestamps/BSAPTimestamps.m; sourceTree = "<group>"; };
 		6EB5909A195ACF22009456B0 /* BSAPDLRReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAPDLRReport.h; sourceTree = "<group>"; };
 		6EB5909B195ACF22009456B0 /* BSAPDLRReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAPDLRReport.m; sourceTree = "<group>"; };
+		6EB5909F195AD712009456B0 /* BSHLRModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSHLRModel.h; path = Models/HLR/HLRModel/BSHLRModel.h; sourceTree = "<group>"; };
+		6EB590A0195AD712009456B0 /* BSHLRModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSHLRModel.m; path = Models/HLR/HLRModel/BSHLRModel.m; sourceTree = "<group>"; };
+		6EB590A3195AD7E8009456B0 /* BSDLRReportModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSDLRReportModel.h; path = Models/HLR/DLRReportModel/BSDLRReportModel.h; sourceTree = "<group>"; };
+		6EB590A4195AD7E8009456B0 /* BSDLRReportModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSDLRReportModel.m; path = Models/HLR/DLRReportModel/BSDLRReportModel.m; sourceTree = "<group>"; };
+		6EB590A7195AD87D009456B0 /* BSTimestampsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSTimestampsModel.h; path = Models/HLR/TimestampsModel/BSTimestampsModel.h; sourceTree = "<group>"; };
+		6EB590A8195AD87D009456B0 /* BSTimestampsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSTimestampsModel.m; path = Models/HLR/TimestampsModel/BSTimestampsModel.m; sourceTree = "<group>"; };
+		6EB590AB195AD8DD009456B0 /* BSHLRReportModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSHLRReportModel.h; path = Models/HLR/HLRReportModel/BSHLRReportModel.h; sourceTree = "<group>"; };
+		6EB590AC195AD8DD009456B0 /* BSHLRReportModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSHLRReportModel.m; path = Models/HLR/HLRReportModel/BSHLRReportModel.m; sourceTree = "<group>"; };
 		6EB685451949ED8B0010FC73 /* BSAFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		6EB685461949ED8B0010FC73 /* BSAFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		6EB685471949ED8B0010FC73 /* BSAFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -453,6 +465,53 @@
 			);
 			name = APDLRReport;
 			path = Models/AutomatedParsing/APDLRReport;
+			sourceTree = "<group>";
+		};
+		6EB5909D195AD6D3009456B0 /* HLR */ = {
+			isa = PBXGroup;
+			children = (
+				6EB590AA195AD8B5009456B0 /* HLRReportModel */,
+				6EB590A6195AD838009456B0 /* TimestampsModel */,
+				6EB590A2195AD7B1009456B0 /* DLRReportModel */,
+				6EB5909E195AD6E6009456B0 /* HLRModel */,
+			);
+			name = HLR;
+			sourceTree = "<group>";
+		};
+		6EB5909E195AD6E6009456B0 /* HLRModel */ = {
+			isa = PBXGroup;
+			children = (
+				6EB5909F195AD712009456B0 /* BSHLRModel.h */,
+				6EB590A0195AD712009456B0 /* BSHLRModel.m */,
+			);
+			name = HLRModel;
+			sourceTree = "<group>";
+		};
+		6EB590A2195AD7B1009456B0 /* DLRReportModel */ = {
+			isa = PBXGroup;
+			children = (
+				6EB590A3195AD7E8009456B0 /* BSDLRReportModel.h */,
+				6EB590A4195AD7E8009456B0 /* BSDLRReportModel.m */,
+			);
+			name = DLRReportModel;
+			sourceTree = "<group>";
+		};
+		6EB590A6195AD838009456B0 /* TimestampsModel */ = {
+			isa = PBXGroup;
+			children = (
+				6EB590A7195AD87D009456B0 /* BSTimestampsModel.h */,
+				6EB590A8195AD87D009456B0 /* BSTimestampsModel.m */,
+			);
+			name = TimestampsModel;
+			sourceTree = "<group>";
+		};
+		6EB590AA195AD8B5009456B0 /* HLRReportModel */ = {
+			isa = PBXGroup;
+			children = (
+				6EB590AB195AD8DD009456B0 /* BSHLRReportModel.h */,
+				6EB590AC195AD8DD009456B0 /* BSHLRReportModel.m */,
+			);
+			name = HLRReportModel;
 			sourceTree = "<group>";
 		};
 		6EB685421949ED7F0010FC73 /* Networking */ = {
@@ -779,6 +838,7 @@
 				6EB8775F1952E3B50070B749 /* Connection */,
 				6EB3EA77195866DD00951E57 /* Pricelist */,
 				6EB8779A1952EF790070B749 /* User */,
+				6EB5909D195AD6D3009456B0 /* HLR */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -983,6 +1043,7 @@
 				6EF46E181959A108002C6F56 /* BSAPVerified.m in Sources */,
 				6EB877961952ED7C0070B749 /* BSPriceListDetailsModel.m in Sources */,
 				6EBC77E6194EF50B00666099 /* BSAFHTTPRequestOperationManager.m in Sources */,
+				6EB590A1195AD712009456B0 /* BSHLRModel.m in Sources */,
 				6EBC77E7194EF50B00666099 /* BSAFHTTPSessionManager.m in Sources */,
 				6EBC77E8194EF50B00666099 /* BSAFNetworkReachabilityManager.m in Sources */,
 				6EBC77E9194EF50B00666099 /* BSAFSecurityPolicy.m in Sources */,
@@ -990,6 +1051,7 @@
 				6EB59098195ACEE1009456B0 /* BSAPTimestamps.m in Sources */,
 				6EB3EA6A195824B100951E57 /* BSAPPricelist.m in Sources */,
 				6EB877841952EC9D0070B749 /* BSWalletModel.m in Sources */,
+				6EB590A5195AD7E8009456B0 /* BSDLRReportModel.m in Sources */,
 				6EB877981952ED7C0070B749 /* BSPriceListScheduleModel.m in Sources */,
 				6EB877B7195311660070B749 /* BSAPCUser.m in Sources */,
 				6EF46E0C19596133002C6F56 /* BSMCCMNCModel.m in Sources */,
@@ -1012,6 +1074,7 @@
 				6EBC7807194F356A00666099 /* BSBaseService.m in Sources */,
 				6EB3EA721958270B00951E57 /* BSAPPNetwork.m in Sources */,
 				6EB96EE2195192A600AD77E2 /* BSAPCPriceListSchedule.m in Sources */,
+				6EB590AD195AD8DD009456B0 /* BSHLRReportModel.m in Sources */,
 				6EB3EA7F195867E300951E57 /* BSNetworkModel.m in Sources */,
 				6EBC77E3194EF4F900666099 /* BSConnectionsService.m in Sources */,
 				6EB3EA6E195825FD00951E57 /* BSAPPCountry.m in Sources */,
@@ -1021,6 +1084,7 @@
 				6EF46E1C1959A604002C6F56 /* BSUserTypeModel.m in Sources */,
 				6EC3168D19504CEB004D8F87 /* BSGeneralModel.m in Sources */,
 				6EB96EDF1951927500AD77E2 /* BSAPCAccountManager.m in Sources */,
+				6EB590A9195AD87D009456B0 /* BSTimestampsModel.m in Sources */,
 				6E65381F194730EB00FC6349 /* BeepSendSDK.m in Sources */,
 				6EB877921952ED7C0070B749 /* BSAccountManagerModel.m in Sources */,
 				6EB877801952EC050070B749 /* BSCallbacksModel.m in Sources */,

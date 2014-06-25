@@ -92,10 +92,8 @@
 	
 	NSNumber *networksCount = _networks_count ? _networks_count : [NSNumber numberWithInteger:_networks.count];
 	
-	double ts = [self.timestamp doubleValue];
-	NSDate *dateOfSave = [NSDate dateWithTimeIntervalSince1970:ts];
-	double fv = [self.first_viewed doubleValue];
-	NSDate *dateOfFirstViewed = [NSDate dateWithTimeIntervalSince1970:fv];
+	NSDate *dateOfSave = [NSDate dateWithTimeIntervalSince1970:[self.timestamp doubleValue]];
+	NSDate *dateOfFirstViewed = [NSDate dateWithTimeIntervalSince1970:[self.first_viewed doubleValue]];
 	
 	BSPricelistModel *pricelistModel =
 	[[BSPricelistModel alloc] initPricelistWithID:_id
