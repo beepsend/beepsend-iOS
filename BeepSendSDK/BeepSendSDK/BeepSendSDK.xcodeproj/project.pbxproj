@@ -21,6 +21,12 @@
 		6EB3EA761958277A00951E57 /* BSAPPMCCMNC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA751958277A00951E57 /* BSAPPMCCMNC.m */; };
 		6EB3EA7B1958679D00951E57 /* BSPricelistModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA7A1958679D00951E57 /* BSPricelistModel.m */; };
 		6EB3EA7F195867E300951E57 /* BSNetworkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3EA7E195867E300951E57 /* BSNetworkModel.m */; };
+		6EB59087195AC020009456B0 /* BSHLRService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB59086195AC020009456B0 /* BSHLRService.m */; };
+		6EB59088195AC33A009456B0 /* BSHLRService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EB59085195AC020009456B0 /* BSHLRService.h */; };
+		6EB5908C195ACC60009456B0 /* BSAPHLR.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB5908B195ACC60009456B0 /* BSAPHLR.m */; };
+		6EB59094195ACD37009456B0 /* BSAPHLRReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB59093195ACD37009456B0 /* BSAPHLRReport.m */; };
+		6EB59098195ACEE1009456B0 /* BSAPTimestamps.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB59097195ACEE1009456B0 /* BSAPTimestamps.m */; };
+		6EB5909C195ACF22009456B0 /* BSAPDLRReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB5909B195ACF22009456B0 /* BSAPDLRReport.m */; };
 		6EB685581949ED8B0010FC73 /* BSAFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685461949ED8B0010FC73 /* BSAFHTTPRequestOperation.m */; };
 		6EB685591949ED8B0010FC73 /* BSAFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685481949ED8B0010FC73 /* BSAFHTTPRequestOperationManager.m */; };
 		6EB6855A1949ED8B0010FC73 /* BSAFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6854A1949ED8B0010FC73 /* BSAFHTTPSessionManager.m */; };
@@ -113,6 +119,7 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				6EB59088195AC33A009456B0 /* BSHLRService.h in CopyFiles */,
 				6EF46E251959B786002C6F56 /* BSUserService.h in CopyFiles */,
 				6EC82C4019547E5F001AD1F2 /* BSPricelistService.h in CopyFiles */,
 				6EC31688195032AE004D8F87 /* BSSMSService.h in CopyFiles */,
@@ -147,6 +154,16 @@
 		6EB3EA7A1958679D00951E57 /* BSPricelistModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSPricelistModel.m; path = Models/Pricelist/PricelistModel/BSPricelistModel.m; sourceTree = "<group>"; };
 		6EB3EA7D195867E300951E57 /* BSNetworkModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSNetworkModel.h; path = Models/Pricelist/NetworkModel/BSNetworkModel.h; sourceTree = "<group>"; };
 		6EB3EA7E195867E300951E57 /* BSNetworkModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSNetworkModel.m; path = Models/Pricelist/NetworkModel/BSNetworkModel.m; sourceTree = "<group>"; };
+		6EB59085195AC020009456B0 /* BSHLRService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSHLRService.h; path = HLR/BSHLRService.h; sourceTree = "<group>"; };
+		6EB59086195AC020009456B0 /* BSHLRService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSHLRService.m; path = HLR/BSHLRService.m; sourceTree = "<group>"; };
+		6EB5908A195ACC60009456B0 /* BSAPHLR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPHLR.h; path = Models/AutomatedParsing/APHLR/BSAPHLR.h; sourceTree = "<group>"; };
+		6EB5908B195ACC60009456B0 /* BSAPHLR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPHLR.m; path = Models/AutomatedParsing/APHLR/BSAPHLR.m; sourceTree = "<group>"; };
+		6EB59092195ACD37009456B0 /* BSAPHLRReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPHLRReport.h; path = Models/AutomatedParsing/APHLRReport/BSAPHLRReport.h; sourceTree = "<group>"; };
+		6EB59093195ACD37009456B0 /* BSAPHLRReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPHLRReport.m; path = Models/AutomatedParsing/APHLRReport/BSAPHLRReport.m; sourceTree = "<group>"; };
+		6EB59096195ACEE1009456B0 /* BSAPTimestamps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPTimestamps.h; path = Models/AutomatedParsing/APTimestamps/BSAPTimestamps.h; sourceTree = "<group>"; };
+		6EB59097195ACEE1009456B0 /* BSAPTimestamps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPTimestamps.m; path = Models/AutomatedParsing/APTimestamps/BSAPTimestamps.m; sourceTree = "<group>"; };
+		6EB5909A195ACF22009456B0 /* BSAPDLRReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAPDLRReport.h; sourceTree = "<group>"; };
+		6EB5909B195ACF22009456B0 /* BSAPDLRReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAPDLRReport.m; sourceTree = "<group>"; };
 		6EB685451949ED8B0010FC73 /* BSAFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		6EB685461949ED8B0010FC73 /* BSAFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		6EB685471949ED8B0010FC73 /* BSAFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -392,6 +409,52 @@
 			name = NetworkModel;
 			sourceTree = "<group>";
 		};
+		6EB59084195ABFDF009456B0 /* HLR */ = {
+			isa = PBXGroup;
+			children = (
+				6EB59085195AC020009456B0 /* BSHLRService.h */,
+				6EB59086195AC020009456B0 /* BSHLRService.m */,
+			);
+			name = HLR;
+			sourceTree = "<group>";
+		};
+		6EB59089195ACC34009456B0 /* APHLR */ = {
+			isa = PBXGroup;
+			children = (
+				6EB5908A195ACC60009456B0 /* BSAPHLR.h */,
+				6EB5908B195ACC60009456B0 /* BSAPHLR.m */,
+			);
+			name = APHLR;
+			sourceTree = "<group>";
+		};
+		6EB59091195ACCFA009456B0 /* APHLRReport */ = {
+			isa = PBXGroup;
+			children = (
+				6EB59092195ACD37009456B0 /* BSAPHLRReport.h */,
+				6EB59093195ACD37009456B0 /* BSAPHLRReport.m */,
+			);
+			name = APHLRReport;
+			sourceTree = "<group>";
+		};
+		6EB59095195ACE1D009456B0 /* APTimestamps */ = {
+			isa = PBXGroup;
+			children = (
+				6EB59096195ACEE1009456B0 /* BSAPTimestamps.h */,
+				6EB59097195ACEE1009456B0 /* BSAPTimestamps.m */,
+			);
+			name = APTimestamps;
+			sourceTree = "<group>";
+		};
+		6EB59099195ACF22009456B0 /* APDLRReport */ = {
+			isa = PBXGroup;
+			children = (
+				6EB5909A195ACF22009456B0 /* BSAPDLRReport.h */,
+				6EB5909B195ACF22009456B0 /* BSAPDLRReport.m */,
+			);
+			name = APDLRReport;
+			path = Models/AutomatedParsing/APDLRReport;
+			sourceTree = "<group>";
+		};
 		6EB685421949ED7F0010FC73 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -401,6 +464,7 @@
 				6EC82C3C19547D22001AD1F2 /* Pricelist */,
 				6EF46E211959B770002C6F56 /* User */,
 				6EC31683195030A2004D8F87 /* SMS */,
+				6EB59084195ABFDF009456B0 /* HLR */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -593,6 +657,10 @@
 		6EB96ED61951902C00AD77E2 /* AutomatedParsing */ = {
 			isa = PBXGroup;
 			children = (
+				6EB59095195ACE1D009456B0 /* APTimestamps */,
+				6EB59091195ACCFA009456B0 /* APHLRReport */,
+				6EB59099195ACF22009456B0 /* APDLRReport */,
+				6EB59089195ACC34009456B0 /* APHLR */,
 				6EF46E121959A098002C6F56 /* APVerified */,
 				6EF46E111959A088002C6F56 /* APUserType */,
 				6EB3EA731958273C00951E57 /* APPMCCMNC */,
@@ -910,6 +978,7 @@
 				6EBC77E5194EF50B00666099 /* BSAFHTTPRequestOperation.m in Sources */,
 				6EF46E1019599FF4002C6F56 /* BSVerifiedModel.m in Sources */,
 				6EC82C3F19547D90001AD1F2 /* BSPricelistService.m in Sources */,
+				6EB5908C195ACC60009456B0 /* BSAPHLR.m in Sources */,
 				6EB877AF195311160070B749 /* BSAPCWallet.m in Sources */,
 				6EF46E181959A108002C6F56 /* BSAPVerified.m in Sources */,
 				6EB877961952ED7C0070B749 /* BSPriceListDetailsModel.m in Sources */,
@@ -918,6 +987,7 @@
 				6EBC77E8194EF50B00666099 /* BSAFNetworkReachabilityManager.m in Sources */,
 				6EBC77E9194EF50B00666099 /* BSAFSecurityPolicy.m in Sources */,
 				6EBC77EA194EF50B00666099 /* BSAFURLConnectionOperation.m in Sources */,
+				6EB59098195ACEE1009456B0 /* BSAPTimestamps.m in Sources */,
 				6EB3EA6A195824B100951E57 /* BSAPPricelist.m in Sources */,
 				6EB877841952EC9D0070B749 /* BSWalletModel.m in Sources */,
 				6EB877981952ED7C0070B749 /* BSPriceListScheduleModel.m in Sources */,
@@ -928,14 +998,17 @@
 				6EB3EA7B1958679D00951E57 /* BSPricelistModel.m in Sources */,
 				6EB8779E1952EFA30070B749 /* BSUserModel.m in Sources */,
 				6EBC77EC194EF50B00666099 /* BSAFURLResponseSerialization.m in Sources */,
+				6EB59094195ACD37009456B0 /* BSAPHLRReport.m in Sources */,
 				6EF46E08195960B3002C6F56 /* BSCountryModel.m in Sources */,
 				6EB8777C1952E5B90070B749 /* BSConnectionModel.m in Sources */,
 				6EF46E151959A0EE002C6F56 /* BSAPUserType.m in Sources */,
 				6EBC77ED194EF50B00666099 /* BSAFURLSessionManager.m in Sources */,
+				6EB59087195AC020009456B0 /* BSHLRService.m in Sources */,
 				6EBA76BD194B3C8300941E85 /* BSHelper.m in Sources */,
 				6EBC77E2194EF4F900666099 /* BSNetworkLayer.m in Sources */,
 				6EBA76B0194B2CD600941E85 /* BSAPIConfiguration.m in Sources */,
 				6EF46E241959B770002C6F56 /* BSUserService.m in Sources */,
+				6EB5909C195ACF22009456B0 /* BSAPDLRReport.m in Sources */,
 				6EBC7807194F356A00666099 /* BSBaseService.m in Sources */,
 				6EB3EA721958270B00951E57 /* BSAPPNetwork.m in Sources */,
 				6EB96EE2195192A600AD77E2 /* BSAPCPriceListSchedule.m in Sources */,

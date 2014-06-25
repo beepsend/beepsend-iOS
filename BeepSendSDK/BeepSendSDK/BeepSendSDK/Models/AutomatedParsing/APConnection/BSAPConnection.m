@@ -71,7 +71,7 @@
 																			  label:_label
 																		   systemID:_system_id
 																	tlvformccandmnc:_tlv_for_mcc_mnc
-																			   type:_type
+																			   type:(BSConnectionType)[_type integerValue]
 																			  users:users
 																			 wallet:wallet
 																		  whitelist:_whitelist];
@@ -112,7 +112,7 @@
 	connection.label = connectionModel.label;
 	connection.system_id = connectionModel.systemID;
 	connection.tlv_for_mcc_mnc = connectionModel.TLVForMCCAndMNC;
-	connection.type = connectionModel.type;
+	connection.type = [NSNumber numberWithInteger:connectionModel.type];
 	connection.whitelist = connectionModel.whitelist;
 	
 	return connection;

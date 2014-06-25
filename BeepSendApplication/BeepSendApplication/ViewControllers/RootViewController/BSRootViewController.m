@@ -16,6 +16,7 @@
 #import "BSPricelistService.h"
 #import "BSSMSService.h"
 #import "BSUserService.h"
+#import "BSHLRService.h"
 
 @interface BSRootViewController () <UITextFieldDelegate>
 
@@ -79,16 +80,6 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameActive:) name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
 	
-	__block BSConnectionsService *cs = [BSConnectionsService sharedService];
-	
-	[cs getMeConnectionOnCompletion:^(BSConnectionModel *connection, id error) {
-		
-		BSUserService *userService = [BSUserService sharedService];
-		[userService updateUserWithName:@"Vladica" phone:nil defaultConnection:connection userTypes:nil verifiedTerms:nil withCompletionBlock:^(BSUserModel *user, id error) {
-			DLog(@"%@", user);
-		}];
-
-	}];
 }
 
 - (void)didReceiveMemoryWarning
@@ -137,11 +128,42 @@
 
 - (void)buttonCheckClicked {
 	
+	__block BSConnectionsService *cs = [BSConnectionsService sharedService];
+	
+	[cs getAllAvailableConnectsionOnCompletion:^(NSArray *connections, id error) {
+		for (BSConnectionModel *connection in connections) {
+			if (connection.type == BSConnectionTypeHLR) {
+				
+				BSHLRService *hlrs = [BSHLRService sharedService];
+				[hlrs doImmediateHLRForNumber:_textFieldTo.text
+							   withConnection:connection
+						  withCompletionBlock:^(id response, id error) {
+							  DLog(@"%@", response);
+				}];
+				
+			}
+		}
+	}];
+	
+	
+	/*
+	[cs getMeConnectionOnCompletion:^(BSConnectionModel *connection, id error) {
+		
+		BSUserService *userService = [BSUserService sharedService];
+		[userService updateUserWithName:@"Vladica" phone:nil defaultConnection:connection userTypes:nil verifiedTerms:nil withCompletionBlock:^(BSUserModel *user, id error) {
+			DLog(@"%@", user);
+		}];
+		
+	}];
+	 */
+
+	/*
 	BSCustomerService *s = [BSCustomerService sharedService];
 	
 	[s getCustomerOnCompletion:^(BSCustomerModel *customer, id error) {
 		DLog(@"\nCustomer: %@, \nWith error: %@\n", customer, error);
 	}];
+	 */
 }
 
 - (void)keyboardBecameActive:(NSNotification *)notification

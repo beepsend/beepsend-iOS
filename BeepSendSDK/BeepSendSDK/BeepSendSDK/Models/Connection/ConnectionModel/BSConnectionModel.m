@@ -19,7 +19,7 @@
 @property (nonatomic, strong, readwrite) NSString *label;
 @property (nonatomic, strong, readwrite) NSString *systemID;
 @property (nonatomic, strong, readwrite) NSNumber *cTLVForMCCAndMNC;//Tag-Length-Value field for returning mcc and mnc in DLR.
-@property (nonatomic, strong, readwrite) NSNumber *type;//Type of connection, 1 for SMS connection or 2 for HLR connection.
+@property (nonatomic, assign, readwrite) BSConnectionType type;//Type of connection, 1 for SMS connection or 2 for HLR connection.
 
 @property (nonatomic, strong, readwrite) NSArray *users;
 
@@ -57,7 +57,7 @@
 									  label:(NSString *)cLabel
 								   systemID:(NSString *)cSystemID
 							tlvformccandmnc:(NSNumber *)cTlvformccandmnc
-									   type:(NSNumber *)cType
+									   type:(BSConnectionType)cType
 									  users:(NSArray *)cUsers
 									 wallet:(BSWalletModel *)cWallet
 								  whitelist:(NSString *)cWhitelist
@@ -99,7 +99,7 @@
 - (BSConnectionModel *)initConnectionWithID:(NSString *)cID
 									  label:(NSString *)cLabel
 								   systemID:(NSString *)cSystemID
-									   type:(NSNumber *)cType
+									   type:(BSConnectionType)cType
 {
 	if (self = [super initWithID:cID andTitle:cLabel]) {
 		_label = cLabel;
