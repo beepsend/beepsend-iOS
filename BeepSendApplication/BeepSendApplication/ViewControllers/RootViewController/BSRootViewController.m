@@ -118,33 +118,61 @@
 		[_textViewMessageBox resignFirstResponder];
 	}
 	
-	if (![Helper isNilOrEmpty:_textFieldFrom.text] && ![Helper isNilOrEmpty:_textFieldTo.text] && ![Helper isNilOrEmpty:_textViewMessageBox.text]) {
+	if (![Helper isNilOrEmpty:_textFieldFrom.text] &&
+		![Helper isNilOrEmpty:_textFieldTo.text] &&
+		![Helper isNilOrEmpty:_textViewMessageBox.text]) {
+		
 		BSSMSService *sms = [BSSMSService sharedService];
-		[sms sendMessage:_textViewMessageBox.text sender:_textFieldFrom.text receiver:_textFieldTo.text withCompletion:^(id response, id error) {
-			DLog(@"%@, %@", response, error);
+		
+		[sms validateSMSForMessage:_textViewMessageBox.text
+							sender:_textFieldFrom.text
+						  receiver:_textFieldTo.text
+			   withCompletionBlock:^(id response, id error) {
+				   
+				   
+				   DLog(@"%@, %@", response, error);
 		}];
+		/*
+		[sms sendMessage:_textViewMessageBox.text 
+				  sender:_textFieldFrom.text
+				receiver:_textFieldTo.text
+		  withCompletion:^(id response, id error) {
+				DLog(@"%@, %@", response, error);
+		}];
+		 */
 	}
 }
 
 - (void)buttonCheckClicked {
 	
 	__block BSConnectionsService *cs = [BSConnectionsService sharedService];
+		
 	
 	[cs getAllAvailableConnectsionOnCompletion:^(NSArray *connections, id error) {
 		for (BSConnectionModel *connection in connections) {
 			if (connection.type == BSConnectionTypeHLR) {
 				
 				BSHLRService *hlrs = [BSHLRService sharedService];
+				
+				[hlrs validateHLRForNumber:_textFieldTo.text
+							withConnection:connection
+					   withCompletionBlock:^(id response, id error) {
+						   
+						  DLog(@"%@", response);
+					   }];
+				
+				/*
 				[hlrs doImmediateHLRForNumber:_textFieldTo.text
 							   withConnection:connection
-						  withCompletionBlock:^(id response, id error) {
-							  DLog(@"%@", response);
-				}];
-				
+						  withCompletionBlock:^(BSHLRModel *hlr, id error) {
+				 
+							  DLog(@"%@", hlr);
+					   }];
+				*/
 			}
 		}
 	}];
-	
+	 
 	
 	/*
 	[cs getMeConnectionOnCompletion:^(BSConnectionModel *connection, id error) {

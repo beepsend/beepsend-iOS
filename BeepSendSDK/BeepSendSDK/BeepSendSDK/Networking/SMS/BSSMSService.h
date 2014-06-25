@@ -15,4 +15,9 @@
 		   receiver:(NSString *)receiver
 	 withCompletion:(void (^)(id response, id error))block;
 
+- (void)validateSMSForMessage:(NSString *)message
+					   sender:(NSString *)sender
+					 receiver:(NSString *)receiver
+		  withCompletionBlock:(void(^)(id response, id error))block;
+
 @end

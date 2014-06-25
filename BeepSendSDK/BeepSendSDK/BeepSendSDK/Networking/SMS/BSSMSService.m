@@ -39,4 +39,17 @@
 				   }];
 }
 
+- (void)validateSMSForMessage:(NSString *)message
+					   sender:(NSString *)sender
+					 receiver:(NSString *)receiver
+		  withCompletionBlock:(void(^)(id response, id error))block
+{
+	[super executePOSTForMethod:[BSAPIConfiguration validateSMS]
+				 withParameters:@{ @"message" : message , @"from" : sender , @"to" : receiver }
+				   onCompletion:^(id response, id error) {
+					   
+					   block(response, error);
+				   }];
+}
+
 @end

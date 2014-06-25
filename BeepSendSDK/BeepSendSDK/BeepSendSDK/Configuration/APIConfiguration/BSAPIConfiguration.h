@@ -185,6 +185,14 @@
  */
 + (NSString *)hlrForNumber:(NSString *)number;
 
+#pragma mark - Validation
+
+/*
+	Perform a dry run of SMS sending or HLR lookups.
+*/
++ (NSString *)validateSMS;
++ (NSString *)validateHLR;
+
 #pragma mark - Estimate SMS cost
 
 /*

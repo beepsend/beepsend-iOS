@@ -30,7 +30,7 @@
 
 - (void)doImmediateHLRForNumber:(NSString *)number
 				 withConnection:(BSConnectionModel *)connection
-			withCompletionBlock:(void(^)(id response, id error))block
+			withCompletionBlock:(void(^)(BSHLRModel *hlr, id error))block
 {
 	NSString *method = [BSAPIConfiguration hlrForNumber:number];
 	NSDictionary *params = connection ? @{ @"connection" : connection.objectID } : @{};
@@ -42,7 +42,28 @@
 					  if (!error) {
 						  
 						  BSHLRModel *hlr = [[BSAPHLR classFromDict:response] convertToHLRModel];
-						  BSLog(@"%@", hlr);
+						  
+						  block(hlr, error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
+- (void)validateHLRForNumber:(NSString *)number
+			  withConnection:(BSConnectionModel *)connection
+		 withCompletionBlock:(void(^)(id response, id error))block
+{
+	NSString *method = [BSAPIConfiguration validateHLR];
+	NSDictionary *params = connection ? @{ @"msisdn" : number , @"connection" : connection.objectID } : @{ @"msisdn" : number };
+	
+	[super executePOSTForMethod:method
+				withParameters:params
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
 						  
 						  block(response, error);
 					  }

@@ -27,7 +27,7 @@
 
 + (NSString *)baseURL
 {
-	return [NSString stringWithFormat:@"https://api.beepsend.com/%@/", [BSAPIConfiguration APIVersion]];
+	return [NSString stringWithFormat:@"https://api.beepsend.com/%@", [BSAPIConfiguration APIVersion]];
 }
 
 + (NSDictionary *)authorizationHeader {
@@ -44,119 +44,131 @@
 #pragma mark - Customer
 
 + (NSString *)customer {
-	return @"customer/";
+	return @"/customer/";
 }
 
 #pragma mark - Connections
 
 + (NSString *)connections
 {
-	return @"connections/";
+	return @"/connections/";
 }
 
 + (NSString *)connectionsMe
 {
-	return @"connections/me";
+	return @"/connections/me";
 }
 
 + (NSString *)connectionsWithID:(NSString *)connectionID
 {
-	return [@"connections/" stringByAppendingString:connectionID];
+	return [@"/connections/" stringByAppendingString:connectionID];
 }
 
 + (NSString *)connectionResetForID:(NSString *)connectionID
 {
-	return [NSString stringWithFormat:@"connections/%@/tokenreset", connectionID];
+	return [NSString stringWithFormat:@"/connections/%@/tokenreset", connectionID];
 }
 
 + (NSString *)connectionPasswordResetForID:(NSString *)connectionID
 {
-	return [NSString stringWithFormat:@"connections/%@/passwordreset", connectionID];
+	return [NSString stringWithFormat:@"/connections/%@/passwordreset", connectionID];
 }
 
 #pragma mark - Pricelist
 
 + (NSString *)pricelistCurrentWithID:(NSString *)connectionID
 {
-	return [NSString stringWithFormat:@"connections/%@/pricelists/current", connectionID];
+	return [NSString stringWithFormat:@"/connections/%@/pricelists/current", connectionID];
 }
 
 + (NSString *)pricelistCurrentMe
 {
-	return @"connections/me/pricelists/current";
+	return @"/connections/me/pricelists/current";
 }
 
 + (NSString *)pricelistAllForID:(NSString *)connectionID
 {
-	return [NSString stringWithFormat:@"connections/%@/pricelists/", connectionID];
+	return [NSString stringWithFormat:@"/connections/%@/pricelists/", connectionID];
 }
 
 + (NSString *)pricelistAllMe
 {
-	return @"connections/me/pricelists/";
+	return @"/connections/me/pricelists/";
 }
 
 + (NSString *)pricelistCSVForID:(NSString *)connectionID
 {
-	return [NSString stringWithFormat:@"pricelists/%@.csv", connectionID];
+	return [NSString stringWithFormat:@"/pricelists/%@.csv", connectionID];
 }
 
 #pragma mark - Users
 
 + (NSString *)userMe
 {
-	return @"users/me";
+	return @"/users/me";
 }
 
 + (NSString *)updateUserEmail
 {
-	return @"users/me/email";
+	return @"/users/me/email";
 }
 
 + (NSString *)updateUserPassword
 {
-	return @"users/me/password";
+	return @"/users/me/password";
 }
 
 + (NSString *)resetPassword
 {
-	return @"users/passwordreset";
+	return @"/users/passwordreset";
 }
 
 + (NSString *)setNewPasswordWithHash:(NSString *)hash
 {
-	return [NSString stringWithFormat:@"users/password/%@", hash];
+	return [NSString stringWithFormat:@"/users/password/%@", hash];
 }
 
 + (NSString *)resetTokenMe
 {
-	return @"users/me/tokenreset";
+	return @"/users/me/tokenreset";
 }
 
 + (NSString *)resetTokenForID:(NSString *)userID
 {
-	return [NSString stringWithFormat:@"users/%@/tokenreset", userID];
+	return [NSString stringWithFormat:@"/users/%@/tokenreset", userID];
 }
 
 #pragma mark - Send SMS
 
 + (NSString *)sms
 {
-	return @"sms/";
+	return @"/sms/";
 }
 
 #pragma mark - HLR
 
 + (NSString *)hlrForNumber:(NSString *)number
 {
-	return [@"hlr/" stringByAppendingString:number];
+	return [@"/hlr/" stringByAppendingString:number];
+}
+
+#pragma mark - Validation
+
++ (NSString *)validateSMS
+{
+	return @"/sms/validate/";
+}
+
++ (NSString *)validateHLR
+{
+	return @"/hlr/validate";
 }
 
 #pragma mark - Estimate SMS cost
 
 + (NSString *)smsCostEstimate
 {
-	return @"sms/costestimate/";
+	return @"/sms/costestimate/";
 }
 
 @end
