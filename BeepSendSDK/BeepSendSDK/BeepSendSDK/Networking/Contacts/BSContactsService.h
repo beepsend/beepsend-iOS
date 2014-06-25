@@ -8,8 +8,14 @@
 
 #import "BSBaseService.h"
 
+#import "BSContactModel.h"
+
 @interface BSContactsService : BSBaseService
 
-- (void)getAllContactsWithCompletionBlock:(void(^)(id response, id error))block;
+- (void)getAllContactsWithCompletionBlock:(void(^)(NSArray *contacts, id error))block;
+
+- (void)addContact:(BSContactModel *)contact withCompletionBlock:(void(^)(BSContactModel *contact, id error))block;
+
+//- (void)addContacts:(NSArray *)contacts withCompletionBlock:(void(^)(id response, id error))block;
 
 @end

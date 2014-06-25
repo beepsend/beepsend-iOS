@@ -83,9 +83,14 @@
 	
 	
 	BSContactsService *cs = [BSContactsService sharedService];
-	[cs getAllContactsWithCompletionBlock:^(id response, id error) {
-		DLog(@"%@", response);
+	
+	[cs getAllContactsWithCompletionBlock:^(NSArray *contacts, id error) {
+		DLog(@"%@", contacts);
 	}];
+	
+//	[cs addContact:[[BSContactModel alloc] initContactWithFirstName:@"Vladica" lastName:@"Pesic" phoneNumber:@"381643460358" groupID:nil groupName:nil errors:nil] withCompletionBlock:^(id response, id error) {
+//		DLog(@"%@", response);
+//	}];
 }
 
 - (void)didReceiveMemoryWarning

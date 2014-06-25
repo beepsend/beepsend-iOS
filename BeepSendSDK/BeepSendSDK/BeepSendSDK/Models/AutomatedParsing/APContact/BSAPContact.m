@@ -12,6 +12,15 @@
 
 #pragma mark - Public methods
 
++ (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array
+{
+	NSMutableArray *results = [@[] mutableCopy];
+	for (id object in array) {
+		[results addObject:[BSAPContact classFromDict:object]];
+	}
+	return [NSArray arrayWithArray:results];
+}
+
 - (BSContactModel *)convertToContactModel
 {
 	BSContactModel *contact = [[BSContactModel alloc] initContactWithID:_id

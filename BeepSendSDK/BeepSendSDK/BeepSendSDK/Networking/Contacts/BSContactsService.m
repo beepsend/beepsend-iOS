@@ -28,7 +28,7 @@
 
 #pragma mark - Public methods
 
-- (void)getAllContactsWithCompletionBlock:(void(^)(id response, id error))block
+- (void)getAllContactsWithCompletionBlock:(void(^)(NSArray *contacts, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration contacts]
 				withParameters:@{}
@@ -36,7 +36,11 @@
 					  
 					  if (!error) {
 						  
-						  block(response, error);
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  for (BSAPContact *con in [BSAPContact arrayOfObjectsFromArrayOfDictionaries:response]) {
+							  [mArr addObject:[con convertToContactModel]];
+						  }
+						  block([NSArray arrayWithArray:mArr], error);
 					  }
 					  else {
 						  //TODO: Create error handling
@@ -45,4 +49,45 @@
 				  }];
 }
 
+- (void)addContact:(BSContactModel *)contact withCompletionBlock:(void(^)(BSContactModel *contact, id error))block
+{
+	NSDictionary *contactToAdd = [[BSAPContact contactFromContactModel:contact] dictFromClass];
+	
+	[super executePOSTForMethod:[BSAPIConfiguration contacts]
+				withParameters:contactToAdd
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  
+						  block([[BSAPContact classFromDict:response] convertToContactModel], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+/*
+- (void)addContacts:(NSArray *)contacts withCompletionBlock:(void(^)(id response, id error))block
+{
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSContactModel *model in contacts) {
+		[mArr addObject:[[BSAPContact contactFromContactModel:model] dictFromClass]];
+	}
+	
+	[super executePOSTForMethod:[BSAPIConfiguration contacts]
+				 withParameters:mArr
+				   onCompletion:^(id response, id error) {
+					   
+					   if (!error) {
+						   
+						   block(response, error);
+					   }
+					   else {
+						   //TODO: Create error handling
+						   block(nil, response);
+					   }
+				   }];
+}
+*/
 @end

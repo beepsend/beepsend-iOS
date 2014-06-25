@@ -20,6 +20,8 @@
 @property (nonatomic, strong) NSString *group_name;
 @property (nonatomic, strong) NSArray *errors;
 
++ (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
+
 - (BSContactModel *)convertToContactModel;
 + (BSAPContact *)contactFromContactModel:(BSContactModel *)contactModel;
 
