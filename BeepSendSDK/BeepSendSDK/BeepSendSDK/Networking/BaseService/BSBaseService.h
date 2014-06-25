@@ -28,4 +28,24 @@
 				withParameters:(NSDictionary *)parameters
 				  onCompletion:(void(^)(id response, id error))block;
 
+- (void)executeGETForMethod:(NSString *)method
+			 withParameters:(NSDictionary *)parameters
+					headers:(NSDictionary *)headers
+			   onCompletion:(void(^)(id response, id error))block;
+
+- (void)executePOSTForMethod:(NSString *)method
+			  withParameters:(NSDictionary *)parameters
+					 headers:(NSDictionary *)headers
+				onCompletion:(void(^)(id response, id error))block;
+
+- (void)executePUTForMethod:(NSString *)method
+			 withParameters:(NSDictionary *)parameters
+					headers:(NSDictionary *)headers
+			   onCompletion:(void(^)(id response, id error))block;
+
+- (void)executeDELETEForMethod:(NSString *)method
+				withParameters:(NSDictionary *)parameters
+					   headers:(NSDictionary *)headers
+				  onCompletion:(void(^)(id response, id error))block;
+
 @end

@@ -31,7 +31,12 @@
 }
 
 + (NSDictionary *)authorizationHeader {
-	return @{ @"Authorization" : [NSString stringWithFormat:@"Token %@", APIToken] };
+	return [BSAPIConfiguration authorizationHeaderForToken:APIToken];
+}
+
++ (NSDictionary *)authorizationHeaderForToken:(NSString *)token
+{
+	return @{ @"Authorization" : [NSString stringWithFormat:@"Token %@", token] };
 }
 
 + (NSString *)urlAPIToken {

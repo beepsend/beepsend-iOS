@@ -47,6 +47,7 @@
 	Authorization: Token abc123
  */
 + (NSDictionary *)authorizationHeader;
++ (NSDictionary *)authorizationHeaderForToken:(NSString *)token;
 
 #pragma mark -
 #pragma mark - Methods

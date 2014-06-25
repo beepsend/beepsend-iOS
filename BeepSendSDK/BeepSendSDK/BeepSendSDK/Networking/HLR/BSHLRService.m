@@ -57,10 +57,14 @@
 		 withCompletionBlock:(void(^)(id response, id error))block
 {
 	NSString *method = [BSAPIConfiguration validateHLR];
+	
 	NSDictionary *params = connection ? @{ @"msisdn" : number , @"connection" : connection.objectID } : @{ @"msisdn" : number };
 	
+	NSDictionary *header = [BSAPIConfiguration authorizationHeaderForToken:connection.apiToken];
+	
 	[super executePOSTForMethod:method
-				withParameters:params
+				 withParameters:params
+						headers:header
 				  onCompletion:^(id response, id error) {
 					  
 					  if (!error) {
