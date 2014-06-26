@@ -10,6 +10,8 @@
 
 #import "BSAPIConfiguration.h"
 
+#import "BSAPBatch.h"
+
 @implementation BSSMSService
 
 #pragma mark - Initialization
@@ -50,6 +52,44 @@
 					   
 					   block(response, error);
 				   }];
+}
+
+- (void)getPreviousBatchesWithCompletionBlock:(void(^)(NSArray *bathces, id error))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration batches]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  for (BSAPBatch *batch in [BSAPBatch arrayOfObjectsFromArrayOfDictionaries:response]) {
+							  [mArr addObject:[batch convertToBatchModel]];
+						  }
+						  block([NSArray arrayWithArray:mArr], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
+- (void)getDetailsForBatch:(NSString *)batchID withCompletionBlock:(void(^)(BSBatchModel *batch, id error))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration batchesForID:batchID]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+
+						  block([[BSAPBatch classFromDict:response] convertToBatchModel], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
 }
 
 @end

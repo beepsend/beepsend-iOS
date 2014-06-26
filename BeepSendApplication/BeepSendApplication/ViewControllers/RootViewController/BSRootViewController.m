@@ -82,8 +82,16 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameActive:) name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
 	
+//	BSSMSService *sms = [BSSMSService sharedService];
+//	[sms getPreviousBatchesWithCompletionBlock:^(NSArray *bathces, id error) {
+//		DLog(@"%@", bathces);
+//	}];
 	
 //	__block BSGroupsService *gs = [BSGroupsService sharedService];
+	
+//	[gs searchContactGroups:@"mi" limit:0 withCompletionBlock:^(NSArray *results, id error) {
+//		DLog(@"%@", results);
+//	}];
 	
 //	[gs addGroupNamed:@"Friends" withCompletionBlock:^(BSGroupModel *group, id error) {
 //		
@@ -109,7 +117,11 @@
 	*/
 	
 //	__block BSContactsService *cs = [BSContactsService sharedService];
-//	
+
+//	[cs searchContact:@"ca" inGroup:nil limit:0 withCompletionBlock:^(NSArray *results, id error) {
+//		DLog(@"%@", results);
+//	}];
+	
 //	[cs getAllContactsWithCompletionBlock:^(NSArray *contacts, id error) {
 //		
 //		DLog(@"%@", contacts);

@@ -12,7 +12,9 @@
 
 @property (nonatomic, strong, readonly) NSString *objectID;
 @property (nonatomic, strong, readonly) NSString *title;
- 
+
+@property (nonatomic, assign, readonly, getter = isObjectValid) BOOL objectValid;
+
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title;
 
 @end

@@ -169,11 +169,16 @@
 	return @"/hlr/validate";
 }
 
-#pragma mark - Estimate SMS cost
+#pragma mark - Batches
 
-+ (NSString *)smsCostEstimate
++ (NSString *)batches;
 {
-	return @"/sms/costestimate/";
+	return @"/batches/";
+}
+
++ (NSString *)batchesForID:(NSString *)batchID
+{
+	return [@"/batches/" stringByAppendingString:batchID];
 }
 
 #pragma mark - Contacts
@@ -198,6 +203,25 @@
 + (NSString *)contactsGroupsForID:(NSString *)groupID
 {
 	return [@"/contacts/groups/" stringByAppendingString:groupID];
+}
+
+#pragma mark - Search contact groups
+
++ (NSString *)searchContacts
+{
+	return @"/search/contacts/";
+}
+
++ (NSString *)searchContactGroups
+{
+	return @"/search/contact_groups/";
+}
+
+#pragma mark - Estimate SMS cost
+
++ (NSString *)smsCostEstimate
+{
+	return @"/sms/costestimate/";
 }
 
 @end

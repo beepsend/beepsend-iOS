@@ -24,4 +24,8 @@
 
 - (void)deleteGroup:(BSGroupModel *)group withCompletionBlock:(void(^)(BOOL success, id error))block;
 
+- (void)searchContactGroups:(NSString *)query
+					  limit:(NSUInteger)limit
+		withCompletionBlock:(void(^)(NSArray *results, id error))block;
+
 @end

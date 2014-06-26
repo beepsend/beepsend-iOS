@@ -8,6 +8,8 @@
 
 #import "BSBaseService.h"
 
+#import "BSBatchModel.h"
+
 @interface BSSMSService : BSBaseService
 
 - (void)sendMessage:(NSString *)message
@@ -19,5 +21,9 @@
 					   sender:(NSString *)sender
 					 receiver:(NSString *)receiver
 		  withCompletionBlock:(void(^)(id response, id error))block;
+
+- (void)getPreviousBatchesWithCompletionBlock:(void(^)(NSArray *bathces, id error))block;
+
+- (void)getDetailsForBatch:(NSString *)batchID withCompletionBlock:(void(^)(BSBatchModel *batch, id error))block;
 
 @end

@@ -127,4 +127,34 @@
 				  }];
 }
 
+- (void)searchContactGroups:(NSString *)query
+					  limit:(NSUInteger)limit
+		withCompletionBlock:(void(^)(NSArray *results, id error))block
+{
+	NSMutableDictionary *parameters = [@{} mutableCopy];
+	[parameters setObject:query forKey:@"query"];
+	
+	if (limit != 0) {
+		[parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
+	}
+	
+	[super executeGETForMethod:[BSAPIConfiguration searchContactGroups]
+				withParameters:parameters
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  for (BSAPContact *con in [BSAPContact arrayOfObjectsFromArrayOfDictionaries:response]) {
+							  [mArr addObject:[con convertToContactModel]];
+						  }
+						  block([NSArray arrayWithArray:mArr], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
 @end

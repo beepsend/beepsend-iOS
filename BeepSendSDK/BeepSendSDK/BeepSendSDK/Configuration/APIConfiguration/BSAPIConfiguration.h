@@ -194,17 +194,17 @@
 + (NSString *)validateSMS;
 + (NSString *)validateHLR;
 
-#pragma mark - Estimate SMS cost
+#pragma mark - Batches
 
 /*
-	Each estimation require a token either assigned to a Connection or a User 
-	that has a default connection set up. By specifying a label of a different
-	Connection belonging to your Company this will instead be used, granted 
-	the User has access-rights to this Connection. If authenticated by
-	User token and no Connection is specified, the default assigned Connection
-	will be used.
+	Get your previous batches with messages.
  */
-+ (NSString *)smsCostEstimate;
++ (NSString *)batches;
+
+/*
+	Get details for a specific batch.
+ */
++ (NSString *)batchesForID:(NSString *)batchID;
 
 #pragma mark - Contacts
 
@@ -237,5 +237,29 @@
 	Delete groups
  */
 + (NSString *)contactsGroupsForID:(NSString *)groupID;
+
+#pragma mark - Search contact groups
+
+/*
+	Search Contacts
+ */
++ (NSString *)searchContacts;
+
+/*
+	Search Contact Groups
+ */
++ (NSString *)searchContactGroups;
+
+#pragma mark - Estimate SMS cost
+
+/*
+ Each estimation require a token either assigned to a Connection or a User
+ that has a default connection set up. By specifying a label of a different
+ Connection belonging to your Company this will instead be used, granted
+ the User has access-rights to this Connection. If authenticated by
+ User token and no Connection is specified, the default assigned Connection
+ will be used.
+ */
++ (NSString *)smsCostEstimate;
 
 @end

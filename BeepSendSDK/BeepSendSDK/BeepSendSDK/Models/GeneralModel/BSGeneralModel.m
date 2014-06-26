@@ -32,6 +32,11 @@
 	}
 }
 
+- (BOOL)isObjectValid
+{
+	return ![self.objectID isEqualToString:@"-1"];
+}
+
 #pragma mark - Initialization
 
 - (id)init

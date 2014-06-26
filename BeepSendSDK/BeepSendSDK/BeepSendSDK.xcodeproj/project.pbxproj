@@ -71,6 +71,8 @@
 		6EB8E453195C1BB20098AC33 /* BSAPGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB8E452195C1BB20098AC33 /* BSAPGroup.m */; };
 		6EB8E458195C1D620098AC33 /* BSGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB8E457195C1D620098AC33 /* BSGroupModel.m */; };
 		6EB8E459195C23320098AC33 /* BSGroupsService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EB8E44D195C1A660098AC33 /* BSGroupsService.h */; };
+		6EB8E45D195C59210098AC33 /* BSAPBatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB8E45C195C59210098AC33 /* BSAPBatch.m */; };
+		6EB8E462195C59690098AC33 /* BSBatchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB8E461195C59690098AC33 /* BSBatchModel.m */; };
 		6EB96EDF1951927500AD77E2 /* BSAPCAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB96EDE1951927500AD77E2 /* BSAPCAccountManager.m */; };
 		6EB96EE2195192A600AD77E2 /* BSAPCPriceListSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB96EE1195192A600AD77E2 /* BSAPCPriceListSchedule.m */; };
 		6EB96EE6195192C100AD77E2 /* BSAPCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB96EE5195192C100AD77E2 /* BSAPCustomer.m */; };
@@ -243,6 +245,10 @@
 		6EB8E452195C1BB20098AC33 /* BSAPGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPGroup.m; path = Models/AutomatedParsing/APGroup/BSAPGroup.m; sourceTree = "<group>"; };
 		6EB8E456195C1D620098AC33 /* BSGroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSGroupModel.h; path = Group/GroupModel/BSGroupModel.h; sourceTree = "<group>"; };
 		6EB8E457195C1D620098AC33 /* BSGroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSGroupModel.m; path = Group/GroupModel/BSGroupModel.m; sourceTree = "<group>"; };
+		6EB8E45B195C59210098AC33 /* BSAPBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPBatch.h; path = Models/AutomatedParsing/APBatch/BSAPBatch.h; sourceTree = "<group>"; };
+		6EB8E45C195C59210098AC33 /* BSAPBatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPBatch.m; path = Models/AutomatedParsing/APBatch/BSAPBatch.m; sourceTree = "<group>"; };
+		6EB8E460195C59690098AC33 /* BSBatchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSBatchModel.h; path = Models/Batch/BatchModel/BSBatchModel.h; sourceTree = "<group>"; };
+		6EB8E461195C59690098AC33 /* BSBatchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSBatchModel.m; path = Models/Batch/BatchModel/BSBatchModel.m; sourceTree = "<group>"; };
 		6EB96EDD1951927500AD77E2 /* BSAPCAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPCAccountManager.h; path = Models/AutomatedParsing/APCAccountManager/BSAPCAccountManager.h; sourceTree = "<group>"; };
 		6EB96EDE1951927500AD77E2 /* BSAPCAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPCAccountManager.m; path = Models/AutomatedParsing/APCAccountManager/BSAPCAccountManager.m; sourceTree = "<group>"; };
 		6EB96EE0195192A600AD77E2 /* BSAPCPriceListSchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPCPriceListSchedule.h; path = Models/AutomatedParsing/APCPriceListSchedule/BSAPCPriceListSchedule.h; sourceTree = "<group>"; };
@@ -807,9 +813,36 @@
 			name = GroupModel;
 			sourceTree = "<group>";
 		};
+		6EB8E45A195C58FB0098AC33 /* APBatch */ = {
+			isa = PBXGroup;
+			children = (
+				6EB8E45B195C59210098AC33 /* BSAPBatch.h */,
+				6EB8E45C195C59210098AC33 /* BSAPBatch.m */,
+			);
+			name = APBatch;
+			sourceTree = "<group>";
+		};
+		6EB8E45E195C59320098AC33 /* Batch */ = {
+			isa = PBXGroup;
+			children = (
+				6EB8E45F195C593E0098AC33 /* BatchModel */,
+			);
+			name = Batch;
+			sourceTree = "<group>";
+		};
+		6EB8E45F195C593E0098AC33 /* BatchModel */ = {
+			isa = PBXGroup;
+			children = (
+				6EB8E460195C59690098AC33 /* BSBatchModel.h */,
+				6EB8E461195C59690098AC33 /* BSBatchModel.m */,
+			);
+			name = BatchModel;
+			sourceTree = "<group>";
+		};
 		6EB96ED61951902C00AD77E2 /* AutomatedParsing */ = {
 			isa = PBXGroup;
 			children = (
+				6EB8E45A195C58FB0098AC33 /* APBatch */,
 				6EB8E450195C1B910098AC33 /* APGroup */,
 				6E74C074195B0C12001B9304 /* APContact */,
 				6EB59095195ACE1D009456B0 /* APTimestamps */,
@@ -937,6 +970,7 @@
 				6EB5909D195AD6D3009456B0 /* HLR */,
 				6E74C078195B0D7D001B9304 /* Contact */,
 				6EB8E454195C1D040098AC33 /* Group */,
+				6EB8E45E195C59320098AC33 /* Batch */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1176,6 +1210,7 @@
 				6EB3EA721958270B00951E57 /* BSAPPNetwork.m in Sources */,
 				6EB96EE2195192A600AD77E2 /* BSAPCPriceListSchedule.m in Sources */,
 				6EB590AD195AD8DD009456B0 /* BSHLRReportModel.m in Sources */,
+				6EB8E45D195C59210098AC33 /* BSAPBatch.m in Sources */,
 				6EB3EA7F195867E300951E57 /* BSNetworkModel.m in Sources */,
 				6EBC77E3194EF4F900666099 /* BSConnectionsService.m in Sources */,
 				6EB3EA6E195825FD00951E57 /* BSAPPCountry.m in Sources */,
@@ -1186,6 +1221,7 @@
 				6EC3168D19504CEB004D8F87 /* BSGeneralModel.m in Sources */,
 				6EB96EDF1951927500AD77E2 /* BSAPCAccountManager.m in Sources */,
 				6EB590A9195AD87D009456B0 /* BSTimestampsModel.m in Sources */,
+				6EB8E462195C59690098AC33 /* BSBatchModel.m in Sources */,
 				6E65381F194730EB00FC6349 /* BeepSendSDK.m in Sources */,
 				6E74C077195B0C59001B9304 /* BSAPContact.m in Sources */,
 				6EB8E44F195C1A660098AC33 /* BSGroupsService.m in Sources */,

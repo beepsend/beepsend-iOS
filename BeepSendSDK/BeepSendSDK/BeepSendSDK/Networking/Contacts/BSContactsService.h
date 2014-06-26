@@ -9,6 +9,7 @@
 #import "BSBaseService.h"
 
 #import "BSContactModel.h"
+#import "BSGroupModel.h"
 
 @interface BSContactsService : BSBaseService
 
@@ -26,5 +27,10 @@
   withCompletionBlock:(void(^)(BSContactModel *contact, id error))block;
 
 - (void)deleteContact:(BSContactModel *)contact withCompletionBlock:(void(^)(BOOL success, id error))block;
+
+- (void)searchContact:(NSString *)query
+			  inGroup:(BSGroupModel *)group
+				limit:(NSUInteger)limit
+  withCompletionBlock:(void(^)(NSArray *results, id error))block;
 
 @end
