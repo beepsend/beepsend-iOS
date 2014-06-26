@@ -50,20 +50,16 @@
 	return self;
 }
 
-- (BSContactModel *)initContactWithFirstName:(NSString *)firstName
-									lastName:(NSString *)lastName
-								 phoneNumber:(NSString *)phoneNumber
-									 groupID:(NSNumber *)gID
-								   groupName:(NSString *)groupName
-									  errors:(NSArray *)errors
+- (BSContactModel *)initContactWithPhoneNumber:(NSString *)phoneNumber
+									 firstName:(NSString *)firstName
+									  lastName:(NSString *)lastName
+									   groupID:(NSNumber *)groupID
 {
 	if (self = [super initWithID:@"0" andTitle:firstName]) {
 		_firstName = firstName;
 		_lastName = lastName;
 		_phoneNumber = phoneNumber;
-		_groupID = gID;
-		_groupName = groupName;
-		_errors = errors;
+		_groupID = groupID;
 	}
 	return self;
 }

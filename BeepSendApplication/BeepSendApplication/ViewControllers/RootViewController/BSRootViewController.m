@@ -82,15 +82,44 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
 	
 	
-	BSContactsService *cs = [BSContactsService sharedService];
+	__block BSContactsService *cs = [BSContactsService sharedService];
 	
 	[cs getAllContactsWithCompletionBlock:^(NSArray *contacts, id error) {
+		
 		DLog(@"%@", contacts);
 	}];
 	
-//	[cs addContact:[[BSContactModel alloc] initContactWithFirstName:@"Vladica" lastName:@"Pesic" phoneNumber:@"381643460358" groupID:nil groupName:nil errors:nil] withCompletionBlock:^(id response, id error) {
-//		DLog(@"%@", response);
-//	}];
+	/*
+	[cs addContacts:@[
+					  [[BSContactModel alloc] initContactWithPhoneNumber:@"381643460358"
+															   firstName:@"Vladica"
+																lastName:@"Pešić"
+																 groupID:nil],
+					  [[BSContactModel alloc] initContactWithPhoneNumber:@"381692101760"
+															   firstName:@"Ivica"
+																lastName:@"Pešić"
+																 groupID:nil],
+					  [[BSContactModel alloc] initContactWithPhoneNumber:@"381653389189"
+															   firstName:@"Milan"
+																lastName:@"Djokić"
+																 groupID:nil],
+					  [[BSContactModel alloc] initContactWithPhoneNumber:@"381658899986"
+															   firstName:@"Milan"
+																lastName:@"Stanojević"
+																 groupID:nil],
+					  [[BSContactModel alloc] initContactWithPhoneNumber:@"381642551948"
+															   firstName:@"Ivan"
+																lastName:@"Živković"
+																 groupID:nil],
+					  [[BSContactModel alloc] initContactWithPhoneNumber:@"381665544300"
+															   firstName:@"Vuk"
+																lastName:@"Ninić"
+																 groupID:nil]
+					  ] withCompletionBlock:^(NSArray *contacts, id error) {
+						  
+		DLog(@"%@", contacts);
+	}];
+	 */
 }
 
 - (void)didReceiveMemoryWarning

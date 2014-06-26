@@ -13,15 +13,15 @@
 + (instancetype)sharedService;
 
 - (void)executeGETForMethod:(NSString *)method
-			 withParameters:(NSDictionary *)parameters
+			 withParameters:(id)parameters
 			   onCompletion:(void(^)(id response, id error))block;
 
 - (void)executePOSTForMethod:(NSString *)method
-			  withParameters:(NSDictionary *)parameters
+			  withParameters:(id)parameters
 				onCompletion:(void(^)(id response, id error))block;
 
 - (void)executePUTForMethod:(NSString *)method
-			 withParameters:(NSDictionary *)parameters
+			 withParameters:(id)parameters
 			   onCompletion:(void(^)(id response, id error))block;
 
 - (void)executeDELETEForMethod:(NSString *)method
@@ -29,22 +29,22 @@
 				  onCompletion:(void(^)(id response, id error))block;
 
 - (void)executeGETForMethod:(NSString *)method
-			 withParameters:(NSDictionary *)parameters
+			 withParameters:(id)parameters
 					headers:(NSDictionary *)headers
 			   onCompletion:(void(^)(id response, id error))block;
 
 - (void)executePOSTForMethod:(NSString *)method
-			  withParameters:(NSDictionary *)parameters
+			  withParameters:(id)parameters
 					 headers:(NSDictionary *)headers
 				onCompletion:(void(^)(id response, id error))block;
 
 - (void)executePUTForMethod:(NSString *)method
-			 withParameters:(NSDictionary *)parameters
+			 withParameters:(id)parameters
 					headers:(NSDictionary *)headers
 			   onCompletion:(void(^)(id response, id error))block;
 
 - (void)executeDELETEForMethod:(NSString *)method
-				withParameters:(NSDictionary *)parameters
+				withParameters:(id)parameters
 					   headers:(NSDictionary *)headers
 				  onCompletion:(void(^)(id response, id error))block;
 

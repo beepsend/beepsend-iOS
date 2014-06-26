@@ -125,7 +125,7 @@
 	withRequestSerializer:(RequestSerializer)requestSerializer
 	andResponseSerializer:(ResponseSerializer)responseSerializer
 				forMethod:(NSString *)method
-		   withParameters:(NSDictionary *)parameters
+		   withParameters:(id)parameters
 		additionalHeaders:(NSDictionary *)headers
 			 onCompletion:(RequestCompletionBLock)block
 {

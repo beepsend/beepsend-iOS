@@ -28,7 +28,7 @@
 #pragma mark - Public methods
 
 - (void)executeGETForMethod:(NSString *)method
-			 withParameters:(NSDictionary *)parameters
+			 withParameters:(id)parameters
 			   onCompletion:(RequestCompletionBLock)block
 {
 	[self executeGETForMethod:method withParameters:parameters headers:[BSAPIConfiguration authorizationHeader] onCompletion:^(id response, id error) {
@@ -37,7 +37,7 @@
 }
 
 - (void)executePOSTForMethod:(NSString *)method
-			  withParameters:(NSDictionary *)parameters
+			  withParameters:(id)parameters
 				onCompletion:(RequestCompletionBLock)block
 {
 	[self executePOSTForMethod:method withParameters:parameters headers:[BSAPIConfiguration authorizationHeader] onCompletion:^(id response, id error) {
@@ -46,7 +46,7 @@
 }
 
 - (void)executePUTForMethod:(NSString *)method
-			 withParameters:(NSDictionary *)parameters
+			 withParameters:(id)parameters
 			   onCompletion:(RequestCompletionBLock)block
 {
 	[self executePUTForMethod:method withParameters:parameters headers:[BSAPIConfiguration authorizationHeader] onCompletion:^(id response, id error) {
@@ -55,7 +55,7 @@
 }
 
 - (void)executeDELETEForMethod:(NSString *)method
-				withParameters:(NSDictionary *)parameters
+				withParameters:(id)parameters
 				  onCompletion:(RequestCompletionBLock)block
 {
 	[self executeDELETEForMethod:method withParameters:parameters headers:[BSAPIConfiguration authorizationHeader] onCompletion:^(id response, id error) {
@@ -65,7 +65,7 @@
 }
 
 - (void)executeGETForMethod:(NSString *)method
-			 withParameters:(NSDictionary *)parameters
+			 withParameters:(id)parameters
 					headers:(NSDictionary *)headers
 			   onCompletion:(void(^)(id response, id error))block
 {
@@ -85,7 +85,7 @@
 }
 
 - (void)executePOSTForMethod:(NSString *)method
-			  withParameters:(NSDictionary *)parameters
+			  withParameters:(id)parameters
 					 headers:(NSDictionary *)headers
 				onCompletion:(void(^)(id response, id error))block
 {
@@ -105,7 +105,7 @@
 }
 
 - (void)executePUTForMethod:(NSString *)method
-			 withParameters:(NSDictionary *)parameters
+			 withParameters:(id)parameters
 					headers:(NSDictionary *)headers
 			   onCompletion:(void(^)(id response, id error))block
 {
@@ -125,7 +125,7 @@
 }
 
 - (void)executeDELETEForMethod:(NSString *)method
-				withParameters:(NSDictionary *)parameters
+				withParameters:(id)parameters
 					   headers:(NSDictionary *)headers
 				  onCompletion:(void(^)(id response, id error))block
 {

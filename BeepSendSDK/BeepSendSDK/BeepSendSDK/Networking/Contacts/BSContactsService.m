@@ -67,8 +67,8 @@
 					  }
 				  }];
 }
-/*
-- (void)addContacts:(NSArray *)contacts withCompletionBlock:(void(^)(id response, id error))block
+
+- (void)addContacts:(NSArray *)contacts withCompletionBlock:(void(^)(NSArray *contacts, id error))block
 {
 	NSMutableArray *mArr = [@[] mutableCopy];
 	for (BSContactModel *model in contacts) {
@@ -89,5 +89,48 @@
 					   }
 				   }];
 }
-*/
+
+
+- (void)updateContact:(BSContactModel *)contact
+		   withNumber:(NSString *)number
+			firstName:(NSString *)firstName
+			 lastName:(NSString *)lastName
+			  groupID:(NSNumber *)groupID
+  withCompletionBlock:(void(^)(BSContactModel *contact, id error))block
+{
+	
+	NSDictionary *contactToUpdate = [[BSAPContact contactFromContactModel:[[BSContactModel alloc] initContactWithPhoneNumber:number firstName:firstName lastName:lastName groupID:groupID]] dictFromClass];
+	
+	[super executePUTForMethod:[BSAPIConfiguration contactsForID:contact.objectID]
+				withParameters:contactToUpdate
+				  onCompletion:^(id response, id error) {
+					   
+					  if (!error) {
+					   
+						  block([[BSAPContact classFromDict:response] convertToContactModel], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
+- (void)deleteContact:(BSContactModel *)contact withCompletionBlock:(void(^)(BOOL success, id error))block
+{
+	[super executeDELETEForMethod:[BSAPIConfiguration contactsForID:contact.objectID]
+				   withParameters:@{}
+					 onCompletion:^(id response, id error) {
+					  
+						 if (!error) {
+						  
+							 block(YES, response);
+						 }
+						 else {
+							 //TODO: Create error handling
+							 block(NO, response);
+						 }
+					 }];
+}
+
 @end

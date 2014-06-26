@@ -25,11 +25,9 @@
 							groupName:(NSString *)groupName
 							   errors:(NSArray *)errors;
 
-- (BSContactModel *)initContactWithFirstName:(NSString *)firstName
-									lastName:(NSString *)lastName
-								 phoneNumber:(NSString *)phoneNumber
-									 groupID:(NSNumber *)gID
-								   groupName:(NSString *)groupName
-									  errors:(NSArray *)errors;
+- (BSContactModel *)initContactWithPhoneNumber:(NSString *)phoneNumber
+									 firstName:(NSString *)firstName
+									  lastName:(NSString *)lastName
+									   groupID:(NSNumber *)groupID;
 
 @end

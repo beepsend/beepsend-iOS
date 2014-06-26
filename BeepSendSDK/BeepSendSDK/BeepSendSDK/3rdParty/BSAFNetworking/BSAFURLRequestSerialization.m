@@ -280,6 +280,26 @@ NSArray * BSAFQueryStringPairsFromKeyAndValue(NSString *key, id value) {
 	return request;
 }
 
+- (NSMutableURLRequest *)requestWithMethod:(NSString *)method
+                                 URLString:(NSString *)URLString
+								 parameter:(NSArray *)parameter
+                                     error:(NSError *__autoreleasing *)error
+{
+    NSParameterAssert(method);
+    NSParameterAssert(URLString);
+	
+    NSURL *url = [NSURL URLWithString:URLString];
+	
+    NSParameterAssert(url);
+	
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setHTTPMethod:method];
+	
+    request = [[self requestBySerializingRequest:request withParameters:parameter error:error] mutableCopy];
+	
+	return request;
+}
+
 - (NSMutableURLRequest *)multipartFormRequestWithMethod:(NSString *)method
                                               URLString:(NSString *)URLString
                                              parameters:(NSDictionary *)parameters

@@ -116,7 +116,7 @@
 #pragma mark -
 
 - (NSURLSessionDataTask *)GET:(NSString *)URLString
-                   parameters:(NSDictionary *)parameters
+                   parameters:(id)parameters
 			 headerParameters:(NSDictionary *)params
                       success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
@@ -147,7 +147,7 @@
 }
 
 - (NSURLSessionDataTask *)GET:(NSString *)URLString
-                   parameters:(NSDictionary *)parameters
+                   parameters:(id)parameters
 			 headerParameters:(NSDictionary *)params
 					 response:(void (^)(NSURLSessionDataTask *task, id responseObject, NSError *error))success {
 	NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:nil];
@@ -170,7 +170,7 @@
 }
 
 - (NSURLSessionDataTask *)HEAD:(NSString *)URLString
-                    parameters:(NSDictionary *)parameters
+                    parameters:(id)parameters
 			  headerParameters:(NSDictionary *)params
                        success:(void (^)(NSURLSessionDataTask *task))success
                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
@@ -201,7 +201,7 @@
 }
 
 - (NSURLSessionDataTask *)HEAD:(NSString *)URLString
-                    parameters:(NSDictionary *)parameters
+                    parameters:(id)parameters
 			  headerParameters:(NSDictionary *)params
 					  response:(void (^)(NSURLSessionDataTask *task, NSError *error))success
 {
@@ -225,7 +225,7 @@
 }
 
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
-                    parameters:(NSDictionary *)parameters
+                    parameters:(id)parameters
 			  headerParameters:(NSDictionary *)params
                        success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
@@ -256,7 +256,7 @@
 }
 
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
-                    parameters:(NSDictionary *)parameters
+                    parameters:(id)parameters
 			  headerParameters:(NSDictionary *)params
 					  response:(void (^)(NSURLSessionDataTask *task, id responseObject, NSError *error))success
 {
@@ -280,7 +280,7 @@
 }
 
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
-                    parameters:(NSDictionary *)parameters
+                    parameters:(id)parameters
 			  headerParameters:(NSDictionary *)params
      constructingBodyWithBlock:(void (^)(id <BSAFMultipartFormData> formData))block
                        success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
@@ -312,7 +312,7 @@
 }
 
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
-                    parameters:(NSDictionary *)parameters
+                    parameters:(id)parameters
 			  headerParameters:(NSDictionary *)params
      constructingBodyWithBlock:(void (^)(id <BSAFMultipartFormData> formData))block
 					  response:(void (^)(NSURLSessionDataTask *task, id responseObject, NSError *error))success
@@ -337,7 +337,7 @@
 }
 
 - (NSURLSessionDataTask *)PUT:(NSString *)URLString
-                   parameters:(NSDictionary *)parameters
+                   parameters:(id)parameters
 			 headerParameters:(NSDictionary *)params
                       success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
@@ -368,7 +368,7 @@
 }
 
 - (NSURLSessionDataTask *)PUT:(NSString *)URLString
-                   parameters:(NSDictionary *)parameters
+                   parameters:(id)parameters
 			 headerParameters:(NSDictionary *)params
                      response:(void (^)(NSURLSessionDataTask *task, id responseObject, NSError *error))success
 {
@@ -392,7 +392,7 @@
 }
 
 - (NSURLSessionDataTask *)PATCH:(NSString *)URLString
-                     parameters:(NSDictionary *)parameters
+                     parameters:(id)parameters
 			   headerParameters:(NSDictionary *)params
                         success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                         failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
@@ -423,7 +423,7 @@
 }
 
 - (NSURLSessionDataTask *)PATCH:(NSString *)URLString
-                     parameters:(NSDictionary *)parameters
+                     parameters:(id)parameters
 			   headerParameters:(NSDictionary *)params
 					   response:(void (^)(NSURLSessionDataTask *task, id responseObject, NSError *error))success
 {
@@ -447,7 +447,7 @@
 }
 
 - (NSURLSessionDataTask *)DELETE:(NSString *)URLString
-                      parameters:(NSDictionary *)parameters
+                      parameters:(id)parameters
 				headerParameters:(NSDictionary *)params
                          success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                          failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
@@ -478,7 +478,7 @@
 }
 
 - (NSURLSessionDataTask *)DELETE:(NSString *)URLString
-                      parameters:(NSDictionary *)parameters
+                      parameters:(id)parameters
 				headerParameters:(NSDictionary *)params
 						response:(void (^)(NSURLSessionDataTask *task, id responseObject, NSError *error))success
 {

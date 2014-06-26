@@ -180,7 +180,7 @@
 
 + (NSString *)contactsForID:(NSString *)groupID
 {
-	return [@"/contacts/%@" stringByAppendingString:groupID];
+	return [@"/contacts/" stringByAppendingString:groupID];
 }
 
 + (NSString *)contacts

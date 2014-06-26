@@ -37,6 +37,11 @@
 + (BSAPContact *)contactFromContactModel:(BSContactModel *)contactModel
 {
 	BSAPContact *contact = [[BSAPContact alloc] init];
+	
+	if ([contactModel.objectID isEqualToString:@"-1"]) {
+		return contact;
+	}
+	
 	contact.id = [contactModel.objectID isEqualToString:@"0"] ? nil : contactModel.objectID;
 	contact.firstname = contactModel.firstName;
 	contact.lastname = contactModel.lastName;

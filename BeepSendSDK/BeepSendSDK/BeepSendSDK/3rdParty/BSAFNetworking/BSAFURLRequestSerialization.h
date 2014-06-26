@@ -168,6 +168,11 @@ forHTTPHeaderField:(NSString *)field;
                                 parameters:(NSDictionary *)parameters
                                      error:(NSError * __autoreleasing *)error;
 
+- (NSMutableURLRequest *)requestWithMethod:(NSString *)method
+                                 URLString:(NSString *)URLString
+								 parameter:(NSArray *)parameter
+                                     error:(NSError *__autoreleasing *)error;
+
 /**
  @deprecated This method has been deprecated. Use -multipartFormRequestWithMethod:URLString:parameters:constructingBodyWithBlock:error: instead.
  */
