@@ -215,12 +215,31 @@
 	Update a contact
 	Delete a contact
  */
-+ (NSString *)contactsForID:(NSString *)groupID;
++ (NSString *)contactsForID:(NSString *)contactID;
 
 /*
 	Get all contacts
 	Add new contacts
  */
 + (NSString *)contacts;
+
+#pragma mark - Contact groups
+
+/*
+	Get all contact groups belonging to your user.
+ */
++ (NSString *)contactsGroupsForUser:(NSString *)userID;
+
+/*
+	Add new groups
+ */
++ (NSString *)contactGroups;
+
+/*
+	Get content of a contact group
+	Update groups
+	Delete groups
+ */
++ (NSString *)contactGroupsForID:(NSString *)groupID;
 
 @end

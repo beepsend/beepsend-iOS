@@ -178,14 +178,31 @@
 
 #pragma mark - Contacts
 
-+ (NSString *)contactsForID:(NSString *)groupID
++ (NSString *)contactsForID:(NSString *)contactID
 {
-	return [@"/contacts/" stringByAppendingString:groupID];
+	return [@"/contacts/" stringByAppendingString:contactID];
 }
 
 + (NSString *)contacts
 {
 	return @"/contacts/";
+}
+
+#pragma mark - Contact groups
+
++ (NSString *)contactsGroupsForUser:(NSString *)userID
+{
+	return [@"/contacts/groups/" stringByAppendingString:userID];
+}
+
++ (NSString *)contactGroups
+{
+	return @"/contacts/groups/";
+}
+
++ (NSString *)contactGroupsForID:(NSString *)groupID
+{
+	return [@"/contacts/groups/" stringByAppendingString:groupID];
 }
 
 @end

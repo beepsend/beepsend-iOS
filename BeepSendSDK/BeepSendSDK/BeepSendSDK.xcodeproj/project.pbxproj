@@ -67,6 +67,9 @@
 		6EB877B41953113C0070B749 /* BSAPCCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB877B21953113C0070B749 /* BSAPCCallback.m */; };
 		6EB877B7195311660070B749 /* BSAPCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB877B6195311660070B749 /* BSAPCUser.m */; };
 		6EB877B8195311660070B749 /* BSAPCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB877B6195311660070B749 /* BSAPCUser.m */; };
+		6EB8E44F195C1A660098AC33 /* BSGroupsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB8E44E195C1A660098AC33 /* BSGroupsService.m */; };
+		6EB8E453195C1BB20098AC33 /* BSAPGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB8E452195C1BB20098AC33 /* BSAPGroup.m */; };
+		6EB8E458195C1D620098AC33 /* BSGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB8E457195C1D620098AC33 /* BSGroupModel.m */; };
 		6EB96EDF1951927500AD77E2 /* BSAPCAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB96EDE1951927500AD77E2 /* BSAPCAccountManager.m */; };
 		6EB96EE2195192A600AD77E2 /* BSAPCPriceListSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB96EE1195192A600AD77E2 /* BSAPCPriceListSchedule.m */; };
 		6EB96EE6195192C100AD77E2 /* BSAPCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB96EE5195192C100AD77E2 /* BSAPCustomer.m */; };
@@ -232,6 +235,12 @@
 		6EB877B21953113C0070B749 /* BSAPCCallback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPCCallback.m; path = Models/AutomatedParsing/APCCallbacks/BSAPCCallback.m; sourceTree = "<group>"; };
 		6EB877B5195311660070B749 /* BSAPCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPCUser.h; path = Models/AutomatedParsing/APCUser/BSAPCUser.h; sourceTree = "<group>"; };
 		6EB877B6195311660070B749 /* BSAPCUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPCUser.m; path = Models/AutomatedParsing/APCUser/BSAPCUser.m; sourceTree = "<group>"; };
+		6EB8E44D195C1A660098AC33 /* BSGroupsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSGroupsService.h; path = Groups/BSGroupsService.h; sourceTree = "<group>"; };
+		6EB8E44E195C1A660098AC33 /* BSGroupsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSGroupsService.m; path = Groups/BSGroupsService.m; sourceTree = "<group>"; };
+		6EB8E451195C1BB20098AC33 /* BSAPGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPGroup.h; path = Models/AutomatedParsing/APGroup/BSAPGroup.h; sourceTree = "<group>"; };
+		6EB8E452195C1BB20098AC33 /* BSAPGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPGroup.m; path = Models/AutomatedParsing/APGroup/BSAPGroup.m; sourceTree = "<group>"; };
+		6EB8E456195C1D620098AC33 /* BSGroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSGroupModel.h; path = Group/GroupModel/BSGroupModel.h; sourceTree = "<group>"; };
+		6EB8E457195C1D620098AC33 /* BSGroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSGroupModel.m; path = Group/GroupModel/BSGroupModel.m; sourceTree = "<group>"; };
 		6EB96EDD1951927500AD77E2 /* BSAPCAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPCAccountManager.h; path = Models/AutomatedParsing/APCAccountManager/BSAPCAccountManager.h; sourceTree = "<group>"; };
 		6EB96EDE1951927500AD77E2 /* BSAPCAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPCAccountManager.m; path = Models/AutomatedParsing/APCAccountManager/BSAPCAccountManager.m; sourceTree = "<group>"; };
 		6EB96EE0195192A600AD77E2 /* BSAPCPriceListSchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPCPriceListSchedule.h; path = Models/AutomatedParsing/APCPriceListSchedule/BSAPCPriceListSchedule.h; sourceTree = "<group>"; };
@@ -571,6 +580,7 @@
 				6EC31683195030A2004D8F87 /* SMS */,
 				6EB59084195ABFDF009456B0 /* HLR */,
 				6E42E577195B08F000343B2E /* Contacts */,
+				6EB8E44C195C1A3D0098AC33 /* Groups */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -760,9 +770,45 @@
 			name = APCUser;
 			sourceTree = "<group>";
 		};
+		6EB8E44C195C1A3D0098AC33 /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				6EB8E44D195C1A660098AC33 /* BSGroupsService.h */,
+				6EB8E44E195C1A660098AC33 /* BSGroupsService.m */,
+			);
+			name = Groups;
+			sourceTree = "<group>";
+		};
+		6EB8E450195C1B910098AC33 /* APGroup */ = {
+			isa = PBXGroup;
+			children = (
+				6EB8E451195C1BB20098AC33 /* BSAPGroup.h */,
+				6EB8E452195C1BB20098AC33 /* BSAPGroup.m */,
+			);
+			name = APGroup;
+			sourceTree = "<group>";
+		};
+		6EB8E454195C1D040098AC33 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				6EB8E455195C1D170098AC33 /* GroupModel */,
+			);
+			name = Group;
+			sourceTree = "<group>";
+		};
+		6EB8E455195C1D170098AC33 /* GroupModel */ = {
+			isa = PBXGroup;
+			children = (
+				6EB8E456195C1D620098AC33 /* BSGroupModel.h */,
+				6EB8E457195C1D620098AC33 /* BSGroupModel.m */,
+			);
+			name = GroupModel;
+			sourceTree = "<group>";
+		};
 		6EB96ED61951902C00AD77E2 /* AutomatedParsing */ = {
 			isa = PBXGroup;
 			children = (
+				6EB8E450195C1B910098AC33 /* APGroup */,
 				6E74C074195B0C12001B9304 /* APContact */,
 				6EB59095195ACE1D009456B0 /* APTimestamps */,
 				6EB59091195ACCFA009456B0 /* APHLRReport */,
@@ -888,6 +934,7 @@
 				6EB8779A1952EF790070B749 /* User */,
 				6EB5909D195AD6D3009456B0 /* HLR */,
 				6E74C078195B0D7D001B9304 /* Contact */,
+				6EB8E454195C1D040098AC33 /* Group */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1090,6 +1137,7 @@
 				6EC82C3F19547D90001AD1F2 /* BSPricelistService.m in Sources */,
 				6EB5908C195ACC60009456B0 /* BSAPHLR.m in Sources */,
 				6EB877AF195311160070B749 /* BSAPCWallet.m in Sources */,
+				6EB8E453195C1BB20098AC33 /* BSAPGroup.m in Sources */,
 				6EF46E181959A108002C6F56 /* BSAPVerified.m in Sources */,
 				6EB877961952ED7C0070B749 /* BSPriceListDetailsModel.m in Sources */,
 				6EBC77E6194EF50B00666099 /* BSAFHTTPRequestOperationManager.m in Sources */,
@@ -1138,6 +1186,8 @@
 				6EB590A9195AD87D009456B0 /* BSTimestampsModel.m in Sources */,
 				6E65381F194730EB00FC6349 /* BeepSendSDK.m in Sources */,
 				6E74C077195B0C59001B9304 /* BSAPContact.m in Sources */,
+				6EB8E44F195C1A660098AC33 /* BSGroupsService.m in Sources */,
+				6EB8E458195C1D620098AC33 /* BSGroupModel.m in Sources */,
 				6EB877921952ED7C0070B749 /* BSAccountManagerModel.m in Sources */,
 				6EB877801952EC050070B749 /* BSCallbacksModel.m in Sources */,
 				6EB3EA761958277A00951E57 /* BSAPPMCCMNC.m in Sources */,
