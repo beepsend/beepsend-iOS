@@ -227,19 +227,15 @@
 
 /*
 	Get all contact groups belonging to your user.
- */
-+ (NSString *)contactsGroupsForUser:(NSString *)userID;
-
-/*
 	Add new groups
  */
-+ (NSString *)contactGroups;
++ (NSString *)contactsGroups;
 
 /*
 	Get content of a contact group
 	Update groups
 	Delete groups
  */
-+ (NSString *)contactGroupsForID:(NSString *)groupID;
++ (NSString *)contactsGroupsForID:(NSString *)groupID;
 
 @end

@@ -18,6 +18,7 @@
 #import "BSUserService.h"
 #import "BSHLRService.h"
 #import "BSContactsService.h"
+#import "BSGroupsService.h"
 
 @interface BSRootViewController () <UITextFieldDelegate>
 
@@ -82,12 +83,37 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
 	
 	
-	__block BSContactsService *cs = [BSContactsService sharedService];
+//	__block BSGroupsService *gs = [BSGroupsService sharedService];
 	
-	[cs getAllContactsWithCompletionBlock:^(NSArray *contacts, id error) {
+//	[gs addGroupNamed:@"Friends" withCompletionBlock:^(BSGroupModel *group, id error) {
+//		
+//		DLog(@"%@", group);
+//	}];
+	
+	/*
+	[gs getAllGroupsWithCompletionBlock:^(NSArray *groups, id error) {
 		
-		DLog(@"%@", contacts);
+		DLog(@"%@", groups);
+		
+		for (BSGroupModel *group in groups) {
+			if ([group.name isEqualToString:@"My contact"]) {
+				
+				[gs deleteGroup:group withCompletionBlock:^(BOOL success, id error) {
+					
+				}];
+				
+			}
+		}
+		
 	}];
+	*/
+	
+//	__block BSContactsService *cs = [BSContactsService sharedService];
+//	
+//	[cs getAllContactsWithCompletionBlock:^(NSArray *contacts, id error) {
+//		
+//		DLog(@"%@", contacts);
+//	}];
 	
 	/*
 	[cs addContacts:@[

@@ -190,17 +190,12 @@
 
 #pragma mark - Contact groups
 
-+ (NSString *)contactsGroupsForUser:(NSString *)userID
-{
-	return [@"/contacts/groups/" stringByAppendingString:userID];
-}
-
-+ (NSString *)contactGroups
++ (NSString *)contactsGroups
 {
 	return @"/contacts/groups/";
 }
 
-+ (NSString *)contactGroupsForID:(NSString *)groupID
++ (NSString *)contactsGroupsForID:(NSString *)groupID
 {
 	return [@"/contacts/groups/" stringByAppendingString:groupID];
 }
