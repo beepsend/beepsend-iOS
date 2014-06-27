@@ -14,6 +14,8 @@
 #	define BSLog(...)
 #endif
 
+#define dateFormatForSMPPStandard @"YYMMDDhhmmsstnnp"
+
 @interface BSHelper : NSObject
 
 + (BOOL)isNilOrEmpty:(NSString*)string;

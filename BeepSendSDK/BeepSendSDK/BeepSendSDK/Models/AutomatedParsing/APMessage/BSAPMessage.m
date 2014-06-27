@@ -26,7 +26,6 @@
 	return message;
 }
 
-
 #pragma mark - Public methods
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array
@@ -41,10 +40,7 @@
 - (BSMessageModel *)convertToMessageModel
 {
 	
-	BSBatchModel *batch = [[BSBatchModel alloc] initBatchWithID:_batch.id
-														  label:_batch.label
-												 dateOfCreation:nil
-												  dateOfLastUse:nil];
+	BSBatchModel *batch = [_batch convertToBatchModel];
 	
 	BSMessageModel *message = [[BSMessageModel alloc] initMessageWithID:_id
 																  batch:batch

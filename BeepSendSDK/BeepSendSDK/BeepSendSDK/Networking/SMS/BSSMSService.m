@@ -13,6 +13,7 @@
 #import "BSAPMessageRequest.h"
 #import "BSAPMessage.h"
 #import "BSAPBatch.h"
+#import "BSAPSMSLookup.h"
 
 @implementation BSSMSService
 
@@ -76,6 +77,25 @@ withCompletionBlock:(void(^)(NSArray *response, id error))block
 						   block(nil, response);
 					   }
 				   }];
+}
+
+- (void)lookupSMS:(BSMessageModel *)sms withCompletionBlock:(void(^)(BSLookupModel *lookupResponse, id error))block {
+	
+	[super executeGETForMethod:[BSAPIConfiguration smsLookupWithID:sms.objectID]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  
+						  BSLookupModel *smslookup = [[BSAPSMSLookup classFromDict:response] convertToLookupModel];
+						  
+						  block(smslookup, error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
 }
 
 - (void)validateSMSForMessage:(NSString *)message

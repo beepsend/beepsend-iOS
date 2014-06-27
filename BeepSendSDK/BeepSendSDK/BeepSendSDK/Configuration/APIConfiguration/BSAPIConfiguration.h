@@ -175,6 +175,16 @@
  */
 + (NSString *)sms;
 
+#pragma mark - SMS Lookup
+
+/*
+	The API can be utilized to get details of any message sent through Beepsend 
+	no matter if you submitted it via SMPP or HTTP.
+
+	Get details regarding one message.
+ */
++ (NSString *)smsLookupWithID:(NSString *)smsID;
+
 #pragma mark - HLR
 
 /*

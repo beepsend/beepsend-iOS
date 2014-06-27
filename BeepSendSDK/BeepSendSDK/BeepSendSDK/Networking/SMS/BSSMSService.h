@@ -10,6 +10,7 @@
 
 #import "BSBatchModel.h"
 #import "BSMessageModel.h"
+#import "BSLookupModel.h"
 
 @interface BSSMSService : BSBaseService
 
@@ -28,6 +29,11 @@
 		   validFor:(NSString *)validTime
 recieveDeliveryReport:(NSNumber *)receiveDlrOption //0: Disable, 1: Always, 2: Only on failure. Default is 1.
 withCompletionBlock:(void(^)(NSArray *response, id error))block;
+
+/*
+	Get details regarding one message.
+ */
+- (void)lookupSMS:(BSMessageModel *)sms withCompletionBlock:(void(^)(BSLookupModel *lookupResponse, id error))block;
 
 /*
 	Performs dry run of SMS sending

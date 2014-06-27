@@ -138,9 +138,9 @@
 				validFor:nil
    recieveDeliveryReport:nil
 	 withCompletionBlock:^(NSArray *response, id error) {
-		 
 		  DLog(@"%@, %@", response, error);
 	 }];
+		 
 
 	}
 }
@@ -168,7 +168,6 @@
 
 - (void)keyboardBecameActive:(NSNotification *)notification
 {
-	DLog(@"%@", notification.userInfo);
 	CGRect keyboardFrameEndUser = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
 	CGRect scrollViewFrame = _scrollView.frame;
 	scrollViewFrame.size.height = keyboardFrameEndUser.origin.y;
@@ -180,7 +179,6 @@
 
 - (void)keyboardBecameInactive:(NSNotification *)notification
 {
-	DLog(@"%@", notification.userInfo);
 	CGRect keyboardFrameEndUser = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
 	CGRect scrollViewFrame = _scrollView.frame;
 	scrollViewFrame.size.height = keyboardFrameEndUser.origin.y;

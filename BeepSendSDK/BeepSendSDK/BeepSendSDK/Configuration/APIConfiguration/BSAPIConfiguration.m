@@ -150,6 +150,13 @@
 	return @"/sms/";
 }
 
+#pragma mark - SMS Lookup
+
++ (NSString *)smsLookupWithID:(NSString *)smsID
+{
+	return [@"/sms/" stringByAppendingString:smsID];
+}
+
 #pragma mark - HLR
 
 + (NSString *)hlrForNumber:(NSString *)number
