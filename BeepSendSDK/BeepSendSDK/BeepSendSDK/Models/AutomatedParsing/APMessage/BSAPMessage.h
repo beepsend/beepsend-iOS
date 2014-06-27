@@ -10,8 +10,6 @@
 
 #import "BSAPBatch.h"
 
-#import "BSMessageModel.h"
-
 @interface BSAPMessage : BSSerializableObject
 
 @property (nonatomic, strong) NSString *id;
@@ -22,7 +20,5 @@
 @property (nonatomic, strong) NSArray *groups;
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
-
-- (BSMessageModel *)convertToMessageModel;
 
 @end

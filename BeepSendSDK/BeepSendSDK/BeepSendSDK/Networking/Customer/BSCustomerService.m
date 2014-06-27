@@ -34,7 +34,7 @@
 				  onCompletion:^(id response, id error) {
 					  
 					  if (!error) {
-						  block([[BSAPCustomer classFromDict:response] convertToCustomerModel], error);
+						  block([[BSAPCustomer classFromDict:response] convertToModel], error);
 					  }
 					  else {
 						  //TODO: Create error handling

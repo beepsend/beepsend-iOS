@@ -8,6 +8,15 @@
 
 #import "BSAPRecipient.h"
 
+#import "BSRecipientModel.h"
+
 @implementation BSAPRecipient
+
+#pragma mark - Inherited methods
+
+- (id)convertToModel
+{
+	return [[BSRecipientModel alloc] initRecipientWithNumber:_address numberType:_ton planIndex:_npi];
+}
 
 @end

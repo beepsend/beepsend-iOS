@@ -8,6 +8,15 @@
 
 #import "BSAPDLRReport.h"
 
+#import "BSDLRReportModel.h"
+
 @implementation BSAPDLRReport
+
+#pragma mark - Inherited methods
+
+- (id)convertToModel
+{
+	return [[BSDLRReportModel alloc] initReportWithResponseStatus:_status?_status:@"" andResponseCode:_error?_error:@0];
+}
 
 @end

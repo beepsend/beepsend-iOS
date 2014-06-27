@@ -8,6 +8,15 @@
 
 #import "BSAPCPriceListSchedule.h"
 
+#import "BSPriceListScheduleModel.h"
+
 @implementation BSAPCPriceListSchedule
+
+#pragma mark - Inherited methods
+
+- (id)convertToModel
+{
+	return [[BSPriceListScheduleModel alloc] initPricelistScheduleWithID:_id andName:_name?_name:@""];
+}
 
 @end

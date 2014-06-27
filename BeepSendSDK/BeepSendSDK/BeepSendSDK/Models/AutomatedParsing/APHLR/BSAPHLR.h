@@ -12,8 +12,6 @@
 #import "BSAPDLRReport.h"
 #import "BSAPTimestamps.h"
 
-#import "BSHLRModel.h"
-
 @interface BSAPHLR : BSSerializableObject
 
 @property (nonatomic, strong) NSString *id;
@@ -24,7 +22,5 @@
 @property (nonatomic, strong) NSNumber *ported;
 @property (nonatomic, strong) NSNumber *roaming;
 @property (nonatomic, strong) BSAPPMCCMNC *prefix;
-
-- (BSHLRModel *)convertToHLRModel;
 
 @end

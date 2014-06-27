@@ -8,6 +8,8 @@
 
 #import "BSAPMessage.h"
 
+#import "BSMessageModel.h"
+
 @implementation BSAPMessage
 
 #pragma mark - Inherited methods
@@ -26,6 +28,11 @@
 	return message;
 }
 
+- (id)convertToModel
+{
+	return [[BSMessageModel alloc] initMessageWithID:_id batch:[_batch convertToModel] recipients:_to sender:_from errors:[_errors isKindOfClass:[NSArray class]]?_errors:nil recipientGroups:_groups];
+}
+
 #pragma mark - Public methods
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array
@@ -35,21 +42,6 @@
 		[results addObject:[BSAPMessage classFromDict:object]];
 	}
 	return [NSArray arrayWithArray:results];
-}
-
-- (BSMessageModel *)convertToMessageModel
-{
-	
-	BSBatchModel *batch = [_batch convertToBatchModel];
-	
-	BSMessageModel *message = [[BSMessageModel alloc] initMessageWithID:_id
-																  batch:batch
-															 recipients:_to
-																 sender:_from
-																 errors:[_errors isKindOfClass:[NSArray class]]?_errors:nil
-														recipientGroups:_groups];
-	
-	return message;
 }
 
 @end

@@ -11,29 +11,9 @@
 #import "BSAPPNetwork.h"
 #import "BSAPPMCCMNC.h"
 
+#import "BSPricelistModel.h"
+
 @implementation BSAPPricelist
-
-#pragma mark - Properties
-
-- (NSString *)timestamp
-{
-	if (_timestamp == nil || [_timestamp isEqual:[NSNull null]] || [_timestamp isKindOfClass:[NSNull class]]) {
-		return [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
-	}
-	else {
-		return _timestamp;
-	}
-}
-
-- (NSString *)first_viewed
-{
-	if (_first_viewed == nil || [_first_viewed isEqual:[NSNull null]] || [_first_viewed isKindOfClass:[NSNull class]]) {
-		return [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
-	}
-	else {
-		return _first_viewed;
-	}
-}
 
 #pragma mark - Inherited methods
 
@@ -53,6 +33,30 @@
 	return pricelist;
 }
 
+- (id)convertToModel
+{
+	NSMutableArray *mNetworks = [@[] mutableCopy];
+	for (BSAPPNetwork *network in _networks) {
+		[mNetworks addObject:[network convertToModel]];
+	}
+	
+	NSDate *dateOfSave =
+	_timestamp!=nil && ![_timestamp isKindOfClass:[NSNull class]] && ![_timestamp isEqual:[NSNull null]]
+	?
+	[NSDate dateWithTimeIntervalSince1970:[_timestamp doubleValue]]
+	:
+	nil;
+	
+	NSDate *dateOfFirstViewed =
+	_first_viewed!=nil && ![_first_viewed isKindOfClass:[NSNull class]] && ![_first_viewed isEqual:[NSNull null]]
+	?
+	[NSDate dateWithTimeIntervalSince1970:[_first_viewed doubleValue]]
+	:
+	nil;
+	
+	return [[BSPricelistModel alloc] initPricelistWithID:_id networks:[NSArray arrayWithArray:mNetworks] networkCount:_networks_count timeOfSave:dateOfSave active:_active timeOfFirstView:dateOfFirstViewed];
+}
+
 #pragma mark - Public methods
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array
@@ -62,48 +66,6 @@
 		[results addObject:[BSAPPricelist classFromDict:object]];
 	}
 	return [NSArray arrayWithArray:results];
-}
-
-- (BSPricelistModel *)convertToPricelistModel
-{
-	NSMutableArray *mNetworks = [@[] mutableCopy];
-	for (BSAPPNetwork *network in _networks) {
-		BSCountryModel *country = [[BSCountryModel alloc] initCountryNamed:network.country.name
-														   withCountryCode:network.country.code
-															andCallingCode:network.country.prefix];
-		
-		NSMutableArray *mMCCMNC = [@[] mutableCopy];
-		for (BSAPPMCCMNC *mccmnc in network.mccmnc) {
-			BSMCCMNCModel *mmm = [[BSMCCMNCModel alloc] initWithMNC:mccmnc.mnc
-															 andMCC:mccmnc.mcc];
-			
-			[mMCCMNC addObject:mmm];
-		}
-		
-		BSNetworkModel *networkModel =
-		[[BSNetworkModel alloc] initNetworkWithMCCMNC:[NSArray arrayWithArray:mMCCMNC]
-										  withComment:network.comment
-												price:network.price
-										  fromCountry:country
-											 operator:network.operator];
-		
-		[mNetworks addObject:networkModel];
-	}
-	
-	NSNumber *networksCount = _networks_count ? _networks_count : [NSNumber numberWithInteger:_networks.count];
-	
-	NSDate *dateOfSave = [NSDate dateWithTimeIntervalSince1970:[self.timestamp doubleValue]];
-	NSDate *dateOfFirstViewed = [NSDate dateWithTimeIntervalSince1970:[self.first_viewed doubleValue]];
-	
-	BSPricelistModel *pricelistModel =
-	[[BSPricelistModel alloc] initPricelistWithID:_id
-										 networks:[NSArray arrayWithArray:mNetworks]
-									 networkCount:networksCount
-									   timeOfSave:dateOfSave
-										   active:[_active boolValue]
-								  timeOfFirstView:dateOfFirstViewed];
-	
-	return pricelistModel;
 }
 
 @end

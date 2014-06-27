@@ -11,7 +11,7 @@
 #import "BSAPCCallback.h"
 #import "BSAPCWallet.h"
 
-#import "BSConnectionModel.h"
+@class BSConnectionModel;
 
 @interface BSAPConnection : BSSerializableObject
 
@@ -30,7 +30,6 @@
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
 
-- (BSConnectionModel *)convertToConnectionModel;
 + (BSAPConnection *)convertFromConnectionModel:(BSConnectionModel *)connectionModel;
 
 @end

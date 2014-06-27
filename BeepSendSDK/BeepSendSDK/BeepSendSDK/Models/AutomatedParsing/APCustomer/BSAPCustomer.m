@@ -8,6 +8,8 @@
 
 #import "BSAPCustomer.h"
 
+#import "BSCustomerModel.h"
+
 @implementation BSAPCustomer
 
 #pragma mark - Inherited methods
@@ -21,36 +23,17 @@
 	return [super classFromDict:dictionary];
 }
 
-#pragma mark - Public methods
-
-- (BSCustomerModel *)convertToCustomerModel
+- (id)convertToModel
 {
+	BSPriceListDetailsModel *customerPricelistDetails =
+	[[BSPriceListDetailsModel alloc] initPricelistDetailsWithType:_pricelist_type
+														delimiter:_pricelist_delimiter
+												pricelistSchedule:[_pricelist_schedule convertToModel]
+														   fields:_pricelist_fields];
 	
-	BSPriceListScheduleModel *pricelistSchedule = [[BSPriceListScheduleModel alloc] initPricelistScheduleWithID:_pricelist_schedule.id
-																										andName:_pricelist_schedule.name];
-	
-	BSPriceListDetailsModel *customerPricelistDetails = [[BSPriceListDetailsModel alloc] initPricelistDetailsWithType:_pricelist_type
-																											delimiter:_pricelist_delimiter
-																									pricelistSchedule:pricelistSchedule
-																											   fields:_pricelist_fields];
-	
-	BSAccountManagerModel *accountManager = [[BSAccountManagerModel alloc] initAccountManagerWithName:_account_manager.name
-																							 andEmail:_account_manager.email];
-	
-	BSCustomerModel *customer = [[BSCustomerModel alloc] initCustomerWithID:_id
-																	   name:_name
-																	  phone:_phone
-																	address:_address
-																	   city:_city
-																	postBox:_post_box
-																	country:_country
-																		vat:_vat
-																	  email:_email
-																invoiceType:_invoice_type
-															 accountManager:accountManager
-														   priceListDetails:customerPricelistDetails];
-		
-	return customer;
+	return [[BSCustomerModel alloc] initCustomerWithID:_id name:_name phone:_phone address:_address city:_city postBox:_post_box country:_country vat:_vat email:_email invoiceType:_invoice_type accountManager:[_account_manager convertToModel] priceListDetails:customerPricelistDetails];
 }
+
+#pragma mark - Public methods
 
 @end

@@ -8,6 +8,8 @@
 
 #import "BSAPSMSLookup.h"
 
+#import "BSLookupModel.h"
+
 @implementation BSAPSMSLookup
 
 #pragma mark - Inherited methods
@@ -31,6 +33,26 @@
 	return messageLookup;
 }
 
+- (id)convertToModel
+{
+	NSDateFormatter *smppFormatter = [[NSDateFormatter alloc] init];
+	[smppFormatter setDateFormat:dateFormatForSMPPStandard];
+	NSDate *validTo = [smppFormatter dateFromString:_validity_period];
+	
+	return [[BSLookupModel alloc] initLookupWithID:_id
+											 batch:[_batch convertToModel]
+										   message:_body
+									usedConnection:[_connection convertToModel]
+										dataCoding:_data_coding
+									deliveryReport:[_dlr convertToModel]
+											sender:[_from convertToModel]
+											mccmnc:[_mccmnc convertToModel]
+											 price:_price
+										 timestamp:[_timestamps	convertToModel]
+										 recipient:[_to convertToModel]
+											 valid:validTo];
+}
+
 #pragma mark - Public methods
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array
@@ -40,48 +62,6 @@
 		[results addObject:[BSAPSMSLookup classFromDict:object]];
 	}
 	return [NSArray arrayWithArray:results];
-}
-
-- (BSLookupModel *)convertToLookupModel
-{
-	BSBatchModel *bModel = [_batch convertToBatchModel];
-	BSConnectionModel *cModel = [_connection convertToConnectionModel];
-	
-	BSDLRReportModel *report = [[BSDLRReportModel alloc] initReportWithResponseStatus:_dlr.status andResponseCode:_dlr.error];
-
-	BSRecipientModel *sender = [[BSRecipientModel alloc] initRecipientWithNumber:_from.address numberType:_from.ton planIndex:_from.npi];
-	
-	BSMCCMNCModel *mccmnc = [[BSMCCMNCModel alloc] initWithMNC:_mccmnc.mnc andMCC:_mccmnc.mcc];
-	
-	NSDate *dateOfDeliverResponse = _timestamps.hlr.delivered!=nil && ![_timestamps.hlr.delivered isKindOfClass:[NSNull class]] && ![_timestamps.hlr.delivered isEqual:[NSNull null]] ? [NSDate dateWithTimeIntervalSince1970:[_timestamps.hlr.delivered doubleValue]] : nil;
-	NSDate *dateOfInHLR = _timestamps.hlr.in!=nil && ![_timestamps.hlr.in isKindOfClass:[NSNull class]] && ![_timestamps.hlr.in isEqual:[NSNull null]] ? [NSDate dateWithTimeIntervalSince1970:[_timestamps.hlr.in doubleValue]] : nil;
-	BSHLRReportModel *hlrReport = [[BSHLRReportModel alloc] initReportWithHLRReachedDate:dateOfInHLR andResponseReachedDate:dateOfDeliverResponse];
-	
-	NSDate *whenCallbackWasSent = _timestamps.dlr_out!=nil && ![_timestamps.dlr_out isKindOfClass:[NSNull class]] && ![_timestamps.dlr_out isEqual:[NSNull null]] ? [NSDate dateWithTimeIntervalSince1970:[_timestamps.dlr_out doubleValue]] : nil;
-	
-	BSTimestampsModel *timestamp = [[BSTimestampsModel alloc] initReportWithHLRReport:hlrReport andCallbackSentTime:whenCallbackWasSent];
-	
-	
-	BSRecipientModel *recipient = [[BSRecipientModel alloc] initRecipientWithNumber:_to.address numberType:_to.ton planIndex:_to.npi];
-	
-	NSDateFormatter *smppFormatter = [[NSDateFormatter alloc] init];
-	[smppFormatter setDateFormat:dateFormatForSMPPStandard];
-	NSDate *validTo = [smppFormatter dateFromString:_validity_period];
-	
-	BSLookupModel *lookup = [[BSLookupModel alloc] initLookupWithID:_id
-															  batch:bModel
-															message:_body
-													 usedConnection:cModel
-														 dataCoding:_data_coding
-													 deliveryReport:report
-															 sender:sender
-															 mccmnc:mccmnc
-															  price:_price
-														  timestamp:timestamp
-														  recipient:recipient
-															  valid:validTo];
-	
-	return lookup;
 }
 
 @end

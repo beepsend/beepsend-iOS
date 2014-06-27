@@ -14,8 +14,8 @@
 @property (nonatomic, strong, readwrite) BSDLRReportModel *dlrReport;
 @property (nonatomic, strong, readwrite) BSMCCMNCModel *mccmnc;
 @property (nonatomic, strong, readwrite) NSString *imsi;//The IMSI of the handset if available. First five characters and then zeroes.
-@property (nonatomic, assign, readwrite, getter = isPorted) BOOL ported;//true if the number seems to be ported, false if not.
-@property (nonatomic, assign, readwrite, getter = isInRoaming) BOOL roaming;//true if the number is roaming, false if not.
+@property (nonatomic, strong, readwrite) NSNumber *ported;//true if the number seems to be ported, false if not.
+@property (nonatomic, strong, readwrite) NSNumber *roaming;//true if the number is roaming, false if not.
 @property (nonatomic, strong, readwrite) BSMCCMNCModel *prefix;
 
 @end
@@ -38,7 +38,8 @@
 					   mccmnc:(BSMCCMNCModel *)hlrMccMnc
 						 imsi:(NSString *)hlrImsi
 					   prefix:(BSMCCMNCModel *)hlrPrefix
-					   potred:(BOOL)isPorted inRoaming:(BOOL)isInRoaming
+					   potred:(NSNumber *)isPorted
+					inRoaming:(NSNumber *)isInRoaming
 {
 	if (self = [super initWithID:hlrID andTitle:@"HLR"]) {
 		_timestamps = hlrTimestamp;

@@ -10,13 +10,13 @@
 
 @interface BSVerifiedModel : BSGeneralModel
 
-@property (nonatomic, assign, readonly, getter = isEmailVerified) BOOL emailVerified;
-@property (nonatomic, assign, readonly, getter = isPhoneVerified) BOOL phoneVerified;
-@property (nonatomic, assign, readonly, getter = isTermsVerified) BOOL termsVerified;
+@property (nonatomic, assign, readonly) NSNumber *emailVerified;
+@property (nonatomic, assign, readonly) NSNumber *phoneVerified;
+@property (nonatomic, assign, readonly) NSNumber *termsVerified;
 
-- (BSVerifiedModel *)initUserWithTermsVerified:(BOOL)termsVerified;
-- (BSVerifiedModel *)initUserWithEmailVerified:(BOOL)emailVerified
-								 phoneVerified:(BOOL)phoneVerified
-								 termsVerified:(BOOL)termsVerified;
+- (BSVerifiedModel *)initUserWithTermsVerified:(NSNumber *)termsVerified;
+- (BSVerifiedModel *)initUserWithEmailVerified:(NSNumber *)emailVerified
+								 phoneVerified:(NSNumber *)phoneVerified
+								 termsVerified:(NSNumber *)termsVerified;
 
 @end

@@ -10,6 +10,7 @@
 
 #import "BSAPCUser.h"
 
+#import "BSConnectionModel.h"
 #import "BSUserModel.h"
 
 @implementation BSAPConnection
@@ -33,6 +34,16 @@
 	return connection;
 }
 
+- (id)convertToModel
+{
+	NSMutableArray *mUsers = [@[] mutableCopy];
+	for (BSAPCUser *user in _users) {
+		[mUsers addObject:[user convertToModel]];
+	}
+	
+	return [[BSConnectionModel alloc] initConnectionWithID:_id apiToken:_api_token callbacks:[_callbacks convertToModel] customer:_customer description:_description label:_label systemID:_system_id tlvformccandmnc:_tlv_for_mcc_mnc type:(BSConnectionType)[_type integerValue] users:[NSArray arrayWithArray:mUsers] wallet:[_wallet convertToModel] whitelist:_whitelist];
+}
+
 #pragma mark - Public methods
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array
@@ -42,41 +53,6 @@
 		[results addObject:[BSAPConnection classFromDict:object]];
 	}
 	return [NSArray arrayWithArray:results];
-}
-
-- (BSConnectionModel *)convertToConnectionModel
-{
-	BSCallbacksModel *callback = [[BSCallbacksModel alloc] initCallbackWithMethod:_callbacks.method
-																			  dlr:_callbacks.dlr
-																			   mo:_callbacks.mo];
-	
-	BSWalletModel *wallet = [[BSWalletModel alloc] initWalletWithID:_wallet.id
-															   name:_wallet.name
-															balance:_wallet.balance];
-	
-	NSMutableArray *mArr = [@[] mutableCopy];
-	for (BSAPCUser *user in _users) {
-		BSUserModel *usr = [[BSUserModel alloc] initUserWithID:user.id
-														  name:user.name
-														 email:user.username];
-		[mArr addObject:usr];
-	}
-	NSArray *users = [NSArray arrayWithArray:mArr];
-	
-	BSConnectionModel *connection = [[BSConnectionModel alloc] initConnectionWithID:_id
-																		   apiToken:_api_token
-																		  callbacks:callback
-																		   customer:_customer
-																		description:_description
-																			  label:_label
-																		   systemID:_system_id
-																	tlvformccandmnc:_tlv_for_mcc_mnc
-																			   type:(BSConnectionType)[_type integerValue]
-																			  users:users
-																			 wallet:wallet
-																		  whitelist:_whitelist];
-	
-	return connection;
 }
 
 + (BSAPConnection *)convertFromConnectionModel:(BSConnectionModel *)connectionModel

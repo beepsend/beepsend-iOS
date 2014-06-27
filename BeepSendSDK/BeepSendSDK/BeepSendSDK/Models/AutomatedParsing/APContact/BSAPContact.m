@@ -8,7 +8,16 @@
 
 #import "BSAPContact.h"
 
+#import "BSContactModel.h"
+
 @implementation BSAPContact
+
+#pragma mark - Inherited methods
+
+- (id)convertToModel
+{
+	return [[BSContactModel alloc] initContactWithID:_id firstName:_firstname lastName:_lastname phoneNumber:_msisdn groupID:_group_id groupName:_group_name errors:_errors];
+}
 
 #pragma mark - Public methods
 
@@ -19,19 +28,6 @@
 		[results addObject:[BSAPContact classFromDict:object]];
 	}
 	return [NSArray arrayWithArray:results];
-}
-
-- (BSContactModel *)convertToContactModel
-{
-	BSContactModel *contact = [[BSContactModel alloc] initContactWithID:_id
-															  firstName:_firstname
-															   lastName:_lastname
-															phoneNumber:_msisdn
-																groupID:_group_id
-															  groupName:_group_name
-																 errors:_errors];
-	
-	return contact;
 }
 
 + (BSAPContact *)contactFromContactModel:(BSContactModel *)contactModel

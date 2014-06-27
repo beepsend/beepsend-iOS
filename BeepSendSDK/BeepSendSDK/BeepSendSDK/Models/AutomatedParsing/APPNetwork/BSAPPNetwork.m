@@ -10,6 +10,8 @@
 
 #import "BSAPPMCCMNC.h"
 
+#import "BSNetworkModel.h"
+
 @implementation BSAPPNetwork
 
 #pragma mark - Inherited methods
@@ -29,6 +31,16 @@
 	network.mccmnc = [BSAPPMCCMNC arrayOfObjectsFromArrayOfDictionaries:network.mccmnc];
 	
 	return network;
+}
+
+- (id)convertToModel
+{
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPPMCCMNC *mccmnc in _mccmnc) {
+		[mArr addObject:[mccmnc convertToModel]];
+	}
+	
+	return [[BSNetworkModel alloc] initNetworkWithMCCMNC:[NSArray arrayWithArray:mArr] withComment:_comment?_comment:@"" price:_price?_price:@0 fromCountry:[_country convertToModel] operator:_operator?_operator:@""];
 }
 
 #pragma mark - Public methods

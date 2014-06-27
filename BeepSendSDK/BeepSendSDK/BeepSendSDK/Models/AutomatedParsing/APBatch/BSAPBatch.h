@@ -8,8 +8,6 @@
 
 #import "BSSerializableObject.h"
 
-#import "BSBatchModel.h"
-
 @interface BSAPBatch : BSSerializableObject
 
 @property (nonatomic, strong) NSString *id;
@@ -18,7 +16,5 @@
 @property (nonatomic, strong) NSString *last_used;
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
-
-- (BSBatchModel *)convertToBatchModel;
 
 @end

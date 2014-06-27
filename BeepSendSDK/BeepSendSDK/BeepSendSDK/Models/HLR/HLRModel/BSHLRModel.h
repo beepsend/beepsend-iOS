@@ -18,8 +18,8 @@
 @property (nonatomic, strong, readonly) BSDLRReportModel *dlrReport;
 @property (nonatomic, strong, readonly) BSMCCMNCModel *mccmnc;
 @property (nonatomic, strong, readonly) NSString *imsi;//The IMSI of the handset if available. First five characters and then zeroes.
-@property (nonatomic, assign, readonly, getter = isPorted) BOOL ported;//true if the number seems to be ported, false if not.
-@property (nonatomic, assign, readonly, getter = isInRoaming) BOOL roaming;//true if the number is roaming, false if not.
+@property (nonatomic, strong, readonly) NSNumber *ported;//true if the number seems to be ported, false if not.
+@property (nonatomic, strong, readonly) NSNumber *roaming;//true if the number is roaming, false if not.
 @property (nonatomic, strong, readonly) BSMCCMNCModel *prefix;
 
 - (BSHLRModel *)initHLRWithID:(NSString *)hlrID
@@ -28,6 +28,7 @@
 					   mccmnc:(BSMCCMNCModel *)hlrMccMnc
 						 imsi:(NSString *)hlrImsi
 					   prefix:(BSMCCMNCModel *)hlrPrefix
-					   potred:(BOOL)isPorted inRoaming:(BOOL)isInRoaming;
+					   potred:(NSNumber *)isPorted
+					inRoaming:(NSNumber *)isInRoaming;
 
 @end

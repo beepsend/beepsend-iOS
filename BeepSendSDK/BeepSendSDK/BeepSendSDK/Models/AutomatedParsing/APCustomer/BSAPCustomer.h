@@ -11,8 +11,6 @@
 #import "BSAPCAccountManager.h"
 #import "BSAPCPriceListSchedule.h"
 
-#import "BSCustomerModel.h"
-
 @interface BSAPCustomer : BSSerializableObject
 
 @property (nonatomic, strong) NSString *id;
@@ -30,7 +28,5 @@
 @property (nonatomic, strong) NSString *pricelist_delimiter;
 @property (nonatomic, strong) BSAPCPriceListSchedule *pricelist_schedule;
 @property (nonatomic, strong) NSArray *pricelist_fields;
-
-- (BSCustomerModel *)convertToCustomerModel;
 
 @end

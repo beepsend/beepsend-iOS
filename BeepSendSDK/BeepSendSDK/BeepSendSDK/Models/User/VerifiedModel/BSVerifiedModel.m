@@ -10,9 +10,9 @@
 
 @interface BSVerifiedModel ()
 
-@property (nonatomic, assign, readwrite, getter = isEmailVerified) BOOL emailVerified;
-@property (nonatomic, assign, readwrite, getter = isPhoneVerified) BOOL phoneVerified;
-@property (nonatomic, assign, readwrite, getter = isTermsVerified) BOOL termsVerified;
+@property (nonatomic, assign, readwrite) NSNumber *emailVerified;
+@property (nonatomic, assign, readwrite) NSNumber *phoneVerified;
+@property (nonatomic, assign, readwrite) NSNumber *termsVerified;
 
 @end
 
@@ -28,7 +28,7 @@
 	return self;
 }
 
-- (BSVerifiedModel *)initUserWithTermsVerified:(BOOL)termsVerified
+- (BSVerifiedModel *)initUserWithTermsVerified:(NSNumber *)termsVerified
 {
 	if (self = [super initWithID:@"0" andTitle:@"Verified"]) {
 		_termsVerified = termsVerified;
@@ -36,9 +36,9 @@
 	return self;
 }
 
-- (BSVerifiedModel *)initUserWithEmailVerified:(BOOL)emailVerified
-								 phoneVerified:(BOOL)phoneVerified
-								 termsVerified:(BOOL)termsVerified
+- (BSVerifiedModel *)initUserWithEmailVerified:(NSNumber *)emailVerified
+								 phoneVerified:(NSNumber *)phoneVerified
+								 termsVerified:(NSNumber *)termsVerified
 {
 	if (self = [super initWithID:@"0" andTitle:@"Verified"]) {
 		_emailVerified = emailVerified;

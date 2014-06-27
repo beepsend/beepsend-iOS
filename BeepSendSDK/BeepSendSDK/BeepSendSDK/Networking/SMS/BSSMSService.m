@@ -68,7 +68,7 @@ withCompletionBlock:(void(^)(NSArray *response, id error))block
 						   
 						   NSMutableArray *mArr = [@[] mutableCopy];
 						   for (BSAPMessage *msg in [BSAPMessage arrayOfObjectsFromArrayOfDictionaries:response]) {
-							   [mArr addObject:[msg convertToMessageModel]];
+							   [mArr addObject:[msg convertToModel]];
 						   }
 						   block([NSArray arrayWithArray:mArr], error);
 					   }
@@ -87,7 +87,7 @@ withCompletionBlock:(void(^)(NSArray *response, id error))block
 					  
 					  if (!error) {
 						  
-						  BSLookupModel *smslookup = [[BSAPSMSLookup classFromDict:response] convertToLookupModel];
+						  BSLookupModel *smslookup = [[BSAPSMSLookup classFromDict:response] convertToModel];
 						  
 						  block(smslookup, error);
 					  }
@@ -133,7 +133,7 @@ withCompletionBlock:(void(^)(NSArray *response, id error))block
 					   
 					   if (!error) {
 						   
-						   block([[BSAPMessage classFromDict:response] convertToMessageModel], error);
+						   block([[BSAPMessage classFromDict:response] convertToModel], error);
 					   }
 					   else {
 						   //TODO: Create error handling
@@ -152,7 +152,7 @@ withCompletionBlock:(void(^)(NSArray *response, id error))block
 
 						  NSMutableArray *mArr = [@[] mutableCopy];
 						  for (BSAPBatch *batch in [BSAPBatch arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  [mArr addObject:[batch convertToBatchModel]];
+							  [mArr addObject:[batch convertToModel]];
 						  }
 						  block([NSArray arrayWithArray:mArr], error);
 					  }
@@ -171,7 +171,7 @@ withCompletionBlock:(void(^)(NSArray *response, id error))block
 					  
 					  if (!error) {
 
-						  block([[BSAPBatch classFromDict:response] convertToBatchModel], error);
+						  block([[BSAPBatch classFromDict:response] convertToModel], error);
 					  }
 					  else {
 						  //TODO: Create error handling

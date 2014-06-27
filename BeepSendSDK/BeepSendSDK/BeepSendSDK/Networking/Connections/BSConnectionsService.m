@@ -37,7 +37,7 @@
 					  if (!error) {
 						  NSMutableArray *mArr = [@[] mutableCopy];
 						  for (BSAPConnection *conn in [BSAPConnection arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  [mArr addObject:[conn convertToConnectionModel]];
+							  [mArr addObject:[conn convertToModel]];
 						  }
 						  block([NSArray arrayWithArray:mArr], error);
 					  }
@@ -55,7 +55,7 @@
 				  onCompletion:^(id response, id error) {
 		
 					  if (!error) {
-						  block([[BSAPConnection classFromDict:response] convertToConnectionModel], error);
+						  block([[BSAPConnection classFromDict:response] convertToModel], error);
 					  }
 					  else {
 						  //TODO: Create error handling
@@ -106,7 +106,7 @@
 				  onCompletion:^(id response, id error) {
 					  
 					  if (!error) {
-						  block([[BSAPConnection classFromDict:response] convertToConnectionModel], error);
+						  block([[BSAPConnection classFromDict:response] convertToModel], error);
 					  }
 					  else {
 						  //TODO: Create error handling
@@ -122,7 +122,7 @@
 				  onCompletion:^(id response, id error) {
 					  
 					  BSConnectionModel *newToken = [[BSConnectionModel alloc] initWithConnectionModel:connection
-																						  withNewToken:[[BSAPConnection classFromDict:response] convertToConnectionModel].apiToken];
+																						  withNewToken:[[[BSAPConnection classFromDict:response] convertToModel] apiToken]];
 					  
 					  if (!error) {
 						  block(newToken, error);

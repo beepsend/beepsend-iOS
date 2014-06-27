@@ -8,6 +8,15 @@
 
 #import "BSAPCWallet.h"
 
+#import "BSWalletModel.h"
+
 @implementation BSAPCWallet
+
+#pragma mark - Inherited methods
+
+- (id)convertToModel
+{
+	return [[BSWalletModel alloc] initWalletWithID:_id name:_name?_name:@"" balance:_balance?_balance:@0];
+}
 
 @end

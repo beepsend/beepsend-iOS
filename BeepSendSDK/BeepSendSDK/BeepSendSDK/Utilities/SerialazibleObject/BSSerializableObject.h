@@ -33,4 +33,6 @@
  **/
 + (id)classFromDict:(NSDictionary *)dictionary;
 
+- (id)convertToModel;
+
 @end

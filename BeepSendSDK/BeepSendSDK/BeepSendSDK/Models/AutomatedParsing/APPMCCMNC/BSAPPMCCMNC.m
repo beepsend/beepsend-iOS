@@ -8,6 +8,8 @@
 
 #import "BSAPPMCCMNC.h"
 
+#import "BSMCCMNCModel.h"
+
 @implementation BSAPPMCCMNC
 
 #pragma mark - Properties
@@ -40,15 +42,9 @@
 
 #pragma mark - Inherited methods
 
-+ (id)classFromDict:(NSDictionary *)dictionary
+- (id)convertToModel
 {
-	if (![dictionary isKindOfClass:[NSDictionary class]]) {
-		return nil;
-	}
-	
-	BSAPPMCCMNC	*mccmnc = [super classFromDict:dictionary];
-	
-	return mccmnc;
+	return [[BSMCCMNCModel alloc] initWithMNC:self.mnc andMCC:self.mcc];
 }
 
 #pragma mark - Public methods

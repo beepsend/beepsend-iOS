@@ -8,8 +8,6 @@
 
 #import "BSSerializableObject.h"
 
-#import "BSPricelistModel.h"
-
 @interface BSAPPricelist : BSSerializableObject
 
 @property (nonatomic, strong) NSArray *networks;
@@ -20,7 +18,5 @@
 @property (nonatomic, strong) NSString *first_viewed;
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
-
-- (BSPricelistModel *)convertToPricelistModel;
 
 @end

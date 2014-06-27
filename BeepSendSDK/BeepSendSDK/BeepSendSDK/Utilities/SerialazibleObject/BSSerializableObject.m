@@ -104,7 +104,9 @@
 	
 }
 
-
+- (id)convertToModel {
+	return nil;
+}
 
 /**
  * Method that returns class, or array of classes from the given dict.

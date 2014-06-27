@@ -8,7 +8,16 @@
 
 #import "BSAPGroup.h"
 
+#import "BSGroupModel.h"
+
 @implementation BSAPGroup
+
+#pragma mark - Inherited methods
+
+- (id)convertToModel
+{
+	return [[BSGroupModel alloc] initGroupWithID:_id name:_name contacts:_contacts_count processing:_processing];
+}
 
 #pragma mark - Public methods
 
@@ -19,16 +28,6 @@
 		[results addObject:[BSAPGroup classFromDict:object]];
 	}
 	return [NSArray arrayWithArray:results];
-}
-
-- (BSGroupModel *)convertToGroupModel
-{
-	BSGroupModel *group = [[BSGroupModel alloc] initGroupWithID:_id
-														   name:_name
-													   contacts:_contacts_count
-													 processing:_processing];
-	
-	return group;
 }
 
 + (BSAPGroup *)groupFromGroupModel:(BSGroupModel *)groupModel

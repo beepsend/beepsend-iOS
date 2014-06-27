@@ -38,7 +38,7 @@
 						  
 						  NSMutableArray *mArr = [@[] mutableCopy];
 						  for (BSAPContact *con in [BSAPContact arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  [mArr addObject:[con convertToContactModel]];
+							  [mArr addObject:[con convertToModel]];
 						  }
 						  block([NSArray arrayWithArray:mArr], error);
 					  }
@@ -59,7 +59,7 @@
 					  
 					  if (!error) {
 						  
-						  block([[BSAPContact classFromDict:response] convertToContactModel], error);
+						  block([[BSAPContact classFromDict:response] convertToModel], error);
 					  }
 					  else {
 						  //TODO: Create error handling
@@ -107,7 +107,7 @@
 					   
 					  if (!error) {
 					   
-						  block([[BSAPContact classFromDict:response] convertToContactModel], error);
+						  block([[BSAPContact classFromDict:response] convertToModel], error);
 					  }
 					  else {
 						  //TODO: Create error handling
@@ -157,7 +157,7 @@
 						  
 						  NSMutableArray *mArr = [@[] mutableCopy];
 						  for (BSAPContact *con in [BSAPContact arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  [mArr addObject:[con convertToContactModel]];
+							  [mArr addObject:[con convertToModel]];
 						  }
 						  block([NSArray arrayWithArray:mArr], error);
 					  }

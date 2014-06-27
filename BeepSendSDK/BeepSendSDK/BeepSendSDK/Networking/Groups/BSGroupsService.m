@@ -39,7 +39,7 @@
 						  
 						  NSMutableArray *mArr = [@[] mutableCopy];
 						  for (BSAPGroup *group in [BSAPGroup arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  [mArr addObject:[group convertToGroupModel]];
+							  [mArr addObject:[group convertToModel]];
 						  }
 						  
 						  BSLog(@"%@", mArr);
@@ -61,7 +61,7 @@
 					  
 					  if (!error) {
 	
-						  block([[BSAPGroup classFromDict:response] convertToGroupModel], error);
+						  block([[BSAPGroup classFromDict:response] convertToModel], error);
 					  }
 					  else {
 						  //TODO: Create error handling
@@ -81,7 +81,7 @@
 					  
 					  if (!error) {
 						  
-						  block([[BSAPGroup classFromDict:response] convertToGroupModel], error);
+						  block([[BSAPGroup classFromDict:response] convertToModel], error);
 					  }
 					  else {
 						  //TODO: Create error handling
@@ -101,7 +101,7 @@
 					   
 					   if (!error) {
 						   
-						   block([[BSAPGroup classFromDict:response] convertToGroupModel], error);
+						   block([[BSAPGroup classFromDict:response] convertToModel], error);
 					   }
 					   else {
 						   //TODO: Create error handling
@@ -146,7 +146,7 @@
 						  
 						  NSMutableArray *mArr = [@[] mutableCopy];
 						  for (BSAPContact *con in [BSAPContact arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  [mArr addObject:[con convertToContactModel]];
+							  [mArr addObject:[con convertToModel]];
 						  }
 						  block([NSArray arrayWithArray:mArr], error);
 					  }

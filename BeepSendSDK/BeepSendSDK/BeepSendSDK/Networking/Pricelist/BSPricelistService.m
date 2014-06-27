@@ -36,7 +36,7 @@
 					  
 					  if (!error) {
 						  
-						  BSPricelistModel *pricelist = [[BSAPPricelist classFromDict:response] convertToPricelistModel];
+						  BSPricelistModel *pricelist = [[BSAPPricelist classFromDict:response] convertToModel];
 						  
 						  block(pricelist, error);
 					  }
@@ -55,7 +55,7 @@
 					  
 					  if (!error) {
 						  
-						  BSPricelistModel *pricelist = [[BSAPPricelist classFromDict:response] convertToPricelistModel];
+						  BSPricelistModel *pricelist = [[BSAPPricelist classFromDict:response] convertToModel];
 						  
 						  block(pricelist, error);
 					  }
@@ -77,7 +77,7 @@
 						  NSMutableArray *mArr = [@[] mutableCopy];
 						  for (BSAPPricelist *pricelist in [BSAPPricelist arrayOfObjectsFromArrayOfDictionaries:response]) {
 							  
-							  [mArr addObject:[pricelist convertToPricelistModel]];
+							  [mArr addObject:[pricelist convertToModel]];
 						  }
 						  block([NSArray arrayWithArray:mArr], error);
 						  
@@ -100,7 +100,7 @@
 						  NSMutableArray *mArr = [@[] mutableCopy];
 						  for (BSAPPricelist *pricelist in [BSAPPricelist arrayOfObjectsFromArrayOfDictionaries:response]) {
 							  
-							  [mArr addObject:[pricelist convertToPricelistModel]];
+							  [mArr addObject:[pricelist convertToModel]];
 						  }
 						  block([NSArray arrayWithArray:mArr], error);
 						  

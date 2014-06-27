@@ -41,7 +41,7 @@
 					  
 					  if (!error) {
 						  
-						  BSHLRModel *hlr = [[BSAPHLR classFromDict:response] convertToHLRModel];
+						  BSHLRModel *hlr = [[BSAPHLR classFromDict:response] convertToModel];
 						  
 						  block(hlr, error);
 					  }

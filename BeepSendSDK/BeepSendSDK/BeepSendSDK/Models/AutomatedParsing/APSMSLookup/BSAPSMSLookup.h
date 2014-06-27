@@ -15,8 +15,6 @@
 #import "BSAPPMCCMNC.h"
 #import "BSAPTimestamps.h"
 
-#import "BSLookupModel.h"
-
 @interface BSAPSMSLookup : BSSerializableObject
 
 @property (nonatomic, strong) BSAPBatch *batch;
@@ -33,7 +31,5 @@
 @property (nonatomic, strong) NSString *validity_period;
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
-
-- (BSLookupModel *)convertToLookupModel;
 
 @end

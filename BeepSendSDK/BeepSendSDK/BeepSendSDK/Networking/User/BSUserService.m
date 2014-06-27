@@ -37,7 +37,7 @@
 					  
 					  if (!error) {
 						  
-						  BSUserModel *userModel = [[BSAPCUser classFromDict:response] convertToUserModel];
+						  BSUserModel *userModel = [[BSAPCUser classFromDict:response] convertToModel];
 						  
 						  block(userModel, error);
 					  }
@@ -66,7 +66,7 @@
 	
 	BSVerifiedModel *verified = nil;
 	if (uVerifiedTerms) {
-		verified = [[BSVerifiedModel alloc] initUserWithTermsVerified:[uVerifiedTerms boolValue]];
+		verified = [[BSVerifiedModel alloc] initUserWithTermsVerified:uVerifiedTerms];
 	}
 	
 	
@@ -87,7 +87,7 @@
 					  
 					  if (!error) {
 						  
-						  BSUserModel *userModel = [[BSAPCUser classFromDict:response] convertToUserModel];
+						  BSUserModel *userModel = [[BSAPCUser classFromDict:response] convertToModel];
 						  
 						  block(userModel, error);
 					  }
