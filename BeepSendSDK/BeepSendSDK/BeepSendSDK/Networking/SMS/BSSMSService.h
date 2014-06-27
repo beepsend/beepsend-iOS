@@ -9,21 +9,50 @@
 #import "BSBaseService.h"
 
 #import "BSBatchModel.h"
+#import "BSMessageModel.h"
 
 @interface BSSMSService : BSBaseService
 
+/*
+	Sends SMS
+ */
 - (void)sendMessage:(NSString *)message
-			 sender:(NSString *)sender
-		   receiver:(NSString *)receiver
-	 withCompletion:(void (^)(id response, id error))block;
+			   from:(NSString *)sender
+				 to:(NSString *)receiver
+			 groups:(NSArray *)groups
+		 withBachID:(NSString *)batchID
+	  andBatchLabel:(NSString *)batchLabel
+	atScheduledTime:(NSString *)scheduleTime
+	   usedEncoding:(NSString *)encoding
+		messageType:(NSString *)type
+		   validFor:(NSString *)validTime
+recieveDeliveryReport:(NSNumber *)receiveDlrOption //0: Disable, 1: Always, 2: Only on failure. Default is 1.
+withCompletionBlock:(void(^)(NSArray *response, id error))block;
 
+/*
+	Performs dry run of SMS sending
+ */
 - (void)validateSMSForMessage:(NSString *)message
-					   sender:(NSString *)sender
-					 receiver:(NSString *)receiver
-		  withCompletionBlock:(void(^)(id response, id error))block;
+						 from:(NSString *)sender
+						   to:(NSString *)receiver
+					   groups:(NSArray *)groups
+				   withBachID:(NSString *)batchID
+				andBatchLabel:(NSString *)batchLabel
+			  atScheduledTime:(NSString *)scheduleTime
+				 usedEncoding:(NSString *)encoding
+				  messageType:(NSString *)type
+					 validFor:(NSString *)validTime
+		recieveDeliveryReport:(NSNumber *)receiveDlrOption //0: Disable, 1: Always, 2: Only on failure. Default is 1.
+		  withCompletionBlock:(void(^)(BSMessageModel *message, id error))block;
 
+/*
+	Get your previous batches with messages.
+ */
 - (void)getPreviousBatchesWithCompletionBlock:(void(^)(NSArray *bathces, id error))block;
 
+/*
+	Get details for a specific batch.
+ */
 - (void)getDetailsForBatch:(NSString *)batchID withCompletionBlock:(void(^)(BSBatchModel *batch, id error))block;
 
 @end

@@ -143,7 +143,6 @@
 		
 		////////////////////////////////////////////////////////////////////////
 		//Constraints
-		[self addConstraint:[NSLayoutConstraint constraintWithItem:_scrollViewContainer attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0.0]];
     }
     return self;
 }

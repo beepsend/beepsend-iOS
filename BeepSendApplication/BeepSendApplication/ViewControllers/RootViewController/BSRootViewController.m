@@ -82,82 +82,6 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameActive:) name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
 	
-//	BSSMSService *sms = [BSSMSService sharedService];
-//	[sms getPreviousBatchesWithCompletionBlock:^(NSArray *bathces, id error) {
-//		DLog(@"%@", bathces);
-//	}];
-	
-//	__block BSGroupsService *gs = [BSGroupsService sharedService];
-	
-//	[gs searchContactGroups:@"mi" limit:0 withCompletionBlock:^(NSArray *results, id error) {
-//		DLog(@"%@", results);
-//	}];
-	
-//	[gs addGroupNamed:@"Friends" withCompletionBlock:^(BSGroupModel *group, id error) {
-//		
-//		DLog(@"%@", group);
-//	}];
-	
-	/*
-	[gs getAllGroupsWithCompletionBlock:^(NSArray *groups, id error) {
-		
-		DLog(@"%@", groups);
-		
-		for (BSGroupModel *group in groups) {
-			if ([group.name isEqualToString:@"My contact"]) {
-				
-				[gs deleteGroup:group withCompletionBlock:^(BOOL success, id error) {
-					
-				}];
-				
-			}
-		}
-		
-	}];
-	*/
-	
-//	__block BSContactsService *cs = [BSContactsService sharedService];
-
-//	[cs searchContact:@"ca" inGroup:nil limit:0 withCompletionBlock:^(NSArray *results, id error) {
-//		DLog(@"%@", results);
-//	}];
-	
-//	[cs getAllContactsWithCompletionBlock:^(NSArray *contacts, id error) {
-//		
-//		DLog(@"%@", contacts);
-//	}];
-	
-	/*
-	[cs addContacts:@[
-					  [[BSContactModel alloc] initContactWithPhoneNumber:@"381643460358"
-															   firstName:@"Vladica"
-																lastName:@"Pešić"
-																 groupID:nil],
-					  [[BSContactModel alloc] initContactWithPhoneNumber:@"381692101760"
-															   firstName:@"Ivica"
-																lastName:@"Pešić"
-																 groupID:nil],
-					  [[BSContactModel alloc] initContactWithPhoneNumber:@"381653389189"
-															   firstName:@"Milan"
-																lastName:@"Djokić"
-																 groupID:nil],
-					  [[BSContactModel alloc] initContactWithPhoneNumber:@"381658899986"
-															   firstName:@"Milan"
-																lastName:@"Stanojević"
-																 groupID:nil],
-					  [[BSContactModel alloc] initContactWithPhoneNumber:@"381642551948"
-															   firstName:@"Ivan"
-																lastName:@"Živković"
-																 groupID:nil],
-					  [[BSContactModel alloc] initContactWithPhoneNumber:@"381665544300"
-															   firstName:@"Vuk"
-																lastName:@"Ninić"
-																 groupID:nil]
-					  ] withCompletionBlock:^(NSArray *contacts, id error) {
-						  
-		DLog(@"%@", contacts);
-	}];
-	 */
 }
 
 - (void)didReceiveMemoryWarning
@@ -202,29 +126,28 @@
 		
 		BSSMSService *sms = [BSSMSService sharedService];
 		
-		[sms validateSMSForMessage:_textViewMessageBox.text
-							sender:_textFieldFrom.text
-						  receiver:_textFieldTo.text
-			   withCompletionBlock:^(id response, id error) {
-				   
-				   
-				   DLog(@"%@, %@", response, error);
-		}];
-		/*
-		[sms sendMessage:_textViewMessageBox.text 
-				  sender:_textFieldFrom.text
-				receiver:_textFieldTo.text
-		  withCompletion:^(id response, id error) {
-				DLog(@"%@, %@", response, error);
-		}];
-		 */
+		[sms sendMessage:_textViewMessageBox.text
+					from:_textFieldFrom.text
+					  to:_textFieldTo.text
+				  groups:nil
+			  withBachID:nil
+		   andBatchLabel:nil
+		 atScheduledTime:nil
+			usedEncoding:nil
+			 messageType:nil
+				validFor:nil
+   recieveDeliveryReport:nil
+	 withCompletionBlock:^(NSArray *response, id error) {
+		 
+		  DLog(@"%@, %@", response, error);
+	 }];
+
 	}
 }
 
 - (void)buttonCheckClicked {
 	
 	__block BSConnectionsService *cs = [BSConnectionsService sharedService];
-		
 	
 	[cs getAllAvailableConnectsionOnCompletion:^(NSArray *connections, id error) {
 		for (BSConnectionModel *connection in connections) {
@@ -232,44 +155,15 @@
 				
 				BSHLRService *hlrs = [BSHLRService sharedService];
 				
-				[hlrs validateHLRForNumber:_textFieldTo.text
-							withConnection:connection
-					   withCompletionBlock:^(id response, id error) {
-						   
-						  DLog(@"%@", response);
-					   }];
-				
-				/*
 				[hlrs doImmediateHLRForNumber:_textFieldTo.text
 							   withConnection:connection
 						  withCompletionBlock:^(BSHLRModel *hlr, id error) {
 				 
 							  DLog(@"%@", hlr);
 					   }];
-				*/
 			}
 		}
 	}];
-	 
-	
-	/*
-	[cs getMeConnectionOnCompletion:^(BSConnectionModel *connection, id error) {
-		
-		BSUserService *userService = [BSUserService sharedService];
-		[userService updateUserWithName:@"Vladica" phone:nil defaultConnection:connection userTypes:nil verifiedTerms:nil withCompletionBlock:^(BSUserModel *user, id error) {
-			DLog(@"%@", user);
-		}];
-		
-	}];
-	 */
-
-	/*
-	BSCustomerService *s = [BSCustomerService sharedService];
-	
-	[s getCustomerOnCompletion:^(BSCustomerModel *customer, id error) {
-		DLog(@"\nCustomer: %@, \nWith error: %@\n", customer, error);
-	}];
-	 */
 }
 
 - (void)keyboardBecameActive:(NSNotification *)notification

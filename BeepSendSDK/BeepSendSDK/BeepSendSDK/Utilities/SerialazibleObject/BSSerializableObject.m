@@ -150,6 +150,9 @@
 				///////////////////////////////////////////////////////
 				//check value for every property and add it to response
 				for (NSString *zz in propertyList) {
+					if (![dictionary isKindOfClass:[NSDictionary class]]) {
+						return nil;
+					}
 					if([dictionary objectForKey:zz])
 					{
 						NSString *className = propetyTypes[zz];

@@ -55,7 +55,7 @@
 	[[BSConnectionModel alloc] initConnectionWithID:_default_connection.id
 											  label:_default_connection.label
 										   systemID:_default_connection.system_id
-											   type:_default_connection.type];
+											   type:(BSConnectionType)_default_connection.type.integerValue];
 	
 	NSMutableArray *mUserTypes = [@[] mutableCopy];
 	for (BSAPUserType *uType in _user_types) {

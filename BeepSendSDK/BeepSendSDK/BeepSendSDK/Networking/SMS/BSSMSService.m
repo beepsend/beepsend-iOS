@@ -10,6 +10,8 @@
 
 #import "BSAPIConfiguration.h"
 
+#import "BSAPMessageRequest.h"
+#import "BSAPMessage.h"
 #import "BSAPBatch.h"
 
 @implementation BSSMSService
@@ -29,28 +31,94 @@
 #pragma mark - Public methods
 
 - (void)sendMessage:(NSString *)message
-			 sender:(NSString *)sender
-		   receiver:(NSString *)receiver
-	 withCompletion:(void (^)(id response, id error))block {
+			   from:(NSString *)sender
+				 to:(NSString *)receiver
+			 groups:(NSArray *)groups
+		 withBachID:(NSString *)batchID
+	  andBatchLabel:(NSString *)batchLabel
+	atScheduledTime:(NSString *)scheduleTime
+	   usedEncoding:(NSString *)encoding
+		messageType:(NSString *)type
+		   validFor:(NSString *)validTime
+recieveDeliveryReport:(NSNumber *)receiveDlrOption
+withCompletionBlock:(void(^)(NSArray *response, id error))block
+{
+	BSAPMessageRequest *messageRequest = [[BSAPMessageRequest alloc] init];
+	messageRequest.message = message;
+	messageRequest.from = sender;
+	messageRequest.to = receiver;
+	messageRequest.batch_id = batchID;
+	messageRequest.batch_label = batchLabel;
+	messageRequest.send_time = scheduleTime;
+	messageRequest.encoding = encoding;
+	messageRequest.message_type = type;
+	messageRequest.validity_period = validTime;
+	messageRequest.receive_dlr = receiveDlrOption;
+	messageRequest.groups = groups;
+	
+	NSDictionary *parameters = [messageRequest dictFromClass];
+	BSLog(@"%@", parameters);
 	
 	[super executePOSTForMethod:[BSAPIConfiguration sms]
-				 withParameters:@{ @"message" : message , @"from" : sender , @"to" : receiver }
+				 withParameters:parameters
 				   onCompletion:^(id response, id error) {
-					  
-					  block(response, error);
+					   
+					   if (!error) {
+						   
+						   NSMutableArray *mArr = [@[] mutableCopy];
+						   for (BSAPMessage *msg in [BSAPMessage arrayOfObjectsFromArrayOfDictionaries:response]) {
+							   [mArr addObject:[msg convertToMessageModel]];
+						   }
+						   block([NSArray arrayWithArray:mArr], error);
+					   }
+					   else {
+						   //TODO: Create error handling
+						   block(nil, response);
+					   }
 				   }];
 }
 
 - (void)validateSMSForMessage:(NSString *)message
-					   sender:(NSString *)sender
-					 receiver:(NSString *)receiver
-		  withCompletionBlock:(void(^)(id response, id error))block
+						 from:(NSString *)sender
+						   to:(NSString *)receiver
+					   groups:(NSArray *)groups
+				   withBachID:(NSString *)batchID
+				andBatchLabel:(NSString *)batchLabel
+			  atScheduledTime:(NSString *)scheduleTime
+				 usedEncoding:(NSString *)encoding
+				  messageType:(NSString *)type
+					 validFor:(NSString *)validTime
+		recieveDeliveryReport:(NSNumber *)receiveDlrOption
+		  withCompletionBlock:(void(^)(BSMessageModel *message, id error))block
 {
+	BSAPMessageRequest *messageRequest = [[BSAPMessageRequest alloc] init];
+	messageRequest.message = message;
+	messageRequest.from = sender;
+	messageRequest.to = receiver;
+	messageRequest.batch_id = batchID;
+	messageRequest.batch_label = batchLabel;
+	messageRequest.send_time = scheduleTime;
+	messageRequest.encoding = encoding;
+	messageRequest.message_type = type;
+	messageRequest.validity_period = validTime;
+	messageRequest.receive_dlr = receiveDlrOption;
+	messageRequest.groups = groups;
+	
+	NSDictionary *parameters = [messageRequest dictFromClass];
+	BSLog(@"%@", parameters);
+	
 	[super executePOSTForMethod:[BSAPIConfiguration validateSMS]
-				 withParameters:@{ @"message" : message , @"from" : sender , @"to" : receiver }
+				 withParameters:parameters
 				   onCompletion:^(id response, id error) {
 					   
-					   block(response, error);
+					   if (!error) {
+						   
+						   block([[BSAPMessage classFromDict:response] convertToMessageModel], error);
+					   }
+					   else {
+						   //TODO: Create error handling
+						   block(nil, response);
+					   }
 				   }];
 }
 
