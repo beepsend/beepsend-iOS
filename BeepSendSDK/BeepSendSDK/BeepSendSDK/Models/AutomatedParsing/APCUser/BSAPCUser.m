@@ -41,7 +41,7 @@
 		[mUserTypes addObject:[uType convertToModel]];
 	}
 	
-	return [[BSUserModel alloc] initUserWithID:_id name:_name email:_email phone:_phone customer:_customer apiToken:_api_token defaultConnection:[_default_connection convertToModel] userTypes:[NSArray arrayWithArray:mUserTypes] maxLevel:_max_level verified:[_verified convertToModel]];
+	return [[BSUserModel alloc] initUserWithID:_id name:_name email:_email?_email:_username?_username:@"" phone:_phone customer:_customer apiToken:_api_token defaultConnection:[_default_connection convertToModel] userTypes:[NSArray arrayWithArray:mUserTypes] maxLevel:_max_level verified:[_verified convertToModel]];
 }
 
 #pragma mark - Public methods
