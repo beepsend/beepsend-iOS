@@ -33,7 +33,7 @@
 
 - (void)sendMessage:(NSString *)message
 			   from:(NSString *)sender
-				 to:(NSString *)receiver
+				 to:(id)receiver
 			 groups:(NSArray *)groups
 		 withBachID:(NSString *)batchID
 	  andBatchLabel:(NSString *)batchLabel
@@ -58,6 +58,34 @@ withCompletionBlock:(void(^)(NSArray *response, id error))block
 	messageRequest.groups = groups;
 	
 	NSDictionary *parameters = [messageRequest dictFromClass];
+	BSLog(@"%@", parameters);
+	
+	[super executePOSTForMethod:[BSAPIConfiguration sms]
+				 withParameters:parameters
+				   onCompletion:^(id response, id error) {
+					   
+					   if (!error) {
+						   
+						   NSMutableArray *mArr = [@[] mutableCopy];
+						   for (BSAPMessage *msg in [BSAPMessage arrayOfObjectsFromArrayOfDictionaries:response]) {
+							   [mArr addObject:[msg convertToModel]];
+						   }
+						   block([NSArray arrayWithArray:mArr], error);
+					   }
+					   else {
+						   //TODO: Create error handling
+						   block(nil, response);
+					   }
+				   }];
+}
+
+- (void)sendMessages:(NSArray *)messages withCompletionBlock:(void(^)(NSArray *array, id error))block
+{
+	NSMutableArray *parameters = [@[] mutableCopy];
+	for (BSAPMessageRequest *request in [BSAPMessageRequest arrayOfObjectsFromArrayOfModels:messages]) {
+		[parameters addObject:[request dictFromClass]];
+	}
+	
 	BSLog(@"%@", parameters);
 	
 	[super executePOSTForMethod:[BSAPIConfiguration sms]

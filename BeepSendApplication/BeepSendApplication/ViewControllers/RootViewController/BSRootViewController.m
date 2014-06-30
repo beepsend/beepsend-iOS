@@ -125,7 +125,6 @@
 		![Helper isNilOrEmpty:_textViewMessageBox.text]) {
 		
 		BSSMSService *sms = [BSSMSService sharedService];
-		
 		[sms sendMessage:_textViewMessageBox.text
 					from:_textFieldFrom.text
 					  to:_textFieldTo.text
@@ -140,7 +139,6 @@
 	 withCompletionBlock:^(NSArray *response, id error) {
 		  DLog(@"%@, %@", response, error);
 	 }];
-		 
 
 	}
 }

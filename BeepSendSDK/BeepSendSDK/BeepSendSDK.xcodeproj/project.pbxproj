@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E254A0119619206004D00AE /* BSMessageRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E254A0019619206004D00AE /* BSMessageRequestModel.m */; };
 		6E42E57A195B091B00343B2E /* BSContactsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E42E579195B091B00343B2E /* BSContactsService.m */; };
 		6E653818194730EB00FC6349 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E653817194730EB00FC6349 /* Foundation.framework */; };
 		6E65381D194730EB00FC6349 /* BeepSendSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6E65381C194730EB00FC6349 /* BeepSendSDK.h */; };
@@ -155,6 +156,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6E2549FF19619206004D00AE /* BSMessageRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSMessageRequestModel.h; path = MessageRequestModel/BSMessageRequestModel.h; sourceTree = "<group>"; };
+		6E254A0019619206004D00AE /* BSMessageRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSMessageRequestModel.m; path = MessageRequestModel/BSMessageRequestModel.m; sourceTree = "<group>"; };
 		6E42E578195B091B00343B2E /* BSContactsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSContactsService.h; path = Contacts/BSContactsService.h; sourceTree = "<group>"; };
 		6E42E579195B091B00343B2E /* BSContactsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSContactsService.m; path = Contacts/BSContactsService.m; sourceTree = "<group>"; };
 		6E653814194730EB00FC6349 /* libBeepSendSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBeepSendSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -335,6 +338,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E2549FE1961913C004D00AE /* MessageRequestModel */ = {
+			isa = PBXGroup;
+			children = (
+				6E2549FF19619206004D00AE /* BSMessageRequestModel.h */,
+				6E254A0019619206004D00AE /* BSMessageRequestModel.m */,
+			);
+			name = MessageRequestModel;
+			sourceTree = "<group>";
+		};
 		6E42E577195B08F000343B2E /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1068,6 +1080,7 @@
 		6ECBBD37195D7BD000D78CAE /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				6E2549FE1961913C004D00AE /* MessageRequestModel */,
 				6ECBBD45195D7CA600D78CAE /* RecipientModel */,
 				6ECBBD38195D7BD000D78CAE /* LookupModel */,
 				6ECBBD3B195D7BD000D78CAE /* MessageModel */,
@@ -1307,6 +1320,7 @@
 				6EF46E151959A0EE002C6F56 /* BSAPUserType.m in Sources */,
 				6E74C07C195B0DC3001B9304 /* BSContactModel.m in Sources */,
 				6EBC77ED194EF50B00666099 /* BSAFURLSessionManager.m in Sources */,
+				6E254A0119619206004D00AE /* BSMessageRequestModel.m in Sources */,
 				6EB59087195AC020009456B0 /* BSHLRService.m in Sources */,
 				6EBA76BD194B3C8300941E85 /* BSHelper.m in Sources */,
 				6EBC77E2194EF4F900666099 /* BSNetworkLayer.m in Sources */,

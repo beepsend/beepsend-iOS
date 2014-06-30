@@ -77,7 +77,7 @@
 							userTypes:[NSArray arrayWithArray:mArr]
 							 verified:verified];
 	
-	NSDictionary *userUpdateDictionary = [[BSAPCUser convertFromConnectionModel:userUpdate] dictFromClass];
+	NSDictionary *userUpdateDictionary = [[BSAPCUser convertFromUserModel:userUpdate] dictFromClass];
 	
 	BSLog(@"%@", userUpdateDictionary);
 	
@@ -104,7 +104,7 @@
 {
 	BSUserModel *userUpdate = [[BSUserModel alloc] initUserWithEmail:newEmail andPassword:password];
 	
-	NSDictionary *userUpdateDictionary = [[BSAPCUser convertFromConnectionModel:userUpdate] dictFromClass];
+	NSDictionary *userUpdateDictionary = [[BSAPCUser convertFromUserModel:userUpdate] dictFromClass];
 	
 	BSLog(@"%@", userUpdateDictionary);
 	
@@ -128,7 +128,7 @@
 {
 	BSUserModel *userUpdate = [[BSUserModel alloc] initUserWithPassword:password andNewPassword:newPassword];
 	
-	NSDictionary *userUpdateDictionary = [[BSAPCUser convertFromConnectionModel:userUpdate] dictFromClass];
+	NSDictionary *userUpdateDictionary = [[BSAPCUser convertFromUserModel:userUpdate] dictFromClass];
 	
 	BSLog(@"%@", userUpdateDictionary);
 	

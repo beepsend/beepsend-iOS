@@ -55,7 +55,7 @@
 	return [NSArray arrayWithArray:results];
 }
 
-+ (BSAPCUser *)convertFromConnectionModel:(BSUserModel *)userModel
++ (BSAPCUser *)convertFromUserModel:(BSUserModel *)userModel
 {
 	
 	BSAPCUser *user = [[BSAPCUser alloc] init];
