@@ -8,6 +8,8 @@
 
 #import "BSMessageRequestModel.h"
 
+#import "BSGroupModel.h"
+
 @interface BSMessageRequestModel ()
 
 @property (nonatomic, strong, readwrite) id receiver;
@@ -59,7 +61,12 @@
 		_messageType = rType;
 		_validTo = rValidTo;
 		_receiveDeliveryReport = rReceiveDLR;
-		_groups = rGroups;
+		
+		NSMutableArray *mArr = [@[] mutableCopy];
+		for (BSGroupModel *gModel in rGroups) {
+			[mArr addObject:gModel.objectID];
+		}
+		_groups = mArr.count>0?[NSArray arrayWithArray:mArr]:nil;
 	}
 	return self;
 }
