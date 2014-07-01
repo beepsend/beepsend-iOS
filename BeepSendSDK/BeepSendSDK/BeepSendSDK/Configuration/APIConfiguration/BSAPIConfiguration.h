@@ -277,4 +277,6 @@
  */
 + (NSString *)smsCostEstimate;
 
++ (NSString *)smsCostEstimateForID:(NSString *)connectionID;
+
 @end

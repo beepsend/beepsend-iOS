@@ -41,7 +41,9 @@
 											  messageType:_message_type
 												  validTo:validTo
 											   recieveDLR:_receive_dlr
-												forGroups:_groups];
+												forGroups:_groups
+										   userDataHeader:_udh
+									   dataCodingSettings:_dcs];
 }
 
 #pragma mark - Public methods
@@ -93,6 +95,9 @@
 		}
 	}
 	request.groups = groupsID.count>0?[NSArray arrayWithArray:groupsID]:nil;
+	
+	request.udh = msgRequest.userDataHeader;
+	request.dcs = msgRequest.dataCodingSettings;
 	
 	return request;
 }

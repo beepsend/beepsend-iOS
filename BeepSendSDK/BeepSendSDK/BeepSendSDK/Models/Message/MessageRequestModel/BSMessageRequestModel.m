@@ -24,6 +24,9 @@
 @property (nonatomic, strong, readwrite) NSNumber *receiveDeliveryReport;
 @property (nonatomic, strong, readwrite) NSArray *groups;
 
+@property (nonatomic, strong, readwrite) NSString *userDataHeader;
+@property (nonatomic, strong, readwrite) NSString *dataCodingSettings;
+
 @end
 
 @implementation BSMessageRequestModel
@@ -49,6 +52,8 @@
 								   validTo:(NSDate *)rValidTo
 								recieveDLR:(NSNumber *)rReceiveDLR
 								 forGroups:(NSArray *)rGroups
+							userDataHeader:(NSString *)rUDH
+						dataCodingSettings:(NSString *)rDCS
 {
 	if (self = [super initWithID:@"0" andTitle:@"Message request"]) {
 		_receiver = rReceiver;
@@ -61,12 +66,10 @@
 		_messageType = rType;
 		_validTo = rValidTo;
 		_receiveDeliveryReport = rReceiveDLR;
+		_groups = rGroups;
 		
-		NSMutableArray *mArr = [@[] mutableCopy];
-		for (BSGroupModel *gModel in rGroups) {
-			[mArr addObject:gModel.objectID];
-		}
-		_groups = mArr.count>0?[NSArray arrayWithArray:mArr]:nil;
+		_userDataHeader = rUDH;
+		_dataCodingSettings = rDCS;
 	}
 	return self;
 }

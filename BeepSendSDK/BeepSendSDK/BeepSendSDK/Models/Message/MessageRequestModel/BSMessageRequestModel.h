@@ -22,6 +22,9 @@
 @property (nonatomic, strong, readonly) NSNumber *receiveDeliveryReport;
 @property (nonatomic, strong, readonly) NSArray *groups;
 
+@property (nonatomic, strong, readonly) NSString *userDataHeader;
+@property (nonatomic, strong, readonly) NSString *dataCodingSettings;
+
 - (BSMessageRequestModel *)initWithMessage:(NSString *)rMessage
 								  receiver:(id)rReceiver
 									sender:(NSString *)rSender
@@ -32,6 +35,8 @@
 							   messageType:(NSString *)rType
 								   validTo:(NSDate *)rValidTo
 								recieveDLR:(NSNumber *)rReceiveDLR
-								 forGroups:(NSArray *)rGroups;
+								 forGroups:(NSArray *)rGroups
+							userDataHeader:(NSString *)rUDH
+						dataCodingSettings:(NSString *)rDCS;
 
 @end

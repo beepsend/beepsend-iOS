@@ -236,4 +236,9 @@
 	return @"/sms/costestimate/";
 }
 
++ (NSString *)smsCostEstimateForID:(NSString *)connectionID
+{
+	return [@"/sms/costestimate/" stringByAppendingString:connectionID];
+}
+
 @end

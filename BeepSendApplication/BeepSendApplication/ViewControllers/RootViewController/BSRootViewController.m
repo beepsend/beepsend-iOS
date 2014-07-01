@@ -125,20 +125,82 @@
 		![Helper isNilOrEmpty:_textViewMessageBox.text]) {
 		
 		BSSMSService *sms = [BSSMSService sharedService];
-		[sms sendMessage:_textViewMessageBox.text
-					from:_textFieldFrom.text
-					  to:@[@"381643460358"]
-				  groups:@[@"13122"]
-			  withBachID:nil
-		   andBatchLabel:nil
-		 atScheduledTime:nil
-			usedEncoding:nil
-			 messageType:nil
-				validFor:nil
-   recieveDeliveryReport:nil
-	 withCompletionBlock:^(NSArray *response, id error) {
-		  DLog(@"%@, %@", response, error);
-	 }];
+		
+		BSMessageRequestModel *message1 = [[BSMessageRequestModel alloc] initWithMessage:_textViewMessageBox.text
+																			   receiver:_textFieldTo.text
+																				 sender:nil
+																				batchID:nil
+																			 batchLabel:nil
+																			   sendTime:nil
+																		   usedEncoding:nil
+																			messageType:nil
+																				validTo:nil
+																			 recieveDLR:nil
+																			  forGroups:nil
+																		 userDataHeader:nil
+																	 dataCodingSettings:nil];
+		BSMessageRequestModel *message2 = [[BSMessageRequestModel alloc] initWithMessage:_textViewMessageBox.text
+																			   receiver:@[_textFieldTo.text, @"381692101760"]
+																				 sender:nil
+																				batchID:nil
+																			 batchLabel:nil
+																			   sendTime:nil
+																		   usedEncoding:nil
+																			messageType:nil
+																				validTo:nil
+																			 recieveDLR:nil
+																			  forGroups:nil
+																		 userDataHeader:nil
+																	 dataCodingSettings:nil];
+		BSMessageRequestModel *message3 = [[BSMessageRequestModel alloc] initWithMessage:_textViewMessageBox.text
+																			   receiver:nil
+																				 sender:nil
+																				batchID:nil
+																			 batchLabel:nil
+																			   sendTime:nil
+																		   usedEncoding:nil
+																			messageType:nil
+																				validTo:nil
+																			 recieveDLR:nil
+																			  forGroups:@[@"13122"]
+																		 userDataHeader:nil
+																	 dataCodingSettings:nil];
+		BSMessageRequestModel *message4 = [[BSMessageRequestModel alloc] initWithMessage:_textViewMessageBox.text
+																			   receiver:_textFieldTo.text
+																				 sender:nil
+																				batchID:nil
+																			 batchLabel:nil
+																			   sendTime:nil
+																		   usedEncoding:nil
+																			messageType:nil
+																				validTo:nil
+																			 recieveDLR:nil
+																			  forGroups:nil
+																		 userDataHeader:nil
+																	 dataCodingSettings:nil];
+		
+		[sms estimateCostForMessages:@[message1, message2, message3, message4] usingConnection:nil withCompletionBlock:^(NSArray *response, id error) {
+			DLog(@"%@", response);
+		}];
+		
+//		[sms sendMessage:message usingConnection:nil withCompletionBlock:^(NSArray *response, id error) {
+//			DLog(@"%@", response);
+//		}];
+
+//		[sms sendMessage:_textViewMessageBox.text
+//					from:_textFieldFrom.text
+//					  to:@[@"381643460358"]
+//				  groups:@[@"13122"]
+//			  withBachID:nil
+//		   andBatchLabel:nil
+//		 atScheduledTime:nil
+//			usedEncoding:nil
+//			 messageType:nil
+//				validFor:nil
+//   recieveDeliveryReport:nil
+//	 withCompletionBlock:^(NSArray *response, id error) {
+//		  DLog(@"%@, %@", response, error);
+//	 }];
 
 	}
 }
