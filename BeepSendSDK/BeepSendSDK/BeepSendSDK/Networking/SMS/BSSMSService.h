@@ -32,9 +32,14 @@ recieveDeliveryReport:(NSNumber *)receiveDlrOption //0: Disable, 1: Always, 2: O
 withCompletionBlock:(void(^)(NSArray *response, id error))block;
 
 /*
+	Sends SMS
+ */
+- (void)sendMessage:(BSMessageRequestModel *)messageRequest usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block;
+
+/*
 	Parameter is array of message request models
  */
-- (void)sendMessages:(NSArray *)messages withCompletionBlock:(void(^)(NSArray *array, id error))block;
+- (void)sendMessages:(NSArray *)messages usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *array, id error))block;
 
 /*
 	Get details regarding one message.

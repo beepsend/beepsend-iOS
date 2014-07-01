@@ -53,7 +53,14 @@
 				  }];
 }
 
-- (void)getDetailsForGroup:(NSString *)groupID withCompletionBlock:(void(^)(BSGroupModel *group, id error))block
+- (void)getDetailsForGroup:(BSGroupModel *)group withCompletionBlock:(void(^)(BSGroupModel *group, id error))block
+{
+	[self getDetailsForGroupID:group.objectID withCompletionBlock:^(BSGroupModel *group, id error) {
+		block(group, error);
+	}];
+}
+
+- (void)getDetailsForGroupID:(NSString *)groupID withCompletionBlock:(void(^)(BSGroupModel *group, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration contactsGroupsForID:groupID]
 				withParameters:@{}

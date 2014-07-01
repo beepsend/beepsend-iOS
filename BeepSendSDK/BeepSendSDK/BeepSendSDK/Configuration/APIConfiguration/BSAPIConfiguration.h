@@ -175,6 +175,11 @@
  */
 + (NSString *)sms;
 
+/*
+	Send SMS with specific connection
+ */
++ (NSString *)smsForID:(NSString *)connectionID;
+
 #pragma mark - SMS Lookup
 
 /*

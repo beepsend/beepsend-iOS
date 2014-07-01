@@ -15,6 +15,8 @@
 #import "BSAPBatch.h"
 #import "BSAPSMSLookup.h"
 
+#import "BSGroupModel.h"
+
 @implementation BSSMSService
 
 #pragma mark - Initialization
@@ -55,12 +57,24 @@ withCompletionBlock:(void(^)(NSArray *response, id error))block
 	messageRequest.message_type = type;
 	messageRequest.validity_period = validTime;
 	messageRequest.receive_dlr = receiveDlrOption;
-	messageRequest.groups = groups;
+	
+	NSMutableArray *groupsID = [@[] mutableCopy];
+	if (groups && groups.count>0) {
+		if ([groups[0] isKindOfClass:[BSGroupModel class]]) {
+			for (BSGroupModel *group in groups) {
+				[groupsID addObject:group.objectID];
+			}
+		}
+		else {
+			groupsID = [groups mutableCopy];
+		}
+	}
+	messageRequest.groups = groupsID;
 	
 	NSDictionary *parameters = [messageRequest dictFromClass];
 	BSLog(@"%@", parameters);
 	
-	[super executePOSTForMethod:[BSAPIConfiguration sms]
+	[super executePOSTForMethod:groups?[BSAPIConfiguration batches]:[BSAPIConfiguration sms]
 				 withParameters:parameters
 				   onCompletion:^(id response, id error) {
 					   
@@ -79,16 +93,77 @@ withCompletionBlock:(void(^)(NSArray *response, id error))block
 				   }];
 }
 
-- (void)sendMessages:(NSArray *)messages withCompletionBlock:(void(^)(NSArray *array, id error))block
+- (void)sendMessage:(BSMessageRequestModel *)messageRequest usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block
 {
+	NSString *method;
+	if (messageRequest.groups) {
+		if (connection) {
+			method = [BSAPIConfiguration batchesForID:connection.objectID];
+		}
+		else {
+			method = [BSAPIConfiguration batches];
+		}
+	}
+	else {
+		if (connection) {
+			method = [BSAPIConfiguration smsForID:connection.objectID];
+		}
+		else {
+			method = [BSAPIConfiguration sms];
+		}
+	}
+	
+	NSDictionary *parameters = [[BSAPMessageRequest convertFromMessageRequestModel:messageRequest] dictFromClass];
+	
+	[super executePOSTForMethod:method
+				 withParameters:parameters
+				   onCompletion:^(id response, id error) {
+					   
+					   if (!error) {
+						   
+						   NSMutableArray *mArr = [@[] mutableCopy];
+						   for (BSAPMessage *msg in [BSAPMessage arrayOfObjectsFromArrayOfDictionaries:response]) {
+							   [mArr addObject:[msg convertToModel]];
+						   }
+						   block([NSArray arrayWithArray:mArr], error);
+					   }
+					   else {
+						   //TODO: Create error handling
+						   block(nil, response);
+					   }
+				   }];
+}
+
+- (void)sendMessages:(NSArray *)messages usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *array, id error))block
+{
+	BOOL containGroups = NO;
 	NSMutableArray *parameters = [@[] mutableCopy];
 	for (BSAPMessageRequest *request in [BSAPMessageRequest arrayOfObjectsFromArrayOfModels:messages]) {
 		[parameters addObject:[request dictFromClass]];
+		if (request.groups) {
+			containGroups = YES;
+		}
 	}
 	
-	BSLog(@"%@", parameters);
+	NSString *method;
+	if (containGroups) {
+		if (connection) {
+			method = [BSAPIConfiguration batchesForID:connection.objectID];
+		}
+		else {
+			method = [BSAPIConfiguration batches];
+		}
+	}
+	else {
+		if (connection) {
+			method = [BSAPIConfiguration smsForID:connection.objectID];
+		}
+		else {
+			method = [BSAPIConfiguration sms];
+		}
+	}
 	
-	[super executePOSTForMethod:[BSAPIConfiguration sms]
+	[super executePOSTForMethod:method
 				 withParameters:parameters
 				   onCompletion:^(id response, id error) {
 					   

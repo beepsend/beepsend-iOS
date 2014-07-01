@@ -9,6 +9,7 @@
 #import "BSAPMessageRequest.h"
 
 #import "BSMessageRequestModel.h"
+#import "BSGroupModel.h"
 
 @implementation BSAPMessageRequest
 
@@ -77,7 +78,21 @@
 	request.message_type = msgRequest.messageType;
 	request.validity_period = msgRequest.validTo?[NSString stringWithFormat:@"%f", [msgRequest.validTo timeIntervalSince1970]]:nil;
 	request.receive_dlr = msgRequest.receiveDeliveryReport;
-	request.groups = msgRequest.groups;
+	
+	//If groups array consists of BSGroupModel
+	//than convert it to array of strings (group ids)
+	NSMutableArray *groupsID = [@[] mutableCopy];
+	if (msgRequest.groups && msgRequest.groups.count>0) {
+		if ([msgRequest.groups[0] isKindOfClass:[BSGroupModel class]]) {
+			for (BSGroupModel *group in msgRequest.groups) {
+				[groupsID addObject:group.objectID];
+			}
+		}
+		else {
+			groupsID = [msgRequest.groups mutableCopy];
+		}
+	}
+	request.groups = groupsID.count>0?[NSArray arrayWithArray:groupsID]:nil;
 	
 	return request;
 }

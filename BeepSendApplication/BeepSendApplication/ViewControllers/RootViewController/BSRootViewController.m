@@ -127,8 +127,8 @@
 		BSSMSService *sms = [BSSMSService sharedService];
 		[sms sendMessage:_textViewMessageBox.text
 					from:_textFieldFrom.text
-					  to:_textFieldTo.text
-				  groups:nil
+					  to:@[@"381643460358"]
+				  groups:@[@"13122"]
 			  withBachID:nil
 		   andBatchLabel:nil
 		 atScheduledTime:nil
