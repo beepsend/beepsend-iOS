@@ -221,6 +221,56 @@
  */
 + (NSString *)batchesForID:(NSString *)batchID;
 
+#pragma mark - Analytics
+
+/*
+	This call will give you accumulated statistics for all messages sent between
+	two specified dates and the accumulated cost for these in Euro (€).
+	The call counts all messages submitted via SMPP and HTTP alike.
+ 
+	The call supports a summary for available connections on a User Token, 
+	a specific connection or using the short hand alias "me" for the 
+	authenticated connection if a Connection token was used when authenticating 
+	or the default connection if User token was used instead.
+ 
+	This call does not consider delivery statistics and should merely be used
+	for aggregated views on traffic. 
+	If no ID is provided the return data set is a list of connections.
+ */
++ (NSString *)analyticsSummary;
+
++ (NSString *)analyticsSummaryMe;
+
++ (NSString *)analyticsSummaryForID:(NSString *)connectionID;
+
+/*
+	This call will give you granular delivery statistics for all messages 
+	sorted by each recipient network between two specified dates. 
+	The call counts all messages submitted via SMPP and HTTP alike.
+ 
+	The call supports parameter to specify a list of MCC and/or MNC. 
+	If these parameters are omitted all MCC and MNC that has traffic 
+	will be returned.
+ 
+	The call supports a summary for available connections on used token. 
+	Either a specific Connection ID or using the short hand alias "me" for 
+	the authenticated connection if Connection token was used when 
+	authenticating or the default connection if User token was used instead. 
+	If no ID is provided all connections available is returned as list.
+ */
++ (NSString *)analyticsNetwork;
+
++ (NSString *)analyticsNetworkMe;
+
++ (NSString *)analyticsNetworkForID:(NSString *)connectionID;
+
+/*
+	This call will give you delivery statistics for a whole batch.
+ */
++ (NSString *)analyticsBatches;
+
++ (NSString *)analyticsBatchesForID:(NSString *)batchID;
+
 #pragma mark - Contacts
 
 /*

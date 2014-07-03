@@ -19,6 +19,7 @@
 #import "BSHLRService.h"
 #import "BSContactsService.h"
 #import "BSGroupsService.h"
+#import "BSAnalyticsService.h"
 
 @interface BSRootViewController () <UITextFieldDelegate>
 
@@ -82,6 +83,10 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameActive:) name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
 	
+	BSAnalyticsService *as = [BSAnalyticsService sharedService];
+	[as getNetworkDetailsFromDate:nil toDate:nil mccmnc:nil usingConnection:nil withCompletionBlock:^(NSArray *networkDetails, id error) {
+		DLog(@"%@", networkDetails);
+	}];
 }
 
 - (void)didReceiveMemoryWarning
@@ -123,12 +128,12 @@
 	if (![Helper isNilOrEmpty:_textFieldFrom.text] &&
 		![Helper isNilOrEmpty:_textFieldTo.text] &&
 		![Helper isNilOrEmpty:_textViewMessageBox.text]) {
-		
+/*
 		BSSMSService *sms = [BSSMSService sharedService];
 		
 		BSMessageRequestModel *message1 = [[BSMessageRequestModel alloc] initWithMessage:_textViewMessageBox.text
 																			   receiver:_textFieldTo.text
-																				 sender:nil
+																				 sender:_textFieldFrom.text
 																				batchID:nil
 																			 batchLabel:nil
 																			   sendTime:nil
@@ -178,12 +183,12 @@
 																			  forGroups:nil
 																		 userDataHeader:nil
 																	 dataCodingSettings:nil];
+		*/
+//		[sms estimateCostForMessages:@[message1, message2, message3, message4] usingConnection:nil withCompletionBlock:^(NSArray *response, id error) {
+//			DLog(@"%@", response);
+//		}];
 		
-		[sms estimateCostForMessages:@[message1, message2, message3, message4] usingConnection:nil withCompletionBlock:^(NSArray *response, id error) {
-			DLog(@"%@", response);
-		}];
-		
-//		[sms sendMessage:message usingConnection:nil withCompletionBlock:^(NSArray *response, id error) {
+//		[sms sendMessage:message1 usingConnection:nil withCompletionBlock:^(NSArray *response, id error) {
 //			DLog(@"%@", response);
 //		}];
 
