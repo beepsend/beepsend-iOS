@@ -84,8 +84,18 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
 	
 	BSAnalyticsService *as = [BSAnalyticsService sharedService];
-	[as getNetworkDetailsFromDate:nil toDate:nil mccmnc:nil usingConnection:nil withCompletionBlock:^(NSArray *networkDetails, id error) {
-		DLog(@"%@", networkDetails);
+//	[as getNetworkDetailsFromDate:nil toDate:nil mccmnc:nil usingConnection:nil withCompletionBlock:^(NSArray *networkDetails, id error) {
+//		DLog(@"%@", networkDetails);
+//	}];
+	
+	BSSMSService *sms = [BSSMSService sharedService];
+	[sms getPreviousBatchesWithCompletionBlock:^(NSArray *bathces, id error) {
+		
+		[as getDeliveryStatisticsForBach:bathces[0] withCompletionBlock:^(NSArray *statistics, id error) {
+			
+			DLog(@"%@", statistics);
+		}];
+		DLog(@"%@", bathces);
 	}];
 }
 

@@ -117,6 +117,8 @@
 		6EC7E5BA19653F7A008486E6 /* BSAPStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7E5B919653F7A008486E6 /* BSAPStatistics.m */; };
 		6EC7E5BF1965429E008486E6 /* BSStatisticsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7E5BE1965429E008486E6 /* BSStatisticsModel.m */; };
 		6EC7E5C2196542D9008486E6 /* BSNetworkDetailsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7E5C1196542D9008486E6 /* BSNetworkDetailsModel.m */; };
+		6EC7E5C6196562F1008486E6 /* BSAPAnalyticsBatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7E5C5196562F1008486E6 /* BSAPAnalyticsBatch.m */; };
+		6EC7E5CA19656533008486E6 /* BSAnalyticsBatchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7E5C919656533008486E6 /* BSAnalyticsBatchModel.m */; };
 		6EC82C3F19547D90001AD1F2 /* BSPricelistService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC82C3E19547D90001AD1F2 /* BSPricelistService.m */; };
 		6EC82C4019547E5F001AD1F2 /* BSPricelistService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EC82C3D19547D90001AD1F2 /* BSPricelistService.h */; };
 		6ECBBD21195D563E00D78CAE /* BSAPMessageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ECBBD20195D563E00D78CAE /* BSAPMessageRequest.m */; };
@@ -320,6 +322,10 @@
 		6EC7E5BE1965429E008486E6 /* BSStatisticsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSStatisticsModel.m; path = Models/Analytics/StatisticsModel/BSStatisticsModel.m; sourceTree = "<group>"; };
 		6EC7E5C0196542D9008486E6 /* BSNetworkDetailsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSNetworkDetailsModel.h; path = Models/Analytics/NetworkDetailsModel/BSNetworkDetailsModel.h; sourceTree = "<group>"; };
 		6EC7E5C1196542D9008486E6 /* BSNetworkDetailsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSNetworkDetailsModel.m; path = Models/Analytics/NetworkDetailsModel/BSNetworkDetailsModel.m; sourceTree = "<group>"; };
+		6EC7E5C4196562F1008486E6 /* BSAPAnalyticsBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPAnalyticsBatch.h; path = Models/AutomatedParsing/APAnalyticsBatch/BSAPAnalyticsBatch.h; sourceTree = "<group>"; };
+		6EC7E5C5196562F1008486E6 /* BSAPAnalyticsBatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPAnalyticsBatch.m; path = Models/AutomatedParsing/APAnalyticsBatch/BSAPAnalyticsBatch.m; sourceTree = "<group>"; };
+		6EC7E5C819656533008486E6 /* BSAnalyticsBatchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAnalyticsBatchModel.h; path = Models/Analytics/AnalyticsBatchModel/BSAnalyticsBatchModel.h; sourceTree = "<group>"; };
+		6EC7E5C919656533008486E6 /* BSAnalyticsBatchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAnalyticsBatchModel.m; path = Models/Analytics/AnalyticsBatchModel/BSAnalyticsBatchModel.m; sourceTree = "<group>"; };
 		6EC82C3D19547D90001AD1F2 /* BSPricelistService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSPricelistService.h; path = Pricelist/BSPricelistService.h; sourceTree = "<group>"; };
 		6EC82C3E19547D90001AD1F2 /* BSPricelistService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSPricelistService.m; path = Pricelist/BSPricelistService.m; sourceTree = "<group>"; };
 		6ECBBD1F195D563E00D78CAE /* BSAPMessageRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPMessageRequest.h; path = Models/AutomatedParsing/APMessageRequest/BSAPMessageRequest.h; sourceTree = "<group>"; };
@@ -520,6 +526,7 @@
 		6EACD78D19640BBE00D3BB3D /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
+				6EC7E5C719656495008486E6 /* AnalyticsBatchModel */,
 				6EC7E5BC196541B8008486E6 /* StatisticsModel */,
 				6EC7E5BB196540F4008486E6 /* NetworkDetailsModel */,
 				6EACD78E19640BD700D3BB3D /* AccumulatedStatisticsModel */,
@@ -971,6 +978,7 @@
 		6EB96ED61951902C00AD77E2 /* AutomatedParsing */ = {
 			isa = PBXGroup;
 			children = (
+				6EC7E5C319656265008486E6 /* APAnalyticsBatch */,
 				6EC7E5B719653E06008486E6 /* APStatistics */,
 				6EC7E5B019653B6F008486E6 /* APNetworkDetailsResponse */,
 				6EC7E5AF19653B63008486E6 /* APNetworkDetailsRequest */,
@@ -1195,6 +1203,24 @@
 				6EC7E5BE1965429E008486E6 /* BSStatisticsModel.m */,
 			);
 			name = StatisticsModel;
+			sourceTree = "<group>";
+		};
+		6EC7E5C319656265008486E6 /* APAnalyticsBatch */ = {
+			isa = PBXGroup;
+			children = (
+				6EC7E5C4196562F1008486E6 /* BSAPAnalyticsBatch.h */,
+				6EC7E5C5196562F1008486E6 /* BSAPAnalyticsBatch.m */,
+			);
+			name = APAnalyticsBatch;
+			sourceTree = "<group>";
+		};
+		6EC7E5C719656495008486E6 /* AnalyticsBatchModel */ = {
+			isa = PBXGroup;
+			children = (
+				6EC7E5C819656533008486E6 /* BSAnalyticsBatchModel.h */,
+				6EC7E5C919656533008486E6 /* BSAnalyticsBatchModel.m */,
+			);
+			name = AnalyticsBatchModel;
 			sourceTree = "<group>";
 		};
 		6EC82C3C19547D22001AD1F2 /* Pricelist */ = {
@@ -1459,6 +1485,7 @@
 				6EB8E453195C1BB20098AC33 /* BSAPGroup.m in Sources */,
 				6EF46E181959A108002C6F56 /* BSAPVerified.m in Sources */,
 				6EB877961952ED7C0070B749 /* BSPriceListDetailsModel.m in Sources */,
+				6EC7E5C6196562F1008486E6 /* BSAPAnalyticsBatch.m in Sources */,
 				6EBC77E6194EF50B00666099 /* BSAFHTTPRequestOperationManager.m in Sources */,
 				6EB590A1195AD712009456B0 /* BSHLRModel.m in Sources */,
 				6EBC77E7194EF50B00666099 /* BSAFHTTPSessionManager.m in Sources */,
@@ -1479,6 +1506,7 @@
 				6EB877941952ED7C0070B749 /* BSCustomerModel.m in Sources */,
 				6EBC77EB194EF50B00666099 /* BSAFURLRequestSerialization.m in Sources */,
 				6EB3EA7B1958679D00951E57 /* BSPricelistModel.m in Sources */,
+				6EC7E5CA19656533008486E6 /* BSAnalyticsBatchModel.m in Sources */,
 				6EC7E5C2196542D9008486E6 /* BSNetworkDetailsModel.m in Sources */,
 				6EB8779E1952EFA30070B749 /* BSUserModel.m in Sources */,
 				6EBC77EC194EF50B00666099 /* BSAFURLResponseSerialization.m in Sources */,

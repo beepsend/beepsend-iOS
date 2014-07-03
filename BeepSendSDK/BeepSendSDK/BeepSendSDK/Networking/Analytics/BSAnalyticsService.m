@@ -16,6 +16,8 @@
 #import "BSAPNetworkDetailsRequest.h"
 #import "BSAPNetworkDetailsResponse.h"
 
+#import "BSAPAnalyticsBatch.h"
+
 @implementation BSAnalyticsService
 
 #pragma mark - Initialization
@@ -73,6 +75,26 @@
 					  if (!error) {
 						  NSMutableArray *mArr = [@[] mutableCopy];
 						  for (BSAPNetworkDetailsResponse *con in [BSAPNetworkDetailsResponse arrayOfObjectsFromArrayOfDictionaries:response]) {
+							  [mArr addObject:[con convertToModel]];
+						  }
+						  block([NSArray arrayWithArray:mArr], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
+- (void)getDeliveryStatisticsForBach:(BSBatchModel *)batch withCompletionBlock:(void(^)(NSArray *statistics, id error))block
+{
+	[super executeGETForMethod:batch?[BSAPIConfiguration analyticsBatchesForID:batch.objectID]:[BSAPIConfiguration analyticsBatches]
+				withParameters:@[]
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  for (BSAPAnalyticsBatch *con in [BSAPAnalyticsBatch arrayOfObjectsFromArrayOfDictionaries:response]) {
 							  [mArr addObject:[con convertToModel]];
 						  }
 						  block([NSArray arrayWithArray:mArr], error);
