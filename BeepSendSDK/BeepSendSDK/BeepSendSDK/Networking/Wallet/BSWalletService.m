@@ -11,6 +11,7 @@
 #import "BSAPIConfiguration.h"
 
 #import "BSAPWallet.h"
+#import "BSAPEmail.h"
 
 @implementation BSWalletService
 
@@ -82,6 +83,78 @@
 						  block(nil, response);
 					  }
 				  }];
+}
+
+- (void)getEmailsForWallet:(BSWalletModel *)wallet withCompletionBlock:(void(^)(NSArray *emails, id error))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration walletsEmailsForID:wallet.objectID]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  for (BSAPEmail *mail in [BSAPEmail arrayOfObjectsFromArrayOfDictionaries:response]) {
+							  [mArr addObject:[mail convertToModel]];
+						  }
+						  block([NSArray arrayWithArray:mArr], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
+- (void)getEmailForWallet:(BSWalletModel *)wallet andEmailID:(NSString *)emailID withCompletionBlock:(void(^)(BSEmailModel *email, id error))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration walletsEmailsForWalletID:wallet.objectID andEmailID:emailID]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  
+						  block([[BSAPEmail classFromDict:response] convertToModel], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
+- (void)addEmail:(NSString *)email toWallet:(BSWalletModel *)wallet withCompletionBlock:(void(^)(BSEmailModel *email, id error))block
+{
+	[super executePOSTForMethod:[BSAPIConfiguration walletsEmailsForID:wallet.objectID]
+				withParameters:[[BSAPEmail convertFromEmailModel:[[BSEmailModel alloc] initEmailWithAddress:email]] dictFromClass]
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  
+						  block([[BSAPEmail classFromDict:response] convertToModel], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
+- (void)deleteEmailInWallet:(BSWalletModel *)wallet email:(BSEmailModel *)email withCompletionBlock:(void(^)(BOOL success, id error))block
+{
+	[super executeDELETEForMethod:[BSAPIConfiguration walletsEmailsForWalletID:wallet.objectID andEmailID:email.objectID]
+				   withParameters:@{}
+					 onCompletion:^(id response, id error) {
+					   
+						 if (!error) {
+						   
+							 block(YES, error);
+						 }
+						 else {
+							 //TODO: Create error handling
+							 block(NO, response);
+						 }
+					 }];
 }
 
 @end

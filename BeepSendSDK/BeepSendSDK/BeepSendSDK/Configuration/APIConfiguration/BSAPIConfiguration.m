@@ -271,6 +271,18 @@
 	return @"/search/contact_groups/";
 }
 
+#pragma mark - WalletNotification
+
++ (NSString *)walletsEmailsForID:(NSString *)walletID
+{
+	return [NSString stringWithFormat:@"/wallets/%@/emails/", walletID];
+}
+
++ (NSString *)walletsEmailsForWalletID:(NSString *)walletID andEmailID:(NSString *)emailID
+{
+	return [NSString stringWithFormat:@"/wallets/%@/emails/%@", walletID, emailID];
+}
+
 #pragma mark - Wallets
 
 + (NSString *)wallets

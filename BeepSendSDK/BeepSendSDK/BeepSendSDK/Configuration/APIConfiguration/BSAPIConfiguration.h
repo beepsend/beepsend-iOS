@@ -315,6 +315,22 @@
  */
 + (NSString *)searchContactGroups;
 
+#pragma mark - WalletNotification
+
+/*
+	By default, all pricelist and wallet notifications will be sent to the email
+	registered to your user. If you wish to have updates sent to more emails 
+	you can add external recipients.
+ 
+	Get a list of your external emails.
+ */
++ (NSString *)walletsEmailsForID:(NSString *)walletID;
+
+/*
+	Get details for a specific wallet
+ */
++ (NSString *)walletsEmailsForWalletID:(NSString *)walletID andEmailID:(NSString *)emailID;
+
 #pragma mark - Wallets
 
 /*

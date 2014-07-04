@@ -83,16 +83,7 @@
 	//Add keyboard appearance notification
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameActive:) name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
-	
-	BSWalletService *ws = [BSWalletService sharedService];
-	[ws getAllWalletsWithCompletionBlock:^(NSArray *wallets, id error) {
-		
-		DLog(@"%@", wallets);
-		[ws updateWallet:wallets[0] withName:@"Wallet 1" notifyLimit:nil withCompletionBlock:^(BSWalletModel *wallet, id error) {
-			
-			DLog(@"%@", wallet);
-		}];
-	}];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -134,10 +125,10 @@
 	if (![Helper isNilOrEmpty:_textFieldFrom.text] &&
 		![Helper isNilOrEmpty:_textFieldTo.text] &&
 		![Helper isNilOrEmpty:_textViewMessageBox.text]) {
-/*
+
 		BSSMSService *sms = [BSSMSService sharedService];
 		
-		BSMessageRequestModel *message1 = [[BSMessageRequestModel alloc] initWithMessage:_textViewMessageBox.text
+		BSMessageRequestModel *message = [[BSMessageRequestModel alloc] initWithMessage:_textViewMessageBox.text
 																			   receiver:_textFieldTo.text
 																				 sender:_textFieldFrom.text
 																				batchID:nil
@@ -150,68 +141,10 @@
 																			  forGroups:nil
 																		 userDataHeader:nil
 																	 dataCodingSettings:nil];
-		BSMessageRequestModel *message2 = [[BSMessageRequestModel alloc] initWithMessage:_textViewMessageBox.text
-																			   receiver:@[_textFieldTo.text, @"381692101760"]
-																				 sender:nil
-																				batchID:nil
-																			 batchLabel:nil
-																			   sendTime:nil
-																		   usedEncoding:nil
-																			messageType:nil
-																				validTo:nil
-																			 recieveDLR:nil
-																			  forGroups:nil
-																		 userDataHeader:nil
-																	 dataCodingSettings:nil];
-		BSMessageRequestModel *message3 = [[BSMessageRequestModel alloc] initWithMessage:_textViewMessageBox.text
-																			   receiver:nil
-																				 sender:nil
-																				batchID:nil
-																			 batchLabel:nil
-																			   sendTime:nil
-																		   usedEncoding:nil
-																			messageType:nil
-																				validTo:nil
-																			 recieveDLR:nil
-																			  forGroups:@[@"13122"]
-																		 userDataHeader:nil
-																	 dataCodingSettings:nil];
-		BSMessageRequestModel *message4 = [[BSMessageRequestModel alloc] initWithMessage:_textViewMessageBox.text
-																			   receiver:_textFieldTo.text
-																				 sender:nil
-																				batchID:nil
-																			 batchLabel:nil
-																			   sendTime:nil
-																		   usedEncoding:nil
-																			messageType:nil
-																				validTo:nil
-																			 recieveDLR:nil
-																			  forGroups:nil
-																		 userDataHeader:nil
-																	 dataCodingSettings:nil];
-		*/
-//		[sms estimateCostForMessages:@[message1, message2, message3, message4] usingConnection:nil withCompletionBlock:^(NSArray *response, id error) {
-//			DLog(@"%@", response);
-//		}];
 		
-//		[sms sendMessage:message1 usingConnection:nil withCompletionBlock:^(NSArray *response, id error) {
-//			DLog(@"%@", response);
-//		}];
-
-//		[sms sendMessage:_textViewMessageBox.text
-//					from:_textFieldFrom.text
-//					  to:@[@"381643460358"]
-//				  groups:@[@"13122"]
-//			  withBachID:nil
-//		   andBatchLabel:nil
-//		 atScheduledTime:nil
-//			usedEncoding:nil
-//			 messageType:nil
-//				validFor:nil
-//   recieveDeliveryReport:nil
-//	 withCompletionBlock:^(NSArray *response, id error) {
-//		  DLog(@"%@, %@", response, error);
-//	 }];
+		[sms sendMessage:message usingConnection:nil withCompletionBlock:^(NSArray *response, id error) {
+			DLog(@"%@", response);
+		}];
 
 	}
 }

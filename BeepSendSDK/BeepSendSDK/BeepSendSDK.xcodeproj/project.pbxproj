@@ -107,6 +107,8 @@
 		6EBE6B391966910900F59310 /* BSWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE6B381966910900F59310 /* BSWalletModel.m */; };
 		6EBE6B3D1966988800F59310 /* BSWalletService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE6B3C1966988800F59310 /* BSWalletService.m */; };
 		6EBE6B3E19669BCC00F59310 /* BSWalletService.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBE6B3B1966988800F59310 /* BSWalletService.h */; };
+		6EBE6B421966AFCE00F59310 /* BSAPEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE6B411966AFCE00F59310 /* BSAPEmail.m */; };
+		6EBE6B461966B21F00F59310 /* BSEmailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE6B451966B21F00F59310 /* BSEmailModel.m */; };
 		6EC3166519502ADC004D8F87 /* BSTestSemaphor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC3166419502ADC004D8F87 /* BSTestSemaphor.m */; };
 		6EC31686195030D0004D8F87 /* BSSMSService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC31685195030D0004D8F87 /* BSSMSService.m */; };
 		6EC31687195030D0004D8F87 /* BSSMSService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC31685195030D0004D8F87 /* BSSMSService.m */; };
@@ -310,6 +312,10 @@
 		6EBE6B381966910900F59310 /* BSWalletModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSWalletModel.m; path = Models/Wallet/WalletModel/BSWalletModel.m; sourceTree = "<group>"; };
 		6EBE6B3B1966988800F59310 /* BSWalletService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSWalletService.h; path = Wallet/BSWalletService.h; sourceTree = "<group>"; };
 		6EBE6B3C1966988800F59310 /* BSWalletService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSWalletService.m; path = Wallet/BSWalletService.m; sourceTree = "<group>"; };
+		6EBE6B401966AFCE00F59310 /* BSAPEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPEmail.h; path = Models/AutomatedParsing/APEmail/BSAPEmail.h; sourceTree = "<group>"; };
+		6EBE6B411966AFCE00F59310 /* BSAPEmail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPEmail.m; path = Models/AutomatedParsing/APEmail/BSAPEmail.m; sourceTree = "<group>"; };
+		6EBE6B441966B21F00F59310 /* BSEmailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSEmailModel.h; path = Models/Wallet/EmailModel/BSEmailModel.h; sourceTree = "<group>"; };
+		6EBE6B451966B21F00F59310 /* BSEmailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSEmailModel.m; path = Models/Wallet/EmailModel/BSEmailModel.m; sourceTree = "<group>"; };
 		6EC3166319502ADC004D8F87 /* BSTestSemaphor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTestSemaphor.h; sourceTree = "<group>"; };
 		6EC3166419502ADC004D8F87 /* BSTestSemaphor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSTestSemaphor.m; sourceTree = "<group>"; };
 		6EC31684195030D0004D8F87 /* BSSMSService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSSMSService.h; path = SMS/BSSMSService.h; sourceTree = "<group>"; };
@@ -964,6 +970,7 @@
 		6EB96ED61951902C00AD77E2 /* AutomatedParsing */ = {
 			isa = PBXGroup;
 			children = (
+				6EBE6B3F1966AF7800F59310 /* APEmail */,
 				6EBE6B3119668BD200F59310 /* APWallet */,
 				6EC7E5C319656265008486E6 /* APAnalyticsBatch */,
 				6EC7E5B719653E06008486E6 /* APStatistics */,
@@ -1132,6 +1139,7 @@
 		6EBE6B351966907700F59310 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				6EBE6B431966B1FC00F59310 /* EmailModel */,
 				6EBE6B361966908700F59310 /* WalletModel */,
 			);
 			name = Wallet;
@@ -1153,6 +1161,24 @@
 				6EBE6B3C1966988800F59310 /* BSWalletService.m */,
 			);
 			name = Wallet;
+			sourceTree = "<group>";
+		};
+		6EBE6B3F1966AF7800F59310 /* APEmail */ = {
+			isa = PBXGroup;
+			children = (
+				6EBE6B401966AFCE00F59310 /* BSAPEmail.h */,
+				6EBE6B411966AFCE00F59310 /* BSAPEmail.m */,
+			);
+			name = APEmail;
+			sourceTree = "<group>";
+		};
+		6EBE6B431966B1FC00F59310 /* EmailModel */ = {
+			isa = PBXGroup;
+			children = (
+				6EBE6B441966B21F00F59310 /* BSEmailModel.h */,
+				6EBE6B451966B21F00F59310 /* BSEmailModel.m */,
+			);
+			name = EmailModel;
 			sourceTree = "<group>";
 		};
 		6EC3166219502ADC004D8F87 /* BSTestSemaphore */ = {
@@ -1541,6 +1567,7 @@
 				6EBC77ED194EF50B00666099 /* BSAFURLSessionManager.m in Sources */,
 				6EACD7831963F05700D3BB3D /* BSAnalyticsService.m in Sources */,
 				6E254A0119619206004D00AE /* BSMessageRequestModel.m in Sources */,
+				6EBE6B421966AFCE00F59310 /* BSAPEmail.m in Sources */,
 				6EB59087195AC020009456B0 /* BSHLRService.m in Sources */,
 				6EBA76BD194B3C8300941E85 /* BSHelper.m in Sources */,
 				6EACD78B1963F6C900D3BB3D /* BSAPAccumulatedStatisticsResponse.m in Sources */,
@@ -1580,6 +1607,7 @@
 				6EB877921952ED7C0070B749 /* BSAccountManagerModel.m in Sources */,
 				6EB877801952EC050070B749 /* BSCallbacksModel.m in Sources */,
 				6EB3EA761958277A00951E57 /* BSAPPMCCMNC.m in Sources */,
+				6EBE6B461966B21F00F59310 /* BSEmailModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
