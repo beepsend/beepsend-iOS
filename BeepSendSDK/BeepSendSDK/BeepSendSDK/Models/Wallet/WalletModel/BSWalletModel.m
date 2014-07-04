@@ -58,4 +58,14 @@
 	return self;
 }
 
+- (BSWalletModel *)initWalletWithName:(NSString *)wName
+								limit:(NSNumber *)wLimit
+{
+	if (self = [super initWithID:@"0" andTitle:wName]) {
+		_name = wName;
+		_minimumBalanceForNotification = wLimit;
+	}
+	return self;
+}
+
 @end

@@ -16,4 +16,6 @@
 
 - (void)getWalletDetailsForID:(NSString *)walletID withCompletionBlock:(void(^)(BSWalletModel *wallet, id error))block;
 
+- (void)updateWallet:(BSWalletModel *)wallet withName:(NSString *)wName notifyLimit:(NSNumber *)wLimit withCompletionBlock:(void(^)(BSWalletModel *wallet, id error))block;
+
 @end

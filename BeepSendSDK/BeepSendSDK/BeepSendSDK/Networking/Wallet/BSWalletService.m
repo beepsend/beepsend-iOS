@@ -65,4 +65,23 @@
 				  }];
 }
 
+- (void)updateWallet:(BSWalletModel *)wallet withName:(NSString *)wName notifyLimit:(NSNumber *)wLimit withCompletionBlock:(void(^)(BSWalletModel *wallet, id error))block
+{
+	NSDictionary *parameters = [[BSAPWallet convertFromWalletModel:[[BSWalletModel alloc] initWalletWithName:wName limit:wLimit]] dictFromClass];
+	
+	[super executePUTForMethod:[BSAPIConfiguration walletsForID:wallet.objectID]
+				withParameters:parameters
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  
+						  block([[BSAPWallet classFromDict:response] convertToModel], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
 @end

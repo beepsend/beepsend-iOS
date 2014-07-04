@@ -8,6 +8,8 @@
 
 #import "BSSerializableObject.h"
 
+@class BSWalletModel;
+
 @interface BSAPWallet : BSSerializableObject
 
 @property (nonatomic, strong) NSString *id;
@@ -18,5 +20,7 @@
 @property (nonatomic, strong) NSArray *users;
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
+
++ (BSAPWallet *)convertFromWalletModel:(BSWalletModel *)walletModel;
 
 @end

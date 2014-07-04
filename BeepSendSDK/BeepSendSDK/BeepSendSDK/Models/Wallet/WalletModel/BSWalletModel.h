@@ -27,4 +27,7 @@
 							   name:(NSString *)wName
 							balance:(NSNumber *)wBalance;
 
+- (BSWalletModel *)initWalletWithName:(NSString *)wName
+								limit:(NSNumber *)wLimit;
+
 @end

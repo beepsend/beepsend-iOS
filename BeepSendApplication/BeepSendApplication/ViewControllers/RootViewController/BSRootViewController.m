@@ -88,7 +88,7 @@
 	[ws getAllWalletsWithCompletionBlock:^(NSArray *wallets, id error) {
 		
 		DLog(@"%@", wallets);
-		[ws getWalletDetailsForID:[wallets[0] objectID] withCompletionBlock:^(BSWalletModel *wallet, id error) {
+		[ws updateWallet:wallets[0] withName:@"Wallet 1" notifyLimit:nil withCompletionBlock:^(BSWalletModel *wallet, id error) {
 			
 			DLog(@"%@", wallet);
 		}];

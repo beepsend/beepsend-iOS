@@ -52,4 +52,24 @@
 	return [NSArray arrayWithArray:results];
 }
 
++ (BSAPWallet *)convertFromWalletModel:(BSWalletModel *)walletModel
+{
+
+	BSAPWallet *wallet = [[BSAPWallet alloc] init];
+	
+	if ([walletModel.objectID isEqualToString:@"-1"]) {
+		return wallet;
+	}
+	
+	wallet.id = [walletModel.objectID isEqualToString:@"0"] ? nil : walletModel.objectID;
+	
+	wallet.name = walletModel.name;
+	wallet.balance = walletModel.balance;
+	wallet.notify_limit = walletModel.minimumBalanceForNotification;
+	
+	//TODO: Add conversion for arrays
+	
+	return wallet;
+}
+
 @end
