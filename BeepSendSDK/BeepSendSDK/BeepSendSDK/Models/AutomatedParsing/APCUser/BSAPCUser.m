@@ -55,6 +55,15 @@
 	return [NSArray arrayWithArray:results];
 }
 
++ (NSArray *)arrayOfModelsFromArrayOfObjects:(NSArray *)array
+{
+	NSMutableArray *results = [@[] mutableCopy];
+	for (id object in array) {
+		[results addObject:[object convertToModel]];
+	}
+	return [NSArray arrayWithArray:results];
+}
+
 + (BSAPCUser *)convertFromUserModel:(BSUserModel *)userModel
 {
 	

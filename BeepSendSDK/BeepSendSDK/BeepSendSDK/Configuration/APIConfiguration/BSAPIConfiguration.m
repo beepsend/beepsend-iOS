@@ -271,6 +271,18 @@
 	return @"/search/contact_groups/";
 }
 
+#pragma mark - Wallets
+
++ (NSString *)wallets
+{
+	return @"/wallets/";
+}
+
++ (NSString *)walletsForID:(NSString *)walletID
+{
+	return [@"/wallets/" stringByAppendingString:walletID];
+}
+
 #pragma mark - Estimate SMS cost
 
 + (NSString *)smsCostEstimate

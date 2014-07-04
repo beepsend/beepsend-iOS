@@ -2,7 +2,7 @@
 //  BSWalletModel.m
 //  BeepSendSDK
 //
-//  Created by Vladica Pesic on 6/19/14.
+//  Created by Vladica Pesic on 7/4/14.
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
@@ -12,6 +12,9 @@
 
 @property (nonatomic, strong, readwrite) NSString *name;
 @property (nonatomic, strong, readwrite) NSNumber *balance;
+@property (nonatomic, strong, readwrite) NSNumber *minimumBalanceForNotification;
+@property (nonatomic, strong, readwrite) NSArray *connections;
+@property (nonatomic, strong, readwrite) NSArray *users;
 
 @end
 
@@ -23,6 +26,23 @@
 {
 	if (self = [super initWithID:@"-1" andTitle:@"Irregular wallet"]) {
 		
+	}
+	return self;
+}
+
+- (BSWalletModel *)initWalletWithID:(NSString *)wID
+							  named:(NSString *)wName
+							balance:(NSNumber *)wBalance
+					 minimumBalance:(NSNumber *)wMinBalance
+						connections:(NSArray *)wConnections
+							  users:(NSArray *)wUsers
+{
+	if (self = [super initWithID:wID andTitle:wName]) {
+		_name = wName;
+		_balance = wBalance;
+		_minimumBalanceForNotification = wMinBalance;
+		_connections = wConnections;
+		_users = wUsers;
 	}
 	return self;
 }

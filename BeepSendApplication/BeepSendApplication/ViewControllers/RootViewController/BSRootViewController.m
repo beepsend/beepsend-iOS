@@ -20,6 +20,7 @@
 #import "BSContactsService.h"
 #import "BSGroupsService.h"
 #import "BSAnalyticsService.h"
+#import "BSWalletService.h"
 
 @interface BSRootViewController () <UITextFieldDelegate>
 
@@ -83,19 +84,14 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameActive:) name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
 	
-	BSAnalyticsService *as = [BSAnalyticsService sharedService];
-//	[as getNetworkDetailsFromDate:nil toDate:nil mccmnc:nil usingConnection:nil withCompletionBlock:^(NSArray *networkDetails, id error) {
-//		DLog(@"%@", networkDetails);
-//	}];
-	
-	BSSMSService *sms = [BSSMSService sharedService];
-	[sms getPreviousBatchesWithCompletionBlock:^(NSArray *bathces, id error) {
+	BSWalletService *ws = [BSWalletService sharedService];
+	[ws getAllWalletsWithCompletionBlock:^(NSArray *wallets, id error) {
 		
-		[as getDeliveryStatisticsForBach:bathces[0] withCompletionBlock:^(NSArray *statistics, id error) {
+		DLog(@"%@", wallets);
+		[ws getWalletDetailsForID:[wallets[0] objectID] withCompletionBlock:^(BSWalletModel *wallet, id error) {
 			
-			DLog(@"%@", statistics);
+			DLog(@"%@", wallet);
 		}];
-		DLog(@"%@", bathces);
 	}];
 }
 

@@ -315,6 +315,15 @@
  */
 + (NSString *)searchContactGroups;
 
+#pragma mark - Wallets
+
+/*
+	Get info for your wallet
+ */
++ (NSString *)wallets;
+
++ (NSString *)walletsForID:(NSString *)walletID;
+
 #pragma mark - Estimate SMS cost
 
 /*
