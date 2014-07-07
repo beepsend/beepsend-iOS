@@ -19,6 +19,8 @@
 #import "BSHLRService.h"
 #import "BSContactsService.h"
 #import "BSGroupsService.h"
+#import "BSAnalyticsService.h"
+#import "BSWalletService.h"
 
 @interface BSRootViewController () <UITextFieldDelegate>
 
@@ -81,7 +83,7 @@
 	//Add keyboard appearance notification
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameActive:) name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
-	
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -123,24 +125,26 @@
 	if (![Helper isNilOrEmpty:_textFieldFrom.text] &&
 		![Helper isNilOrEmpty:_textFieldTo.text] &&
 		![Helper isNilOrEmpty:_textViewMessageBox.text]) {
-		
+
 		BSSMSService *sms = [BSSMSService sharedService];
 		
-		[sms sendMessage:_textViewMessageBox.text
-					from:_textFieldFrom.text
-					  to:_textFieldTo.text
-				  groups:nil
-			  withBachID:nil
-		   andBatchLabel:nil
-		 atScheduledTime:nil
-			usedEncoding:nil
-			 messageType:nil
-				validFor:nil
-   recieveDeliveryReport:nil
-	 withCompletionBlock:^(NSArray *response, id error) {
-		  DLog(@"%@, %@", response, error);
-	 }];
-		 
+		BSMessageRequestModel *message = [[BSMessageRequestModel alloc] initWithMessage:_textViewMessageBox.text
+																			   receiver:_textFieldTo.text
+																				 sender:_textFieldFrom.text
+																				batchID:nil
+																			 batchLabel:nil
+																			   sendTime:nil
+																		   usedEncoding:nil
+																			messageType:nil
+																				validTo:nil
+																			 recieveDLR:nil
+																			  forGroups:nil
+																		 userDataHeader:nil
+																	 dataCodingSettings:nil];
+		
+		[sms sendMessage:message usingConnection:nil withCompletionBlock:^(NSArray *response, id error) {
+			DLog(@"%@", response);
+		}];
 
 	}
 }

@@ -14,6 +14,9 @@
 #import "BSAPMessage.h"
 #import "BSAPBatch.h"
 #import "BSAPSMSLookup.h"
+#import "BSAPEstimatedCost.h"
+
+#import "BSGroupModel.h"
 
 @implementation BSSMSService
 
@@ -31,36 +34,77 @@
 
 #pragma mark - Public methods
 
-- (void)sendMessage:(NSString *)message
-			   from:(NSString *)sender
-				 to:(NSString *)receiver
-			 groups:(NSArray *)groups
-		 withBachID:(NSString *)batchID
-	  andBatchLabel:(NSString *)batchLabel
-	atScheduledTime:(NSString *)scheduleTime
-	   usedEncoding:(NSString *)encoding
-		messageType:(NSString *)type
-		   validFor:(NSString *)validTime
-recieveDeliveryReport:(NSNumber *)receiveDlrOption
-withCompletionBlock:(void(^)(NSArray *response, id error))block
+- (void)sendMessage:(BSMessageRequestModel *)messageRequest usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block
 {
-	BSAPMessageRequest *messageRequest = [[BSAPMessageRequest alloc] init];
-	messageRequest.message = message;
-	messageRequest.from = sender;
-	messageRequest.to = receiver;
-	messageRequest.batch_id = batchID;
-	messageRequest.batch_label = batchLabel;
-	messageRequest.send_time = scheduleTime;
-	messageRequest.encoding = encoding;
-	messageRequest.message_type = type;
-	messageRequest.validity_period = validTime;
-	messageRequest.receive_dlr = receiveDlrOption;
-	messageRequest.groups = groups;
+	NSString *method;
+	if (messageRequest.groups) {
+		if (connection) {
+			method = [BSAPIConfiguration batchesForID:connection.objectID];
+		}
+		else {
+			method = [BSAPIConfiguration batches];
+		}
+	}
+	else {
+		if (connection) {
+			method = [BSAPIConfiguration smsForID:connection.objectID];
+		}
+		else {
+			method = [BSAPIConfiguration sms];
+		}
+	}
 	
-	NSDictionary *parameters = [messageRequest dictFromClass];
-	BSLog(@"%@", parameters);
+	NSDictionary *parameters = [[BSAPMessageRequest convertFromMessageRequestModel:messageRequest] dictFromClass];
 	
-	[super executePOSTForMethod:[BSAPIConfiguration sms]
+	[super executePOSTForMethod:method
+				 withParameters:parameters
+				   onCompletion:^(id response, id error) {
+					   
+					   if (!error) {
+						   
+						   NSMutableArray *mArr = [@[] mutableCopy];
+						   for (BSAPMessage *msg in [BSAPMessage arrayOfObjectsFromArrayOfDictionaries:response]) {
+							   [mArr addObject:[msg convertToModel]];
+						   }
+						   block([NSArray arrayWithArray:mArr], error);
+					   }
+					   else {
+						   //TODO: Create error handling
+						   block(nil, response);
+					   }
+				   }];
+}
+
+- (void)sendMessages:(NSArray *)messages usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *array, id error))block
+{
+	BOOL containGroups = NO;
+	NSMutableArray *parameters = [@[] mutableCopy];
+	for (BSAPMessageRequest *request in [BSAPMessageRequest arrayOfObjectsFromArrayOfModels:messages]) {
+		[parameters addObject:[request dictFromClass]];
+		if (request.groups) {
+			containGroups = YES;
+		}
+	}
+	
+	NSString *method;
+	if (containGroups) {
+		if (connection) {
+			method = [BSAPIConfiguration batchesForID:connection.objectID];
+		}
+		else {
+			method = [BSAPIConfiguration batches];
+		}
+	}
+	else {
+		if (connection) {
+			method = [BSAPIConfiguration smsForID:connection.objectID];
+		}
+		else {
+			method = [BSAPIConfiguration sms];
+		}
+	}
+	
+	[super executePOSTForMethod:method
 				 withParameters:parameters
 				   onCompletion:^(id response, id error) {
 					   
@@ -98,33 +142,9 @@ withCompletionBlock:(void(^)(NSArray *response, id error))block
 				  }];
 }
 
-- (void)validateSMSForMessage:(NSString *)message
-						 from:(NSString *)sender
-						   to:(NSString *)receiver
-					   groups:(NSArray *)groups
-				   withBachID:(NSString *)batchID
-				andBatchLabel:(NSString *)batchLabel
-			  atScheduledTime:(NSString *)scheduleTime
-				 usedEncoding:(NSString *)encoding
-				  messageType:(NSString *)type
-					 validFor:(NSString *)validTime
-		recieveDeliveryReport:(NSNumber *)receiveDlrOption
-		  withCompletionBlock:(void(^)(BSMessageModel *message, id error))block
+- (void)validateSMSForMessage:(BSMessageRequestModel *)message withCompletionBlock:(void(^)(BSMessageModel *message, id error))block
 {
-	BSAPMessageRequest *messageRequest = [[BSAPMessageRequest alloc] init];
-	messageRequest.message = message;
-	messageRequest.from = sender;
-	messageRequest.to = receiver;
-	messageRequest.batch_id = batchID;
-	messageRequest.batch_label = batchLabel;
-	messageRequest.send_time = scheduleTime;
-	messageRequest.encoding = encoding;
-	messageRequest.message_type = type;
-	messageRequest.validity_period = validTime;
-	messageRequest.receive_dlr = receiveDlrOption;
-	messageRequest.groups = groups;
-	
-	NSDictionary *parameters = [messageRequest dictFromClass];
+	NSDictionary *parameters = [[BSAPMessageRequest convertFromMessageRequestModel:message] dictFromClass];
 	BSLog(@"%@", parameters);
 	
 	[super executePOSTForMethod:[BSAPIConfiguration validateSMS]
@@ -178,6 +198,40 @@ withCompletionBlock:(void(^)(NSArray *response, id error))block
 						  block(nil, response);
 					  }
 				  }];
+}
+
+- (void)estimateCostForMessages:(NSArray *)messageRequest usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block
+{
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSMessageRequestModel *mrm in messageRequest) {
+		[mArr addObject:[[BSAPMessageRequest convertFromMessageRequestModel:mrm] dictFromClass]];
+	}
+	
+	[super executePOSTForMethod:connection?[BSAPIConfiguration smsCostEstimateForID:connection.objectID]:[BSAPIConfiguration smsCostEstimate]
+				 withParameters:[NSArray arrayWithArray:mArr]
+				   onCompletion:^(id response, id error) {
+					   
+					   if (!error) {
+						   NSArray *result;
+						   if (![response isKindOfClass:[NSArray class]]) {
+							   result = @[response];
+						   }
+						   else {
+							   result = [NSArray arrayWithArray:response];
+						   }
+						   
+						   NSMutableArray *mArr = [@[] mutableCopy];
+						   for (BSAPEstimatedCost *msg in [BSAPEstimatedCost arrayOfObjectsFromArrayOfDictionaries:result]) {
+							   [mArr addObject:[msg convertToModel]];
+						   }
+						   block([NSArray arrayWithArray:mArr], error);
+					   }
+					   else {
+						   //TODO: Create error handling
+						   block(nil, response);
+					   }
+				   }];
+
 }
 
 @end

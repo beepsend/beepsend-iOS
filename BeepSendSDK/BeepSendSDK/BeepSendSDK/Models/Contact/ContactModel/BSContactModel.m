@@ -13,7 +13,7 @@
 @property (nonatomic, strong, readwrite) NSString *firstName;
 @property (nonatomic, strong, readwrite) NSString *lastName;
 @property (nonatomic, strong, readwrite) NSString *phoneNumber;
-@property (nonatomic, strong, readwrite) NSNumber *groupID;
+@property (nonatomic, strong, readwrite) NSString *groupID;
 @property (nonatomic, strong, readwrite) NSString *groupName;
 @property (nonatomic, strong, readwrite) NSArray *errors;
 
@@ -35,7 +35,7 @@
 							firstName:(NSString *)firstName
 							 lastName:(NSString *)lastName
 						  phoneNumber:(NSString *)phoneNumber
-							  groupID:(NSNumber *)gID
+							  groupID:(NSString *)gID
 							groupName:(NSString *)groupName
 							   errors:(NSArray *)errors
 {
@@ -53,7 +53,7 @@
 - (BSContactModel *)initContactWithPhoneNumber:(NSString *)phoneNumber
 									 firstName:(NSString *)firstName
 									  lastName:(NSString *)lastName
-									   groupID:(NSNumber *)groupID
+									   groupID:(NSString *)groupID
 {
 	if (self = [super initWithID:@"0" andTitle:firstName]) {
 		_firstName = firstName;

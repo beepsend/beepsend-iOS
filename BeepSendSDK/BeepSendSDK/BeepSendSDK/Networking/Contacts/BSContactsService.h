@@ -23,7 +23,7 @@
 		   withNumber:(NSString *)number
 			firstName:(NSString *)firstName
 			 lastName:(NSString *)lastName
-			  groupID:(NSNumber *)groupID
+			  groupID:(NSString *)groupID
   withCompletionBlock:(void(^)(BSContactModel *contact, id error))block;
 
 - (void)deleteContact:(BSContactModel *)contact withCompletionBlock:(void(^)(BOOL success, id error))block;

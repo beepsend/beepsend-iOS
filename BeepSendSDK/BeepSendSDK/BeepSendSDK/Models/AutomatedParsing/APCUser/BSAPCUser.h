@@ -32,7 +32,8 @@
 @property (nonatomic, strong, getter = the_new_password) NSString *new_password;
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
++ (NSArray *)arrayOfModelsFromArrayOfObjects:(NSArray *)array;
 
-+ (BSAPCUser *)convertFromConnectionModel:(BSUserModel *)connectionModel;
++ (BSAPCUser *)convertFromUserModel:(BSUserModel *)userModel;
 
 @end

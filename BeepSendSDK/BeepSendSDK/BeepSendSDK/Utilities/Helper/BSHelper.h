@@ -14,7 +14,16 @@
 #	define BSLog(...)
 #endif
 
-#define dateFormatForSMPPStandard @"YYMMDDhhmmsstnnp"
+//Defines date format for SMPP standard
+//Used for converting to NSDate
+#define kDateFormatForSMPPStandard @"YYMMDDhhmmsstnnp"
+
+//Defines SMS character count for single SMS and long SMS
+#define kSMSOrdinaryCharacterCountISO 160
+#define kSMSLongCharacterCountISO 153
+
+#define kSMSOrdinaryCharacterCountUTF16 70
+#define kSMSLongCharacterCountUTF16 66
 
 @interface BSHelper : NSObject
 

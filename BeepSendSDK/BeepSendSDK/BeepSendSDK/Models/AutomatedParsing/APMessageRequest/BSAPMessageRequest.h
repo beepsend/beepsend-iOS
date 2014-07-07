@@ -8,6 +8,8 @@
 
 #import "BSSerializableObject.h"
 
+@class BSMessageRequestModel;
+
 @interface BSAPMessageRequest : BSSerializableObject
 
 @property (nonatomic, strong) id to;
@@ -21,5 +23,12 @@
 @property (nonatomic, strong) NSString *validity_period;
 @property (nonatomic, strong) NSNumber *receive_dlr;
 @property (nonatomic, strong) NSArray *groups;
+@property (nonatomic, strong) NSString *udh;
+@property (nonatomic, strong) NSString *dcs;
+
++ (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
++ (NSArray *)arrayOfObjectsFromArrayOfModels:(NSArray *)array;
+
++ (BSAPMessageRequest *)convertFromMessageRequestModel:(BSMessageRequestModel *)msgRequest;
 
 @end

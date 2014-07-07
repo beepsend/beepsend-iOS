@@ -9,7 +9,7 @@
 #import "BSSerializableObject.h"
 
 #import "BSAPCCallback.h"
-#import "BSAPCWallet.h"
+#import "BSAPWallet.h"
 
 @class BSConnectionModel;
 
@@ -25,10 +25,13 @@
 @property (nonatomic, strong) NSNumber *tlv_for_mcc_mnc;
 @property (nonatomic, strong) NSNumber *type;
 @property (nonatomic, strong) NSArray *users;
-@property (nonatomic, strong) BSAPCWallet *wallet;
+@property (nonatomic, strong) BSAPWallet *wallet;
 @property (nonatomic, strong) NSString *whitelist;
 
+@property (nonatomic, strong) NSString *name;
+
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
++ (NSArray *)arrayOfModelsFromArrayOfObjects:(NSArray *)array;
 
 + (BSAPConnection *)convertFromConnectionModel:(BSConnectionModel *)connectionModel;
 

@@ -16,7 +16,8 @@
 
 - (void)getAllGroupsWithCompletionBlock:(void(^)(NSArray *groups, id error))block;
 
-- (void)getDetailsForGroup:(NSString *)groupID withCompletionBlock:(void(^)(BSGroupModel *group, id error))block;
+- (void)getDetailsForGroup:(BSGroupModel *)group withCompletionBlock:(void(^)(BSGroupModel *group, id error))block;
+- (void)getDetailsForGroupID:(NSString *)groupID withCompletionBlock:(void(^)(BSGroupModel *group, id error))block;
 
 - (void)addGroupNamed:(NSString *)groupName withCompletionBlock:(void(^)(BSGroupModel *group, id error))block;
 

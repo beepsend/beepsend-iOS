@@ -95,11 +95,11 @@
 		   withNumber:(NSString *)number
 			firstName:(NSString *)firstName
 			 lastName:(NSString *)lastName
-			  groupID:(NSNumber *)groupID
+			  groupID:(NSString *)groupID
   withCompletionBlock:(void(^)(BSContactModel *contact, id error))block
 {
 	
-	NSDictionary *contactToUpdate = [[BSAPContact contactFromContactModel:[[BSContactModel alloc] initContactWithPhoneNumber:number firstName:firstName lastName:lastName groupID:groupID]] dictFromClass];
+	NSDictionary *contactToUpdate = [[BSAPContact contactFromContactModel:[[BSContactModel alloc] initContactWithPhoneNumber:number?number:contact.phoneNumber firstName:firstName lastName:lastName groupID:groupID]] dictFromClass];
 	
 	[super executePUTForMethod:[BSAPIConfiguration contactsForID:contact.objectID]
 				withParameters:contactToUpdate

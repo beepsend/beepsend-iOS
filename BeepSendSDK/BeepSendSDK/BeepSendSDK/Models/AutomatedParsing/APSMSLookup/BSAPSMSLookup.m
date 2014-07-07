@@ -36,7 +36,7 @@
 - (id)convertToModel
 {
 	NSDateFormatter *smppFormatter = [[NSDateFormatter alloc] init];
-	[smppFormatter setDateFormat:dateFormatForSMPPStandard];
+	[smppFormatter setDateFormat:kDateFormatForSMPPStandard];
 	NSDate *validTo = [smppFormatter dateFromString:_validity_period];
 	
 	return [[BSLookupModel alloc] initLookupWithID:_id

@@ -150,6 +150,11 @@
 	return @"/sms/";
 }
 
++ (NSString *)smsForID:(NSString *)connectionID
+{
+	return [@"/sms/" stringByAppendingString:connectionID];
+}
+
 #pragma mark - SMS Lookup
 
 + (NSString *)smsLookupWithID:(NSString *)smsID
@@ -188,6 +193,48 @@
 	return [@"/batches/" stringByAppendingString:batchID];
 }
 
+#pragma mark - Analytics
+
++ (NSString *)analyticsSummary
+{
+	return @"/analytics/summary/";
+}
+
++ (NSString *)analyticsSummaryMe
+{
+	return @"/analytics/summary/me";
+}
+
++ (NSString *)analyticsSummaryForID:(NSString *)connectionID
+{
+	return [@"/analytics/summary/" stringByAppendingString:connectionID];
+}
+
++ (NSString *)analyticsNetwork
+{
+	return @"/analytics/network/";
+}
+
++ (NSString *)analyticsNetworkMe
+{
+	return @"/analytics/network/me";
+}
+
++ (NSString *)analyticsNetworkForID:(NSString *)connectionID
+{
+	return [@"/analytics/network/" stringByAppendingString:connectionID];
+}
+
++ (NSString *)analyticsBatches
+{
+	return @"/analytics/batches/";
+}
+
++ (NSString *)analyticsBatchesForID:(NSString *)batchID
+{
+	return [@"/analytics/batches/" stringByAppendingString:batchID];
+}
+
 #pragma mark - Contacts
 
 + (NSString *)contactsForID:(NSString *)contactID
@@ -224,11 +271,40 @@
 	return @"/search/contact_groups/";
 }
 
+#pragma mark - WalletNotification
+
++ (NSString *)walletsEmailsForID:(NSString *)walletID
+{
+	return [NSString stringWithFormat:@"/wallets/%@/emails/", walletID];
+}
+
++ (NSString *)walletsEmailsForWalletID:(NSString *)walletID andEmailID:(NSString *)emailID
+{
+	return [NSString stringWithFormat:@"/wallets/%@/emails/%@", walletID, emailID];
+}
+
+#pragma mark - Wallets
+
++ (NSString *)wallets
+{
+	return @"/wallets/";
+}
+
++ (NSString *)walletsForID:(NSString *)walletID
+{
+	return [@"/wallets/" stringByAppendingString:walletID];
+}
+
 #pragma mark - Estimate SMS cost
 
 + (NSString *)smsCostEstimate
 {
 	return @"/sms/costestimate/";
+}
+
++ (NSString *)smsCostEstimateForID:(NSString *)connectionID
+{
+	return [@"/sms/costestimate/" stringByAppendingString:connectionID];
 }
 
 @end

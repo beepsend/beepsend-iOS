@@ -25,7 +25,7 @@
 	
 	//We need to register all classes before load
 	[BSAPCCallback class];
-	[BSAPCWallet class];
+	[BSAPWallet class];
 	
 	BSAPConnection *connection = [super classFromDict:dictionary];
 	
@@ -41,7 +41,7 @@
 		[mUsers addObject:[user convertToModel]];
 	}
 	
-	return [[BSConnectionModel alloc] initConnectionWithID:_id apiToken:_api_token callbacks:[_callbacks convertToModel] customer:_customer description:_description label:_label systemID:_system_id tlvformccandmnc:_tlv_for_mcc_mnc type:(BSConnectionType)[_type integerValue] users:[NSArray arrayWithArray:mUsers] wallet:[_wallet convertToModel] whitelist:_whitelist];
+	return [[BSConnectionModel alloc] initConnectionWithID:_id apiToken:_api_token callbacks:[_callbacks convertToModel] customer:_customer description:_description label:_label?_label:_name?_name:@"" systemID:_system_id tlvformccandmnc:_tlv_for_mcc_mnc type:(BSConnectionType)[_type integerValue] users:[NSArray arrayWithArray:mUsers] wallet:[_wallet convertToModel] whitelist:_whitelist];
 }
 
 #pragma mark - Public methods
@@ -51,6 +51,15 @@
 	NSMutableArray *results = [@[] mutableCopy];
 	for (id object in array) {
 		[results addObject:[BSAPConnection classFromDict:object]];
+	}
+	return [NSArray arrayWithArray:results];
+}
+
++ (NSArray *)arrayOfModelsFromArrayOfObjects:(NSArray *)array
+{
+	NSMutableArray *results = [@[] mutableCopy];
+	for (id object in array) {
+		[results addObject:[object convertToModel]];
 	}
 	return [NSArray arrayWithArray:results];
 }
@@ -65,7 +74,7 @@
 	callback.mo	= connectionModel.callbacks.MO;
 	connection.callbacks = callback;
 	
-	BSAPCWallet *wallet = [[BSAPCWallet alloc] init];
+	BSAPWallet *wallet = [[BSAPWallet alloc] init];
 	wallet.id = connectionModel.wallet.objectID;
 	wallet.name = connectionModel.wallet.name;
 	wallet.balance = connectionModel.wallet.balance;
