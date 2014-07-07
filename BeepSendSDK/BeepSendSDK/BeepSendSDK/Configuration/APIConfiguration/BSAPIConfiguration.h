@@ -340,6 +340,16 @@
 
 + (NSString *)walletsForID:(NSString *)walletID;
 
+/*
+	View transactions for given wallet.
+ */
++ (NSString *)walletsTransactionForID:(NSString *)walletID;
+
+/*
+	Transfer credits between your connection wallets.
+ */
++ (NSString *)walletsTransferFundsFromWallet:(NSString *)wallet1 toWallet:(NSString *)wallet2;
+
 #pragma mark - Estimate SMS cost
 
 /*

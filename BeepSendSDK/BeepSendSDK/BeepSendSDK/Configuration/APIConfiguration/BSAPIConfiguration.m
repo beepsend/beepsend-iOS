@@ -295,6 +295,16 @@
 	return [@"/wallets/" stringByAppendingString:walletID];
 }
 
++ (NSString *)walletsTransactionForID:(NSString *)walletID
+{
+	return [NSString stringWithFormat:@"/wallets/%@/transactions/", walletID];
+}
+
++ (NSString *)walletsTransferFundsFromWallet:(NSString *)wallet1 toWallet:(NSString *)wallet2
+{
+	return [NSString stringWithFormat:@"/wallets/%@/transfer/%@/", wallet1, wallet2];
+}
+
 #pragma mark - Estimate SMS cost
 
 + (NSString *)smsCostEstimate

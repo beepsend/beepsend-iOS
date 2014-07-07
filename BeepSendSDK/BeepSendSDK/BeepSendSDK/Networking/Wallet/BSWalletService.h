@@ -10,6 +10,8 @@
 
 #import "BSWalletModel.h"
 #import "BSEmailModel.h"
+#import "BSTransferModel.h"
+#import "BSLogModel.h"
 
 @interface BSWalletService : BSBaseService
 
@@ -23,5 +25,8 @@
 - (void)getEmailForWallet:(BSWalletModel *)wallet andEmailID:(NSString *)emailID withCompletionBlock:(void(^)(BSEmailModel *email, id error))block;
 - (void)addEmail:(NSString *)email toWallet:(BSWalletModel *)wallet withCompletionBlock:(void(^)(BSEmailModel *email, id error))block;
 - (void)deleteEmailInWallet:(BSWalletModel *)wallet email:(BSEmailModel *)email withCompletionBlock:(void(^)(BOOL success, id error))block;
+
+- (void)getTransactionLogForWallet:(BSWalletModel *)wallet withCompletionBlock:(void(^)(NSArray *log, id error))block;
+- (void)transferFunds:(NSNumber *)ammount fromWallet:(BSWalletModel *)wallet1 toWallet:(BSWalletModel *)wallet2 withCompletionBlock:(void(^)(BSTransferModel *transfer, id error))block;
 
 @end

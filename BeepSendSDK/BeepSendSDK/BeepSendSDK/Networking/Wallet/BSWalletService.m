@@ -12,6 +12,8 @@
 
 #import "BSAPWallet.h"
 #import "BSAPEmail.h"
+#import "BSAPTransactionLog.h"
+#import "BSAPTransfer.h"
 
 @implementation BSWalletService
 
@@ -155,6 +157,44 @@
 							 block(NO, response);
 						 }
 					 }];
+}
+
+- (void)getTransactionLogForWallet:(BSWalletModel *)wallet withCompletionBlock:(void(^)(NSArray *log, id error))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration walletsTransactionForID:wallet.objectID]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  for (BSAPTransactionLog *log in [BSAPTransactionLog arrayOfObjectsFromArrayOfDictionaries:response]) {
+							  [mArr addObject:[log convertToModel]];
+						  }
+						  block([NSArray arrayWithArray:mArr], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
+- (void)transferFunds:(NSNumber *)ammount fromWallet:(BSWalletModel *)wallet1 toWallet:(BSWalletModel *)wallet2 withCompletionBlock:(void(^)(BSTransferModel *transfer, id error))block
+{
+	[super executePOSTForMethod:[BSAPIConfiguration walletsTransferFundsFromWallet:wallet1.objectID toWallet:wallet2.objectID]
+				 withParameters:@{@"amount" : ammount}
+				   onCompletion:^(id response, id error) {
+					   
+					   if (!error) {
+						   
+						   block([[BSAPTransfer classFromDict:response] convertToModel], error);
+					   }
+					   else {
+						   //TODO: Create error handling
+						   block(nil, response);
+					   }
+				   }];
 }
 
 @end
