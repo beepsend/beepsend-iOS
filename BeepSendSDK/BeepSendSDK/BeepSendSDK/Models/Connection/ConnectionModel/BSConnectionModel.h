@@ -35,6 +35,8 @@ typedef enum {
 
 @property (nonatomic, strong, readonly) NSString *whitelist;
 
+@property (nonatomic, strong, readonly) NSString *password;
+
 - (BSConnectionModel *)initConnectionWithID:(NSString *)cID;
 
 - (BSConnectionModel *)initConnectionWithID:(NSString *)cID
@@ -48,10 +50,12 @@ typedef enum {
 									   type:(BSConnectionType)cType
 									  users:(NSArray *)cUsers
 									 wallet:(BSWalletModel *)cWallet
-								  whitelist:(NSString *)cWhitelist;
+								  whitelist:(NSString *)cWhitelist
+								   password:(NSString *)password;
 
 - (BSConnectionModel *)initWithConnectionModel:(BSConnectionModel *)connectionModel
 								  withNewToken:(NSString *)newToken;
+- (BSConnectionModel *)initWithConnectionModel:(BSConnectionModel *)connectionModel withNewPassword:(NSString *)newPassword;
 
 - (BSConnectionModel *)initConnectionWithID:(NSString *)cID
 									  label:(NSString *)cLabel

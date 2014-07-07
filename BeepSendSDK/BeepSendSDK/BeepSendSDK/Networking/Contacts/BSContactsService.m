@@ -11,6 +11,7 @@
 #import "BSAPIConfiguration.h"
 
 #import "BSAPContact.h"
+#import "BSAPContactsRequests.h"
 
 @implementation BSContactsService
 
@@ -32,6 +33,41 @@
 {
 	[super executeGETForMethod:[BSAPIConfiguration contacts]
 				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  for (BSAPContact *con in [BSAPContact arrayOfObjectsFromArrayOfDictionaries:response]) {
+							  [mArr addObject:[con convertToModel]];
+						  }
+						  block([NSArray arrayWithArray:mArr], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
+- (void)getAllContactsInGroup:(NSString *)groupID
+					  sinceID:(NSString *)since
+						maxID:(NSString *)max
+				 contactCount:(NSNumber *)count
+					   offset:(NSNumber *)offset
+						 sort:(NSString *)sort
+		  withCompletionBlock:(void(^)(NSArray *contacts, id error))block
+{
+	BSAPContactsRequests *request = [[BSAPContactsRequests alloc] init];
+	request.group = groupID;
+	request.since_id = since;
+	request.max_id = max;
+	request.count = count;
+	request.offset = offset;
+	request.sort = sort;
+	
+	[super executeGETForMethod:[BSAPIConfiguration contacts]
+				withParameters:[request dictFromClass]
 				  onCompletion:^(id response, id error) {
 					  
 					  if (!error) {

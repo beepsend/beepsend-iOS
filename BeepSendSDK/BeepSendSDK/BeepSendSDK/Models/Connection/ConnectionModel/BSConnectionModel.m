@@ -27,6 +27,8 @@
 
 @property (nonatomic, strong, readwrite) NSString *whitelist;
 
+@property (nonatomic, strong, readwrite) NSString *password;
+
 @end
 
 @implementation BSConnectionModel
@@ -61,6 +63,7 @@
 									  users:(NSArray *)cUsers
 									 wallet:(BSWalletModel *)cWallet
 								  whitelist:(NSString *)cWhitelist
+								   password:(NSString *)password
 {
 	if (self = [super initWithID:cID andTitle:cLabel]) {
 		_apiToken = cAPIToken;
@@ -74,6 +77,7 @@
 		_users = cUsers;
 		_wallet = cWallet;
 		_whitelist = cWhitelist;
+		_password = password;
 	}
 	return self;
 }
@@ -92,6 +96,26 @@
 		_users = connectionModel.users;
 		_wallet = connectionModel.wallet;
 		_whitelist = connectionModel.whitelist;
+		_password = connectionModel.password;
+	}
+	return self;
+}
+
+- (BSConnectionModel *)initWithConnectionModel:(BSConnectionModel *)connectionModel withNewPassword:(NSString *)newPassword
+{
+	if (self = [super initWithID:connectionModel.objectID andTitle:connectionModel.label]) {
+		_apiToken = connectionModel.apiToken;
+		_callbacks = connectionModel.callbacks;
+		_customer = connectionModel.customer;
+		_description = connectionModel.description;
+		_label = connectionModel.label;
+		_systemID = connectionModel.systemID;
+		_TLVForMCCAndMNC = connectionModel.TLVForMCCAndMNC;
+		_type = connectionModel.type;
+		_users = connectionModel.users;
+		_wallet = connectionModel.wallet;
+		_whitelist = connectionModel.whitelist;
+		_password = newPassword;
 	}
 	return self;
 }

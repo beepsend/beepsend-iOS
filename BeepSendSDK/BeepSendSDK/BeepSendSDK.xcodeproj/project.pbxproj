@@ -24,6 +24,7 @@
 		6E9ABC2D196A833600874D81 /* BSLogModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ABC2C196A833600874D81 /* BSLogModel.m */; };
 		6E9ABC31196A94DA00874D81 /* BSAPTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ABC30196A94DA00874D81 /* BSAPTransfer.m */; };
 		6E9ABC36196AA00300874D81 /* BSTransferModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ABC35196AA00300874D81 /* BSTransferModel.m */; };
+		6E9ABC3A196AD4DD00874D81 /* BSAPContactsRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ABC39196AD4DD00874D81 /* BSAPContactsRequests.m */; };
 		6EACD7831963F05700D3BB3D /* BSAnalyticsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EACD7821963F05700D3BB3D /* BSAnalyticsService.m */; };
 		6EACD7881963F65C00D3BB3D /* BSAPAccumulatedStatisticsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EACD7871963F65C00D3BB3D /* BSAPAccumulatedStatisticsRequest.m */; };
 		6EACD78B1963F6C900D3BB3D /* BSAPAccumulatedStatisticsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EACD78A1963F6C900D3BB3D /* BSAPAccumulatedStatisticsResponse.m */; };
@@ -206,6 +207,8 @@
 		6E9ABC30196A94DA00874D81 /* BSAPTransfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPTransfer.m; path = Models/AutomatedParsing/APTransfer/BSAPTransfer.m; sourceTree = "<group>"; };
 		6E9ABC34196AA00300874D81 /* BSTransferModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSTransferModel.h; path = Models/Wallet/TransferModel/BSTransferModel.h; sourceTree = "<group>"; };
 		6E9ABC35196AA00300874D81 /* BSTransferModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSTransferModel.m; path = Models/Wallet/TransferModel/BSTransferModel.m; sourceTree = "<group>"; };
+		6E9ABC38196AD4DD00874D81 /* BSAPContactsRequests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPContactsRequests.h; path = APContactsRequest/BSAPContactsRequests.h; sourceTree = "<group>"; };
+		6E9ABC39196AD4DD00874D81 /* BSAPContactsRequests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPContactsRequests.m; path = APContactsRequest/BSAPContactsRequests.m; sourceTree = "<group>"; };
 		6EACD7811963F05700D3BB3D /* BSAnalyticsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAnalyticsService.h; path = Analytics/BSAnalyticsService.h; sourceTree = "<group>"; };
 		6EACD7821963F05700D3BB3D /* BSAnalyticsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAnalyticsService.m; path = Analytics/BSAnalyticsService.m; sourceTree = "<group>"; };
 		6EACD7861963F65C00D3BB3D /* BSAPAccumulatedStatisticsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPAccumulatedStatisticsRequest.h; path = Models/AutomatedParsing/APAccumulatedStatisticsRequest/BSAPAccumulatedStatisticsRequest.h; sourceTree = "<group>"; };
@@ -552,6 +555,15 @@
 				6E9ABC35196AA00300874D81 /* BSTransferModel.m */,
 			);
 			name = TransferModel;
+			sourceTree = "<group>";
+		};
+		6E9ABC37196AD48F00874D81 /* APContactsRequest */ = {
+			isa = PBXGroup;
+			children = (
+				6E9ABC38196AD4DD00874D81 /* BSAPContactsRequests.h */,
+				6E9ABC39196AD4DD00874D81 /* BSAPContactsRequests.m */,
+			);
+			name = APContactsRequest;
 			sourceTree = "<group>";
 		};
 		6EACD7801963EF3000D3BB3D /* Analytics */ = {
@@ -1018,6 +1030,7 @@
 		6EB96ED61951902C00AD77E2 /* AutomatedParsing */ = {
 			isa = PBXGroup;
 			children = (
+				6E9ABC37196AD48F00874D81 /* APContactsRequest */,
 				6E9ABC2E196A94B200874D81 /* APTransfer */,
 				6E9ABC26196A819800874D81 /* APTransactionLog */,
 				6EBE6B3F1966AF7800F59310 /* APEmail */,
@@ -1636,6 +1649,7 @@
 				6EF46E241959B770002C6F56 /* BSUserService.m in Sources */,
 				6ECBBD2E195D764C00D78CAE /* BSAPRecipient.m in Sources */,
 				6EB5909C195ACF22009456B0 /* BSAPDLRReport.m in Sources */,
+				6E9ABC3A196AD4DD00874D81 /* BSAPContactsRequests.m in Sources */,
 				6EBC7807194F356A00666099 /* BSBaseService.m in Sources */,
 				6EB3EA721958270B00951E57 /* BSAPPNetwork.m in Sources */,
 				6EB96EE2195192A600AD77E2 /* BSAPCPriceListSchedule.m in Sources */,

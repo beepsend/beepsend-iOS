@@ -24,4 +24,6 @@
 
 - (void)resetTokenForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(BSConnectionModel *updatedModel, id error))block;
 
+- (void)resetPasswordForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(BSConnectionModel *updatedModel, id error))block;
+
 @end

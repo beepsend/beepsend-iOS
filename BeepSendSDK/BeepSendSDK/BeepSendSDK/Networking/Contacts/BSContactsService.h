@@ -14,6 +14,13 @@
 @interface BSContactsService : BSBaseService
 
 - (void)getAllContactsWithCompletionBlock:(void(^)(NSArray *contacts, id error))block;
+- (void)getAllContactsInGroup:(NSString *)groupID
+					  sinceID:(NSString *)since
+						maxID:(NSString *)max
+				 contactCount:(NSNumber *)count
+					   offset:(NSNumber *)offset
+						 sort:(NSString *)sort
+		  withCompletionBlock:(void(^)(NSArray *contacts, id error))block;
 
 - (void)addContact:(BSContactModel *)contact withCompletionBlock:(void(^)(BSContactModel *contact, id error))block;
 

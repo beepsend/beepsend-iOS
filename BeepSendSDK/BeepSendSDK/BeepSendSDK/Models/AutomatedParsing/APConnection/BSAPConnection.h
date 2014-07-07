@@ -29,6 +29,7 @@
 @property (nonatomic, strong) NSString *whitelist;
 
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *password;
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
 + (NSArray *)arrayOfModelsFromArrayOfObjects:(NSArray *)array;

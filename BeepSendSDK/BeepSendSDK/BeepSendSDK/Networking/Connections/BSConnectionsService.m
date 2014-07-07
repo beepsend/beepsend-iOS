@@ -134,4 +134,23 @@
 				  }];
 }
 
+- (void)resetPasswordForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(BSConnectionModel *updatedModel, id error))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration connectionPasswordResetForID:connection.objectID]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  BSConnectionModel *newPass = [[BSConnectionModel alloc] initWithConnectionModel:connection
+																						  withNewPassword:[[[BSAPConnection classFromDict:response] convertToModel] password]];
+					  
+					  if (!error) {
+						  block(newPass, error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, error);
+					  }
+				  }];
+}
+
 @end
