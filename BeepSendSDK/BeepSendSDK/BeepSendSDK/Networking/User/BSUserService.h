@@ -30,6 +30,6 @@
 		   userNewPassword:(NSString *)newPassword
 	   withCompletionBlock:(void(^)(BOOL success, id error))block;
 
-- (void)resetUserTokenWithCompletionBlock:(void(^)(NSString *apiToken, id error))block;
+- (void)resetUserTokenUsingPassword:(NSString *)password withCompletionBlock:(void(^)(NSString *apiToken, id error))block;
 
 @end

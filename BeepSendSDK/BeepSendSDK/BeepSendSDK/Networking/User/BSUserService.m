@@ -146,14 +146,14 @@
 				  }];
 }
 
-- (void)resetUserTokenWithCompletionBlock:(void(^)(NSString *apiToken, id error))block
+- (void)resetUserTokenUsingPassword:(NSString *)password withCompletionBlock:(void(^)(NSString *apiToken, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration resetTokenMe]
-				withParameters:@{}
+				withParameters:@{@"password":password}
 				  onCompletion:^(id response, id error) {
 					  
 					  if (!error) {
-						  block(response, error);
+						  block(response[@"api_token"], error);
 					  }
 					  else {
 						  //TODO: Create error handling

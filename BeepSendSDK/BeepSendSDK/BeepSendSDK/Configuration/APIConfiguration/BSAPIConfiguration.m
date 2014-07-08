@@ -31,7 +31,7 @@
 }
 
 + (NSDictionary *)authorizationHeader {
-	return [BSAPIConfiguration authorizationHeaderForToken:APIToken];
+	return [BSAPIConfiguration authorizationHeaderForToken:[[NSUserDefaults standardUserDefaults] objectForKey:@"API_TOKEN"]];
 }
 
 + (NSDictionary *)authorizationHeaderForToken:(NSString *)token
@@ -40,7 +40,7 @@
 }
 
 + (NSString *)urlAPIToken {
-	return [@"?api_token=" stringByAppendingString:APIToken];
+	return [@"?api_token=" stringByAppendingString:[[NSUserDefaults standardUserDefaults] objectForKey:@"API_TOKEN"]];
 }
 
 #pragma mark -

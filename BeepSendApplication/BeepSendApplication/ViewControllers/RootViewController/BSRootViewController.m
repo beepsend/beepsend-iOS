@@ -11,16 +11,8 @@
 #import "BSRootView.h"
 
 //TODO: IMPORT SDK FOR TESTING
-#import "BSConnectionsService.h"
-#import "BSCustomerService.h"
-#import "BSPricelistService.h"
-#import "BSSMSService.h"
-#import "BSUserService.h"
-#import "BSHLRService.h"
-#import "BSContactsService.h"
-#import "BSGroupsService.h"
-#import "BSAnalyticsService.h"
-#import "BSWalletService.h"
+#import "BSUser.h"
+#import "BSConnection.h"
 
 @interface BSRootViewController () <UITextFieldDelegate>
 
@@ -126,48 +118,33 @@
 		![Helper isNilOrEmpty:_textFieldTo.text] &&
 		![Helper isNilOrEmpty:_textViewMessageBox.text]) {
 
-		BSSMSService *sms = [BSSMSService sharedService];
-		
-		BSMessageRequestModel *message = [[BSMessageRequestModel alloc] initWithMessage:_textViewMessageBox.text
-																			   receiver:_textFieldTo.text
-																				 sender:_textFieldFrom.text
-																				batchID:nil
-																			 batchLabel:nil
-																			   sendTime:nil
-																		   usedEncoding:nil
-																			messageType:nil
-																				validTo:nil
-																			 recieveDLR:nil
-																			  forGroups:nil
-																		 userDataHeader:nil
-																	 dataCodingSettings:nil];
-		
-		[sms sendMessage:message usingConnection:nil withCompletionBlock:^(NSArray *response, id error) {
-			DLog(@"%@", response);
-		}];
+
 
 	}
 }
 
 - (void)buttonCheckClicked {
+	DLog(@"START");
 	
-	__block BSConnectionsService *cs = [BSConnectionsService sharedService];
+	StartCounting;
 	
-	[cs getAllAvailableConnectsionOnCompletion:^(NSArray *connections, id error) {
-		for (BSConnectionModel *connection in connections) {
-			if (connection.type == BSConnectionTypeHLR) {
-				
-				BSHLRService *hlrs = [BSHLRService sharedService];
-				
-				[hlrs doImmediateHLRForNumber:_textFieldTo.text
-							   withConnection:connection
-						  withCompletionBlock:^(BSHLRModel *hlr, id error) {
-				 
-							  DLog(@"%@", hlr);
-					   }];
-			}
-		}
-	}];
+	TICK;
+	BSUser *user = [[BSUser alloc] initWithToken:@"5b36836d23ada4d45deb21fc6d69b05a97c856754d4592104829b5d866bf32ca"];
+	TOCK;
+
+	TICK;
+	BSConnection *connection = user.defaultConnection;
+	TOCK;
+
+	TICK;
+	connection = user.defaultConnection;
+	TOCK;
+	
+	TICK;
+	DLog(@"Time 1 : %@", [user getAvailableConnections]);
+	TOCK;
+	
+	DLog(@"END");
 }
 
 - (void)keyboardBecameActive:(NSNotification *)notification

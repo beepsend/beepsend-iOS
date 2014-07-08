@@ -8,13 +8,10 @@
 
 #import "BSGeneralModel.h"
 
+#import	"BSStructs.h"
+
 #import "BSCallbacksModel.h"
 #import "BSWalletModel.h"
-
-typedef enum {
-	BSConnectionTypeSMS = 1,
-	BSConnectionTypeHLR = 2
-} BSConnectionType;
 
 @interface BSConnectionModel : BSGeneralModel
 
@@ -27,7 +24,7 @@ typedef enum {
 @property (nonatomic, strong, readonly) NSString *label;
 @property (nonatomic, strong, readonly) NSString *systemID;
 @property (nonatomic, strong, readonly) NSNumber *TLVForMCCAndMNC;//Tag-Length-Value field for returning mcc and mnc in DLR.
-@property (nonatomic, assign, readonly) BSConnectionType type;//Type of connection, 1 for SMS connection or 2 for HLR connection.
+@property (nonatomic, assign, readonly) BeepSendConnectionsType type;//Type of connection, 1 for SMS connection or 2 for HLR connection.
 
 @property (nonatomic, strong, readonly) NSArray *users;
 
@@ -47,7 +44,7 @@ typedef enum {
 									  label:(NSString *)cLabel
 								   systemID:(NSString *)cSystemID
 							tlvformccandmnc:(NSNumber *)cTlvformccandmnc
-									   type:(BSConnectionType)cType
+									   type:(BeepSendConnectionsType)cType
 									  users:(NSArray *)cUsers
 									 wallet:(BSWalletModel *)cWallet
 								  whitelist:(NSString *)cWhitelist
@@ -60,6 +57,6 @@ typedef enum {
 - (BSConnectionModel *)initConnectionWithID:(NSString *)cID
 									  label:(NSString *)cLabel
 								   systemID:(NSString *)cSystemID
-									   type:(BSConnectionType)cType;
+									   type:(BeepSendConnectionsType)cType;
 
 @end
