@@ -14,7 +14,7 @@
 @interface BSConnection : NSObject
 
 @property (nonatomic, strong, readonly) NSString *connectionID;
-@property (nonatomic, assign, readonly) BeepSendConnectionsType type;
+@property (nonatomic, assign, readonly) BSConnectionType type;
 @property (nonatomic, strong) NSString *label;
 @property (nonatomic, strong) NSString *description;
 @property (nonatomic, strong) NSString *systemID;//Login name
@@ -30,6 +30,6 @@
 //Accessible only if User is initated with apiToken
 - (BSConnection *)initDefaultConnection;
 
-- (BSConnection *)initWIthID:(NSString *)cID andConnectionType:(BeepSendConnectionsType)cType;
+- (BSConnection *)initWIthID:(NSString *)cID andConnectionType:(BSConnectionType)cType;
 
 @end

@@ -41,7 +41,7 @@
 		[mUsers addObject:[user convertToModel]];
 	}
 	
-	return [[BSConnectionModel alloc] initConnectionWithID:_id apiToken:_api_token callbacks:[_callbacks convertToModel] customer:_customer description:_description label:_label?_label:_name?_name:@"" systemID:_system_id tlvformccandmnc:_tlv_for_mcc_mnc type:(BeepSendConnectionsType)[_type integerValue] users:[NSArray arrayWithArray:mUsers] wallet:[_wallet convertToModel] whitelist:_whitelist password:_password];
+	return [[BSConnectionModel alloc] initConnectionWithID:_id apiToken:_api_token callbacks:[_callbacks convertToModel] customer:_customer description:_description label:_label?_label:_name?_name:@"" systemID:_system_id tlvformccandmnc:_tlv_for_mcc_mnc type:(BSConnectionType)[_type integerValue] users:[NSArray arrayWithArray:mUsers] wallet:[_wallet convertToModel] whitelist:_whitelist password:_password];
 }
 
 #pragma mark - Public methods

@@ -24,7 +24,7 @@
 @property (nonatomic, strong, readonly) NSString *label;
 @property (nonatomic, strong, readonly) NSString *systemID;
 @property (nonatomic, strong, readonly) NSNumber *TLVForMCCAndMNC;//Tag-Length-Value field for returning mcc and mnc in DLR.
-@property (nonatomic, assign, readonly) BeepSendConnectionsType type;//Type of connection, 1 for SMS connection or 2 for HLR connection.
+@property (nonatomic, assign, readonly) BSConnectionType type;//Type of connection, 1 for SMS connection or 2 for HLR connection.
 
 @property (nonatomic, strong, readonly) NSArray *users;
 
@@ -44,7 +44,7 @@
 									  label:(NSString *)cLabel
 								   systemID:(NSString *)cSystemID
 							tlvformccandmnc:(NSNumber *)cTlvformccandmnc
-									   type:(BeepSendConnectionsType)cType
+									   type:(BSConnectionType)cType
 									  users:(NSArray *)cUsers
 									 wallet:(BSWalletModel *)cWallet
 								  whitelist:(NSString *)cWhitelist
@@ -57,6 +57,6 @@
 - (BSConnectionModel *)initConnectionWithID:(NSString *)cID
 									  label:(NSString *)cLabel
 								   systemID:(NSString *)cSystemID
-									   type:(BeepSendConnectionsType)cType;
+									   type:(BSConnectionType)cType;
 
 @end

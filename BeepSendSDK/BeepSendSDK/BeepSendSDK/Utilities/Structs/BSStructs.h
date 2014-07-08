@@ -10,8 +10,8 @@
 #define BeepSendSDK_BSStructs_h
 
 typedef enum {
-	BeepSendConnectionsTypeSMS = 1,
-	BeepSendConnectionsTypeHLR = 2
-} BeepSendConnectionsType;
+	BSConnectionTypeSMS = 1,
+	BSConnectionTypeHLR = 2
+} BSConnectionType;
 
 #endif

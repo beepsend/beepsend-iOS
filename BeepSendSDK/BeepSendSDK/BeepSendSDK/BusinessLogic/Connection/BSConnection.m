@@ -86,7 +86,7 @@
 	return self;
 }
 
-- (BSConnection *)initWIthID:(NSString *)cID andConnectionType:(BeepSendConnectionsType)cType
+- (BSConnection *)initWIthID:(NSString *)cID andConnectionType:(BSConnectionType)cType
 {
 	if (self = [super init]) {
 		_connectionID = cID;
