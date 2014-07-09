@@ -6,16 +6,16 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSMCCMNCModel.h"
+#import "BSMCCMNC.h"
 
-@interface BSMCCMNCModel ()
+@interface BSMCCMNC ()
 
 @property (nonatomic, strong, readwrite) NSNumber *mnc;
 @property (nonatomic, strong, readwrite) NSNumber *mcc;
 
 @end
 
-@implementation BSMCCMNCModel
+@implementation BSMCCMNC
 
 #pragma mark - Initialization
 
@@ -27,7 +27,7 @@
 	return self;
 }
 
-- (BSMCCMNCModel *)initWithMNC:(NSNumber *)mnc
+- (BSMCCMNC *)initWithMNC:(NSNumber *)mnc
 						andMCC:(NSNumber *)mcc
 {
 	if (self = [super initWithID:@"0" andTitle:@"MCC - MNC"]) {

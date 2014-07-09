@@ -11,15 +11,16 @@
 #import "BSConnectionModel.h"
 #import "BSAccumulatedStatisticsModel.h"
 #import "BSNetworkDetailsModel.h"
-#import "BSMCCMNCModel.h"
-#import "BSBatchModel.h"
+
+#import "BSMCCMNC.h"
+#import "BSBatch.h"
 
 @interface BSAnalyticsService : BSBaseService
 
 - (void)getAnalyticsSummaryFromDate:(NSDate *)startDate toDate:(NSDate *)endDate usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *statistics, id error))block;
 
-- (void)getNetworkDetailsFromDate:(NSDate *)startDate toDate:(NSDate *)endDate mccmnc:(BSMCCMNCModel *)mccmnc usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *networkDetails, id error))block;
+- (void)getNetworkDetailsFromDate:(NSDate *)startDate toDate:(NSDate *)endDate mccmnc:(BSMCCMNC *)mccmnc usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *networkDetails, id error))block;
 
-- (void)getDeliveryStatisticsForBach:(BSBatchModel *)batch withCompletionBlock:(void(^)(NSArray *statistics, id error))block;
+- (void)getDeliveryStatisticsForBach:(BSBatch *)batch withCompletionBlock:(void(^)(NSArray *statistics, id error))block;
 
 @end

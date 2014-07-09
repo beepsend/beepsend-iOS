@@ -6,19 +6,19 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSNetworkModel.h"
+#import "BSNetwork.h"
 
-@interface BSNetworkModel ()
+@interface BSNetwork ()
 
 @property (nonatomic, strong, readwrite) NSArray *mccmnc;
 @property (nonatomic, strong, readwrite) NSString *comment;
 @property (nonatomic, strong, readwrite) NSNumber *price;
-@property (nonatomic, strong, readwrite) BSCountryModel *country;
+@property (nonatomic, strong, readwrite) BSCountry *country;
 @property (nonatomic, strong, readwrite) NSString *operatorName;
 
 @end
 
-@implementation BSNetworkModel
+@implementation BSNetwork
 
 #pragma mark - Initialization
 
@@ -30,10 +30,10 @@
 	return self;
 }
 
-- (BSNetworkModel *)initNetworkWithMCCMNC:(NSArray *)nMCCMNC
+- (BSNetwork *)initNetworkWithMCCMNC:(NSArray *)nMCCMNC
 							  withComment:(NSString *)nComment
 									price:(NSNumber *)nPrice
-							  fromCountry:(BSCountryModel *)nCountry
+							  fromCountry:(BSCountry *)nCountry
 								 operator:(NSString *)nOperatorName
 {
 	if (self = [super initWithID:@"0" andTitle:nOperatorName]) {

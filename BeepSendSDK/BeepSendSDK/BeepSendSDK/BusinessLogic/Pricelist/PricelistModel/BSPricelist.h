@@ -8,9 +8,9 @@
 
 #import "BSGeneralModel.h"
 
-#import "BSNetworkModel.h"
+#import "BSNetwork.h"
 
-@interface BSPricelistModel : BSGeneralModel
+@interface BSPricelist : BSGeneralModel
 
 @property (nonatomic, strong, readonly) NSArray *networks;
 @property (nonatomic, strong, readonly) NSNumber *networkCount;
@@ -18,11 +18,11 @@
 @property (nonatomic, assign, readonly) NSNumber *active;
 @property (nonatomic, strong, readonly) NSDate *firstViewed;
 
-- (BSPricelistModel *)initPricelistWithID:(NSString *)pID
-								 networks:(NSArray *)pNetworks
-							 networkCount:(NSNumber *)nCount
-							   timeOfSave:(NSDate *)nSaved
-								   active:(NSNumber *)active
-						  timeOfFirstView:(NSDate *)nFirstView;
+- (BSPricelist *)initPricelistWithID:(NSString *)pID
+							networks:(NSArray *)pNetworks
+						networkCount:(NSNumber *)nCount
+						  timeOfSave:(NSDate *)nSaved
+							  active:(NSNumber *)active
+					 timeOfFirstView:(NSDate *)nFirstView;
 
 @end

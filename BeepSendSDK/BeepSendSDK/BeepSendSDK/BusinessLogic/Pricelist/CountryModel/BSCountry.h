@@ -8,14 +8,14 @@
 
 #import "BSGeneralModel.h"
 
-@interface BSCountryModel : BSGeneralModel
+@interface BSCountry : BSGeneralModel
 
 @property (nonatomic, strong, readonly) NSString *name;
 @property (nonatomic, strong, readonly) NSNumber *callingCode;
 @property (nonatomic, strong, readonly) NSString *code;
 
-- (BSCountryModel *)initCountryNamed:(NSString *)cName
-					 withCountryCode:(NSString *)cCountryCode
-					  andCallingCode:(NSNumber *)cCallingCode;
+- (BSCountry *)initCountryNamed:(NSString *)cName
+				withCountryCode:(NSString *)cCountryCode
+				 andCallingCode:(NSNumber *)cCallingCode;
 
 @end

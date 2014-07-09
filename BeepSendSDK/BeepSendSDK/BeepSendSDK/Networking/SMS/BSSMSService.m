@@ -34,7 +34,7 @@
 
 #pragma mark - Public methods
 
-- (void)sendMessage:(BSMessageRequestModel *)messageRequest usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block
+- (void)sendMessage:(BSMessage *)messageRequest usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block
 {
 	NSString *method;
 	if (messageRequest.groups) {
@@ -123,9 +123,9 @@
 				   }];
 }
 
-- (void)lookupSMS:(BSMessageModel *)sms withCompletionBlock:(void(^)(BSLookupModel *lookupResponse, id error))block {
+- (void)lookupSMS:(BSMessage *)sms withCompletionBlock:(void(^)(BSLookupModel *lookupResponse, id error))block {
 	
-	[super executeGETForMethod:[BSAPIConfiguration smsLookupWithID:sms.objectID]
+	[super executeGETForMethod:[BSAPIConfiguration smsLookupWithID:sms.messageID]
 				withParameters:@{}
 				  onCompletion:^(id response, id error) {
 					  
@@ -142,7 +142,7 @@
 				  }];
 }
 
-- (void)validateSMSForMessage:(BSMessageRequestModel *)message withCompletionBlock:(void(^)(BSMessageModel *message, id error))block
+- (void)validateSMSForMessage:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, id error))block
 {
 	NSDictionary *parameters = [[BSAPMessageRequest convertFromMessageRequestModel:message] dictFromClass];
 	BSLog(@"%@", parameters);
@@ -183,7 +183,7 @@
 				  }];
 }
 
-- (void)getDetailsForBatch:(NSString *)batchID withCompletionBlock:(void(^)(BSBatchModel *batch, id error))block
+- (void)getDetailsForBatch:(NSString *)batchID withCompletionBlock:(void(^)(BSBatch *batch, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration batchesForID:batchID]
 				withParameters:@{}
@@ -203,7 +203,7 @@
 - (void)estimateCostForMessages:(NSArray *)messageRequest usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block
 {
 	NSMutableArray *mArr = [@[] mutableCopy];
-	for (BSMessageRequestModel *mrm in messageRequest) {
+	for (BSMessage *mrm in messageRequest) {
 		[mArr addObject:[[BSAPMessageRequest convertFromMessageRequestModel:mrm] dictFromClass]];
 	}
 	

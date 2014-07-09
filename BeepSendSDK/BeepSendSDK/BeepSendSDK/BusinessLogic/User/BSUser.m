@@ -8,6 +8,8 @@
 
 #import "BSUser.h"
 
+#import "BSInputData.h"
+
 #import "BSUserService.h"
 #import "BSConnectionsService.h"
 
@@ -48,11 +50,11 @@
 
 #pragma mark - Initialization
 
-- (BSUser *)initWithToken:(NSString *)apiToken
+- (BSUser *)init
 {
 	if (self = [super init]) {
 		
-		[[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"API_TOKEN" : apiToken }];
+		[[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"API_TOKEN" : APIToken }];
 		
 		[[BSUserService sharedService] getUserDetailsWithCompletionBlock:^(BSUserModel *user, id error) {
 			[[BSTestSemaphor sharedInstance] lift:@"FetchUser"];
@@ -68,6 +70,16 @@
 		
 	}
 	return self;
+}
+
++ (BSUser *)currentUser
+{
+	static BSUser *singleton;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		singleton = [[BSUser alloc] init];
+	});
+	return singleton;
 }
 
 - (BSUser *)initWithUserID:(NSString *)uID
@@ -114,17 +126,17 @@
 	[[BSConnectionsService sharedService] getAllAvailableConnectsionOnCompletion:^(NSArray *connections, id error) {
 		BSLog(@"%@", connections);
 		
-		NSMutableArray *mArr = [@[] mutableCopy];
-		for (BSConnectionModel *cm in connections) {
-			
-			BSConnection *connection = [[BSConnection alloc] initWIthID:cm.objectID andConnectionType:cm.type];
-			connection.label = cm.label;
-			connection.description = cm.description;
-			connection.systemID = cm.systemID;
-			
-			[mArr addObject:connection];
-		}
-		_connections = [NSArray arrayWithArray:mArr];
+//		NSMutableArray *mArr = [@[] mutableCopy];
+//		for (BSConnectionModel *cm in connections) {
+//			
+//			BSConnection *connection = [[BSConnection alloc] initWIthID:cm.objectID andConnectionType:cm.type];
+//			connection.label = cm.label;
+//			connection.description = cm.description;
+//			connection.systemID = cm.systemID;
+//			
+//			[mArr addObject:connection];
+//		}
+//		_connections = [NSArray arrayWithArray:mArr];
 		
 		block(_connections);
 	}];
@@ -139,17 +151,17 @@
 		[[BSConnectionsService sharedService] getAllAvailableConnectsionOnCompletion:^(NSArray *connections, id error) {
 			[[BSTestSemaphor sharedInstance] lift:@"FetchConnections"];
 			
-			NSMutableArray *mArr = [@[] mutableCopy];
-			for (BSConnectionModel *cm in connections) {
-				
-				BSConnection *connection = [[BSConnection alloc] initWIthID:cm.objectID andConnectionType:cm.type];
-				connection.label = cm.label;
-				connection.description = cm.description;
-				connection.systemID = cm.systemID;
-				
-				[mArr addObject:connection];
-			}
-			_connections = [NSArray arrayWithArray:mArr];
+//			NSMutableArray *mArr = [@[] mutableCopy];
+//			for (BSConnectionModel *cm in connections) {
+//				
+//				BSConnection *connection = [[BSConnection alloc] initWIthID:cm.objectID andConnectionType:cm.type];
+//				connection.label = cm.label;
+//				connection.description = cm.description;
+//				connection.systemID = cm.systemID;
+//				
+//				[mArr addObject:connection];
+//			}
+//			_connections = [NSArray arrayWithArray:mArr];
 			
 		}];
 		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchConnections"];

@@ -8,7 +8,7 @@
 
 #import "BSAPPCountry.h"
 
-#import "BSCountryModel.h"
+#import "BSCountry.h"
 
 @implementation BSAPPCountry
 
@@ -16,7 +16,7 @@
 
 - (id)convertToModel
 {
-	return [[BSCountryModel alloc] initCountryNamed:_name?_name:@"" withCountryCode:_code?_code:@"" andCallingCode:_prefix?_prefix:@0];
+	return [[BSCountry alloc] initCountryNamed:_name?_name:@"" withCountryCode:_code?_code:@"" andCallingCode:_prefix?_prefix:@0];
 }
 
 @end

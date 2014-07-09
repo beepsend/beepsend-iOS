@@ -8,7 +8,7 @@
 
 #import "BSAPMessage.h"
 
-#import "BSMessageModel.h"
+#import "BSMessage.h"
 
 @implementation BSAPMessage
 
@@ -30,7 +30,7 @@
 
 - (id)convertToModel
 {
-	return [[BSMessageModel alloc] initMessageWithID:_id batch:[_batch convertToModel] recipients:_to sender:_from errors:[_errors isKindOfClass:[NSArray class]]?_errors:nil recipientGroups:_groups];
+	return [[BSMessage alloc] initMessageWithID:_id batch:[_batch convertToModel] recipients:_to sender:_from errors:[_errors isKindOfClass:[NSArray class]]?_errors:nil recipientGroups:_groups];
 }
 
 #pragma mark - Public methods

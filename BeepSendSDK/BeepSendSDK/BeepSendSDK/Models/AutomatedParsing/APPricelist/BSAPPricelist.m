@@ -11,7 +11,7 @@
 #import "BSAPPNetwork.h"
 #import "BSAPPMCCMNC.h"
 
-#import "BSPricelistModel.h"
+#import "BSPricelist.h"
 
 @implementation BSAPPricelist
 
@@ -54,7 +54,7 @@
 	:
 	nil;
 	
-	return [[BSPricelistModel alloc] initPricelistWithID:_id networks:[NSArray arrayWithArray:mNetworks] networkCount:_networks_count timeOfSave:dateOfSave active:_active timeOfFirstView:dateOfFirstViewed];
+	return [[BSPricelist alloc] initPricelistWithID:_id networks:[NSArray arrayWithArray:mNetworks] networkCount:_networks_count timeOfSave:dateOfSave active:_active timeOfFirstView:dateOfFirstViewed];
 }
 
 #pragma mark - Public methods

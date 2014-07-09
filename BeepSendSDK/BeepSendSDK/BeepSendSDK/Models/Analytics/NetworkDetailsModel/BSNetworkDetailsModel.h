@@ -8,15 +8,15 @@
 
 #import "BSGeneralModel.h"
 
-#import "BSMCCMNCModel.h"
+#import "BSMCCMNC.h"
 #import "BSStatisticsModel.h"
 
 @interface BSNetworkDetailsModel : BSGeneralModel
 
-@property (nonatomic, strong, readonly) BSMCCMNCModel *mccmnc;
+@property (nonatomic, strong, readonly) BSMCCMNC *mccmnc;
 @property (nonatomic, strong, readonly) BSStatisticsModel *statistics;
 @property (nonatomic, strong, readonly) NSNumber *total;
 
-- (BSNetworkDetailsModel *)initWithMCCMNC:(BSMCCMNCModel *)nMccmnc statistics:(BSStatisticsModel *)nStatistics total:(NSNumber *)nTotal;
+- (BSNetworkDetailsModel *)initWithMCCMNC:(BSMCCMNC *)nMccmnc statistics:(BSStatisticsModel *)nStatistics total:(NSNumber *)nTotal;
 
 @end

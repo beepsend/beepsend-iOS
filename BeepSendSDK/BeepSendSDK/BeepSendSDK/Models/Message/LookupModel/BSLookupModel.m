@@ -10,13 +10,13 @@
 
 @interface BSLookupModel ()
 
-@property (nonatomic, strong, readwrite) BSBatchModel *batch;
+@property (nonatomic, strong, readwrite) BSBatch *batch;
 @property (nonatomic, strong, readwrite) NSString *messageBody;
 @property (nonatomic, strong, readwrite) BSConnectionModel *usedConnection;
 @property (nonatomic, strong, readwrite) NSNumber *dataCoding; //0 for Gsm7 encoded messages. 8 for UCS-2 encoded messages and 4 for binary messages.
 @property (nonatomic, strong, readwrite) BSDLRReportModel *deliveryReport;
 @property (nonatomic, strong, readwrite) BSRecipientModel *sender;
-@property (nonatomic, strong, readwrite) BSMCCMNCModel *mccmnc;
+@property (nonatomic, strong, readwrite) BSMCCMNC *mccmnc;
 @property (nonatomic, strong, readwrite) NSNumber *price;
 @property (nonatomic, strong, readwrite) BSTimestampsModel *timestamps;
 @property (nonatomic, strong, readwrite) BSRecipientModel *recipient;
@@ -37,13 +37,13 @@
 }
 
 - (BSLookupModel *)initLookupWithID:(NSString *)lID
-							  batch:(BSBatchModel *)lBatch
+							  batch:(BSBatch *)lBatch
 							message:(NSString *)lMessage
 					 usedConnection:(BSConnectionModel *)lConnection
 						 dataCoding:(NSNumber *)lDataCoding
 					 deliveryReport:(BSDLRReportModel *)lDLR
 							 sender:(BSRecipientModel *)lSender
-							 mccmnc:(BSMCCMNCModel *)lMccmnc
+							 mccmnc:(BSMCCMNC *)lMccmnc
 							  price:(NSNumber *)lPrice
 						  timestamp:(BSTimestampsModel *)lTimestamp
 						  recipient:(BSRecipientModel *)lRecipient

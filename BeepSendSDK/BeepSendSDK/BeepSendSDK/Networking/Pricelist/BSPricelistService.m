@@ -28,7 +28,7 @@
 
 #pragma mark - Public methods
 
-- (void)getCurrentPricelistsForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(BSPricelistModel *pricelist, id error))block
+- (void)getCurrentPricelistsForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(BSPricelist *pricelist, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration pricelistCurrentWithID:connection.objectID]
 				withParameters:@{}
@@ -36,7 +36,7 @@
 					  
 					  if (!error) {
 						  
-						  BSPricelistModel *pricelist = [[BSAPPricelist classFromDict:response] convertToModel];
+						  BSPricelist *pricelist = [[BSAPPricelist classFromDict:response] convertToModel];
 						  
 						  block(pricelist, error);
 					  }
@@ -47,7 +47,7 @@
 				  }];
 }
 
-- (void)getCurrentPricelistsForMeWithCompletionBlock:(void(^)(BSPricelistModel *pricelist, id error))block
+- (void)getCurrentPricelistsForMeWithCompletionBlock:(void(^)(BSPricelist *pricelist, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration pricelistCurrentMe]
 				withParameters:@{}
@@ -55,7 +55,7 @@
 					  
 					  if (!error) {
 						  
-						  BSPricelistModel *pricelist = [[BSAPPricelist classFromDict:response] convertToModel];
+						  BSPricelist *pricelist = [[BSAPPricelist classFromDict:response] convertToModel];
 						  
 						  block(pricelist, error);
 					  }

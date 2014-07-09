@@ -10,7 +10,7 @@
 
 @interface BSNetworkDetailsModel ()
 
-@property (nonatomic, strong, readwrite) BSMCCMNCModel *mccmnc;
+@property (nonatomic, strong, readwrite) BSMCCMNC *mccmnc;
 @property (nonatomic, strong, readwrite) BSStatisticsModel *statistics;
 @property (nonatomic, strong, readwrite) NSNumber *total;
 
@@ -29,7 +29,7 @@
 	return self;
 }
 
-- (BSNetworkDetailsModel *)initWithMCCMNC:(BSMCCMNCModel *)nMccmnc statistics:(BSStatisticsModel *)nStatistics total:(NSNumber *)nTotal
+- (BSNetworkDetailsModel *)initWithMCCMNC:(BSMCCMNC *)nMccmnc statistics:(BSStatisticsModel *)nStatistics total:(NSNumber *)nTotal
 {
 	if (self = [super initWithID:@"0" andTitle:@"Network details"]) {
 		_mccmnc = nMccmnc;

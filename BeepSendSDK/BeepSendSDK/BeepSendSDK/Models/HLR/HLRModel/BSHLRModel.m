@@ -12,11 +12,11 @@
 
 @property (nonatomic, strong, readwrite) BSTimestampsModel *timestamps;
 @property (nonatomic, strong, readwrite) BSDLRReportModel *dlrReport;
-@property (nonatomic, strong, readwrite) BSMCCMNCModel *mccmnc;
+@property (nonatomic, strong, readwrite) BSMCCMNC *mccmnc;
 @property (nonatomic, strong, readwrite) NSString *imsi;//The IMSI of the handset if available. First five characters and then zeroes.
 @property (nonatomic, strong, readwrite) NSNumber *ported;//true if the number seems to be ported, false if not.
 @property (nonatomic, strong, readwrite) NSNumber *roaming;//true if the number is roaming, false if not.
-@property (nonatomic, strong, readwrite) BSMCCMNCModel *prefix;
+@property (nonatomic, strong, readwrite) BSMCCMNC *prefix;
 
 @end
 
@@ -35,9 +35,9 @@
 - (BSHLRModel *)initHLRWithID:(NSString *)hlrID
 					timestamp:(BSTimestampsModel *)hlrTimestamp
 					dlrReport:(BSDLRReportModel *)hlrDlrReport
-					   mccmnc:(BSMCCMNCModel *)hlrMccMnc
+					   mccmnc:(BSMCCMNC *)hlrMccMnc
 						 imsi:(NSString *)hlrImsi
-					   prefix:(BSMCCMNCModel *)hlrPrefix
+					   prefix:(BSMCCMNC *)hlrPrefix
 					   potred:(NSNumber *)isPorted
 					inRoaming:(NSNumber *)isInRoaming
 {

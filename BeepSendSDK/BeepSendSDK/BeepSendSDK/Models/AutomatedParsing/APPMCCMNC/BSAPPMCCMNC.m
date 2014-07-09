@@ -8,7 +8,7 @@
 
 #import "BSAPPMCCMNC.h"
 
-#import "BSMCCMNCModel.h"
+#import "BSMCCMNC.h"
 
 @implementation BSAPPMCCMNC
 
@@ -44,7 +44,7 @@
 
 - (id)convertToModel
 {
-	return [[BSMCCMNCModel alloc] initWithMNC:self.mnc andMCC:self.mcc];
+	return [[BSMCCMNC alloc] initWithMNC:self.mnc andMCC:self.mcc];
 }
 
 #pragma mark - Public methods

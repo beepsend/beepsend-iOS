@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSCountryModel.h"
+#import "BSCountry.h"
 
-@interface BSCountryModel ()
+@interface BSCountry ()
 
 @property (nonatomic, strong, readwrite) NSString *name;
 @property (nonatomic, strong, readwrite) NSNumber *callingCode;
@@ -16,7 +16,7 @@
 
 @end
 
-@implementation BSCountryModel
+@implementation BSCountry
 
 #pragma mark - Initialization
 
@@ -28,9 +28,9 @@
 	return self;
 }
 
-- (BSCountryModel *)initCountryNamed:(NSString *)cName
-					 withCountryCode:(NSString *)cCountryCode
-					  andCallingCode:(NSNumber *)cCallingCode
+- (BSCountry *)initCountryNamed:(NSString *)cName
+				withCountryCode:(NSString *)cCountryCode
+				 andCallingCode:(NSNumber *)cCallingCode
 {
 	if (self = [super initWithID:@"0" andTitle:cName]) {
 		_name = cName;

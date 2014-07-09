@@ -9,6 +9,7 @@
 #import "BSAppDelegate.h"
 
 #import "BSRootViewController.h"
+#import "BSSendMessageViewController.h"
 
 @interface BSAppDelegate ()
 
@@ -23,8 +24,12 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 	
+	
+	
+	BSSendMessageViewController *sms = [[BSSendMessageViewController alloc] init];
 	BSRootViewController *rootViewController = [[BSRootViewController alloc] init];
-	_navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+	
+	_navigationController = [[UINavigationController alloc] initWithRootViewController:sms];
 	[_navigationController setNavigationBarHidden:YES];	
 	[_window setRootViewController:_navigationController];
 	

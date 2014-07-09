@@ -8,21 +8,21 @@
 
 #import "BSGeneralModel.h"
 
-#import "BSMCCMNCModel.h"
-#import "BSCountryModel.h"
+#import "BSMCCMNC.h"
+#import "BSCountry.h"
 
-@interface BSNetworkModel : BSGeneralModel
+@interface BSNetwork : BSGeneralModel
 
 @property (nonatomic, strong, readonly) NSArray *mccmnc;
 @property (nonatomic, strong, readonly) NSString *comment;
 @property (nonatomic, strong, readonly) NSNumber *price;
-@property (nonatomic, strong, readonly) BSCountryModel *country;
+@property (nonatomic, strong, readonly) BSCountry *country;
 @property (nonatomic, strong, readonly) NSString *operatorName;
 
-- (BSNetworkModel *)initNetworkWithMCCMNC:(NSArray *)nMCCMNC
-							  withComment:(NSString *)nComment
-									price:(NSNumber *)nPrice
-							  fromCountry:(BSCountryModel *)nCountry
-								 operator:(NSString *)nOperatorName;
+- (BSNetwork *)initNetworkWithMCCMNC:(NSArray *)nMCCMNC
+						 withComment:(NSString *)nComment
+							   price:(NSNumber *)nPrice
+						 fromCountry:(BSCountry *)nCountry
+							operator:(NSString *)nOperatorName;
 
 @end

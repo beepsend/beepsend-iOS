@@ -8,12 +8,12 @@
 
 #import "BSGeneralModel.h"
 
-@interface BSMCCMNCModel : BSGeneralModel
+@interface BSMCCMNC : BSGeneralModel
 
 @property (nonatomic, strong, readonly) NSNumber *mnc;
 @property (nonatomic, strong, readonly) NSNumber *mcc;
 
-- (BSMCCMNCModel *)initWithMNC:(NSNumber *)mnc
+- (BSMCCMNC *)initWithMNC:(NSNumber *)mnc
 						andMCC:(NSNumber *)mcc;
 
 @end

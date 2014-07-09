@@ -27,6 +27,8 @@
 		6EB6853619498BD20010FC73 /* BSTextFieldCustomTextInset.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6853519498BD20010FC73 /* BSTextFieldCustomTextInset.m */; };
 		6EBC77DD194EE9BF00666099 /* libBeepSendSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBC77DA194EE98100666099 /* libBeepSendSDK.a */; };
 		6EBC77F1194EF60800666099 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBC77F0194EF60800666099 /* SystemConfiguration.framework */; };
+		6EBD2F56196D453400F89C52 /* BSSendMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD2F55196D453400F89C52 /* BSSendMessageView.m */; };
+		6EBD2F5A196D45FB00F89C52 /* BSSendMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD2F59196D45FB00F89C52 /* BSSendMessageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +93,10 @@
 		6EB6853C19498F520010FC73 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Utilities/Helper/Constants/Constants.h; sourceTree = "<group>"; };
 		6EBC77D4194EE98100666099 /* BeepSendSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BeepSendSDK.xcodeproj; path = ../BeepSendSDK/BeepSendSDK/BeepSendSDK.xcodeproj; sourceTree = "<group>"; };
 		6EBC77F0194EF60800666099 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6EBD2F54196D453400F89C52 /* BSSendMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSSendMessageView.h; path = Views/SendMessageView/BSSendMessageView.h; sourceTree = "<group>"; };
+		6EBD2F55196D453400F89C52 /* BSSendMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSSendMessageView.m; path = Views/SendMessageView/BSSendMessageView.m; sourceTree = "<group>"; };
+		6EBD2F58196D45FB00F89C52 /* BSSendMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSSendMessageViewController.h; path = ViewControllers/SendMessageViewController/BSSendMessageViewController.h; sourceTree = "<group>"; };
+		6EBD2F59196D45FB00F89C52 /* BSSendMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSSendMessageViewController.m; path = ViewControllers/SendMessageViewController/BSSendMessageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				6EB6446419488C33004A1818 /* RootViewController */,
+				6EBD2F57196D45C500F89C52 /* SendMessageCiewController */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -216,6 +223,7 @@
 		6EB6446619488C51004A1818 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6EBD2F52196D450000F89C52 /* SendMessageView */,
 				6EB6446719488C57004A1818 /* RootView */,
 				6EB6447F1948A3BA004A1818 /* Components */,
 			);
@@ -292,6 +300,24 @@
 				6EBC77DC194EE98100666099 /* BeepSendSDKTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		6EBD2F52196D450000F89C52 /* SendMessageView */ = {
+			isa = PBXGroup;
+			children = (
+				6EBD2F54196D453400F89C52 /* BSSendMessageView.h */,
+				6EBD2F55196D453400F89C52 /* BSSendMessageView.m */,
+			);
+			name = SendMessageView;
+			sourceTree = "<group>";
+		};
+		6EBD2F57196D45C500F89C52 /* SendMessageCiewController */ = {
+			isa = PBXGroup;
+			children = (
+				6EBD2F58196D45FB00F89C52 /* BSSendMessageViewController.h */,
+				6EBD2F59196D45FB00F89C52 /* BSSendMessageViewController.m */,
+			);
+			name = SendMessageCiewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,8 +445,10 @@
 				6E6537E919472BD700FC6349 /* main.m in Sources */,
 				6EB644831948A597004A1818 /* BSInputAccessoryView.m in Sources */,
 				6E6537ED19472BD700FC6349 /* BSAppDelegate.m in Sources */,
+				6EBD2F56196D453400F89C52 /* BSSendMessageView.m in Sources */,
 				6EB6446D19488E17004A1818 /* BSRootView.m in Sources */,
 				6EB644741948965B004A1818 /* Helper.m in Sources */,
+				6EBD2F5A196D45FB00F89C52 /* BSSendMessageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

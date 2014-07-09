@@ -8,7 +8,7 @@
 
 #import "BSAPBatch.h"
 
-#import "BSBatchModel.h"
+#import "BSBatch.h"
 
 @implementation BSAPBatch
 
@@ -30,7 +30,11 @@
 	:
 	nil;
 	
-	return [[BSBatchModel alloc] initBatchWithID:_id label:_label dateOfCreation:dateOfCreation dateOfLastUse:dateOfLastUse];
+	BSBatch *batch = [[BSBatch alloc] initWithID:_id andLabel:_label];
+	[batch setCreatedAt:dateOfCreation];
+	[batch setLastUsed:dateOfLastUse];
+	
+	return batch;
 }
 
 #pragma mark - Public methods

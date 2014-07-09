@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSPricelistModel.h"
+#import "BSPricelist.h"
 
-@interface BSPricelistModel ()
+@interface BSPricelist ()
 
 @property (nonatomic, strong, readwrite) NSArray *networks;
 @property (nonatomic, strong, readwrite) NSNumber *networkCount;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation BSPricelistModel
+@implementation BSPricelist
 
 #pragma mark - Initialization
 
@@ -30,12 +30,12 @@
 	return self;
 }
 
-- (BSPricelistModel *)initPricelistWithID:(NSString *)pID
-								 networks:(NSArray *)pNetworks
-							 networkCount:(NSNumber *)nCount
-							   timeOfSave:(NSDate *)nSaved
-								   active:(NSNumber *)active
-						  timeOfFirstView:(NSDate *)nFirstView
+- (BSPricelist *)initPricelistWithID:(NSString *)pID
+							networks:(NSArray *)pNetworks
+						networkCount:(NSNumber *)nCount
+						  timeOfSave:(NSDate *)nSaved
+							  active:(NSNumber *)active
+					 timeOfFirstView:(NSDate *)nFirstView
 {
 	if (self = [super initWithID:pID andTitle:@"Pricelist"]) {
 		_networks = pNetworks;
