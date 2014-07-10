@@ -8,11 +8,12 @@
 
 #import "BSGeneralModel.h"
 
-@interface BSPriceListScheduleModel : BSGeneralModel
+@interface BSPriceListSchedule : BSGeneralModel
 
+@property (nonatomic, strong, readonly) NSString *pricelistScheduleID;
 @property (nonatomic, strong, readonly) NSString *scheduleName;
 
-- (BSPriceListScheduleModel *)initPricelistScheduleWithID:(NSString *)psID
-												  andName:(NSString *)psName;
+- (BSPriceListSchedule *)initPricelistScheduleWithID:(NSString *)psID
+											 andName:(NSString *)psName;
 
 @end

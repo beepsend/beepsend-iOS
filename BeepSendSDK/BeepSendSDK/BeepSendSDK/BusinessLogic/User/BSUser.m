@@ -19,7 +19,7 @@
 
 @interface BSUser ()
 
-@property (nonatomic, strong) BSUserModel *currentUser;
+@property (nonatomic, strong) BSUser *currentUser;
 
 @property (nonatomic, strong) NSArray *connections;
 
@@ -34,7 +34,7 @@
 }
 
 - (NSString *)phone {
-	return _currentUser.phoneNumber;
+	return _currentUser.phone;
 }
 
 - (NSString *)email {
@@ -50,20 +50,105 @@
 
 #pragma mark - Initialization
 
+- (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title
+{
+	if (self = [super initWithID:@"-1" andTitle:@"Irregular user"]) {
+		
+	}
+	return self;
+}
+
+- (BSUser *)initUserWithID:(NSString *)uID
+						   name:(NSString *)uName
+						  email:(NSString *)uEmail
+{
+	if (self = [super initWithID:uID andTitle:uName]) {
+		_userID = uID;
+		_name = uName;
+		_email = uEmail;
+	}
+	return self;
+}
+
+- (BSUser *)initUserWithEmail:(NSString *)uEmail
+				  andPassword:(NSString *)uPassword
+{
+	if (self = [super initWithID:@"0" andTitle:@"Update email user"]) {
+		_userID = @"0";
+		_email = uEmail;
+		_password = uPassword;
+	}
+	return self;
+}
+
+- (BSUser *)initUserWithPassword:(NSString *)uPassword
+				  andNewPassword:(NSString *)uNewPassword
+{
+	if (self = [super initWithID:@"0" andTitle:@"Update user password"]) {
+		_userID = @"0";
+		_password = uPassword;
+		_theNewPassword = uNewPassword;
+	}
+	return self;
+}
+
+- (BSUser *)initWithName:(NSString *)uName
+				   phone:(NSString *)uPhone
+	   defaultConnection:(BSConnection *)uConnection
+			   userTypes:(NSArray *)uTypes
+				verified:(BSVerified *)uVerified
+{
+	if (self = [super initWithID:@"0" andTitle:uName]) {
+		_userID = @"0";
+		_name = uName;
+		_phone = uPhone;
+		_defaultConnection = uConnection;
+		_userTypes = uTypes;
+		_verified = uVerified;
+	}
+	return self;
+}
+
+- (BSUser *)initUserWithID:(NSString *)uID
+					  name:(NSString *)uName
+					 email:(NSString *)uEmail
+					 phone:(NSString *)uPhone
+				  customer:(NSString *)uCustomer
+				  apiToken:(NSString *)uAPIToken
+		 defaultConnection:(BSConnection *)uConnection
+				 userTypes:(NSArray *)uUserTypes
+				  maxLevel:(NSNumber *)uMaxLevel
+				  verified:(BSVerified *)uVerified
+{
+	if (self = [super initWithID:uID andTitle:uName]) {
+		_userID = uID;
+		_name = uName;
+		_email = uEmail;
+		_phone = uPhone;
+		_customer = uCustomer;
+		_apiToken = uAPIToken;
+		_defaultConnection = uConnection;
+		_userTypes = uUserTypes;
+		_maxLevel = uMaxLevel;
+		_verified = uVerified;
+	}
+	return self;
+}
+
 - (BSUser *)init
 {
-	if (self = [super init]) {
+	if (self = [super initWithID:@"0" andTitle:@"User"]) {
 		
 		[[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"API_TOKEN" : APIToken }];
 		
-		[[BSUserService sharedService] getUserDetailsWithCompletionBlock:^(BSUserModel *user, id error) {
+		[[BSUserService sharedService] getUserDetailsWithCompletionBlock:^(BSUser *user, id error) {
 			[[BSTestSemaphor sharedInstance] lift:@"FetchUser"];
 			
 			_currentUser = user;
 			
 			_name = user.name;
 			_email = user.email;
-			_phone = user.phoneNumber;
+			_phone = user.phone;
 			
 		}];
 		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchUser"];
@@ -84,7 +169,7 @@
 
 - (BSUser *)initWithUserID:(NSString *)uID
 {
-	if (self = [super init]) {
+	if (self = [super initWithID:@"0" andTitle:@"User"]) {
 		_userID = uID;
 	}
 	return self;
@@ -99,16 +184,16 @@
 		connectionModel = [[BSConnection alloc] initConnectionWithID:_defaultConnection.connectionID];
 	}
 	[[BSUserService sharedService] updateUserWithName:[_name isEqualToString:_currentUser.name]?nil:_name
-												phone:[_phone isEqualToString:_currentUser.phoneNumber]?nil:_phone
+												phone:[_phone isEqualToString:_currentUser.phone]?nil:_phone
 									defaultConnection:connectionModel
 											userTypes:nil
-										verifiedTerms:nil withCompletionBlock:^(BSUserModel *user, id error) {
+										verifiedTerms:nil withCompletionBlock:^(BSUser *user, id error) {
 											
 											_currentUser = user;
 											
 											_name = user.name;
 											_email = user.email;
-											_phone = user.phoneNumber;
+											_phone = user.phone;
 											
 	}];
 }
@@ -124,7 +209,7 @@
 - (void)getAvailableConnectionsOnCompletion:(void(^)(NSArray *connections))block
 {
 	[[BSConnectionsService sharedService] getAllAvailableConnectsionOnCompletion:^(NSArray *connections, id error) {
-		BSLog(@"%@", connections);
+		BSDLog(@"%@", connections);
 		
 //		NSMutableArray *mArr = [@[] mutableCopy];
 //		for (BSConnectionModel *cm in connections) {

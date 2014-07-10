@@ -145,7 +145,7 @@
 - (void)validateSMSForMessage:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, id error))block
 {
 	NSDictionary *parameters = [[BSAPMessageRequest convertFromMessageRequestModel:message] dictFromClass];
-	BSLog(@"%@", parameters);
+	BSDLog(@"%@", parameters);
 	
 	[super executePOSTForMethod:[BSAPIConfiguration validateSMS]
 				 withParameters:parameters

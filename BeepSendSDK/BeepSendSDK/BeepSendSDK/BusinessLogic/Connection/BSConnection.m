@@ -16,8 +16,6 @@
 #import "BSPricelistService.h"
 #import "BSSMSService.h"
 
-#import "BSUserModel.h"
-
 #import "BSUser.h"
 #import "BSMessage.h"
 
@@ -37,7 +35,7 @@
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title
 {
 	if (self = [super initWithID:@"-1" andTitle:@"Irregular connection"]) {
-		
+		_connectionID = @"-1";
 	}
 	return self;
 }
@@ -139,7 +137,7 @@
 
 - (BSConnection *)init
 {
-	if (self = [super init]) {
+	if (self = [super initWithID:@"0" andTitle:@"Connection"]) {
 		
 		[[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"API_TOKEN" : APIToken }];
 		
@@ -155,7 +153,7 @@
 			_systemID = connection.systemID;
 			
 			NSMutableArray *mArr = [@[] mutableCopy];
-			for (BSUserModel *user in connection.users) {
+			for (BSUser *user in connection.users) {
 				
 				BSUser *u = [[BSUser alloc] initWithUserID:user.objectID];
 				u.name = user.name;
@@ -171,7 +169,7 @@
 }
 
 - (BSConnection *)initDefaultConnection {
-	if (self = [super init]) {
+	if (self = [super initWithID:@"0" andTitle:@"Connection"]) {
 		
 		[[BSConnectionsService sharedService] getMeConnectionOnCompletion:^(BSConnection *connection, id error) {
 			[[BSTestSemaphor sharedInstance] lift:@"FetchConnection"];
@@ -184,16 +182,7 @@
 			_description = connection.description;
 			_systemID = connection.systemID;
 			
-			NSMutableArray *mArr = [@[] mutableCopy];
-			for (BSUserModel *user in connection.users) {
-				
-				BSUser *u = [[BSUser alloc] initWithUserID:user.objectID];
-				u.name = user.name;
-				u.email = user.email;
-				
-				[mArr addObject:u];
-			}
-			_users = [NSArray arrayWithArray:mArr];
+			_users = connection.users;
 		}];
 		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchConnection"];
 	}
@@ -280,7 +269,7 @@
 - (void)sendSMS:(BSMessage *)message
 {
 	[[BSSMSService sharedService] sendMessage:message usingConnection:_connectionModel withCompletionBlock:^(NSArray *response, id error) {
-		BSLog(@"%@", response);
+		BSDLog(@"%@", response);
 	}];
 }
 
@@ -288,7 +277,7 @@
 - (void)sendMultipleSMS:(NSArray *)messages
 {
 	[[BSSMSService sharedService] sendMessages:messages usingConnection:_connectionModel withCompletionBlock:^(NSArray *array, id error) {
-		BSLog(@"%@", array);
+		BSDLog(@"%@", array);
 	}];
 }
 
@@ -296,7 +285,7 @@
 - (void)validateSMS:(BSMessage *)message
 {
 	[[BSSMSService sharedService] validateSMSForMessage:message withCompletionBlock:^(BSMessage *message, id error) {
-		BSLog(@"%@", message);
+		BSDLog(@"%@", message);
 	}];
 }
 
@@ -304,7 +293,7 @@
 - (void)getDetailsForSMS:(BSMessage *)message
 {
 	[[BSSMSService sharedService] lookupSMS:message withCompletionBlock:^(BSLookupModel *lookupResponse, id error) {
-		BSLog(@"%@", lookupResponse);
+		BSDLog(@"%@", lookupResponse);
 	}];
 }
 

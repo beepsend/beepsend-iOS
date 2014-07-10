@@ -8,7 +8,7 @@
 
 #import "BSAPUserType.h"
 
-#import "BSUserTypeModel.h"
+#import "BSUserType.h"
 
 @implementation BSAPUserType
 
@@ -16,7 +16,7 @@
 
 - (id)convertToModel
 {
-	return [[BSUserTypeModel alloc] initUserTypeWithID:_id name:_name?_name:@""];
+	return [[BSUserType alloc] initUserTypeWithID:_id name:_name?_name:@""];
 }
 
 #pragma mark - Public methods

@@ -6,30 +6,31 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSPriceListScheduleModel.h"
+#import "BSPriceListSchedule.h"
 
-@interface BSPriceListScheduleModel ()
+@interface BSPriceListSchedule ()
 
 @property (nonatomic, strong, readwrite) NSString *scheduleName;
 
 @end
 
-@implementation BSPriceListScheduleModel
+@implementation BSPriceListSchedule
 
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title
 {
 	if (self = [super initWithID:@"-1" andTitle:@"Irregular pricelist schedule"]) {
-		
+		_pricelistScheduleID = @"-1";
 	}
 	return self;
 }
 
-- (BSPriceListScheduleModel *)initPricelistScheduleWithID:(NSString *)psID
-												  andName:(NSString *)psName
+- (BSPriceListSchedule *)initPricelistScheduleWithID:(NSString *)psID
+											 andName:(NSString *)psName
 {
 	if (self = [super initWithID:psID andTitle:psName]) {
+		_pricelistScheduleID = psID;
 		_scheduleName = psName;
 	}
 	return self;

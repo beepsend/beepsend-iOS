@@ -9,12 +9,16 @@
 #import "BSBaseService.h"
 
 #import "BSGroupModel.h"
-#import "BSUserModel.h"
 #import "BSContactModel.h"
 
 @interface BSGroupsService : BSBaseService
 
 - (void)getAllGroupsWithCompletionBlock:(void(^)(NSArray *groups, id error))block;
+- (void)getAllGroupsSinceID:(NSString *)sinceID
+					  maxID:(NSString *)maxID
+					  count:(NSNumber *)count
+		withCompletionBlock:(void(^)(NSArray *groups, id error))block;
+
 
 - (void)getDetailsForGroup:(BSGroupModel *)group withCompletionBlock:(void(^)(BSGroupModel *group, id error))block;
 - (void)getDetailsForGroupID:(NSString *)groupID withCompletionBlock:(void(^)(BSGroupModel *group, id error))block;

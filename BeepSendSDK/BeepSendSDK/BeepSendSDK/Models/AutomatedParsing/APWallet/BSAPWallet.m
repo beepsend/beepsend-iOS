@@ -57,11 +57,11 @@
 
 	BSAPWallet *wallet = [[BSAPWallet alloc] init];
 	
-	if ([walletModel.objectID isEqualToString:@"-1"]) {
+	if ([walletModel.walletID isEqualToString:@"-1"]) {
 		return wallet;
 	}
 	
-	wallet.id = [walletModel.objectID isEqualToString:@"0"] ? nil : walletModel.objectID;
+	wallet.id = [walletModel.walletID isEqualToString:@"0"] ? nil : walletModel.walletID;
 	
 	wallet.name = walletModel.name;
 	wallet.balance = walletModel.balance;

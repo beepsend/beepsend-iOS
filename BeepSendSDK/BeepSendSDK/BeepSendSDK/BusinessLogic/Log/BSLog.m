@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSLogModel.h"
+#import "BSLog.h"
 
-@interface BSLogModel ()
+@interface BSLog ()
 
 @property (nonatomic, strong, readwrite) NSDate *timeOfTransaction;
 @property (nonatomic, strong, readwrite) NSNumber *balanceAfterTransaction;
@@ -17,25 +17,26 @@
 
 @end
 
-@implementation BSLogModel
+@implementation BSLog
 
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title
 {
 	if (self = [super initWithID:@"-1" andTitle:@"Irregular Log"]) {
-		
+		_logID = @"-1";
 	}
 	return self;
 }
 
-- (BSLogModel *)initLogWithID:(NSString *)logID
-					   atTime:(NSDate *)time
-				  withBalance:(NSNumber *)balance
-					   change:(NSNumber *)change
-					  comment:(NSString *)comment
+- (BSLog *)initLogWithID:(NSString *)logID
+				  atTime:(NSDate *)time
+			 withBalance:(NSNumber *)balance
+				  change:(NSNumber *)change
+				 comment:(NSString *)comment
 {
 	if (self = [super initWithID:logID andTitle:@"Transaction Log"]) {
+		_logID = logID;
 		_timeOfTransaction = time;
 		_balanceAfterTransaction = balance;
 		_change = change;

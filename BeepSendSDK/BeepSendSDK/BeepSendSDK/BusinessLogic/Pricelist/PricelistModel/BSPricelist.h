@@ -12,6 +12,7 @@
 
 @interface BSPricelist : BSGeneralModel
 
+@property (nonatomic, strong, readonly) NSString *pricelistID;
 @property (nonatomic, strong, readonly) NSArray *networks;
 @property (nonatomic, strong, readonly) NSNumber *networkCount;
 @property (nonatomic, strong, readonly) NSDate *saved;

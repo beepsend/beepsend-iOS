@@ -12,6 +12,7 @@
 
 #import "BSAPGroup.h"
 #import "BSAPContact.h"
+#import "BSAPGroupsRequest.h"
 
 @implementation BSGroupsService
 
@@ -42,7 +43,38 @@
 							  [mArr addObject:[group convertToModel]];
 						  }
 						  
-						  BSLog(@"%@", mArr);
+						  BSDLog(@"%@", mArr);
+						  
+						  block([NSArray arrayWithArray:mArr], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
+- (void)getAllGroupsSinceID:(NSString *)sinceID
+					  maxID:(NSString *)maxID
+					  count:(NSNumber *)count
+		withCompletionBlock:(void(^)(NSArray *groups, id error))block
+{
+	BSAPGroupsRequest *groupsRequest = [[BSAPGroupsRequest alloc] init];
+	groupsRequest.since_id = sinceID;
+	groupsRequest.max_id = maxID;
+	groupsRequest.count = count;
+	[super executeGETForMethod:[BSAPIConfiguration contactsGroups]
+				withParameters:[groupsRequest dictFromClass]
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  for (BSAPGroup *group in [BSAPGroup arrayOfObjectsFromArrayOfDictionaries:response]) {
+							  [mArr addObject:[group convertToModel]];
+						  }
+						  
+						  BSDLog(@"%@", mArr);
 						  
 						  block([NSArray arrayWithArray:mArr], error);
 					  }
@@ -80,7 +112,7 @@
 - (void)addGroupNamed:(NSString *)groupName withCompletionBlock:(void(^)(BSGroupModel *group, id error))block
 {
 	NSDictionary *dict = [[BSAPGroup groupFromGroupModel:[[BSGroupModel alloc] initGroupWithName:groupName]] dictFromClass];
-	BSLog(@"%@", dict);
+	BSDLog(@"%@", dict);
 	
 	[super executePOSTForMethod:[BSAPIConfiguration contactsGroups]
 				 withParameters:dict
@@ -100,7 +132,7 @@
 - (void)updateName:(NSString *)gName inGroup:(BSGroupModel *)group withCompletionBlock:(void(^)(BSGroupModel *group, id error))block
 {
 	NSDictionary *dict = [[BSAPGroup groupFromGroupModel:[[BSGroupModel alloc] initGroupWithName:gName]] dictFromClass];
-	BSLog(@"%@", dict);
+	BSDLog(@"%@", dict);
 	
 	[super executePUTForMethod:[BSAPIConfiguration contactsGroupsForID:group.objectID]
 				 withParameters:dict

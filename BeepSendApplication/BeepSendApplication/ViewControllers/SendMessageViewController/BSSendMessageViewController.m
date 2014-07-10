@@ -125,7 +125,7 @@
 		
 		BSMessage *binaryMessage = [BSMessage binaryMessageWithBody:_textViewMessageBox.text from:_textFieldFrom.text to:_textFieldTo.text];
 		
-		[[[BSUser currentUser] defaultConnection] sendSMS:message];
+		[[[BSUser currentUser] defaultConnection] sendSMS:flashMessage];
 	}
 }
 

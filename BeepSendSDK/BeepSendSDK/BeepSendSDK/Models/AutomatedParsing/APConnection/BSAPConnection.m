@@ -12,7 +12,7 @@
 
 #import "BSConnection.h"
 #import "BSWallet.h"
-#import "BSUserModel.h"
+#import "BSUser.h"
 
 @implementation BSAPConnection
 
@@ -81,6 +81,10 @@
 {
 	BSAPConnection *connection = [[BSAPConnection alloc] init];
 	
+	if ([connectionModel.connectionID isEqualToString:@"-1"]) {
+		return connection;
+	}
+	
 	BSAPCCallback *callback = [[BSAPCCallback alloc] init];
 	callback.method = connectionModel.callbackURLs.method;
 	callback.dlr = connectionModel.callbackURLs.DLR;
@@ -94,16 +98,16 @@
 	connection.wallet = wallet;
 	
 	NSMutableArray *mArr = [@[] mutableCopy];
-	for (BSUserModel *usr in connectionModel.users) {
+	for (BSUser *usr in connectionModel.users) {
 		BSAPCUser *user = [[BSAPCUser alloc] init];
-		user.id = usr.objectID;
+		user.id = usr.userID;
 		user.name = usr.name;
 		user.username = usr.email;
 		[mArr addObject:user];
 	}
 	connection.users = [NSArray arrayWithArray:mArr];
 	
-	connection.id = connectionModel.connectionID;
+	connection.id = [connectionModel.connectionID isEqualToString:@"0"] ? nil : connectionModel.connectionID;
 	connection.description = connectionModel.description;
 	connection.api_token = connectionModel.apiToken;
 	connection.customer = connectionModel.customer;

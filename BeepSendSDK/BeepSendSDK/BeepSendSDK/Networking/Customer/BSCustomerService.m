@@ -28,7 +28,7 @@
 
 #pragma mark - Public methods
 
-- (void)getCustomerOnCompletion:(void(^)(BSCustomerModel *customer, id error))block {
+- (void)getCustomerOnCompletion:(void(^)(BSCustomer *customer, id error))block {
 	[super executeGETForMethod:[BSAPIConfiguration customer]
 				withParameters:@{}
 				  onCompletion:^(id response, id error) {

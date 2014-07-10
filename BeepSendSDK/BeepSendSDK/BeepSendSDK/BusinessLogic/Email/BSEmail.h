@@ -8,11 +8,12 @@
 
 #import "BSGeneralModel.h"
 
-@interface BSEmailModel : BSGeneralModel
+@interface BSEmail : BSGeneralModel
 
+@property (nonatomic, strong, readonly) NSString *emailID;
 @property (nonatomic, strong, readonly) NSString *address;
 
-- (BSEmailModel *)initEmailWithID:(NSString *)eID atAddress:(NSString *)address;
-- (BSEmailModel *)initEmailWithAddress:(NSString *)address;
+- (BSEmail *)initEmailWithID:(NSString *)eID atAddress:(NSString *)address;
+- (BSEmail *)initEmailWithAddress:(NSString *)address;
 
 @end

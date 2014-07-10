@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "BSGeneralModel.h"
 
 @class BSBatch;
 
-@interface BSMessage : NSObject
+@interface BSMessage : BSGeneralModel
 
 //Required
 @property (nonatomic, strong, readonly) NSString *sender;

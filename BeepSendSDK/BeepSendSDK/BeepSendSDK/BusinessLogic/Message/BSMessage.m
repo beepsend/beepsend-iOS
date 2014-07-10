@@ -61,7 +61,9 @@
 				userDataHeader:(NSString *)rUDH
 			dataCodingSettings:(NSString *)rDCS
 {
-	if (self = [super init]) {
+	if (self = [super initWithID:@"0" andTitle:@"Message"]) {
+		_messageID = @"0";
+		
 		_recipient = [rReceiver isKindOfClass:[NSString class]] ? rReceiver : nil;
 		_recipients = [rReceiver isKindOfClass:[NSArray class]] ? rReceiver : nil;
 		_message = rMessage;
@@ -90,7 +92,8 @@
 						  errors:(NSArray *)mErrors
 				 recipientGroups:(NSArray *)mGroups
 {
-	if (self = [super init]) {
+	if (self = [super initWithID:mID andTitle:@"Message"]) {
+		_messageID = mID;
 		_batch = mBatch;
 		_sender = mSender;
 		_errors = mErrors;
@@ -104,7 +107,8 @@
 
 - (BSMessage *)initMessageWithBody:(NSString *)messageBody from:(NSString *)sender to:(NSString *)recipient
 {
-	if (self = [super init]) {
+	if (self = [super initWithID:@"0" andTitle:@"Normal message"]) {
+		_messageID = @"0";
 		_message = messageBody;
 		_sender = sender;
 		_recipient = recipient;
@@ -116,7 +120,9 @@
 
 - (BSMessage *)initMessageWithBody:(NSString *)messageBody from:(NSString *)sender toMultiple:(NSArray *)recipients
 {
-	if (self = [super init]) {
+	if (self = [super initWithID:@"0" andTitle:@"Normal message"]) {
+		_messageID = @"0";
+		
 		_message = messageBody;
 		_sender = sender;
 		_recipients = recipients;
@@ -128,7 +134,9 @@
 
 - (BSMessage *)initMessageWithBody:(NSString *)messageBody from:(NSString *)sender toGroups:(NSArray *)groups
 {
-	if (self = [super init]) {
+	if (self = [super initWithID:@"0" andTitle:@"Normal message"]) {
+		_messageID = @"0";
+		
 		_message = messageBody;
 		_sender = sender;
 		_groups = groups;
@@ -140,7 +148,9 @@
 
 - (BSMessage *)initFlashMessageWithBody:(NSString *)messageBody from:(NSString *)sender to:(NSString *)recipient
 {
-	if (self = [super init]) {
+	if (self = [super initWithID:@"0" andTitle:@"Flash message"]) {
+		_messageID = @"0";
+		
 		_message = messageBody;
 		_sender = sender;
 		_recipient = recipient;
@@ -153,7 +163,9 @@
 
 - (BSMessage *)initFlashMessageWithBody:(NSString *)messageBody from:(NSString *)sender toMultiple:(NSArray *)recipients
 {
-	if (self = [super init]) {
+	if (self = [super initWithID:@"0" andTitle:@"Flash message"]) {
+		_messageID = @"0";
+		
 		_message = messageBody;
 		_sender = sender;
 		_recipients = recipients;
@@ -166,7 +178,9 @@
 
 - (BSMessage *)initFlashMessageWithBody:(NSString *)messageBody from:(NSString *)sender toGroups:(NSArray *)groups
 {
-	if (self = [super init]) {
+	if (self = [super initWithID:@"0" andTitle:@"Flash message"]) {
+		_messageID = @"0";
+		
 		_message = messageBody;
 		_sender = sender;
 		_groups = groups;
@@ -179,7 +193,9 @@
 
 - (BSMessage *)initBinaryMessageWithBody:(NSString *)messageBody from:(NSString *)sender to:(NSString *)recipient
 {
-	if (self = [super init]) {
+	if (self = [super initWithID:@"0" andTitle:@"Binary message"]) {
+		_messageID = @"0";
+		
 		_message = messageBody;
 		_sender = sender;
 		_recipient = recipient;
@@ -192,7 +208,9 @@
 
 - (BSMessage *)initBinaryMessageWithBody:(NSString *)messageBody from:(NSString *)sender toMultiple:(NSArray *)recipients
 {
-	if (self = [super init]) {
+	if (self = [super initWithID:@"0" andTitle:@"Binary message"]) {
+		_messageID = @"0";
+		
 		_message = messageBody;
 		_sender = sender;
 		_recipients = recipients;
@@ -205,7 +223,9 @@
 
 - (BSMessage *)initBinaryMessageWithBody:(NSString *)messageBody from:(NSString *)sender toGroups:(NSArray *)groups
 {
-	if (self = [super init]) {
+	if (self = [super initWithID:@"0" andTitle:@"Binary message"]) {
+		_messageID = @"0";
+		
 		_message = messageBody;
 		_sender = sender;
 		_groups = groups;

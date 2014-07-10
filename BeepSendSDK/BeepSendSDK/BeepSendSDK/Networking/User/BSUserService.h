@@ -8,19 +8,20 @@
 
 #import "BSBaseService.h"
 
-#import "BSUserModel.h"
-#import "BSUserTypeModel.h"
+#import "BSUser.h"
+#import "BSUserType.h"
+#import "BSConnection.h"
 
 @interface BSUserService : BSBaseService
 
-- (void)getUserDetailsWithCompletionBlock:(void(^)(BSUserModel *user, id error))block;
+- (void)getUserDetailsWithCompletionBlock:(void(^)(BSUser *user, id error))block;
 
 - (void)updateUserWithName:(NSString *)uName
 					 phone:(NSString *)uPhone
 		 defaultConnection:(BSConnection *)uConnection
 				 userTypes:(NSArray *)uTypes
 			 verifiedTerms:(NSNumber *)uVerifiedTerms
-	   withCompletionBlock:(void(^)(BSUserModel *user, id error))block;
+	   withCompletionBlock:(void(^)(BSUser *user, id error))block;
 
 - (void)updateUserEmail:(NSString *)newEmail
 		   userPassword:(NSString *)password

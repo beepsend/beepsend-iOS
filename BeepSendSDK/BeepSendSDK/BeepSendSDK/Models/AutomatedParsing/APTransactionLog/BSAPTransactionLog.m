@@ -8,7 +8,7 @@
 
 #import "BSAPTransactionLog.h"
 
-#import "BSLogModel.h"
+#import "BSLog.h"
 
 @implementation BSAPTransactionLog
 
@@ -23,7 +23,7 @@
 	:
 	nil;
 	
-	return [[BSLogModel alloc] initLogWithID:_id atTime:transactionTime withBalance:_new_balance change:_change comment:_comment];
+	return [[BSLog alloc] initLogWithID:_id atTime:transactionTime withBalance:_new_balance change:_change comment:_comment];
 }
 
 #pragma mark - Public methods

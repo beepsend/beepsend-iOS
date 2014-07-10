@@ -10,9 +10,17 @@
 
 @implementation BSBatch
 
+- (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title
+{
+	if (self = [super initWithID:@"-1" andTitle:@"Irregular connection"]) {
+		_batchID = @"-1";
+	}
+	return self;
+}
+
 - (BSBatch *)initWithID:(NSString *)bID andLabel:(NSString *)bLabel
 {
-	if (self = [super init]) {
+	if (self = [super initWithID:bID andTitle:bLabel]) {
 		_batchID = bID;
 		_label = bLabel;
 	}

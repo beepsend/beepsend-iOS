@@ -6,17 +6,23 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSVerifiedModel.h"
+#import "BSVerified.h"
 
-@interface BSVerifiedModel ()
+@implementation BSVerified
 
-@property (nonatomic, assign, readwrite) NSNumber *emailVerified;
-@property (nonatomic, assign, readwrite) NSNumber *phoneVerified;
-@property (nonatomic, assign, readwrite) NSNumber *termsVerified;
+#pragma mark - Properties
 
-@end
+- (BOOL)isVerifiedEmail {
+	return [_emailVerified boolValue];
+}
 
-@implementation BSVerifiedModel
+- (BOOL)isVerifiedPhone {
+	return [_phoneVerified boolValue];
+}
+
+- (BOOL)isVerifiedTerms {
+	return [_termsVerified boolValue];
+}
 
 #pragma mark - Initialization
 
@@ -28,7 +34,7 @@
 	return self;
 }
 
-- (BSVerifiedModel *)initUserWithTermsVerified:(NSNumber *)termsVerified
+- (BSVerified *)initUserWithTermsVerified:(NSNumber *)termsVerified
 {
 	if (self = [super initWithID:@"0" andTitle:@"Verified"]) {
 		_termsVerified = termsVerified;
@@ -36,9 +42,9 @@
 	return self;
 }
 
-- (BSVerifiedModel *)initUserWithEmailVerified:(NSNumber *)emailVerified
-								 phoneVerified:(NSNumber *)phoneVerified
-								 termsVerified:(NSNumber *)termsVerified
+- (BSVerified *)initUserWithEmailVerified:(NSNumber *)emailVerified
+							phoneVerified:(NSNumber *)phoneVerified
+							termsVerified:(NSNumber *)termsVerified
 {
 	if (self = [super initWithID:@"0" andTitle:@"Verified"]) {
 		_emailVerified = emailVerified;

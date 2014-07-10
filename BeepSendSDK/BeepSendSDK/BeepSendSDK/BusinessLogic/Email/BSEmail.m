@@ -6,37 +6,39 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSEmailModel.h"
+#import "BSEmail.h"
 
-@interface BSEmailModel ()
+@interface BSEmail ()
 
 @property (nonatomic, strong, readwrite) NSString *address;
 
 @end
 
-@implementation BSEmailModel
+@implementation BSEmail
 
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title
 {
 	if (self = [super initWithID:@"-1" andTitle:@"Irregular email"]) {
-		
+		_emailID = @"-1";
 	}
 	return self;
 }
 
-- (BSEmailModel *)initEmailWithID:(NSString *)eID atAddress:(NSString *)address
+- (BSEmail *)initEmailWithID:(NSString *)eID atAddress:(NSString *)address
 {
 	if (self = [super initWithID:eID andTitle:address]) {
+		_emailID = eID;
 		_address = address;
 	}
 	return self;
 }
 
-- (BSEmailModel *)initEmailWithAddress:(NSString *)address
+- (BSEmail *)initEmailWithAddress:(NSString *)address
 {
 	if (self = [super initWithID:@"0" andTitle:address]) {
+		_emailID = @"0";
 		_address = address;
 	}
 	return self;

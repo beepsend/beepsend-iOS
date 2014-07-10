@@ -6,16 +6,16 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSAccountManagerModel.h"
+#import "BSAccountManager.h"
 
-@interface BSAccountManagerModel ()
+@interface BSAccountManager ()
 
-@property (nonatomic, strong, readwrite) NSString *accountManagerName;
-@property (nonatomic, strong, readwrite) NSString *accountManagerEmail;
+@property (nonatomic, strong, readwrite) NSString *name;
+@property (nonatomic, strong, readwrite) NSString *email;
 
 @end
 
-@implementation BSAccountManagerModel
+@implementation BSAccountManager
 
 #pragma mark - Initialization
 
@@ -27,12 +27,12 @@
 	return self;
 }
 
-- (BSAccountManagerModel *)initAccountManagerWithName:(NSString *)amName
-											 andEmail:(NSString *)amEmail
+- (BSAccountManager *)initAccountManagerWithName:(NSString *)amName
+										andEmail:(NSString *)amEmail
 {
 	if (self = [super initWithID:@"0" andTitle:amName]) {
-		_accountManagerName = amName;
-		_accountManagerEmail = amEmail;
+		_name = amName;
+		_email = amEmail;
 	}
 	return self;
 }

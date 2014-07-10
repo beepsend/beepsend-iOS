@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "BSGeneralModel.h"
 
-@interface BSBatch : NSObject
+@interface BSBatch : BSGeneralModel
 
 @property (nonatomic, strong, readonly) NSString *batchID;
 @property (nonatomic, strong, readonly) NSString *label;

@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSTransferModel.h"
+#import "BSTransfer.h"
 
 #import "BSWallet.h"
 
-@interface BSTransferModel ()
+@interface BSTransfer ()
 
 @property (nonatomic, strong, readwrite) BSWallet *source;
 @property (nonatomic, strong, readwrite) BSWallet *target;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation BSTransferModel
+@implementation BSTransfer
 
 #pragma mark - Initialization
 
@@ -30,7 +30,7 @@
 	return self;
 }
 
-- (BSTransferModel *)initTransferWithSourceWallet:(BSWallet *)wallet1 destinationWallet:(BSWallet *)wallet2 withAmount:(NSNumber *)amount
+- (BSTransfer *)initTransferWithSourceWallet:(BSWallet *)wallet1 destinationWallet:(BSWallet *)wallet2 withAmount:(NSNumber *)amount
 {
 	if (self = [super initWithID:@"0" andTitle:@"Transfer"]) {
 		_source = wallet1;

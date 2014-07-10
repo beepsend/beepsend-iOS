@@ -8,7 +8,7 @@
 
 #import "BSAPTransfer.h"
 
-#import "BSTransferModel.h"
+#import "BSTransfer.h"
 
 @implementation BSAPTransfer
 
@@ -29,7 +29,7 @@
 
 - (id)convertToModel
 {
-	return [[BSTransferModel alloc] initTransferWithSourceWallet:[_source_wallet convertToModel] destinationWallet:[_target_wallet convertToModel] withAmount:_amount];
+	return [[BSTransfer alloc] initTransferWithSourceWallet:[_source_wallet convertToModel] destinationWallet:[_target_wallet convertToModel] withAmount:_amount];
 }
 
 #pragma mark - Public methods

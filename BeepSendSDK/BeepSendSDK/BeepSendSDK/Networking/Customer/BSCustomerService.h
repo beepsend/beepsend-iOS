@@ -8,10 +8,10 @@
 
 #import "BSBaseService.h"
 
-#import "BSCustomerModel.h"
+#import "BSCustomer.h"
 
 @interface BSCustomerService : BSBaseService
 
-- (void)getCustomerOnCompletion:(void(^)(BSCustomerModel *customer, id error))block;
+- (void)getCustomerOnCompletion:(void(^)(BSCustomer *customer, id error))block;
 
 @end

@@ -108,7 +108,7 @@
 				  }];
 }
 
-- (void)getEmailForWallet:(BSWallet *)wallet andEmailID:(NSString *)emailID withCompletionBlock:(void(^)(BSEmailModel *email, id error))block
+- (void)getEmailForWallet:(BSWallet *)wallet andEmailID:(NSString *)emailID withCompletionBlock:(void(^)(BSEmail *email, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration walletsEmailsForWalletID:wallet.objectID andEmailID:emailID]
 				withParameters:@{}
@@ -125,10 +125,10 @@
 				  }];
 }
 
-- (void)addEmail:(NSString *)email toWallet:(BSWallet *)wallet withCompletionBlock:(void(^)(BSEmailModel *email, id error))block
+- (void)addEmail:(NSString *)email toWallet:(BSWallet *)wallet withCompletionBlock:(void(^)(BSEmail *email, id error))block
 {
 	[super executePOSTForMethod:[BSAPIConfiguration walletsEmailsForID:wallet.objectID]
-				withParameters:[[BSAPEmail convertFromEmailModel:[[BSEmailModel alloc] initEmailWithAddress:email]] dictFromClass]
+				withParameters:[[BSAPEmail convertFromEmailModel:[[BSEmail alloc] initEmailWithAddress:email]] dictFromClass]
 				  onCompletion:^(id response, id error) {
 					  
 					  if (!error) {
@@ -142,7 +142,7 @@
 				  }];
 }
 
-- (void)deleteEmailInWallet:(BSWallet *)wallet email:(BSEmailModel *)email withCompletionBlock:(void(^)(BOOL success, id error))block
+- (void)deleteEmailInWallet:(BSWallet *)wallet email:(BSEmail *)email withCompletionBlock:(void(^)(BOOL success, id error))block
 {
 	[super executeDELETEForMethod:[BSAPIConfiguration walletsEmailsForWalletID:wallet.objectID andEmailID:email.objectID]
 				   withParameters:@{}
@@ -180,7 +180,7 @@
 				  }];
 }
 
-- (void)transferFunds:(NSNumber *)ammount fromWallet:(BSWallet *)wallet1 toWallet:(BSWallet *)wallet2 withCompletionBlock:(void(^)(BSTransferModel *transfer, id error))block
+- (void)transferFunds:(NSNumber *)ammount fromWallet:(BSWallet *)wallet1 toWallet:(BSWallet *)wallet2 withCompletionBlock:(void(^)(BSTransfer *transfer, id error))block
 {
 	[super executePOSTForMethod:[BSAPIConfiguration walletsTransferFundsFromWallet:wallet1.objectID toWallet:wallet2.objectID]
 				 withParameters:@{@"amount" : ammount}

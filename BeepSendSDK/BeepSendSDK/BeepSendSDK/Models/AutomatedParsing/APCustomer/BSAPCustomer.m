@@ -8,7 +8,7 @@
 
 #import "BSAPCustomer.h"
 
-#import "BSCustomerModel.h"
+#import "BSCustomer.h"
 
 @implementation BSAPCustomer
 
@@ -25,13 +25,13 @@
 
 - (id)convertToModel
 {
-	BSPriceListDetailsModel *customerPricelistDetails =
-	[[BSPriceListDetailsModel alloc] initPricelistDetailsWithType:_pricelist_type
+	BSPriceListDetails *customerPricelistDetails =
+	[[BSPriceListDetails alloc] initPricelistDetailsWithType:_pricelist_type
 														delimiter:_pricelist_delimiter
 												pricelistSchedule:[_pricelist_schedule convertToModel]
 														   fields:_pricelist_fields];
 	
-	return [[BSCustomerModel alloc] initCustomerWithID:_id name:_name phone:_phone address:_address city:_city postBox:_post_box country:_country vat:_vat email:_email invoiceType:_invoice_type accountManager:[_account_manager convertToModel] priceListDetails:customerPricelistDetails];
+	return [[BSCustomer alloc] initCustomerWithID:_id name:_name phone:_phone address:_address city:_city postBox:_post_box country:_country vat:_vat email:_email invoiceType:_invoice_type accountManager:[_account_manager convertToModel] priceListDetails:customerPricelistDetails];
 }
 
 #pragma mark - Public methods

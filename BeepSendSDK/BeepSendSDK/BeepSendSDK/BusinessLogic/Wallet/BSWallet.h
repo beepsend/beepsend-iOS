@@ -8,12 +8,14 @@
 
 #import "BSGeneralModel.h"
 
+#import "BSEmail.h"
+
 @interface BSWallet : BSGeneralModel
 
 @property (nonatomic, strong, readonly) NSString *walletID;
-@property (nonatomic, strong, readonly) NSString *name;
+@property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong, readonly) NSNumber *balance;
-@property (nonatomic, strong, readonly) NSNumber *minimumBalanceForNotification;
+@property (nonatomic, strong) NSNumber *minimumBalanceForNotification;
 @property (nonatomic, strong, readonly) NSArray *connections;
 @property (nonatomic, strong, readonly) NSArray *users;
 
@@ -30,5 +32,16 @@
 
 - (BSWallet *)initWalletWithName:(NSString *)wName
 						   limit:(NSNumber *)wLimit;
+
+- (void)updateWallet;
+
+- (void)getTransactionLogOnCompletion:(void(^)(NSArray *log))block;
+
+- (void)transferFunds:(NSNumber *)funds toWallet:(BSWallet *)wallet;
+- (void)transferFunds:(NSNumber *)funds fromWallet:(BSWallet *)wallet;
+
+- (void)getEmailsOnCompletion:(void(^)(NSArray *emails))block;
+- (void)addEmail:(NSString *)email;
+- (void)removeEmail:(BSEmail *)email;
 
 @end

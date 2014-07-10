@@ -8,7 +8,7 @@
 
 #import "BSAPVerified.h"
 
-#import "BSVerifiedModel.h"
+#import "BSVerified.h"
 
 @implementation BSAPVerified
 
@@ -16,7 +16,7 @@
 
 - (id)convertToModel
 {
-	return [[BSVerifiedModel alloc] initUserWithEmailVerified:_email?_email:nil phoneVerified:_phone?_phone:nil termsVerified:_terms?_terms:nil];
+	return [[BSVerified alloc] initUserWithEmailVerified:_email?_email:nil phoneVerified:_phone?_phone:nil termsVerified:_terms?_terms:nil];
 }
 
 @end

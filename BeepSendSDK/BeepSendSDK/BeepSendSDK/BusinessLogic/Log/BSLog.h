@@ -8,17 +8,18 @@
 
 #import "BSGeneralModel.h"
 
-@interface BSLogModel : BSGeneralModel
+@interface BSLog : BSGeneralModel
 
+@property (nonatomic, strong, readonly) NSString *logID;
 @property (nonatomic, strong, readonly) NSDate *timeOfTransaction;
 @property (nonatomic, strong, readonly) NSNumber *balanceAfterTransaction;
 @property (nonatomic, strong, readonly) NSNumber *change;
 @property (nonatomic, strong, readonly) NSString *comment;
 
-- (BSLogModel *)initLogWithID:(NSString *)logID
-					   atTime:(NSDate *)time
-				  withBalance:(NSNumber *)balance
-					   change:(NSNumber *)change
-					  comment:(NSString *)comment;
+- (BSLog *)initLogWithID:(NSString *)logID
+				  atTime:(NSDate *)time
+			 withBalance:(NSNumber *)balance
+				  change:(NSNumber *)change
+				 comment:(NSString *)comment;
 
 @end

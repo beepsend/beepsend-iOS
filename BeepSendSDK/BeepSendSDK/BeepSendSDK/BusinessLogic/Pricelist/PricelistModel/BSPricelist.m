@@ -25,7 +25,7 @@
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title
 {
 	if (self = [super initWithID:@"-1" andTitle:@"Irregular pricelist"]) {
-		
+		_pricelistID = @"-1";
 	}
 	return self;
 }
@@ -38,6 +38,7 @@
 					 timeOfFirstView:(NSDate *)nFirstView
 {
 	if (self = [super initWithID:pID andTitle:@"Pricelist"]) {
+		_pricelistID = pID;
 		_networks = pNetworks;
 		_networkCount = nCount;
 		_saved = nSaved;
