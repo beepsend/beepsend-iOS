@@ -8,7 +8,7 @@
 
 #import "BSBaseService.h"
 
-#import "BSWalletModel.h"
+#import "BSWallet.h"
 #import "BSEmailModel.h"
 #import "BSTransferModel.h"
 #import "BSLogModel.h"
@@ -17,16 +17,16 @@
 
 - (void)getAllWalletsWithCompletionBlock:(void(^)(NSArray *wallets, id error))block;
 
-- (void)getWalletDetailsForID:(NSString *)walletID withCompletionBlock:(void(^)(BSWalletModel *wallet, id error))block;
+- (void)getWalletDetailsForID:(NSString *)walletID withCompletionBlock:(void(^)(BSWallet *wallet, id error))block;
 
-- (void)updateWallet:(BSWalletModel *)wallet withName:(NSString *)wName notifyLimit:(NSNumber *)wLimit withCompletionBlock:(void(^)(BSWalletModel *wallet, id error))block;
+- (void)updateWallet:(BSWallet *)wallet withName:(NSString *)wName notifyLimit:(NSNumber *)wLimit withCompletionBlock:(void(^)(BSWallet *wallet, id error))block;
 
-- (void)getEmailsForWallet:(BSWalletModel *)wallet withCompletionBlock:(void(^)(NSArray *emails, id error))block;
-- (void)getEmailForWallet:(BSWalletModel *)wallet andEmailID:(NSString *)emailID withCompletionBlock:(void(^)(BSEmailModel *email, id error))block;
-- (void)addEmail:(NSString *)email toWallet:(BSWalletModel *)wallet withCompletionBlock:(void(^)(BSEmailModel *email, id error))block;
-- (void)deleteEmailInWallet:(BSWalletModel *)wallet email:(BSEmailModel *)email withCompletionBlock:(void(^)(BOOL success, id error))block;
+- (void)getEmailsForWallet:(BSWallet *)wallet withCompletionBlock:(void(^)(NSArray *emails, id error))block;
+- (void)getEmailForWallet:(BSWallet *)wallet andEmailID:(NSString *)emailID withCompletionBlock:(void(^)(BSEmailModel *email, id error))block;
+- (void)addEmail:(NSString *)email toWallet:(BSWallet *)wallet withCompletionBlock:(void(^)(BSEmailModel *email, id error))block;
+- (void)deleteEmailInWallet:(BSWallet *)wallet email:(BSEmailModel *)email withCompletionBlock:(void(^)(BOOL success, id error))block;
 
-- (void)getTransactionLogForWallet:(BSWalletModel *)wallet withCompletionBlock:(void(^)(NSArray *log, id error))block;
-- (void)transferFunds:(NSNumber *)ammount fromWallet:(BSWalletModel *)wallet1 toWallet:(BSWalletModel *)wallet2 withCompletionBlock:(void(^)(BSTransferModel *transfer, id error))block;
+- (void)getTransactionLogForWallet:(BSWallet *)wallet withCompletionBlock:(void(^)(NSArray *log, id error))block;
+- (void)transferFunds:(NSNumber *)ammount fromWallet:(BSWallet *)wallet1 toWallet:(BSWallet *)wallet2 withCompletionBlock:(void(^)(BSTransferModel *transfer, id error))block;
 
 @end

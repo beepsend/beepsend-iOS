@@ -50,13 +50,13 @@
 
 - (void)updateUserWithName:(NSString *)uName
 					 phone:(NSString *)uPhone
-		 defaultConnection:(BSConnectionModel *)uConnection
+		 defaultConnection:(BSConnection *)uConnection
 				 userTypes:(NSArray *)uTypes
 			 verifiedTerms:(NSNumber *)uVerifiedTerms
 	   withCompletionBlock:(void(^)(BSUserModel *user, id error))block
 {
 	
-	BSConnectionModel *connection = [[BSConnectionModel alloc] initConnectionWithID:uConnection.objectID];
+	BSConnection *connection = [[BSConnection alloc] initConnectionWithID:uConnection.objectID];
 	
 	NSMutableArray *mArr = [@[] mutableCopy];
 	for (BSUserTypeModel *uType in uTypes) {

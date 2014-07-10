@@ -17,7 +17,7 @@
 
 - (void)updateUserWithName:(NSString *)uName
 					 phone:(NSString *)uPhone
-		 defaultConnection:(BSConnectionModel *)uConnection
+		 defaultConnection:(BSConnection *)uConnection
 				 userTypes:(NSArray *)uTypes
 			 verifiedTerms:(NSNumber *)uVerifiedTerms
 	   withCompletionBlock:(void(^)(BSUserModel *user, id error))block;

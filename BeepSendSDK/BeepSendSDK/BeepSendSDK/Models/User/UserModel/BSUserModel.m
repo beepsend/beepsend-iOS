@@ -16,7 +16,7 @@
 @property (nonatomic, strong, readwrite) NSString *phoneNumber;
 @property (nonatomic, strong, readwrite) NSString *customer;
 @property (nonatomic, strong, readwrite) NSString *apiToken;
-@property (nonatomic, strong, readwrite) BSConnectionModel *defaultConnection;
+@property (nonatomic, strong, readwrite) BSConnection *defaultConnection;
 @property (nonatomic, strong, readwrite) NSArray *userTypes;
 @property (nonatomic, strong, readwrite) NSNumber *maxLevel;//Simple permission model. Allows access to all version 2 endpoints.
 @property (nonatomic, strong, readwrite) BSVerifiedModel *verified;
@@ -71,7 +71,7 @@
 
 - (BSUserModel *)initWithName:(NSString *)uName
 						phone:(NSString *)uPhone
-			defaultConnection:(BSConnectionModel *)uConnection
+			defaultConnection:(BSConnection *)uConnection
 					userTypes:(NSArray *)uTypes
 					 verified:(BSVerifiedModel *)uVerified
 {
@@ -91,7 +91,7 @@
 						  phone:(NSString *)uPhone
 					   customer:(NSString *)uCustomer
 					   apiToken:(NSString *)uAPIToken
-			  defaultConnection:(BSConnectionModel *)uConnection
+			  defaultConnection:(BSConnection *)uConnection
 					  userTypes:(NSArray *)uUserTypes
 					   maxLevel:(NSNumber *)uMaxLevel
 					   verified:(BSVerifiedModel *)uVerified

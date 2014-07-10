@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong, readwrite) BSBatch *batch;
 @property (nonatomic, strong, readwrite) NSString *messageBody;
-@property (nonatomic, strong, readwrite) BSConnectionModel *usedConnection;
+@property (nonatomic, strong, readwrite) BSConnection *usedConnection;
 @property (nonatomic, strong, readwrite) NSNumber *dataCoding; //0 for Gsm7 encoded messages. 8 for UCS-2 encoded messages and 4 for binary messages.
 @property (nonatomic, strong, readwrite) BSDLRReportModel *deliveryReport;
 @property (nonatomic, strong, readwrite) BSRecipientModel *sender;
@@ -39,7 +39,7 @@
 - (BSLookupModel *)initLookupWithID:(NSString *)lID
 							  batch:(BSBatch *)lBatch
 							message:(NSString *)lMessage
-					 usedConnection:(BSConnectionModel *)lConnection
+					 usedConnection:(BSConnection *)lConnection
 						 dataCoding:(NSNumber *)lDataCoding
 					 deliveryReport:(BSDLRReportModel *)lDLR
 							 sender:(BSRecipientModel *)lSender

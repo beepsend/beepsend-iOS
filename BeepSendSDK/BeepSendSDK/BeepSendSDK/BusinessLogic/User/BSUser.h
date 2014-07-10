@@ -24,6 +24,7 @@
 @property (nonatomic, strong) BSConnection *defaultConnection;
 
 //@property (nonatomic, strong, readonly) NSString *customer;
+
 //@property (nonatomic, strong, readonly) NSString *apiToken;
 //@property (nonatomic, strong, readonly) NSArray *userTypes;
 //@property (nonatomic, strong, readonly) NSNumber *maxLevel;//Simple permission model. Allows access to all version 2 endpoints.

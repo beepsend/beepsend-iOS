@@ -48,7 +48,7 @@
 	}];
 }
 
-- (void)getMeConnectionOnCompletion:(void(^)(BSConnectionModel *connection, id error))block
+- (void)getMeConnectionOnCompletion:(void(^)(BSConnection *connection, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration connectionsMe]
 				withParameters:@{}
@@ -64,12 +64,12 @@
 	}];
 }
 
-- (void)updateConnection:(BSConnectionModel *)connection
+- (void)updateConnection:(BSConnection *)connection
 		 withCallbackDLR:(NSString *)calbackDLR
 				systemID:(NSString *)systemID
 				   label:(NSString *)label
 			 description:(NSString *)description
-	 withCompletionBlock:(void(^)(BSConnectionModel *connection, id error))block
+	 withCompletionBlock:(void(^)(BSConnection *connection, id error))block
 {
 	//	{
 	//		"callbacks": {
@@ -115,14 +115,14 @@
 				  }];
 }
 
-- (void)resetTokenForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(BSConnectionModel *updatedModel, id error))block
+- (void)resetTokenForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSConnection *updatedModel, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration connectionResetForID:connection.objectID]
 				withParameters:@{}
 				  onCompletion:^(id response, id error) {
 					  
-					  BSConnectionModel *newToken = [[BSConnectionModel alloc] initWithConnectionModel:connection
-																						  withNewToken:[[[BSAPConnection classFromDict:response] convertToModel] apiToken]];
+					  BSConnection *newToken = [[BSConnection alloc] initWithConnectionModel:connection
+																				withNewToken:[[[BSAPConnection classFromDict:response] convertToModel] apiToken]];
 					  
 					  if (!error) {
 						  block(newToken, error);
@@ -134,14 +134,14 @@
 				  }];
 }
 
-- (void)resetPasswordForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(BSConnectionModel *updatedModel, id error))block
+- (void)resetPasswordForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSConnection *updatedModel, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration connectionPasswordResetForID:connection.objectID]
 				withParameters:@{}
 				  onCompletion:^(id response, id error) {
 					  
-					  BSConnectionModel *newPass = [[BSConnectionModel alloc] initWithConnectionModel:connection
-																						  withNewPassword:[[[BSAPConnection classFromDict:response] convertToModel] password]];
+					  BSConnection *newPass = [[BSConnection alloc] initWithConnectionModel:connection
+																			withNewPassword:[[[BSAPConnection classFromDict:response] convertToModel] password]];
 					  
 					  if (!error) {
 						  block(newPass, error);

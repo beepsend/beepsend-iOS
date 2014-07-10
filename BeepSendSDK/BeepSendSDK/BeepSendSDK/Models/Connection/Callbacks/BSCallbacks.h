@@ -8,14 +8,14 @@
 
 #import "BSGeneralModel.h"
 
-@interface BSCallbacksModel : BSGeneralModel
+@interface BSCallbacks : BSGeneralModel
 
-@property (nonatomic, strong, readonly) NSString *DLR;
+@property (nonatomic, strong) NSString *DLR;
 @property (nonatomic, strong, readonly) NSString *MO;
 @property (nonatomic, strong, readonly) NSString *method;
 
-- (BSCallbacksModel *)initCallbackWithMethod:(NSString *)cMethod
-										 dlr:(NSString *)cDlr
-										  mo:(NSString *)cMo;
+- (BSCallbacks *)initCallbackWithMethod:(NSString *)cMethod
+									dlr:(NSString *)cDlr
+									 mo:(NSString *)cMo;
 
 @end

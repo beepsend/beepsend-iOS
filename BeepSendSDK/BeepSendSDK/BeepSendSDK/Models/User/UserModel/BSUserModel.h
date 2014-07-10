@@ -8,7 +8,7 @@
 
 #import "BSGeneralModel.h"
 
-#import "BSConnectionModel.h"
+#import "BSConnection.h"
 #import "BSVerifiedModel.h"
 
 @interface BSUserModel : BSGeneralModel
@@ -19,7 +19,7 @@
 @property (nonatomic, strong, readonly) NSString *phoneNumber;
 @property (nonatomic, strong, readonly) NSString *customer;
 @property (nonatomic, strong, readonly) NSString *apiToken;
-@property (nonatomic, strong, readonly) BSConnectionModel *defaultConnection;
+@property (nonatomic, strong, readonly) BSConnection *defaultConnection;
 @property (nonatomic, strong, readonly) NSArray *userTypes;
 @property (nonatomic, strong, readonly) NSNumber *maxLevel;//Simple permission model. Allows access to all version 2 endpoints.
 @property (nonatomic, strong, readonly) BSVerifiedModel *verified;
@@ -39,7 +39,7 @@
 
 - (BSUserModel *)initWithName:(NSString *)uName
 						phone:(NSString *)uPhone
-			defaultConnection:(BSConnectionModel *)uConnection
+			defaultConnection:(BSConnection *)uConnection
 					userTypes:(NSArray *)uTypes
 					 verified:(BSVerifiedModel *)uVerified;
 
@@ -49,7 +49,7 @@
 						  phone:(NSString *)uPhone
 					   customer:(NSString *)uCustomer
 					   apiToken:(NSString *)uAPIToken
-			  defaultConnection:(BSConnectionModel *)uConnection
+			  defaultConnection:(BSConnection *)uConnection
 					  userTypes:(NSArray *)uUserTypes
 					   maxLevel:(NSNumber *)uMaxLevel
 					   verified:(BSVerifiedModel *)uVerified;

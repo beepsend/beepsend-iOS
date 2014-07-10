@@ -94,9 +94,9 @@
 
 - (void)updateUser
 {
-	BSConnectionModel *connectionModel;
+	BSConnection *connectionModel;
 	if (![_defaultConnection.connectionID isEqualToString:_currentUser.defaultConnection.objectID]) {
-		connectionModel = [[BSConnectionModel alloc] initConnectionWithID:_defaultConnection.connectionID];
+		connectionModel = [[BSConnection alloc] initConnectionWithID:_defaultConnection.connectionID];
 	}
 	[[BSUserService sharedService] updateUserWithName:[_name isEqualToString:_currentUser.name]?nil:_name
 												phone:[_phone isEqualToString:_currentUser.phoneNumber]?nil:_phone

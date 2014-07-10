@@ -8,12 +8,12 @@
 
 #import "BSTransferModel.h"
 
-#import "BSWalletModel.h"
+#import "BSWallet.h"
 
 @interface BSTransferModel ()
 
-@property (nonatomic, strong, readwrite) BSWalletModel *source;
-@property (nonatomic, strong, readwrite) BSWalletModel *target;
+@property (nonatomic, strong, readwrite) BSWallet *source;
+@property (nonatomic, strong, readwrite) BSWallet *target;
 @property (nonatomic, strong, readwrite) NSNumber *amount;
 
 @end
@@ -30,7 +30,7 @@
 	return self;
 }
 
-- (BSTransferModel *)initTransferWithSourceWallet:(BSWalletModel *)wallet1 destinationWallet:(BSWalletModel *)wallet2 withAmount:(NSNumber *)amount
+- (BSTransferModel *)initTransferWithSourceWallet:(BSWallet *)wallet1 destinationWallet:(BSWallet *)wallet2 withAmount:(NSNumber *)amount
 {
 	if (self = [super initWithID:@"0" andTitle:@"Transfer"]) {
 		_source = wallet1;

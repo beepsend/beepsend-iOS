@@ -28,9 +28,9 @@
 
 #pragma mark - Public methods
 
-- (void)getCurrentPricelistsForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(BSPricelist *pricelist, id error))block
+- (void)getCurrentPricelistsForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSPricelist *pricelist, id error))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration pricelistCurrentWithID:connection.objectID]
+	[super executeGETForMethod:[BSAPIConfiguration pricelistCurrentWithID:connection.connectionID]
 				withParameters:@{}
 				  onCompletion:^(id response, id error) {
 					  
@@ -66,9 +66,9 @@
 				  }];
 }
 
-- (void)getPricelistsForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *pricelists, id error))block
+- (void)getPricelistsForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *pricelists, id error))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration pricelistAllForID:connection.objectID]
+	[super executeGETForMethod:[BSAPIConfiguration pricelistAllForID:connection.connectionID]
 				withParameters:@{}
 				  onCompletion:^(id response, id error) {
 					  

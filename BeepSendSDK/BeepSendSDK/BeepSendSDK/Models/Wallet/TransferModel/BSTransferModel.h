@@ -8,14 +8,14 @@
 
 #import "BSGeneralModel.h"
 
-@class BSWalletModel;
+@class BSWallet;
 
 @interface BSTransferModel : BSGeneralModel
 
-@property (nonatomic, strong, readonly) BSWalletModel *source;
-@property (nonatomic, strong, readonly) BSWalletModel *target;
+@property (nonatomic, strong, readonly) BSWallet *source;
+@property (nonatomic, strong, readonly) BSWallet *target;
 @property (nonatomic, strong, readonly) NSNumber *amount;
 
-- (BSTransferModel *)initTransferWithSourceWallet:(BSWalletModel *)wallet1 destinationWallet:(BSWalletModel *)wallet2 withAmount:(NSNumber *)amount;
+- (BSTransferModel *)initTransferWithSourceWallet:(BSWallet *)wallet1 destinationWallet:(BSWallet *)wallet2 withAmount:(NSNumber *)amount;
 
 @end

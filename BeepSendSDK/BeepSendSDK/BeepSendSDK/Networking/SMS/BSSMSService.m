@@ -34,7 +34,7 @@
 
 #pragma mark - Public methods
 
-- (void)sendMessage:(BSMessage *)messageRequest usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block
+- (void)sendMessage:(BSMessage *)messageRequest usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block
 {
 	NSString *method;
 	if (messageRequest.groups) {
@@ -75,7 +75,7 @@
 				   }];
 }
 
-- (void)sendMessages:(NSArray *)messages usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *array, id error))block
+- (void)sendMessages:(NSArray *)messages usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *array, id error))block
 {
 	BOOL containGroups = NO;
 	NSMutableArray *parameters = [@[] mutableCopy];
@@ -200,7 +200,7 @@
 				  }];
 }
 
-- (void)estimateCostForMessages:(NSArray *)messageRequest usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block
+- (void)estimateCostForMessages:(NSArray *)messageRequest usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block
 {
 	NSMutableArray *mArr = [@[] mutableCopy];
 	for (BSMessage *mrm in messageRequest) {

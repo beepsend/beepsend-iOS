@@ -10,7 +10,8 @@
 
 #import "BSAPCUser.h"
 
-#import "BSConnectionModel.h"
+#import "BSConnection.h"
+#import "BSWallet.h"
 #import "BSUserModel.h"
 
 @implementation BSAPConnection
@@ -41,7 +42,19 @@
 		[mUsers addObject:[user convertToModel]];
 	}
 	
-	return [[BSConnectionModel alloc] initConnectionWithID:_id apiToken:_api_token callbacks:[_callbacks convertToModel] customer:_customer description:_description label:_label?_label:_name?_name:@"" systemID:_system_id tlvformccandmnc:_tlv_for_mcc_mnc type:(BSConnectionType)[_type integerValue] users:[NSArray arrayWithArray:mUsers] wallet:[_wallet convertToModel] whitelist:_whitelist password:_password];
+	return [[BSConnection alloc] initConnectionWithID:_id
+											 apiToken:_api_token
+											callbacks:[_callbacks convertToModel]
+											 customer:_customer
+										  description:_description
+												label:_label?_label:_name?_name:@""
+											 systemID:_system_id
+									  tlvformccandmnc:_tlv_for_mcc_mnc
+												 type:(BSConnectionType)[_type integerValue]
+												users:[NSArray arrayWithArray:mUsers]
+											   wallet:[_wallet convertToModel]
+											whitelist:_whitelist
+											 password:_password];
 }
 
 #pragma mark - Public methods
@@ -64,22 +77,18 @@
 	return [NSArray arrayWithArray:results];
 }
 
-+ (BSAPConnection *)convertFromConnectionModel:(BSConnectionModel *)connectionModel
++ (BSAPConnection *)convertFromConnectionModel:(BSConnection *)connectionModel
 {
 	BSAPConnection *connection = [[BSAPConnection alloc] init];
 	
-	if ([connectionModel.objectID isEqualToString:@"-1"]) {
-		return connection;
-	}
-	
 	BSAPCCallback *callback = [[BSAPCCallback alloc] init];
-	callback.method = connectionModel.callbacks.method;
-	callback.dlr = connectionModel.callbacks.DLR;
-	callback.mo	= connectionModel.callbacks.MO;
+	callback.method = connectionModel.callbackURLs.method;
+	callback.dlr = connectionModel.callbackURLs.DLR;
+	callback.mo	= connectionModel.callbackURLs.MO;
 	connection.callbacks = callback;
 	
 	BSAPWallet *wallet = [[BSAPWallet alloc] init];
-	wallet.id = connectionModel.wallet.objectID;
+	wallet.id = connectionModel.wallet.walletID;
 	wallet.name = connectionModel.wallet.name;
 	wallet.balance = connectionModel.wallet.balance;
 	connection.wallet = wallet;
@@ -94,7 +103,7 @@
 	}
 	connection.users = [NSArray arrayWithArray:mArr];
 	
-	connection.id = connectionModel.objectID;
+	connection.id = connectionModel.connectionID;
 	connection.description = connectionModel.description;
 	connection.api_token = connectionModel.apiToken;
 	connection.customer = connectionModel.customer;

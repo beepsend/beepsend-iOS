@@ -23,7 +23,7 @@
 
 @interface BSConnection ()
 
-@property (nonatomic, strong) BSConnectionModel *connectionModel;
+@property (nonatomic, strong) BSConnection *connectionModel;
 
 @property (nonatomic, strong) BSPricelist *currentPricelist;
 @property (nonatomic, strong) NSArray *pricelists;
@@ -32,13 +32,110 @@
 
 @implementation BSConnection
 
-#pragma mark - Properties
+#pragma mark - Initialization
 
-- (NSString *)apiToken {
-	return _connectionModel.apiToken;
+- (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title
+{
+	if (self = [super initWithID:@"-1" andTitle:@"Irregular connection"]) {
+		
+	}
+	return self;
 }
 
-#pragma mark - Initialization
+- (BSConnection *)initConnectionWithID:(NSString *)cID
+{
+	if (self = [super initWithID:cID andTitle:@"Connection"]) {
+		_connectionID = cID;
+	}
+	return self;
+}
+
+- (BSConnection *)initConnectionWithID:(NSString *)cID
+								   apiToken:(NSString *)cAPIToken
+								  callbacks:(BSCallbacks *)cCallbacks
+								   customer:(NSString *)cCustomer
+								description:(NSString *)cDescription
+									  label:(NSString *)cLabel
+								   systemID:(NSString *)cSystemID
+							tlvformccandmnc:(NSNumber *)cTlvformccandmnc
+									   type:(BSConnectionType)cType
+									  users:(NSArray *)cUsers
+									 wallet:(BSWallet *)cWallet
+								  whitelist:(NSString *)cWhitelist
+								   password:(NSString *)password
+{
+	if (self = [super initWithID:cID andTitle:cLabel]) {
+		_connectionID = cID;
+		_apiToken = cAPIToken;
+		_callbackURLs = cCallbacks;
+		_customer = cCustomer;
+		_description = cDescription;
+		_label = cLabel;
+		_systemID = cSystemID;
+		_TLVForMCCAndMNC = cTlvformccandmnc;
+		_type = cType;
+		_users = cUsers;
+		_wallet = cWallet;
+		_whitelist = cWhitelist;
+		_password = password;
+	}
+	return self;
+}
+
+- (BSConnection *)initWithConnectionModel:(BSConnection *)connectionModel withNewToken:(NSString *)newToken
+{
+	if (self = [super initWithID:connectionModel.objectID andTitle:connectionModel.label]) {
+		_connectionID = connectionModel.objectID;
+		_apiToken = newToken;
+		_callbackURLs = connectionModel.callbackURLs;
+		_customer = connectionModel.customer;
+		_description = connectionModel.description;
+		_label = connectionModel.label;
+		_systemID = connectionModel.systemID;
+		_TLVForMCCAndMNC = connectionModel.TLVForMCCAndMNC;
+		_type = connectionModel.type;
+		_users = connectionModel.users;
+		_wallet = connectionModel.wallet;
+		_whitelist = connectionModel.whitelist;
+		_password = connectionModel.password;
+	}
+	return self;
+}
+
+- (BSConnection *)initWithConnectionModel:(BSConnection *)connectionModel withNewPassword:(NSString *)newPassword
+{
+	if (self = [super initWithID:connectionModel.objectID andTitle:connectionModel.label]) {
+		_connectionID = connectionModel.objectID;
+		_apiToken = connectionModel.apiToken;
+		_callbackURLs = connectionModel.callbackURLs;
+		_customer = connectionModel.customer;
+		_description = connectionModel.description;
+		_label = connectionModel.label;
+		_systemID = connectionModel.systemID;
+		_TLVForMCCAndMNC = connectionModel.TLVForMCCAndMNC;
+		_type = connectionModel.type;
+		_users = connectionModel.users;
+		_wallet = connectionModel.wallet;
+		_whitelist = connectionModel.whitelist;
+		_password = newPassword;
+	}
+	return self;
+}
+
+- (BSConnection *)initConnectionWithID:(NSString *)cID
+									  label:(NSString *)cLabel
+								   systemID:(NSString *)cSystemID
+									   type:(BSConnectionType)cType
+{
+	if (self = [super initWithID:cID andTitle:cLabel]) {
+		_connectionID = cID;
+		_label = cLabel;
+		_systemID = cSystemID;
+		_type = cType;
+		
+	}
+	return self;
+}
 
 - (BSConnection *)init
 {
@@ -46,7 +143,7 @@
 		
 		[[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"API_TOKEN" : APIToken }];
 		
-		[[BSConnectionsService sharedService] getMeConnectionOnCompletion:^(BSConnectionModel *connection, id error) {
+		[[BSConnectionsService sharedService] getMeConnectionOnCompletion:^(BSConnection *connection, id error) {
 			[[BSTestSemaphor sharedInstance] lift:@"FetchConnection"];
 			
 			_connectionModel = connection;
@@ -76,7 +173,7 @@
 - (BSConnection *)initDefaultConnection {
 	if (self = [super init]) {
 		
-		[[BSConnectionsService sharedService] getMeConnectionOnCompletion:^(BSConnectionModel *connection, id error) {
+		[[BSConnectionsService sharedService] getMeConnectionOnCompletion:^(BSConnection *connection, id error) {
 			[[BSTestSemaphor sharedInstance] lift:@"FetchConnection"];
 			
 			_connectionModel = connection;
@@ -103,21 +200,31 @@
 	return self;
 }
 
++ (BSConnection *)currentConnection
+{
+	static BSConnection *singleton;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		singleton = [[BSConnection alloc] init];
+	});
+	return singleton;
+}
+
 #pragma mark - Public methods
 
 //After made changes it is necessary to call method updateConnection
 - (void)updateConnection
 {
 	[[BSConnectionsService sharedService] updateConnection:_connectionModel
-										   withCallbackDLR:[_dlrCallback isEqualToString:_connectionModel.callbacks.DLR] ? nil : _dlrCallback
+										   withCallbackDLR:[_callbackURLs.DLR isEqualToString:_connectionModel.callbackURLs.DLR] ? nil : _callbackURLs.DLR
 												  systemID:[_systemID isEqualToString:_connectionModel.systemID] ? nil : _systemID
 													 label:[_label isEqualToString:_connectionModel.label] ? nil : _label
 											   description:[_description isEqualToString:_connectionModel.description] ? nil : _description
-									   withCompletionBlock:^(BSConnectionModel *connection, id error) {
+									   withCompletionBlock:^(BSConnection *connection, id error) {
 	
 										   _connectionModel = connection;
 										   
-										   _dlrCallback = connection.callbacks.DLR;
+										   _callbackURLs.DLR = connection.callbackURLs.DLR;
 										   _systemID = connection.systemID;
 										   _label = connection.label;
 										   _description = connection.description;
@@ -128,7 +235,7 @@
 //If API token is compromised use this method for token reset
 - (void)resetConnectionToken
 {
-	[[BSConnectionsService sharedService] resetTokenForConnection:_connectionModel withCompletionBlock:^(BSConnectionModel *updatedModel, id error) {
+	[[BSConnectionsService sharedService] resetTokenForConnection:_connectionModel withCompletionBlock:^(BSConnection *updatedModel, id error) {
 		
 		//If previously saved API token is equal to connection token
 		//then overwrite it. Otherwise saved token is User token.

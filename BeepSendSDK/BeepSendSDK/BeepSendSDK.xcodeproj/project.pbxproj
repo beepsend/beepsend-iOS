@@ -48,11 +48,13 @@
 		6EB6855E1949ED8B0010FC73 /* BSAFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685531949ED8B0010FC73 /* BSAFURLRequestSerialization.m */; };
 		6EB6855F1949ED8B0010FC73 /* BSAFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685551949ED8B0010FC73 /* BSAFURLResponseSerialization.m */; };
 		6EB685601949ED8B0010FC73 /* BSAFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685571949ED8B0010FC73 /* BSAFURLSessionManager.m */; };
+		6EB7619A196E7F2C00953308 /* BSWallet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB76199196E7F2C00953308 /* BSWallet.m */; };
+		6EB7619B196E7F4400953308 /* BSWallet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB76199196E7F2C00953308 /* BSWallet.m */; };
+		6EB7619F196E873400953308 /* BSCallbacks.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7619E196E873400953308 /* BSCallbacks.m */; };
+		6EB761A0196E8A2800953308 /* BSCallbacks.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7619E196E873400953308 /* BSCallbacks.m */; };
 		6EB7B3A91962ECF400CFEAD4 /* BSAPEstimatedCost.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7B3A81962ECF400CFEAD4 /* BSAPEstimatedCost.m */; };
 		6EB7B3AD1962F05500CFEAD4 /* BSEstimateCostModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7B3AC1962F05500CFEAD4 /* BSEstimateCostModel.m */; };
 		6EB7B3B11962F24E00CFEAD4 /* BSValueForNumberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB7B3B01962F24E00CFEAD4 /* BSValueForNumberModel.m */; };
-		6EB8777C1952E5B90070B749 /* BSConnectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB8777B1952E5B90070B749 /* BSConnectionModel.m */; };
-		6EB877801952EC050070B749 /* BSCallbacksModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB8777F1952EC050070B749 /* BSCallbacksModel.m */; };
 		6EB877921952ED7C0070B749 /* BSAccountManagerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB877881952ED7C0070B749 /* BSAccountManagerModel.m */; };
 		6EB877931952ED7C0070B749 /* BSAccountManagerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB877881952ED7C0070B749 /* BSAccountManagerModel.m */; };
 		6EB877941952ED7C0070B749 /* BSCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB8778B1952ED7C0070B749 /* BSCustomerModel.m */; };
@@ -89,7 +91,6 @@
 		6EBADD18196BE90900315EA4 /* BSUser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBADD10196BDE4400315EA4 /* BSUser.h */; };
 		6EBADD19196BE90900315EA4 /* BSConnection.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBADD14196BE26A00315EA4 /* BSConnection.h */; };
 		6EBADD1F196BEFBC00315EA4 /* BSMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBADD1E196BEFBC00315EA4 /* BSMessage.m */; };
-		6EBADD23196C3B9B00315EA4 /* BSWallet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBADD22196C3B9B00315EA4 /* BSWallet.m */; };
 		6EBC77E2194EF4F900666099 /* BSNetworkLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA76AA194AF28C00941E85 /* BSNetworkLayer.m */; };
 		6EBC77E3194EF4F900666099 /* BSConnectionsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA76B8194B38D800941E85 /* BSConnectionsService.m */; };
 		6EBC77E5194EF50B00666099 /* BSAFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685461949ED8B0010FC73 /* BSAFHTTPRequestOperation.m */; };
@@ -106,7 +107,6 @@
 		6EBC7807194F356A00666099 /* BSBaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBA76A6194AF28600941E85 /* BSBaseService.m */; };
 		6EBD2F51196D1EBE00F89C52 /* BSBatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD2F50196D1EBE00F89C52 /* BSBatch.m */; };
 		6EBE6B3419668D1800F59310 /* BSAPWallet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE6B3319668D1800F59310 /* BSAPWallet.m */; };
-		6EBE6B391966910900F59310 /* BSWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE6B381966910900F59310 /* BSWalletModel.m */; };
 		6EBE6B3D1966988800F59310 /* BSWalletService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE6B3C1966988800F59310 /* BSWalletService.m */; };
 		6EBE6B421966AFCE00F59310 /* BSAPEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE6B411966AFCE00F59310 /* BSAPEmail.m */; };
 		6EBE6B461966B21F00F59310 /* BSEmailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE6B451966B21F00F59310 /* BSEmailModel.m */; };
@@ -251,16 +251,16 @@
 		6EB685551949ED8B0010FC73 /* BSAFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAFURLResponseSerialization.m; sourceTree = "<group>"; };
 		6EB685561949ED8B0010FC73 /* BSAFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAFURLSessionManager.h; sourceTree = "<group>"; };
 		6EB685571949ED8B0010FC73 /* BSAFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAFURLSessionManager.m; sourceTree = "<group>"; };
+		6EB76198196E7F2C00953308 /* BSWallet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSWallet.h; sourceTree = "<group>"; };
+		6EB76199196E7F2C00953308 /* BSWallet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSWallet.m; sourceTree = "<group>"; };
+		6EB7619D196E873400953308 /* BSCallbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCallbacks.h; sourceTree = "<group>"; };
+		6EB7619E196E873400953308 /* BSCallbacks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSCallbacks.m; sourceTree = "<group>"; };
 		6EB7B3A71962ECF400CFEAD4 /* BSAPEstimatedCost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPEstimatedCost.h; path = Models/AutomatedParsing/APEstimatedCost/BSAPEstimatedCost.h; sourceTree = "<group>"; };
 		6EB7B3A81962ECF400CFEAD4 /* BSAPEstimatedCost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPEstimatedCost.m; path = Models/AutomatedParsing/APEstimatedCost/BSAPEstimatedCost.m; sourceTree = "<group>"; };
 		6EB7B3AB1962F05500CFEAD4 /* BSEstimateCostModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSEstimateCostModel.h; path = EstimateCostModel/BSEstimateCostModel.h; sourceTree = "<group>"; };
 		6EB7B3AC1962F05500CFEAD4 /* BSEstimateCostModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSEstimateCostModel.m; path = EstimateCostModel/BSEstimateCostModel.m; sourceTree = "<group>"; };
 		6EB7B3AF1962F24E00CFEAD4 /* BSValueForNumberModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSValueForNumberModel.h; path = EstimateCostModel/ValueForNumberModel/BSValueForNumberModel.h; sourceTree = "<group>"; };
 		6EB7B3B01962F24E00CFEAD4 /* BSValueForNumberModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSValueForNumberModel.m; path = EstimateCostModel/ValueForNumberModel/BSValueForNumberModel.m; sourceTree = "<group>"; };
-		6EB8777A1952E5B90070B749 /* BSConnectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSConnectionModel.h; path = Models/Connection/ConnectionModel/BSConnectionModel.h; sourceTree = "<group>"; };
-		6EB8777B1952E5B90070B749 /* BSConnectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSConnectionModel.m; path = Models/Connection/ConnectionModel/BSConnectionModel.m; sourceTree = "<group>"; };
-		6EB8777E1952EC050070B749 /* BSCallbacksModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSCallbacksModel.h; path = Models/Connection/CallbacksModel/BSCallbacksModel.h; sourceTree = "<group>"; };
-		6EB8777F1952EC050070B749 /* BSCallbacksModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSCallbacksModel.m; path = Models/Connection/CallbacksModel/BSCallbacksModel.m; sourceTree = "<group>"; };
 		6EB877871952ED7C0070B749 /* BSAccountManagerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAccountManagerModel.h; sourceTree = "<group>"; };
 		6EB877881952ED7C0070B749 /* BSAccountManagerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAccountManagerModel.m; sourceTree = "<group>"; };
 		6EB8778A1952ED7C0070B749 /* BSCustomerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCustomerModel.h; sourceTree = "<group>"; };
@@ -308,8 +308,6 @@
 		6EBADD1B196BECB000315EA4 /* BSStructs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BSStructs.h; path = Utilities/Structs/BSStructs.h; sourceTree = "<group>"; };
 		6EBADD1D196BEFBC00315EA4 /* BSMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSMessage.h; path = BusinessLogic/Message/BSMessage.h; sourceTree = "<group>"; };
 		6EBADD1E196BEFBC00315EA4 /* BSMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSMessage.m; path = BusinessLogic/Message/BSMessage.m; sourceTree = "<group>"; };
-		6EBADD21196C3B9B00315EA4 /* BSWallet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSWallet.h; path = BusinessLogic/Wallet/BSWallet.h; sourceTree = "<group>"; };
-		6EBADD22196C3B9B00315EA4 /* BSWallet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSWallet.m; path = BusinessLogic/Wallet/BSWallet.m; sourceTree = "<group>"; };
 		6EBC77F3194F2E6300666099 /* BSCustomerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSCustomerService.h; path = Customer/BSCustomerService.h; sourceTree = "<group>"; };
 		6EBC77F4194F2E6300666099 /* BSCustomerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSCustomerService.m; path = Customer/BSCustomerService.m; sourceTree = "<group>"; };
 		6EBD2F4F196D1EBE00F89C52 /* BSBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSBatch.h; path = BusinessLogic/Batch/BSBatch.h; sourceTree = "<group>"; };
@@ -317,8 +315,6 @@
 		6EBD2F5B196D54CA00F89C52 /* BSInputData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSInputData.h; sourceTree = "<group>"; };
 		6EBE6B3219668D1800F59310 /* BSAPWallet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPWallet.h; path = Models/AutomatedParsing/APWallet/BSAPWallet.h; sourceTree = "<group>"; };
 		6EBE6B3319668D1800F59310 /* BSAPWallet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPWallet.m; path = Models/AutomatedParsing/APWallet/BSAPWallet.m; sourceTree = "<group>"; };
-		6EBE6B371966910900F59310 /* BSWalletModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSWalletModel.h; path = Models/Wallet/WalletModel/BSWalletModel.h; sourceTree = "<group>"; };
-		6EBE6B381966910900F59310 /* BSWalletModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSWalletModel.m; path = Models/Wallet/WalletModel/BSWalletModel.m; sourceTree = "<group>"; };
 		6EBE6B3B1966988800F59310 /* BSWalletService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSWalletService.h; path = Wallet/BSWalletService.h; sourceTree = "<group>"; };
 		6EBE6B3C1966988800F59310 /* BSWalletService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSWalletService.m; path = Wallet/BSWalletService.m; sourceTree = "<group>"; };
 		6EBE6B401966AFCE00F59310 /* BSAPEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPEmail.h; path = Models/AutomatedParsing/APEmail/BSAPEmail.h; sourceTree = "<group>"; };
@@ -783,6 +779,26 @@
 			path = BSAFNetworking;
 			sourceTree = "<group>";
 		};
+		6EB76197196E7F2C00953308 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				6EB76198196E7F2C00953308 /* BSWallet.h */,
+				6EB76199196E7F2C00953308 /* BSWallet.m */,
+			);
+			name = Wallet;
+			path = BusinessLogic/Wallet;
+			sourceTree = "<group>";
+		};
+		6EB7619C196E873400953308 /* Callbacks */ = {
+			isa = PBXGroup;
+			children = (
+				6EB7619D196E873400953308 /* BSCallbacks.h */,
+				6EB7619E196E873400953308 /* BSCallbacks.m */,
+			);
+			name = Callbacks;
+			path = Models/Connection/Callbacks;
+			sourceTree = "<group>";
+		};
 		6EB7B3A61962ECCD00CFEAD4 /* APEstimatedCost */ = {
 			isa = PBXGroup;
 			children = (
@@ -809,33 +825,6 @@
 				6EB7B3B01962F24E00CFEAD4 /* BSValueForNumberModel.m */,
 			);
 			name = ValueForNumberModel;
-			sourceTree = "<group>";
-		};
-		6EB8775F1952E3B50070B749 /* Connection */ = {
-			isa = PBXGroup;
-			children = (
-				6EB8777D1952EB990070B749 /* CallbacksModel */,
-				6EB877791952E50D0070B749 /* ConnectionModel */,
-			);
-			name = Connection;
-			sourceTree = "<group>";
-		};
-		6EB877791952E50D0070B749 /* ConnectionModel */ = {
-			isa = PBXGroup;
-			children = (
-				6EB8777A1952E5B90070B749 /* BSConnectionModel.h */,
-				6EB8777B1952E5B90070B749 /* BSConnectionModel.m */,
-			);
-			name = ConnectionModel;
-			sourceTree = "<group>";
-		};
-		6EB8777D1952EB990070B749 /* CallbacksModel */ = {
-			isa = PBXGroup;
-			children = (
-				6EB8777E1952EC050070B749 /* BSCallbacksModel.h */,
-				6EB8777F1952EC050070B749 /* BSCallbacksModel.m */,
-			);
-			name = CallbacksModel;
 			sourceTree = "<group>";
 		};
 		6EB877851952ED7C0070B749 /* Customer */ = {
@@ -1112,7 +1101,8 @@
 				6EBADD0E196BCF3900315EA4 /* Message */,
 				6EBD2F4E196D1E8D00F89C52 /* Batch */,
 				6ED59E70196D79E200A271ED /* Pricelist */,
-				6EBADD20196C3B8200315EA4 /* BSWallet */,
+				6EB76197196E7F2C00953308 /* Wallet */,
+				6EB7619C196E873400953308 /* Callbacks */,
 			);
 			name = BusinessLogic;
 			sourceTree = "<group>";
@@ -1152,22 +1142,12 @@
 			name = Structs;
 			sourceTree = "<group>";
 		};
-		6EBADD20196C3B8200315EA4 /* BSWallet */ = {
-			isa = PBXGroup;
-			children = (
-				6EBADD21196C3B9B00315EA4 /* BSWallet.h */,
-				6EBADD22196C3B9B00315EA4 /* BSWallet.m */,
-			);
-			name = BSWallet;
-			sourceTree = "<group>";
-		};
 		6EBC77CA194EE04E00666099 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				6EB96ED61951902C00AD77E2 /* AutomatedParsing */,
 				6EC3168A19504CBE004D8F87 /* GeneralModel */,
 				6EB877851952ED7C0070B749 /* Customer */,
-				6EB8775F1952E3B50070B749 /* Connection */,
 				6EB8779A1952EF790070B749 /* User */,
 				6ECBBD37195D7BD000D78CAE /* Message */,
 				6EB5909D195AD6D3009456B0 /* HLR */,
@@ -1212,18 +1192,8 @@
 				6E9ABC32196A9FC600874D81 /* TransferModel */,
 				6E9ABC2A196A830C00874D81 /* LogModel */,
 				6EBE6B431966B1FC00F59310 /* EmailModel */,
-				6EBE6B361966908700F59310 /* WalletModel */,
 			);
 			name = Wallet;
-			sourceTree = "<group>";
-		};
-		6EBE6B361966908700F59310 /* WalletModel */ = {
-			isa = PBXGroup;
-			children = (
-				6EBE6B371966910900F59310 /* BSWalletModel.h */,
-				6EBE6B381966910900F59310 /* BSWalletModel.m */,
-			);
-			name = WalletModel;
 			sourceTree = "<group>";
 		};
 		6EBE6B3A1966984D00F59310 /* Wallet */ = {
@@ -1609,14 +1579,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EB761A0196E8A2800953308 /* BSCallbacks.m in Sources */,
+				6EB7619B196E7F4400953308 /* BSWallet.m in Sources */,
 				6ED59E81196D7A0700A271ED /* BSCountry.m in Sources */,
 				6ED59E82196D7A0700A271ED /* BSMCCMNC.m in Sources */,
 				6ED59E83196D7A0700A271ED /* BSNetwork.m in Sources */,
 				6ED59E84196D7A0700A271ED /* BSPricelist.m in Sources */,
 				6EBADD17196BE48B00315EA4 /* BSTestSemaphor.m in Sources */,
-				6EBE6B391966910900F59310 /* BSWalletModel.m in Sources */,
 				6EC7E5B619653CA4008486E6 /* BSAPNetworkDetailsResponse.m in Sources */,
-				6EBADD23196C3B9B00315EA4 /* BSWallet.m in Sources */,
 				6E42E57A195B091B00343B2E /* BSContactsService.m in Sources */,
 				6EB7B3B11962F24E00CFEAD4 /* BSValueForNumberModel.m in Sources */,
 				6EB877AB195310D10070B749 /* BSAPConnection.m in Sources */,
@@ -1656,7 +1626,6 @@
 				6EBC77EC194EF50B00666099 /* BSAFURLResponseSerialization.m in Sources */,
 				6ECBBD32195D76F600D78CAE /* BSAPSMSLookup.m in Sources */,
 				6EB59094195ACD37009456B0 /* BSAPHLRReport.m in Sources */,
-				6EB8777C1952E5B90070B749 /* BSConnectionModel.m in Sources */,
 				6EF46E151959A0EE002C6F56 /* BSAPUserType.m in Sources */,
 				6EBE6B3D1966988800F59310 /* BSWalletService.m in Sources */,
 				6E74C07C195B0DC3001B9304 /* BSContactModel.m in Sources */,
@@ -1704,7 +1673,6 @@
 				6E74C077195B0C59001B9304 /* BSAPContact.m in Sources */,
 				6EB8E44F195C1A660098AC33 /* BSGroupsService.m in Sources */,
 				6EB877921952ED7C0070B749 /* BSAccountManagerModel.m in Sources */,
-				6EB877801952EC050070B749 /* BSCallbacksModel.m in Sources */,
 				6EB3EA761958277A00951E57 /* BSAPPMCCMNC.m in Sources */,
 				6EBE6B461966B21F00F59310 /* BSEmailModel.m in Sources */,
 			);
@@ -1717,6 +1685,7 @@
 				6EB877931952ED7C0070B749 /* BSAccountManagerModel.m in Sources */,
 				6EB877971952ED7C0070B749 /* BSPriceListDetailsModel.m in Sources */,
 				6EBA76A7194AF28600941E85 /* BSBaseService.m in Sources */,
+				6EB7619A196E7F2C00953308 /* BSWallet.m in Sources */,
 				6ED59E7E196D79E200A271ED /* BSMCCMNC.m in Sources */,
 				6EB96EE6195192C100AD77E2 /* BSAPCustomer.m in Sources */,
 				6EB6855D1949ED8B0010FC73 /* BSAFURLConnectionOperation.m in Sources */,
@@ -1729,6 +1698,7 @@
 				6E653834194730EB00FC6349 /* BeepSendSDKTests.m in Sources */,
 				6EB877B8195311660070B749 /* BSAPCUser.m in Sources */,
 				6EB6855B1949ED8B0010FC73 /* BSAFNetworkReachabilityManager.m in Sources */,
+				6EB7619F196E873400953308 /* BSCallbacks.m in Sources */,
 				6ED59E80196D79E200A271ED /* BSPricelist.m in Sources */,
 				6EB877AC195310D10070B749 /* BSAPConnection.m in Sources */,
 				6EC31687195030D0004D8F87 /* BSSMSService.m in Sources */,

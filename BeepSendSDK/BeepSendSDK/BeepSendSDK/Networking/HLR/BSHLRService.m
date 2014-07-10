@@ -29,7 +29,7 @@
 #pragma mark - Public methods
 
 - (void)doImmediateHLRForNumber:(NSString *)number
-				 withConnection:(BSConnectionModel *)connection
+				 withConnection:(BSConnection *)connection
 			withCompletionBlock:(void(^)(BSHLRModel *hlr, id error))block
 {
 	NSString *method = [BSAPIConfiguration hlrForNumber:number];
@@ -53,7 +53,7 @@
 }
 
 - (void)validateHLRForNumber:(NSString *)number
-			  withConnection:(BSConnectionModel *)connection
+			  withConnection:(BSConnection *)connection
 		 withCompletionBlock:(void(^)(id response, id error))block
 {
 	NSString *method = [BSAPIConfiguration validateHLR];

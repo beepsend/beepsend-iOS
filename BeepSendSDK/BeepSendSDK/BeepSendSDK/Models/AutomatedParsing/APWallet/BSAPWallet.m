@@ -11,7 +11,7 @@
 #import "BSAPConnection.h"
 #import "BSAPCUser.h"
 
-#import "BSWalletModel.h"
+#import "BSWallet.h"
 
 @implementation BSAPWallet
 
@@ -33,7 +33,7 @@
 
 - (id)convertToModel
 {
-	return [[BSWalletModel alloc] initWalletWithID:_id
+	return [[BSWallet alloc] initWalletWithID:_id
 											 named:_name
 										   balance:_balance
 									minimumBalance:_notify_limit
@@ -52,7 +52,7 @@
 	return [NSArray arrayWithArray:results];
 }
 
-+ (BSAPWallet *)convertFromWalletModel:(BSWalletModel *)walletModel
++ (BSAPWallet *)convertFromWalletModel:(BSWallet *)walletModel
 {
 
 	BSAPWallet *wallet = [[BSAPWallet alloc] init];

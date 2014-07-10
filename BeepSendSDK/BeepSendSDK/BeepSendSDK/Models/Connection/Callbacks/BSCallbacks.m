@@ -6,17 +6,16 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSCallbacksModel.h"
+#import "BSCallbacks.h"
 
-@interface BSCallbacksModel ()
+@interface BSCallbacks ()
 
-@property (nonatomic, strong, readwrite) NSString *DLR;
 @property (nonatomic, strong, readwrite) NSString *MO;
 @property (nonatomic, strong, readwrite) NSString *method;
 
 @end
 
-@implementation BSCallbacksModel
+@implementation BSCallbacks
 
 #pragma mark - Initialization
 
@@ -28,7 +27,7 @@
 	return self;
 }
 
-- (BSCallbacksModel *)initCallbackWithMethod:(NSString *)cMethod
+- (BSCallbacks *)initCallbackWithMethod:(NSString *)cMethod
 										 dlr:(NSString *)cDlr
 										  mo:(NSString *)cMo
 {

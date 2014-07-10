@@ -8,7 +8,7 @@
 
 #import "BSSerializableObject.h"
 
-@class BSWalletModel;
+@class BSWallet;
 
 @interface BSAPWallet : BSSerializableObject
 
@@ -21,6 +21,6 @@
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
 
-+ (BSAPWallet *)convertFromWalletModel:(BSWalletModel *)walletModel;
++ (BSAPWallet *)convertFromWalletModel:(BSWallet *)walletModel;
 
 @end

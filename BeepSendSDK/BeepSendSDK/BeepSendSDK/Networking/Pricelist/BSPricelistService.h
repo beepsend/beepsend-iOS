@@ -9,14 +9,14 @@
 #import "BSBaseService.h"
 
 #import "BSPricelist.h"
-#import "BSConnectionModel.h"
+#import "BSConnection.h"
 
 @interface BSPricelistService : BSBaseService
 
-- (void)getCurrentPricelistsForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(BSPricelist *pricelist, id error))block;
+- (void)getCurrentPricelistsForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSPricelist *pricelist, id error))block;
 - (void)getCurrentPricelistsForMeWithCompletionBlock:(void(^)(BSPricelist *pricelist, id error))block;
 
-- (void)getPricelistsForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *pricelists, id error))block;
+- (void)getPricelistsForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *pricelists, id error))block;
 - (void)getPriceListsForMeWithCompletionBlock:(void(^)(NSArray *pricelists, id error))block;
 
 @end

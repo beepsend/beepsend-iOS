@@ -6,15 +6,16 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "BSGeneralModel.h"
 #import "BSStructs.h"
 
 #import "BSPricelist.h"
+#import "BSCallbacks.h"
 
 @class BSMessage;
 @class BSWallet;
 
-@interface BSConnection : NSObject
+@interface BSConnection : BSGeneralModel
 
 //Connection ID
 @property (nonatomic, strong, readonly) NSString *connectionID;
@@ -37,17 +38,53 @@
 //Connection API token
 @property (nonatomic, strong, readonly) NSString *apiToken;
 
-//Callback URLs
-@property (nonatomic, strong) NSString *dlrCallback;
+//Callbacks URLs
+@property (nonatomic, strong) BSCallbacks *callbackURLs;
 
-//@property (nonatomic, strong, readonly) BSCallbacksModel *callbacks;
-//@property (nonatomic, strong, readonly) NSString *customer;
-//@property (nonatomic, strong, readonly) NSNumber *TLVForMCCAndMNC;//Tag-Length-Value field for returning mcc and mnc in DLR.
-//@property (nonatomic, strong, readonly) NSString *whitelist;
-//@property (nonatomic, strong, readonly) NSString *password;
+//Customer that ownes connection
+@property (nonatomic, strong, readonly) NSString *customer;
+
+//Tag-Length-Value field for returning mcc and mnc in DLR.
+@property (nonatomic, strong, readonly) NSNumber *TLVForMCCAndMNC;
+
+//Whitelist
+@property (nonatomic, strong, readonly) NSString *whitelist;
+
+//Connection password
+@property (nonatomic, strong, readonly) NSString *password;
+
+
+- (BSConnection *)initConnectionWithID:(NSString *)cID;
+
+- (BSConnection *)initConnectionWithID:(NSString *)cID
+							  apiToken:(NSString *)cAPIToken
+							 callbacks:(BSCallbacks *)cCallbacks
+							  customer:(NSString *)cCustomer
+						   description:(NSString *)cDescription
+								 label:(NSString *)cLabel
+							  systemID:(NSString *)cSystemID
+					   tlvformccandmnc:(NSNumber *)cTlvformccandmnc
+								  type:(BSConnectionType)cType
+								 users:(NSArray *)cUsers
+								wallet:(BSWallet *)cWallet
+							 whitelist:(NSString *)cWhitelist
+							  password:(NSString *)password;
+
+//Copy constructor with new API token
+- (BSConnection *)initWithConnectionModel:(BSConnection *)connectionModel
+							 withNewToken:(NSString *)newToken;
+
+//Copy constructor with new password
+- (BSConnection *)initWithConnectionModel:(BSConnection *)connectionModel
+						  withNewPassword:(NSString *)newPassword;
+
+- (BSConnection *)initConnectionWithID:(NSString *)cID
+								 label:(NSString *)cLabel
+							  systemID:(NSString *)cSystemID
+								  type:(BSConnectionType)cType;
 
 //Initiate connection with API token
-- (BSConnection *)init;
++ (BSConnection *)currentConnection;
 
 //Accessible only if User is initiated with apiToken
 - (BSConnection *)initDefaultConnection;
