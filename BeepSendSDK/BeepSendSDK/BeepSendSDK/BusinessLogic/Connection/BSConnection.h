@@ -48,11 +48,10 @@
 @property (nonatomic, strong, readonly) NSNumber *TLVForMCCAndMNC;
 
 //Whitelist
-@property (nonatomic, strong, readonly) NSString *whitelist;
+@property (nonatomic, strong, readonly) NSArray *whitelist;
 
 //Connection password
 @property (nonatomic, strong, readonly) NSString *password;
-
 
 - (BSConnection *)initConnectionWithID:(NSString *)cID;
 
@@ -67,7 +66,7 @@
 								  type:(BSConnectionType)cType
 								 users:(NSArray *)cUsers
 								wallet:(BSWallet *)cWallet
-							 whitelist:(NSString *)cWhitelist
+							 whitelist:(NSArray *)cWhitelist
 							  password:(NSString *)password;
 
 //Copy constructor with new API token

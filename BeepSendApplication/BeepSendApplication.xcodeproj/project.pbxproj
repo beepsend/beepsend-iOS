@@ -25,6 +25,8 @@
 		6EB644741948965B004A1818 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB644731948965B004A1818 /* Helper.m */; };
 		6EB644831948A597004A1818 /* BSInputAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB644821948A597004A1818 /* BSInputAccessoryView.m */; };
 		6EB6853619498BD20010FC73 /* BSTextFieldCustomTextInset.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6853519498BD20010FC73 /* BSTextFieldCustomTextInset.m */; };
+		6EB871EB19700C9D0006CE29 /* BSUserTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB871EA19700C9D0006CE29 /* BSUserTypeTableViewCell.m */; };
+		6EB871EE19700CC20006CE29 /* BSConnectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB871ED19700CC20006CE29 /* BSConnectionTableViewCell.m */; };
 		6EBC77DD194EE9BF00666099 /* libBeepSendSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBC77DA194EE98100666099 /* libBeepSendSDK.a */; };
 		6EBC77F1194EF60800666099 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBC77F0194EF60800666099 /* SystemConfiguration.framework */; };
 		6EBD2F56196D453400F89C52 /* BSSendMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD2F55196D453400F89C52 /* BSSendMessageView.m */; };
@@ -91,6 +93,10 @@
 		6EB6853419498BD20010FC73 /* BSTextFieldCustomTextInset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTextFieldCustomTextInset.h; sourceTree = "<group>"; };
 		6EB6853519498BD20010FC73 /* BSTextFieldCustomTextInset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSTextFieldCustomTextInset.m; sourceTree = "<group>"; };
 		6EB6853C19498F520010FC73 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Utilities/Helper/Constants/Constants.h; sourceTree = "<group>"; };
+		6EB871E919700C9D0006CE29 /* BSUserTypeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSUserTypeTableViewCell.h; path = TableViewCells/TableViewCellUserType/BSUserTypeTableViewCell.h; sourceTree = "<group>"; };
+		6EB871EA19700C9D0006CE29 /* BSUserTypeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSUserTypeTableViewCell.m; path = TableViewCells/TableViewCellUserType/BSUserTypeTableViewCell.m; sourceTree = "<group>"; };
+		6EB871EC19700CC20006CE29 /* BSConnectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSConnectionTableViewCell.h; path = TableViewCells/TableViewCellConnection/BSConnectionTableViewCell.h; sourceTree = "<group>"; };
+		6EB871ED19700CC20006CE29 /* BSConnectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSConnectionTableViewCell.m; path = TableViewCells/TableViewCellConnection/BSConnectionTableViewCell.m; sourceTree = "<group>"; };
 		6EBC77D4194EE98100666099 /* BeepSendSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BeepSendSDK.xcodeproj; path = ../BeepSendSDK/BeepSendSDK/BeepSendSDK.xcodeproj; sourceTree = "<group>"; };
 		6EBC77F0194EF60800666099 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6EBD2F54196D453400F89C52 /* BSSendMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSSendMessageView.h; path = Views/SendMessageView/BSSendMessageView.h; sourceTree = "<group>"; };
@@ -163,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				6EB6447019489638004A1818 /* Utilities */,
+				6EB871E519700C410006CE29 /* TableViewCells */,
 				6EB6446619488C51004A1818 /* Views */,
 				6EB6446319488C25004A1818 /* ViewControllers */,
 				6E6537EB19472BD700FC6349 /* BSAppDelegate.h */,
@@ -291,6 +298,33 @@
 				6EB6853C19498F520010FC73 /* Constants.h */,
 			);
 			name = Constants;
+			sourceTree = "<group>";
+		};
+		6EB871E519700C410006CE29 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				6EB871E719700C4B0006CE29 /* TableViewCellUserType */,
+				6EB871E819700C5A0006CE29 /* TableViewCellConnection */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		6EB871E719700C4B0006CE29 /* TableViewCellUserType */ = {
+			isa = PBXGroup;
+			children = (
+				6EB871E919700C9D0006CE29 /* BSUserTypeTableViewCell.h */,
+				6EB871EA19700C9D0006CE29 /* BSUserTypeTableViewCell.m */,
+			);
+			name = TableViewCellUserType;
+			sourceTree = "<group>";
+		};
+		6EB871E819700C5A0006CE29 /* TableViewCellConnection */ = {
+			isa = PBXGroup;
+			children = (
+				6EB871EC19700CC20006CE29 /* BSConnectionTableViewCell.h */,
+				6EB871ED19700CC20006CE29 /* BSConnectionTableViewCell.m */,
+			);
+			name = TableViewCellConnection;
 			sourceTree = "<group>";
 		};
 		6EBC77D5194EE98100666099 /* Products */ = {
@@ -443,6 +477,8 @@
 				6EB6853619498BD20010FC73 /* BSTextFieldCustomTextInset.m in Sources */,
 				6EB6446A19488C8C004A1818 /* BSRootViewController.m in Sources */,
 				6E6537E919472BD700FC6349 /* main.m in Sources */,
+				6EB871EB19700C9D0006CE29 /* BSUserTypeTableViewCell.m in Sources */,
+				6EB871EE19700CC20006CE29 /* BSConnectionTableViewCell.m in Sources */,
 				6EB644831948A597004A1818 /* BSInputAccessoryView.m in Sources */,
 				6E6537ED19472BD700FC6349 /* BSAppDelegate.m in Sources */,
 				6EBD2F56196D453400F89C52 /* BSSendMessageView.m in Sources */,

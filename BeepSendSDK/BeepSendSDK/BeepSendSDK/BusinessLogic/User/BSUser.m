@@ -30,15 +30,15 @@
 #pragma mark - Properties
 
 - (NSString *)name {
-	return _currentUser.name;
+	return _currentUser ? _currentUser.name : _name;
 }
 
 - (NSString *)phone {
-	return _currentUser.phone;
+	return _currentUser ? _currentUser.phone : _phone;
 }
 
 - (NSString *)email {
-	return _currentUser.email;
+	return _currentUser ? _currentUser.email : _email;
 }
 
 - (BSConnection *)defaultConnection {
@@ -59,8 +59,8 @@
 }
 
 - (BSUser *)initUserWithID:(NSString *)uID
-						   name:(NSString *)uName
-						  email:(NSString *)uEmail
+					  name:(NSString *)uName
+					 email:(NSString *)uEmail
 {
 	if (self = [super initWithID:uID andTitle:uName]) {
 		_userID = uID;
@@ -150,6 +150,15 @@
 			_email = user.email;
 			_phone = user.phone;
 			
+			_userID = user.userID;
+
+			_customer = user.customer;
+			_apiToken = user.apiToken;
+
+			_userTypes = user.userTypes;
+			_maxLevel = user.maxLevel;
+			_verified = user.verified;
+			
 		}];
 		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchUser"];
 		
@@ -179,6 +188,10 @@
 
 - (void)updateUser
 {
+	if (!_currentUser) {
+		return;
+	}
+	
 	BSConnection *connectionModel;
 	if (![_defaultConnection.connectionID isEqualToString:_currentUser.defaultConnection.objectID]) {
 		connectionModel = [[BSConnection alloc] initConnectionWithID:_defaultConnection.connectionID];
@@ -195,6 +208,7 @@
 											_email = user.email;
 											_phone = user.phone;
 											
+											_defaultConnection = user.defaultConnection;
 	}];
 }
 
@@ -203,6 +217,8 @@
 	[[BSUserService sharedService] resetUserTokenUsingPassword:password withCompletionBlock:^(NSString *apiToken, id error) {
 		[[NSUserDefaults standardUserDefaults] setObject:apiToken forKey:@"API_TOKEN"];
 		[[NSUserDefaults standardUserDefaults] synchronize];
+		
+		_apiToken = apiToken;
 	}];
 }
 
@@ -211,17 +227,7 @@
 	[[BSConnectionsService sharedService] getAllAvailableConnectsionOnCompletion:^(NSArray *connections, id error) {
 		BSDLog(@"%@", connections);
 		
-//		NSMutableArray *mArr = [@[] mutableCopy];
-//		for (BSConnectionModel *cm in connections) {
-//			
-//			BSConnection *connection = [[BSConnection alloc] initWIthID:cm.objectID andConnectionType:cm.type];
-//			connection.label = cm.label;
-//			connection.description = cm.description;
-//			connection.systemID = cm.systemID;
-//			
-//			[mArr addObject:connection];
-//		}
-//		_connections = [NSArray arrayWithArray:mArr];
+		_connections = connections;
 		
 		block(_connections);
 	}];
@@ -236,17 +242,7 @@
 		[[BSConnectionsService sharedService] getAllAvailableConnectsionOnCompletion:^(NSArray *connections, id error) {
 			[[BSTestSemaphor sharedInstance] lift:@"FetchConnections"];
 			
-//			NSMutableArray *mArr = [@[] mutableCopy];
-//			for (BSConnectionModel *cm in connections) {
-//				
-//				BSConnection *connection = [[BSConnection alloc] initWIthID:cm.objectID andConnectionType:cm.type];
-//				connection.label = cm.label;
-//				connection.description = cm.description;
-//				connection.systemID = cm.systemID;
-//				
-//				[mArr addObject:connection];
-//			}
-//			_connections = [NSArray arrayWithArray:mArr];
+			_connections = connections;
 			
 		}];
 		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchConnections"];

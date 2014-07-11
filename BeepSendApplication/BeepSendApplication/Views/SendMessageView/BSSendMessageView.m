@@ -12,9 +12,6 @@
 
 #import "BSInputAccessoryView.h"
 
-#define kTextFieldDefaultPlaceholderSize 14.0
-#define kTextFieldDefaultTextSize 16.0
-
 @implementation BSSendMessageView
 
 #pragma mark - Initialization

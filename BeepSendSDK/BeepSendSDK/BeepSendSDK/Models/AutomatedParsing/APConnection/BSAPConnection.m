@@ -42,6 +42,10 @@
 		[mUsers addObject:[user convertToModel]];
 	}
 	
+	if (![_whitelist isKindOfClass:[NSArray class]]) {
+		_whitelist = nil;
+	}
+	
 	return [[BSConnection alloc] initConnectionWithID:_id
 											 apiToken:_api_token
 											callbacks:[_callbacks convertToModel]

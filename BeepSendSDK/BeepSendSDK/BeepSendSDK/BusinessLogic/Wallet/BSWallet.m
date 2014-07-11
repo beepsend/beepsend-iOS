@@ -10,13 +10,28 @@
 
 #import "BSWalletService.h"
 
+#define kDefaultCount @2
+
 @interface BSWallet ()
 
+@property (nonatomic, strong) BSWallet *currentWallet;
+
+@property (nonatomic, strong) NSNumber *count;
 @property (nonatomic, strong) NSArray *log;
 
 @end
 
 @implementation BSWallet
+
+#pragma mark - Properties
+
+- (NSString *)name {
+	return _currentWallet ? _currentWallet.name : _name;
+}
+
+- (NSNumber *)minimumBalanceForNotification {
+	return _currentWallet ? _currentWallet.minimumBalanceForNotification : _minimumBalanceForNotification;
+}
 
 #pragma mark - Initialization
 
@@ -42,6 +57,7 @@
 		_minimumBalanceForNotification = wMinBalance;
 		_connections = wConnections;
 		_users = wUsers;
+		_count = kDefaultCount;
 	}
 	return self;
 }
@@ -54,6 +70,7 @@
 		_walletID = wID;
 		_name = wName;
 		_balance = wBalance;
+		_count = kDefaultCount;
 	}
 	return self;
 }
@@ -65,6 +82,7 @@
 		_walletID = @"0";
 		_name = wName;
 		_minimumBalanceForNotification = wLimit;
+		_count = kDefaultCount;
 	}
 	return self;
 }
@@ -73,19 +91,55 @@
 
 - (void)updateWallet
 {
-	
-}
-
-- (void)getTransactionLogOnCompletion:(void(^)(NSArray *log))block
-{
-	if (_log) {
-		block(_log);
+	if (!_currentWallet) {
+		return;
 	}
 	
-	[[BSWalletService sharedService] getTransactionLogForWallet:self withCompletionBlock:^(NSArray *log, id error) {
-		_log = log;
-		block(log);
+	[[BSWalletService sharedService] updateWallet:self
+										 withName:![_currentWallet.name isEqualToString:_name]?_name:nil
+									  notifyLimit:![_currentWallet.minimumBalanceForNotification isEqualToNumber:_minimumBalanceForNotification]?_minimumBalanceForNotification:nil
+							  withCompletionBlock:^(BSWallet *wallet, id error) {
+								  
+								  _currentWallet = wallet;
+								  
+								  _name = _currentWallet.name;
+								  _minimumBalanceForNotification = _currentWallet.minimumBalanceForNotification;
+								  
+							  }];
+}
+
+- (void)getTransactionLogForNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *log))block
+{
+	NSString *maxID = nil;
+	if (_log) {
+		maxID = [_log lastObject] ? [[_log lastObject] logID] : nil;
+	}
+	
+	if (!nextPage) {
+		_log = @[];
+	}
+	
+	[[BSWalletService sharedService] getTransactionLogForWallet:self since:nil max:nextPage ? maxID : nil count:nextPage ? [NSNumber numberWithInteger:([_count integerValue]+1)] : _count withCompletionBlock:^(NSArray *log, id error) {
+		
+		NSMutableArray *mArr = [NSMutableArray arrayWithArray:_log];
+		[mArr removeLastObject];
+		_log = [mArr arrayByAddingObjectsFromArray:log];
+		
+		block(_log);
 	}];
+}
+
+- (void)setMaximumLogCount:(NSNumber *)logCount
+{
+	if ([logCount integerValue] > 200) {
+		_count = @200;
+	}
+	
+	if ([logCount integerValue] < 1) {
+		_count = @1;
+	}
+	
+	_count = logCount;
 }
 
 - (void)transferFunds:(NSNumber *)funds toWallet:(BSWallet *)wallet

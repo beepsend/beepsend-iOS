@@ -35,7 +35,8 @@
 
 - (void)updateWallet;
 
-- (void)getTransactionLogOnCompletion:(void(^)(NSArray *log))block;
+- (void)getTransactionLogForNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *log))block;
+- (void)setMaximumLogCount:(NSNumber *)logCount; //Default 50. Maximum 200.
 
 - (void)transferFunds:(NSNumber *)funds toWallet:(BSWallet *)wallet;
 - (void)transferFunds:(NSNumber *)funds fromWallet:(BSWallet *)wallet;

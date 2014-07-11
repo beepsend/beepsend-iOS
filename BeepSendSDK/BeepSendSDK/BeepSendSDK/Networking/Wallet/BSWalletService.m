@@ -14,6 +14,7 @@
 #import "BSAPEmail.h"
 #import "BSAPTransactionLog.h"
 #import "BSAPTransfer.h"
+#import "BSAPWalletRequest.h"
 
 @implementation BSWalletService
 
@@ -159,10 +160,15 @@
 					 }];
 }
 
-- (void)getTransactionLogForWallet:(BSWallet *)wallet withCompletionBlock:(void(^)(NSArray *log, id error))block
+- (void)getTransactionLogForWallet:(BSWallet *)wallet since:(NSString *)sinceID max:(NSString *)maxID count:(NSNumber *)count withCompletionBlock:(void(^)(NSArray *log, id error))block
 {
+	BSAPWalletRequest *wRequest = [[BSAPWalletRequest alloc] init];
+	wRequest.since_id = sinceID;
+	wRequest.max_id = maxID;
+	wRequest.count = count;
+	
 	[super executeGETForMethod:[BSAPIConfiguration walletsTransactionForID:wallet.objectID]
-				withParameters:@{}
+				withParameters:[wRequest dictFromClass]
 				  onCompletion:^(id response, id error) {
 					  
 					  if (!error) {

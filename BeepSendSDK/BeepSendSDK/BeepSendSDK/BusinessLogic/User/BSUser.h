@@ -61,15 +61,15 @@
 				verified:(BSVerified *)uVerified;
 
 - (BSUser *)initUserWithID:(NSString *)uID
-						   name:(NSString *)uName
-						  email:(NSString *)uEmail
-						  phone:(NSString *)uPhone
-					   customer:(NSString *)uCustomer
-					   apiToken:(NSString *)uAPIToken
-			  defaultConnection:(BSConnection *)uConnection
-					  userTypes:(NSArray *)uUserTypes
-					   maxLevel:(NSNumber *)uMaxLevel
-					   verified:(BSVerified *)uVerified;
+					  name:(NSString *)uName
+					 email:(NSString *)uEmail
+					 phone:(NSString *)uPhone
+				  customer:(NSString *)uCustomer
+				  apiToken:(NSString *)uAPIToken
+		 defaultConnection:(BSConnection *)uConnection
+				 userTypes:(NSArray *)uUserTypes
+				  maxLevel:(NSNumber *)uMaxLevel
+				  verified:(BSVerified *)uVerified;
 
 //Initiate user with API token
 + (BSUser *)currentUser;

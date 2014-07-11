@@ -11,6 +11,8 @@
 #import "BSRootViewController.h"
 #import "BSSendMessageViewController.h"
 
+#import "BSUser.h"
+
 @interface BSAppDelegate ()
 
 @property (nonatomic, strong) UINavigationController *navigationController;
@@ -24,12 +26,13 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 	
+	//Initialize User on application start
+	[[BSUser currentUser] defaultConnection];
 	
-	
-	BSSendMessageViewController *sms = [[BSSendMessageViewController alloc] init];
+	BSSendMessageViewController *sendMessageViewController = [[BSSendMessageViewController alloc] init];
 	BSRootViewController *rootViewController = [[BSRootViewController alloc] init];
 	
-	_navigationController = [[UINavigationController alloc] initWithRootViewController:sms];
+	_navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
 	[_navigationController setNavigationBarHidden:YES];	
 	[_window setRootViewController:_navigationController];
 	

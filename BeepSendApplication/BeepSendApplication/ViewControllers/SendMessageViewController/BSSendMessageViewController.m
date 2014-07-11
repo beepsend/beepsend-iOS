@@ -14,6 +14,7 @@
 #import "BSUser.h"
 #import "BSConnection.h"
 #import "BSMessage.h"
+#import "BSWallet.h"
 
 @interface BSSendMessageViewController () <UITextFieldDelegate>
 
@@ -139,7 +140,22 @@
 	TOCK;
 	
 	TICK;
-	BSConnection *connection = user.defaultConnection;
+	[user.defaultConnection.wallet getTransactionLogForNextPage:NO onCompletion:^(NSArray *log) {
+		DLog(@"%@", log);
+		
+		[user.defaultConnection.wallet getTransactionLogForNextPage:YES onCompletion:^(NSArray *log) {
+			DLog(@"%@", log);
+			
+			[user.defaultConnection.wallet getTransactionLogForNextPage:YES onCompletion:^(NSArray *log) {
+				DLog(@"%@", log);
+				
+				[user.defaultConnection.wallet getTransactionLogForNextPage:YES onCompletion:^(NSArray *log) {
+					
+					DLog(@"%@", log);
+				}];
+			}];
+		}];
+	}];
 	TOCK;
 	
 	DLog(@"END");

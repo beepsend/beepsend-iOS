@@ -30,6 +30,20 @@
 
 @implementation BSConnection
 
+#pragma mark - Properties
+
+- (NSString *)label {
+	return _connectionModel ? _connectionModel.label : _label;
+}
+
+- (NSString *)description {
+	return _connectionModel ? _connectionModel.description : _description;
+}
+
+- (NSString *)systemID {
+	return _connectionModel ? _connectionModel.systemID : _systemID;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title
@@ -59,7 +73,7 @@
 									   type:(BSConnectionType)cType
 									  users:(NSArray *)cUsers
 									 wallet:(BSWallet *)cWallet
-								  whitelist:(NSString *)cWhitelist
+								  whitelist:(NSArray *)cWhitelist
 								   password:(NSString *)password
 {
 	if (self = [super initWithID:cID andTitle:cLabel]) {
@@ -142,7 +156,7 @@
 		[[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"API_TOKEN" : APIToken }];
 		
 		[[BSConnectionsService sharedService] getMeConnectionOnCompletion:^(BSConnection *connection, id error) {
-			[[BSTestSemaphor sharedInstance] lift:@"FetchConnection"];
+//			[[BSTestSemaphor sharedInstance] lift:@"FetchConnection"];
 			
 			_connectionModel = connection;
 			
@@ -152,18 +166,17 @@
 			_description = connection.description;
 			_systemID = connection.systemID;
 			
-			NSMutableArray *mArr = [@[] mutableCopy];
-			for (BSUser *user in connection.users) {
-				
-				BSUser *u = [[BSUser alloc] initWithUserID:user.objectID];
-				u.name = user.name;
-				u.email = user.email;
-				
-				[mArr addObject:u];
-			}
-			_users = [NSArray arrayWithArray:mArr];
+			_users = connection.users;
+			
+			_wallet = connection.wallet;
+			_apiToken = connection.apiToken;
+			_callbackURLs = connection.callbackURLs;
+			_customer = connection.customer;
+			_TLVForMCCAndMNC = connection.TLVForMCCAndMNC;
+			_whitelist = connection.whitelist;
+			_password = connection.password;
 		}];
-		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchConnection"];
+//		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchConnection"];
 	}
 	return self;
 }
@@ -183,6 +196,15 @@
 			_systemID = connection.systemID;
 			
 			_users = connection.users;
+			
+			_wallet = connection.wallet;
+			_apiToken = connection.apiToken;
+			_callbackURLs = connection.callbackURLs;
+			_customer = connection.customer;
+			_TLVForMCCAndMNC = connection.TLVForMCCAndMNC;
+			_whitelist = connection.whitelist;
+			_password = connection.password;
+
 		}];
 		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchConnection"];
 	}
@@ -204,6 +226,10 @@
 //After made changes it is necessary to call method updateConnection
 - (void)updateConnection
 {
+	if (!_connectionModel) {
+		return;
+	}
+	
 	[[BSConnectionsService sharedService] updateConnection:_connectionModel
 										   withCallbackDLR:[_callbackURLs.DLR isEqualToString:_connectionModel.callbackURLs.DLR] ? nil : _callbackURLs.DLR
 												  systemID:[_systemID isEqualToString:_connectionModel.systemID] ? nil : _systemID
@@ -233,6 +259,7 @@
 		}
 		
 		_connectionModel = updatedModel;
+		_apiToken = updatedModel.apiToken;
 		
 	}];
 }

@@ -26,7 +26,7 @@
 @property (nonatomic, strong) NSNumber *type;
 @property (nonatomic, strong) NSArray *users;
 @property (nonatomic, strong) BSAPWallet *wallet;
-@property (nonatomic, strong) NSString *whitelist;
+@property (nonatomic, strong) NSArray *whitelist;
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *password;
