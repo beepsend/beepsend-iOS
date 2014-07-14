@@ -8,8 +8,8 @@
 
 #import "BSBaseService.h"
 
-#import "BSContactModel.h"
-#import "BSGroupModel.h"
+#import "BSContact.h"
+#import "BSGroup.h"
 
 @interface BSContactsService : BSBaseService
 
@@ -22,21 +22,21 @@
 						 sort:(NSString *)sort
 		  withCompletionBlock:(void(^)(NSArray *contacts, id error))block;
 
-- (void)addContact:(BSContactModel *)contact withCompletionBlock:(void(^)(BSContactModel *contact, id error))block;
+- (void)addContact:(BSContact *)contact withCompletionBlock:(void(^)(BSContact *contact, id error))block;
 
 - (void)addContacts:(NSArray *)contacts withCompletionBlock:(void(^)(NSArray *contacts, id error))block;
 
-- (void)updateContact:(BSContactModel *)contact
+- (void)updateContact:(BSContact *)contact
 		   withNumber:(NSString *)number
 			firstName:(NSString *)firstName
 			 lastName:(NSString *)lastName
 			  groupID:(NSString *)groupID
-  withCompletionBlock:(void(^)(BSContactModel *contact, id error))block;
+  withCompletionBlock:(void(^)(BSContact *contact, id error))block;
 
-- (void)deleteContact:(BSContactModel *)contact withCompletionBlock:(void(^)(BOOL success, id error))block;
+- (void)deleteContact:(BSContact *)contact withCompletionBlock:(void(^)(BOOL success, id error))block;
 
 - (void)searchContact:(NSString *)query
-			  inGroup:(BSGroupModel *)group
+			  inGroup:(BSGroup *)group
 				limit:(NSUInteger)limit
   withCompletionBlock:(void(^)(NSArray *results, id error))block;
 

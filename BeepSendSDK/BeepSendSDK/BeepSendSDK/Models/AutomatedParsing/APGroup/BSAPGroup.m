@@ -8,7 +8,7 @@
 
 #import "BSAPGroup.h"
 
-#import "BSGroupModel.h"
+#import "BSGroup.h"
 
 @implementation BSAPGroup
 
@@ -16,7 +16,7 @@
 
 - (id)convertToModel
 {
-	return [[BSGroupModel alloc] initGroupWithID:_id name:_name contacts:_contacts_count processing:_processing];
+	return [[BSGroup alloc] initGroupWithID:_id name:_name contacts:_contacts_count processing:_processing];
 }
 
 #pragma mark - Public methods
@@ -30,7 +30,7 @@
 	return [NSArray arrayWithArray:results];
 }
 
-+ (BSAPGroup *)groupFromGroupModel:(BSGroupModel *)groupModel
++ (BSAPGroup *)groupFromGroupModel:(BSGroup *)groupModel
 {
 	BSAPGroup *group = [[BSAPGroup alloc] init];
 	

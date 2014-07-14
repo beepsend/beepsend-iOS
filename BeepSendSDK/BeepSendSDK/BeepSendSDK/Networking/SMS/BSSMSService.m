@@ -16,7 +16,7 @@
 #import "BSAPSMSLookup.h"
 #import "BSAPEstimatedCost.h"
 
-#import "BSGroupModel.h"
+#import "BSGroup.h"
 
 @implementation BSSMSService
 
@@ -123,7 +123,7 @@
 				   }];
 }
 
-- (void)lookupSMS:(BSMessage *)sms withCompletionBlock:(void(^)(BSLookupModel *lookupResponse, id error))block {
+- (void)lookupSMS:(BSMessage *)sms withCompletionBlock:(void(^)(BSLookup *lookupResponse, id error))block {
 	
 	[super executeGETForMethod:[BSAPIConfiguration smsLookupWithID:sms.messageID]
 				withParameters:@{}
@@ -131,7 +131,7 @@
 					  
 					  if (!error) {
 						  
-						  BSLookupModel *smslookup = [[BSAPSMSLookup classFromDict:response] convertToModel];
+						  BSLookup *smslookup = [[BSAPSMSLookup classFromDict:response] convertToModel];
 						  
 						  block(smslookup, error);
 					  }

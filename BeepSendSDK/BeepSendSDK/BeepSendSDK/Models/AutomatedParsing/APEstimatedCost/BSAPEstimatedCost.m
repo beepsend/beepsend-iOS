@@ -8,7 +8,7 @@
 
 #import "BSAPEstimatedCost.h"
 
-#import "BSEstimateCostModel.h"
+#import "BSEstimateCost.h"
 
 @implementation BSAPEstimatedCost
 
@@ -19,16 +19,16 @@
 	NSMutableArray *recipients = [@[] mutableCopy];
 	if (_to) {
 		for (NSString *key in [_to allKeys]) {
-			[recipients addObject:[[BSValueForNumberModel alloc] initWithValue:key cost:_to[key]]];
+			[recipients addObject:[[BSValueForNumber alloc] initWithValue:key cost:_to[key]]];
 		}
 	}
 	else if (_groups) {
 		for (NSString *key in [_groups allKeys]) {
-			[recipients addObject:[[BSValueForNumberModel alloc] initWithValue:key cost:_to[key]]];
+			[recipients addObject:[[BSValueForNumber alloc] initWithValue:key cost:_to[key]]];
 		}
 	}
 	
-	return [[BSEstimateCostModel alloc] initWithRecipients:[NSArray arrayWithArray:recipients] totalCost:_total_cost];
+	return [[BSEstimateCost alloc] initWithRecipients:[NSArray arrayWithArray:recipients] totalCost:_total_cost];
 }
 
 #pragma mark - Public methods

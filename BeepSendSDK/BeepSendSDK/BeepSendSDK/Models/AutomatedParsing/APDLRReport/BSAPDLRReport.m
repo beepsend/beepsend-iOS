@@ -8,7 +8,7 @@
 
 #import "BSAPDLRReport.h"
 
-#import "BSDLRReportModel.h"
+#import "BSDLRReport.h"
 
 @implementation BSAPDLRReport
 
@@ -16,7 +16,7 @@
 
 - (id)convertToModel
 {
-	return [[BSDLRReportModel alloc] initReportWithResponseStatus:_status?_status:@"" andResponseCode:_error?_error:@0];
+	return [[BSDLRReport alloc] initReportWithResponseStatus:_status?_status:@"" andResponseCode:_error?_error:@0];
 }
 
 @end

@@ -62,18 +62,6 @@
 						  errors:(NSArray *)mErrors
 				 recipientGroups:(NSArray *)mGroups;
 
-- (BSMessage *)initMessageWithBody:(NSString *)messageBody from:(NSString *)sender to:(NSString *)recipient;
-- (BSMessage *)initMessageWithBody:(NSString *)messageBody from:(NSString *)sender toMultiple:(NSArray *)recipients;
-- (BSMessage *)initMessageWithBody:(NSString *)messageBody from:(NSString *)sender toGroups:(NSArray *)groups;
-
-- (BSMessage *)initFlashMessageWithBody:(NSString *)messageBody from:(NSString *)sender to:(NSString *)recipient;
-- (BSMessage *)initFlashMessageWithBody:(NSString *)messageBody from:(NSString *)sender toMultiple:(NSArray *)recipients;
-- (BSMessage *)initFlashMessageWithBody:(NSString *)messageBody from:(NSString *)sender toGroups:(NSArray *)groups;
-
-- (BSMessage *)initBinaryMessageWithBody:(NSString *)messageBody from:(NSString *)sender to:(NSString *)recipient;
-- (BSMessage *)initBinaryMessageWithBody:(NSString *)messageBody from:(NSString *)sender toMultiple:(NSArray *)recipients;
-- (BSMessage *)initBinaryMessageWithBody:(NSString *)messageBody from:(NSString *)sender toGroups:(NSArray *)groups;
-
 + (BSMessage *)messageWithBody:(NSString *)body from:(NSString *)sender to:(NSString *)recipient;
 + (BSMessage *)messageWithBody:(NSString *)body from:(NSString *)sender toMultiple:(NSArray *)recipients;
 + (BSMessage *)messageWithBody:(NSString *)body from:(NSString *)sender toGroups:(NSArray *)groups;

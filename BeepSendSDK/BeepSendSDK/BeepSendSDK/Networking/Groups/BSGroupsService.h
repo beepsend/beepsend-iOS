@@ -8,8 +8,8 @@
 
 #import "BSBaseService.h"
 
-#import "BSGroupModel.h"
-#import "BSContactModel.h"
+#import "BSGroup.h"
+#import "BSContact.h"
 
 @interface BSGroupsService : BSBaseService
 
@@ -19,14 +19,14 @@
 					  count:(NSNumber *)count
 		withCompletionBlock:(void(^)(NSArray *groups, id error))block;
 
-- (void)getDetailsForGroup:(BSGroupModel *)group withCompletionBlock:(void(^)(BSGroupModel *group, id error))block;
-- (void)getDetailsForGroupID:(NSString *)groupID withCompletionBlock:(void(^)(BSGroupModel *group, id error))block;
+- (void)getDetailsForGroup:(BSGroup *)group withCompletionBlock:(void(^)(BSGroup *group, id error))block;
+- (void)getDetailsForGroupID:(NSString *)groupID withCompletionBlock:(void(^)(BSGroup *group, id error))block;
 
-- (void)addGroupNamed:(NSString *)groupName withCompletionBlock:(void(^)(BSGroupModel *group, id error))block;
+- (void)addGroupNamed:(NSString *)groupName withCompletionBlock:(void(^)(BSGroup *group, id error))block;
 
-- (void)updateName:(NSString *)gName inGroup:(BSGroupModel *)group withCompletionBlock:(void(^)(BSGroupModel *group, id error))block;
+- (void)updateName:(NSString *)gName inGroup:(BSGroup *)group withCompletionBlock:(void(^)(BSGroup *group, id error))block;
 
-- (void)deleteGroup:(BSGroupModel *)group withCompletionBlock:(void(^)(BOOL success, id error))block;
+- (void)deleteGroup:(BSGroup *)group withCompletionBlock:(void(^)(BOOL success, id error))block;
 
 - (void)searchContactGroups:(NSString *)query
 					  limit:(NSUInteger)limit

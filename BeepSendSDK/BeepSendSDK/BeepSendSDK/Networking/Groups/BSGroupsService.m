@@ -85,14 +85,14 @@
 				  }];
 }
 
-- (void)getDetailsForGroup:(BSGroupModel *)group withCompletionBlock:(void(^)(BSGroupModel *group, id error))block
+- (void)getDetailsForGroup:(BSGroup *)group withCompletionBlock:(void(^)(BSGroup *group, id error))block
 {
-	[self getDetailsForGroupID:group.objectID withCompletionBlock:^(BSGroupModel *group, id error) {
+	[self getDetailsForGroupID:group.objectID withCompletionBlock:^(BSGroup *group, id error) {
 		block(group, error);
 	}];
 }
 
-- (void)getDetailsForGroupID:(NSString *)groupID withCompletionBlock:(void(^)(BSGroupModel *group, id error))block
+- (void)getDetailsForGroupID:(NSString *)groupID withCompletionBlock:(void(^)(BSGroup *group, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration contactsGroupsForID:groupID]
 				withParameters:@{}
@@ -109,9 +109,9 @@
 				  }];
 }
 
-- (void)addGroupNamed:(NSString *)groupName withCompletionBlock:(void(^)(BSGroupModel *group, id error))block
+- (void)addGroupNamed:(NSString *)groupName withCompletionBlock:(void(^)(BSGroup *group, id error))block
 {
-	NSDictionary *dict = [[BSAPGroup groupFromGroupModel:[[BSGroupModel alloc] initGroupWithName:groupName]] dictFromClass];
+	NSDictionary *dict = [[BSAPGroup groupFromGroupModel:[[BSGroup alloc] initGroupWithName:groupName]] dictFromClass];
 	BSDLog(@"%@", dict);
 	
 	[super executePOSTForMethod:[BSAPIConfiguration contactsGroups]
@@ -129,9 +129,9 @@
 				  }];
 }
 
-- (void)updateName:(NSString *)gName inGroup:(BSGroupModel *)group withCompletionBlock:(void(^)(BSGroupModel *group, id error))block
+- (void)updateName:(NSString *)gName inGroup:(BSGroup *)group withCompletionBlock:(void(^)(BSGroup *group, id error))block
 {
-	NSDictionary *dict = [[BSAPGroup groupFromGroupModel:[[BSGroupModel alloc] initGroupWithName:gName]] dictFromClass];
+	NSDictionary *dict = [[BSAPGroup groupFromGroupModel:[[BSGroup alloc] initGroupWithName:gName]] dictFromClass];
 	BSDLog(@"%@", dict);
 	
 	[super executePUTForMethod:[BSAPIConfiguration contactsGroupsForID:group.objectID]
@@ -149,7 +149,7 @@
 				   }];
 }
 
-- (void)deleteGroup:(BSGroupModel *)group withCompletionBlock:(void(^)(BOOL success, id error))block
+- (void)deleteGroup:(BSGroup *)group withCompletionBlock:(void(^)(BOOL success, id error))block
 {
 	[super executeDELETEForMethod:[BSAPIConfiguration contactsGroupsForID:group.objectID]
 				withParameters:@{}

@@ -8,7 +8,7 @@
 
 #import "BSAPContact.h"
 
-#import "BSContactModel.h"
+#import "BSContact.h"
 
 @implementation BSAPContact
 
@@ -16,7 +16,7 @@
 
 - (id)convertToModel
 {
-	return [[BSContactModel alloc] initContactWithID:_id firstName:_firstname lastName:_lastname phoneNumber:_msisdn groupID:_group_id groupName:_group_name errors:_errors];
+	return [[BSContact alloc] initContactWithID:_id firstName:_firstname lastName:_lastname phoneNumber:_msisdn groupID:_group_id groupName:_group_name errors:_errors];
 }
 
 #pragma mark - Public methods
@@ -30,7 +30,7 @@
 	return [NSArray arrayWithArray:results];
 }
 
-+ (BSAPContact *)contactFromContactModel:(BSContactModel *)contactModel
++ (BSAPContact *)contactFromContactModel:(BSContact *)contactModel
 {
 	BSAPContact *contact = [[BSAPContact alloc] init];
 	

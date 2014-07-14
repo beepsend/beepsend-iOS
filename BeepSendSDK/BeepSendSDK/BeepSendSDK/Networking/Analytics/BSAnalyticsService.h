@@ -9,8 +9,8 @@
 #import "BSBaseService.h"
 
 #import "BSConnection.h"
-#import "BSAccumulatedStatisticsModel.h"
-#import "BSNetworkDetailsModel.h"
+#import "BSAccumulatedStatistics.h"
+#import "BSNetworkDetails.h"
 
 #import "BSMCCMNC.h"
 #import "BSBatch.h"

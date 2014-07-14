@@ -105,50 +105,9 @@
 
 }
 
-- (BSMessage *)initMessageWithBody:(NSString *)messageBody from:(NSString *)sender to:(NSString *)recipient
+- (BSMessage *)initMessageOfType:(NSString *)messageType withBody:(NSString *)messageBody sender:(NSString *)sender recipient:(NSString *)recipient
 {
-	if (self = [super initWithID:@"0" andTitle:@"Normal message"]) {
-		_messageID = @"0";
-		_message = messageBody;
-		_sender = sender;
-		_recipient = recipient;
-		
-		_shouldReceiveDeliveryReport = 1;
-	}
-	return self;
-}
-
-- (BSMessage *)initMessageWithBody:(NSString *)messageBody from:(NSString *)sender toMultiple:(NSArray *)recipients
-{
-	if (self = [super initWithID:@"0" andTitle:@"Normal message"]) {
-		_messageID = @"0";
-		
-		_message = messageBody;
-		_sender = sender;
-		_recipients = recipients;
-		
-		_shouldReceiveDeliveryReport = 1;
-	}
-	return self;
-}
-
-- (BSMessage *)initMessageWithBody:(NSString *)messageBody from:(NSString *)sender toGroups:(NSArray *)groups
-{
-	if (self = [super initWithID:@"0" andTitle:@"Normal message"]) {
-		_messageID = @"0";
-		
-		_message = messageBody;
-		_sender = sender;
-		_groups = groups;
-		
-		_shouldReceiveDeliveryReport = 1;
-	}
-	return self;
-}
-
-- (BSMessage *)initFlashMessageWithBody:(NSString *)messageBody from:(NSString *)sender to:(NSString *)recipient
-{
-	if (self = [super initWithID:@"0" andTitle:@"Flash message"]) {
+	if (self = [super initWithID:@"0" andTitle:messageType]) {
 		_messageID = @"0";
 		
 		_message = messageBody;
@@ -156,14 +115,15 @@
 		_recipient = recipient;
 		
 		_shouldReceiveDeliveryReport = 1;
-		_messageType = @"flash";
+		
+		_messageType = messageType;
 	}
 	return self;
 }
 
-- (BSMessage *)initFlashMessageWithBody:(NSString *)messageBody from:(NSString *)sender toMultiple:(NSArray *)recipients
+- (BSMessage *)initMessageOfType:(NSString *)messageType withBody:(NSString *)messageBody sender:(NSString *)sender recipients:(NSArray *)recipients
 {
-	if (self = [super initWithID:@"0" andTitle:@"Flash message"]) {
+	if (self = [super initWithID:@"0" andTitle:messageType]) {
 		_messageID = @"0";
 		
 		_message = messageBody;
@@ -171,14 +131,15 @@
 		_recipients = recipients;
 		
 		_shouldReceiveDeliveryReport = 1;
-		_messageType = @"flash";
+		
+		_messageType = messageType;
 	}
 	return self;
 }
 
-- (BSMessage *)initFlashMessageWithBody:(NSString *)messageBody from:(NSString *)sender toGroups:(NSArray *)groups
+- (BSMessage *)initMessageOfType:(NSString *)messageType withBody:(NSString *)messageBody sender:(NSString *)sender groups:(NSArray *)groups
 {
-	if (self = [super initWithID:@"0" andTitle:@"Flash message"]) {
+	if (self = [super initWithID:@"0" andTitle:messageType]) {
 		_messageID = @"0";
 		
 		_message = messageBody;
@@ -186,99 +147,55 @@
 		_groups = groups;
 		
 		_shouldReceiveDeliveryReport = 1;
-		_messageType = @"flash";
-	}
-	return self;
-}
-
-- (BSMessage *)initBinaryMessageWithBody:(NSString *)messageBody from:(NSString *)sender to:(NSString *)recipient
-{
-	if (self = [super initWithID:@"0" andTitle:@"Binary message"]) {
-		_messageID = @"0";
 		
-		_message = messageBody;
-		_sender = sender;
-		_recipient = recipient;
-		
-		_shouldReceiveDeliveryReport = 1;
-		_messageType = @"binary";
-	}
-	return self;
-}
-
-- (BSMessage *)initBinaryMessageWithBody:(NSString *)messageBody from:(NSString *)sender toMultiple:(NSArray *)recipients
-{
-	if (self = [super initWithID:@"0" andTitle:@"Binary message"]) {
-		_messageID = @"0";
-		
-		_message = messageBody;
-		_sender = sender;
-		_recipients = recipients;
-		
-		_shouldReceiveDeliveryReport = 1;
-		_messageType = @"binary";
-	}
-	return self;
-}
-
-- (BSMessage *)initBinaryMessageWithBody:(NSString *)messageBody from:(NSString *)sender toGroups:(NSArray *)groups
-{
-	if (self = [super initWithID:@"0" andTitle:@"Binary message"]) {
-		_messageID = @"0";
-		
-		_message = messageBody;
-		_sender = sender;
-		_groups = groups;
-		
-		_shouldReceiveDeliveryReport = 1;
-		_messageType = @"binary";
+		_messageType = messageType;
 	}
 	return self;
 }
 
 + (BSMessage *)messageWithBody:(NSString *)body from:(NSString *)sender to:(NSString *)recipient
 {
-	return [[BSMessage alloc] initMessageWithBody:body from:sender to:recipient];
+	return [[BSMessage alloc] initMessageOfType:nil withBody:body sender:sender recipient:recipient];
 }
 
 + (BSMessage *)messageWithBody:(NSString *)body from:(NSString *)sender toMultiple:(NSArray *)recipients
 {
-	return [[BSMessage alloc] initMessageWithBody:body from:sender toMultiple:recipients];
+	return [[BSMessage alloc] initMessageOfType:nil withBody:body sender:sender recipients:recipients];
 }
 
 + (BSMessage *)messageWithBody:(NSString *)body from:(NSString *)sender toGroups:(NSArray *)groups
 {
-	return [[BSMessage alloc] initMessageWithBody:body from:sender toGroups:groups];
+	return [[BSMessage alloc] initMessageOfType:nil withBody:body sender:sender groups:groups];
 }
 
 + (BSMessage *)flashMessageWithBody:(NSString *)body from:(NSString *)sender to:(NSString *)recipient
 {
-	return [[BSMessage alloc] initFlashMessageWithBody:body from:sender to:recipient];
+	return [[BSMessage alloc] initMessageOfType:@"flash" withBody:body sender:sender recipient:recipient];
 }
 
 + (BSMessage *)flashMessageWithBody:(NSString *)body from:(NSString *)sender toMultiple:(NSArray *)recipients
 {
-	return [[BSMessage alloc] initFlashMessageWithBody:body from:sender toMultiple:recipients];
+	return [[BSMessage alloc] initMessageOfType:@"flash" withBody:body sender:sender recipients:recipients];
 }
 
 + (BSMessage *)flashMessageWithBody:(NSString *)body from:(NSString *)sender toGroups:(NSArray *)groups
 {
-	return [[BSMessage alloc] initFlashMessageWithBody:body from:sender toGroups:groups];
+	return [[BSMessage alloc] initMessageOfType:@"flash" withBody:body sender:sender groups:groups];
 }
 
 + (BSMessage *)binaryMessageWithBody:(NSString *)body from:(NSString *)sender to:(NSString *)recipient
 {
-	return [[BSMessage alloc] initBinaryMessageWithBody:body from:sender to:recipient];
+	return [[BSMessage alloc] initMessageOfType:@"binary" withBody:body sender:sender recipient:recipient];
 }
 
 + (BSMessage *)binaryMessageWithBody:(NSString *)body from:(NSString *)sender toMultiple:(NSArray *)recipients
 {
-	return [[BSMessage alloc] initBinaryMessageWithBody:body from:sender toMultiple:recipients];
+	return [[BSMessage alloc] initMessageOfType:@"binary" withBody:body sender:sender recipients:recipients];
 }
 
 + (BSMessage *)binaryMessageWithBody:(NSString *)body from:(NSString *)sender toGroups:(NSArray *)groups
 {
-	return [[BSMessage alloc] initBinaryMessageWithBody:body from:sender toGroups:groups];
+	return [[BSMessage alloc] initMessageOfType:@"binary" withBody:body sender:sender groups:groups];
 }
 
 #pragma mark - Public methods

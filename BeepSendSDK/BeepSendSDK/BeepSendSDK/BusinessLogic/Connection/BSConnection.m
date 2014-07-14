@@ -319,7 +319,7 @@
 //Get sms details
 - (void)getDetailsForSMS:(BSMessage *)message
 {
-	[[BSSMSService sharedService] lookupSMS:message withCompletionBlock:^(BSLookupModel *lookupResponse, id error) {
+	[[BSSMSService sharedService] lookupSMS:message withCompletionBlock:^(BSLookup *lookupResponse, id error) {
 		BSDLog(@"%@", lookupResponse);
 	}];
 }

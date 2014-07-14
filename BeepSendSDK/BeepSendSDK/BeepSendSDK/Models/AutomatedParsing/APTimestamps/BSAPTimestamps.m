@@ -8,7 +8,7 @@
 
 #import "BSAPTimestamps.h"
 
-#import "BSTimestampsModel.h"
+#import "BSTimestamps.h"
 
 @implementation BSAPTimestamps
 
@@ -22,7 +22,7 @@
 	:
 	nil;
 	
-	return [[BSTimestampsModel alloc] initReportWithHLRReport:[_hlr convertToModel] andCallbackSentTime:whenCallbackWasSent];
+	return [[BSTimestamps alloc] initReportWithHLRReport:[_hlr convertToModel] andCallbackSentTime:whenCallbackWasSent];
 }
 
 @end

@@ -8,8 +8,8 @@
 
 #import "BSBaseService.h"
 
-#import "BSLookupModel.h"
-#import "BSEstimateCostModel.h"
+#import "BSLookup.h"
+#import "BSEstimateCost.h"
 
 #import "BSMessage.h"
 #import "BSBatch.h"
@@ -35,7 +35,7 @@
 /*
 	Get details regarding one message.
  */
-- (void)lookupSMS:(BSMessage *)sms withCompletionBlock:(void(^)(BSLookupModel *lookupResponse, id error))block;
+- (void)lookupSMS:(BSMessage *)sms withCompletionBlock:(void(^)(BSLookup *lookupResponse, id error))block;
 
 /*
 	Performs dry run of SMS sending.

@@ -8,7 +8,7 @@
 
 #import "BSAPMessageRequest.h"
 
-#import "BSGroupModel.h"
+#import "BSGroup.h"
 
 #import "BSMessage.h"
 #import "BSBatch.h"
@@ -87,8 +87,8 @@
 	//than convert it to array of strings (group ids)
 	NSMutableArray *groupsID = [@[] mutableCopy];
 	if (msgRequest.groups && msgRequest.groups.count>0) {
-		if ([msgRequest.groups[0] isKindOfClass:[BSGroupModel class]]) {
-			for (BSGroupModel *group in msgRequest.groups) {
+		if ([msgRequest.groups[0] isKindOfClass:[BSGroup class]]) {
+			for (BSGroup *group in msgRequest.groups) {
 				[groupsID addObject:group.objectID];
 			}
 		}

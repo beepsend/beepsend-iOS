@@ -8,7 +8,7 @@
 
 #import "BSSerializableObject.h"
 
-@class BSContactModel;
+@class BSContact;
 
 @interface BSAPContact : BSSerializableObject
 
@@ -22,6 +22,6 @@
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
 
-+ (BSAPContact *)contactFromContactModel:(BSContactModel *)contactModel;
++ (BSAPContact *)contactFromContactModel:(BSContact *)contactModel;
 
 @end

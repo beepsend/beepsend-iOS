@@ -8,7 +8,7 @@
 
 #import "BSAPStatistics.h"
 
-#import "BSStatisticsModel.h"
+#import "BSStatistics.h"
 
 @implementation BSAPStatistics
 
@@ -16,7 +16,7 @@
 
 - (id)convertToModel
 {
-	return [[BSStatisticsModel alloc] initWithDelivered:_delivered mo:_mo expired:_expired unknown:_unknown rejected:_rejected undelivered:_undelivered noDlr:_no_dlr];
+	return [[BSStatistics alloc] initWithDelivered:_delivered mo:_mo expired:_expired unknown:_unknown rejected:_rejected undelivered:_undelivered noDlr:_no_dlr];
 }
 
 @end

@@ -30,7 +30,7 @@
 
 - (void)doImmediateHLRForNumber:(NSString *)number
 				 withConnection:(BSConnection *)connection
-			withCompletionBlock:(void(^)(BSHLRModel *hlr, id error))block
+			withCompletionBlock:(void(^)(BSHLR *hlr, id error))block
 {
 	NSString *method = [BSAPIConfiguration hlrForNumber:number];
 	NSDictionary *params = connection ? @{ @"connection" : connection.objectID } : @{};
@@ -41,7 +41,7 @@
 					  
 					  if (!error) {
 						  
-						  BSHLRModel *hlr = [[BSAPHLR classFromDict:response] convertToModel];
+						  BSHLR *hlr = [[BSAPHLR classFromDict:response] convertToModel];
 						  
 						  block(hlr, error);
 					  }

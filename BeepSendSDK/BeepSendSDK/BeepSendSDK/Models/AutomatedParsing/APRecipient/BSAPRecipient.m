@@ -8,7 +8,7 @@
 
 #import "BSAPRecipient.h"
 
-#import "BSRecipientModel.h"
+#import "BSRecipient.h"
 
 @implementation BSAPRecipient
 
@@ -16,7 +16,7 @@
 
 - (id)convertToModel
 {
-	return [[BSRecipientModel alloc] initRecipientWithNumber:_address numberType:_ton planIndex:_npi];
+	return [[BSRecipient alloc] initRecipientWithNumber:_address numberType:_ton planIndex:_npi];
 }
 
 @end
