@@ -15,6 +15,7 @@
 #import "BSAPBatch.h"
 #import "BSAPSMSLookup.h"
 #import "BSAPEstimatedCost.h"
+#import "BSConnection.h"
 
 #import "BSGroup.h"
 

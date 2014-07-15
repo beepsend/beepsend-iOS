@@ -8,8 +8,8 @@
 
 #import "BSGeneralModel.h"
 
-#import "BSVerified.h"
-
+@class BSCustomer;
+@class BSVerified;
 @class BSConnection;
 
 @interface BSUser : BSGeneralModel
@@ -26,13 +26,13 @@
 @property (nonatomic, strong) BSConnection *defaultConnection;
 
 //Customer that ownes user
-@property (nonatomic, strong, readonly) NSString *customer;
+@property (nonatomic, strong, readonly) NSString *customerName;
 
 //Users API token
 @property (nonatomic, strong, readonly) NSString *apiToken;
 
 //User types
-@property (nonatomic, strong, readonly) NSArray *userTypes;
+@property (nonatomic, strong) NSArray *userTypes;
 
 //Simple permission model. Allows access to all version 2 endpoints.
 @property (nonatomic, strong, readonly) NSNumber *maxLevel;
@@ -43,6 +43,9 @@
 
 //Is user verified
 @property (nonatomic, strong, readonly) BSVerified *verified;
+
+//Accessible only if customer details are enquired 
+@property (nonatomic, strong, readonly) BSCustomer *customer;
 
 - (BSUser *)initUserWithID:(NSString *)uID
 					  name:(NSString *)uName
@@ -71,15 +74,21 @@
 				  maxLevel:(NSNumber *)uMaxLevel
 				  verified:(BSVerified *)uVerified;
 
-//Initiate user with API token
-+ (BSUser *)currentUser;
-
 //Create user object with ID
 - (BSUser *)initWithUserID:(NSString *)uID;
 
-//After made changes with name, email, phone
+//Initiate user with API token
++ (BSUser *)currentUser;
+
+//After made changes with name, phone or defaultConnection
 //it is necessary to call method updateUser
 - (void)updateUser;
+
+//For updateing email address user needs to enter password
+- (void)updateUserEmailWithPassword:(NSString *)password;
+
+//Method for changing password
+- (void)changePassword:(NSString *)currentPassword withNewPassword:(NSString *)newPassword;
 
 //If API token is compromised use this method for token reset
 - (void)resetUserTokenWithPassword:(NSString *)password;
@@ -88,5 +97,10 @@
 - (void)getAvailableConnectionsOnCompletion:(void(^)(NSArray *connections))block;
 //Sync method for retrieving users connections
 - (NSArray *)getAvailableConnections;
+
+- (void)getCustomerDetailsOnCompletion:(void(^)(BSCustomer *customer, id error))block;
+
+- (void)getAvailableWalletsOnCompletion:(void(^)(NSArray *wallets, id error))block;
+- (NSArray *)getAvailableWallets;
 
 @end

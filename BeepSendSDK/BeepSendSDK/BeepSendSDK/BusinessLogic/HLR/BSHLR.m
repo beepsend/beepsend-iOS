@@ -8,6 +8,10 @@
 
 #import "BSHLR.h"
 
+#import "BSDLRReport.h"
+#import "BSMCCMNC.h"
+#import "BSTimestamps.h"
+
 @interface BSHLR ()
 
 @property (nonatomic, strong, readwrite) BSTimestamps *timestamps;

@@ -17,6 +17,8 @@
 
 - (void)updateConnection:(BSConnection *)connection
 		 withCallbackDLR:(NSString *)calbackDLR
+			  callbackMO:(NSString *)callbackMO
+		  callbackMethod:(NSString *)callbackMethod
 				systemID:(NSString *)systemID
 				   label:(NSString *)label
 			 description:(NSString *)description

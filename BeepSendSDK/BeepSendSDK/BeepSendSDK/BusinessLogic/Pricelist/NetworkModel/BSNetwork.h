@@ -8,8 +8,8 @@
 
 #import "BSGeneralModel.h"
 
-#import "BSMCCMNC.h"
-#import "BSCountry.h"
+@class BSMCCMNC;
+@class BSCountry;
 
 @interface BSNetwork : BSGeneralModel
 

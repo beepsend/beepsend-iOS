@@ -12,16 +12,22 @@
 
 #import "BSUserService.h"
 #import "BSConnectionsService.h"
+#import "BSCustomerService.h"
+#import "BSWalletService.h"
 
 #import "BSTestSemaphor.h"
 
 #import "BSConnection.h"
+#import "BSWallet.h"
+#import "BSVerified.h"
+#import "BSCustomer.h"
 
 @interface BSUser ()
 
 @property (nonatomic, strong) BSUser *currentUser;
 
 @property (nonatomic, strong) NSArray *connections;
+@property (nonatomic, strong) NSArray *wallets;
 
 @end
 
@@ -45,7 +51,7 @@
 	if (_defaultConnection) {
 		return _defaultConnection;
 	}
-	return _defaultConnection = [[BSConnection alloc] initDefaultConnection];
+	return _defaultConnection = [BSConnection currentConnection];
 }
 
 #pragma mark - Initialization
@@ -125,12 +131,20 @@
 		_name = uName;
 		_email = uEmail;
 		_phone = uPhone;
-		_customer = uCustomer;
+		_customerName = uCustomer;
 		_apiToken = uAPIToken;
 		_defaultConnection = uConnection;
 		_userTypes = uUserTypes;
 		_maxLevel = uMaxLevel;
 		_verified = uVerified;
+	}
+	return self;
+}
+
+- (BSUser *)initWithUserID:(NSString *)uID
+{
+	if (self = [super initWithID:@"0" andTitle:@"User"]) {
+		_userID = uID;
 	}
 	return self;
 }
@@ -142,7 +156,7 @@
 		[[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"API_TOKEN" : APIToken }];
 		
 		[[BSUserService sharedService] getUserDetailsWithCompletionBlock:^(BSUser *user, id error) {
-			[[BSTestSemaphor sharedInstance] lift:@"FetchUser"];
+//			[[BSTestSemaphor sharedInstance] lift:@"FetchUser"];
 			
 			_currentUser = user;
 			
@@ -152,15 +166,17 @@
 			
 			_userID = user.userID;
 
-			_customer = user.customer;
+			_customerName = user.customerName;
 			_apiToken = user.apiToken;
 
 			_userTypes = user.userTypes;
 			_maxLevel = user.maxLevel;
 			_verified = user.verified;
 			
+			_defaultConnection = [BSConnection currentConnection];
+			
 		}];
-		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchUser"];
+//		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchUser"];
 		
 	}
 	return self;
@@ -176,39 +192,85 @@
 	return singleton;
 }
 
-- (BSUser *)initWithUserID:(NSString *)uID
-{
-	if (self = [super initWithID:@"0" andTitle:@"User"]) {
-		_userID = uID;
-	}
-	return self;
-}
-
 #pragma mark - Public methods
 
 - (void)updateUser
 {
 	if (!_currentUser) {
-		return;
+		return; //User object can not be edited
 	}
 	
-	BSConnection *connectionModel;
-	if (![_defaultConnection.connectionID isEqualToString:_currentUser.defaultConnection.objectID]) {
-		connectionModel = [[BSConnection alloc] initConnectionWithID:_defaultConnection.connectionID];
+	if ([_name isEqualToString:_currentUser.name] &&
+		[_phone isEqualToString:_currentUser.phone] &&
+		[_defaultConnection.connectionID isEqualToString:_currentUser.defaultConnection.objectID] &&
+		[_userTypes isEqualToArray:_currentUser.userTypes] &&
+		_verified.isVerifiedTerms==_currentUser.verified.isVerifiedTerms) {
+		return; //No changes were made
 	}
+	
 	[[BSUserService sharedService] updateUserWithName:[_name isEqualToString:_currentUser.name]?nil:_name
 												phone:[_phone isEqualToString:_currentUser.phone]?nil:_phone
-									defaultConnection:connectionModel
-											userTypes:nil
-										verifiedTerms:nil withCompletionBlock:^(BSUser *user, id error) {
-											
-											_currentUser = user;
-											
-											_name = user.name;
-											_email = user.email;
-											_phone = user.phone;
-											
-											_defaultConnection = user.defaultConnection;
+									defaultConnection:[_defaultConnection.connectionID isEqualToString:_currentUser.defaultConnection.objectID]?nil:_defaultConnection
+											userTypes:[_userTypes isEqualToArray:_currentUser.userTypes]?nil:_userTypes
+										verifiedTerms:_verified.isVerifiedTerms==_currentUser.verified.isVerifiedTerms?nil:_verified.termsVerified
+								  withCompletionBlock:^(BSUser *user, id error) {
+									  
+									  _currentUser = user;
+									  
+									  _name = user.name;
+									  _phone = user.phone;
+									  
+									  _defaultConnection = user.defaultConnection;
+									  
+									  _userTypes = user.userTypes;
+									  
+									  _verified.termsVerified = user.verified.termsVerified;
+	}];
+}
+
+- (void)updateUserEmailWithPassword:(NSString *)password
+{
+	if (!password) {
+		return;//Missing password
+	}
+	
+	if (_password) {
+		if (![_password isEqualToString:password]) {
+			return;//Invalid password
+		}
+	}
+	
+	if (![_email isEqualToString:_currentUser.email]) {
+		[[BSUserService sharedService] updateUserEmail:_email userPassword:password withCompletionBlock:^(BOOL success, id error) {
+			if (success) {
+				_currentUser.email = _email;
+				_password = password;
+			}
+		}];
+	}
+}
+
+- (void)changePassword:(NSString *)currentPassword withNewPassword:(NSString *)newPassword
+{
+	if (!currentPassword || !newPassword) {
+		return; //Missing password
+	}
+	
+	if ([currentPassword isEqualToString:newPassword]) {
+		return; //Passwords don't match
+	}
+	
+	if (_password) {
+		if (![_password isEqualToString:currentPassword]) {
+			return; //Invalid password
+		}
+	}
+	
+	[[BSUserService sharedService] updateUserPassword:_password userNewPassword:_theNewPassword withCompletionBlock:^(BOOL success, id error) {
+		if (success) {
+			_password = _theNewPassword;
+			_theNewPassword = nil;
+		}
 	}];
 }
 
@@ -225,8 +287,7 @@
 - (void)getAvailableConnectionsOnCompletion:(void(^)(NSArray *connections))block
 {
 	[[BSConnectionsService sharedService] getAllAvailableConnectsionOnCompletion:^(NSArray *connections, id error) {
-		BSDLog(@"%@", connections);
-		
+	
 		_connections = connections;
 		
 		block(_connections);
@@ -248,6 +309,50 @@
 		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchConnections"];
 		
 		return _connections;
+	}
+}
+
+- (void)getCustomerDetailsOnCompletion:(void(^)(BSCustomer *customer, id error))block
+{
+	if (_customer) {
+		block(_customer, nil);
+	}
+	
+	[[BSCustomerService sharedService] getCustomerOnCompletion:^(BSCustomer *customer, id error) {
+		
+		if (!_customer) {
+			block(customer, error);
+		}
+		
+		_customer = customer;
+	}];
+}
+
+- (void)getAvailableWalletsOnCompletion:(void(^)(NSArray *wallets, id error))block
+{
+	[[BSWalletService sharedService] getAllWalletsWithCompletionBlock:^(NSArray *wallets, id error) {
+		
+		_wallets = wallets;
+		
+		block(wallets, error);
+	}];
+}
+
+- (NSArray *)getAvailableWallets
+{
+	if (_wallets) {
+		return _wallets;
+	}
+	else {
+		[[BSWalletService sharedService] getAllWalletsWithCompletionBlock:^(NSArray *wallets, id error) {
+			[[BSTestSemaphor sharedInstance] lift:@"FetchWallets"];
+			
+			_wallets = wallets;
+			
+		}];
+		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchWallets"];
+		
+		return _wallets;
 	}
 }
 

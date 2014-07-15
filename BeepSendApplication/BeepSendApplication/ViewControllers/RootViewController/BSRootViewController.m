@@ -152,7 +152,7 @@
 	_textFieldEmail.text = u.email;
 	_textFieldPhone.text = u.phone;
 	
-	[_buttonCustomer setTitle:u.customer forState:UIControlStateNormal];
+	[_buttonCustomer setTitle:u.customerName forState:UIControlStateNormal];
 	[_buttonDefaultConnection setTitle:u.defaultConnection.label forState:UIControlStateNormal];
 }
 

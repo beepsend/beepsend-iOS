@@ -8,13 +8,6 @@
 
 #import "BSCallbacks.h"
 
-@interface BSCallbacks ()
-
-@property (nonatomic, strong, readwrite) NSString *MO;
-@property (nonatomic, strong, readwrite) NSString *method;
-
-@end
-
 @implementation BSCallbacks
 
 #pragma mark - Initialization

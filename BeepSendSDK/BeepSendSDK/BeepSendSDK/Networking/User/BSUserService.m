@@ -13,6 +13,8 @@
 
 #import "BSAPCUser.h"
 
+#import "BSVerified.h"
+
 @implementation BSUserService
 
 #pragma mark - Initialization

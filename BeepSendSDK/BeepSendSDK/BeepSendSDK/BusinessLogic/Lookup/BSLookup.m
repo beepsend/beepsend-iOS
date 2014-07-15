@@ -8,6 +8,13 @@
 
 #import "BSLookup.h"
 
+#import "BSConnection.h"
+#import "BSDLRReport.h"
+#import "BSRecipient.h"
+#import "BSMCCMNC.h"
+#import "BSTimestamps.h"
+#import "BSBatch.h"
+
 @interface BSLookup ()
 
 @property (nonatomic, strong, readwrite) BSBatch *batch;

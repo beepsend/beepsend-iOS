@@ -10,42 +10,35 @@
 
 #import "BSBatch.h"
 
-@interface BSMessage ()
-
-//Required
-//@property (nonatomic, strong, readwrite) NSString *sender;
-//@property (nonatomic, strong, readwrite) NSString *message;
-//@property (nonatomic, strong, readwrite) NSString *recipient;
-//
-//// Optional
-//@property (nonatomic, strong, readwrite) NSArray *groups;
-//@property (nonatomic, strong, readwrite) NSArray *recipients;
-//
-////Additional options
-////@property (nonatomic, strong) BSBatch *batch;
-//
-//@property (nonatomic, strong, readwrite) NSDate *validTo;
-//@property (nonatomic, strong, readwrite) NSDate *sendTime;
-//
-//@property (nonatomic, strong, readwrite) NSString *messageType;
-//
-//@property (nonatomic, strong, readwrite) NSString *usedEncoding;
-//
-//@property (nonatomic, assign, readwrite) BOOL shouldReceiveDeliveryReport;
-//
-////Available options for binary message
-//@property (nonatomic, strong, readwrite) NSString *userDataHeader;
-//@property (nonatomic, strong, readwrite) NSString *dataCodingSettings;
-//
-////Message response parameters
-//@property (nonatomic, strong, readwrite) NSString *messageID;
-//@property (nonatomic, strong, readwrite) NSArray *errors;
-
-@end
-
 @implementation BSMessage
 
 #pragma mark - Initialization
+
+- (BSMessage *)initMessageWithID:(NSString *)mshID andErrors:(NSArray *)errors forMessage:(BSMessage *)msg
+{
+	if (self = [super initWithID:mshID andTitle:@"Message"]) {
+		_messageID = mshID;
+		_errors = errors;
+		
+		_recipient = msg.recipient;
+		_recipients = msg.recipients;
+		_message = msg.message;
+		_sender = msg.sender;
+		
+		_batch = msg.batch;
+		
+		_sendTime = msg.sendTime;
+		_usedEncoding = msg.usedEncoding;
+		_messageType = msg.messageType;
+		_validTo = msg.validTo;
+		_shouldReceiveDeliveryReport = msg.shouldReceiveDeliveryReport;
+		_groups = msg.groups;
+		
+		_userDataHeader = msg.userDataHeader;
+		_dataCodingSettings = msg.dataCodingSettings;
+	}
+	return self;
+}
 
 - (BSMessage *)initWithMessage:(NSString *)rMessage
 					  receiver:(id)rReceiver
@@ -222,6 +215,11 @@
 - (void)setEncoding:(NSString *)encoding
 {
 	_usedEncoding = encoding;
+}
+
+- (void)addGroupsRecipients:(NSArray *)groups
+{
+	_groups = groups;
 }
 
 @end

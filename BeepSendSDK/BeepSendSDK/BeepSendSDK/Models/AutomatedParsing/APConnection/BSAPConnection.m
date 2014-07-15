@@ -11,6 +11,7 @@
 #import "BSAPCUser.h"
 
 #import "BSConnection.h"
+#import "BSCallbacks.h"
 #import "BSWallet.h"
 #import "BSUser.h"
 

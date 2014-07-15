@@ -11,8 +11,8 @@
 @interface BSVerified : BSGeneralModel
 
 @property (nonatomic, assign, readonly, getter = isVerifiedPhone) BOOL verifiedPhone;
-@property (nonatomic, assign, readonly, getter = isVerifiedPhone) BOOL verifiedEmail;
-@property (nonatomic, assign, readonly, getter = isVerifiedPhone) BOOL verifiedTerms;
+@property (nonatomic, assign, readonly, getter = isVerifiedEmail) BOOL verifiedEmail;
+@property (nonatomic, assign, readonly, getter = isVerifiedTerms) BOOL verifiedTerms;
 
 @property (nonatomic, strong, readonly) NSNumber *emailVerified;
 @property (nonatomic, strong, readonly) NSNumber *phoneVerified;

@@ -8,6 +8,9 @@
 
 #import "BSNetworkDetails.h"
 
+#import "BSMCCMNC.h"
+#import "BSStatistics.h"
+
 @interface BSNetworkDetails ()
 
 @property (nonatomic, strong, readwrite) BSMCCMNC *mccmnc;
@@ -15,7 +18,6 @@
 @property (nonatomic, strong, readwrite) NSNumber *total;
 
 @end
-
 
 @implementation BSNetworkDetails
 

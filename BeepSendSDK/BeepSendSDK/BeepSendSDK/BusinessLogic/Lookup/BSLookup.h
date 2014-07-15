@@ -8,13 +8,12 @@
 
 #import "BSGeneralModel.h"
 
-#import "BSBatch.h"
-
-#import "BSConnection.h"
-#import "BSDLRReport.h"
-#import "BSRecipient.h"
-#import "BSMCCMNC.h"
-#import "BSTimestamps.h"
+@class BSBatch;
+@class BSTimestamps;
+@class BSMCCMNC;
+@class BSRecipient;
+@class BSDLRReport;
+@class BSConnection;
 
 @interface BSLookup : BSGeneralModel
 

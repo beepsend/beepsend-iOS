@@ -12,6 +12,7 @@
 
 #import "BSUser.h"
 #import "BSUserType.h"
+#import "BSVerified.h"
 
 @implementation BSAPCUser
 
@@ -87,7 +88,7 @@
 	user.username = userModel.email;
 	user.email = userModel.email;
 	user.phone = userModel.phone;
-	user.customer = userModel.customer;
+	user.customer = userModel.customerName;
 	user.api_token = userModel.apiToken;
 	
 	user.password = userModel.password;

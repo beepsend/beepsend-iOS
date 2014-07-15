@@ -66,33 +66,20 @@
 
 - (void)updateConnection:(BSConnection *)connection
 		 withCallbackDLR:(NSString *)calbackDLR
+			  callbackMO:(NSString *)callbackMO
+		  callbackMethod:(NSString *)callbackMethod
 				systemID:(NSString *)systemID
 				   label:(NSString *)label
 			 description:(NSString *)description
 	 withCompletionBlock:(void(^)(BSConnection *connection, id error))block
 {
-	//	{
-	//		"callbacks": {
-	//			"dlr": "https://beepsend.com/securedlr"
-	//		},
-	//		"system_id": "crossover",
-	//		"label": "Pawnee-connection",
-	/*
-	 //		"password": "cake",
-	 */
-	//		"description": "Cool. Cool, cool, cool"
-	//	}
-	
-	//	If authenticating with a user API Token you can even set specified connection to be your default.
-	//
-	//	{
-	//		"default_connection": true
-	//	}
 	
 	BSAPConnection *conn = [[BSAPConnection alloc] init];
 	
 	BSAPCCallback *call = [[BSAPCCallback alloc] init];
 	call.dlr = calbackDLR;
+	call.mo = callbackMO;
+	call.method = callbackMethod;
 	
 	conn.callbacks = call;
 	conn.system_id = systemID;

@@ -9,8 +9,12 @@
 #import "BSGeneralModel.h"
 #import "BSStructs.h"
 
-#import "BSPricelist.h"
-#import "BSCallbacks.h"
+@class BSPricelist;
+@class BSCallbacks;
+@class BSBatch;
+@class BSEstimateCost;
+@class BSHLR;
+@class BSLookup;
 
 @class BSMessage;
 @class BSWallet;
@@ -85,9 +89,6 @@
 //Initiate connection with API token
 + (BSConnection *)currentConnection;
 
-//Accessible only if User is initiated with apiToken
-- (BSConnection *)initDefaultConnection;
-
 //After made changes it is necessary to call method updateConnection
 - (void)updateConnection;
 
@@ -101,15 +102,32 @@
 - (void)getCurrentPricelistOnCompletion:(void(^)(BSPricelist *pricelist))block;
 
 //Send message
-- (void)sendSMS:(BSMessage *)message;
+- (void)sendSMS:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, id error))block;
 
 //Send messages
-- (void)sendMultipleSMS:(NSArray *)messages;
+- (void)sendMultipleSMS:(NSArray *)messages withCompletionBlock:(void(^)(NSArray *messages, id error))block;
 
 //Validate SMS
-- (void)validateSMS:(BSMessage *)message;
+- (void)validateSMS:(BSMessage *)message onCompletion:(void(^)(BSMessage *message, id error))block;
 
 //Get sms details
-- (void)getDetailsForSMS:(BSMessage *)message;
+- (void)getDetailsForSMS:(BSMessage *)message onCompletion:(void(^)(BSLookup *lookup, id error))block;
+
+//Get batch details
+- (void)getDetailsForBatch:(BSBatch *)batch onCompletion:(void(^)(BSBatch *batch, id error))block;
+
+//Get previous batches
+- (void)getPreviousBatchesOnCompletion:(void(^)(NSArray *batches, id error))block;
+
+//Estimates message cost (not necessarily accurate)
+- (void)estimateSMSCostForMessages:(NSArray *)messages onCompletion:(void(^)(NSArray *cost, id error))block;
+
+//Do immediate HLR for given number
+- (void)immediateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, id error))block;
+
+//Validate HLR for phone number
+- (void)validateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, id error))black;
+
+
 
 @end

@@ -31,6 +31,8 @@
 		6EBC77F1194EF60800666099 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBC77F0194EF60800666099 /* SystemConfiguration.framework */; };
 		6EBD2F56196D453400F89C52 /* BSSendMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD2F55196D453400F89C52 /* BSSendMessageView.m */; };
 		6EBD2F5A196D45FB00F89C52 /* BSSendMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD2F59196D45FB00F89C52 /* BSSendMessageViewController.m */; };
+		6EC74F8919750DCC007A0356 /* BSUserDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC74F8819750DCC007A0356 /* BSUserDetailsViewController.m */; };
+		6EC74F8D19750E08007A0356 /* BSUserDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC74F8C19750E08007A0356 /* BSUserDetailsView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +105,10 @@
 		6EBD2F55196D453400F89C52 /* BSSendMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSSendMessageView.m; path = Views/SendMessageView/BSSendMessageView.m; sourceTree = "<group>"; };
 		6EBD2F58196D45FB00F89C52 /* BSSendMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSSendMessageViewController.h; path = ViewControllers/SendMessageViewController/BSSendMessageViewController.h; sourceTree = "<group>"; };
 		6EBD2F59196D45FB00F89C52 /* BSSendMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSSendMessageViewController.m; path = ViewControllers/SendMessageViewController/BSSendMessageViewController.m; sourceTree = "<group>"; };
+		6EC74F8719750DCC007A0356 /* BSUserDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSUserDetailsViewController.h; sourceTree = "<group>"; };
+		6EC74F8819750DCC007A0356 /* BSUserDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSUserDetailsViewController.m; sourceTree = "<group>"; };
+		6EC74F8B19750E08007A0356 /* BSUserDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSUserDetailsView.h; path = Views/UserDetailsView/BSUserDetailsView.h; sourceTree = "<group>"; };
+		6EC74F8C19750E08007A0356 /* BSUserDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSUserDetailsView.m; path = Views/UserDetailsView/BSUserDetailsView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				6EB6446419488C33004A1818 /* RootViewController */,
+				6EC74F8619750DCC007A0356 /* UserDetailsViewController */,
 				6EBD2F57196D45C500F89C52 /* SendMessageCiewController */,
 			);
 			name = ViewControllers;
@@ -230,8 +237,9 @@
 		6EB6446619488C51004A1818 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6EBD2F52196D450000F89C52 /* SendMessageView */,
 				6EB6446719488C57004A1818 /* RootView */,
+				6EC74F8A19750DD5007A0356 /* UserDetailsView */,
+				6EBD2F52196D450000F89C52 /* SendMessageView */,
 				6EB6447F1948A3BA004A1818 /* Components */,
 			);
 			name = Views;
@@ -352,6 +360,25 @@
 				6EBD2F59196D45FB00F89C52 /* BSSendMessageViewController.m */,
 			);
 			name = SendMessageCiewController;
+			sourceTree = "<group>";
+		};
+		6EC74F8619750DCC007A0356 /* UserDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6EC74F8719750DCC007A0356 /* BSUserDetailsViewController.h */,
+				6EC74F8819750DCC007A0356 /* BSUserDetailsViewController.m */,
+			);
+			name = UserDetailsViewController;
+			path = ViewControllers/UserDetailsViewController;
+			sourceTree = "<group>";
+		};
+		6EC74F8A19750DD5007A0356 /* UserDetailsView */ = {
+			isa = PBXGroup;
+			children = (
+				6EC74F8B19750E08007A0356 /* BSUserDetailsView.h */,
+				6EC74F8C19750E08007A0356 /* BSUserDetailsView.m */,
+			);
+			name = UserDetailsView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -483,6 +510,8 @@
 				6E6537ED19472BD700FC6349 /* BSAppDelegate.m in Sources */,
 				6EBD2F56196D453400F89C52 /* BSSendMessageView.m in Sources */,
 				6EB6446D19488E17004A1818 /* BSRootView.m in Sources */,
+				6EC74F8919750DCC007A0356 /* BSUserDetailsViewController.m in Sources */,
+				6EC74F8D19750E08007A0356 /* BSUserDetailsView.m in Sources */,
 				6EB644741948965B004A1818 /* Helper.m in Sources */,
 				6EBD2F5A196D45FB00F89C52 /* BSSendMessageViewController.m in Sources */,
 			);

@@ -15,7 +15,14 @@
 #import "BSConnectionsService.h"
 #import "BSPricelistService.h"
 #import "BSSMSService.h"
+#import "BSHLRService.h"
 
+#import "BSPricelist.h"
+#import "BSCallbacks.h"
+#import "BSBatch.h"
+#import "BSEstimateCost.h"
+#import "BSHLR.h"
+#import "BSLookup.h"
 #import "BSUser.h"
 #import "BSMessage.h"
 
@@ -181,36 +188,6 @@
 	return self;
 }
 
-- (BSConnection *)initDefaultConnection {
-	if (self = [super initWithID:@"0" andTitle:@"Connection"]) {
-		
-		[[BSConnectionsService sharedService] getMeConnectionOnCompletion:^(BSConnection *connection, id error) {
-			[[BSTestSemaphor sharedInstance] lift:@"FetchConnection"];
-			
-			_connectionModel = connection;
-			
-			_connectionID = connection.objectID;
-			_type = connection.type;
-			_label = connection.label;
-			_description = connection.description;
-			_systemID = connection.systemID;
-			
-			_users = connection.users;
-			
-			_wallet = connection.wallet;
-			_apiToken = connection.apiToken;
-			_callbackURLs = connection.callbackURLs;
-			_customer = connection.customer;
-			_TLVForMCCAndMNC = connection.TLVForMCCAndMNC;
-			_whitelist = connection.whitelist;
-			_password = connection.password;
-
-		}];
-		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchConnection"];
-	}
-	return self;
-}
-
 + (BSConnection *)currentConnection
 {
 	static BSConnection *singleton;
@@ -227,11 +204,23 @@
 - (void)updateConnection
 {
 	if (!_connectionModel) {
-		return;
+		return; //Connection object can't be edited
 	}
 	
-	[[BSConnectionsService sharedService] updateConnection:_connectionModel
+	if ([_callbackURLs.DLR isEqualToString:_connectionModel.callbackURLs.DLR] &&
+		[_callbackURLs.MO isEqualToString:_connectionModel.callbackURLs.MO] &&
+		[_callbackURLs.method isEqualToString:_connectionModel.callbackURLs.method] &&
+		[_systemID isEqualToString:_connectionModel.systemID] &&
+		[_label isEqualToString:_connectionModel.label] &&
+		[_description isEqualToString:_connectionModel.description]) {
+		
+		return; //No changes were made
+	}
+	
+	[[BSConnectionsService sharedService] updateConnection:self
 										   withCallbackDLR:[_callbackURLs.DLR isEqualToString:_connectionModel.callbackURLs.DLR] ? nil : _callbackURLs.DLR
+												callbackMO:[_callbackURLs.MO isEqualToString:_connectionModel.callbackURLs.MO] ? nil : _callbackURLs.MO
+											callbackMethod:[_callbackURLs.method isEqualToString:_connectionModel.callbackURLs.method] ? nil : _callbackURLs.method
 												  systemID:[_systemID isEqualToString:_connectionModel.systemID] ? nil : _systemID
 													 label:[_label isEqualToString:_connectionModel.label] ? nil : _label
 											   description:[_description isEqualToString:_connectionModel.description] ? nil : _description
@@ -240,6 +229,9 @@
 										   _connectionModel = connection;
 										   
 										   _callbackURLs.DLR = connection.callbackURLs.DLR;
+										   _callbackURLs.MO = connection.callbackURLs.MO;
+										   _callbackURLs.method = connection.callbackURLs.method;
+										   
 										   _systemID = connection.systemID;
 										   _label = connection.label;
 										   _description = connection.description;
@@ -252,15 +244,16 @@
 {
 	[[BSConnectionsService sharedService] resetTokenForConnection:_connectionModel withCompletionBlock:^(BSConnection *updatedModel, id error) {
 		
-		//If previously saved API token is equal to connection token
-		//then overwrite it. Otherwise saved token is User token.
-		if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"API_TOKEN"] isEqualToString:_connectionModel.apiToken]) {
-			 [[NSUserDefaults standardUserDefaults] setObject:updatedModel.apiToken forKey:@"API_TOKEN"];
+		if (!error) {
+			//If previously saved API token is equal to connection token
+			//then overwrite it. Otherwise saved token is User token.
+			if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"API_TOKEN"] isEqualToString:_connectionModel.apiToken]) {
+				[[NSUserDefaults standardUserDefaults] setObject:updatedModel.apiToken forKey:@"API_TOKEN"];
+			}
+			
+			_connectionModel = updatedModel;
+			_apiToken = updatedModel.apiToken;
 		}
-		
-		_connectionModel = updatedModel;
-		_apiToken = updatedModel.apiToken;
-		
 	}];
 }
 
@@ -269,12 +262,15 @@
 {
 	if (_pricelists) {
 		block(_pricelists);
-		return;
 	}
 	
 	[[BSPricelistService sharedService] getPricelistsForConnection:_connectionModel withCompletionBlock:^(NSArray *pricelists, id error) {
+		
+		if (!_pricelists) {
+			block(pricelists);
+		}
 		_pricelists = pricelists;
-		block(_pricelists);
+		
 	}];
 }
 
@@ -283,44 +279,136 @@
 {
 	if (_currentPricelist) {
 		block(_currentPricelist);
-		return;
 	}
 	
 	[[BSPricelistService sharedService] getCurrentPricelistsForConnection:_connectionModel withCompletionBlock:^(BSPricelist *pricelist, id error) {
+		
+		if (!_currentPricelist) {
+			block(pricelist);
+		}
 		_currentPricelist = pricelist;
-		block(_currentPricelist);
+		
 	}];
 }
 
 //Send message
-- (void)sendSMS:(BSMessage *)message
+- (void)sendSMS:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, id error))block
 {
+	if (_type != BSConnectionTypeSMS) {
+		return; //This connection can't send SMS
+	}
+	
+	__block BSMessage *msg = message;
 	[[BSSMSService sharedService] sendMessage:message usingConnection:_connectionModel withCompletionBlock:^(NSArray *response, id error) {
-		BSDLog(@"%@", response);
+		
+		if (response.count > 0) {
+			block([[BSMessage alloc] initMessageWithID:[response[0] messageID] andErrors:[response[0] errors] forMessage:msg], error);
+		}
+		else {
+			block(nil, error);
+		}
 	}];
 }
 
 //Send messages
-- (void)sendMultipleSMS:(NSArray *)messages
+- (void)sendMultipleSMS:(NSArray *)messages withCompletionBlock:(void(^)(NSArray *messages, id error))block
 {
+	if (_type != BSConnectionTypeSMS) {
+		return; //This connection can't send SMS
+	}
+	
+	__block NSArray *msgs = messages;
 	[[BSSMSService sharedService] sendMessages:messages usingConnection:_connectionModel withCompletionBlock:^(NSArray *array, id error) {
-		BSDLog(@"%@", array);
+		
+		if (array.count > 0) {
+			NSMutableArray *mArr = [@[] mutableCopy];
+			for (BSMessage *m in array) {
+				[mArr addObject:[[BSMessage alloc] initMessageWithID:m.messageID andErrors:m.errors forMessage:msgs[[array indexOfObject:m]]]];
+			}
+			block([NSArray arrayWithArray:msgs], error);
+		}
+		else {
+			block(nil, error);
+		}
 	}];
 }
 
 //Validate SMS
-- (void)validateSMS:(BSMessage *)message
+- (void)validateSMS:(BSMessage *)message onCompletion:(void(^)(BSMessage *message, id error))block
 {
+	if (_type != BSConnectionTypeSMS) {
+		return; //This connection can't send SMS
+	}
+	
 	[[BSSMSService sharedService] validateSMSForMessage:message withCompletionBlock:^(BSMessage *message, id error) {
-		BSDLog(@"%@", message);
+		
+		block(message, error);
 	}];
 }
 
 //Get sms details
-- (void)getDetailsForSMS:(BSMessage *)message
+- (void)getDetailsForSMS:(BSMessage *)message onCompletion:(void(^)(BSLookup *lookup, id error))block
 {
+	if (_type != BSConnectionTypeSMS) {
+		return; //This connection can't send SMS
+	}
+	
 	[[BSSMSService sharedService] lookupSMS:message withCompletionBlock:^(BSLookup *lookupResponse, id error) {
-		BSDLog(@"%@", lookupResponse);
+		
+		block(lookupResponse, error);
+	}];
+}
+
+//Get batch details
+- (void)getDetailsForBatch:(BSBatch *)batch onCompletion:(void(^)(BSBatch *batch, id error))block
+{
+	[[BSSMSService sharedService] getDetailsForBatch:batch.batchID withCompletionBlock:^(BSBatch *batch, id error) {
+		
+		block(batch, error);
+	}];
+}
+
+//Get previous batches
+- (void)getPreviousBatchesOnCompletion:(void(^)(NSArray *batches, id error))block
+{
+	[[BSSMSService sharedService] getPreviousBatchesWithCompletionBlock:^(NSArray *bathces, id error) {
+		
+		block(bathces, error);
+	}];
+}
+
+//Estimates message cost (not necessarily accurate)
+- (void)estimateSMSCostForMessages:(NSArray *)messages onCompletion:(void(^)(NSArray *cost, id error))block
+{
+	[[BSSMSService sharedService] estimateCostForMessages:messages usingConnection:self withCompletionBlock:^(NSArray *response, id error) {
+		
+		block(response, error);
+	}];
+}
+
+//Do immediate HLR for given number
+- (void)immediateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, id error))block
+{
+	if (_type != BSConnectionTypeHLR) {
+		return; //This connection can't send HLR
+	}
+	
+	[[BSHLRService sharedService] doImmediateHLRForNumber:phoneNumber withConnection:self withCompletionBlock:^(BSHLR *hlr, id error) {
+		
+		block(hlr, error);
+	}];
+}
+
+//Validate HLR for phone number
+- (void)validateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, id error))black
+{
+	if (_type != BSConnectionTypeHLR) {
+		return; //This connection can't send HLR
+	}
+	
+	[[BSHLRService sharedService] validateHLRForNumber:phoneNumber withConnection:self withCompletionBlock:^(id response, id error) {
+		
+		
 	}];
 }
 

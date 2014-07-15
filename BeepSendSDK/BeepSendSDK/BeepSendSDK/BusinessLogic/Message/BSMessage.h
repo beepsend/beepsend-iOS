@@ -41,6 +41,8 @@
 @property (nonatomic, strong, readonly) NSString *messageID;
 @property (nonatomic, strong, readonly) NSArray *errors;
 
+- (BSMessage *)initMessageWithID:(NSString *)mshID andErrors:(NSArray *)errors forMessage:(BSMessage *)msg;
+
 - (BSMessage *)initWithMessage:(NSString *)rMessage
 					  receiver:(id)rReceiver
 						sender:(NSString *)rSender
@@ -80,5 +82,7 @@
 
 //Explicitly set encoding
 - (void)setEncoding:(NSString *)encoding;
+
+- (void)addGroupsRecipients:(NSArray *)groups;
 
 @end

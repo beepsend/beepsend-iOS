@@ -8,7 +8,7 @@
 
 #import "BSGeneralModel.h"
 
-#import "BSEmail.h"
+@class BSEmail;
 
 @interface BSWallet : BSGeneralModel
 

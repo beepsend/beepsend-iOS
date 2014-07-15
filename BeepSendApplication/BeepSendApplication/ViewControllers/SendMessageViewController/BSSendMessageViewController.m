@@ -120,13 +120,19 @@
 		![Helper isNilOrEmpty:_textFieldTo.text] &&
 		![Helper isNilOrEmpty:_textViewMessageBox.text]) {
 		
-		BSMessage *message = [BSMessage messageWithBody:_textViewMessageBox.text from:_textFieldFrom.text to:_textFieldTo.text];
+//		BSMessage *message = [BSMessage messageWithBody:[_textViewMessageBox.text stringByAppendingString:@"1"] from:_textFieldFrom.text to:_textFieldTo.text];
+//		BSMessage *message1 = [BSMessage messageWithBody:[_textViewMessageBox.text stringByAppendingString:@"2"] from:_textFieldFrom.text to:_textFieldTo.text];
+//		BSMessage *message2 = [BSMessage messageWithBody:[_textViewMessageBox.text stringByAppendingString:@"3"] from:_textFieldFrom.text to:_textFieldTo.text];
 		
-		BSMessage *flashMessage = [BSMessage flashMessageWithBody:_textViewMessageBox.text from:_textFieldFrom.text to:_textFieldTo.text];
+//		BSMessage *flashMessage = [BSMessage flashMessageWithBody:_textViewMessageBox.text from:_textFieldFrom.text to:_textFieldTo.text];
 		
-		BSMessage *binaryMessage = [BSMessage binaryMessageWithBody:_textViewMessageBox.text from:_textFieldFrom.text to:_textFieldTo.text];
+//		BSMessage *binaryMessage = [BSMessage binaryMessageWithBody:_textViewMessageBox.text from:_textFieldFrom.text to:_textFieldTo.text];
 		
-		[[[BSUser currentUser] defaultConnection] sendSMS:flashMessage];
+		BSMessage *msg = [[BSMessage alloc] initMessageWithID:@"023360800140542909816482381643460358" andErrors:nil forMessage:nil];
+		
+		[[[BSUser currentUser] defaultConnection] getDetailsForSMS:msg onCompletion:^(BSLookup *lookup, id error) {
+			
+		}];
 	}
 }
 
@@ -136,26 +142,14 @@
 	StartCounting;
 	
 	TICK;
-	BSUser *user = [BSUser currentUser];
-	TOCK;
-	
-	TICK;
-	[user.defaultConnection.wallet getTransactionLogForNextPage:NO onCompletion:^(NSArray *log) {
-		DLog(@"%@", log);
-		
-		[user.defaultConnection.wallet getTransactionLogForNextPage:YES onCompletion:^(NSArray *log) {
-			DLog(@"%@", log);
-			
-			[user.defaultConnection.wallet getTransactionLogForNextPage:YES onCompletion:^(NSArray *log) {
-				DLog(@"%@", log);
+	NSArray *connections = [[BSUser currentUser] getAvailableConnections];
+	for (BSConnection *connection in connections) {
+		if (connection.type == BSConnectionTypeHLR) {
+			[connection validateHLRForNumber:@"381643460358" onCompletion:^(BSHLR *hlr, id error) {
 				
-				[user.defaultConnection.wallet getTransactionLogForNextPage:YES onCompletion:^(NSArray *log) {
-					
-					DLog(@"%@", log);
-				}];
 			}];
-		}];
-	}];
+		}
+	}
 	TOCK;
 	
 	DLog(@"END");

@@ -7,6 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E1348541975637800E67A96 /* BSVerified.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6E76F5FD196E9B0A004CBE46 /* BSVerified.h */; };
+		6E1348551975637800E67A96 /* BSUserType.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6E76F602196E9C65004CBE46 /* BSUserType.h */; };
+		6E1348561975637800E67A96 /* BSBatch.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD2F4F196D1EBE00F89C52 /* BSBatch.h */; };
+		6E1348571975637800E67A96 /* BSCountry.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6ED59E72196D79E200A271ED /* BSCountry.h */; };
+		6E1348581975637800E67A96 /* BSMCCMNC.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6ED59E75196D79E200A271ED /* BSMCCMNC.h */; };
+		6E1348591975637800E67A96 /* BSNetwork.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6ED59E78196D79E200A271ED /* BSNetwork.h */; };
+		6E13485A1975637800E67A96 /* BSPricelist.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6ED59E7B196D79E200A271ED /* BSPricelist.h */; };
+		6E13485B1975637800E67A96 /* BSEmail.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EB761A6196E8C7F00953308 /* BSEmail.h */; };
+		6E13485C1975637800E67A96 /* BSLog.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EB761A9196E8C7F00953308 /* BSLog.h */; };
+		6E13485D1975637800E67A96 /* BSTransfer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EB761AC196E8C7F00953308 /* BSTransfer.h */; };
+		6E13485E1975637800E67A96 /* BSAccountManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6E76F5E9196E9636004CBE46 /* BSAccountManager.h */; };
+		6E13485F1975637800E67A96 /* BSCustomer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6E76F5EC196E9636004CBE46 /* BSCustomer.h */; };
+		6E1348601975637800E67A96 /* BSPriceListDetails.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6E76F5EF196E9636004CBE46 /* BSPriceListDetails.h */; };
+		6E1348611975637800E67A96 /* BSPriceListSchedule.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6E76F5F2196E9636004CBE46 /* BSPriceListSchedule.h */; };
+		6E1348621975637800E67A96 /* BSContact.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD83DD1973C50B004FD8AF /* BSContact.h */; };
+		6E1348631975637800E67A96 /* BSGroup.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD84161973D099004FD8AF /* BSGroup.h */; };
+		6E1348641975637800E67A96 /* BSEstimateCost.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD83E21973C6FD004FD8AF /* BSEstimateCost.h */; };
+		6E1348651975637800E67A96 /* BSValueForNumber.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD83E51973C6FD004FD8AF /* BSValueForNumber.h */; };
+		6E1348661975637800E67A96 /* BSLookup.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD83EA1973C7B2004FD8AF /* BSLookup.h */; };
+		6E1348671975637800E67A96 /* BSRecipient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD83EE1973C8CC004FD8AF /* BSRecipient.h */; };
+		6E1348681975637800E67A96 /* BSCallbacks.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD83F21973C93F004FD8AF /* BSCallbacks.h */; };
+		6E1348691975637800E67A96 /* BSDLRReport.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD83F61973CB7E004FD8AF /* BSDLRReport.h */; };
+		6E13486A1975637800E67A96 /* BSHLR.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD83F91973CB7E004FD8AF /* BSHLR.h */; };
+		6E13486B1975637800E67A96 /* BSHLRReport.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD83FC1973CB7E004FD8AF /* BSHLRReport.h */; };
+		6E13486C1975637800E67A96 /* BSTimestamps.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD83FF1973CB7E004FD8AF /* BSTimestamps.h */; };
+		6E13486D1975637800E67A96 /* BSAccumulatedStatistics.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD84061973CE70004FD8AF /* BSAccumulatedStatistics.h */; };
+		6E13486E1975637800E67A96 /* BSAnalyticsBatch.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD84091973CE70004FD8AF /* BSAnalyticsBatch.h */; };
+		6E13486F1975637800E67A96 /* BSNetworkDetails.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD840C1973CE70004FD8AF /* BSNetworkDetails.h */; };
+		6E1348701975637800E67A96 /* BSStatistics.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD840F1973CE70004FD8AF /* BSStatistics.h */; };
 		6E42E57A195B091B00343B2E /* BSContactsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E42E579195B091B00343B2E /* BSContactsService.m */; };
 		6E653818194730EB00FC6349 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E653817194730EB00FC6349 /* Foundation.framework */; };
 		6E65381F194730EB00FC6349 /* BeepSendSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E65381E194730EB00FC6349 /* BeepSendSDK.m */; };
@@ -170,6 +199,35 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				6E1348541975637800E67A96 /* BSVerified.h in CopyFiles */,
+				6E1348551975637800E67A96 /* BSUserType.h in CopyFiles */,
+				6E1348561975637800E67A96 /* BSBatch.h in CopyFiles */,
+				6E1348571975637800E67A96 /* BSCountry.h in CopyFiles */,
+				6E1348581975637800E67A96 /* BSMCCMNC.h in CopyFiles */,
+				6E1348591975637800E67A96 /* BSNetwork.h in CopyFiles */,
+				6E13485A1975637800E67A96 /* BSPricelist.h in CopyFiles */,
+				6E13485B1975637800E67A96 /* BSEmail.h in CopyFiles */,
+				6E13485C1975637800E67A96 /* BSLog.h in CopyFiles */,
+				6E13485D1975637800E67A96 /* BSTransfer.h in CopyFiles */,
+				6E13485E1975637800E67A96 /* BSAccountManager.h in CopyFiles */,
+				6E13485F1975637800E67A96 /* BSCustomer.h in CopyFiles */,
+				6E1348601975637800E67A96 /* BSPriceListDetails.h in CopyFiles */,
+				6E1348611975637800E67A96 /* BSPriceListSchedule.h in CopyFiles */,
+				6E1348621975637800E67A96 /* BSContact.h in CopyFiles */,
+				6E1348631975637800E67A96 /* BSGroup.h in CopyFiles */,
+				6E1348641975637800E67A96 /* BSEstimateCost.h in CopyFiles */,
+				6E1348651975637800E67A96 /* BSValueForNumber.h in CopyFiles */,
+				6E1348661975637800E67A96 /* BSLookup.h in CopyFiles */,
+				6E1348671975637800E67A96 /* BSRecipient.h in CopyFiles */,
+				6E1348681975637800E67A96 /* BSCallbacks.h in CopyFiles */,
+				6E1348691975637800E67A96 /* BSDLRReport.h in CopyFiles */,
+				6E13486A1975637800E67A96 /* BSHLR.h in CopyFiles */,
+				6E13486B1975637800E67A96 /* BSHLRReport.h in CopyFiles */,
+				6E13486C1975637800E67A96 /* BSTimestamps.h in CopyFiles */,
+				6E13486D1975637800E67A96 /* BSAccumulatedStatistics.h in CopyFiles */,
+				6E13486E1975637800E67A96 /* BSAnalyticsBatch.h in CopyFiles */,
+				6E13486F1975637800E67A96 /* BSNetworkDetails.h in CopyFiles */,
+				6E1348701975637800E67A96 /* BSStatistics.h in CopyFiles */,
 				6EB871E4196FC6060006CE29 /* BSWallet.h in CopyFiles */,
 				6ED59E85196D827E00A271ED /* BSMessage.h in CopyFiles */,
 				6EBADD18196BE90900315EA4 /* BSUser.h in CopyFiles */,
