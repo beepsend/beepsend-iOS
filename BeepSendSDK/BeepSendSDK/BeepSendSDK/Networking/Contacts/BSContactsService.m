@@ -135,7 +135,7 @@
   withCompletionBlock:(void(^)(BSContact *contact, id error))block
 {
 	
-	NSDictionary *contactToUpdate = [[BSAPContact contactFromContactModel:[[BSContact alloc] initContactWithPhoneNumber:number?number:contact.phoneNumber firstName:firstName lastName:lastName groupID:groupID]] dictFromClass];
+	NSDictionary *contactToUpdate = [[BSAPContact contactFromContactModel:[[BSContact alloc] initContactWithPhoneNumber:number?number:contact.phoneNumber firstName:firstName lastName:lastName group:[[BSGroup alloc] initGroupWithID:groupID name:nil contacts:nil]]] dictFromClass];
 	
 	[super executePUTForMethod:[BSAPIConfiguration contactsForID:contact.objectID]
 				withParameters:contactToUpdate

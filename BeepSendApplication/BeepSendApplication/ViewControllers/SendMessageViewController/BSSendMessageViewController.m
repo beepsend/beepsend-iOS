@@ -142,9 +142,8 @@
 	StartCounting;
 	
 	TICK;
-	[[[BSUser currentUser] defaultConnection] getDetailsForMessagesSentTo:@"381643460358" sentFrom:nil usedBatch:nil beforeDate:nil afterDate:nil forNextPage:NO onCompletion:^(NSArray *lookups, id error) {
-		DLog(@"%@", lookups);
-		
+	[[BSUser currentUser] searchContactsWithQuery:@"ica" inGroup:nil limit:@1 onCompletion:^(NSArray *results, id error) {
+		DLog(@"%@", results);
 	}];
 	TOCK;
 	

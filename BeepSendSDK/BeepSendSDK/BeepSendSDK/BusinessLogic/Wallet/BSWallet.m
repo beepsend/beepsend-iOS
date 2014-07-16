@@ -11,7 +11,7 @@
 #import "BSWalletService.h"
 #import "BSEmail.h"
 
-#define kDefaultCount @2
+#define kDefaultCount @100
 
 @interface BSWallet ()
 

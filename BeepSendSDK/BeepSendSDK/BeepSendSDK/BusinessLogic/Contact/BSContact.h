@@ -8,27 +8,32 @@
 
 #import "BSGeneralModel.h"
 
+@class BSGroup;
+
 @interface BSContact : BSGeneralModel
 
 @property (nonatomic, strong, readonly) NSString *contactID;
-@property (nonatomic, strong, readonly) NSString *firstName;
-@property (nonatomic, strong, readonly) NSString *lastName;
-@property (nonatomic, strong, readonly) NSString *phoneNumber;
-@property (nonatomic, strong, readonly) NSString *groupID;
-@property (nonatomic, strong, readonly) NSString *groupName;
+@property (nonatomic, strong) NSString *firstName;
+@property (nonatomic, strong) NSString *lastName;
+@property (nonatomic, strong) NSString *phoneNumber;
 @property (nonatomic, strong, readonly) NSArray *errors;
+
+@property (nonatomic, strong) BSGroup *group;
 
 - (BSContact *)initContactWithID:(NSString *)cID
 					   firstName:(NSString *)firstName
 						lastName:(NSString *)lastName
 					 phoneNumber:(NSString *)phoneNumber
-						 groupID:(NSString *)gID
-					   groupName:(NSString *)groupName
+						   group:(BSGroup *)group
 						  errors:(NSArray *)errors;
 
 - (BSContact *)initContactWithPhoneNumber:(NSString *)phoneNumber
 								firstName:(NSString *)firstName
 								 lastName:(NSString *)lastName
-								  groupID:(NSString *)groupID;
+									group:(BSGroup *)group;
+
+- (void)updateContact;
+- (void)saveContact;
+- (void)removeContact;
 
 @end

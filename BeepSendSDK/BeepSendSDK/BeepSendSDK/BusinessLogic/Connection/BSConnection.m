@@ -26,7 +26,7 @@
 #import "BSUser.h"
 #import "BSMessage.h"
 
-#define kDefaultMessageCountForLookup @5
+#define kDefaultMessageCountForLookup @100
 
 @interface BSConnection ()
 

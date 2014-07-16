@@ -14,6 +14,8 @@
 #import "BSConnectionsService.h"
 #import "BSCustomerService.h"
 #import "BSWalletService.h"
+#import "BSContactsService.h"
+#import "BSGroupsService.h"
 
 #import "BSTestSemaphor.h"
 
@@ -28,6 +30,9 @@
 
 @property (nonatomic, strong) NSArray *connections;
 @property (nonatomic, strong) NSArray *wallets;
+
+@property (nonatomic, strong) NSArray *contacts;
+@property (nonatomic, strong) NSArray *groups;
 
 @end
 
@@ -353,6 +358,88 @@
 		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchWallets"];
 		
 		return _wallets;
+	}
+}
+
+- (void)getAllContactsOnCompletion:(void(^)(NSArray *contacts, id error))block
+{
+	if (_contacts) {
+		block(_contacts, nil);
+	}
+	
+	[[BSContactsService sharedService] getAllContactsWithCompletionBlock:^(NSArray *contacts, id error) {
+			
+		if (!_contacts) {
+			block(contacts, error);
+		}
+		
+		_contacts = contacts;
+	}];
+}
+
+- (NSArray *)getAllContacts
+{
+	if (_contacts) {
+		return _contacts;
+	}
+	else {
+		[[BSContactsService sharedService] getAllContactsWithCompletionBlock:^(NSArray *contacts, id error) {
+			[[BSTestSemaphor sharedInstance] lift:@"FetchContacts"];
+			
+			_contacts = contacts;
+			
+		}];
+		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchContacts"];
+		
+		return _contacts;
+	}
+}
+
+- (void)addMultipleContacts:(NSArray *)contacts onCompletion:(void(^)(NSArray *response, id error))block
+{
+	[[BSContactsService sharedService] addContacts:contacts withCompletionBlock:^(NSArray *contacts, id error) {
+		block(contacts, error);
+	}];
+}
+
+- (void)searchContactsWithQuery:(NSString *)query inGroup:(BSGroup *)group limit:(NSNumber *)limit onCompletion:(void(^)(NSArray *results, id error))block
+{
+	[[BSContactsService sharedService] searchContact:query inGroup:group limit:limit.integerValue withCompletionBlock:^(NSArray *results, id error) {
+		block(results, error);
+	}];
+}
+
+- (void)getAllGroupsOnCompletion:(void(^)(NSArray *groups, id error))block
+{
+	if (_groups) {
+		block(_groups, nil);
+	}
+	
+	[[BSGroupsService sharedService] getAllGroupsWithCompletionBlock:^(NSArray *groups, id error) {
+		
+		if (!_groups) {
+			block(groups, error);
+		}
+		
+		_groups = groups;
+	}];
+}
+
+- (NSArray *)getAllGroups
+{
+	if (_groups) {
+		return _groups;
+	}
+	else {
+		[[BSGroupsService sharedService] getAllGroupsWithCompletionBlock:^(NSArray *groups, id error) {
+			[[BSTestSemaphor sharedInstance] lift:@"FetchGroups"];
+			
+			_groups = groups;
+			
+		}];
+		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchGroups"];
+		
+		return _groups;
 	}
 }
 

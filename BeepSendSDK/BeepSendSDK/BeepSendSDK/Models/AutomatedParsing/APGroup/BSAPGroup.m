@@ -38,7 +38,7 @@
 		return group;
 	}
 	
-	group.id = [groupModel.objectID isEqualToString:@"0"] ? nil : groupModel.objectID;
+	group.id = [groupModel.groupID isEqualToString:@"0"] ? nil : groupModel.groupID;
 	group.name = groupModel.name;
 	group.contacts_count = groupModel.contactsCount;
 	group.processing = groupModel.processing;

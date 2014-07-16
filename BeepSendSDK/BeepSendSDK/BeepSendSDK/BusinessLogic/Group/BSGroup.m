@@ -8,14 +8,13 @@
 
 #import "BSGroup.h"
 
+#import "BSGroupsService.h"
+
 @interface BSGroup ()
 
-@property (nonatomic, strong, readwrite) NSString *name;
-@property (nonatomic, strong, readwrite) NSNumber *contactsCount;
-@property (nonatomic, strong, readwrite) NSNumber *processing;
+@property (nonatomic, strong) NSString *oldName;
 
 @end
-
 
 @implementation BSGroup
 
@@ -35,7 +34,9 @@
 					   processing:(NSNumber *)gProcessing
 {
 	if (self = [super initWithID:gID andTitle:gName]) {
+		_groupID = gID;
 		_name = gName;
+		_oldName = gName;
 		_contactsCount = gContactsCount;
 		_processing = gProcessing;
 	}
@@ -45,7 +46,9 @@
 - (BSGroup *)initGroupWithName:(NSString *)gName
 {
 	if (self = [super initWithID:@"0" andTitle:gName]) {
+		_groupID = @"0";
 		_name = gName;
+		_oldName = gName;
 	}
 	return self;
 }
@@ -55,10 +58,103 @@
 						 contacts:(NSNumber *)gContactsCount
 {
 	if (self = [super initWithID:gID andTitle:gName]) {
+		_groupID = gID;
 		_name = gName;
+		_oldName = gName;
 		_contactsCount = gContactsCount;
 	}
 	return self;
+}
+
+#pragma mark - Public methods
+
+- (void)updateGroup
+{
+	if (!_groupID || [_groupID isEqualToString:@"0"]) {
+		return; //Group needs to be saved first
+	}
+	
+	if ([_name isEqualToString:_oldName]) {
+		return; //No changes were made
+	}
+	
+	[[BSGroupsService sharedService] updateName:_name
+										inGroup:self
+							withCompletionBlock:^(BSGroup *group, id error) {
+								
+								if (!error) {
+									_oldName = group.name;
+								}
+								else {
+									_name = _oldName;
+								}
+	}];
+}
+
+- (void)saveGroup
+{
+	if (_groupID && ![_groupID isEqualToString:@"0"]) {
+		return; //Group already exists
+	}
+	
+	[[BSGroupsService sharedService] addGroupNamed:_name
+							   withCompletionBlock:^(BSGroup *group, id error) {
+		
+								   if (!error) {
+									   _groupID = group.groupID;
+								   }
+	}];
+}
+
+- (void)removeGroup
+{
+	if (!_groupID || [_groupID isEqualToString:@"0"]) {
+		return; //Group needs to be saved first
+	}
+	
+	[[BSGroupsService sharedService] deleteGroup:self
+							 withCompletionBlock:^(BOOL success, id error) {
+		
+								 if (!error) {
+									 _groupID = @"0";
+								 }
+	}];
+}
+
+- (void)addContact:(BSContact *)contact
+{
+	contact.group = self;
+	[contact updateContact];
+	
+	_contactsCount = [NSNumber numberWithInteger:(_contactsCount.integerValue+1)];
+}
+
+- (void)addContacts:(NSArray *)contacts
+{
+	for (BSContact *contact in contacts) {
+		contact.group = self;
+		[contact updateContact];
+	}
+	
+	_contactsCount = [NSNumber numberWithInteger:(_contactsCount.integerValue+contacts.count)];
+}
+
+- (void)removeContact:(BSContact *)contact
+{
+	contact.group = nil;
+	[contact updateContact];
+	
+	_contactsCount = [NSNumber numberWithInteger:(_contactsCount.integerValue+1)];
+}
+
+- (void)removeContacts:(NSArray *)contacts
+{
+	for (BSContact *contact in contacts) {
+		contact.group = nil;
+		[contact updateContact];
+	}
+	
+	_contactsCount = [NSNumber numberWithInteger:(_contactsCount.integerValue+contacts.count)];
 }
 
 @end

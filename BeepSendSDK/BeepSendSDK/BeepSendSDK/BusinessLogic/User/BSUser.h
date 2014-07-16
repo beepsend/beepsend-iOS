@@ -11,6 +11,7 @@
 @class BSCustomer;
 @class BSVerified;
 @class BSConnection;
+@class BSGroup;
 
 @interface BSUser : BSGeneralModel
 
@@ -102,5 +103,17 @@
 
 - (void)getAvailableWalletsOnCompletion:(void(^)(NSArray *wallets, id error))block;
 - (NSArray *)getAvailableWallets;
+
+//Contacts
+- (void)getAllContactsOnCompletion:(void(^)(NSArray *contacts, id error))block;
+- (NSArray *)getAllContacts;
+
+- (void)addMultipleContacts:(NSArray *)contacts onCompletion:(void(^)(NSArray *response, id error))block;
+
+- (void)searchContactsWithQuery:(NSString *)query inGroup:(BSGroup *)group limit:(NSNumber *)limit onCompletion:(void(^)(NSArray *results, id error))block;
+
+//Groups
+- (void)getAllGroupsOnCompletion:(void(^)(NSArray *groups, id error))block;
+- (NSArray *)getAllGroups;
 
 @end
