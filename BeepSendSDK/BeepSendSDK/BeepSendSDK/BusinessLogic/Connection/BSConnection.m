@@ -26,12 +26,17 @@
 #import "BSUser.h"
 #import "BSMessage.h"
 
+#define kDefaultMessageCountForLookup @5
+
 @interface BSConnection ()
 
 @property (nonatomic, strong) BSConnection *connectionModel;
 
 @property (nonatomic, strong) BSPricelist *currentPricelist;
 @property (nonatomic, strong) NSArray *pricelists;
+
+@property (nonatomic, strong) NSArray *lookups;
+@property (nonatomic, strong) NSNumber *lookupPageLimit;
 
 @end
 
@@ -65,6 +70,7 @@
 {
 	if (self = [super initWithID:cID andTitle:@"Connection"]) {
 		_connectionID = cID;
+		_lookupPageLimit = kDefaultMessageCountForLookup;
 	}
 	return self;
 }
@@ -97,6 +103,7 @@
 		_wallet = cWallet;
 		_whitelist = cWhitelist;
 		_password = password;
+		_lookupPageLimit = kDefaultMessageCountForLookup;
 	}
 	return self;
 }
@@ -117,6 +124,7 @@
 		_wallet = connectionModel.wallet;
 		_whitelist = connectionModel.whitelist;
 		_password = connectionModel.password;
+		_lookupPageLimit = kDefaultMessageCountForLookup;
 	}
 	return self;
 }
@@ -137,6 +145,7 @@
 		_wallet = connectionModel.wallet;
 		_whitelist = connectionModel.whitelist;
 		_password = newPassword;
+		_lookupPageLimit = kDefaultMessageCountForLookup;
 	}
 	return self;
 }
@@ -151,6 +160,7 @@
 		_label = cLabel;
 		_systemID = cSystemID;
 		_type = cType;
+		_lookupPageLimit = kDefaultMessageCountForLookup;
 		
 	}
 	return self;
@@ -182,6 +192,7 @@
 			_TLVForMCCAndMNC = connection.TLVForMCCAndMNC;
 			_whitelist = connection.whitelist;
 			_password = connection.password;
+			_lookupPageLimit = kDefaultMessageCountForLookup;
 		}];
 //		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchConnection"];
 	}
@@ -357,6 +368,52 @@
 		
 		block(lookupResponse, error);
 	}];
+}
+
+- (void)getDetailsForMessagesSentTo:(NSString *)recipient sentFrom:(NSString *)sender usedBatch:(BSBatch *)batch beforeDate:(NSDate *)bDate afterDate:(NSDate *)aDate forNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *lookups, id error))block
+{
+	NSString *maxID = nil;
+	if (_lookups) {
+		maxID = [_lookups lastObject] ? [[_lookups lastObject] objectID] : nil;
+	}
+	
+	if (!nextPage) {
+		_lookups = @[];
+	}
+	
+	[[BSSMSService sharedService] lookupMultipleSMSSentTo:recipient
+												 setnFrom:sender
+										  usingConnection:self
+													batch:batch
+												  sinceID:nil
+													maxID:nextPage ? maxID : nil
+												afterDate:aDate
+											   beforeDate:bDate
+													count:nextPage ? [NSNumber numberWithInteger:(_lookupPageLimit.integerValue+1)] : _lookupPageLimit
+									  withCompletionBlock:^(NSArray *lookupResponse, id error) {
+										  
+										  
+										  NSMutableArray *mArr = [NSMutableArray arrayWithArray:_lookups];
+										  if (!error) {
+											  [mArr removeLastObject];
+											  _lookups = [mArr arrayByAddingObjectsFromArray:lookupResponse];
+										  }
+										  
+										  block(_lookups, error);
+	}];
+}
+
+- (void)setLookupPageLimit:(NSNumber *)lookupPageLimit
+{
+	if ([lookupPageLimit integerValue] > 200) {
+		_lookupPageLimit = @200;
+	}
+	
+	if ([lookupPageLimit integerValue] < 1) {
+		_lookupPageLimit = @1;
+	}
+	
+	_lookupPageLimit = lookupPageLimit;
 }
 
 //Get batch details

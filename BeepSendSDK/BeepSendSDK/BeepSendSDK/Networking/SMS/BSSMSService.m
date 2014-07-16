@@ -143,6 +143,56 @@
 				  }];
 }
 
+- (void)lookupMultipleSMSSentTo:(NSString *)recipient setnFrom:(NSString *)sender usingConnection:(BSConnection *)connection batch:(BSBatch *)batch sinceID:(NSString *)sinceID maxID:(NSString *)maxID afterDate:(NSDate *)afterDate beforeDate:(NSDate *)beforeDate count:(NSNumber *)count withCompletionBlock:(void(^)(NSArray *lookupResponse, id error))block
+{
+	NSMutableDictionary *parameters = [@{} mutableCopy];
+	if (recipient) {
+		[parameters setObject:recipient forKey:@"to"];
+	}
+	if (sender) {
+		[parameters setObject:sender forKey:@"from"];
+	}
+	if (connection && ![connection.objectID isEqualToString:@"0"]) {
+		[parameters setObject:connection.objectID forKey:@"connection_id"];
+	}
+	if (batch && ![batch.objectID isEqualToString:@"0"]) {
+		[parameters setObject:batch.objectID forKey:@"batch_id"];
+	}
+	if (sinceID) {
+		[parameters setObject:sinceID forKey:@"since_id"];
+	}
+	if (maxID) {
+		[parameters setObject:maxID forKey:@"max_id"];
+	}
+	if (count) {
+		[parameters setObject:count forKey:@"count"];
+	}
+	if (afterDate) {
+		[parameters setObject:[NSString stringWithFormat:@"%f", [afterDate timeIntervalSince1970]] forKey:@"after_date"];
+	}
+	if (beforeDate) {
+		[parameters setObject:[NSString stringWithFormat:@"%f", [beforeDate timeIntervalSince1970]] forKey:@"before_date"];
+	}
+	
+	[super executePOSTForMethod:[BSAPIConfiguration sms]
+				 withParameters:parameters
+				   onCompletion:^(id response, id error) {
+					   
+					   if (!error) {
+						   
+						   NSMutableArray *mArr = [@[] mutableCopy];
+						   for (BSAPSMSLookup *msg in [BSAPSMSLookup arrayOfObjectsFromArrayOfDictionaries:response]) {
+							   [mArr addObject:[msg convertToModel]];
+						   }
+						   block([NSArray arrayWithArray:mArr], error);
+					   }
+					   else {
+						   //TODO: Create error handling
+						   block(nil, response);
+					   }
+				   }];
+}
+
 - (void)validateSMSForMessage:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, id error))block
 {
 	NSDictionary *parameters = [[BSAPMessageRequest convertFromMessageRequestModel:message] dictFromClass];

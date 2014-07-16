@@ -113,6 +113,12 @@
 //Get sms details
 - (void)getDetailsForSMS:(BSMessage *)message onCompletion:(void(^)(BSLookup *lookup, id error))block;
 
+//Get sms details based on filters
+- (void)getDetailsForMessagesSentTo:(NSString *)recipient sentFrom:(NSString *)sender usedBatch:(BSBatch *)batch beforeDate:(NSDate *)bDate afterDate:(NSDate *)aDate forNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *lookups, id error))block;
+
+//How many SMS objects to fetch. Maximum 200, default 100.
+- (void)setLookupPageLimit:(NSNumber *)lookupPageLimit;
+
 //Get batch details
 - (void)getDetailsForBatch:(BSBatch *)batch onCompletion:(void(^)(BSBatch *batch, id error))block;
 

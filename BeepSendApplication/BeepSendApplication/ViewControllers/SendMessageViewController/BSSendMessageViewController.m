@@ -142,14 +142,10 @@
 	StartCounting;
 	
 	TICK;
-	NSArray *connections = [[BSUser currentUser] getAvailableConnections];
-	for (BSConnection *connection in connections) {
-		if (connection.type == BSConnectionTypeHLR) {
-			[connection validateHLRForNumber:@"381643460358" onCompletion:^(BSHLR *hlr, id error) {
-				
-			}];
-		}
-	}
+	[[[BSUser currentUser] defaultConnection] getDetailsForMessagesSentTo:@"381643460358" sentFrom:nil usedBatch:nil beforeDate:nil afterDate:nil forNextPage:NO onCompletion:^(NSArray *lookups, id error) {
+		DLog(@"%@", lookups);
+		
+	}];
 	TOCK;
 	
 	DLog(@"END");
