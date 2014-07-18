@@ -102,10 +102,15 @@
 - (void)getCurrentPricelistOnCompletion:(void(^)(BSPricelist *pricelist))block;
 
 //Send message
-- (void)sendSMS:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, id error))block;
+//Returns number of messages
+- (NSInteger)sendSMS:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, id error))block;
 
 //Send messages
-- (void)sendMultipleSMS:(NSArray *)messages withCompletionBlock:(void(^)(NSArray *messages, id error))block;
+//Returns number of messages
+- (NSInteger)sendMultipleSMS:(NSArray *)messages withCompletionBlock:(void(^)(NSArray *messages, id error))block;
+
+- (NSInteger)smsCountForMessage:(BSMessage *)message;
+- (NSInteger)smsCountForMessages:(NSArray *)messages;
 
 //Validate SMS
 - (void)validateSMS:(BSMessage *)message onCompletion:(void(^)(BSMessage *message, id error))block;

@@ -303,10 +303,10 @@
 }
 
 //Send message
-- (void)sendSMS:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, id error))block
+- (NSInteger)sendSMS:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, id error))block
 {
 	if (_type != BSConnectionTypeSMS) {
-		return; //This connection can't send SMS
+		return 0; //This connection can't send SMS
 	}
 	
 	__block BSMessage *msg = message;
@@ -319,13 +319,15 @@
 			block(nil, error);
 		}
 	}];
+	
+	return [self smsCountForMessage:message];
 }
 
 //Send messages
-- (void)sendMultipleSMS:(NSArray *)messages withCompletionBlock:(void(^)(NSArray *messages, id error))block
+- (NSInteger)sendMultipleSMS:(NSArray *)messages withCompletionBlock:(void(^)(NSArray *messages, id error))block
 {
 	if (_type != BSConnectionTypeSMS) {
-		return; //This connection can't send SMS
+		return 0; //This connection can't send SMS
 	}
 	
 	__block NSArray *msgs = messages;
@@ -342,6 +344,24 @@
 			block(nil, error);
 		}
 	}];
+	
+	return [self smsCountForMessages:messages];
+}
+
+- (NSInteger)smsCountForMessage:(BSMessage *)message
+{
+	BOOL isUTF8 = is_utf8([message.message cStringUsingEncoding:NSUTF16BigEndianStringEncoding]);
+	return message.message.length<=(isUTF8?160:70) ? 1 : message.message.length/(isUTF8?153:66);
+}
+
+- (NSInteger)smsCountForMessages:(NSArray *)messages
+{
+	NSInteger messageCount = 0;
+	for (BSMessage *m in messages) {
+		messageCount += [self smsCountForMessage:m];
+	}
+	
+	return messageCount;
 }
 
 //Validate SMS

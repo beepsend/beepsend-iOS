@@ -177,18 +177,35 @@
 		![Helper isNilOrEmpty:_textFieldTo.text] &&
 		![Helper isNilOrEmpty:_textViewMessageBox.text]) {
 		
-//		BSMessage *message = [BSMessage messageWithBody:[_textViewMessageBox.text stringByAppendingString:@"1"] from:_textFieldFrom.text to:_textFieldTo.text];
-//		BSMessage *message1 = [BSMessage messageWithBody:[_textViewMessageBox.text stringByAppendingString:@"2"] from:_textFieldFrom.text to:_textFieldTo.text];
-//		BSMessage *message2 = [BSMessage messageWithBody:[_textViewMessageBox.text stringByAppendingString:@"3"] from:_textFieldFrom.text to:_textFieldTo.text];
+		BSMessage *message;
+		switch (_segmentedControlMessageType.selectedSegmentIndex) {
+			case 0://Normal message
+			{
+				message = [BSMessage messageWithBody:_textViewMessageBox.text from:_textFieldFrom.text to:_textFieldTo.text];
+			}
+				break;
+			case 1://Binary message
+			{
+				message = [BSMessage binaryMessageWithBody:_textViewMessageBox.text from:_textFieldFrom.text to:_textFieldTo.text];
+			}
+				break;
+			case 2://Flash message
+			{
+				message = [BSMessage flashMessageWithBody:_textViewMessageBox.text from:_textFieldFrom.text to:_textFieldTo.text];
+			}
+				break;
+			default:
+				break;
+		}
 		
-//		BSMessage *flashMessage = [BSMessage flashMessageWithBody:_textViewMessageBox.text from:_textFieldFrom.text to:_textFieldTo.text];
-		
-//		BSMessage *binaryMessage = [BSMessage binaryMessageWithBody:_textViewMessageBox.text from:_textFieldFrom.text to:_textFieldTo.text];
-		
-		BSMessage *msg = [[BSMessage alloc] initMessageWithID:@"023360800140542909816482381643460358" andErrors:nil forMessage:nil];
-		
-		[[[BSUser currentUser] defaultConnection] getDetailsForSMS:msg onCompletion:^(BSLookup *lookup, id error) {
+		[_connection sendSMS:message withCompletionBlock:^(BSMessage *message, id error) {
 			
+			if (!error) {
+				[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success!", @"") message:NSLocalizedString(@"Message was successfully sent!", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+			}
+			else {
+				[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:NSLocalizedString(@"There was an error while sending message! Try again.", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+			}
 		}];
 	}
 }
