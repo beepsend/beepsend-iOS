@@ -350,7 +350,7 @@
 
 - (NSInteger)smsCountForMessage:(BSMessage *)message
 {
-	BOOL isUTF8 = is_utf8([message.message cStringUsingEncoding:NSUTF16BigEndianStringEncoding]);
+	BOOL isUTF8 = TARGET_IPHONE_SIMULATOR ? NO : is_utf8([message.message cStringUsingEncoding:NSUTF16BigEndianStringEncoding]);
 	return message.message.length<=(isUTF8?160:70) ? 1 : message.message.length/(isUTF8?153:66);
 }
 

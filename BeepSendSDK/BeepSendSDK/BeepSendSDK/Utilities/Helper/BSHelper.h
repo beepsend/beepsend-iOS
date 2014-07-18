@@ -25,6 +25,9 @@
 #define kSMSOrdinaryCharacterCountUTF16 70
 #define kSMSLongCharacterCountUTF16 66
 
+
+#if !(TARGET_IPHONE_SIMULATOR)
+
 _Bool is_utf8(const char * string)
 {
     if(!string)
@@ -104,6 +107,8 @@ _Bool is_utf8(const char * string)
 	
     return 1;
 }
+
+#endif
 
 @interface BSHelper : NSObject
 
