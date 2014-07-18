@@ -116,4 +116,6 @@
 - (void)getAllGroupsOnCompletion:(void(^)(NSArray *groups, id error))block;
 - (NSArray *)getAllGroups;
 
+- (void)searchGroupsWithQuery:(NSString *)query limit:(NSNumber *)limit onCompletion:(void(^)(NSArray *results, id error))block;
+
 @end

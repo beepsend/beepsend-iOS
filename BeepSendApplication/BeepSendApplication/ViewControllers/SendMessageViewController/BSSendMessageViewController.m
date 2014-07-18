@@ -18,12 +18,20 @@
 
 @interface BSSendMessageViewController () <UITextFieldDelegate>
 
+@property (nonatomic, strong) BSConnection *connection;
+
 @property (nonatomic, weak) UIScrollView *scrollView;
 
 @property (nonatomic, weak) UITextField *textFieldFrom;
 @property (nonatomic, weak) UITextField *textFieldTo;
 
 @property (nonatomic, weak) UITextView *textViewMessageBox;
+
+@property (nonatomic, weak) UIButton *buttonCheckDestinationNumber;
+@property (nonatomic, weak) UIButton *buttonDone;
+
+@property (nonatomic, weak) UIButton *buttonBack;
+@property (nonatomic, weak) UISegmentedControl *segmentedControlMessageType;
 
 - (void)setupViewElements;
 
@@ -32,6 +40,9 @@
 
 - (void)keyboardBecameActive:(NSNotification *)notification;
 - (void)keyboardBecameInactive:(NSNotification *)notification;
+
+- (void)buttonBackClicked:(UIButton *)sender;
+- (void)segmentedControlChangedValue:(UISegmentedControl *)sender;
 
 @end
 
@@ -44,6 +55,17 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+    }
+    return self;
+}
+
+- (BSSendMessageViewController *)initWithConnection:(BSConnection *)connection
+{
+	self = [super init];
+    if (self) {
+        // Custom initialization
+		
+		_connection = connection;
     }
     return self;
 }
@@ -61,8 +83,20 @@
 	
 	_textViewMessageBox = sendMessageView.textViewMessageBox;
 	
-	[sendMessageView.buttonCheckDestinationNumber addTarget:self action:@selector(buttonCheckClicked) forControlEvents:UIControlEventTouchUpInside];
-	[sendMessageView.buttonDone addTarget:self action:@selector(buttonDoneClicked) forControlEvents:UIControlEventTouchUpInside];
+	_buttonCheckDestinationNumber = sendMessageView.buttonCheckDestinationNumber;
+	_buttonDone = sendMessageView.buttonDone;
+	
+	[_buttonCheckDestinationNumber addTarget:self action:@selector(buttonCheckClicked) forControlEvents:UIControlEventTouchUpInside];
+	[_buttonDone addTarget:self action:@selector(buttonDoneClicked) forControlEvents:UIControlEventTouchUpInside];
+	
+	_buttonBack = sendMessageView.buttonBack;
+	[_buttonBack addTarget:self action:@selector(buttonBackClicked:) forControlEvents:UIControlEventTouchUpInside];
+	
+	_segmentedControlMessageType = sendMessageView.segmentedControlMessageType;
+	[_segmentedControlMessageType insertSegmentWithTitle:NSLocalizedString(@"Normal", @"") atIndex:0 animated:YES];
+	[_segmentedControlMessageType insertSegmentWithTitle:NSLocalizedString(@"Binary", @"") atIndex:1 animated:YES];
+	[_segmentedControlMessageType insertSegmentWithTitle:NSLocalizedString(@"Flash", @"") atIndex:2 animated:YES];
+	[_segmentedControlMessageType setSelectedSegmentIndex:0];
 	
 	self.view = sendMessageView;
 }
@@ -77,6 +111,23 @@
 	//Add keyboard appearance notification
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameActive:) name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
+	
+	if (_connection.type == BSConnectionTypeSMS) {
+		_buttonCheckDestinationNumber.enabled = NO;
+		_buttonCheckDestinationNumber.alpha = 0.3;
+		
+		_textFieldTo.placeholder = NSLocalizedString(@"To whom is message sent?", @"");
+	}
+	else {
+		_textFieldFrom.enabled = NO;
+		_textFieldFrom.alpha = 0.3;
+		_textViewMessageBox.userInteractionEnabled = NO;
+		_textViewMessageBox.alpha = 0.3;
+		_segmentedControlMessageType.enabled = NO;
+		_segmentedControlMessageType.alpha = 0.3;
+		
+		_textFieldTo.placeholder = NSLocalizedString(@"Enter number to perform HLR", @"");
+	}
 	
 }
 
@@ -106,6 +157,12 @@
 
 - (void)buttonDoneClicked
 {
+	if (_connection.type == BSConnectionTypeHLR) {
+		
+		[_textFieldTo resignFirstResponder];
+		return;
+	}
+	
 	if ([_textFieldFrom isFirstResponder]) {
 		[_textFieldFrom resignFirstResponder];
 	}
@@ -137,17 +194,16 @@
 }
 
 - (void)buttonCheckClicked {
-	DLog(@"START");
 	
-	StartCounting;
+	if ([Helper isNilOrEmpty:_textFieldTo.text]) {
+		[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning!", @"") message:NSLocalizedString(@"You must enter number to perform HLR request.", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+		return; //Enter number to perform hlr
+	}
 	
-	TICK;
-	[[BSUser currentUser] searchContactsWithQuery:@"ica" inGroup:nil limit:@1 onCompletion:^(NSArray *results, id error) {
-		DLog(@"%@", results);
+	[_connection immediateHLRForNumber:_textFieldTo.text onCompletion:^(BSHLR *hlr, id error) {
+		//TODO: show result
 	}];
-	TOCK;
 	
-	DLog(@"END");
 }
 
 - (void)keyboardBecameActive:(NSNotification *)notification
@@ -179,11 +235,34 @@
 	[UIView setAnimationBeginsFromCurrentState:YES];
 	{
 		self.view.frame = newFrame;
+		_scrollView.frame = self.view.frame;
 	}
 	[UIView commitAnimations];
 }
 
+- (void)buttonBackClicked:(UIButton *)sender
+{
+	[self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)segmentedControlChangedValue:(UISegmentedControl *)sender
+{
+	
+}
+
 #pragma mark - UITextField delegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+	if ([textField isEqual:_textViewMessageBox]) {
+		[_buttonDone setTitle:NSLocalizedString(@"Send", @"") forState:UIControlStateNormal];
+	}
+	else {
+		[_buttonDone setTitle:NSLocalizedString(@"Done", @"") forState:UIControlStateNormal];
+	}
+	
+	return YES;
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

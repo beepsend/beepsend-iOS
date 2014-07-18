@@ -24,7 +24,7 @@
 		
 		////////////////////////////////////////////////////////////////////////
 		//Main view
-		self.backgroundColor = [UIColor blackColor];
+		self.backgroundColor = [UIColor clearColor];
 		
 		UIBezierPath *roundedPath = [UIBezierPath bezierPathWithRoundedRect:frame
 														  byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight
@@ -139,7 +139,28 @@
 		[self addSubview:_buttonCheckDestinationNumber];
 		
 		////////////////////////////////////////////////////////////////////////
-		//Constraints
+		
+		_buttonBack = [[UIButton alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, frame.size.height - kViewDefaultBorderInset - kTextFieldDefaultHeight, frame.size.width - 2*kViewDefaultBorderInset, kTextFieldDefaultHeight)];
+		_buttonBack.backgroundColor = [UIColor lightGrayColor];
+		_buttonBack.showsTouchWhenHighlighted = YES;
+		_buttonBack.clipsToBounds = YES;
+		[_buttonBack setTitle:NSLocalizedString(@"Back", @"") forState:UIControlStateNormal];
+		[_buttonBack setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		[_buttonBack setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
+		_buttonBack.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
+		
+		_buttonBack.layer.cornerRadius = _textFieldTo.layer.cornerRadius;
+		_buttonBack.layer.borderWidth = kDefaultBorderWidth;
+		_buttonBack.layer.borderColor = [UIColor orangeColor].CGColor;
+		
+		[self addSubview:_buttonBack];
+		
+		
+		_segmentedControlMessageType = [[UISegmentedControl alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, CGRectGetMaxY(_textViewMessageBox.frame) + kSeparatorDefaultSpacing, frame.size.width - 2*kViewDefaultBorderInset, kTextFieldDefaultHeight)];
+		[_segmentedControlMessageType setTintColor:[UIColor orangeColor]];
+		
+		[self addSubview:_segmentedControlMessageType];
+		
     }
     return self;
 }

@@ -18,8 +18,10 @@
 @property (nonatomic, strong) BSTextFieldCustomTextInset *textFieldTo;
 @property (nonatomic, strong) UITextView *textViewMessageBox;
 @property (nonatomic, strong) UIButton *buttonCheckDestinationNumber;
-@property (nonatomic, strong) UIButton *buttonSendMessage;
 
 @property (nonatomic, weak) UIButton *buttonDone;
+
+@property (nonatomic, strong) UIButton *buttonBack;
+@property (nonatomic, strong) UISegmentedControl *segmentedControlMessageType;
 
 @end

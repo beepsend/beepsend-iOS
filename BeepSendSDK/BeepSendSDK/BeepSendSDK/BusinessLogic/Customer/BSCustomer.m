@@ -10,6 +10,7 @@
 
 @interface BSCustomer ()
 
+@property (nonatomic, strong, readwrite) NSString *customerID;
 @property (nonatomic, strong, readwrite) NSString *name;
 @property (nonatomic, strong, readwrite) NSString *phoneNumber;
 @property (nonatomic, strong, readwrite) NSString *address;
@@ -18,7 +19,7 @@
 @property (nonatomic, strong, readwrite) NSString *country;
 @property (nonatomic, strong, readwrite) NSString *vat;
 @property (nonatomic, strong, readwrite) NSString *email;
-@property (nonatomic, strong, readwrite) NSString *invoiceType;
+@property (nonatomic, strong, readwrite) NSString *type;
 
 @property (nonatomic, strong, readwrite) BSAccountManager *accountManager;
 
@@ -27,6 +28,56 @@
 @end
 
 @implementation BSCustomer
+
+- (NSString *)customerID
+{
+	return [_customerID isEqual:[NSNull null]]||_customerID==nil?@"":_customerID;
+}
+
+- (NSString *)name
+{
+	return [_name isEqual:[NSNull null]]||_name==nil?@"":_name;
+}
+
+- (NSString *)phoneNumber
+{
+	return [_phoneNumber isEqual:[NSNull null]]||_phoneNumber==nil?@"":_phoneNumber;
+}
+
+- (NSString *)address
+{
+	return [_address isEqual:[NSNull null]]||_address==nil?@"":_address;
+}
+
+- (NSString *)city
+{
+	return [_city isEqual:[NSNull null]]||_city==nil?@"":_city;
+}
+
+- (NSString *)postBox
+{
+	return [_postBox isEqual:[NSNull null]]||_postBox==nil?@"":_postBox;
+}
+
+- (NSString *)country
+{
+	return [_country isEqual:[NSNull null]]||_country==nil?@"":_country;
+}
+
+- (NSString *)vat
+{
+	return [_vat isEqual:[NSNull null]]||_vat==nil?@"":_vat;
+}
+
+- (NSString *)email
+{
+	return [_email isEqual:[NSNull null]]||_email==nil?@"":_email;
+}
+
+- (NSString *)type
+{
+	return [_type isEqual:[NSNull null]]||_type==nil?@"":_type;
+}
 
 #pragma mark - Initialization
 
@@ -61,7 +112,7 @@
 		_country = cCountry;
 		_vat = cVat;
 		_email = cEmail;
-		_invoiceType = cInvoiceType;
+		_type = cInvoiceType;
 		
 		_accountManager = cAccountManager;
 		

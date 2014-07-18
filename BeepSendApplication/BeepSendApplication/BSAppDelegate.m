@@ -9,7 +9,6 @@
 #import "BSAppDelegate.h"
 
 #import "BSRootViewController.h"
-#import "BSSendMessageViewController.h"
 
 #import "BSUser.h"
 
@@ -31,18 +30,15 @@
 	
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 		
-		BSSendMessageViewController *sendMessageViewController = [[BSSendMessageViewController alloc] init];
-//		BSRootViewController *rootViewController = [[BSRootViewController alloc] init];
+		BSRootViewController *rootViewController = [[BSRootViewController alloc] init];
 		
-		_navigationController = [[UINavigationController alloc] initWithRootViewController:sendMessageViewController];
+		_navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
 		[_navigationController setNavigationBarHidden:YES];
 		[_window setRootViewController:_navigationController];
 		
 	});
 	
-
-	
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
     return YES;
 }

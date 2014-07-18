@@ -443,4 +443,12 @@
 	}
 }
 
+- (void)searchGroupsWithQuery:(NSString *)query limit:(NSNumber *)limit onCompletion:(void(^)(NSArray *results, id error))block
+{
+	[[BSGroupsService sharedService] searchContactGroups:query limit:limit.integerValue withCompletionBlock:^(NSArray *results, id error) {
+		
+		block(results, error);
+	}];
+}
+
 @end
