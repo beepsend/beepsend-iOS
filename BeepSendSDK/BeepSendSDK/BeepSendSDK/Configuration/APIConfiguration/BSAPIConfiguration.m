@@ -317,4 +317,16 @@
 	return [@"/sms/costestimate/" stringByAppendingString:connectionID];
 }
 
+#pragma mark - Verify email and phone number
+
++ (NSString *)verifyEmailWithHash:(NSString *)hash
+{
+	return [@"/users/email/" stringByAppendingString:hash];
+}
+
++ (NSString *)verifyPhoneWithHash:(NSString *)hash
+{
+	return [@"/users/phone/" stringByAppendingString:hash];
+}
+
 @end

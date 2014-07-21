@@ -353,15 +353,30 @@
 #pragma mark - Estimate SMS cost
 
 /*
- Each estimation require a token either assigned to a Connection or a User
- that has a default connection set up. By specifying a label of a different
- Connection belonging to your Company this will instead be used, granted
- the User has access-rights to this Connection. If authenticated by
- User token and no Connection is specified, the default assigned Connection
- will be used.
+	Each estimation require a token either assigned to a Connection or a User
+	that has a default connection set up. By specifying a label of a different
+	Connection belonging to your Company this will instead be used, granted
+	the User has access-rights to this Connection. If authenticated by
+	User token and no Connection is specified, the default assigned Connection
+	will be used.
  */
 + (NSString *)smsCostEstimate;
 
 + (NSString *)smsCostEstimateForID:(NSString *)connectionID;
+
+#pragma mark - Verify email and phone number
+
+/*
+	An email will be sent out after changing your email address asking you
+	to verify that you have indeed changed it. Use the unique hash in the 
+	verification link to perform the verification.
+ */
++ (NSString *)verifyEmailWithHash:(NSString *)hash;
+
+/*
+	After changing your phone number. An SMS will be sent out asking you 
+	to verify the change. Use the unique hash to verify.
+ */
++ (NSString *)verifyPhoneWithHash:(NSString *)hash;
 
 @end

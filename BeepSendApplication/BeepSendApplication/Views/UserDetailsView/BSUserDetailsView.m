@@ -154,7 +154,7 @@
 		
 		////////////////////////////////////////////////////////////////////////
 		//Buttons customer and default connection
-		_buttonCustomer = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_tableViewUserTypes.frame) + 2*kViewDefaultBorderInset, CGRectGetMinY(_tableViewUserTypes.frame), CGRectGetWidth(_tableViewUserTypes.frame), CGRectGetHeight(_tableViewUserTypes.frame)/2.0 - kSeparatorDefaultSpacing)];
+		_buttonCustomer = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_tableViewUserTypes.frame) + kSeparatorDefaultSpacing, CGRectGetMinY(_tableViewUserTypes.frame), CGRectGetWidth(_tableViewUserTypes.frame) - 20, CGRectGetHeight(_tableViewUserTypes.frame)/2.0 - kSeparatorDefaultSpacing)];
 		
 		_buttonCustomer.backgroundColor = [UIColor lightGrayColor];
 		_buttonCustomer.showsTouchWhenHighlighted = YES;
@@ -203,6 +203,23 @@
 		//		@property (nonatomic, strong) UIButton *buttonVerifiedTerms;
 		//		@property (nonatomic, strong) UIButton *buttonVerifiedPhone;
 		//		@property (nonatomic, strong) UIButton *buttonVerifiedEmail;
+		
+		////////////////////////////////////////////////////////////////////////
+		//Contacts button
+		_buttonContacts = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_buttonCustomer.frame) + kSeparatorDefaultSpacing, CGRectGetMinY(_buttonCustomer.frame), frame.size.width - 2*kSeparatorDefaultSpacing - CGRectGetWidth(_buttonCustomer.frame) - CGRectGetWidth(_tableViewUserTypes.frame) - 2*kViewDefaultBorderInset, CGRectGetHeight(_tableViewUserTypes.frame))];
+		
+		_buttonContacts.backgroundColor = [UIColor lightGrayColor];
+		_buttonContacts.showsTouchWhenHighlighted = YES;
+		_buttonContacts.clipsToBounds = YES;
+		[_buttonContacts setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		[_buttonContacts setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+		_buttonContacts.titleLabel.font = [UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultTextSize/1.6];
+		
+		_buttonContacts.layer.cornerRadius = kDefaultButtonCornerRadius;
+		_buttonContacts.layer.borderWidth = kDefaultBorderWidth;
+		_buttonContacts.layer.borderColor = [UIColor orangeColor].CGColor;
+		
+		[_scrollViewContainer addSubview:_buttonContacts];
 		
     }
     return self;

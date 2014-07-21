@@ -42,6 +42,8 @@
 
 @property (nonatomic, weak) UITableView *tableViewConnections;
 
+@property (nonatomic, weak) UIButton *buttonContacts;
+
 @property (nonatomic, strong) NSArray *dataSourceConnections;
 
 - (void)setupViewElements;
@@ -53,6 +55,7 @@
 
 - (void)buttonCustomerClicked:(UIButton *)sender;
 - (void)buttonDefaultConnectionClicked:(UIButton *)sender;
+- (void)buttonContactsClicked:(UIButton *)sender;
 
 @end
 
@@ -110,6 +113,9 @@
 	_tableViewConnections.dataSource = self;
 	_tableViewConnections.delegate = self;
 	
+	_buttonContacts = rootView.buttonContacts;
+	[_buttonContacts addTarget:self action:@selector(buttonContactsClicked:) forControlEvents:UIControlEventTouchUpInside];
+	
 	self.view = rootView;
 }
 
@@ -164,6 +170,8 @@
 	
 	[_buttonCustomer setTitle:u.customerName forState:UIControlStateNormal];
 	[_buttonDefaultConnection setTitle:u.defaultConnection.label forState:UIControlStateNormal];
+	
+	[_buttonContacts setTitle:@"+" forState:UIControlStateNormal];
 }
 
 - (void)keyboardBecameActive:(NSNotification *)notification
@@ -211,6 +219,11 @@
 {
 	BSSendMessageViewController *msgVC = [[BSSendMessageViewController alloc] initWithConnection:[BSUser currentUser].defaultConnection];
 	[self.navigationController pushViewController:msgVC animated:YES];
+}
+
+- (void)buttonContactsClicked:(UIButton *)sender
+{
+	//TODO: add contacts
 }
 
 #pragma mark - UITableView data source

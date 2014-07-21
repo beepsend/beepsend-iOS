@@ -163,4 +163,38 @@
 				  }];
 }
 
+- (void)verifyEmailWithHash:(NSString *)hash withCompletionBlock:(void(^)(BOOL success, id error))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration verifyEmailWithHash:hash]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  block(YES, error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(NO, response);
+					  }
+					  
+				  }];
+}
+
+- (void)verifyPhoneWithHash:(NSString *)hash withCompletionBlock:(void(^)(BOOL success, id error))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration verifyPhoneWithHash:hash]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  block(YES, error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(NO, response);
+					  }
+					  
+				  }];
+}
+
 @end

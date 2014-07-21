@@ -33,4 +33,7 @@
 
 - (void)resetUserTokenUsingPassword:(NSString *)password withCompletionBlock:(void(^)(NSString *apiToken, id error))block;
 
+- (void)verifyEmailWithHash:(NSString *)hash withCompletionBlock:(void(^)(BOOL success, id error))block;
+- (void)verifyPhoneWithHash:(NSString *)hash withCompletionBlock:(void(^)(BOOL success, id error))block;
+
 @end
