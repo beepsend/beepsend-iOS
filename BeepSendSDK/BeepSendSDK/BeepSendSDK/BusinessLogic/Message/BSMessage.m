@@ -10,7 +10,27 @@
 
 #import "BSBatch.h"
 
+@interface BSMessage ()
+
+//Message response parameters
+@property (nonatomic, strong, readwrite) NSString *messageID;
+@property (nonatomic, strong, readwrite) NSArray *errors;
+
+@end
+
 @implementation BSMessage
+
+#pragma mark - Properties
+
+- (NSString *)messageID
+{
+	return [BSHelper isNilOrEmpty:_messageID] ? @"0" : [_messageID isKindOfClass:[NSNumber class]] ? [(NSNumber *)_messageID stringValue] : _messageID;
+}
+
+- (NSArray *)errors
+{
+	return _errors ? _errors : @[];
+}
 
 #pragma mark - Initialization
 

@@ -17,6 +17,18 @@
 
 @implementation BSAccountManager
 
+#pragma mark - Properties
+
+- (NSString *)name
+{
+	return [BSHelper isNilOrEmpty:_name] ? @"" : _name;
+}
+
+- (NSString *)email
+{
+	return [BSHelper isNilOrEmpty:_email] ? @"" : _email;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title

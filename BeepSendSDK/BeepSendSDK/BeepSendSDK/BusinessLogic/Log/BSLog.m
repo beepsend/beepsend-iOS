@@ -10,6 +10,7 @@
 
 @interface BSLog ()
 
+@property (nonatomic, strong, readwrite) NSString *logID;
 @property (nonatomic, strong, readwrite) NSDate *timeOfTransaction;
 @property (nonatomic, strong, readwrite) NSNumber *balanceAfterTransaction;
 @property (nonatomic, strong, readwrite) NSNumber *change;
@@ -18,6 +19,28 @@
 @end
 
 @implementation BSLog
+
+#pragma mark - Properties
+
+- (NSString *)logID
+{
+	return [BSHelper isNilOrEmpty:_logID] ? @"0" : [_logID isKindOfClass:[NSNumber class]] ? [(NSNumber *)_logID stringValue] : _logID;
+}
+
+- (NSNumber *)balanceAfterTransaction
+{
+	return _balanceAfterTransaction ? _balanceAfterTransaction : @0;
+}
+
+- (NSNumber *)change
+{
+	return _change ? _change : @0;
+}
+
+- (NSString *)comment
+{
+	return [BSHelper isNilOrEmpty:_comment] ? @"" : _comment;
+}
 
 #pragma mark - Initialization
 

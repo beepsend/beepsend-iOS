@@ -31,52 +31,52 @@
 
 - (NSString *)customerID
 {
-	return [_customerID isEqual:[NSNull null]]||_customerID==nil?@"":_customerID;
+	return [BSHelper isNilOrEmpty:_customerID] ? @"0" : [_customerID isKindOfClass:[NSNumber class]] ? [(NSNumber *)_customerID stringValue] : _customerID;
 }
 
 - (NSString *)name
 {
-	return [_name isEqual:[NSNull null]]||_name==nil?@"":_name;
+	return [BSHelper isNilOrEmpty:_name] ? @"" : _name;
 }
 
 - (NSString *)phoneNumber
 {
-	return [_phoneNumber isEqual:[NSNull null]]||_phoneNumber==nil?@"":_phoneNumber;
+	return [BSHelper isNilOrEmpty:_phoneNumber] ? @"" : _phoneNumber;
 }
 
 - (NSString *)address
 {
-	return [_address isEqual:[NSNull null]]||_address==nil?@"":_address;
+	return [BSHelper isNilOrEmpty:_address] ? @"" : _address;
 }
 
 - (NSString *)city
 {
-	return [_city isEqual:[NSNull null]]||_city==nil?@"":_city;
+	return [BSHelper isNilOrEmpty:_city] ? @"" : _city;
 }
 
 - (NSString *)postBox
 {
-	return [_postBox isEqual:[NSNull null]]||_postBox==nil?@"":_postBox;
+	return [BSHelper isNilOrEmpty:_postBox] ? @"" : _postBox;
 }
 
 - (NSString *)country
 {
-	return [_country isEqual:[NSNull null]]||_country==nil?@"":_country;
+	return [BSHelper isNilOrEmpty:_country] ? @"" : _country;
 }
 
 - (NSString *)vat
 {
-	return [_vat isEqual:[NSNull null]]||_vat==nil?@"":_vat;
+	return [BSHelper isNilOrEmpty:_vat] ? @"" : _vat;
 }
 
 - (NSString *)email
 {
-	return [_email isEqual:[NSNull null]]||_email==nil?@"":_email;
+	return [BSHelper isNilOrEmpty:_email] ? @"" : _email;
 }
 
 - (NSString *)type
 {
-	return [_type isEqual:[NSNull null]]||_type==nil?@"":_type;
+	return [BSHelper isNilOrEmpty:_type] ? @"" : _type;
 }
 
 #pragma mark - Initialization

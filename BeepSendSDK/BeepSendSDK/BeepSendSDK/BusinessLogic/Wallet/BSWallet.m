@@ -15,6 +15,11 @@
 
 @interface BSWallet ()
 
+@property (nonatomic, strong, readwrite) NSString *walletID;
+@property (nonatomic, strong, readwrite) NSNumber *balance;
+@property (nonatomic, strong, readwrite) NSArray *connections;
+@property (nonatomic, strong, readwrite) NSArray *users;
+
 @property (nonatomic, strong) BSWallet *currentWallet;
 
 @property (nonatomic, strong) NSNumber *count;
@@ -25,6 +30,26 @@
 @implementation BSWallet
 
 #pragma mark - Properties
+
+- (NSString *)walletID
+{
+	return [BSHelper isNilOrEmpty:_walletID] ? @"0" : [_walletID isKindOfClass:[NSNumber class]] ? [(NSNumber *)_walletID stringValue] : _walletID;
+}
+
+- (NSNumber *)balance
+{
+	return _balance ? _balance : @0;
+}
+
+- (NSArray *)connections
+{
+	return _connections ? _connections : @[];
+}
+
+- (NSArray *)users
+{
+	return _users ? _users : @[];
+}
 
 - (NSString *)name {
 	return _currentWallet ? _currentWallet.name : _name;

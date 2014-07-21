@@ -21,6 +21,13 @@
 
 @implementation BSNetworkDetails
 
+#pragma mark - Properties
+
+- (NSNumber *)total
+{
+	return _total ? _total : @0;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title

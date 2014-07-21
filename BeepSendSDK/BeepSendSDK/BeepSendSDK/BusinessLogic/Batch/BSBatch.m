@@ -8,7 +8,28 @@
 
 #import "BSBatch.h"
 
+@interface BSBatch ()
+
+@property (nonatomic, strong, readwrite) NSString *batchID;
+@property (nonatomic, strong, readwrite) NSString *label;
+
+@end
+
 @implementation BSBatch
+
+#pragma mark - Properties
+
+- (NSString *)batchID
+{
+	return [BSHelper isNilOrEmpty:_batchID] ? @"0" : [_batchID isKindOfClass:[NSNumber class]] ? [(NSNumber *)_batchID stringValue] : _batchID;
+}
+
+- (NSString *)label
+{
+	return [BSHelper isNilOrEmpty:_label] ? @"" : _label;
+}
+
+#pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title
 {

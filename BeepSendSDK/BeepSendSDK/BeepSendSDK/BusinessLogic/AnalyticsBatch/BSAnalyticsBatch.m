@@ -20,6 +20,18 @@
 
 @implementation BSAnalyticsBatch
 
+#pragma mark - Properties
+
+- (NSString *)label
+{
+	return [BSHelper isNilOrEmpty:_label] ? @"" : _label;
+}
+
+- (NSNumber *)total
+{
+	return _total ? _total : @0;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title

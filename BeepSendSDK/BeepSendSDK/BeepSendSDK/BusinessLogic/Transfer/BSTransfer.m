@@ -20,6 +20,13 @@
 
 @implementation BSTransfer
 
+#pragma mark - Properties
+
+- (NSNumber *)amount
+{
+	return _amount ? _amount : @0;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title

@@ -23,6 +23,28 @@
 
 @implementation BSNetwork
 
+#pragma mark - Properties
+
+- (NSArray *)mccmnc
+{
+	return _mccmnc ? _mccmnc : @[];
+}
+
+- (NSString *)comment
+{
+	return [BSHelper isNilOrEmpty:_comment] ? @"" : _comment;
+}
+
+- (NSNumber *)price
+{
+	return _price ? _price : @0;
+}
+
+- (NSString *)operatorName
+{
+	return [BSHelper isNilOrEmpty:_operatorName] ? @"" : _operatorName;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title

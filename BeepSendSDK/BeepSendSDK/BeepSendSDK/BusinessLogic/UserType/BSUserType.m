@@ -10,11 +10,24 @@
 
 @interface BSUserType ()
 
+@property (nonatomic, strong, readwrite) NSString *userTypeID;
 @property (nonatomic, strong, readwrite) NSString *name;
 
 @end
 
 @implementation BSUserType
+
+#pragma mark - Properties
+
+- (NSString *)userTypeID
+{
+	return [BSHelper isNilOrEmpty:_userTypeID] ? @"0" : [_userTypeID isKindOfClass:[NSNumber class]] ? [(NSNumber *)_userTypeID stringValue] : _userTypeID;
+}
+
+- (NSString *)name
+{
+	return [BSHelper isNilOrEmpty:_name] ? @"" : _name;
+}
 
 #pragma mark - Initialization
 

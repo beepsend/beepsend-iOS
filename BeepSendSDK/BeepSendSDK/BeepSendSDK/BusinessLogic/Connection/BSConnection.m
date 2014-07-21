@@ -30,6 +30,15 @@
 
 @interface BSConnection ()
 
+@property (nonatomic, strong, readwrite) NSString *connectionID;
+@property (nonatomic, strong, readwrite) NSArray *users;
+@property (nonatomic, strong, readwrite) NSString *apiToken;
+@property (nonatomic, strong, readwrite) NSString *customer;
+@property (nonatomic, strong, readwrite) NSNumber *TLVForMCCAndMNC;
+@property (nonatomic, strong, readwrite) NSArray *whitelist;
+
+
+
 @property (nonatomic, strong) BSConnection *connectionModel;
 
 @property (nonatomic, strong) BSPricelist *currentPricelist;
@@ -43,6 +52,36 @@
 @implementation BSConnection
 
 #pragma mark - Properties
+
+- (NSString *)connectionID
+{
+	return [BSHelper isNilOrEmpty:_connectionID] ? @"0" : [_connectionID isKindOfClass:[NSNumber class]] ? [(NSNumber *)_connectionID stringValue] : _connectionID;
+}
+
+- (NSArray *)users
+{
+	return _users ? _users : @[];
+}
+
+- (NSString *)apiToken
+{
+	return [BSHelper isNilOrEmpty:_apiToken] ? @"" : _apiToken;
+}
+
+- (NSString *)customer
+{
+	return [BSHelper isNilOrEmpty:_customer] ? @"" : _customer;
+}
+
+- (NSNumber *)TLVForMCCAndMNC
+{
+	return _TLVForMCCAndMNC ? _TLVForMCCAndMNC : @0;
+}
+
+- (NSArray *)whitelist
+{
+	return _whitelist ? _whitelist : @[];
+}
 
 - (NSString *)label {
 	return _connectionModel ? _connectionModel.label : _label;

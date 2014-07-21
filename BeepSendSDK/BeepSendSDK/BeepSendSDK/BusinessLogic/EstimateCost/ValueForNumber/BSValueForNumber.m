@@ -17,6 +17,18 @@
 
 @implementation BSValueForNumber
 
+#pragma mark - Properties
+
+- (NSString *)value
+{
+	return [BSHelper isNilOrEmpty:_value] ? @"" : _value;
+}
+
+- (NSNumber *)cost
+{
+	return _cost ? _cost : @0;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title

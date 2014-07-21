@@ -26,6 +26,13 @@
 
 @interface BSUser ()
 
+@property (nonatomic, strong, readwrite) NSString *userID;
+@property (nonatomic, strong, readwrite) NSString *customerName;
+@property (nonatomic, strong, readwrite) NSString *apiToken;
+@property (nonatomic, strong, readwrite) NSNumber *maxLevel;
+@property (nonatomic, strong, readwrite) NSString *password;
+@property (nonatomic, strong, readwrite) NSString *theNewPassword;
+
 @property (nonatomic, strong) BSUser *currentUser;
 
 @property (nonatomic, strong) NSArray *connections;
@@ -39,6 +46,32 @@
 @implementation BSUser
 
 #pragma mark - Properties
+
+
+- (NSString *)userID
+{
+	return [BSHelper isNilOrEmpty:_userID] ? @"0" : [_userID isKindOfClass:[NSNumber class]] ? [(NSNumber *)_userID stringValue] : _userID;
+}
+
+- (NSString *)customerName
+{
+	return [BSHelper isNilOrEmpty:_customerName] ? @"" : _customerName;
+}
+
+- (NSString *)apiToken
+{
+	return [BSHelper isNilOrEmpty:_apiToken] ? @"" : _apiToken;
+}
+
+- (NSArray *)userTypes
+{
+	return _userTypes ? _userTypes : @[];
+}
+
+- (NSNumber *)maxLevel
+{
+	return _maxLevel ? _maxLevel : @0;
+}
 
 - (NSString *)name {
 	return _currentUser ? _currentUser.name : _name;

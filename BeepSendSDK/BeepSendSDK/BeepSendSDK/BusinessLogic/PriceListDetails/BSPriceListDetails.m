@@ -21,6 +21,23 @@
 
 @implementation BSPriceListDetails
 
+#pragma mark - Properties
+
+- (NSNumber *)type
+{
+	return _type ? _type : @0;
+}
+
+- (NSString *)delimiter
+{
+	return [BSHelper isNilOrEmpty:_delimiter] ? @"" : _delimiter;
+}
+
+- (NSArray *)fields
+{
+	return _fields ? _fields : @[];
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title

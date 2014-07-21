@@ -18,6 +18,23 @@
 
 @implementation BSRecipient
 
+#pragma mark - Properties
+
+- (NSString *)destinationNumber
+{
+	return [BSHelper isNilOrEmpty:_destinationNumber] ? @"" : _destinationNumber;
+}
+
+- (NSNumber *)numberType
+{
+	return _numberType ? _numberType : @0;
+}
+
+- (NSNumber *)numberPlanIndex
+{
+	return _numberPlanIndex ? _numberPlanIndex : @0;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title

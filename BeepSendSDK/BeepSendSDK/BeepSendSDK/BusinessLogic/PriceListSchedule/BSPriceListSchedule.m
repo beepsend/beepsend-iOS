@@ -11,10 +11,23 @@
 @interface BSPriceListSchedule ()
 
 @property (nonatomic, strong, readwrite) NSString *scheduleName;
+@property (nonatomic, strong, readwrite) NSString *pricelistScheduleID;
 
 @end
 
 @implementation BSPriceListSchedule
+
+#pragma mark - Properties
+
+- (NSString *)scheduleName
+{
+	return [BSHelper isNilOrEmpty:_scheduleName] ? @"" : _scheduleName;
+}
+
+- (NSString *)pricelistScheduleID
+{
+	return [BSHelper isNilOrEmpty:_pricelistScheduleID] ? @"0" : [_pricelistScheduleID isKindOfClass:[NSNumber class]] ? [(NSNumber *)_pricelistScheduleID stringValue] : _pricelistScheduleID;
+}
 
 #pragma mark - Initialization
 

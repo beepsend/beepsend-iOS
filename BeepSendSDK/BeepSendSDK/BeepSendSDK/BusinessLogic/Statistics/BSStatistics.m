@@ -22,6 +22,43 @@
 
 @implementation BSStatistics
 
+#pragma mark - Properties
+
+- (NSNumber *)deliveredMessages
+{
+	return _deliveredMessages ? _deliveredMessages : @0;
+}
+
+- (NSNumber *)incomingMessagesFromOperator
+{
+	return _incomingMessagesFromOperator ? _incomingMessagesFromOperator : @0;
+}
+
+- (NSNumber *)expiredMessages
+{
+	return _expiredMessages ? _expiredMessages : @0;
+}
+
+- (NSNumber *)failedMessagesWithoutError
+{
+	return _failedMessagesWithoutError ? _failedMessagesWithoutError : @0;
+}
+
+- (NSNumber *)rejectedMessagesByOperator
+{
+	return _rejectedMessagesByOperator ? _rejectedMessagesByOperator : @0;
+}
+
+- (NSNumber *)failedMessagesWithError
+{
+	return _failedMessagesWithError ? _failedMessagesWithError : @0;
+}
+
+- (NSNumber *)messagesInProcessOfSending
+{
+	return _messagesInProcessOfSending ? _messagesInProcessOfSending : @0;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title

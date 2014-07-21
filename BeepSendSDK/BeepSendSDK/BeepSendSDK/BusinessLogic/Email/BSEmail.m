@@ -11,10 +11,23 @@
 @interface BSEmail ()
 
 @property (nonatomic, strong, readwrite) NSString *address;
+@property (nonatomic, strong, readwrite) NSString *emailID;
 
 @end
 
 @implementation BSEmail
+
+#pragma mark - Properties
+
+- (NSString *)address
+{
+	return [BSHelper isNilOrEmpty:_address] ? @"" : _address;
+}
+
+- (NSString *)emailID
+{
+	return [BSHelper isNilOrEmpty:_emailID] ? @"0" : [_emailID isKindOfClass:[NSNumber class]] ? [(NSNumber *)_emailID stringValue] : _emailID;
+}
 
 #pragma mark - Initialization
 

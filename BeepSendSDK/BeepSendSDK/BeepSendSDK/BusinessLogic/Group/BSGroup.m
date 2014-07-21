@@ -14,9 +14,35 @@
 
 @property (nonatomic, strong) NSString *oldName;
 
+@property (nonatomic, strong, readwrite) NSString *groupID;
+@property (nonatomic, strong, readwrite) NSNumber *contactsCount;
+@property (nonatomic, strong, readwrite) NSNumber *processing;
+
 @end
 
 @implementation BSGroup
+
+#pragma mark - Properties
+
+- (NSString *)groupID
+{
+	return [BSHelper isNilOrEmpty:_groupID] ? @"0" : [_groupID isKindOfClass:[NSNumber class]] ? [(NSNumber *)_groupID stringValue] : _groupID;
+}
+
+- (NSString *)name
+{
+	return [BSHelper isNilOrEmpty:_name] ? @"" : _name;
+}
+
+- (NSNumber *)contactsCount
+{
+	return _contactsCount ? _contactsCount : @0;
+}
+
+- (NSNumber *)processing
+{
+	return _processing ? _processing : @0;
+}
 
 #pragma mark - Initialization
 

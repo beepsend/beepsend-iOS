@@ -17,6 +17,18 @@
 
 @implementation BSEstimateCost
 
+#pragma mark - Properties
+
+- (NSArray *)recipients
+{
+	return _recipients ? _recipients : @[];
+}
+
+- (NSNumber *)totalCost
+{
+	return _totalCost ? _totalCost : @0;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title

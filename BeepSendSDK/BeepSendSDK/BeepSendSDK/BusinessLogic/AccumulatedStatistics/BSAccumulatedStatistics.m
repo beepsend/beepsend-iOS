@@ -18,6 +18,23 @@
 
 @implementation BSAccumulatedStatistics
 
+#pragma mark - Properties
+
+- (NSString *)account
+{
+	return [BSHelper isNilOrEmpty:_account] ? @"" : _account;
+}
+
+- (NSNumber *)count
+{
+	return _count ? _count : @0;
+}
+
+- (NSNumber *)price
+{
+	return _price ? _price : @0;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title

@@ -33,6 +33,23 @@
 
 @implementation BSLookup
 
+#pragma mark - Properties
+
+- (NSString *)messageBody
+{
+	return [BSHelper isNilOrEmpty:_messageBody] ? @"" : _messageBody;
+}
+
+- (NSNumber *)dataCoding
+{
+	return _dataCoding ? _dataCoding : @0;
+}
+
+- (NSNumber *)price
+{
+	return _price ? _price : @0;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title

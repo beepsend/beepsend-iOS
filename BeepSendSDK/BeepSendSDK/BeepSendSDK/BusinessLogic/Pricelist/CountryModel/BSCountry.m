@@ -18,6 +18,23 @@
 
 @implementation BSCountry
 
+#pragma mark - Properties
+
+- (NSString *)name
+{
+	return [BSHelper isNilOrEmpty:_name] ? @"" : _name;
+}
+
+- (NSNumber *)callingCode
+{
+	return _callingCode ? _callingCode : @0;
+}
+
+- (NSString *)code
+{
+	return [BSHelper isNilOrEmpty:_code] ? @"" : _code;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title

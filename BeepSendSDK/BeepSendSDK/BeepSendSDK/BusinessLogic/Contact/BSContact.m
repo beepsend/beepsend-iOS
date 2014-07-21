@@ -17,9 +17,39 @@
 @property (nonatomic, strong) NSString *oldLastName;
 @property (nonatomic, strong) BSGroup *oldGroup;
 
+@property (nonatomic, strong, readwrite) NSString *contactID;
+@property (nonatomic, strong, readwrite) NSArray *errors;
+
 @end
 
 @implementation BSContact
+
+#pragma mark - Properties
+
+- (NSString *)contactID
+{
+	return [BSHelper isNilOrEmpty:_contactID] ? @"0" : [_contactID isKindOfClass:[NSNumber class]] ? [(NSNumber *)_contactID stringValue] : _contactID;
+}
+
+- (NSArray *)errors
+{
+	return _errors ? _errors : @[];
+}
+
+- (NSString *)firstName
+{
+	return [BSHelper isNilOrEmpty:_firstName] ? @"" : _firstName;
+}
+
+- (NSString *)lastName
+{
+	return [BSHelper isNilOrEmpty:_lastName] ? @"" : _lastName;
+}
+
+- (NSString *)phoneNumber
+{
+	return [BSHelper isNilOrEmpty:_phoneNumber] ? @"" : _phoneNumber;
+}
 
 #pragma mark - Initialization
 

@@ -8,20 +8,42 @@
 
 #import "BSVerified.h"
 
+@interface BSVerified ()
+
+@property (nonatomic, strong, readwrite) NSNumber *emailVerified;
+@property (nonatomic, strong, readwrite) NSNumber *phoneVerified;
+
+@end
+
 @implementation BSVerified
 
 #pragma mark - Properties
 
 - (BOOL)isVerifiedEmail {
-	return [_emailVerified boolValue];
+	return _emailVerified ? [_emailVerified boolValue] : NO;
 }
 
 - (BOOL)isVerifiedPhone {
-	return [_phoneVerified boolValue];
+	return _phoneVerified ? [_phoneVerified boolValue] : NO;
 }
 
 - (BOOL)isVerifiedTerms {
-	return [_termsVerified boolValue];
+	return _termsVerified ? [_termsVerified boolValue] : NO;
+}
+
+- (NSNumber *)emailVerified
+{
+	return _emailVerified ? _emailVerified : @NO;
+}
+
+- (NSNumber *)phoneVerified
+{
+	return _phoneVerified ? _phoneVerified : @NO;
+}
+
+- (NSNumber *)termsVerified
+{
+	return _termsVerified ? _termsVerified : @NO;
 }
 
 #pragma mark - Initialization

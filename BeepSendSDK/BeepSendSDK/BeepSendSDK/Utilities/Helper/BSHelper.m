@@ -11,6 +11,11 @@
 @implementation BSHelper
 
 + (BOOL)isNilOrEmpty:(NSString*)string {
+	
+	if ([string isKindOfClass:[NSNumber class]]) {
+		return string ? NO : YES;
+	}
+	
 	if (string == nil || [string isEqual:[NSNull null]] || [[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
 		return YES;
 	}

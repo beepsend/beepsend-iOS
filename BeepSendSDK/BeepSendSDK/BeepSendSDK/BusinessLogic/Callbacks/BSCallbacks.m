@@ -10,6 +10,23 @@
 
 @implementation BSCallbacks
 
+#pragma mark - Properties
+
+- (NSString *)DLR
+{
+	return [BSHelper isNilOrEmpty:_DLR] ? @"" : _DLR;
+}
+
+- (NSString *)MO
+{
+	return [BSHelper isNilOrEmpty:_MO] ? @"" : _MO;
+}
+
+- (NSString *)method
+{
+	return [BSHelper isNilOrEmpty:_method] ? @"" : _method;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title

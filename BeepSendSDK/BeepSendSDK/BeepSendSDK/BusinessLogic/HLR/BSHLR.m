@@ -26,6 +26,23 @@
 
 @implementation BSHLR
 
+#pragma mark - Properties
+
+- (NSString *)imsi
+{
+	return [BSHelper isNilOrEmpty:_imsi] ? @"" : _imsi;
+}
+
+- (NSNumber *)ported
+{
+	return _ported ? _ported : @NO;
+}
+
+- (NSNumber *)roaming
+{
+	return _roaming ? _roaming : @NO;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title

@@ -17,6 +17,18 @@
 
 @implementation BSMCCMNC
 
+#pragma mark - Properties
+
+- (NSNumber *)mnc
+{
+	return _mnc ? _mnc : @0;
+}
+
+- (NSNumber *)mcc
+{
+	return _mcc ? _mcc : @0;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title

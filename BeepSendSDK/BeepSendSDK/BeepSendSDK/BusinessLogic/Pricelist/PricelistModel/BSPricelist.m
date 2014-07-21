@@ -12,6 +12,7 @@
 
 @interface BSPricelist ()
 
+@property (nonatomic, strong, readwrite) NSString *pricelistID;
 @property (nonatomic, strong, readwrite) NSArray *networks;
 @property (nonatomic, strong, readwrite) NSNumber *networkCount;
 @property (nonatomic, strong, readwrite) NSDate *saved;
@@ -21,6 +22,28 @@
 @end
 
 @implementation BSPricelist
+
+#pragma mark - Properties
+
+- (NSString *)pricelistID
+{
+	return [BSHelper isNilOrEmpty:_pricelistID] ? @"0" : [_pricelistID isKindOfClass:[NSNumber class]] ? [(NSNumber *)_pricelistID stringValue] : _pricelistID;
+}
+
+- (NSArray *)networks
+{
+	return _networks ? _networks : @[];
+}
+
+- (NSNumber *)networkCount
+{
+	return _networkCount ? _networkCount : @0;
+}
+
+- (NSNumber *)active
+{
+	return _active ? _active : @0;
+}
 
 #pragma mark - Initialization
 

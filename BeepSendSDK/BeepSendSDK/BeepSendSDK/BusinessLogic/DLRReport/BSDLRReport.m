@@ -17,6 +17,18 @@
 
 @implementation BSDLRReport
 
+#pragma mark - Properties
+
+- (NSString *)responseStatus
+{
+	return [BSHelper isNilOrEmpty:_responseStatus] ? @"" : _responseStatus;
+}
+
+- (NSNumber *)responseCode
+{
+	return _responseCode ? _responseCode : @0;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title
