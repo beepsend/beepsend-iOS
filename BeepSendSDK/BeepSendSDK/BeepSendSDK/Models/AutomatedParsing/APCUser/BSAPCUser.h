@@ -11,7 +11,7 @@
 #import "BSAPConnection.h"
 #import "BSAPVerified.h"
 
-@class BSUserModel;
+@class BSUser;
 
 @interface BSAPCUser : BSSerializableObject
 
@@ -34,6 +34,6 @@
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
 + (NSArray *)arrayOfModelsFromArrayOfObjects:(NSArray *)array;
 
-+ (BSAPCUser *)convertFromUserModel:(BSUserModel *)userModel;
++ (BSAPCUser *)convertFromUserModel:(BSUser *)userModel;
 
 @end

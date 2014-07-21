@@ -8,7 +8,7 @@
 
 #import "BSAPHLR.h"
 
-#import "BSHLRModel.h"
+#import "BSHLR.h"
 
 @implementation BSAPHLR
 
@@ -33,7 +33,7 @@
 
 - (id)convertToModel
 {
-	return [[BSHLRModel alloc] initHLRWithID:_id timestamp:[_timestamps convertToModel] dlrReport:[_dlr convertToModel] mccmnc:[_mccmnc convertToModel] imsi:_imsi prefix:[_prefix convertToModel] potred:_ported inRoaming:_roaming];
+	return [[BSHLR alloc] initHLRWithID:_id timestamp:[_timestamps convertToModel] dlrReport:[_dlr convertToModel] mccmnc:[_mccmnc convertToModel] imsi:_imsi prefix:[_prefix convertToModel] potred:_ported inRoaming:_roaming];
 }
 
 #pragma mark - Public methods

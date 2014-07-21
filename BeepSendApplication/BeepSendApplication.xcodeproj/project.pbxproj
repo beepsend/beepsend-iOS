@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01A0DA8D1977DE9900D12300 /* BSCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A0DA8C1977DE9900D12300 /* BSCustomerViewController.m */; };
+		01A0DA901977DED600D12300 /* BSCustomerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 01A0DA8F1977DED600D12300 /* BSCustomerView.m */; };
 		6E6537DD19472BD700FC6349 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E6537DC19472BD700FC6349 /* Foundation.framework */; };
 		6E6537DF19472BD700FC6349 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E6537DE19472BD700FC6349 /* CoreGraphics.framework */; };
 		6E6537E119472BD700FC6349 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E6537E019472BD700FC6349 /* UIKit.framework */; };
@@ -25,8 +27,14 @@
 		6EB644741948965B004A1818 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB644731948965B004A1818 /* Helper.m */; };
 		6EB644831948A597004A1818 /* BSInputAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB644821948A597004A1818 /* BSInputAccessoryView.m */; };
 		6EB6853619498BD20010FC73 /* BSTextFieldCustomTextInset.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6853519498BD20010FC73 /* BSTextFieldCustomTextInset.m */; };
+		6EB871EB19700C9D0006CE29 /* BSUserTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB871EA19700C9D0006CE29 /* BSUserTypeTableViewCell.m */; };
+		6EB871EE19700CC20006CE29 /* BSConnectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB871ED19700CC20006CE29 /* BSConnectionTableViewCell.m */; };
 		6EBC77DD194EE9BF00666099 /* libBeepSendSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBC77DA194EE98100666099 /* libBeepSendSDK.a */; };
 		6EBC77F1194EF60800666099 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBC77F0194EF60800666099 /* SystemConfiguration.framework */; };
+		6EBD2F56196D453400F89C52 /* BSSendMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD2F55196D453400F89C52 /* BSSendMessageView.m */; };
+		6EBD2F5A196D45FB00F89C52 /* BSSendMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD2F59196D45FB00F89C52 /* BSSendMessageViewController.m */; };
+		6EC74F8919750DCC007A0356 /* BSUserDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC74F8819750DCC007A0356 /* BSUserDetailsViewController.m */; };
+		6EC74F8D19750E08007A0356 /* BSUserDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC74F8C19750E08007A0356 /* BSUserDetailsView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +69,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01A0DA8B1977DE9900D12300 /* BSCustomerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCustomerViewController.h; sourceTree = "<group>"; };
+		01A0DA8C1977DE9900D12300 /* BSCustomerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSCustomerViewController.m; sourceTree = "<group>"; };
+		01A0DA8E1977DED600D12300 /* BSCustomerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSCustomerView.h; path = Views/CustomerView/BSCustomerView.h; sourceTree = "<group>"; };
+		01A0DA8F1977DED600D12300 /* BSCustomerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSCustomerView.m; path = Views/CustomerView/BSCustomerView.m; sourceTree = "<group>"; };
 		6E6537D919472BD700FC6349 /* BeepSendApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeepSendApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E6537DC19472BD700FC6349 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6E6537DE19472BD700FC6349 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -89,8 +101,20 @@
 		6EB6853419498BD20010FC73 /* BSTextFieldCustomTextInset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTextFieldCustomTextInset.h; sourceTree = "<group>"; };
 		6EB6853519498BD20010FC73 /* BSTextFieldCustomTextInset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSTextFieldCustomTextInset.m; sourceTree = "<group>"; };
 		6EB6853C19498F520010FC73 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Utilities/Helper/Constants/Constants.h; sourceTree = "<group>"; };
+		6EB871E919700C9D0006CE29 /* BSUserTypeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSUserTypeTableViewCell.h; path = TableViewCells/TableViewCellUserType/BSUserTypeTableViewCell.h; sourceTree = "<group>"; };
+		6EB871EA19700C9D0006CE29 /* BSUserTypeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSUserTypeTableViewCell.m; path = TableViewCells/TableViewCellUserType/BSUserTypeTableViewCell.m; sourceTree = "<group>"; };
+		6EB871EC19700CC20006CE29 /* BSConnectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSConnectionTableViewCell.h; path = TableViewCells/TableViewCellConnection/BSConnectionTableViewCell.h; sourceTree = "<group>"; };
+		6EB871ED19700CC20006CE29 /* BSConnectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSConnectionTableViewCell.m; path = TableViewCells/TableViewCellConnection/BSConnectionTableViewCell.m; sourceTree = "<group>"; };
 		6EBC77D4194EE98100666099 /* BeepSendSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BeepSendSDK.xcodeproj; path = ../BeepSendSDK/BeepSendSDK/BeepSendSDK.xcodeproj; sourceTree = "<group>"; };
 		6EBC77F0194EF60800666099 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6EBD2F54196D453400F89C52 /* BSSendMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSSendMessageView.h; path = Views/SendMessageView/BSSendMessageView.h; sourceTree = "<group>"; };
+		6EBD2F55196D453400F89C52 /* BSSendMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSSendMessageView.m; path = Views/SendMessageView/BSSendMessageView.m; sourceTree = "<group>"; };
+		6EBD2F58196D45FB00F89C52 /* BSSendMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSSendMessageViewController.h; path = ViewControllers/SendMessageViewController/BSSendMessageViewController.h; sourceTree = "<group>"; };
+		6EBD2F59196D45FB00F89C52 /* BSSendMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSSendMessageViewController.m; path = ViewControllers/SendMessageViewController/BSSendMessageViewController.m; sourceTree = "<group>"; };
+		6EC74F8719750DCC007A0356 /* BSUserDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSUserDetailsViewController.h; sourceTree = "<group>"; };
+		6EC74F8819750DCC007A0356 /* BSUserDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSUserDetailsViewController.m; sourceTree = "<group>"; };
+		6EC74F8B19750E08007A0356 /* BSUserDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSUserDetailsView.h; path = Views/UserDetailsView/BSUserDetailsView.h; sourceTree = "<group>"; };
+		6EC74F8C19750E08007A0356 /* BSUserDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSUserDetailsView.m; path = Views/UserDetailsView/BSUserDetailsView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +144,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01A0DA841977DE3200D12300 /* CustomerView */ = {
+			isa = PBXGroup;
+			children = (
+				01A0DA8E1977DED600D12300 /* BSCustomerView.h */,
+				01A0DA8F1977DED600D12300 /* BSCustomerView.m */,
+			);
+			name = CustomerView;
+			sourceTree = "<group>";
+		};
+		01A0DA8A1977DE9900D12300 /* CustomerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				01A0DA8B1977DE9900D12300 /* BSCustomerViewController.h */,
+				01A0DA8C1977DE9900D12300 /* BSCustomerViewController.m */,
+			);
+			name = CustomerViewController;
+			path = ViewControllers/CustomerViewController;
+			sourceTree = "<group>";
+		};
 		6E6537D019472BD700FC6349 = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				6EB6447019489638004A1818 /* Utilities */,
+				6EB871E519700C410006CE29 /* TableViewCells */,
 				6EB6446619488C51004A1818 /* Views */,
 				6EB6446319488C25004A1818 /* ViewControllers */,
 				6E6537EB19472BD700FC6349 /* BSAppDelegate.h */,
@@ -200,6 +244,9 @@
 			isa = PBXGroup;
 			children = (
 				6EB6446419488C33004A1818 /* RootViewController */,
+				6EC74F8619750DCC007A0356 /* UserDetailsViewController */,
+				01A0DA8A1977DE9900D12300 /* CustomerViewController */,
+				6EBD2F57196D45C500F89C52 /* SendMessageCiewController */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -217,6 +264,9 @@
 			isa = PBXGroup;
 			children = (
 				6EB6446719488C57004A1818 /* RootView */,
+				6EC74F8A19750DD5007A0356 /* UserDetailsView */,
+				01A0DA841977DE3200D12300 /* CustomerView */,
+				6EBD2F52196D450000F89C52 /* SendMessageView */,
 				6EB6447F1948A3BA004A1818 /* Components */,
 			);
 			name = Views;
@@ -285,6 +335,33 @@
 			name = Constants;
 			sourceTree = "<group>";
 		};
+		6EB871E519700C410006CE29 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				6EB871E719700C4B0006CE29 /* TableViewCellUserType */,
+				6EB871E819700C5A0006CE29 /* TableViewCellConnection */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		6EB871E719700C4B0006CE29 /* TableViewCellUserType */ = {
+			isa = PBXGroup;
+			children = (
+				6EB871E919700C9D0006CE29 /* BSUserTypeTableViewCell.h */,
+				6EB871EA19700C9D0006CE29 /* BSUserTypeTableViewCell.m */,
+			);
+			name = TableViewCellUserType;
+			sourceTree = "<group>";
+		};
+		6EB871E819700C5A0006CE29 /* TableViewCellConnection */ = {
+			isa = PBXGroup;
+			children = (
+				6EB871EC19700CC20006CE29 /* BSConnectionTableViewCell.h */,
+				6EB871ED19700CC20006CE29 /* BSConnectionTableViewCell.m */,
+			);
+			name = TableViewCellConnection;
+			sourceTree = "<group>";
+		};
 		6EBC77D5194EE98100666099 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -292,6 +369,43 @@
 				6EBC77DC194EE98100666099 /* BeepSendSDKTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		6EBD2F52196D450000F89C52 /* SendMessageView */ = {
+			isa = PBXGroup;
+			children = (
+				6EBD2F54196D453400F89C52 /* BSSendMessageView.h */,
+				6EBD2F55196D453400F89C52 /* BSSendMessageView.m */,
+			);
+			name = SendMessageView;
+			sourceTree = "<group>";
+		};
+		6EBD2F57196D45C500F89C52 /* SendMessageCiewController */ = {
+			isa = PBXGroup;
+			children = (
+				6EBD2F58196D45FB00F89C52 /* BSSendMessageViewController.h */,
+				6EBD2F59196D45FB00F89C52 /* BSSendMessageViewController.m */,
+			);
+			name = SendMessageCiewController;
+			sourceTree = "<group>";
+		};
+		6EC74F8619750DCC007A0356 /* UserDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6EC74F8719750DCC007A0356 /* BSUserDetailsViewController.h */,
+				6EC74F8819750DCC007A0356 /* BSUserDetailsViewController.m */,
+			);
+			name = UserDetailsViewController;
+			path = ViewControllers/UserDetailsViewController;
+			sourceTree = "<group>";
+		};
+		6EC74F8A19750DD5007A0356 /* UserDetailsView */ = {
+			isa = PBXGroup;
+			children = (
+				6EC74F8B19750E08007A0356 /* BSUserDetailsView.h */,
+				6EC74F8C19750E08007A0356 /* BSUserDetailsView.m */,
+			);
+			name = UserDetailsView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -417,10 +531,18 @@
 				6EB6853619498BD20010FC73 /* BSTextFieldCustomTextInset.m in Sources */,
 				6EB6446A19488C8C004A1818 /* BSRootViewController.m in Sources */,
 				6E6537E919472BD700FC6349 /* main.m in Sources */,
+				6EB871EB19700C9D0006CE29 /* BSUserTypeTableViewCell.m in Sources */,
+				6EB871EE19700CC20006CE29 /* BSConnectionTableViewCell.m in Sources */,
 				6EB644831948A597004A1818 /* BSInputAccessoryView.m in Sources */,
 				6E6537ED19472BD700FC6349 /* BSAppDelegate.m in Sources */,
+				01A0DA901977DED600D12300 /* BSCustomerView.m in Sources */,
+				6EBD2F56196D453400F89C52 /* BSSendMessageView.m in Sources */,
 				6EB6446D19488E17004A1818 /* BSRootView.m in Sources */,
+				6EC74F8919750DCC007A0356 /* BSUserDetailsViewController.m in Sources */,
+				6EC74F8D19750E08007A0356 /* BSUserDetailsView.m in Sources */,
 				6EB644741948965B004A1818 /* Helper.m in Sources */,
+				6EBD2F5A196D45FB00F89C52 /* BSSendMessageViewController.m in Sources */,
+				01A0DA8D1977DE9900D12300 /* BSCustomerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

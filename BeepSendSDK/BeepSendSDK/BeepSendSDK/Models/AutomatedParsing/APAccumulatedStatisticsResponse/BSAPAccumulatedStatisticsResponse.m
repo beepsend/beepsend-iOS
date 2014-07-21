@@ -8,7 +8,7 @@
 
 #import "BSAPAccumulatedStatisticsResponse.h"
 
-#import "BSAccumulatedStatisticsModel.h"
+#import "BSAccumulatedStatistics.h"
 
 @implementation BSAPAccumulatedStatisticsResponse
 
@@ -16,7 +16,7 @@
 
 - (id)convertToModel
 {
-	return [[BSAccumulatedStatisticsModel alloc] initWithAccount:_account count:_count price:_price];
+	return [[BSAccumulatedStatistics alloc] initWithAccount:_account count:_count price:_price];
 }
 
 #pragma mark - Public methods

@@ -8,7 +8,7 @@
 
 #import "BSAPCAccountManager.h"
 
-#import "BSAccountManagerModel.h"
+#import "BSAccountManager.h"
 
 @implementation BSAPCAccountManager
 
@@ -16,7 +16,7 @@
 
 - (id)convertToModel
 {
-	return [[BSAccountManagerModel alloc] initAccountManagerWithName:_name?_name:@"" andEmail:_email?_email:@""];
+	return [[BSAccountManager alloc] initAccountManagerWithName:_name?_name:@"" andEmail:_email?_email:@""];
 }
 
 @end

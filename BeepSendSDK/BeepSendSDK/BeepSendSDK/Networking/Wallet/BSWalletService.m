@@ -12,6 +12,9 @@
 
 #import "BSAPWallet.h"
 #import "BSAPEmail.h"
+#import "BSAPTransactionLog.h"
+#import "BSAPTransfer.h"
+#import "BSAPWalletRequest.h"
 
 @implementation BSWalletService
 
@@ -49,7 +52,7 @@
 				  }];
 }
 
-- (void)getWalletDetailsForID:(NSString *)walletID withCompletionBlock:(void(^)(BSWalletModel *wallet, id error))block
+- (void)getWalletDetailsForID:(NSString *)walletID withCompletionBlock:(void(^)(BSWallet *wallet, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration walletsForID:walletID]
 				withParameters:@{}
@@ -66,9 +69,9 @@
 				  }];
 }
 
-- (void)updateWallet:(BSWalletModel *)wallet withName:(NSString *)wName notifyLimit:(NSNumber *)wLimit withCompletionBlock:(void(^)(BSWalletModel *wallet, id error))block
+- (void)updateWallet:(BSWallet *)wallet withName:(NSString *)wName notifyLimit:(NSNumber *)wLimit withCompletionBlock:(void(^)(BSWallet *wallet, id error))block
 {
-	NSDictionary *parameters = [[BSAPWallet convertFromWalletModel:[[BSWalletModel alloc] initWalletWithName:wName limit:wLimit]] dictFromClass];
+	NSDictionary *parameters = [[BSAPWallet convertFromWalletModel:[[BSWallet alloc] initWalletWithName:wName limit:wLimit]] dictFromClass];
 	
 	[super executePUTForMethod:[BSAPIConfiguration walletsForID:wallet.objectID]
 				withParameters:parameters
@@ -85,7 +88,7 @@
 				  }];
 }
 
-- (void)getEmailsForWallet:(BSWalletModel *)wallet withCompletionBlock:(void(^)(NSArray *emails, id error))block
+- (void)getEmailsForWallet:(BSWallet *)wallet withCompletionBlock:(void(^)(NSArray *emails, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration walletsEmailsForID:wallet.objectID]
 				withParameters:@{}
@@ -106,7 +109,7 @@
 				  }];
 }
 
-- (void)getEmailForWallet:(BSWalletModel *)wallet andEmailID:(NSString *)emailID withCompletionBlock:(void(^)(BSEmailModel *email, id error))block
+- (void)getEmailForWallet:(BSWallet *)wallet andEmailID:(NSString *)emailID withCompletionBlock:(void(^)(BSEmail *email, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration walletsEmailsForWalletID:wallet.objectID andEmailID:emailID]
 				withParameters:@{}
@@ -123,10 +126,10 @@
 				  }];
 }
 
-- (void)addEmail:(NSString *)email toWallet:(BSWalletModel *)wallet withCompletionBlock:(void(^)(BSEmailModel *email, id error))block
+- (void)addEmail:(NSString *)email toWallet:(BSWallet *)wallet withCompletionBlock:(void(^)(BSEmail *email, id error))block
 {
 	[super executePOSTForMethod:[BSAPIConfiguration walletsEmailsForID:wallet.objectID]
-				withParameters:[[BSAPEmail convertFromEmailModel:[[BSEmailModel alloc] initEmailWithAddress:email]] dictFromClass]
+				withParameters:[[BSAPEmail convertFromEmailModel:[[BSEmail alloc] initEmailWithAddress:email]] dictFromClass]
 				  onCompletion:^(id response, id error) {
 					  
 					  if (!error) {
@@ -140,7 +143,7 @@
 				  }];
 }
 
-- (void)deleteEmailInWallet:(BSWalletModel *)wallet email:(BSEmailModel *)email withCompletionBlock:(void(^)(BOOL success, id error))block
+- (void)deleteEmailInWallet:(BSWallet *)wallet email:(BSEmail *)email withCompletionBlock:(void(^)(BOOL success, id error))block
 {
 	[super executeDELETEForMethod:[BSAPIConfiguration walletsEmailsForWalletID:wallet.objectID andEmailID:email.objectID]
 				   withParameters:@{}
@@ -155,6 +158,49 @@
 							 block(NO, response);
 						 }
 					 }];
+}
+
+- (void)getTransactionLogForWallet:(BSWallet *)wallet since:(NSString *)sinceID max:(NSString *)maxID count:(NSNumber *)count withCompletionBlock:(void(^)(NSArray *log, id error))block
+{
+	BSAPWalletRequest *wRequest = [[BSAPWalletRequest alloc] init];
+	wRequest.since_id = sinceID;
+	wRequest.max_id = maxID;
+	wRequest.count = count;
+	
+	[super executeGETForMethod:[BSAPIConfiguration walletsTransactionForID:wallet.objectID]
+				withParameters:[wRequest dictFromClass]
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  for (BSAPTransactionLog *log in [BSAPTransactionLog arrayOfObjectsFromArrayOfDictionaries:response]) {
+							  [mArr addObject:[log convertToModel]];
+						  }
+						  block([NSArray arrayWithArray:mArr], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
+- (void)transferFunds:(NSNumber *)ammount fromWallet:(BSWallet *)wallet1 toWallet:(BSWallet *)wallet2 withCompletionBlock:(void(^)(BSTransfer *transfer, id error))block
+{
+	[super executePOSTForMethod:[BSAPIConfiguration walletsTransferFundsFromWallet:wallet1.objectID toWallet:wallet2.objectID]
+				 withParameters:@{@"amount" : ammount}
+				   onCompletion:^(id response, id error) {
+					   
+					   if (!error) {
+						   
+						   block([[BSAPTransfer classFromDict:response] convertToModel], error);
+					   }
+					   else {
+						   //TODO: Create error handling
+						   block(nil, response);
+					   }
+				   }];
 }
 
 @end

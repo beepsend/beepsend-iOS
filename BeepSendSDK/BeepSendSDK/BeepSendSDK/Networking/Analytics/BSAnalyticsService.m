@@ -34,7 +34,7 @@
 
 #pragma mark - Public methods
 
-- (void)getAnalyticsSummaryFromDate:(NSDate *)startDate toDate:(NSDate *)endDate usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *statistics, id error))block
+- (void)getAnalyticsSummaryFromDate:(NSDate *)startDate toDate:(NSDate *)endDate usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *statistics, id error))block
 {
 	BSAPAccumulatedStatisticsRequest *request = [[BSAPAccumulatedStatisticsRequest alloc] init];
 	request.from_date = startDate ? [NSString stringWithFormat:@"%f", [startDate timeIntervalSince1970]] : nil;
@@ -59,7 +59,7 @@
 				  }];
 }
 
-- (void)getNetworkDetailsFromDate:(NSDate *)startDate toDate:(NSDate *)endDate mccmnc:(BSMCCMNCModel *)mccmnc usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *networkDetails, id error))block
+- (void)getNetworkDetailsFromDate:(NSDate *)startDate toDate:(NSDate *)endDate mccmnc:(BSMCCMNC *)mccmnc usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *networkDetails, id error))block
 {
 	BSAPNetworkDetailsRequest *request = [[BSAPNetworkDetailsRequest alloc] init];
 	request.from_date = startDate ? [NSString stringWithFormat:@"%f", [startDate timeIntervalSince1970]] : nil;
@@ -86,9 +86,9 @@
 				  }];
 }
 
-- (void)getDeliveryStatisticsForBach:(BSBatchModel *)batch withCompletionBlock:(void(^)(NSArray *statistics, id error))block
+- (void)getDeliveryStatisticsForBach:(BSBatch *)batch withCompletionBlock:(void(^)(NSArray *statistics, id error))block
 {
-	[super executeGETForMethod:batch?[BSAPIConfiguration analyticsBatchesForID:batch.objectID]:[BSAPIConfiguration analyticsBatches]
+	[super executeGETForMethod:batch?[BSAPIConfiguration analyticsBatchesForID:batch.batchID]:[BSAPIConfiguration analyticsBatches]
 				withParameters:@[]
 				  onCompletion:^(id response, id error) {
 					  

@@ -31,7 +31,7 @@
 }
 
 + (NSDictionary *)authorizationHeader {
-	return [BSAPIConfiguration authorizationHeaderForToken:APIToken];
+	return [BSAPIConfiguration authorizationHeaderForToken:[[NSUserDefaults standardUserDefaults] objectForKey:@"API_TOKEN"]];
 }
 
 + (NSDictionary *)authorizationHeaderForToken:(NSString *)token
@@ -40,7 +40,7 @@
 }
 
 + (NSString *)urlAPIToken {
-	return [@"?api_token=" stringByAppendingString:APIToken];
+	return [@"?api_token=" stringByAppendingString:[[NSUserDefaults standardUserDefaults] objectForKey:@"API_TOKEN"]];
 }
 
 #pragma mark -
@@ -293,6 +293,16 @@
 + (NSString *)walletsForID:(NSString *)walletID
 {
 	return [@"/wallets/" stringByAppendingString:walletID];
+}
+
++ (NSString *)walletsTransactionForID:(NSString *)walletID
+{
+	return [NSString stringWithFormat:@"/wallets/%@/transactions/", walletID];
+}
+
++ (NSString *)walletsTransferFundsFromWallet:(NSString *)wallet1 toWallet:(NSString *)wallet2
+{
+	return [NSString stringWithFormat:@"/wallets/%@/transfer/%@/", wallet1, wallet2];
 }
 
 #pragma mark - Estimate SMS cost

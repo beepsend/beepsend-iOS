@@ -22,6 +22,14 @@
 #define ALog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 ////////////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////////////
+//Count execution time
+#define StartCounting NSDate *startTime
+#define TICK startTime = [NSDate date]
+
+#define TOCK DLog(@"Time: %f", -[startTime timeIntervalSinceNow])
+////////////////////////////////////////////////////////////////////////////////
+
 @interface Helper : NSObject
 
 //Checks if string is nil or empty

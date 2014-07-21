@@ -21,6 +21,13 @@
 #define kDefaultButtonCornerRadius 10.0
 #define kDefaultBorderWidth 1.0
 
+#define kDefaultTitleLabelWidth 70.0
+#define kDefaultTitleLabelHeight 24.0
+
+#define kDefaultTableViewCellHeight 44.0
+
 #define kDefaultTextFontName @"HiraMinProN-W3"
+#define kTextFieldDefaultPlaceholderSize 14.0
+#define kTextFieldDefaultTextSize 16.0
 
 #endif

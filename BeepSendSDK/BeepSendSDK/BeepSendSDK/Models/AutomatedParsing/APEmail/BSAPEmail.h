@@ -8,7 +8,7 @@
 
 #import "BSSerializableObject.h"
 
-@class BSEmailModel;
+@class BSEmail;
 
 @interface BSAPEmail : BSSerializableObject
 
@@ -18,6 +18,6 @@
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
 + (NSArray *)arrayOfModelsFromArrayOfObjects:(NSArray *)array;
 
-+ (BSAPEmail *)convertFromEmailModel:(BSEmailModel *)emailModel;
++ (BSAPEmail *)convertFromEmailModel:(BSEmail *)emailModel;
 
 @end

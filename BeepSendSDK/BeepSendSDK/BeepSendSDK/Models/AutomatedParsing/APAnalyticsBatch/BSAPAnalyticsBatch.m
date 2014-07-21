@@ -8,7 +8,7 @@
 
 #import "BSAPAnalyticsBatch.h"
 
-#import "BSAnalyticsBatchModel.h"
+#import "BSAnalyticsBatch.h"
 
 @implementation BSAPAnalyticsBatch
 
@@ -29,7 +29,7 @@
 
 - (id)convertToModel
 {
-	return [[BSAnalyticsBatchModel alloc] initWithID:_id label:_label total:_total statistics:[_statistics convertToModel]];
+	return [[BSAnalyticsBatch alloc] initWithID:_id label:_label total:_total statistics:[_statistics convertToModel]];
 }
 
 #pragma mark - Public methods

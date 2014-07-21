@@ -10,7 +10,7 @@
 
 #import "BSAPPMCCMNC.h"
 
-#import "BSNetworkModel.h"
+#import "BSNetwork.h"
 
 @implementation BSAPPNetwork
 
@@ -40,7 +40,7 @@
 		[mArr addObject:[mccmnc convertToModel]];
 	}
 	
-	return [[BSNetworkModel alloc] initNetworkWithMCCMNC:[NSArray arrayWithArray:mArr] withComment:_comment?_comment:@"" price:_price?_price:@0 fromCountry:[_country convertToModel] operator:_operator?_operator:@""];
+	return [[BSNetwork alloc] initNetworkWithMCCMNC:[NSArray arrayWithArray:mArr] withComment:_comment?_comment:@"" price:_price?_price:@0 fromCountry:[_country convertToModel] operator:_operator?_operator:@""];
 }
 
 #pragma mark - Public methods

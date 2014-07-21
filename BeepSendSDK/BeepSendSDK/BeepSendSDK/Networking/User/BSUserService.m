@@ -13,6 +13,8 @@
 
 #import "BSAPCUser.h"
 
+#import "BSVerified.h"
+
 @implementation BSUserService
 
 #pragma mark - Initialization
@@ -29,7 +31,7 @@
 
 #pragma mark - Public methods
 
-- (void)getUserDetailsWithCompletionBlock:(void(^)(BSUserModel *user, id error))block
+- (void)getUserDetailsWithCompletionBlock:(void(^)(BSUser *user, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration userMe]
 				withParameters:@{}
@@ -37,7 +39,7 @@
 					  
 					  if (!error) {
 						  
-						  BSUserModel *userModel = [[BSAPCUser classFromDict:response] convertToModel];
+						  BSUser *userModel = [[BSAPCUser classFromDict:response] convertToModel];
 						  
 						  block(userModel, error);
 					  }
@@ -50,36 +52,35 @@
 
 - (void)updateUserWithName:(NSString *)uName
 					 phone:(NSString *)uPhone
-		 defaultConnection:(BSConnectionModel *)uConnection
+		 defaultConnection:(BSConnection *)uConnection
 				 userTypes:(NSArray *)uTypes
 			 verifiedTerms:(NSNumber *)uVerifiedTerms
-	   withCompletionBlock:(void(^)(BSUserModel *user, id error))block
+	   withCompletionBlock:(void(^)(BSUser *user, id error))block
 {
 	
-	BSConnectionModel *connection = [[BSConnectionModel alloc] initConnectionWithID:uConnection.objectID];
+	BSConnection *connection = [[BSConnection alloc] initConnectionWithID:uConnection.connectionID];
 	
 	NSMutableArray *mArr = [@[] mutableCopy];
-	for (BSUserTypeModel *uType in uTypes) {
-		BSUserTypeModel *t = [[BSUserTypeModel alloc] initUserTypeWithID:uType.objectID];
+	for (BSUserType *uType in uTypes) {
+		BSUserType *t = [[BSUserType alloc] initUserTypeWithID:uType.objectID];
 		[mArr addObject:t];
 	}
 	
-	BSVerifiedModel *verified = nil;
+	BSVerified *verified = nil;
 	if (uVerifiedTerms) {
-		verified = [[BSVerifiedModel alloc] initUserWithTermsVerified:uVerifiedTerms];
+		verified = [[BSVerified alloc] initUserWithTermsVerified:uVerifiedTerms];
 	}
 	
-	
-	BSUserModel *userUpdate =
-	[[BSUserModel alloc] initWithName:uName
-								phone:uPhone
-					defaultConnection:connection
-							userTypes:[NSArray arrayWithArray:mArr]
-							 verified:verified];
+	BSUser *userUpdate =
+	[[BSUser alloc] initWithName:uName
+						   phone:uPhone
+			   defaultConnection:connection
+					   userTypes:[NSArray arrayWithArray:mArr]
+						verified:verified];
 	
 	NSDictionary *userUpdateDictionary = [[BSAPCUser convertFromUserModel:userUpdate] dictFromClass];
 	
-	BSLog(@"%@", userUpdateDictionary);
+	BSDLog(@"%@", userUpdateDictionary);
 	
 	[super executePUTForMethod:[BSAPIConfiguration userMe]
 				withParameters:userUpdateDictionary
@@ -87,7 +88,7 @@
 					  
 					  if (!error) {
 						  
-						  BSUserModel *userModel = [[BSAPCUser classFromDict:response] convertToModel];
+						  BSUser *userModel = [[BSAPCUser classFromDict:response] convertToModel];
 						  
 						  block(userModel, error);
 					  }
@@ -102,11 +103,11 @@
 		   userPassword:(NSString *)password
 	withCompletionBlock:(void(^)(BOOL success, id error))block
 {
-	BSUserModel *userUpdate = [[BSUserModel alloc] initUserWithEmail:newEmail andPassword:password];
+	BSUser *userUpdate = [[BSUser alloc] initUserWithEmail:newEmail andPassword:password];
 	
 	NSDictionary *userUpdateDictionary = [[BSAPCUser convertFromUserModel:userUpdate] dictFromClass];
 	
-	BSLog(@"%@", userUpdateDictionary);
+	BSDLog(@"%@", userUpdateDictionary);
 	
 	[super executePUTForMethod:[BSAPIConfiguration updateUserEmail]
 				withParameters:userUpdateDictionary
@@ -126,11 +127,11 @@
 		   userNewPassword:(NSString *)newPassword
 	   withCompletionBlock:(void(^)(BOOL success, id error))block
 {
-	BSUserModel *userUpdate = [[BSUserModel alloc] initUserWithPassword:password andNewPassword:newPassword];
+	BSUser *userUpdate = [[BSUser alloc] initUserWithPassword:password andNewPassword:newPassword];
 	
 	NSDictionary *userUpdateDictionary = [[BSAPCUser convertFromUserModel:userUpdate] dictFromClass];
 	
-	BSLog(@"%@", userUpdateDictionary);
+	BSDLog(@"%@", userUpdateDictionary);
 	
 	[super executePUTForMethod:[BSAPIConfiguration updateUserPassword]
 				withParameters:userUpdateDictionary
@@ -146,14 +147,14 @@
 				  }];
 }
 
-- (void)resetUserTokenWithCompletionBlock:(void(^)(NSString *apiToken, id error))block
+- (void)resetUserTokenUsingPassword:(NSString *)password withCompletionBlock:(void(^)(NSString *apiToken, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration resetTokenMe]
-				withParameters:@{}
+				withParameters:@{@"password":password}
 				  onCompletion:^(id response, id error) {
 					  
 					  if (!error) {
-						  block(response, error);
+						  block(response[@"api_token"], error);
 					  }
 					  else {
 						  //TODO: Create error handling

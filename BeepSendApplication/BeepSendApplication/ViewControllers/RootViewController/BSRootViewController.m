@@ -10,34 +10,16 @@
 
 #import "BSRootView.h"
 
-//TODO: IMPORT SDK FOR TESTING
-#import "BSConnectionsService.h"
-#import "BSCustomerService.h"
-#import "BSPricelistService.h"
-#import "BSSMSService.h"
-#import "BSUserService.h"
-#import "BSHLRService.h"
-#import "BSContactsService.h"
-#import "BSGroupsService.h"
-#import "BSAnalyticsService.h"
-#import "BSWalletService.h"
+#import "BSUserDetailsViewController.h"
 
-@interface BSRootViewController () <UITextFieldDelegate>
+@interface BSRootViewController () 
 
-@property (nonatomic, weak) UIScrollView *scrollView;
+@property (nonatomic, weak) UILabel *labelIntro;
+@property (nonatomic, weak) UIButton *buttonEnter;
 
-@property (nonatomic, weak) UITextField *textFieldFrom;
-@property (nonatomic, weak) UITextField *textFieldTo;
+- (void)setupTitles;
 
-@property (nonatomic, weak) UITextView *textViewMessageBox;
-
-- (void)setupViewElements;
-
-- (void)buttonDoneClicked;
-- (void)buttonCheckClicked;
-
-- (void)keyboardBecameActive:(NSNotification *)notification;
-- (void)keyboardBecameInactive:(NSNotification *)notification;
+- (void)buttonEnterClicked:(UIButton *)sender;
 
 @end
 
@@ -60,15 +42,10 @@
 {
 	BSRootView *rootView = [[BSRootView alloc] initWithFrame:[UIScreen mainScreen].bounds];
 	
-	_scrollView = rootView.scrollViewContainer;
+	_labelIntro = rootView.labelIntro;
+	_buttonEnter = rootView.buttonEnter;
 	
-	_textFieldFrom = rootView.textFieldFrom;
-	_textFieldTo = rootView.textFieldTo;
-	
-	_textViewMessageBox = rootView.textViewMessageBox;
-	
-	[rootView.buttonCheckDestinationNumber addTarget:self action:@selector(buttonCheckClicked) forControlEvents:UIControlEventTouchUpInside];
-	[rootView.buttonDone addTarget:self action:@selector(buttonDoneClicked) forControlEvents:UIControlEventTouchUpInside];
+	[_buttonEnter addTarget:self action:@selector(buttonEnterClicked:) forControlEvents:UIControlEventTouchUpInside];
 	
 	self.view = rootView;
 }
@@ -78,12 +55,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 	
-	[self setupViewElements];
-	
-	//Add keyboard appearance notification
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameActive:) name:UIKeyboardWillShowNotification object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
-
+	[self setupTitles];
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,126 +64,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-}
-
 #pragma mark - Private methods
 
-- (void)setupViewElements
+- (void)setupTitles
 {
-	_textFieldFrom.placeholder = NSLocalizedString(@"Who is sending message?", @"");
-	_textFieldFrom.delegate = self;
-	
-	_textFieldTo.placeholder = NSLocalizedString(@"To whom is message sent?", @"");
-	_textFieldTo.delegate = self;
-	
+	_labelIntro.text = NSLocalizedString(@"WELCOME :)\nThis is example application, built to show capabilities of BeepSendSDK and its basic functionalities.", @"");
+	[_buttonEnter setTitle:NSLocalizedString(@"Enter application", @"") forState:UIControlStateNormal];
 }
 
-- (void)buttonDoneClicked
+- (void)buttonEnterClicked:(UIButton *)sender
 {
-	if ([_textFieldFrom isFirstResponder]) {
-		[_textFieldFrom resignFirstResponder];
-	}
-	else if ([_textFieldTo isFirstResponder]) {
-		[_textFieldTo resignFirstResponder];
-	}
-	else if ([_textViewMessageBox isFirstResponder]) {
-		[_textViewMessageBox resignFirstResponder];
-	}
-	
-	if (![Helper isNilOrEmpty:_textFieldFrom.text] &&
-		![Helper isNilOrEmpty:_textFieldTo.text] &&
-		![Helper isNilOrEmpty:_textViewMessageBox.text]) {
-
-		BSSMSService *sms = [BSSMSService sharedService];
-		
-		BSMessageRequestModel *message = [[BSMessageRequestModel alloc] initWithMessage:_textViewMessageBox.text
-																			   receiver:_textFieldTo.text
-																				 sender:_textFieldFrom.text
-																				batchID:nil
-																			 batchLabel:nil
-																			   sendTime:nil
-																		   usedEncoding:nil
-																			messageType:nil
-																				validTo:nil
-																			 recieveDLR:nil
-																			  forGroups:nil
-																		 userDataHeader:nil
-																	 dataCodingSettings:nil];
-		
-		[sms sendMessage:message usingConnection:nil withCompletionBlock:^(NSArray *response, id error) {
-			DLog(@"%@", response);
-		}];
-
-	}
-}
-
-- (void)buttonCheckClicked {
-	
-	__block BSConnectionsService *cs = [BSConnectionsService sharedService];
-	
-	[cs getAllAvailableConnectsionOnCompletion:^(NSArray *connections, id error) {
-		for (BSConnectionModel *connection in connections) {
-			if (connection.type == BSConnectionTypeHLR) {
-				
-				BSHLRService *hlrs = [BSHLRService sharedService];
-				
-				[hlrs doImmediateHLRForNumber:_textFieldTo.text
-							   withConnection:connection
-						  withCompletionBlock:^(BSHLRModel *hlr, id error) {
-				 
-							  DLog(@"%@", hlr);
-					   }];
-			}
-		}
-	}];
-}
-
-- (void)keyboardBecameActive:(NSNotification *)notification
-{
-	CGRect keyboardFrameEndUser = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-	CGRect scrollViewFrame = _scrollView.frame;
-	scrollViewFrame.size.height = keyboardFrameEndUser.origin.y;
-	
-	[self animateScrollViewFrame:scrollViewFrame
-					withDuration:[notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]
-			   andAnimationCurve:[notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
-}
-
-- (void)keyboardBecameInactive:(NSNotification *)notification
-{
-	CGRect keyboardFrameEndUser = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-	CGRect scrollViewFrame = _scrollView.frame;
-	scrollViewFrame.size.height = keyboardFrameEndUser.origin.y;
-	
-	[self animateScrollViewFrame:scrollViewFrame
-					withDuration:[notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]
-			   andAnimationCurve:[notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
-}
-
-- (void)animateScrollViewFrame:(CGRect)newFrame withDuration:(CGFloat)duration andAnimationCurve:(NSInteger)animationCurve {
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationDuration:duration];
-	[UIView setAnimationCurve:animationCurve];
-	[UIView setAnimationBeginsFromCurrentState:YES];
-	{
-		self.view.frame = newFrame;
-	}
-	[UIView commitAnimations];
-}
-
-#pragma mark - UITextField delegate
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-	if ([textField isEqual:_textFieldFrom]) {
-		[_textFieldTo becomeFirstResponder];
-	}
-	
-	return YES;
+	BSUserDetailsViewController *userDetailsVC = [[BSUserDetailsViewController alloc] init];
+	[self.navigationController pushViewController:userDetailsVC animated:YES];
 }
 
 @end

@@ -8,20 +8,24 @@
 
 #import "BSBaseService.h"
 
-#import "BSConnectionModel.h"
+#import "BSConnection.h"
 
 @interface BSConnectionsService : BSBaseService
 
 - (void)getAllAvailableConnectsionOnCompletion:(void(^)(NSArray *connections, id error))block;
-- (void)getMeConnectionOnCompletion:(void(^)(BSConnectionModel *connection, id error))block;
+- (void)getMeConnectionOnCompletion:(void(^)(BSConnection *connection, id error))block;
 
-- (void)updateConnection:(BSConnectionModel *)connection
+- (void)updateConnection:(BSConnection *)connection
 		 withCallbackDLR:(NSString *)calbackDLR
+			  callbackMO:(NSString *)callbackMO
+		  callbackMethod:(NSString *)callbackMethod
 				systemID:(NSString *)systemID
 				   label:(NSString *)label
 			 description:(NSString *)description
-	 withCompletionBlock:(void(^)(BSConnectionModel *connection, id error))block;
+	 withCompletionBlock:(void(^)(BSConnection *connection, id error))block;
 
-- (void)resetTokenForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(BSConnectionModel *updatedModel, id error))block;
+- (void)resetTokenForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSConnection *updatedModel, id error))block;
+
+- (void)resetPasswordForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSConnection *updatedModel, id error))block;
 
 @end

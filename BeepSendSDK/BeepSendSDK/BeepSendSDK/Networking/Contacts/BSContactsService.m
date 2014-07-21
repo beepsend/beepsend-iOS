@@ -11,6 +11,7 @@
 #import "BSAPIConfiguration.h"
 
 #import "BSAPContact.h"
+#import "BSAPContactsRequests.h"
 
 @implementation BSContactsService
 
@@ -49,7 +50,42 @@
 				  }];
 }
 
-- (void)addContact:(BSContactModel *)contact withCompletionBlock:(void(^)(BSContactModel *contact, id error))block
+- (void)getAllContactsInGroup:(NSString *)groupID
+					  sinceID:(NSString *)since
+						maxID:(NSString *)max
+				 contactCount:(NSNumber *)count
+					   offset:(NSNumber *)offset
+						 sort:(NSString *)sort
+		  withCompletionBlock:(void(^)(NSArray *contacts, id error))block
+{
+	BSAPContactsRequests *request = [[BSAPContactsRequests alloc] init];
+	request.group = groupID;
+	request.since_id = since;
+	request.max_id = max;
+	request.count = count;
+	request.offset = offset;
+	request.sort = sort;
+	
+	[super executeGETForMethod:[BSAPIConfiguration contacts]
+				withParameters:[request dictFromClass]
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  for (BSAPContact *con in [BSAPContact arrayOfObjectsFromArrayOfDictionaries:response]) {
+							  [mArr addObject:[con convertToModel]];
+						  }
+						  block([NSArray arrayWithArray:mArr], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
+- (void)addContact:(BSContact *)contact withCompletionBlock:(void(^)(BSContact *contact, id error))block
 {
 	NSDictionary *contactToAdd = [[BSAPContact contactFromContactModel:contact] dictFromClass];
 	
@@ -71,7 +107,7 @@
 - (void)addContacts:(NSArray *)contacts withCompletionBlock:(void(^)(NSArray *contacts, id error))block
 {
 	NSMutableArray *mArr = [@[] mutableCopy];
-	for (BSContactModel *model in contacts) {
+	for (BSContact *model in contacts) {
 		[mArr addObject:[[BSAPContact contactFromContactModel:model] dictFromClass]];
 	}
 	
@@ -91,15 +127,15 @@
 }
 
 
-- (void)updateContact:(BSContactModel *)contact
+- (void)updateContact:(BSContact *)contact
 		   withNumber:(NSString *)number
 			firstName:(NSString *)firstName
 			 lastName:(NSString *)lastName
 			  groupID:(NSString *)groupID
-  withCompletionBlock:(void(^)(BSContactModel *contact, id error))block
+  withCompletionBlock:(void(^)(BSContact *contact, id error))block
 {
 	
-	NSDictionary *contactToUpdate = [[BSAPContact contactFromContactModel:[[BSContactModel alloc] initContactWithPhoneNumber:number?number:contact.phoneNumber firstName:firstName lastName:lastName groupID:groupID]] dictFromClass];
+	NSDictionary *contactToUpdate = [[BSAPContact contactFromContactModel:[[BSContact alloc] initContactWithPhoneNumber:number?number:contact.phoneNumber firstName:firstName lastName:lastName group:[[BSGroup alloc] initGroupWithID:groupID name:nil contacts:nil]]] dictFromClass];
 	
 	[super executePUTForMethod:[BSAPIConfiguration contactsForID:contact.objectID]
 				withParameters:contactToUpdate
@@ -116,7 +152,7 @@
 				  }];
 }
 
-- (void)deleteContact:(BSContactModel *)contact withCompletionBlock:(void(^)(BOOL success, id error))block
+- (void)deleteContact:(BSContact *)contact withCompletionBlock:(void(^)(BOOL success, id error))block
 {
 	[super executeDELETEForMethod:[BSAPIConfiguration contactsForID:contact.objectID]
 				   withParameters:@{}
@@ -134,7 +170,7 @@
 }
 
 - (void)searchContact:(NSString *)query
-			  inGroup:(BSGroupModel *)group
+			  inGroup:(BSGroup *)group
 				limit:(NSUInteger)limit
   withCompletionBlock:(void(^)(NSArray *results, id error))block
 {

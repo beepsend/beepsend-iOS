@@ -8,8 +8,10 @@
 
 #import "BSAPMessageRequest.h"
 
-#import "BSMessageRequestModel.h"
-#import "BSGroupModel.h"
+#import "BSGroup.h"
+
+#import "BSMessage.h"
+#import "BSBatch.h"
 
 @implementation BSAPMessageRequest
 
@@ -31,19 +33,19 @@
 	:
 	nil;
 	
-	return [[BSMessageRequestModel alloc] initWithMessage:_message
-												 receiver:_to
-												   sender:_from
-												  batchID:_batch_id
-											   batchLabel:_batch_label
-												 sendTime:sendDate
-											 usedEncoding:_encoding
-											  messageType:_message_type
-												  validTo:validTo
-											   recieveDLR:_receive_dlr
-												forGroups:_groups
-										   userDataHeader:_udh
-									   dataCodingSettings:_dcs];
+	return [[BSMessage alloc] initWithMessage:_message
+									 receiver:_to
+									   sender:_from
+									  batchID:_batch_id
+								   batchLabel:_batch_label
+									 sendTime:sendDate
+								 usedEncoding:_encoding
+								  messageType:_message_type
+									  validTo:validTo
+								   recieveDLR:_receive_dlr
+									forGroups:_groups
+							   userDataHeader:_udh
+						   dataCodingSettings:_dcs];
 }
 
 #pragma mark - Public methods
@@ -66,27 +68,27 @@
 	return [NSArray arrayWithArray:results];
 }
 
-+ (BSAPMessageRequest *)convertFromMessageRequestModel:(BSMessageRequestModel *)msgRequest
++ (BSAPMessageRequest *)convertFromMessageRequestModel:(BSMessage *)msgRequest
 {
 	BSAPMessageRequest *request = [[BSAPMessageRequest alloc] init];
 	
-	request.to = msgRequest.receiver;
+	request.to = msgRequest.recipient ? msgRequest.recipient : msgRequest.recipients;
 	request.message = msgRequest.message;
 	request.from = msgRequest.sender;
-	request.batch_id = msgRequest.batchID;
-	request.batch_label = msgRequest.batchLabel;
-	request.send_time = msgRequest.sendTime?[NSString stringWithFormat:@"%f", [msgRequest.sendTime timeIntervalSince1970]]:nil;
+	request.batch_id = msgRequest.batch.batchID;
+	request.batch_label = msgRequest.batch.label;
+	request.send_time = msgRequest.sendTime ? [NSString stringWithFormat:@"%f", [msgRequest.sendTime timeIntervalSince1970]] : nil;
 	request.encoding = msgRequest.usedEncoding;
 	request.message_type = msgRequest.messageType;
-	request.validity_period = msgRequest.validTo?[NSString stringWithFormat:@"%f", [msgRequest.validTo timeIntervalSince1970]]:nil;
-	request.receive_dlr = msgRequest.receiveDeliveryReport;
+	request.validity_period = msgRequest.validTo ? [NSString stringWithFormat:@"%f", [msgRequest.validTo timeIntervalSince1970]] : nil;
+	request.receive_dlr = [NSNumber numberWithInteger:msgRequest.shouldReceiveDeliveryReport];
 	
 	//If groups array consists of BSGroupModel
 	//than convert it to array of strings (group ids)
 	NSMutableArray *groupsID = [@[] mutableCopy];
 	if (msgRequest.groups && msgRequest.groups.count>0) {
-		if ([msgRequest.groups[0] isKindOfClass:[BSGroupModel class]]) {
-			for (BSGroupModel *group in msgRequest.groups) {
+		if ([msgRequest.groups[0] isKindOfClass:[BSGroup class]]) {
+			for (BSGroup *group in msgRequest.groups) {
 				[groupsID addObject:group.objectID];
 			}
 		}

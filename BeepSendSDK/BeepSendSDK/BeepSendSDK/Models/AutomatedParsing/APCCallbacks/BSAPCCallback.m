@@ -8,7 +8,7 @@
 
 #import "BSAPCCallback.h"
 
-#import "BSCallbacksModel.h"
+#import "BSCallbacks.h"
 
 @implementation BSAPCCallback
 
@@ -16,7 +16,7 @@
 
 - (id)convertToModel
 {
-	return [[BSCallbacksModel alloc] initCallbackWithMethod:_method?_method:@"" dlr:_dlr?_dlr:@"" mo:_mo?_mo:@""];
+	return [[BSCallbacks alloc] initCallbackWithMethod:_method?_method:nil dlr:_dlr?_dlr:nil mo:_mo?_mo:nil];
 }
 
 @end

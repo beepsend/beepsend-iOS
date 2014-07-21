@@ -8,13 +8,6 @@
 
 #import "BSRootView.h"
 
-#import <QuartzCore/QuartzCore.h>
-
-#import "BSInputAccessoryView.h"
-
-#define kTextFieldDefaultPlaceholderSize 14.0
-#define kTextFieldDefaultTextSize 16.0
-
 @implementation BSRootView
 
 #pragma mark - Initialization
@@ -27,7 +20,7 @@
 		
 		////////////////////////////////////////////////////////////////////////
 		//Main view
-		self.backgroundColor = [UIColor blackColor];
+		self.backgroundColor = [UIColor clearColor];
 		
 		UIBezierPath *roundedPath = [UIBezierPath bezierPathWithRoundedRect:frame
 														  byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight
@@ -42,107 +35,32 @@
 		[self.layer addSublayer:maskLayer];
 		
 		////////////////////////////////////////////////////////////////////////
-		//Setup textField input accessory view
-		BSInputAccessoryView *accessoryView = [BSInputAccessoryView inputAccessoryViewWithDoneButton];
-		_buttonDone = accessoryView.buttonDone;
+		//Labels and text fields for name, email and phone
+		_labelIntro = [[UILabel alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, kViewDefaultBorderInset, frame.size.width - 2*kViewDefaultBorderInset, frame.size.width - 2*kViewDefaultBorderInset)];
+		_labelIntro.backgroundColor = [UIColor clearColor];
+		_labelIntro.font = [UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultTextSize];
+		_labelIntro.textColor = [UIColor blackColor];
+		_labelIntro.textAlignment = NSTextAlignmentCenter;
+		_labelIntro.numberOfLines = 0;
+		
+		[self addSubview:_labelIntro];
 		
 		////////////////////////////////////////////////////////////////////////
-		//Scroll view
-		_scrollViewContainer = [[UIScrollView alloc] initWithFrame:frame];
-		_scrollViewContainer.backgroundColor = [UIColor clearColor];
-		_scrollViewContainer.contentSize = frame.size;
-		_scrollViewContainer.clipsToBounds = YES;
-
-		[self addSubview:_scrollViewContainer];
+		//Buttons customer and default connection
+		_buttonEnter = [[UIButton alloc] initWithFrame:CGRectMake(frame.size.width/3, CGRectGetMaxY(_labelIntro.frame)+kSeparatorDefaultSpacing, frame.size.width/3, kTextFieldDefaultHeight)];
 		
-		////////////////////////////////////////////////////////////////////////
-		//Text field sender
-		_textFieldFrom = [[BSTextFieldCustomTextInset alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, kViewDefaultBorderInset, frame.size.width - kViewDefaultBorderInset*2, kTextFieldDefaultHeight)];
-		_textFieldFrom.backgroundColor = [UIColor whiteColor];
-		_textFieldFrom.font = [UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultTextSize];
-		_textFieldFrom.textColor = [UIColor blackColor];
-		_textFieldFrom.textAlignment = NSTextAlignmentNatural;
-		_textFieldFrom.keyboardAppearance = UIKeyboardAppearanceDark;
-		_textFieldFrom.keyboardType = UIKeyboardTypeAlphabet;
-		_textFieldFrom.returnKeyType = UIReturnKeyNext;
-		_textFieldFrom.clearButtonMode = UITextFieldViewModeWhileEditing;
-		_textFieldFrom.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@""
-																			   attributes:@{
-																							NSForegroundColorAttributeName:[UIColor lightGrayColor],
-																							NSFontAttributeName:[UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultPlaceholderSize]
-																							}];
+		_buttonEnter.backgroundColor = [UIColor lightGrayColor];
+		_buttonEnter.showsTouchWhenHighlighted = YES;
+		_buttonEnter.clipsToBounds = YES;
+		[_buttonEnter setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		[_buttonEnter setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+		_buttonEnter.titleLabel.font = [UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultTextSize/1.6];
 		
-		_textFieldFrom.inputAccessoryView = accessoryView;
+		_buttonEnter.layer.cornerRadius = kDefaultButtonCornerRadius;
+		_buttonEnter.layer.borderWidth = kDefaultBorderWidth;
+		_buttonEnter.layer.borderColor = [UIColor orangeColor].CGColor;
 		
-		_textFieldFrom.layer.borderColor = [UIColor orangeColor].CGColor;
-		_textFieldFrom.layer.borderWidth = kDefaultBorderWidth;
-		_textFieldFrom.layer.cornerRadius = kTextFieldDefaultHeight/2.0;
-		
-		[_scrollViewContainer addSubview:_textFieldFrom];
-		
-		////////////////////////////////////////////////////////////////////////
-		//Text field recipient
-		_textFieldTo = [[BSTextFieldCustomTextInset alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, CGRectGetMaxY(_textFieldFrom.frame) + kSeparatorDefaultSpacing, frame.size.width - kViewDefaultBorderInset*2 - kTextFieldDefaultHeight - kSeparatorDefaultSpacing, kTextFieldDefaultHeight)];
-		_textFieldTo.font = [UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultTextSize];
-		_textFieldTo.backgroundColor = [UIColor whiteColor];
-		_textFieldTo.textColor = [UIColor blackColor];
-		_textFieldTo.textAlignment = NSTextAlignmentNatural;
-		_textFieldTo.keyboardAppearance = UIKeyboardAppearanceDark;
-		_textFieldTo.keyboardType = UIKeyboardTypeNumberPad;
-		_textFieldTo.clearButtonMode = UITextFieldViewModeWhileEditing;
-		_textFieldTo.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@""
-																			   attributes:@{
-																							NSForegroundColorAttributeName:[UIColor lightGrayColor],
-																							NSFontAttributeName:[UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultPlaceholderSize]
-																							}];
-		
-		_textFieldTo.inputAccessoryView = accessoryView;
-		
-		_textFieldTo.layer.borderColor = [UIColor orangeColor].CGColor;
-		_textFieldTo.layer.borderWidth = kDefaultBorderWidth;
-		_textFieldTo.layer.cornerRadius = kTextFieldDefaultHeight/2.0;
-		
-		[_scrollViewContainer addSubview:_textFieldTo];
-		
-		////////////////////////////////////////////////////////////////////////
-		//Text view message box
-		_textViewMessageBox = [[UITextView alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, CGRectGetMaxY(_textFieldTo.frame) + kSeparatorDefaultSpacing, frame.size.width - kViewDefaultBorderInset*2, kTextViewDefaultHeight)];
-		_textViewMessageBox.font = [UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultTextSize];
-		_textViewMessageBox.backgroundColor = [UIColor whiteColor];
-		_textViewMessageBox.textColor = [UIColor blackColor];
-		_textViewMessageBox.textAlignment = NSTextAlignmentNatural;
-		_textViewMessageBox.keyboardAppearance = UIKeyboardAppearanceDark;
-		_textViewMessageBox.keyboardType = UIKeyboardTypeAlphabet;
-		_textViewMessageBox.contentInset = UIEdgeInsetsMake(5.0, 5.0, -5.0, -5.0);
-		_textViewMessageBox.directionalLockEnabled = YES;
-		
-		_textViewMessageBox.inputAccessoryView = accessoryView;
-		
-		_textViewMessageBox.layer.borderColor = [UIColor orangeColor].CGColor;
-		_textViewMessageBox.layer.borderWidth = kDefaultBorderWidth;
-		_textViewMessageBox.layer.cornerRadius = _textFieldTo.layer.cornerRadius;
-		
-		[_scrollViewContainer addSubview:_textViewMessageBox];
-		
-		////////////////////////////////////////////////////////////////////////
-		//Check number button
-		_buttonCheckDestinationNumber = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_textFieldTo.frame) + kSeparatorDefaultSpacing, CGRectGetMinY(_textFieldTo.frame), CGRectGetHeight(_textFieldTo.frame), CGRectGetHeight(_textFieldTo.frame))];
-		_buttonCheckDestinationNumber.backgroundColor = [UIColor lightGrayColor];
-		_buttonCheckDestinationNumber.showsTouchWhenHighlighted = YES;
-		_buttonCheckDestinationNumber.clipsToBounds = YES;
-		[_buttonCheckDestinationNumber setTitle:NSLocalizedString(@"", @"") forState:UIControlStateNormal];
-		[_buttonCheckDestinationNumber setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-		[_buttonCheckDestinationNumber setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
-		_buttonCheckDestinationNumber.titleLabel.font = [UIFont boldSystemFontOfSize:16.0];
-		
-		_buttonCheckDestinationNumber.layer.cornerRadius = _textFieldTo.layer.cornerRadius;
-		_buttonCheckDestinationNumber.layer.borderWidth = kDefaultBorderWidth;
-		_buttonCheckDestinationNumber.layer.borderColor = [UIColor orangeColor].CGColor;
-		
-		[self addSubview:_buttonCheckDestinationNumber];
-		
-		////////////////////////////////////////////////////////////////////////
-		//Constraints
+		[self addSubview:_buttonEnter];
     }
     return self;
 }

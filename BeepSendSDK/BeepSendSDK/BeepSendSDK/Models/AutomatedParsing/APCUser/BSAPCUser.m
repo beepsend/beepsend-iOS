@@ -10,8 +10,9 @@
 
 #import "BSAPUserType.h"
 
-#import "BSUserModel.h"
-#import "BSUserTypeModel.h"
+#import "BSUser.h"
+#import "BSUserType.h"
+#import "BSVerified.h"
 
 @implementation BSAPCUser
 
@@ -41,7 +42,16 @@
 		[mUserTypes addObject:[uType convertToModel]];
 	}
 	
-	return [[BSUserModel alloc] initUserWithID:_id name:_name email:_email?_email:_username?_username:@"" phone:_phone customer:_customer apiToken:_api_token defaultConnection:[_default_connection convertToModel] userTypes:[NSArray arrayWithArray:mUserTypes] maxLevel:_max_level verified:[_verified convertToModel]];
+	return [[BSUser alloc] initUserWithID:_id
+									 name:_name
+									email:_email?_email:_username?_username:@""
+									phone:_phone
+								 customer:_customer
+								 apiToken:_api_token
+						defaultConnection:[_default_connection convertToModel]
+								userTypes:[NSArray arrayWithArray:mUserTypes]
+								 maxLevel:_max_level
+								 verified:[_verified convertToModel]];
 }
 
 #pragma mark - Public methods
@@ -64,21 +74,21 @@
 	return [NSArray arrayWithArray:results];
 }
 
-+ (BSAPCUser *)convertFromUserModel:(BSUserModel *)userModel
++ (BSAPCUser *)convertFromUserModel:(BSUser *)userModel
 {
 	
 	BSAPCUser *user = [[BSAPCUser alloc] init];
 	
-	if ([userModel.objectID isEqualToString:@"-1"]) {
+	if ([userModel.userID isEqualToString:@"-1"]) {
 		return user;
 	}
 	
-	user.id = [userModel.objectID isEqualToString:@"0"] ? nil : userModel.objectID;
+	user.id = [userModel.userID isEqualToString:@"0"] ? nil : userModel.userID;
 	user.name = userModel.name;
 	user.username = userModel.email;
 	user.email = userModel.email;
-	user.phone = userModel.phoneNumber;
-	user.customer = userModel.customer;
+	user.phone = userModel.phone;
+	user.customer = userModel.customerName;
 	user.api_token = userModel.apiToken;
 	
 	user.password = userModel.password;
@@ -88,7 +98,7 @@
 	user.default_connection = defaultConnection;
 	
 	NSMutableArray *mArr = [@[] mutableCopy];
-	for (BSUserTypeModel *uType in userModel.userTypes) {
+	for (BSUserType *uType in userModel.userTypes) {
 		BSAPUserType *ut = [[BSAPUserType alloc] init];
 		
 		ut.id = uType.objectID;

@@ -8,7 +8,7 @@
 
 #import "BSAPHLRReport.h"
 
-#import "BSHLRReportModel.h"
+#import "BSHLRReport.h"
 
 @implementation BSAPHLRReport
 
@@ -30,7 +30,7 @@
 	:
 	nil;
 	
-	return [[BSHLRReportModel alloc] initReportWithHLRReachedDate:dateOfInHLR andResponseReachedDate:dateOfDeliverResponse];
+	return [[BSHLRReport alloc] initReportWithHLRReachedDate:dateOfInHLR andResponseReachedDate:dateOfDeliverResponse];
 }
 
 @end

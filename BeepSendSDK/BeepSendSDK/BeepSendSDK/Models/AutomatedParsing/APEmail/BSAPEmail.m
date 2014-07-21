@@ -8,7 +8,7 @@
 
 #import "BSAPEmail.h"
 
-#import "BSEmailModel.h"
+#import "BSEmail.h"
 
 @implementation BSAPEmail
 
@@ -16,7 +16,7 @@
 
 - (id)convertToModel
 {
-	return [[BSEmailModel alloc] initEmailWithID:_id atAddress:_email];
+	return [[BSEmail alloc] initEmailWithID:_id atAddress:_email];
 }
 
 #pragma mark - Public methods
@@ -39,14 +39,14 @@
 	return [NSArray arrayWithArray:results];
 }
 
-+ (BSAPEmail *)convertFromEmailModel:(BSEmailModel *)emailModel
++ (BSAPEmail *)convertFromEmailModel:(BSEmail *)emailModel
 {
 	BSAPEmail *email = [[BSAPEmail alloc] init];
-	if ([emailModel.objectID isEqualToString:@"-1"]) {
+	if ([emailModel.emailID isEqualToString:@"-1"]) {
 		return email;
 	}
 	
-	email.id = [emailModel.objectID isEqualToString:@"0"] ? nil : emailModel.objectID;
+	email.id = [emailModel.emailID isEqualToString:@"0"] ? nil : emailModel.emailID;
 	email.email = emailModel.address;
 	
 	return email;

@@ -29,8 +29,8 @@
 #pragma mark - Public methods
 
 - (void)doImmediateHLRForNumber:(NSString *)number
-				 withConnection:(BSConnectionModel *)connection
-			withCompletionBlock:(void(^)(BSHLRModel *hlr, id error))block
+				 withConnection:(BSConnection *)connection
+			withCompletionBlock:(void(^)(BSHLR *hlr, id error))block
 {
 	NSString *method = [BSAPIConfiguration hlrForNumber:number];
 	NSDictionary *params = connection ? @{ @"connection" : connection.objectID } : @{};
@@ -41,7 +41,7 @@
 					  
 					  if (!error) {
 						  
-						  BSHLRModel *hlr = [[BSAPHLR classFromDict:response] convertToModel];
+						  BSHLR *hlr = [[BSAPHLR classFromDict:response] convertToModel];
 						  
 						  block(hlr, error);
 					  }
@@ -53,7 +53,7 @@
 }
 
 - (void)validateHLRForNumber:(NSString *)number
-			  withConnection:(BSConnectionModel *)connection
+			  withConnection:(BSConnection *)connection
 		 withCompletionBlock:(void(^)(id response, id error))block
 {
 	NSString *method = [BSAPIConfiguration validateHLR];

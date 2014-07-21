@@ -8,7 +8,7 @@
 
 #import "BSAPNetworkDetailsResponse.h"
 
-#import "BSNetworkDetailsModel.h"
+#import "BSNetworkDetails.h"
 
 @implementation BSAPNetworkDetailsResponse
 
@@ -30,7 +30,7 @@
 
 - (id)convertToModel
 {
-	return [[BSNetworkDetailsModel alloc] initWithMCCMNC:[_mccmnc convertToModel]
+	return [[BSNetworkDetails alloc] initWithMCCMNC:[_mccmnc convertToModel]
 											  statistics:[_statistics convertToModel]
 												   total:_total];
 }

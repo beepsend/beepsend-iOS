@@ -8,7 +8,7 @@
 
 #import "BSSerializableObject.h"
 
-@class BSMessageRequestModel;
+@class BSMessage;
 
 @interface BSAPMessageRequest : BSSerializableObject
 
@@ -29,6 +29,6 @@
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
 + (NSArray *)arrayOfObjectsFromArrayOfModels:(NSArray *)array;
 
-+ (BSAPMessageRequest *)convertFromMessageRequestModel:(BSMessageRequestModel *)msgRequest;
++ (BSAPMessageRequest *)convertFromMessageRequestModel:(BSMessage *)msgRequest;
 
 @end

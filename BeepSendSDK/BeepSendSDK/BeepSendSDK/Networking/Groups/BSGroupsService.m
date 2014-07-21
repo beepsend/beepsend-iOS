@@ -12,6 +12,7 @@
 
 #import "BSAPGroup.h"
 #import "BSAPContact.h"
+#import "BSAPGroupsRequest.h"
 
 @implementation BSGroupsService
 
@@ -42,7 +43,7 @@
 							  [mArr addObject:[group convertToModel]];
 						  }
 						  
-						  BSLog(@"%@", mArr);
+						  BSDLog(@"%@", mArr);
 						  
 						  block([NSArray arrayWithArray:mArr], error);
 					  }
@@ -53,14 +54,45 @@
 				  }];
 }
 
-- (void)getDetailsForGroup:(BSGroupModel *)group withCompletionBlock:(void(^)(BSGroupModel *group, id error))block
+- (void)getAllGroupsSinceID:(NSString *)sinceID
+					  maxID:(NSString *)maxID
+					  count:(NSNumber *)count
+		withCompletionBlock:(void(^)(NSArray *groups, id error))block
 {
-	[self getDetailsForGroupID:group.objectID withCompletionBlock:^(BSGroupModel *group, id error) {
+	BSAPGroupsRequest *groupsRequest = [[BSAPGroupsRequest alloc] init];
+	groupsRequest.since_id = sinceID;
+	groupsRequest.max_id = maxID;
+	groupsRequest.count = count;
+	[super executeGETForMethod:[BSAPIConfiguration contactsGroups]
+				withParameters:[groupsRequest dictFromClass]
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  for (BSAPGroup *group in [BSAPGroup arrayOfObjectsFromArrayOfDictionaries:response]) {
+							  [mArr addObject:[group convertToModel]];
+						  }
+						  
+						  BSDLog(@"%@", mArr);
+						  
+						  block([NSArray arrayWithArray:mArr], error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, response);
+					  }
+				  }];
+}
+
+- (void)getDetailsForGroup:(BSGroup *)group withCompletionBlock:(void(^)(BSGroup *group, id error))block
+{
+	[self getDetailsForGroupID:group.objectID withCompletionBlock:^(BSGroup *group, id error) {
 		block(group, error);
 	}];
 }
 
-- (void)getDetailsForGroupID:(NSString *)groupID withCompletionBlock:(void(^)(BSGroupModel *group, id error))block
+- (void)getDetailsForGroupID:(NSString *)groupID withCompletionBlock:(void(^)(BSGroup *group, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration contactsGroupsForID:groupID]
 				withParameters:@{}
@@ -77,10 +109,10 @@
 				  }];
 }
 
-- (void)addGroupNamed:(NSString *)groupName withCompletionBlock:(void(^)(BSGroupModel *group, id error))block
+- (void)addGroupNamed:(NSString *)groupName withCompletionBlock:(void(^)(BSGroup *group, id error))block
 {
-	NSDictionary *dict = [[BSAPGroup groupFromGroupModel:[[BSGroupModel alloc] initGroupWithName:groupName]] dictFromClass];
-	BSLog(@"%@", dict);
+	NSDictionary *dict = [[BSAPGroup groupFromGroupModel:[[BSGroup alloc] initGroupWithName:groupName]] dictFromClass];
+	BSDLog(@"%@", dict);
 	
 	[super executePOSTForMethod:[BSAPIConfiguration contactsGroups]
 				 withParameters:dict
@@ -97,10 +129,10 @@
 				  }];
 }
 
-- (void)updateName:(NSString *)gName inGroup:(BSGroupModel *)group withCompletionBlock:(void(^)(BSGroupModel *group, id error))block
+- (void)updateName:(NSString *)gName inGroup:(BSGroup *)group withCompletionBlock:(void(^)(BSGroup *group, id error))block
 {
-	NSDictionary *dict = [[BSAPGroup groupFromGroupModel:[[BSGroupModel alloc] initGroupWithName:gName]] dictFromClass];
-	BSLog(@"%@", dict);
+	NSDictionary *dict = [[BSAPGroup groupFromGroupModel:[[BSGroup alloc] initGroupWithName:gName]] dictFromClass];
+	BSDLog(@"%@", dict);
 	
 	[super executePUTForMethod:[BSAPIConfiguration contactsGroupsForID:group.objectID]
 				 withParameters:dict
@@ -117,7 +149,7 @@
 				   }];
 }
 
-- (void)deleteGroup:(BSGroupModel *)group withCompletionBlock:(void(^)(BOOL success, id error))block
+- (void)deleteGroup:(BSGroup *)group withCompletionBlock:(void(^)(BOOL success, id error))block
 {
 	[super executeDELETEForMethod:[BSAPIConfiguration contactsGroupsForID:group.objectID]
 				withParameters:@{}

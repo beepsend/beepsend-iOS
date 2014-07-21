@@ -8,7 +8,7 @@
 
 #import "BSSerializableObject.h"
 
-@class BSGroupModel;
+@class BSGroup;
 
 @interface BSAPGroup : BSSerializableObject
 
@@ -19,6 +19,6 @@
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
 
-+ (BSAPGroup *)groupFromGroupModel:(BSGroupModel *)groupModel;
++ (BSAPGroup *)groupFromGroupModel:(BSGroup *)groupModel;
 
 @end

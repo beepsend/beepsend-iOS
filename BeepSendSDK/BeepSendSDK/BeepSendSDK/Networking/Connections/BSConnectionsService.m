@@ -48,7 +48,7 @@
 	}];
 }
 
-- (void)getMeConnectionOnCompletion:(void(^)(BSConnectionModel *connection, id error))block
+- (void)getMeConnectionOnCompletion:(void(^)(BSConnection *connection, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration connectionsMe]
 				withParameters:@{}
@@ -64,35 +64,22 @@
 	}];
 }
 
-- (void)updateConnection:(BSConnectionModel *)connection
+- (void)updateConnection:(BSConnection *)connection
 		 withCallbackDLR:(NSString *)calbackDLR
+			  callbackMO:(NSString *)callbackMO
+		  callbackMethod:(NSString *)callbackMethod
 				systemID:(NSString *)systemID
 				   label:(NSString *)label
 			 description:(NSString *)description
-	 withCompletionBlock:(void(^)(BSConnectionModel *connection, id error))block
+	 withCompletionBlock:(void(^)(BSConnection *connection, id error))block
 {
-	//	{
-	//		"callbacks": {
-	//			"dlr": "https://beepsend.com/securedlr"
-	//		},
-	//		"system_id": "crossover",
-	//		"label": "Pawnee-connection",
-	/*
-	 //		"password": "cake",
-	 */
-	//		"description": "Cool. Cool, cool, cool"
-	//	}
-	
-	//	If authenticating with a user API Token you can even set specified connection to be your default.
-	//
-	//	{
-	//		"default_connection": true
-	//	}
 	
 	BSAPConnection *conn = [[BSAPConnection alloc] init];
 	
 	BSAPCCallback *call = [[BSAPCCallback alloc] init];
 	call.dlr = calbackDLR;
+	call.mo = callbackMO;
+	call.method = callbackMethod;
 	
 	conn.callbacks = call;
 	conn.system_id = systemID;
@@ -115,17 +102,36 @@
 				  }];
 }
 
-- (void)resetTokenForConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(BSConnectionModel *updatedModel, id error))block
+- (void)resetTokenForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSConnection *updatedModel, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration connectionResetForID:connection.objectID]
 				withParameters:@{}
 				  onCompletion:^(id response, id error) {
 					  
-					  BSConnectionModel *newToken = [[BSConnectionModel alloc] initWithConnectionModel:connection
-																						  withNewToken:[[[BSAPConnection classFromDict:response] convertToModel] apiToken]];
+					  BSConnection *newToken = [[BSConnection alloc] initWithConnectionModel:connection
+																				withNewToken:[[[BSAPConnection classFromDict:response] convertToModel] apiToken]];
 					  
 					  if (!error) {
 						  block(newToken, error);
+					  }
+					  else {
+						  //TODO: Create error handling
+						  block(nil, error);
+					  }
+				  }];
+}
+
+- (void)resetPasswordForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSConnection *updatedModel, id error))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration connectionPasswordResetForID:connection.objectID]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  BSConnection *newPass = [[BSConnection alloc] initWithConnectionModel:connection
+																			withNewPassword:[[[BSAPConnection classFromDict:response] convertToModel] password]];
+					  
+					  if (!error) {
+						  block(newPass, error);
 					  }
 					  else {
 						  //TODO: Create error handling

@@ -8,11 +8,11 @@
 
 #import "BSBaseService.h"
 
-#import "BSBatchModel.h"
-#import "BSMessageModel.h"
-#import "BSLookupModel.h"
-#import "BSMessageRequestModel.h"
-#import "BSEstimateCostModel.h"
+#import "BSLookup.h"
+#import "BSEstimateCost.h"
+
+#import "BSMessage.h"
+#import "BSBatch.h"
 
 @interface BSSMSService : BSBaseService
 
@@ -25,22 +25,27 @@
 /*
 	Sends SMS.
  */
-- (void)sendMessage:(BSMessageRequestModel *)messageRequest usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block;
+- (void)sendMessage:(BSMessage *)messageRequest usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block;
 
 /*
 	Parameter is array of message request models.
  */
-- (void)sendMessages:(NSArray *)messages usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *array, id error))block;
+- (void)sendMessages:(NSArray *)messages usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *array, id error))block;
 
 /*
 	Get details regarding one message.
  */
-- (void)lookupSMS:(BSMessageModel *)sms withCompletionBlock:(void(^)(BSLookupModel *lookupResponse, id error))block;
+- (void)lookupSMS:(BSMessage *)sms withCompletionBlock:(void(^)(BSLookup *lookupResponse, id error))block;
+
+/*
+ Get details regarding multiple messages.
+ */
+- (void)lookupMultipleSMSSentTo:(NSString *)recipient setnFrom:(NSString *)sender usingConnection:(BSConnection *)connection batch:(BSBatch *)batch sinceID:(NSString *)sinceID maxID:(NSString *)maxID afterDate:(NSDate *)afterDate beforeDate:(NSDate *)beforeDate count:(NSNumber *)count withCompletionBlock:(void(^)(NSArray *lookupResponse, id error))block;
 
 /*
 	Performs dry run of SMS sending.
  */
-- (void)validateSMSForMessage:(BSMessageRequestModel *)message withCompletionBlock:(void(^)(BSMessageModel *message, id error))block;
+- (void)validateSMSForMessage:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, id error))block;
 
 /*
 	Get your previous batches with messages.
@@ -50,11 +55,11 @@
 /*
 	Get details for a specific batch.
  */
-- (void)getDetailsForBatch:(NSString *)batchID withCompletionBlock:(void(^)(BSBatchModel *batch, id error))block;
+- (void)getDetailsForBatch:(NSString *)batchID withCompletionBlock:(void(^)(BSBatch *batch, id error))block;
 
 /*
 	Estimate message/s price.
  */
-- (void)estimateCostForMessages:(NSArray *)messageRequest usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block;
+- (void)estimateCostForMessages:(NSArray *)messageRequest usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block;
 
 @end

@@ -8,7 +8,7 @@
 
 #import "BSAPCPriceListSchedule.h"
 
-#import "BSPriceListScheduleModel.h"
+#import "BSPriceListSchedule.h"
 
 @implementation BSAPCPriceListSchedule
 
@@ -16,7 +16,7 @@
 
 - (id)convertToModel
 {
-	return [[BSPriceListScheduleModel alloc] initPricelistScheduleWithID:_id andName:_name?_name:@""];
+	return [[BSPriceListSchedule alloc] initPricelistScheduleWithID:_id andName:_name?_name:@""];
 }
 
 @end

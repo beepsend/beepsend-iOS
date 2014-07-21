@@ -8,7 +8,7 @@
 
 #import "BSAPSMSLookup.h"
 
-#import "BSLookupModel.h"
+#import "BSLookup.h"
 
 @implementation BSAPSMSLookup
 
@@ -39,18 +39,18 @@
 	[smppFormatter setDateFormat:kDateFormatForSMPPStandard];
 	NSDate *validTo = [smppFormatter dateFromString:_validity_period];
 	
-	return [[BSLookupModel alloc] initLookupWithID:_id
-											 batch:[_batch convertToModel]
-										   message:_body
-									usedConnection:[_connection convertToModel]
-										dataCoding:_data_coding
-									deliveryReport:[_dlr convertToModel]
-											sender:[_from convertToModel]
-											mccmnc:[_mccmnc convertToModel]
-											 price:_price
-										 timestamp:[_timestamps	convertToModel]
-										 recipient:[_to convertToModel]
-											 valid:validTo];
+	return [[BSLookup alloc] initLookupWithID:_id
+										batch:[_batch convertToModel]
+									  message:_body
+							   usedConnection:[_connection convertToModel]
+								   dataCoding:_data_coding
+							   deliveryReport:[_dlr convertToModel]
+									   sender:[_from convertToModel]
+									   mccmnc:[_mccmnc convertToModel]
+										price:_price
+									timestamp:[_timestamps	convertToModel]
+									recipient:[_to convertToModel]
+										valid:validTo];
 }
 
 #pragma mark - Public methods

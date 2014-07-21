@@ -10,6 +10,8 @@
 
 #import "BSRootViewController.h"
 
+#import "BSUser.h"
+
 @interface BSAppDelegate ()
 
 @property (nonatomic, strong) UINavigationController *navigationController;
@@ -23,12 +25,20 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 	
-	BSRootViewController *rootViewController = [[BSRootViewController alloc] init];
-	_navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
-	[_navigationController setNavigationBarHidden:YES];	
-	[_window setRootViewController:_navigationController];
+	//Initialize User on application start
+	[BSUser currentUser];
 	
-    self.window.backgroundColor = [UIColor whiteColor];
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		
+		BSRootViewController *rootViewController = [[BSRootViewController alloc] init];
+		
+		_navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+		[_navigationController setNavigationBarHidden:YES];
+		[_window setRootViewController:_navigationController];
+		
+	});
+	
+    self.window.backgroundColor = [UIColor blackColor];
     [self.window makeKeyAndVisible];
     return YES;
 }

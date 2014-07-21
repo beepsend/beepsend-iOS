@@ -8,7 +8,8 @@
 
 #import "BSAPContact.h"
 
-#import "BSContactModel.h"
+#import "BSContact.h"
+#import "BSGroup.h"
 
 @implementation BSAPContact
 
@@ -16,7 +17,7 @@
 
 - (id)convertToModel
 {
-	return [[BSContactModel alloc] initContactWithID:_id firstName:_firstname lastName:_lastname phoneNumber:_msisdn groupID:_group_id groupName:_group_name errors:_errors];
+	return [[BSContact alloc] initContactWithID:_id firstName:_firstname lastName:_lastname phoneNumber:_msisdn group:[[BSGroup alloc] initGroupWithID:_group_id name:_group_name contacts:nil] errors:_errors];
 }
 
 #pragma mark - Public methods
@@ -30,7 +31,7 @@
 	return [NSArray arrayWithArray:results];
 }
 
-+ (BSAPContact *)contactFromContactModel:(BSContactModel *)contactModel
++ (BSAPContact *)contactFromContactModel:(BSContact *)contactModel
 {
 	BSAPContact *contact = [[BSAPContact alloc] init];
 	
@@ -38,12 +39,12 @@
 		return contact;
 	}
 	
-	contact.id = [contactModel.objectID isEqualToString:@"0"] ? nil : contactModel.objectID;
+	contact.id = [contactModel.contactID isEqualToString:@"0"] ? nil : contactModel.contactID;
 	contact.firstname = contactModel.firstName;
 	contact.lastname = contactModel.lastName;
 	contact.msisdn = contactModel.phoneNumber;
-	contact.group_id = contactModel.groupID;
-	contact.group_name = contactModel.groupName;
+	contact.group_id = contactModel.group.groupID;
+	contact.group_name = contactModel.group.name;
 	contact.errors = contactModel.errors;
 	
 	return contact;

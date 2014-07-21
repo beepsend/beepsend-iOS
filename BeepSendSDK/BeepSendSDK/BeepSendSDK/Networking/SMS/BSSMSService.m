@@ -15,8 +15,9 @@
 #import "BSAPBatch.h"
 #import "BSAPSMSLookup.h"
 #import "BSAPEstimatedCost.h"
+#import "BSConnection.h"
 
-#import "BSGroupModel.h"
+#import "BSGroup.h"
 
 @implementation BSSMSService
 
@@ -34,7 +35,7 @@
 
 #pragma mark - Public methods
 
-- (void)sendMessage:(BSMessageRequestModel *)messageRequest usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block
+- (void)sendMessage:(BSMessage *)messageRequest usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block
 {
 	NSString *method;
 	if (messageRequest.groups) {
@@ -75,7 +76,7 @@
 				   }];
 }
 
-- (void)sendMessages:(NSArray *)messages usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *array, id error))block
+- (void)sendMessages:(NSArray *)messages usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *array, id error))block
 {
 	BOOL containGroups = NO;
 	NSMutableArray *parameters = [@[] mutableCopy];
@@ -123,15 +124,15 @@
 				   }];
 }
 
-- (void)lookupSMS:(BSMessageModel *)sms withCompletionBlock:(void(^)(BSLookupModel *lookupResponse, id error))block {
+- (void)lookupSMS:(BSMessage *)sms withCompletionBlock:(void(^)(BSLookup *lookupResponse, id error))block {
 	
-	[super executeGETForMethod:[BSAPIConfiguration smsLookupWithID:sms.objectID]
+	[super executeGETForMethod:[BSAPIConfiguration smsLookupWithID:sms.messageID]
 				withParameters:@{}
 				  onCompletion:^(id response, id error) {
 					  
 					  if (!error) {
 						  
-						  BSLookupModel *smslookup = [[BSAPSMSLookup classFromDict:response] convertToModel];
+						  BSLookup *smslookup = [[BSAPSMSLookup classFromDict:response] convertToModel];
 						  
 						  block(smslookup, error);
 					  }
@@ -142,10 +143,60 @@
 				  }];
 }
 
-- (void)validateSMSForMessage:(BSMessageRequestModel *)message withCompletionBlock:(void(^)(BSMessageModel *message, id error))block
+- (void)lookupMultipleSMSSentTo:(NSString *)recipient setnFrom:(NSString *)sender usingConnection:(BSConnection *)connection batch:(BSBatch *)batch sinceID:(NSString *)sinceID maxID:(NSString *)maxID afterDate:(NSDate *)afterDate beforeDate:(NSDate *)beforeDate count:(NSNumber *)count withCompletionBlock:(void(^)(NSArray *lookupResponse, id error))block
+{
+	NSMutableDictionary *parameters = [@{} mutableCopy];
+	if (recipient) {
+		[parameters setObject:recipient forKey:@"to"];
+	}
+	if (sender) {
+		[parameters setObject:sender forKey:@"from"];
+	}
+	if (connection && ![connection.objectID isEqualToString:@"0"]) {
+		[parameters setObject:connection.objectID forKey:@"connection_id"];
+	}
+	if (batch && ![batch.objectID isEqualToString:@"0"]) {
+		[parameters setObject:batch.objectID forKey:@"batch_id"];
+	}
+	if (sinceID) {
+		[parameters setObject:sinceID forKey:@"since_id"];
+	}
+	if (maxID) {
+		[parameters setObject:maxID forKey:@"max_id"];
+	}
+	if (count) {
+		[parameters setObject:count forKey:@"count"];
+	}
+	if (afterDate) {
+		[parameters setObject:[NSString stringWithFormat:@"%f", [afterDate timeIntervalSince1970]] forKey:@"after_date"];
+	}
+	if (beforeDate) {
+		[parameters setObject:[NSString stringWithFormat:@"%f", [beforeDate timeIntervalSince1970]] forKey:@"before_date"];
+	}
+	
+	[super executePOSTForMethod:[BSAPIConfiguration sms]
+				 withParameters:parameters
+				   onCompletion:^(id response, id error) {
+					   
+					   if (!error) {
+						   
+						   NSMutableArray *mArr = [@[] mutableCopy];
+						   for (BSAPSMSLookup *msg in [BSAPSMSLookup arrayOfObjectsFromArrayOfDictionaries:response]) {
+							   [mArr addObject:[msg convertToModel]];
+						   }
+						   block([NSArray arrayWithArray:mArr], error);
+					   }
+					   else {
+						   //TODO: Create error handling
+						   block(nil, response);
+					   }
+				   }];
+}
+
+- (void)validateSMSForMessage:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, id error))block
 {
 	NSDictionary *parameters = [[BSAPMessageRequest convertFromMessageRequestModel:message] dictFromClass];
-	BSLog(@"%@", parameters);
+	BSDLog(@"%@", parameters);
 	
 	[super executePOSTForMethod:[BSAPIConfiguration validateSMS]
 				 withParameters:parameters
@@ -183,7 +234,7 @@
 				  }];
 }
 
-- (void)getDetailsForBatch:(NSString *)batchID withCompletionBlock:(void(^)(BSBatchModel *batch, id error))block
+- (void)getDetailsForBatch:(NSString *)batchID withCompletionBlock:(void(^)(BSBatch *batch, id error))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration batchesForID:batchID]
 				withParameters:@{}
@@ -200,10 +251,10 @@
 				  }];
 }
 
-- (void)estimateCostForMessages:(NSArray *)messageRequest usingConnection:(BSConnectionModel *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block
+- (void)estimateCostForMessages:(NSArray *)messageRequest usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block
 {
 	NSMutableArray *mArr = [@[] mutableCopy];
-	for (BSMessageRequestModel *mrm in messageRequest) {
+	for (BSMessage *mrm in messageRequest) {
 		[mArr addObject:[[BSAPMessageRequest convertFromMessageRequestModel:mrm] dictFromClass]];
 	}
 	

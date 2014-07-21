@@ -11,7 +11,7 @@
 #import "BSAPCCallback.h"
 #import "BSAPWallet.h"
 
-@class BSConnectionModel;
+@class BSConnection;
 
 @interface BSAPConnection : BSSerializableObject
 
@@ -26,13 +26,14 @@
 @property (nonatomic, strong) NSNumber *type;
 @property (nonatomic, strong) NSArray *users;
 @property (nonatomic, strong) BSAPWallet *wallet;
-@property (nonatomic, strong) NSString *whitelist;
+@property (nonatomic, strong) NSArray *whitelist;
 
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *password;
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
 + (NSArray *)arrayOfModelsFromArrayOfObjects:(NSArray *)array;
 
-+ (BSAPConnection *)convertFromConnectionModel:(BSConnectionModel *)connectionModel;
++ (BSAPConnection *)convertFromConnectionModel:(BSConnection *)connectionModel;
 
 @end
