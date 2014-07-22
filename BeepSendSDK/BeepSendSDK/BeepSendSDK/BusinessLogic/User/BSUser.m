@@ -402,7 +402,7 @@
 	
 	[[BSContactsService sharedService] getAllContactsWithCompletionBlock:^(NSArray *contacts, id error) {
 			
-		if (!_contacts) {
+		if (!_contacts || _contacts.count!=contacts.count) {
 			block(contacts, error);
 		}
 		
@@ -450,7 +450,7 @@
 	
 	[[BSGroupsService sharedService] getAllGroupsWithCompletionBlock:^(NSArray *groups, id error) {
 		
-		if (!_groups) {
+		if (!_groups || _groups.count!=groups.count) {
 			block(groups, error);
 		}
 		

@@ -126,7 +126,7 @@
 		////////////////////////////////////////////////////////////////////////
 		//Button add to group
 		_buttonAddToGroup = [[UIButton alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, CGRectGetMaxY(_textFieldPhoneNumber.frame) + kSeparatorDefaultSpacing, frame.size.width - kViewDefaultBorderInset*2, kTextFieldDefaultHeight)];
-		_buttonAddToGroup.titleLabel.font = [UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultTextSize/1.8];
+		_buttonAddToGroup.titleLabel.font = [UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultTextSize];
 		_buttonAddToGroup.titleLabel.textAlignment = NSTextAlignmentCenter;
 		_buttonAddToGroup.backgroundColor = [UIColor lightGrayColor];
 		_buttonAddToGroup.showsTouchWhenHighlighted = YES;

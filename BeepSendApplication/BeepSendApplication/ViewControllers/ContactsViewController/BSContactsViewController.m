@@ -15,6 +15,7 @@
 
 #import "BSUser.h"
 #import "BSContact.h"
+#import "BSGroup.h"
 #import "BSConnection.h"
 
 @interface BSContactsViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
@@ -22,7 +23,7 @@
 @property (nonatomic, strong) BSContact *selectedContact;
 
 @property (nonatomic, strong) NSArray *dataSourceContacts;
-@property (nonatomic, strong) NSArray *dataSourceGroups;
+@property (nonatomic, strong) NSDictionary *dataSourceGroups;
 
 @property (nonatomic, weak) UITableView *tableViewContacts;
 
@@ -74,11 +75,13 @@
     // Do any additional setup after loading the view.
 	
 	[[BSUser currentUser] getAllGroupsOnCompletion:^(NSArray *groups, id error) {
+
+		NSMutableDictionary *mDict = [@{} mutableCopy];
+		for (BSGroup *g in groups) {
+			[mDict setObject:g forKey:g.groupID];
+		}
+		_dataSourceGroups = [NSDictionary dictionaryWithDictionary:mDict];
 		
-	}];
-	
-	[[BSUser currentUser] getAllContactsOnCompletion:^(NSArray *contacts, id error) {
-		_dataSourceContacts = contacts;
 		[_tableViewContacts reloadData];
 	}];
 	
@@ -96,6 +99,11 @@
 	[super viewDidAppear:animated];
 	
 	[_tableViewContacts deselectRowAtIndexPath:[_tableViewContacts indexPathForSelectedRow] animated:YES];
+	
+	[[BSUser currentUser] getAllContactsOnCompletion:^(NSArray *contacts, id error) {
+		_dataSourceContacts = contacts;
+		[_tableViewContacts reloadData];
+	}];
 }
 
 #pragma mark - Private methods
@@ -134,12 +142,13 @@
 	static NSString *CellIdentifier = @"ContactCell";
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 	if (!cell) {
-		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+		cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
 		[cell.textLabel setFont:[UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultTextSize]];
 	}
 	
 	BSContact *contact = _dataSourceContacts[indexPath.row];
-	cell.textLabel.text = [NSString stringWithFormat:@"%@, %@\t%@", contact.lastName, contact.firstName, contact.phoneNumber];
+	cell.textLabel.text = [NSString stringWithFormat:@"%@, %@ - %@", contact.lastName, contact.firstName, contact.phoneNumber];
+	cell.detailTextLabel.text = contact.group ? _dataSourceGroups ? [_dataSourceGroups[contact.group.groupID] name] : contact.group.groupID : @"Ungrouped";
 	
 	return cell;
 }

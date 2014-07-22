@@ -10,7 +10,14 @@
 
 #import "BSAddNewContactView.h"
 
-@interface BSAddNewContactViewController () <UITextFieldDelegate>
+#import "BSGroupSelectionViewController.h"
+
+#import "BSGroup.h"
+#import "BSContact.h"
+
+@interface BSAddNewContactViewController () <UITextFieldDelegate, BSGroupSelectionDelegate>
+
+@property (nonatomic, strong) BSGroup *selectedGroup;
 
 @property (nonatomic, weak) UIScrollView *scrollViewContainer;
 
@@ -112,7 +119,14 @@
 
 - (void)buttonAddToGroupClicked:(UIButton *)sender
 {
+	_selectedGroup = nil;
+	[_buttonAddToGroup setTitle:NSLocalizedString(@"Add to group", @"") forState:UIControlStateNormal];
 	
+	BSGroupSelectionViewController *groupselectionVC = [[BSGroupSelectionViewController alloc] init];
+	groupselectionVC.delegate = self;
+	[self presentViewController:groupselectionVC animated:YES completion:^{
+		
+	}];
 }
 
 - (void)buttonCancelClicked:(UIButton *)sender
@@ -126,7 +140,12 @@
 		return; // You need to enter phone number
 	}
 	
-	[self.navigationController popViewControllerAnimated:YES];
+	BSContact *contact = [[BSContact alloc] initContactWithPhoneNumber:_textFieldPhoneNumber.text
+															 firstName:_textFieldFirstName.text
+															  lastName:_textFieldLastName.text
+																 group:_selectedGroup];
+	[contact saveContact];
+	
 }
 
 - (void)buttonDoneClicked:(UIButton *)sender
@@ -140,6 +159,15 @@
 	else if ([_textFieldPhoneNumber isFirstResponder]) {
 		[_textFieldPhoneNumber resignFirstResponder];
 	}
+}
+
+#pragma mark - BSGroupSelection delegate
+
+-(void)groupSelectionViewController:(BSGroupSelectionViewController *)groupSelectionVC didSelectGroup:(BSGroup *)group
+{
+	_selectedGroup = group;
+	
+	[_buttonAddToGroup setTitle:[NSString stringWithFormat:NSLocalizedString(@"Add to group (%@)", @""), _selectedGroup.name] forState:UIControlStateNormal];
 }
 
 @end

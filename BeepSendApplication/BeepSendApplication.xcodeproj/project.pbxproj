@@ -31,7 +31,6 @@
 		6EB741E3197E509D00D3A7DA /* BSContactsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB741E2197E509D00D3A7DA /* BSContactsView.m */; };
 		6EB741E7197E516100D3A7DA /* BSAddNewContactView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB741E6197E516100D3A7DA /* BSAddNewContactView.m */; };
 		6EB741EC197E519A00D3A7DA /* BSAddNewContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB741EB197E519A00D3A7DA /* BSAddNewContactViewController.m */; };
-		6EB741F0197E797E00D3A7DA /* BSGroupSelectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB741EF197E797E00D3A7DA /* BSGroupSelectionView.m */; };
 		6EB741F4197E79AB00D3A7DA /* BSGroupSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB741F3197E79AB00D3A7DA /* BSGroupSelectionViewController.m */; };
 		6EB871EB19700C9D0006CE29 /* BSUserTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB871EA19700C9D0006CE29 /* BSUserTypeTableViewCell.m */; };
 		6EB871EE19700CC20006CE29 /* BSConnectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB871ED19700CC20006CE29 /* BSConnectionTableViewCell.m */; };
@@ -115,8 +114,6 @@
 		6EB741E6197E516100D3A7DA /* BSAddNewContactView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAddNewContactView.m; path = Views/AddNewContactView/BSAddNewContactView.m; sourceTree = "<group>"; };
 		6EB741EA197E519A00D3A7DA /* BSAddNewContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAddNewContactViewController.h; path = ViewControllers/AddNewContactViewController/BSAddNewContactViewController.h; sourceTree = "<group>"; };
 		6EB741EB197E519A00D3A7DA /* BSAddNewContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAddNewContactViewController.m; path = ViewControllers/AddNewContactViewController/BSAddNewContactViewController.m; sourceTree = "<group>"; };
-		6EB741EE197E797E00D3A7DA /* BSGroupSelectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSGroupSelectionView.h; path = Views/GroupSelectionView/BSGroupSelectionView.h; sourceTree = "<group>"; };
-		6EB741EF197E797E00D3A7DA /* BSGroupSelectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSGroupSelectionView.m; path = Views/GroupSelectionView/BSGroupSelectionView.m; sourceTree = "<group>"; };
 		6EB741F2197E79AB00D3A7DA /* BSGroupSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSGroupSelectionViewController.h; path = ViewControllers/GroupSelectionViewController/BSGroupSelectionViewController.h; sourceTree = "<group>"; };
 		6EB741F3197E79AB00D3A7DA /* BSGroupSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSGroupSelectionViewController.m; path = ViewControllers/GroupSelectionViewController/BSGroupSelectionViewController.m; sourceTree = "<group>"; };
 		6EB871E919700C9D0006CE29 /* BSUserTypeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSUserTypeTableViewCell.h; path = TableViewCells/TableViewCellUserType/BSUserTypeTableViewCell.h; sourceTree = "<group>"; };
@@ -290,7 +287,6 @@
 				6EBD2F52196D450000F89C52 /* SendMessageView */,
 				6EB741E0197E507700D3A7DA /* ContactsView */,
 				6EB741E4197E513900D3A7DA /* AddNewContactView */,
-				6EB741ED197E794C00D3A7DA /* GroupSelectionView */,
 				6EB6447F1948A3BA004A1818 /* Components */,
 			);
 			name = Views;
@@ -394,15 +390,6 @@
 				6EB741EB197E519A00D3A7DA /* BSAddNewContactViewController.m */,
 			);
 			name = AddNewContactViewController;
-			sourceTree = "<group>";
-		};
-		6EB741ED197E794C00D3A7DA /* GroupSelectionView */ = {
-			isa = PBXGroup;
-			children = (
-				6EB741EE197E797E00D3A7DA /* BSGroupSelectionView.h */,
-				6EB741EF197E797E00D3A7DA /* BSGroupSelectionView.m */,
-			);
-			name = GroupSelectionView;
 			sourceTree = "<group>";
 		};
 		6EB741F1197E798300D3A7DA /* GroupSelectionViewController */ = {
@@ -619,7 +606,6 @@
 				01A0DA901977DED600D12300 /* BSCustomerView.m in Sources */,
 				6EBD2F56196D453400F89C52 /* BSSendMessageView.m in Sources */,
 				6EB6446D19488E17004A1818 /* BSRootView.m in Sources */,
-				6EB741F0197E797E00D3A7DA /* BSGroupSelectionView.m in Sources */,
 				6EC74F8919750DCC007A0356 /* BSUserDetailsViewController.m in Sources */,
 				6EC74F8D19750E08007A0356 /* BSUserDetailsView.m in Sources */,
 				6EB644741948965B004A1818 /* Helper.m in Sources */,

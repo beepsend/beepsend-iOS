@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class BSGroupSelectionViewController;
+@class BSGroup;
+
+@protocol BSGroupSelectionDelegate <NSObject>
+
+- (void)groupSelectionViewController:(BSGroupSelectionViewController *)groupSelectionVC didSelectGroup:(BSGroup *)group;
+
+@end
+
 @interface BSGroupSelectionViewController : UIViewController
+
+@property (nonatomic, assign) id<BSGroupSelectionDelegate> delegate;
 
 @end
