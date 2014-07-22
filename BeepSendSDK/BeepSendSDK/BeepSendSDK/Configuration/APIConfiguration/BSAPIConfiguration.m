@@ -178,7 +178,7 @@
 
 + (NSString *)validateHLR
 {
-	return @"/hlr/validate";
+	return @"/hlr/validate/";
 }
 
 #pragma mark - Batches

@@ -24,6 +24,6 @@
 
 - (void)validateHLRForNumber:(NSString *)number
 			  withConnection:(BSConnection *)connection
-		 withCompletionBlock:(void(^)(id response, id error))block;
+		 withCompletionBlock:(void(^)(BSHLR *response, id error))block;
 
 @end

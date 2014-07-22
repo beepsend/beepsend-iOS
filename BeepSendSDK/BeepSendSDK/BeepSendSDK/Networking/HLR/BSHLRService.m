@@ -11,6 +11,7 @@
 #import "BSAPIConfiguration.h"
 
 #import "BSAPHLR.h"
+#import "BSAPHLRValidateResponse.h"
 
 @implementation BSHLRService
 
@@ -54,22 +55,22 @@
 
 - (void)validateHLRForNumber:(NSString *)number
 			  withConnection:(BSConnection *)connection
-		 withCompletionBlock:(void(^)(id response, id error))block
+		 withCompletionBlock:(void(^)(BSHLR *response, id error))block
 {
 	NSString *method = [BSAPIConfiguration validateHLR];
 	
 	NSDictionary *params = connection ? @{ @"msisdn" : number , @"connection" : connection.objectID } : @{ @"msisdn" : number };
 	
-	NSDictionary *header = [BSAPIConfiguration authorizationHeaderForToken:connection.apiToken];
+//	NSDictionary *header = [BSAPIConfiguration authorizationHeaderForToken:connection.apiToken];
 	
 	[super executePOSTForMethod:method
 				 withParameters:params
-						headers:header
+						//headers:header
 				  onCompletion:^(id response, id error) {
 					  
 					  if (!error) {
 						  
-						  block(response, error);
+						  block([[BSAPHLRValidateResponse classFromDict:response] convertToModel], error);
 					  }
 					  else {
 						  //TODO: Create error handling

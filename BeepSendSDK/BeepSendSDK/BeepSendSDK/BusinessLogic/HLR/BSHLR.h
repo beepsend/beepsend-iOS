@@ -22,6 +22,10 @@
 @property (nonatomic, strong, readonly) NSNumber *roaming;//true if the number is roaming, false if not.
 @property (nonatomic, strong, readonly) BSMCCMNC *prefix;
 
+//Response params
+@property (nonatomic, strong, readonly) NSString *phoneNumber;
+@property (nonatomic, strong, readonly) NSArray *errors;
+
 - (BSHLR *)initHLRWithID:(NSString *)hlrID
 			   timestamp:(BSTimestamps *)hlrTimestamp
 			   dlrReport:(BSDLRReport *)hlrDlrReport
@@ -30,5 +34,7 @@
 				  prefix:(BSMCCMNC *)hlrPrefix
 				  potred:(NSNumber *)isPorted
 			   inRoaming:(NSNumber *)isInRoaming;
+
+- (BSHLR *)initHLRWithNumber:(NSString *)phoneNumber andErrors:(NSArray *)errors;
 
 @end

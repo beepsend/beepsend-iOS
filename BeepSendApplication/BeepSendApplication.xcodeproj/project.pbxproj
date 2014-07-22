@@ -27,6 +27,10 @@
 		6EB644741948965B004A1818 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB644731948965B004A1818 /* Helper.m */; };
 		6EB644831948A597004A1818 /* BSInputAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB644821948A597004A1818 /* BSInputAccessoryView.m */; };
 		6EB6853619498BD20010FC73 /* BSTextFieldCustomTextInset.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6853519498BD20010FC73 /* BSTextFieldCustomTextInset.m */; };
+		6EB741DF197E502700D3A7DA /* BSContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB741DE197E502700D3A7DA /* BSContactsViewController.m */; };
+		6EB741E3197E509D00D3A7DA /* BSContactsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB741E2197E509D00D3A7DA /* BSContactsView.m */; };
+		6EB741E7197E516100D3A7DA /* BSAddNewContactView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB741E6197E516100D3A7DA /* BSAddNewContactView.m */; };
+		6EB741EC197E519A00D3A7DA /* BSAddNewContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB741EB197E519A00D3A7DA /* BSAddNewContactViewController.m */; };
 		6EB871EB19700C9D0006CE29 /* BSUserTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB871EA19700C9D0006CE29 /* BSUserTypeTableViewCell.m */; };
 		6EB871EE19700CC20006CE29 /* BSConnectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB871ED19700CC20006CE29 /* BSConnectionTableViewCell.m */; };
 		6EBC77DD194EE9BF00666099 /* libBeepSendSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBC77DA194EE98100666099 /* libBeepSendSDK.a */; };
@@ -101,6 +105,14 @@
 		6EB6853419498BD20010FC73 /* BSTextFieldCustomTextInset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTextFieldCustomTextInset.h; sourceTree = "<group>"; };
 		6EB6853519498BD20010FC73 /* BSTextFieldCustomTextInset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSTextFieldCustomTextInset.m; sourceTree = "<group>"; };
 		6EB6853C19498F520010FC73 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Utilities/Helper/Constants/Constants.h; sourceTree = "<group>"; };
+		6EB741DD197E502700D3A7DA /* BSContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSContactsViewController.h; sourceTree = "<group>"; };
+		6EB741DE197E502700D3A7DA /* BSContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSContactsViewController.m; sourceTree = "<group>"; };
+		6EB741E1197E509D00D3A7DA /* BSContactsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSContactsView.h; path = Views/ContactsView/BSContactsView.h; sourceTree = "<group>"; };
+		6EB741E2197E509D00D3A7DA /* BSContactsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSContactsView.m; path = Views/ContactsView/BSContactsView.m; sourceTree = "<group>"; };
+		6EB741E5197E516100D3A7DA /* BSAddNewContactView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAddNewContactView.h; path = Views/AddNewContactView/BSAddNewContactView.h; sourceTree = "<group>"; };
+		6EB741E6197E516100D3A7DA /* BSAddNewContactView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAddNewContactView.m; path = Views/AddNewContactView/BSAddNewContactView.m; sourceTree = "<group>"; };
+		6EB741EA197E519A00D3A7DA /* BSAddNewContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAddNewContactViewController.h; path = ViewControllers/AddNewContactViewController/BSAddNewContactViewController.h; sourceTree = "<group>"; };
+		6EB741EB197E519A00D3A7DA /* BSAddNewContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAddNewContactViewController.m; path = ViewControllers/AddNewContactViewController/BSAddNewContactViewController.m; sourceTree = "<group>"; };
 		6EB871E919700C9D0006CE29 /* BSUserTypeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSUserTypeTableViewCell.h; path = TableViewCells/TableViewCellUserType/BSUserTypeTableViewCell.h; sourceTree = "<group>"; };
 		6EB871EA19700C9D0006CE29 /* BSUserTypeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSUserTypeTableViewCell.m; path = TableViewCells/TableViewCellUserType/BSUserTypeTableViewCell.m; sourceTree = "<group>"; };
 		6EB871EC19700CC20006CE29 /* BSConnectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSConnectionTableViewCell.h; path = TableViewCells/TableViewCellConnection/BSConnectionTableViewCell.h; sourceTree = "<group>"; };
@@ -247,6 +259,8 @@
 				6EC74F8619750DCC007A0356 /* UserDetailsViewController */,
 				01A0DA8A1977DE9900D12300 /* CustomerViewController */,
 				6EBD2F57196D45C500F89C52 /* SendMessageCiewController */,
+				6EB741DC197E502700D3A7DA /* ContactsViewController */,
+				6EB741E8197E516700D3A7DA /* AddNewContactViewController */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -267,6 +281,8 @@
 				6EC74F8A19750DD5007A0356 /* UserDetailsView */,
 				01A0DA841977DE3200D12300 /* CustomerView */,
 				6EBD2F52196D450000F89C52 /* SendMessageView */,
+				6EB741E0197E507700D3A7DA /* ContactsView */,
+				6EB741E4197E513900D3A7DA /* AddNewContactView */,
 				6EB6447F1948A3BA004A1818 /* Components */,
 			);
 			name = Views;
@@ -333,6 +349,43 @@
 				6EB6853C19498F520010FC73 /* Constants.h */,
 			);
 			name = Constants;
+			sourceTree = "<group>";
+		};
+		6EB741DC197E502700D3A7DA /* ContactsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6EB741DD197E502700D3A7DA /* BSContactsViewController.h */,
+				6EB741DE197E502700D3A7DA /* BSContactsViewController.m */,
+			);
+			name = ContactsViewController;
+			path = ViewControllers/ContactsViewController;
+			sourceTree = "<group>";
+		};
+		6EB741E0197E507700D3A7DA /* ContactsView */ = {
+			isa = PBXGroup;
+			children = (
+				6EB741E1197E509D00D3A7DA /* BSContactsView.h */,
+				6EB741E2197E509D00D3A7DA /* BSContactsView.m */,
+			);
+			name = ContactsView;
+			sourceTree = "<group>";
+		};
+		6EB741E4197E513900D3A7DA /* AddNewContactView */ = {
+			isa = PBXGroup;
+			children = (
+				6EB741E5197E516100D3A7DA /* BSAddNewContactView.h */,
+				6EB741E6197E516100D3A7DA /* BSAddNewContactView.m */,
+			);
+			name = AddNewContactView;
+			sourceTree = "<group>";
+		};
+		6EB741E8197E516700D3A7DA /* AddNewContactViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6EB741EA197E519A00D3A7DA /* BSAddNewContactViewController.h */,
+				6EB741EB197E519A00D3A7DA /* BSAddNewContactViewController.m */,
+			);
+			name = AddNewContactViewController;
 			sourceTree = "<group>";
 		};
 		6EB871E519700C410006CE29 /* TableViewCells */ = {
@@ -531,10 +584,12 @@
 				6EB6853619498BD20010FC73 /* BSTextFieldCustomTextInset.m in Sources */,
 				6EB6446A19488C8C004A1818 /* BSRootViewController.m in Sources */,
 				6E6537E919472BD700FC6349 /* main.m in Sources */,
+				6EB741DF197E502700D3A7DA /* BSContactsViewController.m in Sources */,
 				6EB871EB19700C9D0006CE29 /* BSUserTypeTableViewCell.m in Sources */,
 				6EB871EE19700CC20006CE29 /* BSConnectionTableViewCell.m in Sources */,
 				6EB644831948A597004A1818 /* BSInputAccessoryView.m in Sources */,
 				6E6537ED19472BD700FC6349 /* BSAppDelegate.m in Sources */,
+				6EB741E3197E509D00D3A7DA /* BSContactsView.m in Sources */,
 				01A0DA901977DED600D12300 /* BSCustomerView.m in Sources */,
 				6EBD2F56196D453400F89C52 /* BSSendMessageView.m in Sources */,
 				6EB6446D19488E17004A1818 /* BSRootView.m in Sources */,
@@ -543,6 +598,8 @@
 				6EB644741948965B004A1818 /* Helper.m in Sources */,
 				6EBD2F5A196D45FB00F89C52 /* BSSendMessageViewController.m in Sources */,
 				01A0DA8D1977DE9900D12300 /* BSCustomerViewController.m in Sources */,
+				6EB741EC197E519A00D3A7DA /* BSAddNewContactViewController.m in Sources */,
+				6EB741E7197E516100D3A7DA /* BSAddNewContactView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

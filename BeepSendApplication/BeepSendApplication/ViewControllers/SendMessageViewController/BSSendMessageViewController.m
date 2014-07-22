@@ -216,10 +216,14 @@
 		[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning!", @"") message:NSLocalizedString(@"You must enter number to perform HLR request.", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
 		return; //Enter number to perform hlr
 	}
-	
-	[_connection immediateHLRForNumber:_textFieldTo.text onCompletion:^(BSHLR *hlr, id error) {
-		//TODO: show result
+
+	[_connection validateHLRForNumber:_textFieldTo.text onCompletion:^(BSHLR *hlr, id error) {
+		
 	}];
+	
+//	[_connection immediateHLRForNumber:_textFieldTo.text onCompletion:^(BSHLR *hlr, id error) {
+//		//TODO: show result
+//	}];
 	
 }
 

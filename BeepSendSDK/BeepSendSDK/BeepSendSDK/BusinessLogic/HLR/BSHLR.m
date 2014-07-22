@@ -22,6 +22,9 @@
 @property (nonatomic, strong, readwrite) NSNumber *roaming;//true if the number is roaming, false if not.
 @property (nonatomic, strong, readwrite) BSMCCMNC *prefix;
 
+@property (nonatomic, strong, readwrite) NSString *phoneNumber;
+@property (nonatomic, strong, readwrite) NSArray *errors;
+
 @end
 
 @implementation BSHLR
@@ -41,6 +44,16 @@
 - (NSNumber *)roaming
 {
 	return _roaming ? _roaming : @NO;
+}
+
+- (NSString *)phoneNumber
+{
+	return [BSHelper isNilOrEmpty:_phoneNumber] ? @"" : _phoneNumber;
+}
+
+- (NSArray *)errors
+{
+	return _errors ? _errors : @[];
 }
 
 #pragma mark - Initialization
@@ -70,6 +83,15 @@
 		_prefix = hlrPrefix;
 		_ported = isPorted;
 		_roaming = isInRoaming;
+	}
+	return self;
+}
+
+- (BSHLR *)initHLRWithNumber:(NSString *)phoneNumber andErrors:(NSArray *)errors
+{
+	if (self = [super initWithID:@"0" andTitle:@"HLR"]) {
+		_phoneNumber = phoneNumber;
+		_errors = errors;
 	}
 	return self;
 }

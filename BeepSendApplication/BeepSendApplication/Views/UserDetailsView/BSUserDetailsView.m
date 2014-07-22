@@ -169,7 +169,7 @@
 		
 		[_scrollViewContainer addSubview:_buttonCustomer];
 		
-		_buttonDefaultConnection = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(_buttonCustomer.frame), CGRectGetMaxY(_buttonCustomer.frame) + kSeparatorDefaultSpacing, CGRectGetWidth(_buttonCustomer.frame), CGRectGetHeight(_buttonCustomer.frame))];
+		_buttonDefaultConnection = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(_buttonCustomer.frame), CGRectGetMaxY(_buttonCustomer.frame) + 2*kSeparatorDefaultSpacing, CGRectGetWidth(_buttonCustomer.frame), CGRectGetHeight(_buttonCustomer.frame))];
 		
 		_buttonDefaultConnection.backgroundColor = [UIColor lightGrayColor];
 		_buttonDefaultConnection.showsTouchWhenHighlighted = YES;

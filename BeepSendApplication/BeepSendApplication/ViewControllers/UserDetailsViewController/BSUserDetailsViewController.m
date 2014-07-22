@@ -171,7 +171,7 @@
 	[_buttonCustomer setTitle:u.customerName forState:UIControlStateNormal];
 	[_buttonDefaultConnection setTitle:u.defaultConnection.label forState:UIControlStateNormal];
 	
-	[_buttonContacts setTitle:@"+" forState:UIControlStateNormal];
+	[_buttonContacts setTitle:@"Contacts" forState:UIControlStateNormal];
 }
 
 - (void)keyboardBecameActive:(NSNotification *)notification

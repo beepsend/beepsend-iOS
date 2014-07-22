@@ -83,6 +83,7 @@
 		6EB6855E1949ED8B0010FC73 /* BSAFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685531949ED8B0010FC73 /* BSAFURLRequestSerialization.m */; };
 		6EB6855F1949ED8B0010FC73 /* BSAFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685551949ED8B0010FC73 /* BSAFURLResponseSerialization.m */; };
 		6EB685601949ED8B0010FC73 /* BSAFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB685571949ED8B0010FC73 /* BSAFURLSessionManager.m */; };
+		6EB741D6197E48EF00D3A7DA /* BSAPHLRValidateResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB741D5197E48EF00D3A7DA /* BSAPHLRValidateResponse.m */; };
 		6EB7619A196E7F2C00953308 /* BSWallet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB76199196E7F2C00953308 /* BSWallet.m */; };
 		6EB7619B196E7F4400953308 /* BSWallet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB76199196E7F2C00953308 /* BSWallet.m */; };
 		6EB761AE196E8C7F00953308 /* BSEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB761A7196E8C7F00953308 /* BSEmail.m */; };
@@ -315,6 +316,8 @@
 		6EB685551949ED8B0010FC73 /* BSAFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAFURLResponseSerialization.m; sourceTree = "<group>"; };
 		6EB685561949ED8B0010FC73 /* BSAFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAFURLSessionManager.h; sourceTree = "<group>"; };
 		6EB685571949ED8B0010FC73 /* BSAFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAFURLSessionManager.m; sourceTree = "<group>"; };
+		6EB741D4197E48EF00D3A7DA /* BSAPHLRValidateResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSAPHLRValidateResponse.h; path = Models/AutomatedParsing/APHLRValidateResponse/BSAPHLRValidateResponse.h; sourceTree = "<group>"; };
+		6EB741D5197E48EF00D3A7DA /* BSAPHLRValidateResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPHLRValidateResponse.m; path = Models/AutomatedParsing/APHLRValidateResponse/BSAPHLRValidateResponse.m; sourceTree = "<group>"; };
 		6EB76198196E7F2C00953308 /* BSWallet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSWallet.h; sourceTree = "<group>"; };
 		6EB76199196E7F2C00953308 /* BSWallet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSWallet.m; sourceTree = "<group>"; };
 		6EB761A6196E8C7F00953308 /* BSEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSEmail.h; sourceTree = "<group>"; };
@@ -814,6 +817,15 @@
 			path = BSAFNetworking;
 			sourceTree = "<group>";
 		};
+		6EB741D3197E487500D3A7DA /* APHLRValidateResponse */ = {
+			isa = PBXGroup;
+			children = (
+				6EB741D4197E48EF00D3A7DA /* BSAPHLRValidateResponse.h */,
+				6EB741D5197E48EF00D3A7DA /* BSAPHLRValidateResponse.m */,
+			);
+			name = APHLRValidateResponse;
+			sourceTree = "<group>";
+		};
 		6EB76197196E7F2C00953308 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
@@ -939,6 +951,7 @@
 		6EB96ED61951902C00AD77E2 /* AutomatedParsing */ = {
 			isa = PBXGroup;
 			children = (
+				6EB741D3197E487500D3A7DA /* APHLRValidateResponse */,
 				6EB871E0196FBF2B0006CE29 /* APWalletRequest */,
 				6E76F606196EDA4A004CBE46 /* APGroupsRequest */,
 				6E9ABC37196AD48F00874D81 /* APContactsRequest */,
@@ -1625,6 +1638,7 @@
 				6ED59E84196D7A0700A271ED /* BSPricelist.m in Sources */,
 				6EBADD17196BE48B00315EA4 /* BSTestSemaphor.m in Sources */,
 				6EC7E5B619653CA4008486E6 /* BSAPNetworkDetailsResponse.m in Sources */,
+				6EB741D6197E48EF00D3A7DA /* BSAPHLRValidateResponse.m in Sources */,
 				6E42E57A195B091B00343B2E /* BSContactsService.m in Sources */,
 				6EB877AB195310D10070B749 /* BSAPConnection.m in Sources */,
 				6EB877B31953113C0070B749 /* BSAPCCallback.m in Sources */,

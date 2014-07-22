@@ -528,9 +528,9 @@
 		return; //This connection can't send HLR
 	}
 	
-	[[BSHLRService sharedService] validateHLRForNumber:phoneNumber withConnection:self withCompletionBlock:^(id response, id error) {
+	[[BSHLRService sharedService] validateHLRForNumber:phoneNumber withConnection:self withCompletionBlock:^(BSHLR *response, id error) {
 		
-		
+		black(response, error);
 	}];
 }
 
