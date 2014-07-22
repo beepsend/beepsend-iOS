@@ -15,10 +15,12 @@
 #import "BSConnection.h"
 #import "BSMessage.h"
 #import "BSWallet.h"
+#import "BSContact.h"
 
 @interface BSSendMessageViewController () <UITextFieldDelegate>
 
 @property (nonatomic, strong) BSConnection *connection;
+@property (nonatomic, strong) BSContact *contact;
 
 @property (nonatomic, weak) UIScrollView *scrollView;
 
@@ -66,6 +68,18 @@
         // Custom initialization
 		
 		_connection = connection;
+    }
+    return self;
+}
+
+- (BSSendMessageViewController *)initWithConnection:(BSConnection *)connection forContact:(BSContact *)contact
+{
+	self = [super init];
+    if (self) {
+        // Custom initialization
+		
+		_connection = connection;
+		_contact = contact;
     }
     return self;
 }
@@ -129,6 +143,9 @@
 		_textFieldTo.placeholder = NSLocalizedString(@"Enter number to perform HLR", @"");
 	}
 	
+	if (_contact) {
+		_textFieldTo.text = _contact.phoneNumber;
+	}
 }
 
 - (void)didReceiveMemoryWarning
@@ -275,6 +292,10 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+	if ([textField isEqual:_textFieldTo] && _contact) {
+		return NO;
+	}
+	
 	if ([textField isEqual:_textViewMessageBox]) {
 		[_buttonDone setTitle:NSLocalizedString(@"Send", @"") forState:UIControlStateNormal];
 	}

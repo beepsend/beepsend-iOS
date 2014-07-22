@@ -10,4 +10,9 @@
 
 @interface BSContactsView : UIView
 
+@property (nonatomic, strong) UIButton *buttonAddContact;
+@property (nonatomic, strong) UIButton *buttonBack;
+
+@property (nonatomic, strong) UITableView *tableViewContacts;
+
 @end

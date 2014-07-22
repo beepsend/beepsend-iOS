@@ -144,10 +144,11 @@
 		_buttonBack.backgroundColor = [UIColor lightGrayColor];
 		_buttonBack.showsTouchWhenHighlighted = YES;
 		_buttonBack.clipsToBounds = YES;
+		_buttonBack.titleLabel.font = [UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultTextSize];
+		_buttonBack.titleLabel.textAlignment = NSTextAlignmentCenter;
 		[_buttonBack setTitle:NSLocalizedString(@"Back", @"") forState:UIControlStateNormal];
 		[_buttonBack setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 		[_buttonBack setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
-		_buttonBack.titleLabel.font = [UIFont boldSystemFontOfSize:14.0];
 		
 		_buttonBack.layer.cornerRadius = _textFieldTo.layer.cornerRadius;
 		_buttonBack.layer.borderWidth = kDefaultBorderWidth;

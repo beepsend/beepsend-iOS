@@ -137,7 +137,7 @@
 		
 		////////////////////////////////////////////////////////////////////////
 		//User types table view
-		_tableViewUserTypes = [[UITableView alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, CGRectGetMaxY(_labelPhone.frame) + kSeparatorDefaultSpacing, frame.size.width/2 - 2*kViewDefaultBorderInset, 2.0*kDefaultTableViewCellHeight)];
+		_tableViewUserTypes = [[UITableView alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, CGRectGetMaxY(_labelPhone.frame) + kSeparatorDefaultSpacing, frame.size.width/2 - 3*kViewDefaultBorderInset, 2.0*kDefaultTableViewCellHeight)];
 		[_tableViewUserTypes setBackgroundColor:[UIColor whiteColor]];
 		[_tableViewUserTypes setSeparatorColor:[UIColor darkGrayColor]];
 		[_tableViewUserTypes setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -154,7 +154,7 @@
 		
 		////////////////////////////////////////////////////////////////////////
 		//Buttons customer and default connection
-		_buttonCustomer = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_tableViewUserTypes.frame) + kSeparatorDefaultSpacing, CGRectGetMinY(_tableViewUserTypes.frame), CGRectGetWidth(_tableViewUserTypes.frame) - 20, CGRectGetHeight(_tableViewUserTypes.frame)/2.0 - kSeparatorDefaultSpacing)];
+		_buttonCustomer = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_tableViewUserTypes.frame) + kSeparatorDefaultSpacing, CGRectGetMinY(_tableViewUserTypes.frame), CGRectGetWidth(_tableViewUserTypes.frame), CGRectGetHeight(_tableViewUserTypes.frame)/2.0 - kSeparatorDefaultSpacing)];
 		
 		_buttonCustomer.backgroundColor = [UIColor lightGrayColor];
 		_buttonCustomer.showsTouchWhenHighlighted = YES;

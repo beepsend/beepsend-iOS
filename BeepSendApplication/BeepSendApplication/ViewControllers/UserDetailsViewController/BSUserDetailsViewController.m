@@ -15,6 +15,7 @@
 
 #import "BSCustomerViewController.h"
 #import "BSSendMessageViewController.h"
+#import "BSContactsViewController.h"
 
 #import "BSUser.h"
 #import "BSConnection.h"
@@ -154,6 +155,13 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	
+	[_tableViewConnections deselectRowAtIndexPath:[_tableViewConnections indexPathForSelectedRow] animated:animated];
+}
+
 #pragma mark - Private methods
 
 - (void)setupViewElements
@@ -223,7 +231,8 @@
 
 - (void)buttonContactsClicked:(UIButton *)sender
 {
-	//TODO: add contacts
+	BSContactsViewController *contactsVC = [[BSContactsViewController alloc] init];
+	[self.navigationController pushViewController:contactsVC animated:YES];
 }
 
 #pragma mark - UITableView data source
