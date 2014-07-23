@@ -35,4 +35,6 @@
 
 @property (nonatomic, strong) UITableView *tableViewConnections;
 
+@property (nonatomic, weak) UIButton *buttonDone;
+
 @end

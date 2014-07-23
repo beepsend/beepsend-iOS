@@ -8,6 +8,8 @@
 
 #import "BSUserDetailsView.h"
 
+#import "BSInputAccessoryView.h"
+
 @implementation BSUserDetailsView
 
 #pragma mark - Initialization
@@ -33,6 +35,11 @@
 		maskLayer.strokeColor = [[UIColor orangeColor] CGColor];
 		
 		[self.layer addSublayer:maskLayer];
+		
+		////////////////////////////////////////////////////////////////////////
+		//Setup textField input accessory view
+		BSInputAccessoryView *accessoryView = [BSInputAccessoryView inputAccessoryViewWithDoneButton];
+		_buttonDone = accessoryView.buttonDone;
 		
 		////////////////////////////////////////////////////////////////////////
 		//Scroll view
@@ -68,6 +75,7 @@
 																							NSFontAttributeName:[UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultPlaceholderSize]
 																							}];
 		
+		_textFieldName.inputAccessoryView = accessoryView;
 		
 		_textFieldName.layer.borderColor = [UIColor orangeColor].CGColor;
 		_textFieldName.layer.borderWidth = kDefaultBorderWidth;
@@ -98,6 +106,7 @@
 																							 NSFontAttributeName:[UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultPlaceholderSize]
 																							 }];
 		
+		_textFieldEmail.inputAccessoryView = accessoryView;
 		
 		_textFieldEmail.layer.borderColor = [UIColor orangeColor].CGColor;
 		_textFieldEmail.layer.borderWidth = kDefaultBorderWidth;
@@ -128,6 +137,7 @@
 																							 NSFontAttributeName:[UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultPlaceholderSize]
 																							 }];
 		
+		_textFieldPhone.inputAccessoryView = accessoryView;
 		
 		_textFieldPhone.layer.borderColor = [UIColor orangeColor].CGColor;
 		_textFieldPhone.layer.borderWidth = kDefaultBorderWidth;

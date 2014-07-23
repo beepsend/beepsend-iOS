@@ -27,6 +27,8 @@
 		6EB644741948965B004A1818 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB644731948965B004A1818 /* Helper.m */; };
 		6EB644831948A597004A1818 /* BSInputAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB644821948A597004A1818 /* BSInputAccessoryView.m */; };
 		6EB6853619498BD20010FC73 /* BSTextFieldCustomTextInset.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6853519498BD20010FC73 /* BSTextFieldCustomTextInset.m */; };
+		6EB72BFA197F97D300C26000 /* BSHLRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB72BF9197F97D300C26000 /* BSHLRViewController.m */; };
+		6EB72BFE197F97F600C26000 /* BSHLRView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB72BFD197F97F600C26000 /* BSHLRView.m */; };
 		6EB741DF197E502700D3A7DA /* BSContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB741DE197E502700D3A7DA /* BSContactsViewController.m */; };
 		6EB741E3197E509D00D3A7DA /* BSContactsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB741E2197E509D00D3A7DA /* BSContactsView.m */; };
 		6EB741E7197E516100D3A7DA /* BSAddNewContactView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB741E6197E516100D3A7DA /* BSAddNewContactView.m */; };
@@ -106,6 +108,10 @@
 		6EB6853419498BD20010FC73 /* BSTextFieldCustomTextInset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTextFieldCustomTextInset.h; sourceTree = "<group>"; };
 		6EB6853519498BD20010FC73 /* BSTextFieldCustomTextInset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSTextFieldCustomTextInset.m; sourceTree = "<group>"; };
 		6EB6853C19498F520010FC73 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = Utilities/Helper/Constants/Constants.h; sourceTree = "<group>"; };
+		6EB72BF8197F97D300C26000 /* BSHLRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSHLRViewController.h; path = ViewControllers/HLRViewController/BSHLRViewController.h; sourceTree = "<group>"; };
+		6EB72BF9197F97D300C26000 /* BSHLRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSHLRViewController.m; path = ViewControllers/HLRViewController/BSHLRViewController.m; sourceTree = "<group>"; };
+		6EB72BFC197F97F600C26000 /* BSHLRView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSHLRView.h; path = Views/HLRView/BSHLRView.h; sourceTree = "<group>"; };
+		6EB72BFD197F97F600C26000 /* BSHLRView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSHLRView.m; path = Views/HLRView/BSHLRView.m; sourceTree = "<group>"; };
 		6EB741DD197E502700D3A7DA /* BSContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSContactsViewController.h; sourceTree = "<group>"; };
 		6EB741DE197E502700D3A7DA /* BSContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSContactsViewController.m; sourceTree = "<group>"; };
 		6EB741E1197E509D00D3A7DA /* BSContactsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSContactsView.h; path = Views/ContactsView/BSContactsView.h; sourceTree = "<group>"; };
@@ -262,6 +268,7 @@
 				6EC74F8619750DCC007A0356 /* UserDetailsViewController */,
 				01A0DA8A1977DE9900D12300 /* CustomerViewController */,
 				6EBD2F57196D45C500F89C52 /* SendMessageCiewController */,
+				6EB72BF6197F978F00C26000 /* HLRViewController */,
 				6EB741DC197E502700D3A7DA /* ContactsViewController */,
 				6EB741E8197E516700D3A7DA /* AddNewContactViewController */,
 				6EB741F1197E798300D3A7DA /* GroupSelectionViewController */,
@@ -285,6 +292,7 @@
 				6EC74F8A19750DD5007A0356 /* UserDetailsView */,
 				01A0DA841977DE3200D12300 /* CustomerView */,
 				6EBD2F52196D450000F89C52 /* SendMessageView */,
+				6EB72BFB197F97D900C26000 /* HLRView */,
 				6EB741E0197E507700D3A7DA /* ContactsView */,
 				6EB741E4197E513900D3A7DA /* AddNewContactView */,
 				6EB6447F1948A3BA004A1818 /* Components */,
@@ -353,6 +361,24 @@
 				6EB6853C19498F520010FC73 /* Constants.h */,
 			);
 			name = Constants;
+			sourceTree = "<group>";
+		};
+		6EB72BF6197F978F00C26000 /* HLRViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6EB72BF8197F97D300C26000 /* BSHLRViewController.h */,
+				6EB72BF9197F97D300C26000 /* BSHLRViewController.m */,
+			);
+			name = HLRViewController;
+			sourceTree = "<group>";
+		};
+		6EB72BFB197F97D900C26000 /* HLRView */ = {
+			isa = PBXGroup;
+			children = (
+				6EB72BFC197F97F600C26000 /* BSHLRView.h */,
+				6EB72BFD197F97F600C26000 /* BSHLRView.m */,
+			);
+			name = HLRView;
 			sourceTree = "<group>";
 		};
 		6EB741DC197E502700D3A7DA /* ContactsViewController */ = {
@@ -602,12 +628,14 @@
 				6EB871EE19700CC20006CE29 /* BSConnectionTableViewCell.m in Sources */,
 				6EB644831948A597004A1818 /* BSInputAccessoryView.m in Sources */,
 				6E6537ED19472BD700FC6349 /* BSAppDelegate.m in Sources */,
+				6EB72BFE197F97F600C26000 /* BSHLRView.m in Sources */,
 				6EB741E3197E509D00D3A7DA /* BSContactsView.m in Sources */,
 				01A0DA901977DED600D12300 /* BSCustomerView.m in Sources */,
 				6EBD2F56196D453400F89C52 /* BSSendMessageView.m in Sources */,
 				6EB6446D19488E17004A1818 /* BSRootView.m in Sources */,
 				6EC74F8919750DCC007A0356 /* BSUserDetailsViewController.m in Sources */,
 				6EC74F8D19750E08007A0356 /* BSUserDetailsView.m in Sources */,
+				6EB72BFA197F97D300C26000 /* BSHLRViewController.m in Sources */,
 				6EB644741948965B004A1818 /* Helper.m in Sources */,
 				6EBD2F5A196D45FB00F89C52 /* BSSendMessageViewController.m in Sources */,
 				01A0DA8D1977DE9900D12300 /* BSCustomerViewController.m in Sources */,

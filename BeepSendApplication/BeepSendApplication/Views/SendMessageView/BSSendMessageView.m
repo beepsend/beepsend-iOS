@@ -79,7 +79,7 @@
 		
 		////////////////////////////////////////////////////////////////////////
 		//Text field recipient
-		_textFieldTo = [[BSTextFieldCustomTextInset alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, CGRectGetMaxY(_textFieldFrom.frame) + kSeparatorDefaultSpacing, frame.size.width - kViewDefaultBorderInset*2 - kTextFieldDefaultHeight - kSeparatorDefaultSpacing, kTextFieldDefaultHeight)];
+		_textFieldTo = [[BSTextFieldCustomTextInset alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, CGRectGetMaxY(_textFieldFrom.frame) + kSeparatorDefaultSpacing, frame.size.width - kViewDefaultBorderInset*2, kTextFieldDefaultHeight)];
 		_textFieldTo.font = [UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultTextSize];
 		_textFieldTo.backgroundColor = [UIColor whiteColor];
 		_textFieldTo.textColor = [UIColor blackColor];
@@ -122,23 +122,6 @@
 		[_scrollViewContainer addSubview:_textViewMessageBox];
 		
 		////////////////////////////////////////////////////////////////////////
-		//Check number button
-		_buttonCheckDestinationNumber = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_textFieldTo.frame) + kSeparatorDefaultSpacing, CGRectGetMinY(_textFieldTo.frame), CGRectGetHeight(_textFieldTo.frame), CGRectGetHeight(_textFieldTo.frame))];
-		_buttonCheckDestinationNumber.backgroundColor = [UIColor lightGrayColor];
-		_buttonCheckDestinationNumber.showsTouchWhenHighlighted = YES;
-		_buttonCheckDestinationNumber.clipsToBounds = YES;
-		[_buttonCheckDestinationNumber setTitle:NSLocalizedString(@"", @"") forState:UIControlStateNormal];
-		[_buttonCheckDestinationNumber setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-		[_buttonCheckDestinationNumber setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
-		_buttonCheckDestinationNumber.titleLabel.font = [UIFont boldSystemFontOfSize:16.0];
-		
-		_buttonCheckDestinationNumber.layer.cornerRadius = _textFieldTo.layer.cornerRadius;
-		_buttonCheckDestinationNumber.layer.borderWidth = kDefaultBorderWidth;
-		_buttonCheckDestinationNumber.layer.borderColor = [UIColor orangeColor].CGColor;
-		
-		[self addSubview:_buttonCheckDestinationNumber];
-		
-		////////////////////////////////////////////////////////////////////////
 		
 		_buttonBack = [[UIButton alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, frame.size.height - kViewDefaultBorderInset - kTextFieldDefaultHeight, frame.size.width - 2*kViewDefaultBorderInset, kTextFieldDefaultHeight)];
 		_buttonBack.backgroundColor = [UIColor lightGrayColor];
@@ -154,14 +137,46 @@
 		_buttonBack.layer.borderWidth = kDefaultBorderWidth;
 		_buttonBack.layer.borderColor = [UIColor orangeColor].CGColor;
 		
-		[self addSubview:_buttonBack];
+		[_scrollViewContainer addSubview:_buttonBack];
 		
-		
+		////////////////////////////////////////////////////////////////////////
+		//Segmented control message type
 		_segmentedControlMessageType = [[UISegmentedControl alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, CGRectGetMaxY(_textViewMessageBox.frame) + kSeparatorDefaultSpacing, frame.size.width - 2*kViewDefaultBorderInset, kTextFieldDefaultHeight)];
 		[_segmentedControlMessageType setTintColor:[UIColor orangeColor]];
 		
-		[self addSubview:_segmentedControlMessageType];
+		[_scrollViewContainer addSubview:_segmentedControlMessageType];
 		
+		////////////////////////////////////////////////////////////////////////
+		//Validate SMS button
+		_buttonValidateSMS = [[UIButton alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, CGRectGetMaxY(_segmentedControlMessageType.frame) + kSeparatorDefaultSpacing, CGRectGetWidth(_textFieldTo.frame), CGRectGetHeight(_textFieldTo.frame))];
+		_buttonValidateSMS.backgroundColor = [UIColor lightGrayColor];
+		_buttonValidateSMS.showsTouchWhenHighlighted = YES;
+		_buttonValidateSMS.clipsToBounds = YES;
+		[_buttonValidateSMS setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		[_buttonValidateSMS setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
+		_buttonValidateSMS.titleLabel.font = [UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultTextSize];
+		
+		_buttonValidateSMS.layer.cornerRadius = _textFieldTo.layer.cornerRadius;
+		_buttonValidateSMS.layer.borderWidth = kDefaultBorderWidth;
+		_buttonValidateSMS.layer.borderColor = [UIColor orangeColor].CGColor;
+		
+		[_scrollViewContainer addSubview:_buttonValidateSMS];
+		
+		////////////////////////////////////////////////////////////////////////
+		//Send SMS button
+		_buttonSendSMS = [[UIButton alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, CGRectGetMaxY(_buttonValidateSMS.frame) + kSeparatorDefaultSpacing, CGRectGetWidth(_textFieldTo.frame), CGRectGetHeight(_textFieldTo.frame))];
+		_buttonSendSMS.backgroundColor = [UIColor lightGrayColor];
+		_buttonSendSMS.showsTouchWhenHighlighted = YES;
+		_buttonSendSMS.clipsToBounds = YES;
+		[_buttonSendSMS setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		[_buttonSendSMS setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
+		_buttonSendSMS.titleLabel.font = [UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultTextSize];
+		
+		_buttonSendSMS.layer.cornerRadius = _textFieldTo.layer.cornerRadius;
+		_buttonSendSMS.layer.borderWidth = kDefaultBorderWidth;
+		_buttonSendSMS.layer.borderColor = [UIColor orangeColor].CGColor;
+		
+		[_scrollViewContainer addSubview:_buttonSendSMS];
     }
     return self;
 }

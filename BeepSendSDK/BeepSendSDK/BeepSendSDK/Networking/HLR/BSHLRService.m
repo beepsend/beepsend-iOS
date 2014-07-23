@@ -61,11 +61,8 @@
 	
 	NSDictionary *params = connection ? @{ @"msisdn" : number , @"connection" : connection.objectID } : @{ @"msisdn" : number };
 	
-//	NSDictionary *header = [BSAPIConfiguration authorizationHeaderForToken:connection.apiToken];
-	
 	[super executePOSTForMethod:method
 				 withParameters:params
-						//headers:header
 				  onCompletion:^(id response, id error) {
 					  
 					  if (!error) {
