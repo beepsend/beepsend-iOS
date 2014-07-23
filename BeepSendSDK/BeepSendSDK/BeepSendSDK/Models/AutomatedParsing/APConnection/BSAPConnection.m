@@ -91,37 +91,37 @@
 	}
 	
 	BSAPCCallback *callback = [[BSAPCCallback alloc] init];
-	callback.method = connectionModel.callbackURLs.method;
-	callback.dlr = connectionModel.callbackURLs.DLR;
-	callback.mo	= connectionModel.callbackURLs.MO;
+	callback.method = [connectionModel.callbackURLs.method isEqualToString:@""] ? nil : connectionModel.callbackURLs.method;
+	callback.dlr = [connectionModel.callbackURLs.DLR isEqualToString:@""] ? nil : connectionModel.callbackURLs.DLR;
+	callback.mo	= [connectionModel.callbackURLs.MO isEqualToString:@""] ? nil : connectionModel.callbackURLs.MO;
 	connection.callbacks = callback;
 	
 	BSAPWallet *wallet = [[BSAPWallet alloc] init];
-	wallet.id = connectionModel.wallet.walletID;
-	wallet.name = connectionModel.wallet.name;
-	wallet.balance = connectionModel.wallet.balance;
+	wallet.id = [connectionModel.wallet.walletID isEqualToString:@"0"] ? nil : connectionModel.wallet.walletID;
+	wallet.name = [connectionModel.wallet.name isEqualToString:@""] ? nil : connectionModel.wallet.name;
+	wallet.balance = [connectionModel.wallet.balance isEqualToNumber:@0] ? nil : connectionModel.wallet.balance;
 	connection.wallet = wallet;
 	
 	NSMutableArray *mArr = [@[] mutableCopy];
 	for (BSUser *usr in connectionModel.users) {
 		BSAPCUser *user = [[BSAPCUser alloc] init];
-		user.id = usr.userID;
-		user.name = usr.name;
-		user.username = usr.email;
+		user.id = [usr.userID isEqualToString:@"0"] ? nil : usr.userID;
+		user.name = [usr.name isEqualToString:@""] ? nil : usr.name;
+		user.username = [usr.email isEqualToString:@""] ? nil : usr.email;
 		[mArr addObject:user];
 	}
 	connection.users = [NSArray arrayWithArray:mArr];
 	
 	connection.id = [connectionModel.connectionID isEqualToString:@"0"] ? nil : connectionModel.connectionID;
-	connection.description = connectionModel.description;
-	connection.api_token = connectionModel.apiToken;
-	connection.customer = connectionModel.customer;
-	connection.label = connectionModel.label;
-	connection.system_id = connectionModel.systemID;
-	connection.tlv_for_mcc_mnc = connectionModel.TLVForMCCAndMNC;
+	connection.description = [connectionModel.description isEqualToString:@""] ? nil : connectionModel.description;
+	connection.api_token = [connectionModel.apiToken isEqualToString:@""] ? nil : connectionModel.apiToken;
+	connection.customer = [connectionModel.customer isEqualToString:@""] ? nil : connectionModel.customer;
+	connection.label = [connectionModel.label isEqualToString:@""] ? nil : connectionModel.label;
+	connection.system_id = [connectionModel.systemID isEqualToString:@""] ? nil : connectionModel.systemID;
+	connection.tlv_for_mcc_mnc = [connectionModel.TLVForMCCAndMNC isEqualToNumber:@0] ? nil : connectionModel.TLVForMCCAndMNC;
 	connection.type = [NSNumber numberWithInteger:connectionModel.type];
-	connection.whitelist = connectionModel.whitelist;
-	connection.password = connectionModel.password;
+	connection.whitelist = connectionModel.whitelist.count == 0 ? nil : connectionModel.whitelist;
+	connection.password = [connectionModel.password isEqualToString:@""] ? nil : connectionModel.password;
 	
 	return connection;
 }

@@ -63,9 +63,9 @@
 	
 	wallet.id = [walletModel.walletID isEqualToString:@"0"] ? nil : walletModel.walletID;
 	
-	wallet.name = walletModel.name;
-	wallet.balance = walletModel.balance;
-	wallet.notify_limit = walletModel.minimumBalanceForNotification;
+	wallet.name = [walletModel.name isEqualToString:@"0"] ? nil : walletModel.name;
+	wallet.balance = [walletModel.balance isEqualToNumber:@0] ? nil : walletModel.balance;
+	wallet.notify_limit = [walletModel.minimumBalanceForNotification isEqualToNumber:@0] ? nil : walletModel.balance;
 	
 	//TODO: Add conversion for arrays
 	

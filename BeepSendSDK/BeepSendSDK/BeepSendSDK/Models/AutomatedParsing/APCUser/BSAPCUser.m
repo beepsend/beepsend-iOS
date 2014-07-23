@@ -84,15 +84,15 @@
 	}
 	
 	user.id = [userModel.userID isEqualToString:@"0"] ? nil : userModel.userID;
-	user.name = userModel.name;
-	user.username = userModel.email;
-	user.email = userModel.email;
-	user.phone = userModel.phone;
-	user.customer = userModel.customerName;
-	user.api_token = userModel.apiToken;
+	user.name = [userModel.name isEqualToString:@""] ? nil : userModel.name;
+	user.username = [userModel.email isEqualToString:@""] ? nil : userModel.email;
+	user.email = [userModel.email isEqualToString:@""] ? nil : userModel.email;
+	user.phone = [userModel.phone isEqualToString:@""] ? nil : userModel.phone;
+	user.customer = [userModel.customerName isEqualToString:@""] ? nil : userModel.customerName;
+	user.api_token = [userModel.apiToken isEqualToString:@""] ? nil : userModel.apiToken;
 	
-	user.password = userModel.password;
-	user.new_password = userModel.theNewPassword;
+	user.password = [userModel.password isEqualToString:@""] ? nil : userModel.password;;
+	user.new_password = [userModel.theNewPassword isEqualToString:@""] ? nil : userModel.theNewPassword;;
 	
 	BSAPConnection *defaultConnection = [BSAPConnection convertFromConnectionModel:userModel.defaultConnection];
 	user.default_connection = defaultConnection;
@@ -101,14 +101,14 @@
 	for (BSUserType *uType in userModel.userTypes) {
 		BSAPUserType *ut = [[BSAPUserType alloc] init];
 		
-		ut.id = uType.objectID;
-		ut.name = uType.name;
+		ut.id = [uType.objectID isEqualToString:@"0"] ? nil : uType.objectID;
+		ut.name = [uType.name isEqualToString:@""] ? nil : uType.name;
 		
 		[mArr addObject:ut];
 	}
 	user.user_types = [NSArray arrayWithArray:mArr];
 	
-	user.max_level = userModel.maxLevel;
+	user.max_level = [userModel.maxLevel isEqualToNumber:@0] ? nil : userModel.maxLevel;;
 	
 	BSAPVerified *verified = [[BSAPVerified alloc] init];
 	if (userModel.verified) {

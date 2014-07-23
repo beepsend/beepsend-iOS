@@ -47,7 +47,7 @@
 	}
 	
 	email.id = [emailModel.emailID isEqualToString:@"0"] ? nil : emailModel.emailID;
-	email.email = emailModel.address;
+	email.email = [emailModel.address isEqualToString:@""] ? nil : emailModel.address;
 	
 	return email;
 }

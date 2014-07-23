@@ -40,12 +40,12 @@
 	}
 	
 	contact.id = [contactModel.contactID isEqualToString:@"0"] ? nil : contactModel.contactID;
-	contact.firstname = contactModel.firstName;
-	contact.lastname = contactModel.lastName;
-	contact.msisdn = contactModel.phoneNumber;
-	contact.group_id = contactModel.group.groupID;
-	contact.group_name = contactModel.group.name;
-	contact.errors = contactModel.errors;
+	contact.firstname = [contactModel.firstName isEqualToString:@""] ? nil : contactModel.firstName;
+	contact.lastname = [contactModel.lastName isEqualToString:@""] ? nil : contactModel.lastName;
+	contact.msisdn = [contactModel.phoneNumber isEqualToString:@""] ? nil : contactModel.phoneNumber;
+	contact.group_id = [contactModel.group.groupID isEqualToString:@"0"] ? nil : contactModel.group.groupID;
+	contact.group_name = [contactModel.group.name isEqualToString:@""] ? nil : contactModel.group.name;
+	contact.errors = contactModel.errors.count == 0 ? nil : contactModel.errors;
 	
 	return contact;
 }
