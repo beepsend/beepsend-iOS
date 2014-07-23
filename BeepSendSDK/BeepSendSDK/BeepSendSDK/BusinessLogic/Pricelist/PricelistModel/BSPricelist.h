@@ -12,11 +12,28 @@
 
 @interface BSPricelist : BSGeneralModel
 
+/** Pricelist revision ID.
+ */
 @property (nonatomic, strong, readonly) NSString *pricelistID;
+
+/** An array of networks covered by this pricelist.
+ */
 @property (nonatomic, strong, readonly) NSArray *networks;
+
+/** Number of networks covered by this pricelist.
+ */
 @property (nonatomic, strong, readonly) NSNumber *networkCount;
+
+/** Date of save for this pricelist.
+ */
 @property (nonatomic, strong, readonly) NSDate *saved;
+
+/** Whether this pricelist is active or not.
+ */
 @property (nonatomic, assign, readonly) NSNumber *active;
+
+/** First time this pricelist was accessed by customer.
+ */
 @property (nonatomic, strong, readonly) NSDate *firstViewed;
 
 - (BSPricelist *)initPricelistWithID:(NSString *)pID

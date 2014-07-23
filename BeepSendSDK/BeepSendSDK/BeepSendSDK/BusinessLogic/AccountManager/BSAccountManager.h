@@ -10,7 +10,12 @@
 
 @interface BSAccountManager : BSGeneralModel
 
+/** Name of customer account manager.
+ */
 @property (nonatomic, strong, readonly) NSString *name;
+
+/** Email of customer account manager.
+ */
 @property (nonatomic, strong, readonly) NSString *email;
 
 - (BSAccountManager *)initAccountManagerWithName:(NSString *)amName

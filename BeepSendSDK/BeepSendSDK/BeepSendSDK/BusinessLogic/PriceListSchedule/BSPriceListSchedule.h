@@ -10,7 +10,13 @@
 
 @interface BSPriceListSchedule : BSGeneralModel
 
+/** Pricelist sendout schedule ID.
+ */
 @property (nonatomic, strong, readonly) NSString *pricelistScheduleID;
+
+/** Pricelist sendout schedule name. 
+	How often new pricelist updates should be mailed out.
+ */
 @property (nonatomic, strong, readonly) NSString *scheduleName;
 
 - (BSPriceListSchedule *)initPricelistScheduleWithID:(NSString *)psID

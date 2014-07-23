@@ -12,7 +12,12 @@
 
 @interface BSTimestamps : BSGeneralModel
 
+/** HLR timestamps
+ */
 @property (nonatomic, strong, readonly) BSHLRReport *hlr;
+
+/** When callback was sent.
+ */
 @property (nonatomic, strong, readonly) NSDate *callbackSentAt;
 
 - (BSTimestamps *)initReportWithHLRReport:(BSHLRReport *)hlrReport

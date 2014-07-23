@@ -10,7 +10,12 @@
 
 @interface BSEmail : BSGeneralModel
 
+/** Email id.
+ */
 @property (nonatomic, strong, readonly) NSString *emailID;
+
+/** Email address.
+ */
 @property (nonatomic, strong, readonly) NSString *address;
 
 - (BSEmail *)initEmailWithID:(NSString *)eID atAddress:(NSString *)address;

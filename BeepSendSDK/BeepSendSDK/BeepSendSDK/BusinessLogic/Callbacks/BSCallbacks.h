@@ -10,8 +10,16 @@
 
 @interface BSCallbacks : BSGeneralModel
 
+/** The callback URL that will be used for your Delivery reports.
+ */
 @property (nonatomic, strong) NSString *DLR;
+
+/** The callback URL that will be used for your Mobile Originated SMS.
+ */
 @property (nonatomic, strong) NSString *MO;
+
+/** What HTTP method that will be used for your callbacks. GET, POST or PUT.
+ */
 @property (nonatomic, strong) NSString *method;
 
 - (BSCallbacks *)initCallbackWithMethod:(NSString *)cMethod

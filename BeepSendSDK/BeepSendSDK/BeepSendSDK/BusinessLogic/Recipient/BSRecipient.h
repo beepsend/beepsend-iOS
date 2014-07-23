@@ -10,8 +10,16 @@
 
 @interface BSRecipient : BSGeneralModel
 
+/** Destination address.
+ */
 @property (nonatomic, strong, readonly) NSString *destinationNumber;
+
+/** Type of number.
+ */
 @property (nonatomic, strong, readonly) NSNumber *numberType;
+
+/** Number Plan Index.
+ */
 @property (nonatomic, strong, readonly) NSNumber *numberPlanIndex;
 
 - (BSRecipient *)initRecipientWithNumber:(NSString *)number numberType:(NSNumber *)nType planIndex:(NSNumber *)nPlanIndex;

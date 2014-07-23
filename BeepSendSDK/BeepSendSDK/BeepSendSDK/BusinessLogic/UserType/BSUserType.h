@@ -10,7 +10,12 @@
 
 @interface BSUserType : BSGeneralModel
 
+/** User type ID.
+ */
 @property (nonatomic, strong, readonly) NSString *userTypeID;
+
+/** User type title.
+ */
 @property (nonatomic, strong, readonly) NSString *name;
 
 - (BSUserType *)initUserTypeWithID:(NSString *)uID;

@@ -10,7 +10,12 @@
 
 @interface BSValueForNumber : BSGeneralModel
 
+/** Number
+ */
 @property (nonatomic, strong, readonly) NSString *value;
+
+/** Numbers cost
+ */
 @property (nonatomic, strong, readonly) NSNumber *cost;
 
 - (BSValueForNumber *)initWithValue:(NSString *)value cost:(NSNumber *)cost;

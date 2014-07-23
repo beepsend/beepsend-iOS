@@ -10,7 +10,12 @@
 
 @interface BSHLRReport : BSGeneralModel
 
+/** When the HLR reached Beepsend.
+ */
 @property (nonatomic, strong, readonly) NSDate *hlrReachedAt;
+
+/** When HLR response reached Beepsend.
+ */
 @property (nonatomic, strong, readonly) NSDate *responseReachedAt;
 
 - (BSHLRReport *)initReportWithHLRReachedDate:(NSDate *)rDate

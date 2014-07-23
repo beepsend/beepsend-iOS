@@ -13,8 +13,16 @@
 
 @interface BSNetworkDetails : BSGeneralModel
 
+/** MCC MNC for network
+ */
 @property (nonatomic, strong, readonly) BSMCCMNC *mccmnc;
+
+/** Statistic
+ */
 @property (nonatomic, strong, readonly) BSStatistics *statistics;
+
+/** Total amount of messages for the MCC MNC
+ */
 @property (nonatomic, strong, readonly) NSNumber *total;
 
 - (BSNetworkDetails *)initWithMCCMNC:(BSMCCMNC *)nMccmnc statistics:(BSStatistics *)nStatistics total:(NSNumber *)nTotal;

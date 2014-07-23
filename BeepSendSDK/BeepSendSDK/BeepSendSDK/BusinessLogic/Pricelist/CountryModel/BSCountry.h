@@ -10,8 +10,16 @@
 
 @interface BSCountry : BSGeneralModel
 
+/** Name of the country this network resides in.
+ */
 @property (nonatomic, strong, readonly) NSString *name;
+
+/** Country calling code.
+ */
 @property (nonatomic, strong, readonly) NSNumber *callingCode;
+
+/** Country code (ISO-3166-1).
+ */
 @property (nonatomic, strong, readonly) NSString *code;
 
 - (BSCountry *)initCountryNamed:(NSString *)cName

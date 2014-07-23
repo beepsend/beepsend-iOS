@@ -10,10 +10,15 @@
 
 @interface BSMCCMNC : BSGeneralModel
 
+/** MNC of the network.
+ */
 @property (nonatomic, strong, readonly) NSNumber *mnc;
+
+/** MCC of the network.
+ */
 @property (nonatomic, strong, readonly) NSNumber *mcc;
 
 - (BSMCCMNC *)initWithMNC:(NSNumber *)mnc
-						andMCC:(NSNumber *)mcc;
+				   andMCC:(NSNumber *)mcc;
 
 @end

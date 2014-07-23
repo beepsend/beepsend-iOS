@@ -14,15 +14,38 @@
 
 @interface BSHLR : BSGeneralModel
 
+/** Timestamps
+ */
 @property (nonatomic, strong, readonly) BSTimestamps *timestamps;
+
+/** DLR
+ */
 @property (nonatomic, strong, readonly) BSDLRReport *dlrReport;
+
+/** Mobile Country Code for the handset.
+	Mobile Network Code for the handset.
+ */
 @property (nonatomic, strong, readonly) BSMCCMNC *mccmnc;
-@property (nonatomic, strong, readonly) NSString *imsi;//The IMSI of the handset if available. First five characters and then zeroes.
-@property (nonatomic, strong, readonly) NSNumber *ported;//true if the number seems to be ported, false if not.
-@property (nonatomic, strong, readonly) NSNumber *roaming;//true if the number is roaming, false if not.
+
+/** The IMSI of the handset if available. First five characters and then zeroes.
+ */
+@property (nonatomic, strong, readonly) NSString *imsi;
+
+/** true if the number seems to be ported, false if not.
+ */
+@property (nonatomic, strong, readonly) NSNumber *ported;
+
+/** true if the number is roaming, false if not.
+ */
+@property (nonatomic, strong, readonly) NSNumber *roaming;
+
+/** Mobile Country Code assigned to msisdn prefix.
+	Mobile Network Code assigned to msisdn prefix.
+ */
 @property (nonatomic, strong, readonly) BSMCCMNC *prefix;
 
-//Response params
+/** Response for HLR validation
+ */
 @property (nonatomic, strong, readonly) NSString *phoneNumber;
 @property (nonatomic, strong, readonly) NSArray *errors;
 

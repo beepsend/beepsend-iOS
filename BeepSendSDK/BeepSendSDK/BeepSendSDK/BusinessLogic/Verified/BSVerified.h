@@ -10,13 +10,21 @@
 
 @interface BSVerified : BSGeneralModel
 
+/** If the users email address is verified or not.
+ */
+@property (nonatomic, strong, readonly) NSNumber *emailVerified;
+
+/** If the users phone number has been verified.
+ */
+@property (nonatomic, strong, readonly) NSNumber *phoneVerified;
+
+/** True if the user has agreed to the terms & conditions.
+ */
+@property (nonatomic, strong) NSNumber *termsVerified;
+
 @property (nonatomic, assign, readonly, getter = isVerifiedPhone) BOOL verifiedPhone;
 @property (nonatomic, assign, readonly, getter = isVerifiedEmail) BOOL verifiedEmail;
 @property (nonatomic, assign, readonly, getter = isVerifiedTerms) BOOL verifiedTerms;
-
-@property (nonatomic, strong, readonly) NSNumber *emailVerified;
-@property (nonatomic, strong, readonly) NSNumber *phoneVerified;
-@property (nonatomic, strong) NSNumber *termsVerified;
 
 - (BSVerified *)initUserWithTermsVerified:(NSNumber *)termsVerified;
 - (BSVerified *)initUserWithEmailVerified:(NSNumber *)emailVerified

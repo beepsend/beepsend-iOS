@@ -17,6 +17,7 @@
 
 @interface BSLookup ()
 
+@property (nonatomic, strong, readwrite) NSString *lookupID;
 @property (nonatomic, strong, readwrite) BSBatch *batch;
 @property (nonatomic, strong, readwrite) NSString *messageBody;
 @property (nonatomic, strong, readwrite) BSConnection *usedConnection;
@@ -34,6 +35,11 @@
 @implementation BSLookup
 
 #pragma mark - Properties
+
+- (NSString *)lookupID
+{
+	return [BSHelper isNilOrEmpty:_lookupID] ? @"0" : [_lookupID isKindOfClass:[NSNumber class]] ? [(NSNumber *)_lookupID stringValue] : _lookupID;
+}
 
 - (NSString *)messageBody
 {

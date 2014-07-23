@@ -10,7 +10,12 @@
 
 @interface BSDLRReport : BSGeneralModel
 
+/** Response status.
+ */
 @property (nonatomic, strong, readonly) NSString *responseStatus;
+
+/** Response code.
+ */
 @property (nonatomic, strong, readonly) NSNumber *responseCode;
 
 - (BSDLRReport *)initReportWithResponseStatus:(NSString *)rStatus
