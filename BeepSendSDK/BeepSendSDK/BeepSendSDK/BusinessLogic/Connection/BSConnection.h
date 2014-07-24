@@ -21,40 +21,62 @@
 
 @interface BSConnection : BSGeneralModel
 
-//Connection ID
+/** Connection ID.
+ */
 @property (nonatomic, strong, readonly) NSString *connectionID;
-//Connection type: HLR connection or SMS connection
+
+/** Type of connection, 1 for SMS connection or 2 for HLR connection.
+ */
 @property (nonatomic, assign, readonly) BSConnectionType type;
 
-//Users who have privileges to read/write connection
+/** List of users with read-write access to this connection.
+ */
 @property (nonatomic, strong, readonly) NSArray *users;
-//Wallet that belongs to connection
+
+/** Wallet that belongs to connection
+ */
 @property (nonatomic, strong, readonly) BSWallet *wallet;
 
 //Properties that can be edited by user
-@property (nonatomic, strong) NSString *label;
-@property (nonatomic, strong) NSString *description;
-@property (nonatomic, strong) NSString *systemID;//Login name
 
-//Specifies if connection is default
+/** Connection label.
+ */
+@property (nonatomic, strong) NSString *label;
+
+/** (Optional) Description of this connection.
+ */
+@property (nonatomic, strong) NSString *description;
+
+/** Login name.
+ */
+@property (nonatomic, strong) NSString *systemID;
+
+/** Specifies if connection is default
+ */
 @property (nonatomic, assign) BOOL defaultConnection;
 
-//Connection API token
+/** API Token belonging to this connection.
+ */
 @property (nonatomic, strong, readonly) NSString *apiToken;
 
-//Callbacks URLs
+/** Connection callbacks.
+ */
 @property (nonatomic, strong) BSCallbacks *callbackURLs;
 
-//Customer that ownes connection
+/** Customer name.
+ */
 @property (nonatomic, strong, readonly) NSString *customer;
 
-//Tag-Length-Value field for returning mcc and mnc in DLR.
+/** Tag-Length-Value field for returning mcc and mnc in DLR.
+ */
 @property (nonatomic, strong, readonly) NSNumber *TLVForMCCAndMNC;
 
-//Whitelist
+/** Whitelisted urls for connection
+ */
 @property (nonatomic, strong, readonly) NSArray *whitelist;
 
-//Connection password
+/** Connection password
+ */
 @property (nonatomic, strong, readonly) NSString *password;
 
 - (BSConnection *)initConnectionWithID:(NSString *)cID;
@@ -86,59 +108,134 @@
 							  systemID:(NSString *)cSystemID
 								  type:(BSConnectionType)cType;
 
-//Initiate connection with API token
+/** 
+ */
 + (BSConnection *)currentConnection;
 
-//After made changes it is necessary to call method updateConnection
+/** If changes were made to connection use update method to save changes.
+ */
 - (void)updateConnection;
 
-//If API token is compromised use this method for token reset
+/** If you think that the connection token used for authenticating with 
+	the Beepsend API has been compromised you can use this method 
+	(with a user token) to reset the connection token.
+ */
 - (void)resetConnectionToken;
 
-//Returns pricelists
+/** Receive all price lists revisions for a specific connection 
+	related to the authenticated user. 
+	A connection ID or alias tag "me" must be provided as reference.
+ */
 - (void)getPricelistsOnCompletion:(void(^)(NSArray *pricelists))block;
 
-//Returns current pricelists
+/** Instead of fetching all revisions and then using the latest revision id to
+	get the current price list the following can be used for both 
+	User and Connection authentifications
+ */
 - (void)getCurrentPricelistOnCompletion:(void(^)(BSPricelist *pricelist))block;
 
-//Send message
-//Returns number of messages
+/** Method sends message and returns number of messages
+ 
+ @param message - Message object for sending
+ @param block - Block object that returns message if sending was successfull or error
+ */
 - (NSInteger)sendSMS:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, id error))block;
 
-//Send messages
-//Returns number of messages
+/** Method sends multiple messages and returns number of messages
+ 
+ @param messages - Array of message objects for sending
+ @param block - Block object that returns array of messages if sending was successfull or errors
+ */
 - (NSInteger)sendMultipleSMS:(NSArray *)messages withCompletionBlock:(void(^)(NSArray *messages, id error))block;
 
+/** Method that calculates number of messages for message
+	based on character count and encoding
+ 
+ @param message - Message object to calculate message count
+ */
 - (NSInteger)smsCountForMessage:(BSMessage *)message;
+
+/** Method that calculates number of messages for array of messages
+	based on character count and encoding
+	Message count is sum of calculated message count for every message in array
+ 
+ @param messages - Array of message objects to calculate message count
+ */
 - (NSInteger)smsCountForMessages:(NSArray *)messages;
 
-//Validate SMS
+/** Method that performs a dry run of SMS sending
+ 
+ @param message - Message to validate
+ @param block - Returns message without ID or error if validation failed
+ */
 - (void)validateSMS:(BSMessage *)message onCompletion:(void(^)(BSMessage *message, id error))block;
 
-//Get sms details
+/** The API can be utilized to get details of any message sent through Beepsend 
+	no matter if you submitted it via SMPP or HTTP
+ 
+ @param message - Message to lookup
+ @param block - Returns message lookup or error if lookup failed
+ */
 - (void)getDetailsForSMS:(BSMessage *)message onCompletion:(void(^)(BSLookup *lookup, id error))block;
 
-//Get sms details based on filters
-- (void)getDetailsForMessagesSentTo:(NSString *)recipient sentFrom:(NSString *)sender usedBatch:(BSBatch *)batch beforeDate:(NSDate *)bDate afterDate:(NSDate *)aDate forNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *lookups, id error))block;
+/** Get details regarding multiple sent messages with filters.
+ 
+ @param recipient - MSISDN (phone number), the to address.
+ @param sender - Sender id. The from address.
+ @param batch - Will return every message sent with the same batch.
+ @param bDate - Filter messages sent before this date.
+ @param aDate - Filter messages sent after this date.
+ @param nextPage - If YES then new page with results will be loaded
+ @param block - Returns array of found messages or error
+ */
+- (void)getDetailsForMessagesSentTo:(NSString *)recipient
+						   sentFrom:(NSString *)sender
+						  usedBatch:(BSBatch *)batch
+						 beforeDate:(NSDate *)bDate
+						  afterDate:(NSDate *)aDate
+						forNextPage:(BOOL)nextPage
+					   onCompletion:(void(^)(NSArray *lookups, id error))block;
 
-//How many SMS objects to fetch. Maximum 200, default 100.
+/** How many SMS objects to fetch.
+ 
+ @param lookupPageLimit - Maximum 200, default 100.
+ */
 - (void)setLookupPageLimit:(NSNumber *)lookupPageLimit;
 
-//Get batch details
+/** Get batch details
+ 
+ @param batch - Batch with ID
+ @param block - Returns batch details
+ */
 - (void)getDetailsForBatch:(BSBatch *)batch onCompletion:(void(^)(BSBatch *batch, id error))block;
 
-//Get previous batches
+/** Get previous batches
+ 
+ @param block - Returns array of previous batches
+ */
 - (void)getPreviousBatchesOnCompletion:(void(^)(NSArray *batches, id error))block;
 
-//Estimates message cost (not necessarily accurate)
+/** Estimates message cost (not necessarily accurate)
+ 
+ @param messages - Messages to estimate price for
+ @param block - Returns array of cost per message
+ */
 - (void)estimateSMSCostForMessages:(NSArray *)messages onCompletion:(void(^)(NSArray *cost, id error))block;
 
-//Do immediate HLR for given number
+/** Method that performs immediate HLR lookup
+	(takes some time)
+ 
+ @param phoneNumber - Phone number to perform HLR
+ @param block - Returns HLR response or error
+ */
 - (void)immediateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, id error))block;
 
-//Validate HLR for phone number
+/** Method that performs a dry run of HLR lookup
+	(takes some time)
+ 
+ @param phoneNumber - Phone number to perform HLR
+ @param block - Returns HLR response or error
+ */
 - (void)validateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, id error))black;
-
-
 
 @end
