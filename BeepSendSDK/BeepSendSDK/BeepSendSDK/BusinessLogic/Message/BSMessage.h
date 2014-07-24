@@ -117,61 +117,112 @@
 						  errors:(NSArray *)mErrors
 				 recipientGroups:(NSArray *)mGroups;
 
-/**
+/** Creates normal message for single recipient
+ 
+ @param body - Message body
+ @param sender - Message sender (alphanumeric)
+ @param recipient - Message recipient (numeric)
  */
 + (BSMessage *)messageWithBody:(NSString *)body from:(NSString *)sender to:(NSString *)recipient;
 
-/**
+/** Creates normal message for multiple recipients
+ 
+ @param body - Message body
+ @param sender - Message sender (alphanumeric)
+ @param recipients - Array of message recipients (array of numbers)
  */
 + (BSMessage *)messageWithBody:(NSString *)body from:(NSString *)sender toMultiple:(NSArray *)recipients;
 
-/**
+/** Creates normal message for groups recipients
+ 
+ @param body - Message body
+ @param sender - Message sender (alphanumeric)
+ @param groups - Array of group recipients (array of groups, array of group IDs)
  */
 + (BSMessage *)messageWithBody:(NSString *)body from:(NSString *)sender toGroups:(NSArray *)groups;
 
-/**
+/** Creates flash message for single recipient
+ 
+ @param body - Message body
+ @param sender - Message sender (alphanumeric)
+ @param recipient - Message recipient (numeric)
  */
 + (BSMessage *)flashMessageWithBody:(NSString *)body from:(NSString *)sender to:(NSString *)recipient;
 
-/**
+/** Creates flash message for multiple recipients
+ 
+ @param body - Message body
+ @param sender - Message sender (alphanumeric)
+ @param recipients - Array of message recipients (array of numbers)
  */
 + (BSMessage *)flashMessageWithBody:(NSString *)body from:(NSString *)sender toMultiple:(NSArray *)recipients;
 
-/**
+/** Creates flash message for groups recipients
+ 
+ @param body - Message body
+ @param sender - Message sender (alphanumeric)
+ @param groups - Array of group recipients (array of groups, array of group IDs)
  */
 + (BSMessage *)flashMessageWithBody:(NSString *)body from:(NSString *)sender toGroups:(NSArray *)groups;
 
-/**
+/** Creates binary message for single recipient
+ 
+ @param body - Message body
+ @param sender - Message sender (alphanumeric)
+ @param recipient - Message recipient (numeric)
  */
 + (BSMessage *)binaryMessageWithBody:(NSString *)body from:(NSString *)sender to:(NSString *)recipient;
 
-/** 
+/** Creates binary message for multiple recipients
+ 
+ @param body - Message body
+ @param sender - Message sender (alphanumeric)
+ @param recipients - Array of message recipients (array of numbers)
  */
 + (BSMessage *)binaryMessageWithBody:(NSString *)body from:(NSString *)sender toMultiple:(NSArray *)recipients;
 
-/**
+/** Creates binary message for groups recipients
+ 
+ @param body - Message body
+ @param sender - Message sender (alphanumeric)
+ @param groups - Array of group recipients (array of groups, array of group IDs)
  */
 + (BSMessage *)binaryMessageWithBody:(NSString *)body from:(NSString *)sender toGroups:(NSArray *)groups;
 
-/**
+/** Specify if delivery report should be received
+	
+ @param receive - 0: Disable, 1: Always, 2: Only on failure. Default is 1.
  */
-- (void)receiveDeliveryReportWithOption:(NSInteger)receive;//0: Disable, 1: Always, 2: Only on failure. Default is 1.
+- (void)receiveDeliveryReportWithOption:(NSInteger)receive;
 
-/**
+/** Specify how long a message is relevant to the end user.
+	If this expires, the message won't continue to be routed.
+	Default is infinite.
+ 
+ @param validUntil - Date and time until when message is valid
  */
 - (void)setValidityPeriod:(NSDate *)validUntil;
 
-/**
+/** Schedule message to be delivered at a certain time in the future.
+	Note Credits will be deducted from your connection at the time of sending
+	for the price at that time.
+	Therefore we do not encourage delivery dates set long in the future.
+ 
+ @param sendingTime - Date and time when message should be sent
  */
 - (void)scheduleSendingAtTime:(NSDate *)sendingTime;
 
-//Explicitly set encoding
-
-/**
+/** Explicitly set encoding
+ 
+ @param encoding - UTF-8, ISO-8859-15 or Unicode. 
+					If omitted, the default charset is UTF-8.
+					The unicode uses the UCS2 standard UTF16-BE.
  */
 - (void)setEncoding:(NSString *)encoding;
 
-/** 
+/** Add groups recipients to axisting message
+ 
+ @param groups - Array of groups to receive message
  */
 - (void)addGroupsRecipients:(NSArray *)groups;
 

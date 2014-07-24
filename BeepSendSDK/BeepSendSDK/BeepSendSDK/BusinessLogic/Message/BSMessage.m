@@ -12,6 +12,8 @@
 
 @interface BSMessage ()
 
+@property (nonatomic, strong, readwrite) NSString *usedEncoding;
+
 //Message response parameters
 @property (nonatomic, strong, readwrite) NSString *messageID;
 @property (nonatomic, strong, readwrite) NSArray *errors;
@@ -21,6 +23,19 @@
 @implementation BSMessage
 
 #pragma mark - Properties
+
+- (NSString *)usedEncoding
+{
+	BOOL isUTF8;
+	
+#ifdef TARGET_IPHONE_SIMULATOR
+	isUTF8 = YES;
+#else
+	isUTF8 = is_utf8([message.message cStringUsingEncoding:NSUTF16BigEndianStringEncoding]);
+#endif
+	
+	return _usedEncoding ? _usedEncoding : isUTF8 ? @"UTF-8" : @"Unicode";
+}
 
 - (NSString *)messageID
 {
