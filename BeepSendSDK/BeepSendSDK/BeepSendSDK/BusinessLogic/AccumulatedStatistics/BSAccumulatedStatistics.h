@@ -22,6 +22,14 @@
  */
 @property (nonatomic, strong, readonly) NSNumber *price;
 
+/** Init Acumulated statistics with account, count, price
+ 
+ @param account - Account
+ @param count - Count
+ @param price - Price
+ 
+ @return Returns Acumulated statistics object
+ */
 - (BSAccumulatedStatistics *)initWithAccount:(NSString *)account count:(NSNumber *)count price:(NSNumber *)price;
 
 @end

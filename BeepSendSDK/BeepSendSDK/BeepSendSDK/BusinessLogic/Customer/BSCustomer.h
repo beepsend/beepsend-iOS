@@ -8,8 +8,8 @@
 
 #import "BSGeneralModel.h"
 
-#import "BSAccountManager.h"
 #import "BSPriceListDetails.h"
+#import "BSAccountManager.h"
 
 @interface BSCustomer : BSGeneralModel
 
@@ -61,6 +61,24 @@
  */
 @property (nonatomic, strong, readonly) BSPriceListDetails *priceListDetails;
 
+/** Init Customer with ID, name, phone, address, city, post box, country, vat,
+	email, invoice type, account manager, pricelist model
+ 
+ @param cID - Customer ID
+ @param cName - Name
+ @param cPhone - Phone
+ @param cAddress - Address
+ @param cCity - City
+ @param cPostBox - Post box
+ @param cCountry - Country
+ @param cVat - VAT
+ @param cEmail - Email
+ @param cInvoiceType - Invoice type
+ @param cAccountManager - Account manager
+ @param cPriceListModel - Pricelist model
+ 
+ @return Returns Customer object
+ */
 - (BSCustomer *)initCustomerWithID:(NSString *)cID
 							  name:(NSString *)cName
 							 phone:(NSString *)cPhone

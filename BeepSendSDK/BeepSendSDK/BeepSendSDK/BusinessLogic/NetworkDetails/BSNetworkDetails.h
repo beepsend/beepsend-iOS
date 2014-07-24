@@ -25,6 +25,14 @@
  */
 @property (nonatomic, strong, readonly) NSNumber *total;
 
+/** Init Network details with mccmnc, statistics, total
+ 
+ @param nMccmnc - AnalyticsBatch ID
+ @param nStatistics - Label
+ @param nTotal - Total
+ 
+ @return Returns Network details object
+ */
 - (BSNetworkDetails *)initWithMCCMNC:(BSMCCMNC *)nMccmnc statistics:(BSStatistics *)nStatistics total:(NSNumber *)nTotal;
 
 @end

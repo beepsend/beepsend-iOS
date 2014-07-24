@@ -26,6 +26,13 @@
  */
 @property (nonatomic, strong) NSDate *lastUsed;
 
+/** Init Batch with ID, label
+ 
+ @param bID - Batch ID
+ @param bLabel - Label
+ 
+ @return Returns Batch object
+ */
 - (BSBatch *)initWithID:(NSString *)bID andLabel:(NSString *)bLabel;
 
 @end

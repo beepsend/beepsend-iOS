@@ -18,6 +18,13 @@
  */
 @property (nonatomic, strong, readonly) NSNumber *cost;
 
+/** Init ValueForNumber with value, cost
+ 
+ @param value - Value
+ @param cost - Cost
+ 
+ @return Returns ValueForNumber cost object
+ */
 - (BSValueForNumber *)initWithValue:(NSString *)value cost:(NSNumber *)cost;
 
 @end

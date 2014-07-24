@@ -33,6 +33,16 @@
  */
 @property (nonatomic, strong, readonly) NSString *operatorName;
 
+/** Init Network with mccmnc, comment, price, country, operator name
+ 
+ @param nMCCMNC - MCC MNC
+ @param nComment - Comment
+ @param nPrice - Price
+ @param nCountry - Country
+ @param nOperatorName - Operator name
+ 
+ @return Returns Network object
+ */
 - (BSNetwork *)initNetworkWithMCCMNC:(NSArray *)nMCCMNC
 						 withComment:(NSString *)nComment
 							   price:(NSNumber *)nPrice

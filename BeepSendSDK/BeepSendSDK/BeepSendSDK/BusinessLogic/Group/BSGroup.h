@@ -28,13 +28,36 @@
  */
 @property (nonatomic, strong, readonly) NSNumber *processing;
 
+/** Init Group with ID, name, contact count, processing
+ 
+ @param gID - Group ID
+ @param gName - Name
+ @param gContactsCount - Contact count
+ @param gProcessing - Processing
+ 
+ @return Returns Group object
+ */
 - (BSGroup *)initGroupWithID:(NSString *)gID
 						name:(NSString *)gName
 					contacts:(NSNumber *)gContactsCount
 				  processing:(NSNumber *)gProcessing;
 
+/** Init Group with name
+ 
+ @param gName - Name
+ 
+ @return Returns Group object
+ */
 - (BSGroup *)initGroupWithName:(NSString *)gName;
 
+/** Init Group with ID, name, phone
+ 
+ @param gID - Group ID
+ @param gName - Name
+ @param gContactsCount - Contact count
+ 
+ @return Returns Group object
+ */
 - (BSGroup *)initGroupWithID:(NSString *)gID
 						name:(NSString *)gName
 					contacts:(NSNumber *)gContactsCount;

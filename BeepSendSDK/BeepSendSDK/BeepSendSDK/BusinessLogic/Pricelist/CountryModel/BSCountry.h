@@ -22,6 +22,14 @@
  */
 @property (nonatomic, strong, readonly) NSString *code;
 
+/** Init Country with name, country code, calling code
+ 
+ @param cName - Country name
+ @param cCountryCode - Country code
+ @param cCallingCode - Calling code
+ 
+ @return Returns Country object
+ */
 - (BSCountry *)initCountryNamed:(NSString *)cName
 				withCountryCode:(NSString *)cCountryCode
 				 andCallingCode:(NSNumber *)cCallingCode;

@@ -9,6 +9,8 @@
 #ifndef BeepSendSDK_BSStructs_h
 #define BeepSendSDK_BSStructs_h
 
+/** Connection type enum 
+ */
 typedef enum {
 	BSConnectionTypeSMS = 1,
 	BSConnectionTypeHLR = 2

@@ -29,6 +29,15 @@
  */
 @property (nonatomic, strong, readonly) NSArray *fields;
 
+/** Init Pricelist details with type, delimiter, schedule, fields
+ 
+ @param pType - Type
+ @param pDelimiter - Delimiter
+ @param pSchedule - Schedule
+ @param pFields - Fields
+ 
+ @return Returns Pricelist details object
+ */
 - (BSPriceListDetails *)initPricelistDetailsWithType:(NSNumber *)pType
 										   delimiter:(NSString *)pDelimiter
 								   pricelistSchedule:(BSPriceListSchedule *)pSchedule

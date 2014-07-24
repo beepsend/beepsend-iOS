@@ -30,6 +30,16 @@
  */
 @property (nonatomic, strong, readonly) NSString *comment;
 
+/** Init Log with log ID, time, balance, change, comment
+ 
+ @param logID - Log ID
+ @param time - Time
+ @param balance - Balance
+ @param change - Change
+ @param comment - Comment
+ 
+ @return Returns Log object
+ */
 - (BSLog *)initLogWithID:(NSString *)logID
 				  atTime:(NSDate *)time
 			 withBalance:(NSNumber *)balance

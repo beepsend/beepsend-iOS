@@ -18,7 +18,14 @@
  */
 @property (nonatomic, strong, readonly) NSString *email;
 
-- (BSAccountManager *)initAccountManagerWithName:(NSString *)amName
+/** Init account manager with name and email
+ 
+ @param amName - Account manager name
+ @param amEmail - Account manager email
+ 
+ @return Returns Account manager object
+ */
+-(BSAccountManager *)initAccountManagerWithName:(NSString *)amName
 										andEmail:(NSString *)amEmail;
 
 @end

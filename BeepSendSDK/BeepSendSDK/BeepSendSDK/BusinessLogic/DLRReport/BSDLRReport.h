@@ -18,6 +18,13 @@
  */
 @property (nonatomic, strong, readonly) NSNumber *responseCode;
 
+/** Init DLR with status, code
+ 
+ @param rStatus - Status
+ @param rCode - Code
+ 
+ @return Returns DLR object
+ */
 - (BSDLRReport *)initReportWithResponseStatus:(NSString *)rStatus
 							  andResponseCode:(NSNumber *)rCode;
 

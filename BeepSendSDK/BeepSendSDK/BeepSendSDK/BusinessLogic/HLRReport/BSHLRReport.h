@@ -18,6 +18,13 @@
  */
 @property (nonatomic, strong, readonly) NSDate *responseReachedAt;
 
+/** Init HLR Report with rdate, sdate
+ 
+ @param rDate - HLR Reached Date
+ @param sDate - Response Reached Date
+ 
+ @return Returns HLR Report object
+ */
 - (BSHLRReport *)initReportWithHLRReachedDate:(NSDate *)rDate
 					   andResponseReachedDate:(NSDate *)sDate;
 

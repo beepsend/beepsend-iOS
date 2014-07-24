@@ -18,6 +18,13 @@
  */
 @property (nonatomic, strong, readonly) NSNumber *mcc;
 
+/** Init MCCMNC with mcc and mnc
+ 
+ @param mnc - Mobile network code
+ @param mcc - Mobile country code
+ 
+ @return Returns MCCMNC object
+ */
 - (BSMCCMNC *)initWithMNC:(NSNumber *)mnc
 				   andMCC:(NSNumber *)mcc;
 

@@ -20,6 +20,13 @@
  */
 @property (nonatomic, strong, readonly) NSDate *callbackSentAt;
 
+/** Init Timestamp with hlrReport, sDate
+ 
+ @param hlrReport - HLR Report
+ @param sDate - Callback sent time
+ 
+ @return Returns Timestamp object
+ */
 - (BSTimestamps *)initReportWithHLRReport:(BSHLRReport *)hlrReport
 					  andCallbackSentTime:(NSDate *)sDate;
 

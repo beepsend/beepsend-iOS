@@ -68,22 +68,69 @@
  */
 @property (nonatomic, strong, readonly) BSCustomer *customer;
 
+/** Init User with id, name and email
+ 
+ @param uID - Users ID
+ @param uName - Users name
+ @param uEmail - Users email
+ 
+ @return Returns User object
+ */
 - (BSUser *)initUserWithID:(NSString *)uID
 					  name:(NSString *)uName
 					 email:(NSString *)uEmail;
 
+/** Init User with email and password
+ 
+ @param uEmail - Users email
+ @param uPassword - Users password
+ 
+ @return Returns User object
+ */
 - (BSUser *)initUserWithEmail:(NSString *)uEmail
 				  andPassword:(NSString *)uPassword;
 
+/** Init User with password and new password
+ 
+ @param uPassword - Users password
+ @param uNewPassword - Users new password
+ 
+ @return Returns User object
+ */
 - (BSUser *)initUserWithPassword:(NSString *)uPassword
 				  andNewPassword:(NSString *)uNewPassword;
 
+/** Init User with name, phone, connection, user types, verified
+ 
+ @param uName - Users name
+ @param uPhone - Users phone
+ @param uConnection - Users connection
+ @param uTypes - User types
+ @param uVerified - Users verification
+ 
+ @return Returns User object
+ */
 - (BSUser *)initWithName:(NSString *)uName
 				   phone:(NSString *)uPhone
 	   defaultConnection:(BSConnection *)uConnection
 			   userTypes:(NSArray *)uTypes
 				verified:(BSVerified *)uVerified;
 
+/** Init User with id, name, email, phone, customer, api token, connection, user types, max level, verified
+ 
+ @param uID - Users ID
+ @param uName - Users name
+ @param uEmail - Users email
+ @param uPhone - Users phone
+ @param uCustomer - Customer
+ @param uAPIToken - Users name
+ @param uConnection - Users API token
+ @param uUserTypes - User types
+ @param uMaxLevel - Users max level
+ @param uVerified - Users verification
+ 
+ @return Returns User object
+ */
 - (BSUser *)initUserWithID:(NSString *)uID
 					  name:(NSString *)uName
 					 email:(NSString *)uEmail
@@ -95,10 +142,17 @@
 				  maxLevel:(NSNumber *)uMaxLevel
 				  verified:(BSVerified *)uVerified;
 
-//Create user object with ID
+/** Init User with id
+ 
+ @param uID - Users ID
+ 
+ @return Returns User object
+ */
 - (BSUser *)initWithUserID:(NSString *)uID;
 
-/** Returns User associated with entered API token
+/** User associated with entered API token
+ 
+ @return Returns User object
  */
 + (BSUser *)currentUser;
 
@@ -133,6 +187,8 @@
 - (void)getAvailableConnectionsOnCompletion:(void(^)(NSArray *connections))block;
 
 /** Sync method for retrieving all user connections
+ 
+ @return Returns avilable connections
  */
 - (NSArray *)getAvailableConnections;
 
@@ -149,6 +205,8 @@
 - (void)getAvailableWalletsOnCompletion:(void(^)(NSArray *wallets, id error))block;
 
 /** Sync method for retrieving all user wallets
+ 
+ @return Returns available wallets
  */
 - (NSArray *)getAvailableWallets;
 
@@ -159,6 +217,8 @@
 - (void)getAllContactsOnCompletion:(void(^)(NSArray *contacts, id error))block;
 
 /** Sync method for retrieving user contacts
+ 
+ @return Returns all contacts
  */
 - (NSArray *)getAllContacts;
 
@@ -188,6 +248,8 @@
 - (void)getAllGroupsOnCompletion:(void(^)(NSArray *groups, id error))block;
 
 /** Sync method for retrieving user groups
+ 
+ @return Returns all groups
  */
 - (NSArray *)getAllGroups;
 

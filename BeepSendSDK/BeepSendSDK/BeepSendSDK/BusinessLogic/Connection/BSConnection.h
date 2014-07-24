@@ -79,8 +79,33 @@
  */
 @property (nonatomic, strong, readonly) NSString *password;
 
+/** Init Connection with ID
+ 
+ @param cID - Connection ID
+ 
+ @return Returns Connection object
+ */
 - (BSConnection *)initConnectionWithID:(NSString *)cID;
 
+/** Init Connection with ID, API token, callbacks, customer, description, label,
+	systemID, tlv, type, users, wallet, whitelist, password
+ 
+ @param cID - Connection ID
+ @param cAPIToken - API token
+ @param cCallbacks - Callbacks
+ @param cCustomer - Customer
+ @param cDescription - Description
+ @param cLabel - Label
+ @param cSystemID - System ID
+ @param cTlvformccandmnc - Tag-Length-Value field for returning mcc and mnc in DLR.
+ @param cType - Connection type
+ @param cUsers - Users
+ @param cWallet - Wallet
+ @param cWhitelist - Whitelist
+ @param password - Password
+ 
+ @return Returns Connection object
+ */
 - (BSConnection *)initConnectionWithID:(NSString *)cID
 							  apiToken:(NSString *)cAPIToken
 							 callbacks:(BSCallbacks *)cCallbacks
@@ -95,14 +120,35 @@
 							 whitelist:(NSArray *)cWhitelist
 							  password:(NSString *)password;
 
-//Copy constructor with new API token
+/** Copy constructor with new API token
+ 
+ @param connectionModel - Connection
+ @param newToken - New API token
+ 
+ @return Returns Connection object
+ */
 - (BSConnection *)initWithConnectionModel:(BSConnection *)connectionModel
 							 withNewToken:(NSString *)newToken;
 
-//Copy constructor with new password
+/** Copy constructor with new password
+ 
+ @param connectionModel - Connection
+ @param newPassword - New password
+ 
+ @return Returns Connection object
+ */
 - (BSConnection *)initWithConnectionModel:(BSConnection *)connectionModel
 						  withNewPassword:(NSString *)newPassword;
 
+/** Init Connection with ID, label, system and type
+ 
+ @param cID - Connection ID
+ @param cLabel - Label
+ @param cSystemID - SystemID
+ @param cType - Connection type
+ 
+ @return Returns Connection object
+ */
 - (BSConnection *)initConnectionWithID:(NSString *)cID
 								 label:(NSString *)cLabel
 							  systemID:(NSString *)cSystemID
@@ -113,6 +159,8 @@
  
 	If User token is entered current connection will return default connection 
 	for that user.
+ 
+ @return Returns Connection object
  */
 + (BSConnection *)currentConnection;
 
@@ -142,6 +190,8 @@
  
  @param message - Message object for sending
  @param block - Block object that returns message if sending was successfull or error
+ 
+ @return Returns number of messages
  */
 - (NSInteger)sendSMS:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, id error))block;
 
@@ -149,6 +199,8 @@
  
  @param messages - Array of message objects for sending
  @param block - Block object that returns array of messages if sending was successfull or errors
+ 
+ @return Returns number on messages
  */
 - (NSInteger)sendMultipleSMS:(NSArray *)messages withCompletionBlock:(void(^)(NSArray *messages, id error))block;
 
@@ -156,6 +208,8 @@
 	based on character count and encoding
  
  @param message - Message object to calculate message count
+ 
+ @return Returns number of messages
  */
 - (NSInteger)smsCountForMessage:(BSMessage *)message;
 
@@ -164,6 +218,8 @@
 	Message count is sum of calculated message count for every message in array
  
  @param messages - Array of message objects to calculate message count
+ 
+ @return Returns number of messages
  */
 - (NSInteger)smsCountForMessages:(NSArray *)messages;
 

@@ -94,8 +94,35 @@
  */
 @property (nonatomic, strong, readonly) NSArray *errors;
 
+/** Init Message with ID, errors, message
+ 
+ @param mshID - Message ID
+ @param errors - Errors
+ @param msg - Message
+ 
+ @return Returns Message object
+ */
 - (BSMessage *)initMessageWithID:(NSString *)mshID andErrors:(NSArray *)errors forMessage:(BSMessage *)msg;
 
+/** Init Message with message, receiver, sender, batchID, batch label, 
+	send time, encoding, type, valid to, receive dlr, groups, UDH, DCS
+ 
+ @param rMessage - Message body
+ @param rReceiver - Receiver
+ @param rSender - Sender
+ @param rBatchID - Batch ID
+ @param rBatchLabel - Batch Label
+ @param rSendTime - Send time
+ @param rEncoding - Encoding
+ @param rType - Type
+ @param rValidTo - Valid to
+ @param rReceiveDLR - Receive DLR
+ @param rGroups - Groups
+ @param rUDH - UDH
+ @param rDCS - DCS
+ 
+ @return Returns Message object
+ */
 - (BSMessage *)initWithMessage:(NSString *)rMessage
 					  receiver:(id)rReceiver
 						sender:(NSString *)rSender
@@ -110,6 +137,17 @@
 				userDataHeader:(NSString *)rUDH
 			dataCodingSettings:(NSString *)rDCS;
 
+/** Init Message with ID, batch, recipients, sender, errors, groups
+ 
+ @param mID - Message ID
+ @param mBatch - Batch
+ @param mRecipients - Recipients
+ @param mSender - Sender
+ @param mErrors - Errors
+ @param mGroups - Groups
+ 
+ @return Returns Message object
+ */
 - (BSMessage *)initMessageWithID:(NSString *)mID
 						   batch:(BSBatch *)mBatch
 					  recipients:(id)mRecipients
@@ -122,6 +160,8 @@
  @param body - Message body
  @param sender - Message sender (alphanumeric)
  @param recipient - Message recipient (numeric)
+ 
+ @return Returns Message object
  */
 + (BSMessage *)messageWithBody:(NSString *)body from:(NSString *)sender to:(NSString *)recipient;
 
@@ -130,6 +170,8 @@
  @param body - Message body
  @param sender - Message sender (alphanumeric)
  @param recipients - Array of message recipients (array of numbers)
+ 
+ @return Returns Message object
  */
 + (BSMessage *)messageWithBody:(NSString *)body from:(NSString *)sender toMultiple:(NSArray *)recipients;
 
@@ -138,6 +180,8 @@
  @param body - Message body
  @param sender - Message sender (alphanumeric)
  @param groups - Array of group recipients (array of groups, array of group IDs)
+ 
+ @return Returns Message object
  */
 + (BSMessage *)messageWithBody:(NSString *)body from:(NSString *)sender toGroups:(NSArray *)groups;
 
@@ -146,6 +190,8 @@
  @param body - Message body
  @param sender - Message sender (alphanumeric)
  @param recipient - Message recipient (numeric)
+ 
+ @return Returns Message object
  */
 + (BSMessage *)flashMessageWithBody:(NSString *)body from:(NSString *)sender to:(NSString *)recipient;
 
@@ -154,6 +200,8 @@
  @param body - Message body
  @param sender - Message sender (alphanumeric)
  @param recipients - Array of message recipients (array of numbers)
+ 
+ @return Returns Message object
  */
 + (BSMessage *)flashMessageWithBody:(NSString *)body from:(NSString *)sender toMultiple:(NSArray *)recipients;
 
@@ -162,6 +210,8 @@
  @param body - Message body
  @param sender - Message sender (alphanumeric)
  @param groups - Array of group recipients (array of groups, array of group IDs)
+ 
+ @return Returns Message object
  */
 + (BSMessage *)flashMessageWithBody:(NSString *)body from:(NSString *)sender toGroups:(NSArray *)groups;
 
@@ -170,6 +220,8 @@
  @param body - Message body
  @param sender - Message sender (alphanumeric)
  @param recipient - Message recipient (numeric)
+ 
+ @return Returns Message object
  */
 + (BSMessage *)binaryMessageWithBody:(NSString *)body from:(NSString *)sender to:(NSString *)recipient;
 
@@ -178,6 +230,8 @@
  @param body - Message body
  @param sender - Message sender (alphanumeric)
  @param recipients - Array of message recipients (array of numbers)
+ 
+ @return Returns Message object
  */
 + (BSMessage *)binaryMessageWithBody:(NSString *)body from:(NSString *)sender toMultiple:(NSArray *)recipients;
 
@@ -186,6 +240,8 @@
  @param body - Message body
  @param sender - Message sender (alphanumeric)
  @param groups - Array of group recipients (array of groups, array of group IDs)
+ 
+ @return Returns Message object 
  */
 + (BSMessage *)binaryMessageWithBody:(NSString *)body from:(NSString *)sender toGroups:(NSArray *)groups;
 

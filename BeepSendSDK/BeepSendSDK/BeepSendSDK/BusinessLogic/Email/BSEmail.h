@@ -18,7 +18,21 @@
  */
 @property (nonatomic, strong, readonly) NSString *address;
 
+/** Init Email with email ID, Address
+ 
+ @param eID - Email ID
+ @param address - Address
+ 
+ @return Returns Email object
+ */
 - (BSEmail *)initEmailWithID:(NSString *)eID atAddress:(NSString *)address;
+
+/** Init Email with Address
+ 
+ @param address - Address
+ 
+ @return Returns Email object
+ */
 - (BSEmail *)initEmailWithAddress:(NSString *)address;
 
 @end

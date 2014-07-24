@@ -18,7 +18,21 @@
  */
 @property (nonatomic, strong, readonly) NSString *name;
 
+/** Init User type with ID
+ 
+ @param uID - User type ID
+ 
+ @return Returns UserType object
+ */
 - (BSUserType *)initUserTypeWithID:(NSString *)uID;
+
+/** Init User type with ID and name
+ 
+ @param uID - User type ID
+ @param uName - User type name
+ 
+ @return Returns UserType object
+ */
 - (BSUserType *)initUserTypeWithID:(NSString *)uID
 							  name:(NSString *)uName;
 

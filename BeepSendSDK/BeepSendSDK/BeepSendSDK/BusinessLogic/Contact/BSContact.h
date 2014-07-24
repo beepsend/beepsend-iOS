@@ -36,6 +36,17 @@
  */
 @property (nonatomic, strong) BSGroup *group;
 
+/** Init Contact with ID, name, phone, group, errors
+ 
+ @param cID - Contact ID
+ @param firstName - First name
+ @param lastName - Last name
+ @param phoneNumber - Phone number
+ @param group - Group
+ @param errors - Errors
+ 
+ @return Returns Contact object
+ */
 - (BSContact *)initContactWithID:(NSString *)cID
 					   firstName:(NSString *)firstName
 						lastName:(NSString *)lastName
@@ -43,10 +54,20 @@
 						   group:(BSGroup *)group
 						  errors:(NSArray *)errors;
 
+/** Init Contact with name, phone, group
+ 
+ @param phoneNumber - Phone number
+ @param firstName - First name
+ @param lastName - Last name
+ @param group - Group
+ 
+ @return Returns Contact object
+ */
 - (BSContact *)initContactWithPhoneNumber:(NSString *)phoneNumber
 								firstName:(NSString *)firstName
 								 lastName:(NSString *)lastName
 									group:(BSGroup *)group;
+
 /** If changes were made to contact use update method to save changes.
  */
 - (void)updateContact;

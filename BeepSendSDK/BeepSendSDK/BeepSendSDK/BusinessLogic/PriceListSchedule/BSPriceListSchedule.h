@@ -19,6 +19,13 @@
  */
 @property (nonatomic, strong, readonly) NSString *scheduleName;
 
+/** Init Pricelist schedule with ID, name
+ 
+ @param psID - Pricelist schedule ID
+ @param psName - Name
+ 
+ @return Returns Pricelist schedule object
+ */
 - (BSPriceListSchedule *)initPricelistScheduleWithID:(NSString *)psID
 											 andName:(NSString *)psName;
 

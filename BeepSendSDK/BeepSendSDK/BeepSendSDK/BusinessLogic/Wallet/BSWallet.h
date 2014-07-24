@@ -37,6 +37,17 @@
  */
 @property (nonatomic, strong, readonly) NSArray *users;
 
+/** Init Pricelist with wallet ID, name, balance, min balance, connections, users
+ 
+ @param wID - Wallet ID
+ @param wName - Name
+ @param wBalance - Balance
+ @param wMinBalance - Minimum balance
+ @param wConnections - Connections
+ @param wUsers - Users
+ 
+ @return Returns Wallet object
+ */
 - (BSWallet *)initWalletWithID:(NSString *)wID
 						 named:(NSString *)wName
 					   balance:(NSNumber *)wBalance
@@ -44,10 +55,25 @@
 				   connections:(NSArray *)wConnections
 						 users:(NSArray *)wUsers;
 
+/** Init Pricelist with wallet ID, name, balance
+ 
+ @param wID - Wallet ID
+ @param wName - Name
+ @param wBalance - Balance
+ 
+ @return Returns Wallet object
+ */
 - (BSWallet *)initWalletWithID:(NSString *)wID
 						  name:(NSString *)wName
 					   balance:(NSNumber *)wBalance;
 
+/** Init Pricelist with wallet name, limit
+ 
+ @param wName - Name
+ @param wLimit - Balance
+ 
+ @return Returns Wallet object
+ */
 - (BSWallet *)initWalletWithName:(NSString *)wName
 						   limit:(NSNumber *)wLimit;
 

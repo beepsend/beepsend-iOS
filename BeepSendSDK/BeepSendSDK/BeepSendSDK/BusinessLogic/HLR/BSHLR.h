@@ -49,6 +49,19 @@
 @property (nonatomic, strong, readonly) NSString *phoneNumber;
 @property (nonatomic, strong, readonly) NSArray *errors;
 
+/** Init HLR with ID, timestamp, dlr, mccmnc, imsi, prefix, ported, roaming
+ 
+ @param hlrID - HLR ID
+ @param hlrTimestamp - Timestamp
+ @param hlrDlrReport - DLR
+ @param hlrMccMnc - MCCMNC
+ @param hlrImsi - IMSI
+ @param hlrPrefix - HLR Prefix
+ @param isPorted - Ported
+ @param isInRoaming - Roaming
+ 
+ @return Returns HLR object
+ */
 - (BSHLR *)initHLRWithID:(NSString *)hlrID
 			   timestamp:(BSTimestamps *)hlrTimestamp
 			   dlrReport:(BSDLRReport *)hlrDlrReport
@@ -58,6 +71,13 @@
 				  potred:(NSNumber *)isPorted
 			   inRoaming:(NSNumber *)isInRoaming;
 
+/** Init HLR with phone number, errors
+ 
+ @param phoneNumber - Phone number
+ @param errors - Errors
+ 
+ @return Returns HLR object
+ */
 - (BSHLR *)initHLRWithNumber:(NSString *)phoneNumber andErrors:(NSArray *)errors;
 
 @end

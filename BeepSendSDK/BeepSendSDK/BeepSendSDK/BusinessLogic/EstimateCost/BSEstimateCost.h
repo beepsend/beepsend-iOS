@@ -20,6 +20,13 @@
  */
 @property (nonatomic, strong, readonly) NSNumber *totalCost;
 
+/** Init Estimate cost with recipients, total cost
+ 
+ @param recipients - Recipients
+ @param totalCost - Total cost
+
+ @return Returns Estimate cost object
+ */
 - (BSEstimateCost *)initWithRecipients:(NSArray *)recipients totalCost:(NSNumber *)totalCost;
 
 @end

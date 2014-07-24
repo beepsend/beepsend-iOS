@@ -67,6 +67,24 @@
  */
 @property (nonatomic, strong, readonly) NSDate *validTo;
 
+/** Init Lookup with ID, batch, message, connection, data coding, dlr, sender, mccmnc,
+ price, timestamp, recipient, valid to
+ 
+ @param lID - Lookup ID
+ @param lBatch - Batch
+ @param lMessage - Message
+ @param lConnection - Connection
+ @param lDataCoding - Data coding
+ @param lDLR - DLR
+ @param lSender - Sender
+ @param lMccmnc - MCCMNC
+ @param lPrice - Price
+ @param lTimestamp - Timestamp
+ @param lRecipient - Recipient
+ @param lValidTo - Valid to
+ 
+ @return Returns Lookup object
+ */
 - (BSLookup *)initLookupWithID:(NSString *)lID
 							  batch:(BSBatch *)lBatch
 							message:(NSString *)lMessage

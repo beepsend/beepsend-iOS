@@ -28,6 +28,15 @@
  */
 @property (nonatomic, strong, readonly) BSStatistics *statistic;
 
+/** Init Analytics Batch with AnalyticsBatch ID, Label, Total, Statistics
+ 
+ @param abID - AnalyticsBatch ID
+ @param abLabel - Label
+ @param abTotal - Total
+ @param abStats - Stats
+ 
+ @return Returns Analytics Batch object
+ */
 - (BSAnalyticsBatch *)initWithID:(NSString *)abID label:(NSString *)abLabel total:(NSNumber *)abTotal statistics:(BSStatistics *)abStats;
 
 @end

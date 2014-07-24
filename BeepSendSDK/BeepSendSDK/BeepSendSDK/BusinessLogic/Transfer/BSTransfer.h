@@ -24,6 +24,14 @@
  */
 @property (nonatomic, strong, readonly) NSNumber *amount;
 
+/** Init Transaction with wallet1, Wallet2, ammount
+ 
+ @param wallet1 - Wallet from
+ @param wallet2 - Wallet to
+ @param amount - Ammount
+ 
+ @return Returns Transaction object
+ */
 - (BSTransfer *)initTransferWithSourceWallet:(BSWallet *)wallet1 destinationWallet:(BSWallet *)wallet2 withAmount:(NSNumber *)amount;
 
 @end

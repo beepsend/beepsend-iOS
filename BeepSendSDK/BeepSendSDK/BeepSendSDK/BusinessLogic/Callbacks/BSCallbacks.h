@@ -22,6 +22,14 @@
  */
 @property (nonatomic, strong) NSString *method;
 
+/** Init Callbacks with method, DLR, MO
+ 
+ @param cMethod - Method
+ @param cDlr - DLR
+ @param cMo - MO
+ 
+ @return Returns Callbacks object
+ */
 - (BSCallbacks *)initCallbackWithMethod:(NSString *)cMethod
 									dlr:(NSString *)cDlr
 									 mo:(NSString *)cMo;

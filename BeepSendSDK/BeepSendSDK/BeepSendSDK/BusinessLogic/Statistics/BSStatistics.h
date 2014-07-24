@@ -38,6 +38,18 @@
  */
 @property (nonatomic, strong, readonly) NSNumber *messagesInProcessOfSending;
 
+/** Init Statistic with delivered, mo, expired, unknown, rejected, undelivered, nodlr
+ 
+ @param sDelivered - Delivered
+ @param sMo - MO
+ @param sExpired - Expired
+ @param sUnknown - Unknown
+ @param sRejected - Rejected
+ @param sUndelivered - Undelivered
+ @param sNoDlr - NO DLR
+ 
+ @return Returns Statistic object
+ */
 - (BSStatistics *)initWithDelivered:(NSNumber *)sDelivered
 								 mo:(NSNumber *)sMo
 							expired:(NSNumber *)sExpired

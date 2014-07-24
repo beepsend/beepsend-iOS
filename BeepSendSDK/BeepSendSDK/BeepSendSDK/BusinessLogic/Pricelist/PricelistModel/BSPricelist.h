@@ -36,6 +36,17 @@
  */
 @property (nonatomic, strong, readonly) NSDate *firstViewed;
 
+/** Init Pricelist with pricelist ID, networks, Count, Saved, Active, first viewed
+ 
+ @param pID - Pricelist ID
+ @param pNetworks - Networks
+ @param nCount - Count
+ @param nSaved - Saved
+ @param active - Active
+ @param nFirstView - First viewed
+ 
+ @return Returns Pricelist object
+ */
 - (BSPricelist *)initPricelistWithID:(NSString *)pID
 							networks:(NSArray *)pNetworks
 						networkCount:(NSNumber *)nCount
