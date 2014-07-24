@@ -108,7 +108,11 @@
 							  systemID:(NSString *)cSystemID
 								  type:(BSConnectionType)cType;
 
-/** 
+/** If Connection token is entered current connection will return connection for 
+	given API token.
+ 
+	If User token is entered current connection will return default connection 
+	for that user.
  */
 + (BSConnection *)currentConnection;
 

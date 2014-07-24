@@ -15,37 +15,57 @@
 
 @interface BSUser : BSGeneralModel
 
-//User ID
+/** User ID
+ */
 @property (nonatomic, strong, readonly) NSString *userID;
 
-//Editable data
+/** Name to recognise your User by.
+ */
 @property (nonatomic, strong) NSString *name;
+
+/** User email.
+ */
 @property (nonatomic, strong) NSString *email;
+
+/** User phone number.
+ */
 @property (nonatomic, strong) NSString *phone;
 
-//Users default connection
+/** Users default connection
+ */
 @property (nonatomic, strong) BSConnection *defaultConnection;
 
-//Customer that ownes user
+/** What customer the user is associated with.
+ */
 @property (nonatomic, strong, readonly) NSString *customerName;
 
-//Users API token
+/** API Token belonging to this User.
+ */
 @property (nonatomic, strong, readonly) NSString *apiToken;
 
-//User types
+/** List of types that applies to this user.
+ */
 @property (nonatomic, strong) NSArray *userTypes;
 
-//Simple permission model. Allows access to all version 2 endpoints.
+/** Simple permission model. Allows access to all version 2 endpoints.
+ */
 @property (nonatomic, strong, readonly) NSNumber *maxLevel;
 
-//Users password
+/** Users password
+ */
 @property (nonatomic, strong, readonly) NSString *password;
+
+/** New password. Used when user wants to change password.
+ */
 @property (nonatomic, strong, readonly) NSString *theNewPassword;
 
-//Is user verified
+/** Is user verified
+ */
 @property (nonatomic, strong, readonly) BSVerified *verified;
 
-//Accessible only if customer details are enquired 
+/**	What customer the user is associated with.
+	Accessible only if customer details are enquired
+ */
 @property (nonatomic, strong, readonly) BSCustomer *customer;
 
 - (BSUser *)initUserWithID:(NSString *)uID
@@ -78,44 +98,107 @@
 //Create user object with ID
 - (BSUser *)initWithUserID:(NSString *)uID;
 
-//Initiate user with API token
+/** Returns User associated with entered API token
+ */
 + (BSUser *)currentUser;
 
-//After made changes with name, phone or defaultConnection
-//it is necessary to call method updateUser
+/** If changes were made to user use update method to save changes.
+	Available properties to update: name, phone or defaultConnection
+ */
 - (void)updateUser;
 
-//For updateing email address user needs to enter password
+/** For updateing email address user needs to enter password
+ 
+ @param password - Users password
+ */
 - (void)updateUserEmailWithPassword:(NSString *)password;
 
-//Method for changing password
+/** Method for changing password
+ 
+ @param currentPassword - Current users password
+ @param newPassword - New user password
+ */
 - (void)changePassword:(NSString *)currentPassword withNewPassword:(NSString *)newPassword;
 
-//If API token is compromised use this method for token reset
+/** If API token is compromised use this method for token reset
+ 
+ @param password - Users password
+ */
 - (void)resetUserTokenWithPassword:(NSString *)password;
 
-//Async method for retrieving users connections
+/** Async method for retrieving all user connections
+ 
+ @param block - Returns array of user connections
+ */
 - (void)getAvailableConnectionsOnCompletion:(void(^)(NSArray *connections))block;
-//Sync method for retrieving users connections
+
+/** Sync method for retrieving all user connections
+ */
 - (NSArray *)getAvailableConnections;
 
+/** Method for retrieving customer details
+ 
+ @param block - Returns customer details
+ */
 - (void)getCustomerDetailsOnCompletion:(void(^)(BSCustomer *customer, id error))block;
 
+/** Async method for retrieving all available wallets
+ 
+ @param block - Returns array of user wallets
+ */
 - (void)getAvailableWalletsOnCompletion:(void(^)(NSArray *wallets, id error))block;
+
+/** Sync method for retrieving all user wallets
+ */
 - (NSArray *)getAvailableWallets;
 
-//Contacts
+/** Async method for retrieving user contacts
+ 
+ @param block - Returns array of user contacts
+ */
 - (void)getAllContactsOnCompletion:(void(^)(NSArray *contacts, id error))block;
+
+/** Sync method for retrieving user contacts
+ */
 - (NSArray *)getAllContacts;
 
+/** Add list of contacts 
+ 
+ @param contacts - Array of contacts to add
+ @param block - Returns added list of contacts or error if add failed
+ */
 - (void)addMultipleContacts:(NSArray *)contacts onCompletion:(void(^)(NSArray *response, id error))block;
 
-- (void)searchContactsWithQuery:(NSString *)query inGroup:(BSGroup *)group limit:(NSNumber *)limit onCompletion:(void(^)(NSArray *results, id error))block;
+/** Search contacts
+ 
+ @param query - Will search entries matching on id, msisdn, firstname and lastname.
+ @param group - Specify which group to search in.
+ @param limit - Limit the amount of search results.
+ @param block - Returns array of results
+ */
+- (void)searchContactsWithQuery:(NSString *)query
+						inGroup:(BSGroup *)group
+						  limit:(NSNumber *)limit
+				   onCompletion:(void(^)(NSArray *results, id error))block;
 
-//Groups
+/** Async method for retrieving user groups
+ 
+ @param block - Returns array of user groups
+ */
 - (void)getAllGroupsOnCompletion:(void(^)(NSArray *groups, id error))block;
+
+/** Sync method for retrieving user groups
+ */
 - (NSArray *)getAllGroups;
 
-- (void)searchGroupsWithQuery:(NSString *)query limit:(NSNumber *)limit onCompletion:(void(^)(NSArray *results, id error))block;
+/** Search groups
+ 
+ @param query - Will search entries with matching name.
+ @param limit - Limit the amount of search results.
+ @param block - Returns array of results
+ */
+- (void)searchGroupsWithQuery:(NSString *)query
+						limit:(NSNumber *)limit
+				 onCompletion:(void(^)(NSArray *results, id error))block;
 
 @end
