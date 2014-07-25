@@ -12,21 +12,22 @@
 #import "BSEmail.h"
 #import "BSTransfer.h"
 #import "BSLog.h"
+#import "BSError.h"
 
 @interface BSWalletService : BSBaseService
 
-- (void)getAllWalletsWithCompletionBlock:(void(^)(NSArray *wallets, id error))block;
+- (void)getAllWalletsWithCompletionBlock:(void(^)(NSArray *wallets, NSArray *errors))block;
 
-- (void)getWalletDetailsForID:(NSString *)walletID withCompletionBlock:(void(^)(BSWallet *wallet, id error))block;
+- (void)getWalletDetailsForID:(NSString *)walletID withCompletionBlock:(void(^)(BSWallet *wallet, NSArray *errors))block;
 
-- (void)updateWallet:(BSWallet *)wallet withName:(NSString *)wName notifyLimit:(NSNumber *)wLimit withCompletionBlock:(void(^)(BSWallet *wallet, id error))block;
+- (void)updateWallet:(BSWallet *)wallet withName:(NSString *)wName notifyLimit:(NSNumber *)wLimit withCompletionBlock:(void(^)(BSWallet *wallet, NSArray *errors))block;
 
-- (void)getEmailsForWallet:(BSWallet *)wallet withCompletionBlock:(void(^)(NSArray *emails, id error))block;
-- (void)getEmailForWallet:(BSWallet *)wallet andEmailID:(NSString *)emailID withCompletionBlock:(void(^)(BSEmail *email, id error))block;
-- (void)addEmail:(NSString *)email toWallet:(BSWallet *)wallet withCompletionBlock:(void(^)(BSEmail *email, id error))block;
-- (void)deleteEmailInWallet:(BSWallet *)wallet email:(BSEmail *)email withCompletionBlock:(void(^)(BOOL success, id error))block;
+- (void)getEmailsForWallet:(BSWallet *)wallet withCompletionBlock:(void(^)(NSArray *emails, NSArray *errors))block;
+- (void)getEmailForWallet:(BSWallet *)wallet andEmailID:(NSString *)emailID withCompletionBlock:(void(^)(BSEmail *email, NSArray *errors))block;
+- (void)addEmail:(NSString *)email toWallet:(BSWallet *)wallet withCompletionBlock:(void(^)(BSEmail *email, NSArray *errors))block;
+- (void)deleteEmailInWallet:(BSWallet *)wallet email:(BSEmail *)email withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block;
 
-- (void)getTransactionLogForWallet:(BSWallet *)wallet since:(NSString *)sinceID max:(NSString *)maxID count:(NSNumber *)count withCompletionBlock:(void(^)(NSArray *log, id error))block;
-- (void)transferFunds:(NSNumber *)ammount fromWallet:(BSWallet *)wallet1 toWallet:(BSWallet *)wallet2 withCompletionBlock:(void(^)(BSTransfer *transfer, id error))block;
+- (void)getTransactionLogForWallet:(BSWallet *)wallet since:(NSString *)sinceID max:(NSString *)maxID count:(NSNumber *)count withCompletionBlock:(void(^)(NSArray *log, NSArray *errors))block;
+- (void)transferFunds:(NSNumber *)ammount fromWallet:(BSWallet *)wallet1 toWallet:(BSWallet *)wallet2 withCompletionBlock:(void(^)(BSTransfer *transfer, NSArray *errors))block;
 
 @end

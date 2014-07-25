@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class BSConnection;
-
 @interface BSHLRViewController : UIViewController
 
 - (BSHLRViewController *)initWithConnection:(BSConnection *)connection;

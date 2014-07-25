@@ -1,3 +1,4 @@
+
 //
 //  BSHLRService.m
 //  BeepSendSDK
@@ -31,7 +32,7 @@
 
 - (void)doImmediateHLRForNumber:(NSString *)number
 				 withConnection:(BSConnection *)connection
-			withCompletionBlock:(void(^)(BSHLR *hlr, id error))block
+			withCompletionBlock:(void(^)(BSHLR *hlr, NSArray *errors))block
 {
 	NSString *method = [BSAPIConfiguration hlrForNumber:number];
 	NSDictionary *params = connection ? @{ @"connection" : connection.objectID } : @{};
@@ -40,22 +41,27 @@
 				withParameters:params
 				  onCompletion:^(id response, id error) {
 					  
+					  BSHLR *hlr = [[BSAPHLR classFromDict:response] convertToModel];
+					  
 					  if (!error) {
-						  
-						  BSHLR *hlr = [[BSAPHLR classFromDict:response] convertToModel];
-						  
-						  block(hlr, error);
+
+						  block(hlr, nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+						  
+						  if (hlr.errors.count>0) {
+							  block(nil, hlr.errors);
+						  }
+						  else {
+							  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
+						  }
 					  }
 				  }];
 }
 
 - (void)validateHLRForNumber:(NSString *)number
 			  withConnection:(BSConnection *)connection
-		 withCompletionBlock:(void(^)(BSHLR *response, id error))block
+		 withCompletionBlock:(void(^)(BSHLR *response, NSArray *errors))block
 {
 	NSString *method = [BSAPIConfiguration validateHLR];
 	
@@ -65,13 +71,20 @@
 				 withParameters:params
 				  onCompletion:^(id response, id error) {
 					  
+					  BSHLR *hlr = [[BSAPHLRValidateResponse classFromDict:response] convertToModel];
+					  
 					  if (!error) {
 						  
-						  block([[BSAPHLRValidateResponse classFromDict:response] convertToModel], error);
+						  block(hlr, nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+						  
+						  if (hlr.errors.count>0) {
+							  block(nil, hlr.errors);
+						  }
+						  else {
+							  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
+						  }
 					  }
 				  }];
 }

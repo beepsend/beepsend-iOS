@@ -67,13 +67,14 @@
 }
 
 - (BSHLR *)initHLRWithID:(NSString *)hlrID
-					timestamp:(BSTimestamps *)hlrTimestamp
-					dlrReport:(BSDLRReport *)hlrDlrReport
-					   mccmnc:(BSMCCMNC *)hlrMccMnc
-						 imsi:(NSString *)hlrImsi
-					   prefix:(BSMCCMNC *)hlrPrefix
-					   potred:(NSNumber *)isPorted
-					inRoaming:(NSNumber *)isInRoaming
+			   timestamp:(BSTimestamps *)hlrTimestamp
+			   dlrReport:(BSDLRReport *)hlrDlrReport
+				  mccmnc:(BSMCCMNC *)hlrMccMnc
+					imsi:(NSString *)hlrImsi
+				  prefix:(BSMCCMNC *)hlrPrefix
+				  potred:(NSNumber *)isPorted
+			   inRoaming:(NSNumber *)isInRoaming
+			  withErrors:(NSArray *)errors
 {
 	if (self = [super initWithID:hlrID andTitle:@"HLR"]) {
 		_timestamps = hlrTimestamp;
@@ -83,6 +84,7 @@
 		_prefix = hlrPrefix;
 		_ported = isPorted;
 		_roaming = isInRoaming;
+		_errors = errors;
 	}
 	return self;
 }

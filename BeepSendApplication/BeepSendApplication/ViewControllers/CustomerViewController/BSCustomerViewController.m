@@ -10,9 +10,6 @@
 
 #import "BSCustomerView.h"
 
-#import "BSUser.h"
-#import "BSCustomer.h"
-
 @interface BSCustomerViewController ()
 
 @property (nonatomic, weak) UILabel *labelName;
@@ -125,7 +122,7 @@
 	[self.view addSubview:viewLoader];
 	[self.view addSubview:activityIndicator];
 	
-	[[BSUser currentUser] getCustomerDetailsOnCompletion:^(BSCustomer *customer, id error) {
+	[[BSUser currentUser] getCustomerDetailsOnCompletion:^(BSCustomer *customer, NSArray *errors) {
 		
 		_labelName.text = customer.name;
 		_labelPhone.text = customer.phoneNumber;

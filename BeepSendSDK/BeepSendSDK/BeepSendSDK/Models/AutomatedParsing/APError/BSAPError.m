@@ -16,17 +16,27 @@
 
 + (id)classFromDict:(NSDictionary *)dictionary
 {
-	if (![dictionary isKindOfClass:[NSDictionary class]]) {
+	if (![dictionary isKindOfClass:[NSDictionary class]] && ![dictionary isKindOfClass:[NSString class]]) {
 		return nil;
 	}
 	
-	BSAPError *error = [super classFromDict:dictionary];
-	return error;
+	if ([dictionary isKindOfClass:[NSDictionary class]]) {
+		BSAPError *error = [super classFromDict:dictionary];
+		return error;
+	}
+	else if	([dictionary isKindOfClass:[NSString class]]) {
+		BSAPError *error = [[BSAPError alloc] init];
+		error.code = @0;
+		error.description = (NSString *)dictionary;
+		return error;
+	}
+	
+	return nil;
 }
 
 - (id)convertToModel
 {
-	return [[BSError alloc] initWithCode:@0 andDescription:@""];
+	return [[BSError alloc] initWithCode:_code andDescription:_description];
 }
 
 #pragma mark - Public methods
@@ -39,4 +49,14 @@
 	}
 	return [NSArray arrayWithArray:results];
 }
+
++ (NSArray *)arrayOfModelsFromArrayOfObjects:(NSArray *)array
+{
+	NSMutableArray *results = [@[] mutableCopy];
+	for (id object in array) {
+		[results addObject:[object convertToModel]];
+	}
+	return [NSArray arrayWithArray:results];
+}
+
 @end

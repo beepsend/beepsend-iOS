@@ -10,4 +10,10 @@
 
 @interface BSAPError : BSSerializableObject
 
+@property (nonatomic, strong) NSNumber *code;
+@property (nonatomic, strong) NSString *description;
+
++ (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
++ (NSArray *)arrayOfModelsFromArrayOfObjects:(NSArray *)array;
+
 @end

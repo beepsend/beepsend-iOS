@@ -193,7 +193,7 @@
  
  @return Returns number of messages
  */
-- (NSInteger)sendSMS:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, id error))block;
+- (NSInteger)sendSMS:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, NSArray *errors))block;
 
 /** Method sends multiple messages and returns number of messages
  
@@ -202,7 +202,7 @@
  
  @return Returns number on messages
  */
-- (NSInteger)sendMultipleSMS:(NSArray *)messages withCompletionBlock:(void(^)(NSArray *messages, id error))block;
+- (NSInteger)sendMultipleSMS:(NSArray *)messages withCompletionBlock:(void(^)(NSArray *messages, NSArray *errors))block;
 
 /** Method that calculates number of messages for message
 	based on character count and encoding
@@ -228,7 +228,7 @@
  @param message - Message to validate
  @param block - Returns message without ID or error if validation failed
  */
-- (void)validateSMS:(BSMessage *)message onCompletion:(void(^)(BSMessage *message, id error))block;
+- (void)validateSMS:(BSMessage *)message onCompletion:(void(^)(BSMessage *message, NSArray *errors))block;
 
 /** The API can be utilized to get details of any message sent through Beepsend 
 	no matter if you submitted it via SMPP or HTTP
@@ -236,7 +236,7 @@
  @param message - Message to lookup
  @param block - Returns message lookup or error if lookup failed
  */
-- (void)getDetailsForSMS:(BSMessage *)message onCompletion:(void(^)(BSLookup *lookup, id error))block;
+- (void)getDetailsForSMS:(BSMessage *)message onCompletion:(void(^)(BSLookup *lookup, NSArray *errors))block;
 
 /** Get details regarding multiple sent messages with filters.
  
@@ -254,7 +254,7 @@
 						 beforeDate:(NSDate *)bDate
 						  afterDate:(NSDate *)aDate
 						forNextPage:(BOOL)nextPage
-					   onCompletion:(void(^)(NSArray *lookups, id error))block;
+					   onCompletion:(void(^)(NSArray *lookups, NSArray *errors))block;
 
 /** How many SMS objects to fetch.
  
@@ -267,20 +267,20 @@
  @param batch - Batch with ID
  @param block - Returns batch details
  */
-- (void)getDetailsForBatch:(BSBatch *)batch onCompletion:(void(^)(BSBatch *batch, id error))block;
+- (void)getDetailsForBatch:(BSBatch *)batch onCompletion:(void(^)(BSBatch *batch, NSArray *errors))block;
 
 /** Get previous batches
  
  @param block - Returns array of previous batches
  */
-- (void)getPreviousBatchesOnCompletion:(void(^)(NSArray *batches, id error))block;
+- (void)getPreviousBatchesOnCompletion:(void(^)(NSArray *batches, NSArray *errors))block;
 
 /** Estimates message cost (not necessarily accurate)
  
  @param messages - Messages to estimate price for
  @param block - Returns array of cost per message
  */
-- (void)estimateSMSCostForMessages:(NSArray *)messages onCompletion:(void(^)(NSArray *cost, id error))block;
+- (void)estimateSMSCostForMessages:(NSArray *)messages onCompletion:(void(^)(NSArray *cost, NSArray *errors))block;
 
 /** Method that performs immediate HLR lookup
 	(takes some time)
@@ -288,7 +288,7 @@
  @param phoneNumber - Phone number to perform HLR
  @param block - Returns HLR response or error
  */
-- (void)immediateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, id error))block;
+- (void)immediateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, NSArray *errors))block;
 
 /** Method that performs a dry run of HLR lookup
 	(takes some time)
@@ -296,6 +296,6 @@
  @param phoneNumber - Phone number to perform HLR
  @param block - Returns HLR response or error
  */
-- (void)validateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, id error))black;
+- (void)validateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, NSArray *errors))black;
 
 @end

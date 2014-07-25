@@ -11,29 +11,30 @@
 #import "BSUser.h"
 #import "BSUserType.h"
 #import "BSConnection.h"
+#import "BSError.h"
 
 @interface BSUserService : BSBaseService
 
-- (void)getUserDetailsWithCompletionBlock:(void(^)(BSUser *user, id error))block;
+- (void)getUserDetailsWithCompletionBlock:(void(^)(BSUser *user, NSArray *errors))block;
 
 - (void)updateUserWithName:(NSString *)uName
 					 phone:(NSString *)uPhone
 		 defaultConnection:(BSConnection *)uConnection
 				 userTypes:(NSArray *)uTypes
 			 verifiedTerms:(NSNumber *)uVerifiedTerms
-	   withCompletionBlock:(void(^)(BSUser *user, id error))block;
+	   withCompletionBlock:(void(^)(BSUser *user, NSArray *errors))block;
 
 - (void)updateUserEmail:(NSString *)newEmail
 		   userPassword:(NSString *)password
-	withCompletionBlock:(void(^)(BOOL success, id error))block;
+	withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block;
 
 - (void)updateUserPassword:(NSString *)password
 		   userNewPassword:(NSString *)newPassword
-	   withCompletionBlock:(void(^)(BOOL success, id error))block;
+	   withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block;
 
-- (void)resetUserTokenUsingPassword:(NSString *)password withCompletionBlock:(void(^)(NSString *apiToken, id error))block;
+- (void)resetUserTokenUsingPassword:(NSString *)password withCompletionBlock:(void(^)(NSString *apiToken, NSArray *errors))block;
 
-- (void)verifyEmailWithHash:(NSString *)hash withCompletionBlock:(void(^)(BOOL success, id error))block;
-- (void)verifyPhoneWithHash:(NSString *)hash withCompletionBlock:(void(^)(BOOL success, id error))block;
+- (void)verifyEmailWithHash:(NSString *)hash withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block;
+- (void)verifyPhoneWithHash:(NSString *)hash withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block;
 
 @end

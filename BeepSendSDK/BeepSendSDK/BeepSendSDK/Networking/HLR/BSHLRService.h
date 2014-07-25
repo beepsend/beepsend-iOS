@@ -10,6 +10,7 @@
 
 #import "BSHLR.h"
 #import "BSConnection.h"
+#import "BSError.h"
 
 @interface BSHLRService : BSBaseService
 
@@ -20,10 +21,10 @@
  */
 - (void)doImmediateHLRForNumber:(NSString *)number
 				 withConnection:(BSConnection *)connection
-			withCompletionBlock:(void(^)(BSHLR *hlr, id error))block;
+			withCompletionBlock:(void(^)(BSHLR *hlr, NSArray *errors))block;
 
 - (void)validateHLRForNumber:(NSString *)number
 			  withConnection:(BSConnection *)connection
-		 withCompletionBlock:(void(^)(BSHLR *response, id error))block;
+		 withCompletionBlock:(void(^)(BSHLR *response, NSArray *errors))block;
 
 @end

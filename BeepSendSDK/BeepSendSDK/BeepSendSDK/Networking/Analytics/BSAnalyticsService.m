@@ -34,7 +34,7 @@
 
 #pragma mark - Public methods
 
-- (void)getAnalyticsSummaryFromDate:(NSDate *)startDate toDate:(NSDate *)endDate usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *statistics, id error))block
+- (void)getAnalyticsSummaryFromDate:(NSDate *)startDate toDate:(NSDate *)endDate usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *statistics, NSArray *errors))block
 {
 	BSAPAccumulatedStatisticsRequest *request = [[BSAPAccumulatedStatisticsRequest alloc] init];
 	request.from_date = startDate ? [NSString stringWithFormat:@"%f", [startDate timeIntervalSince1970]] : nil;
@@ -50,16 +50,16 @@
 						  for (BSAPAccumulatedStatisticsResponse *con in [BSAPAccumulatedStatisticsResponse arrayOfObjectsFromArrayOfDictionaries:response]) {
 							  [mArr addObject:[con convertToModel]];
 						  }
-						  block([NSArray arrayWithArray:mArr], error);
+						  block([NSArray arrayWithArray:mArr], nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }
 
-- (void)getNetworkDetailsFromDate:(NSDate *)startDate toDate:(NSDate *)endDate mccmnc:(BSMCCMNC *)mccmnc usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *networkDetails, id error))block
+- (void)getNetworkDetailsFromDate:(NSDate *)startDate toDate:(NSDate *)endDate mccmnc:(BSMCCMNC *)mccmnc usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *networkDetails, NSArray *errors))block
 {
 	BSAPNetworkDetailsRequest *request = [[BSAPNetworkDetailsRequest alloc] init];
 	request.from_date = startDate ? [NSString stringWithFormat:@"%f", [startDate timeIntervalSince1970]] : nil;
@@ -77,16 +77,16 @@
 						  for (BSAPNetworkDetailsResponse *con in [BSAPNetworkDetailsResponse arrayOfObjectsFromArrayOfDictionaries:response]) {
 							  [mArr addObject:[con convertToModel]];
 						  }
-						  block([NSArray arrayWithArray:mArr], error);
+						  block([NSArray arrayWithArray:mArr], nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }
 
-- (void)getDeliveryStatisticsForBach:(BSBatch *)batch withCompletionBlock:(void(^)(NSArray *statistics, id error))block
+- (void)getDeliveryStatisticsForBach:(BSBatch *)batch withCompletionBlock:(void(^)(NSArray *statistics, NSArray *errors))block
 {
 	[super executeGETForMethod:batch?[BSAPIConfiguration analyticsBatchesForID:batch.batchID]:[BSAPIConfiguration analyticsBatches]
 				withParameters:@[]
@@ -97,11 +97,11 @@
 						  for (BSAPAnalyticsBatch *con in [BSAPAnalyticsBatch arrayOfObjectsFromArrayOfDictionaries:response]) {
 							  [mArr addObject:[con convertToModel]];
 						  }
-						  block([NSArray arrayWithArray:mArr], error);
+						  block([NSArray arrayWithArray:mArr], nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }

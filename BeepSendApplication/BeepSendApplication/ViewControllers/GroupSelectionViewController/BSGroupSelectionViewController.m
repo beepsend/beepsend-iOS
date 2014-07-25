@@ -10,9 +10,6 @@
 
 #import "BSContactsView.h"
 
-#import "BSUser.h"
-#import "BSGroup.h"
-
 @interface BSGroupSelectionViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSArray *dataSourceGroups;

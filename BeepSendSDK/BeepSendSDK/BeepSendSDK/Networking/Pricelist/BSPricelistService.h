@@ -10,13 +10,14 @@
 
 #import "BSPricelist.h"
 #import "BSConnection.h"
+#import "BSError.h"
 
 @interface BSPricelistService : BSBaseService
 
-- (void)getCurrentPricelistsForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSPricelist *pricelist, id error))block;
-- (void)getCurrentPricelistsForMeWithCompletionBlock:(void(^)(BSPricelist *pricelist, id error))block;
+- (void)getCurrentPricelistsForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSPricelist *pricelist, NSArray *errors))block;
+- (void)getCurrentPricelistsForMeWithCompletionBlock:(void(^)(BSPricelist *pricelist, NSArray *errors))block;
 
-- (void)getPricelistsForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *pricelists, id error))block;
-- (void)getPriceListsForMeWithCompletionBlock:(void(^)(NSArray *pricelists, id error))block;
+- (void)getPricelistsForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *pricelists, NSArray *errors))block;
+- (void)getPriceListsForMeWithCompletionBlock:(void(^)(NSArray *pricelists, NSArray *errors))block;
 
 @end

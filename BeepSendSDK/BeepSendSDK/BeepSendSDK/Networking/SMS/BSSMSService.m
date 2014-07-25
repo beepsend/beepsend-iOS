@@ -35,7 +35,7 @@
 
 #pragma mark - Public methods
 
-- (void)sendMessage:(BSMessage *)messageRequest usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block
+- (void)sendMessage:(BSMessage *)messageRequest usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSMessage *message, NSArray *errors))block
 {
 	NSString *method;
 	if (messageRequest.groups) {
@@ -61,22 +61,30 @@
 				 withParameters:parameters
 				   onCompletion:^(id response, id error) {
 					   
-					   if (!error) {
+					   if ([response isKindOfClass:[NSArray class]]) {
 						   
 						   NSMutableArray *mArr = [@[] mutableCopy];
 						   for (BSAPMessage *msg in [BSAPMessage arrayOfObjectsFromArrayOfDictionaries:response]) {
 							   [mArr addObject:[msg convertToModel]];
 						   }
-						   block([NSArray arrayWithArray:mArr], error);
+						   
+						   BSMessage *m = mArr[0];
+						   
+						   if (m.errors.count>0) {
+							   block(nil, m.errors);
+						   }
+						   else {
+							   block(m, nil);
+						   }
 					   }
 					   else {
-						   //TODO: Create error handling
-						   block(nil, response);
+
+						   block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					   }
 				   }];
 }
 
-- (void)sendMessages:(NSArray *)messages usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *array, id error))block
+- (void)sendMessages:(NSArray *)messages usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *array, NSArray *errors))block
 {
 	BOOL containGroups = NO;
 	NSMutableArray *parameters = [@[] mutableCopy];
@@ -109,22 +117,30 @@
 				 withParameters:parameters
 				   onCompletion:^(id response, id error) {
 					   
-					   if (!error) {
+					   if ([response isKindOfClass:[NSArray class]]) {
 						   
 						   NSMutableArray *mArr = [@[] mutableCopy];
+						   NSMutableArray *errors = [@[] mutableCopy];
 						   for (BSAPMessage *msg in [BSAPMessage arrayOfObjectsFromArrayOfDictionaries:response]) {
-							   [mArr addObject:[msg convertToModel]];
+							   BSMessage *message = [msg convertToModel];
+							   [mArr addObject:message];
+							   
+							   if (message.errors.count>0) {
+								   [errors addObjectsFromArray:message.errors];
+							   }
 						   }
-						   block([NSArray arrayWithArray:mArr], error);
+						   
+						   block([NSArray arrayWithArray:mArr], errors.count>0 ? errors : nil);
 					   }
 					   else {
-						   //TODO: Create error handling
-						   block(nil, response);
+
+						   block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					   }
 				   }];
 }
 
-- (void)lookupSMS:(BSMessage *)sms withCompletionBlock:(void(^)(BSLookup *lookupResponse, id error))block {
+- (void)lookupSMS:(BSMessage *)sms withCompletionBlock:(void(^)(BSLookup *lookupResponse, NSArray *errors))block
+{
 	
 	[super executeGETForMethod:[BSAPIConfiguration smsLookupWithID:sms.messageID]
 				withParameters:@{}
@@ -134,16 +150,16 @@
 						  
 						  BSLookup *smslookup = [[BSAPSMSLookup classFromDict:response] convertToModel];
 						  
-						  block(smslookup, error);
+						  block(smslookup, nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }
 
-- (void)lookupMultipleSMSSentTo:(NSString *)recipient setnFrom:(NSString *)sender usingConnection:(BSConnection *)connection batch:(BSBatch *)batch sinceID:(NSString *)sinceID maxID:(NSString *)maxID afterDate:(NSDate *)afterDate beforeDate:(NSDate *)beforeDate count:(NSNumber *)count withCompletionBlock:(void(^)(NSArray *lookupResponse, id error))block
+- (void)lookupMultipleSMSSentTo:(NSString *)recipient setnFrom:(NSString *)sender usingConnection:(BSConnection *)connection batch:(BSBatch *)batch sinceID:(NSString *)sinceID maxID:(NSString *)maxID afterDate:(NSDate *)afterDate beforeDate:(NSDate *)beforeDate count:(NSNumber *)count withCompletionBlock:(void(^)(NSArray *lookupResponse, NSArray *error))block
 {
 	NSMutableDictionary *parameters = [@{} mutableCopy];
 	if (recipient) {
@@ -184,16 +200,16 @@
 						   for (BSAPSMSLookup *msg in [BSAPSMSLookup arrayOfObjectsFromArrayOfDictionaries:response]) {
 							   [mArr addObject:[msg convertToModel]];
 						   }
-						   block([NSArray arrayWithArray:mArr], error);
+						   block([NSArray arrayWithArray:mArr], nil);
 					   }
 					   else {
-						   //TODO: Create error handling
-						   block(nil, response);
+
+						   block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					   }
 				   }];
 }
 
-- (void)validateSMSForMessage:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, id error))block
+- (void)validateSMSForMessage:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, NSArray *errors))block
 {
 	NSDictionary *parameters = [[BSAPMessageRequest convertFromMessageRequestModel:message] dictFromClass];
 	BSDLog(@"%@", parameters);
@@ -202,18 +218,26 @@
 				 withParameters:parameters
 				   onCompletion:^(id response, id error) {
 					   
+					   BSMessage *message = [[BSAPMessage classFromDict:response] convertToModel];
+					   
 					   if (!error) {
 						   
-						   block([[BSAPMessage classFromDict:response] convertToModel], error);
+						   block(message, nil);
 					   }
 					   else {
-						   //TODO: Create error handling
-						   block(nil, response);
+						   
+						   if (message.errors.count>0) {
+							   block(nil, message.errors);
+						   }
+						   else {
+							   block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
+						   }
 					   }
+
 				   }];
 }
 
-- (void)getPreviousBatchesWithCompletionBlock:(void(^)(NSArray *bathces, id error))block
+- (void)getPreviousBatchesWithCompletionBlock:(void(^)(NSArray *bathces, NSArray *errors))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration batches]
 				withParameters:@{}
@@ -225,16 +249,16 @@
 						  for (BSAPBatch *batch in [BSAPBatch arrayOfObjectsFromArrayOfDictionaries:response]) {
 							  [mArr addObject:[batch convertToModel]];
 						  }
-						  block([NSArray arrayWithArray:mArr], error);
+						  block([NSArray arrayWithArray:mArr], nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }
 
-- (void)getDetailsForBatch:(NSString *)batchID withCompletionBlock:(void(^)(BSBatch *batch, id error))block
+- (void)getDetailsForBatch:(NSString *)batchID withCompletionBlock:(void(^)(BSBatch *batch, NSArray *errors))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration batchesForID:batchID]
 				withParameters:@{}
@@ -242,16 +266,16 @@
 					  
 					  if (!error) {
 
-						  block([[BSAPBatch classFromDict:response] convertToModel], error);
+						  block([[BSAPBatch classFromDict:response] convertToModel], nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }
 
-- (void)estimateCostForMessages:(NSArray *)messageRequest usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *response, id error))block
+- (void)estimateCostForMessages:(NSArray *)messageRequest usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *response, NSArray *errors))block
 {
 	NSMutableArray *mArr = [@[] mutableCopy];
 	for (BSMessage *mrm in messageRequest) {
@@ -275,11 +299,11 @@
 						   for (BSAPEstimatedCost *msg in [BSAPEstimatedCost arrayOfObjectsFromArrayOfDictionaries:result]) {
 							   [mArr addObject:[msg convertToModel]];
 						   }
-						   block([NSArray arrayWithArray:mArr], error);
+						   block([NSArray arrayWithArray:mArr], nil);
 					   }
 					   else {
-						   //TODO: Create error handling
-						   block(nil, response);
+
+						   block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					   }
 				   }];
 

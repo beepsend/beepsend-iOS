@@ -10,8 +10,6 @@
 
 #import "BSHLRView.h"
 
-#import "BSConnection.h"
-
 @interface BSHLRViewController ()
 
 @property (nonatomic, strong) BSConnection *connection;
@@ -110,11 +108,26 @@
 		return; //You must enter number
 	}
 	
+	__block UIView *viewLoader = [[UIView alloc] initWithFrame:self.view.bounds];
+	[viewLoader setBackgroundColor:[UIColor blackColor]];
+	viewLoader.alpha = 0.6;
+	__block UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	activityIndicator.center = self.view.center;
+	[activityIndicator startAnimating];
+	[self.view addSubview:viewLoader];
+	[self.view addSubview:activityIndicator];
+	
+	[_textFieldNumberToCheck resignFirstResponder];
+	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-	[_connection validateHLRForNumber:_textFieldNumberToCheck.text onCompletion:^(BSHLR *hlr, id error) {
+	[_connection validateHLRForNumber:_textFieldNumberToCheck.text onCompletion:^(BSHLR *hlr, NSArray *errors) {
 		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 		
-		if (error) {
+		[viewLoader removeFromSuperview];
+		[activityIndicator stopAnimating];
+		[activityIndicator removeFromSuperview];
+		
+		if (errors && errors.count>0) {
 			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") message:NSLocalizedString(@"There was an error validating HLR for given number", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
 		}
 		else {
@@ -130,11 +143,26 @@
 		return; //You must enter number
 	}
 	
+	__block UIView *viewLoader = [[UIView alloc] initWithFrame:self.view.bounds];
+	[viewLoader setBackgroundColor:[UIColor blackColor]];
+	viewLoader.alpha = 0.6;
+	__block UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	activityIndicator.center = self.view.center;
+	[activityIndicator startAnimating];
+	[self.view addSubview:viewLoader];
+	[self.view addSubview:activityIndicator];
+	
+	[_textFieldNumberToCheck resignFirstResponder];
+	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-	[_connection immediateHLRForNumber:_textFieldNumberToCheck.text onCompletion:^(BSHLR *hlr, id error) {
+	[_connection immediateHLRForNumber:_textFieldNumberToCheck.text onCompletion:^(BSHLR *hlr, NSArray *errors) {
 		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 		
-		if (error) {
+		[viewLoader removeFromSuperview];
+		[activityIndicator stopAnimating];
+		[activityIndicator removeFromSuperview];
+		
+		if (errors && errors.count>0) {
 			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") message:NSLocalizedString(@"There was an error performing HLR for given number", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
 		}
 		else {

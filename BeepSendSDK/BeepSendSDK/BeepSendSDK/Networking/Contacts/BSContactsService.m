@@ -29,7 +29,7 @@
 
 #pragma mark - Public methods
 
-- (void)getAllContactsWithCompletionBlock:(void(^)(NSArray *contacts, id error))block
+- (void)getAllContactsWithCompletionBlock:(void(^)(NSArray *contacts, NSArray *errors))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration contacts]
 				withParameters:@{}
@@ -41,11 +41,11 @@
 						  for (BSAPContact *con in [BSAPContact arrayOfObjectsFromArrayOfDictionaries:response]) {
 							  [mArr addObject:[con convertToModel]];
 						  }
-						  block([NSArray arrayWithArray:mArr], error);
+						  block([NSArray arrayWithArray:mArr], nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }
@@ -56,7 +56,7 @@
 				 contactCount:(NSNumber *)count
 					   offset:(NSNumber *)offset
 						 sort:(NSString *)sort
-		  withCompletionBlock:(void(^)(NSArray *contacts, id error))block
+		  withCompletionBlock:(void(^)(NSArray *contacts, NSArray *errors))block
 {
 	BSAPContactsRequests *request = [[BSAPContactsRequests alloc] init];
 	request.group = groupID;
@@ -76,16 +76,16 @@
 						  for (BSAPContact *con in [BSAPContact arrayOfObjectsFromArrayOfDictionaries:response]) {
 							  [mArr addObject:[con convertToModel]];
 						  }
-						  block([NSArray arrayWithArray:mArr], error);
+						  block([NSArray arrayWithArray:mArr], nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }
 
-- (void)addContact:(BSContact *)contact withCompletionBlock:(void(^)(BSContact *contact, id error))block
+- (void)addContact:(BSContact *)contact withCompletionBlock:(void(^)(BSContact *contact, NSArray *errors))block
 {
 	NSDictionary *contactToAdd = [[BSAPContact contactFromContactModel:contact] dictFromClass];
 	
@@ -93,18 +93,25 @@
 				withParameters:contactToAdd
 				  onCompletion:^(id response, id error) {
 					  
+					  BSContact *contact = [[BSAPContact classFromDict:response] convertToModel];
+					  
 					  if (!error) {
 						  
-						  block([[BSAPContact classFromDict:response] convertToModel], error);
+						  block(contact, nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+						  
+						  if (contact.errors.count>0) {
+							  block(nil, contact.errors);
+						  }
+						  else {
+							  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
+						  }
 					  }
 				  }];
 }
 
-- (void)addContacts:(NSArray *)contacts withCompletionBlock:(void(^)(NSArray *contacts, id error))block
+- (void)addContacts:(NSArray *)contacts withCompletionBlock:(void(^)(NSArray *contacts, NSArray *errors))block
 {
 	NSMutableArray *mArr = [@[] mutableCopy];
 	for (BSContact *model in contacts) {
@@ -115,13 +122,24 @@
 				 withParameters:mArr
 				   onCompletion:^(id response, id error) {
 					   
-					   if (!error) {
+					   if ([response isKindOfClass:[NSArray class]]) {
 						   
-						   block(response, error);
+						   NSMutableArray *mArr = [@[] mutableCopy];
+						   NSMutableArray *errors = [@[] mutableCopy];
+						   for (BSAPContact *c in [BSAPContact arrayOfObjectsFromArrayOfDictionaries:response]) {
+							   BSContact *contact = [c convertToModel];
+							   [mArr addObject:contact];
+							   
+							   if (contact.errors.count>0) {
+								   [errors addObjectsFromArray:contact.errors];
+							   }
+						   }
+						   
+						   block([NSArray arrayWithArray:mArr], errors.count>0 ? errors : nil);
 					   }
 					   else {
-						   //TODO: Create error handling
-						   block(nil, response);
+
+						   block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					   }
 				   }];
 }
@@ -132,7 +150,7 @@
 			firstName:(NSString *)firstName
 			 lastName:(NSString *)lastName
 			  groupID:(NSString *)groupID
-  withCompletionBlock:(void(^)(BSContact *contact, id error))block
+  withCompletionBlock:(void(^)(BSContact *contact, NSArray *errors))block
 {
 	
 	NSDictionary *contactToUpdate = [[BSAPContact contactFromContactModel:[[BSContact alloc] initContactWithPhoneNumber:number?number:contact.phoneNumber firstName:firstName lastName:lastName group:[[BSGroup alloc] initGroupWithID:groupID name:nil contacts:nil]]] dictFromClass];
@@ -141,18 +159,25 @@
 				withParameters:contactToUpdate
 				  onCompletion:^(id response, id error) {
 					   
+					  BSContact *contact = [[BSAPContact classFromDict:response] convertToModel];
+					  
 					  if (!error) {
-					   
-						  block([[BSAPContact classFromDict:response] convertToModel], error);
+						  
+						  block(contact, nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+						  
+						  if (contact.errors.count>0) {
+							  block(nil, contact.errors);
+						  }
+						  else {
+							  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
+						  }
 					  }
 				  }];
 }
 
-- (void)deleteContact:(BSContact *)contact withCompletionBlock:(void(^)(BOOL success, id error))block
+- (void)deleteContact:(BSContact *)contact withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block
 {
 	[super executeDELETEForMethod:[BSAPIConfiguration contactsForID:contact.objectID]
 				   withParameters:@{}
@@ -160,11 +185,11 @@
 					  
 						 if (!error) {
 						  
-							 block(YES, response);
+							 block(YES, nil);
 						 }
 						 else {
-							 //TODO: Create error handling
-							 block(NO, response);
+
+							 block(NO, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 						 }
 					 }];
 }
@@ -172,7 +197,7 @@
 - (void)searchContact:(NSString *)query
 			  inGroup:(BSGroup *)group
 				limit:(NSUInteger)limit
-  withCompletionBlock:(void(^)(NSArray *results, id error))block
+  withCompletionBlock:(void(^)(NSArray *results, NSArray *errors))block
 {
 	NSMutableDictionary *parameters = [@{} mutableCopy];
 	[parameters setObject:query forKey:@"query"];
@@ -195,11 +220,11 @@
 						  for (BSAPContact *con in [BSAPContact arrayOfObjectsFromArrayOfDictionaries:response]) {
 							  [mArr addObject:[con convertToModel]];
 						  }
-						  block([NSArray arrayWithArray:mArr], error);
+						  block([NSArray arrayWithArray:mArr], nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }

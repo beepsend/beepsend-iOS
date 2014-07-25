@@ -9,11 +9,12 @@
 #import "BSBaseService.h"
 
 #import "BSConnection.h"
+#import "BSError.h"
 
 @interface BSConnectionsService : BSBaseService
 
-- (void)getAllAvailableConnectsionOnCompletion:(void(^)(NSArray *connections, id error))block;
-- (void)getMeConnectionOnCompletion:(void(^)(BSConnection *connection, id error))block;
+- (void)getAllAvailableConnectsionOnCompletion:(void(^)(NSArray *connections, NSArray *errors))block;
+- (void)getMeConnectionOnCompletion:(void(^)(BSConnection *connection, NSArray *errors))block;
 
 - (void)updateConnection:(BSConnection *)connection
 		 withCallbackDLR:(NSString *)calbackDLR
@@ -22,10 +23,10 @@
 				systemID:(NSString *)systemID
 				   label:(NSString *)label
 			 description:(NSString *)description
-	 withCompletionBlock:(void(^)(BSConnection *connection, id error))block;
+	 withCompletionBlock:(void(^)(BSConnection *connection, NSArray *errors))block;
 
-- (void)resetTokenForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSConnection *updatedModel, id error))block;
+- (void)resetTokenForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSConnection *updatedModel, NSArray *errors))block;
 
-- (void)resetPasswordForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSConnection *updatedModel, id error))block;
+- (void)resetPasswordForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSConnection *updatedModel, NSArray *errors))block;
 
 @end

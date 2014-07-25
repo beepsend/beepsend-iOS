@@ -196,13 +196,13 @@
  
  @param block - Returns customer details
  */
-- (void)getCustomerDetailsOnCompletion:(void(^)(BSCustomer *customer, id error))block;
+- (void)getCustomerDetailsOnCompletion:(void(^)(BSCustomer *customer, NSArray *errors))block;
 
 /** Async method for retrieving all available wallets
  
  @param block - Returns array of user wallets
  */
-- (void)getAvailableWalletsOnCompletion:(void(^)(NSArray *wallets, id error))block;
+- (void)getAvailableWalletsOnCompletion:(void(^)(NSArray *wallets, NSArray *errors))block;
 
 /** Sync method for retrieving all user wallets
  
@@ -214,7 +214,7 @@
  
  @param block - Returns array of user contacts
  */
-- (void)getAllContactsOnCompletion:(void(^)(NSArray *contacts, id error))block;
+- (void)getAllContactsOnCompletion:(void(^)(NSArray *contacts, NSArray *errors))block;
 
 /** Sync method for retrieving user contacts
  
@@ -227,7 +227,7 @@
  @param contacts - Array of contacts to add
  @param block - Returns added list of contacts or error if add failed
  */
-- (void)addMultipleContacts:(NSArray *)contacts onCompletion:(void(^)(NSArray *response, id error))block;
+- (void)addMultipleContacts:(NSArray *)contacts onCompletion:(void(^)(NSArray *response, NSArray *errors))block;
 
 /** Search contacts
  
@@ -239,13 +239,20 @@
 - (void)searchContactsWithQuery:(NSString *)query
 						inGroup:(BSGroup *)group
 						  limit:(NSNumber *)limit
-				   onCompletion:(void(^)(NSArray *results, id error))block;
+				   onCompletion:(void(^)(NSArray *results, NSArray *errors))block;
+
+/** Async method for retrieving user contacts from one group
+ 
+ @param group - Group from which are contacts retrieved
+ @param block - Returns array of user contacts
+ */
+- (void)getContactsInGroup:(BSGroup *)group onCompletion:(void(^)(NSArray *results, NSArray *errors))block;
 
 /** Async method for retrieving user groups
  
  @param block - Returns array of user groups
  */
-- (void)getAllGroupsOnCompletion:(void(^)(NSArray *groups, id error))block;
+- (void)getAllGroupsOnCompletion:(void(^)(NSArray *groups, NSArray *errors))block;
 
 /** Sync method for retrieving user groups
  
@@ -261,6 +268,6 @@
  */
 - (void)searchGroupsWithQuery:(NSString *)query
 						limit:(NSNumber *)limit
-				 onCompletion:(void(^)(NSArray *results, id error))block;
+				 onCompletion:(void(^)(NSArray *results, NSArray *errors))block;
 
 @end

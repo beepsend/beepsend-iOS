@@ -342,20 +342,20 @@
 }
 
 //Send message
-- (NSInteger)sendSMS:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, id error))block
+- (NSInteger)sendSMS:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, NSArray *errors))block
 {
 	if (_type != BSConnectionTypeSMS) {
 		return 0; //This connection can't send SMS
 	}
 	
 	__block BSMessage *msg = message;
-	[[BSSMSService sharedService] sendMessage:message usingConnection:_connectionModel withCompletionBlock:^(NSArray *response, id error) {
+	[[BSSMSService sharedService] sendMessage:message usingConnection:_connectionModel withCompletionBlock:^(BSMessage *mesage, NSArray *errors) {
 		
-		if (response.count > 0) {
-			block([[BSMessage alloc] initMessageWithID:[response[0] messageID] andErrors:[response[0] errors] forMessage:msg], error);
+		if (errors && errors.count == 0) {
+			block([[BSMessage alloc] initMessageWithID:[message messageID] andErrors:[message errors] forMessage:msg], nil);
 		}
 		else {
-			block(nil, error);
+			block(nil, errors);
 		}
 	}];
 	
@@ -363,24 +363,24 @@
 }
 
 //Send messages
-- (NSInteger)sendMultipleSMS:(NSArray *)messages withCompletionBlock:(void(^)(NSArray *messages, id error))block
+- (NSInteger)sendMultipleSMS:(NSArray *)messages withCompletionBlock:(void(^)(NSArray *messages, NSArray *errors))block
 {
 	if (_type != BSConnectionTypeSMS) {
 		return 0; //This connection can't send SMS
 	}
 	
 	__block NSArray *msgs = messages;
-	[[BSSMSService sharedService] sendMessages:messages usingConnection:_connectionModel withCompletionBlock:^(NSArray *array, id error) {
+	[[BSSMSService sharedService] sendMessages:messages usingConnection:_connectionModel withCompletionBlock:^(NSArray *array, NSArray *errors) {
 		
 		if (array.count > 0) {
 			NSMutableArray *mArr = [@[] mutableCopy];
 			for (BSMessage *m in array) {
 				[mArr addObject:[[BSMessage alloc] initMessageWithID:m.messageID andErrors:m.errors forMessage:msgs[[array indexOfObject:m]]]];
 			}
-			block([NSArray arrayWithArray:msgs], error);
+			block([NSArray arrayWithArray:msgs], errors);
 		}
 		else {
-			block(nil, error);
+			block(nil, errors);
 		}
 	}];
 	
@@ -410,32 +410,32 @@
 }
 
 //Validate SMS
-- (void)validateSMS:(BSMessage *)message onCompletion:(void(^)(BSMessage *message, id error))block
+- (void)validateSMS:(BSMessage *)message onCompletion:(void(^)(BSMessage *message, NSArray *errors))block
 {
 	if (_type != BSConnectionTypeSMS) {
 		return; //This connection can't send SMS
 	}
 	
-	[[BSSMSService sharedService] validateSMSForMessage:message withCompletionBlock:^(BSMessage *message, id error) {
+	[[BSSMSService sharedService] validateSMSForMessage:message withCompletionBlock:^(BSMessage *message, NSArray *errors) {
 		
-		block(message, error);
+		block(message, errors);
 	}];
 }
 
 //Get sms details
-- (void)getDetailsForSMS:(BSMessage *)message onCompletion:(void(^)(BSLookup *lookup, id error))block
+- (void)getDetailsForSMS:(BSMessage *)message onCompletion:(void(^)(BSLookup *lookup, NSArray *errors))block
 {
 	if (_type != BSConnectionTypeSMS) {
 		return; //This connection can't send SMS
 	}
 	
-	[[BSSMSService sharedService] lookupSMS:message withCompletionBlock:^(BSLookup *lookupResponse, id error) {
+	[[BSSMSService sharedService] lookupSMS:message withCompletionBlock:^(BSLookup *lookupResponse, NSArray *errors) {
 		
-		block(lookupResponse, error);
+		block(lookupResponse, errors);
 	}];
 }
 
-- (void)getDetailsForMessagesSentTo:(NSString *)recipient sentFrom:(NSString *)sender usedBatch:(BSBatch *)batch beforeDate:(NSDate *)bDate afterDate:(NSDate *)aDate forNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *lookups, id error))block
+- (void)getDetailsForMessagesSentTo:(NSString *)recipient sentFrom:(NSString *)sender usedBatch:(BSBatch *)batch beforeDate:(NSDate *)bDate afterDate:(NSDate *)aDate forNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *lookups, NSArray *errors))block
 {
 	NSString *maxID = nil;
 	if (_lookups) {
@@ -455,16 +455,16 @@
 												afterDate:aDate
 											   beforeDate:bDate
 													count:nextPage ? [NSNumber numberWithInteger:(_lookupPageLimit.integerValue+1)] : _lookupPageLimit
-									  withCompletionBlock:^(NSArray *lookupResponse, id error) {
+									  withCompletionBlock:^(NSArray *lookupResponse, NSArray *errors) {
 										  
 										  
 										  NSMutableArray *mArr = [NSMutableArray arrayWithArray:_lookups];
-										  if (!error) {
+										  if (!errors || errors.count==0) {
 											  [mArr removeLastObject];
 											  _lookups = [mArr arrayByAddingObjectsFromArray:lookupResponse];
 										  }
 										  
-										  block(_lookups, error);
+										  block(_lookups, errors);
 	}];
 }
 
@@ -482,55 +482,55 @@
 }
 
 //Get batch details
-- (void)getDetailsForBatch:(BSBatch *)batch onCompletion:(void(^)(BSBatch *batch, id error))block
+- (void)getDetailsForBatch:(BSBatch *)batch onCompletion:(void(^)(BSBatch *batch, NSArray *errors))block
 {
-	[[BSSMSService sharedService] getDetailsForBatch:batch.batchID withCompletionBlock:^(BSBatch *batch, id error) {
+	[[BSSMSService sharedService] getDetailsForBatch:batch.batchID withCompletionBlock:^(BSBatch *batch, NSArray *errors) {
 		
-		block(batch, error);
+		block(batch, errors);
 	}];
 }
 
 //Get previous batches
-- (void)getPreviousBatchesOnCompletion:(void(^)(NSArray *batches, id error))block
+- (void)getPreviousBatchesOnCompletion:(void(^)(NSArray *batches, NSArray *errors))block
 {
-	[[BSSMSService sharedService] getPreviousBatchesWithCompletionBlock:^(NSArray *bathces, id error) {
+	[[BSSMSService sharedService] getPreviousBatchesWithCompletionBlock:^(NSArray *bathces, NSArray *errors) {
 		
-		block(bathces, error);
+		block(bathces, errors);
 	}];
 }
 
 //Estimates message cost (not necessarily accurate)
-- (void)estimateSMSCostForMessages:(NSArray *)messages onCompletion:(void(^)(NSArray *cost, id error))block
+- (void)estimateSMSCostForMessages:(NSArray *)messages onCompletion:(void(^)(NSArray *cost, NSArray *errors))block
 {
-	[[BSSMSService sharedService] estimateCostForMessages:messages usingConnection:self withCompletionBlock:^(NSArray *response, id error) {
+	[[BSSMSService sharedService] estimateCostForMessages:messages usingConnection:self withCompletionBlock:^(NSArray *response, NSArray *errors) {
 		
-		block(response, error);
+		block(response, errors);
 	}];
 }
 
 //Do immediate HLR for given number
-- (void)immediateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, id error))block
+- (void)immediateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, NSArray *errors))block
 {
 	if (_type != BSConnectionTypeHLR) {
 		return; //This connection can't send HLR
 	}
 	
-	[[BSHLRService sharedService] doImmediateHLRForNumber:phoneNumber withConnection:self withCompletionBlock:^(BSHLR *hlr, id error) {
+	[[BSHLRService sharedService] doImmediateHLRForNumber:phoneNumber withConnection:self withCompletionBlock:^(BSHLR *hlr, NSArray *errors) {
 		
-		block(hlr, error);
+		block(hlr, errors);
 	}];
 }
 
 //Validate HLR for phone number
-- (void)validateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, id error))black
+- (void)validateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, NSArray *errors))black
 {
 	if (_type != BSConnectionTypeHLR) {
 		return; //This connection can't send HLR
 	}
 	
-	[[BSHLRService sharedService] validateHLRForNumber:phoneNumber withConnection:self withCompletionBlock:^(BSHLR *response, id error) {
+	[[BSHLRService sharedService] validateHLRForNumber:phoneNumber withConnection:self withCompletionBlock:^(BSHLR *response, NSArray *errors) {
 		
-		black(response, error);
+		black(response, errors);
 	}];
 }
 

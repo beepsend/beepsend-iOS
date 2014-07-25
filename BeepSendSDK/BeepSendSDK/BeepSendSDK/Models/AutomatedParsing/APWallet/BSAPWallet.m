@@ -67,8 +67,6 @@
 	wallet.balance = [walletModel.balance isEqualToNumber:@0] ? nil : walletModel.balance;
 	wallet.notify_limit = [walletModel.minimumBalanceForNotification isEqualToNumber:@0] ? nil : walletModel.balance;
 	
-	//TODO: Add conversion for arrays
-	
 	return wallet;
 }
 

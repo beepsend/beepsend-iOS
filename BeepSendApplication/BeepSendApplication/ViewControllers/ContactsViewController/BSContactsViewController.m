@@ -13,11 +13,6 @@
 #import "BSAddNewContactViewController.h"
 #import "BSSendMessageViewController.h"
 
-#import "BSUser.h"
-#import "BSContact.h"
-#import "BSGroup.h"
-#import "BSConnection.h"
-
 @interface BSContactsViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, strong) BSContact *selectedContact;
@@ -74,7 +69,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 	
-	[[BSUser currentUser] getAllGroupsOnCompletion:^(NSArray *groups, id error) {
+	[[BSUser currentUser] getAllGroupsOnCompletion:^(NSArray *groups, NSArray *errors) {
 
 		NSMutableDictionary *mDict = [@{} mutableCopy];
 		for (BSGroup *g in groups) {
@@ -99,8 +94,8 @@
 	[super viewDidAppear:animated];
 	
 	[_tableViewContacts deselectRowAtIndexPath:[_tableViewContacts indexPathForSelectedRow] animated:YES];
-	
-	[[BSUser currentUser] getAllContactsOnCompletion:^(NSArray *contacts, id error) {
+
+	[[BSUser currentUser] getAllContactsOnCompletion:^(NSArray *contacts, NSArray *errors) {
 		_dataSourceContacts = contacts;
 		[_tableViewContacts reloadData];
 	}];

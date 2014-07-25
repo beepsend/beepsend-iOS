@@ -10,13 +10,6 @@
 
 #import "BSSendMessageView.h"
 
-//TODO: IMPORT SDK FOR TESTING
-#import "BSUser.h"
-#import "BSConnection.h"
-#import "BSMessage.h"
-#import "BSWallet.h"
-#import "BSContact.h"
-
 @interface BSSendMessageViewController () <UITextFieldDelegate>
 
 @property (nonatomic, strong) BSConnection *connection;
@@ -188,8 +181,22 @@
 		return; //Message not valid
 	}
 	
-	[_connection validateSMS:message onCompletion:^(BSMessage *message, id error) {
-		if (!error) {
+	__block UIView *viewLoader = [[UIView alloc] initWithFrame:self.view.bounds];
+	[viewLoader setBackgroundColor:[UIColor blackColor]];
+	viewLoader.alpha = 0.6;
+	__block UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	activityIndicator.center = self.view.center;
+	[activityIndicator startAnimating];
+	[self.view addSubview:viewLoader];
+	[self.view addSubview:activityIndicator];
+	
+	[_connection validateSMS:message onCompletion:^(BSMessage *message, NSArray *errors) {
+		
+		[viewLoader removeFromSuperview];
+		[activityIndicator stopAnimating];
+		[activityIndicator removeFromSuperview];
+		
+		if (!errors || errors.count == 0) {
 			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success!", @"") message:NSLocalizedString(@"Message was successfully validated!", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
 		}
 		else {
@@ -207,9 +214,22 @@
 		return; //Message not valid
 	}
 	
-	[_connection sendSMS:message withCompletionBlock:^(BSMessage *message, id error) {
+	__block UIView *viewLoader = [[UIView alloc] initWithFrame:self.view.bounds];
+	[viewLoader setBackgroundColor:[UIColor blackColor]];
+	viewLoader.alpha = 0.6;
+	__block UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	activityIndicator.center = self.view.center;
+	[activityIndicator startAnimating];
+	[self.view addSubview:viewLoader];
+	[self.view addSubview:activityIndicator];
+	
+	[_connection sendSMS:message withCompletionBlock:^(BSMessage *message, NSArray *errors) {
 		
-		if (!error) {
+		[viewLoader removeFromSuperview];
+		[activityIndicator stopAnimating];
+		[activityIndicator removeFromSuperview];
+		
+		if (!errors || errors.count == 0) {
 			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success!", @"") message:NSLocalizedString(@"Message was successfully sent!", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
 		}
 		else {

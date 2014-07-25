@@ -124,9 +124,9 @@
 										   firstName:_firstName
 											lastName:_lastName
 											 groupID:_group.groupID
-								 withCompletionBlock:^(BSContact *contact, id error) {
+								 withCompletionBlock:^(BSContact *contact, NSArray *errors) {
 									 
-									 if (error) {
+									 if (errors && errors.count>0) {
 										 _phoneNumber = _oldPhoneNumber;
 										 _firstName = _oldFirstName;
 										 _lastName = _oldLastName;
@@ -147,8 +147,8 @@
 		return; //Contact already exists
 	}
 	
-	[[BSContactsService sharedService] addContact:self withCompletionBlock:^(BSContact *contact, id error) {
-		if (!error) {
+	[[BSContactsService sharedService] addContact:self withCompletionBlock:^(BSContact *contact, NSArray *errors) {
+		if (!errors || errors.count==0) {
 			_contactID = contact.contactID;
 		}
 	}];
@@ -160,8 +160,8 @@
 		return; //Contact needs to be saved first
 	}
 	
-	[[BSContactsService sharedService] deleteContact:self withCompletionBlock:^(BOOL success, id error) {
-		if (!error) {
+	[[BSContactsService sharedService] deleteContact:self withCompletionBlock:^(BOOL success, NSArray *errors) {
+		if (!errors || errors.count==0) {
 			_contactID = @"0";
 		}
 	}];

@@ -350,29 +350,29 @@
 	}
 }
 
-- (void)getCustomerDetailsOnCompletion:(void(^)(BSCustomer *customer, id error))block
+- (void)getCustomerDetailsOnCompletion:(void(^)(BSCustomer *customer, NSArray *errors))block
 {
 	if (_customer) {
 		block(_customer, nil);
 	}
 	
-	[[BSCustomerService sharedService] getCustomerOnCompletion:^(BSCustomer *customer, id error) {
+	[[BSCustomerService sharedService] getCustomerOnCompletion:^(BSCustomer *customer, NSArray *errors) {
 		
 		if (!_customer) {
-			block(customer, error);
+			block(customer, errors);
 		}
 		
 		_customer = customer;
 	}];
 }
 
-- (void)getAvailableWalletsOnCompletion:(void(^)(NSArray *wallets, id error))block
+- (void)getAvailableWalletsOnCompletion:(void(^)(NSArray *wallets, NSArray *errors))block
 {
-	[[BSWalletService sharedService] getAllWalletsWithCompletionBlock:^(NSArray *wallets, id error) {
+	[[BSWalletService sharedService] getAllWalletsWithCompletionBlock:^(NSArray *wallets, NSArray *errors) {
 		
 		_wallets = wallets;
 		
-		block(wallets, error);
+		block(wallets, errors);
 	}];
 }
 
@@ -382,7 +382,7 @@
 		return _wallets;
 	}
 	else {
-		[[BSWalletService sharedService] getAllWalletsWithCompletionBlock:^(NSArray *wallets, id error) {
+		[[BSWalletService sharedService] getAllWalletsWithCompletionBlock:^(NSArray *wallets, NSArray *errors) {
 			[[BSTestSemaphor sharedInstance] lift:@"FetchWallets"];
 			
 			_wallets = wallets;
@@ -394,16 +394,16 @@
 	}
 }
 
-- (void)getAllContactsOnCompletion:(void(^)(NSArray *contacts, id error))block
+- (void)getAllContactsOnCompletion:(void(^)(NSArray *contacts, NSArray *errors))block
 {
 	if (_contacts) {
 		block(_contacts, nil);
 	}
 	
-	[[BSContactsService sharedService] getAllContactsWithCompletionBlock:^(NSArray *contacts, id error) {
+	[[BSContactsService sharedService] getAllContactsWithCompletionBlock:^(NSArray *contacts, NSArray *errors) {
 			
 		if (!_contacts || _contacts.count!=contacts.count) {
-			block(contacts, error);
+			block(contacts, errors);
 		}
 		
 		_contacts = contacts;
@@ -416,7 +416,7 @@
 		return _contacts;
 	}
 	else {
-		[[BSContactsService sharedService] getAllContactsWithCompletionBlock:^(NSArray *contacts, id error) {
+		[[BSContactsService sharedService] getAllContactsWithCompletionBlock:^(NSArray *contacts, NSArray *errors) {
 			[[BSTestSemaphor sharedInstance] lift:@"FetchContacts"];
 			
 			_contacts = contacts;
@@ -428,30 +428,44 @@
 	}
 }
 
-- (void)addMultipleContacts:(NSArray *)contacts onCompletion:(void(^)(NSArray *response, id error))block
+- (void)addMultipleContacts:(NSArray *)contacts onCompletion:(void(^)(NSArray *response, NSArray *errors))block
 {
-	[[BSContactsService sharedService] addContacts:contacts withCompletionBlock:^(NSArray *contacts, id error) {
-		block(contacts, error);
+	[[BSContactsService sharedService] addContacts:contacts withCompletionBlock:^(NSArray *contacts, NSArray *errors) {
+		block(contacts, errors);
 	}];
 }
 
-- (void)searchContactsWithQuery:(NSString *)query inGroup:(BSGroup *)group limit:(NSNumber *)limit onCompletion:(void(^)(NSArray *results, id error))block
+- (void)searchContactsWithQuery:(NSString *)query inGroup:(BSGroup *)group limit:(NSNumber *)limit onCompletion:(void(^)(NSArray *results, NSArray *errors))block
 {
-	[[BSContactsService sharedService] searchContact:query inGroup:group limit:limit.integerValue withCompletionBlock:^(NSArray *results, id error) {
-		block(results, error);
+	[[BSContactsService sharedService] searchContact:query inGroup:group limit:limit.integerValue withCompletionBlock:^(NSArray *results, NSArray *errors) {
+		block(results, errors);
 	}];
 }
 
-- (void)getAllGroupsOnCompletion:(void(^)(NSArray *groups, id error))block
+- (void)getContactsInGroup:(BSGroup *)group onCompletion:(void(^)(NSArray *results, NSArray *errors))block
+{
+	[[BSContactsService sharedService] getAllContactsInGroup:group.groupID
+													 sinceID:nil
+													   maxID:nil
+												contactCount:nil
+													  offset:nil
+														sort:nil
+										 withCompletionBlock:^(NSArray *contacts, NSArray *errors) {
+		
+											 block(contacts, errors);
+	}];
+}
+
+- (void)getAllGroupsOnCompletion:(void(^)(NSArray *groups, NSArray *errors))block
 {
 	if (_groups) {
 		block(_groups, nil);
 	}
 	
-	[[BSGroupsService sharedService] getAllGroupsWithCompletionBlock:^(NSArray *groups, id error) {
+	[[BSGroupsService sharedService] getAllGroupsWithCompletionBlock:^(NSArray *groups, NSArray *errors) {
 		
 		if (!_groups || _groups.count!=groups.count) {
-			block(groups, error);
+			block(groups, errors);
 		}
 		
 		_groups = groups;
@@ -464,7 +478,7 @@
 		return _groups;
 	}
 	else {
-		[[BSGroupsService sharedService] getAllGroupsWithCompletionBlock:^(NSArray *groups, id error) {
+		[[BSGroupsService sharedService] getAllGroupsWithCompletionBlock:^(NSArray *groups, NSArray *errors) {
 			[[BSTestSemaphor sharedInstance] lift:@"FetchGroups"];
 			
 			_groups = groups;
@@ -476,11 +490,11 @@
 	}
 }
 
-- (void)searchGroupsWithQuery:(NSString *)query limit:(NSNumber *)limit onCompletion:(void(^)(NSArray *results, id error))block
+- (void)searchGroupsWithQuery:(NSString *)query limit:(NSNumber *)limit onCompletion:(void(^)(NSArray *results, NSArray *errors))block
 {
-	[[BSGroupsService sharedService] searchContactGroups:query limit:limit.integerValue withCompletionBlock:^(NSArray *results, id error) {
+	[[BSGroupsService sharedService] searchContactGroups:query limit:limit.integerValue withCompletionBlock:^(NSArray *results, NSArray *errors) {
 		
-		block(results, error);
+		block(results, errors);
 	}];
 }
 

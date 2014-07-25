@@ -28,7 +28,7 @@
 
 #pragma mark - Public methods
 
-- (void)getCurrentPricelistsForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSPricelist *pricelist, id error))block
+- (void)getCurrentPricelistsForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSPricelist *pricelist, NSArray *errors))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration pricelistCurrentWithID:connection.connectionID]
 				withParameters:@{}
@@ -38,16 +38,16 @@
 						  
 						  BSPricelist *pricelist = [[BSAPPricelist classFromDict:response] convertToModel];
 						  
-						  block(pricelist, error);
+						  block(pricelist, nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }
 
-- (void)getCurrentPricelistsForMeWithCompletionBlock:(void(^)(BSPricelist *pricelist, id error))block
+- (void)getCurrentPricelistsForMeWithCompletionBlock:(void(^)(BSPricelist *pricelist, NSArray *errors))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration pricelistCurrentMe]
 				withParameters:@{}
@@ -57,16 +57,16 @@
 						  
 						  BSPricelist *pricelist = [[BSAPPricelist classFromDict:response] convertToModel];
 						  
-						  block(pricelist, error);
+						  block(pricelist, nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }
 
-- (void)getPricelistsForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *pricelists, id error))block
+- (void)getPricelistsForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *pricelists, NSArray *errors))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration pricelistAllForID:connection.connectionID]
 				withParameters:@{}
@@ -79,17 +79,17 @@
 							  
 							  [mArr addObject:[pricelist convertToModel]];
 						  }
-						  block([NSArray arrayWithArray:mArr], error);
+						  block([NSArray arrayWithArray:mArr], nil);
 						  
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }
 
-- (void)getPriceListsForMeWithCompletionBlock:(void(^)(NSArray *pricelists, id error))block
+- (void)getPriceListsForMeWithCompletionBlock:(void(^)(NSArray *pricelists, NSArray *errors))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration pricelistAllMe]
 				withParameters:@{}
@@ -102,12 +102,12 @@
 							  
 							  [mArr addObject:[pricelist convertToModel]];
 						  }
-						  block([NSArray arrayWithArray:mArr], error);
+						  block([NSArray arrayWithArray:mArr], nil);
 						  
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }

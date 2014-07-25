@@ -12,9 +12,6 @@
 
 #import "BSGroupSelectionViewController.h"
 
-#import "BSGroup.h"
-#import "BSContact.h"
-
 @interface BSAddNewContactViewController () <UITextFieldDelegate, BSGroupSelectionDelegate>
 
 @property (nonatomic, strong) BSGroup *selectedGroup;

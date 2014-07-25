@@ -9,6 +9,7 @@
 #import "BSAPHLR.h"
 
 #import "BSHLR.h"
+#import "BSAPError.h"
 
 @implementation BSAPHLR
 
@@ -27,13 +28,19 @@
 	[BSAPPMCCMNC class];
 	
 	BSAPHLR *hlr = [super classFromDict:dictionary];
+	hlr.errors = [BSAPError arrayOfObjectsFromArrayOfDictionaries:hlr.errors];
 	
 	return hlr;
 }
 
 - (id)convertToModel
 {
-	return [[BSHLR alloc] initHLRWithID:_id timestamp:[_timestamps convertToModel] dlrReport:[_dlr convertToModel] mccmnc:[_mccmnc convertToModel] imsi:_imsi prefix:[_prefix convertToModel] potred:_ported inRoaming:_roaming];
+	if (_msisdn==nil) {
+		return [[BSHLR alloc] initHLRWithID:_id timestamp:[_timestamps convertToModel] dlrReport:[_dlr convertToModel] mccmnc:[_mccmnc convertToModel] imsi:_imsi prefix:[_prefix convertToModel] potred:_ported inRoaming:_roaming withErrors:[BSAPError arrayOfModelsFromArrayOfObjects:_errors]];
+	}
+	else {
+		return [[BSHLR alloc] initHLRWithNumber:_msisdn andErrors:[BSAPError arrayOfModelsFromArrayOfObjects:_errors]];
+	}
 }
 
 #pragma mark - Public methods

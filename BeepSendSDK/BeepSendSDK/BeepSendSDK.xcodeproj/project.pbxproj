@@ -72,6 +72,8 @@
 		6E76F605196E9C65004CBE46 /* BSUserType.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E76F603196E9C65004CBE46 /* BSUserType.m */; };
 		6E76F609196EDA7D004CBE46 /* BSAPGroupsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E76F608196EDA7D004CBE46 /* BSAPGroupsRequest.m */; };
 		6E76F60A196EDA7D004CBE46 /* BSAPGroupsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E76F608196EDA7D004CBE46 /* BSAPGroupsRequest.m */; };
+		6E7E45A619829A2000B8C08A /* BSError.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EC77E6D19814DF7007BCCA3 /* BSError.h */; };
+		6E7E45A719829A2000B8C08A /* BeepSendSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6E65381C194730EB00FC6349 /* BeepSendSDK.h */; };
 		6E9ABC29196A820900874D81 /* BSAPTransactionLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ABC28196A820900874D81 /* BSAPTransactionLog.m */; };
 		6E9ABC31196A94DA00874D81 /* BSAPTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ABC30196A94DA00874D81 /* BSAPTransfer.m */; };
 		6EACD7831963F05700D3BB3D /* BSAnalyticsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EACD7821963F05700D3BB3D /* BSAnalyticsService.m */; };
@@ -215,6 +217,8 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				6E7E45A619829A2000B8C08A /* BSError.h in CopyFiles */,
+				6E7E45A719829A2000B8C08A /* BeepSendSDK.h in CopyFiles */,
 				6E1348541975637800E67A96 /* BSVerified.h in CopyFiles */,
 				6E1348551975637800E67A96 /* BSUserType.h in CopyFiles */,
 				6E1348561975637800E67A96 /* BSBatch.h in CopyFiles */,

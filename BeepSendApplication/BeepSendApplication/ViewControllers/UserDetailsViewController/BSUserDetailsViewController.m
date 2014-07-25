@@ -18,9 +18,6 @@
 #import "BSContactsViewController.h"
 #import "BSHLRViewController.h"
 
-#import "BSUser.h"
-#import "BSConnection.h"
-
 @interface BSUserDetailsViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, weak) UIScrollView *scrollView;

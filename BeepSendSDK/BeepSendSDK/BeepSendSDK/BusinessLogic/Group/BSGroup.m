@@ -106,9 +106,9 @@
 	
 	[[BSGroupsService sharedService] updateName:_name
 										inGroup:self
-							withCompletionBlock:^(BSGroup *group, id error) {
+							withCompletionBlock:^(BSGroup *group, NSArray *errors) {
 								
-								if (!error) {
+								if (!errors || errors.count==0) {
 									_oldName = group.name;
 								}
 								else {
@@ -124,9 +124,9 @@
 	}
 	
 	[[BSGroupsService sharedService] addGroupNamed:_name
-							   withCompletionBlock:^(BSGroup *group, id error) {
+							   withCompletionBlock:^(BSGroup *group, NSArray *errors) {
 		
-								   if (!error) {
+								   if (!errors || errors.count==0) {
 									   _groupID = group.groupID;
 								   }
 	}];
@@ -139,9 +139,9 @@
 	}
 	
 	[[BSGroupsService sharedService] deleteGroup:self
-							 withCompletionBlock:^(BOOL success, id error) {
+							 withCompletionBlock:^(BOOL success, NSArray *errors) {
 		
-								 if (!error) {
+								 if (!errors || errors.count==0) {
 									 _groupID = @"0";
 								 }
 	}];
