@@ -15,6 +15,7 @@
 @class BSEstimateCost;
 @class BSHLR;
 @class BSLookup;
+@class BSMCCMNC;
 
 @class BSMessage;
 @class BSWallet;
@@ -297,5 +298,23 @@
  @param block - Returns HLR response or error
  */
 - (void)validateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, NSArray *errors))black;
+
+/** This call does not consider delivery statistics
+	and should merely be used for aggregated views on traffic. 
+
+ @param startDate - Begin Date in Unix time.
+ @param endDate - End dates in Unix time.
+ @param block - Returns statistics or error
+ */
+- (void)getAnalyticsSummaryFromDate:(NSDate *)startDate toDate:(NSDate *)endDate withCompletionBlock:(void(^)(NSArray *statistics, NSArray *errors))block;
+
+/** The call supports a summary for available connections on used token. 
+ 
+ @param startDate - Begin Date in Unix time.
+ @param endDate - End dates in Unix time.
+ @param mccmnc - Mobile Country Code
+ @param block - Returns network details or error
+ */
+- (void)getNetworkDetailsFromDate:(NSDate *)startDate toDate:(NSDate *)endDate mccmnc:(BSMCCMNC *)mccmnc withCompletionBlock:(void(^)(NSArray *networkDetails, NSArray *errors))block;
 
 @end

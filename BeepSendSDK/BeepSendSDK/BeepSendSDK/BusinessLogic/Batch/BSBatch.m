@@ -8,6 +8,8 @@
 
 #import "BSBatch.h"
 
+#import "BSAnalyticsService.h"
+
 @interface BSBatch ()
 
 @property (nonatomic, strong, readwrite) NSString *batchID;
@@ -46,6 +48,17 @@
 		_label = bLabel;
 	}
 	return self;
+}
+
+- (void)getDeliveryStatisticsWithCompletionBlock:(void (^)(NSArray *statistisc, NSArray *errors))block
+{
+	if (!_batchID || [BSHelper isNilOrEmpty:_batchID]) {
+		return; //Batch id can't be nil
+	}
+	
+	[[BSAnalyticsService sharedService] getDeliveryStatisticsForBach:self withCompletionBlock:^(NSArray *statistics, NSArray *errors) {
+		block(statistics, errors);
+	}];
 }
 
 @end

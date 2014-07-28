@@ -16,6 +16,7 @@
 #import "BSWalletService.h"
 #import "BSContactsService.h"
 #import "BSGroupsService.h"
+#import "BSAnalyticsService.h"
 
 #import "BSTestSemaphor.h"
 
@@ -495,6 +496,24 @@
 	[[BSGroupsService sharedService] searchContactGroups:query limit:limit.integerValue withCompletionBlock:^(NSArray *results, NSArray *errors) {
 		
 		block(results, errors);
+	}];
+}
+
+- (void)getAnalyticsSummaryFromDate:(NSDate *)startDate toDate:(NSDate *)endDate withCompletionBlock:(void(^)(NSArray *statistics, NSArray *errors))block
+{
+	[[BSAnalyticsService sharedService] getAnalyticsSummaryFromDate:startDate toDate:endDate usingConnection:nil withCompletionBlock:^(NSArray *statistics, NSArray *errors) {
+		
+		block(statistics, errors);
+		
+	}];
+}
+
+- (void)getNetworkDetailsFromDate:(NSDate *)startDate toDate:(NSDate *)endDate mccmnc:(BSMCCMNC *)mccmnc withCompletionBlock:(void(^)(NSArray *networkDetails, NSArray *errors))block
+{
+	[[BSAnalyticsService sharedService] getNetworkDetailsFromDate:startDate toDate:endDate mccmnc:mccmnc usingConnection:nil withCompletionBlock:^(NSArray *networkDetails, NSArray *errors) {
+		
+		block(networkDetails, errors);
+		
 	}];
 }
 

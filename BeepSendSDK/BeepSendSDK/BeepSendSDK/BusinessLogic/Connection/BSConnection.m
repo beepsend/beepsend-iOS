@@ -16,6 +16,7 @@
 #import "BSPricelistService.h"
 #import "BSSMSService.h"
 #import "BSHLRService.h"
+#import "BSAnalyticsService.h"
 
 #import "BSPricelist.h"
 #import "BSCallbacks.h"
@@ -531,6 +532,24 @@
 	[[BSHLRService sharedService] validateHLRForNumber:phoneNumber withConnection:self withCompletionBlock:^(BSHLR *response, NSArray *errors) {
 		
 		black(response, errors);
+	}];
+}
+
+- (void)getAnalyticsSummaryFromDate:(NSDate *)startDate toDate:(NSDate *)endDate withCompletionBlock:(void(^)(NSArray *statistics, NSArray *errors))block
+{
+	[[BSAnalyticsService sharedService] getAnalyticsSummaryFromDate:startDate toDate:endDate usingConnection:self withCompletionBlock:^(NSArray *statistics, NSArray *errors) {
+		
+		block(statistics, errors);
+		
+	}];
+}
+
+- (void)getNetworkDetailsFromDate:(NSDate *)startDate toDate:(NSDate *)endDate mccmnc:(BSMCCMNC *)mccmnc withCompletionBlock:(void(^)(NSArray *networkDetails, NSArray *errors))block
+{
+	[[BSAnalyticsService sharedService] getNetworkDetailsFromDate:startDate toDate:endDate mccmnc:mccmnc usingConnection:self withCompletionBlock:^(NSArray *networkDetails, NSArray *errors) {
+		
+		block(networkDetails, errors);
+		
 	}];
 }
 

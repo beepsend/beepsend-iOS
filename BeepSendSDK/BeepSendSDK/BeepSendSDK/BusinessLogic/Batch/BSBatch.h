@@ -35,4 +35,10 @@
  */
 - (BSBatch *)initWithID:(NSString *)bID andLabel:(NSString *)bLabel;
 
+/** This call will give you delivery statistics for a whole batch.
+ 
+ @param block - Returns statistics list or error
+ */
+- (void)getDeliveryStatisticsWithCompletionBlock:(void(^)(NSArray *statistics, NSArray *errors))block;
+
 @end
