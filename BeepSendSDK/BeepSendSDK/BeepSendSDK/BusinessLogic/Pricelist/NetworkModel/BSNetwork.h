@@ -11,34 +11,38 @@
 @class BSMCCMNC;
 @class BSCountry;
 
+/*!
+ @class BSNetwork
+ @discussion Network model shows which networks are covered by specific pricelist.
+ */
 @interface BSNetwork : BSGeneralModel
 
-/** MCC MNC of the network.
+/*! MCC and MNC of the network.
  */
 @property (nonatomic, strong, readonly) NSArray *mccmnc;
 
-/** (Optional) Specific details about this network.
+/*! (Optional) Specific details about this network.
  */
 @property (nonatomic, strong, readonly) NSString *comment;
 
-/** Price of sending to this network in Euro (€)
+/*! Price of sending to this network in Euro (€)
  */
 @property (nonatomic, strong, readonly) NSNumber *price;
 
-/** Country this network resides in.
+/*! Country this network resides in.
  */
 @property (nonatomic, strong, readonly) BSCountry *country;
 
-/** Operator name.
+/*! Operator name.
  */
 @property (nonatomic, strong, readonly) NSString *operatorName;
 
-/** Init Network with mccmnc, comment, price, country, operator name
+/*! Create Network object
  
- @param nMCCMNC - MCC MNC
- @param nComment - Comment
- @param nPrice - Price
- @param nCountry - Country
+ @param nMCCMNC - MCC and MNC of the network
+ @param nComment - Specific details about this network
+ @param nPrice - Price of sending to this network in Euro (€)
+ @param nCountry - Country this network resides in
  @param nOperatorName - Operator name
  
  @return Returns Network object

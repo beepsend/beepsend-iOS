@@ -10,28 +10,34 @@
 
 @class BSWallet;
 
+/*!
+ @class BSTransfer
+ @discussion Transfer model is used when you want to make transaction between two wallets.
+ */
 @interface BSTransfer : BSGeneralModel
 
-/** Source wallet
+/*! Source wallet.
  */
 @property (nonatomic, strong, readonly) BSWallet *source;
 
-/** Target wallet
+/*! Target wallet.
  */
 @property (nonatomic, strong, readonly) BSWallet *target;
 
-/** Amount to transfer
+/*! Amount to transfer.
  */
 @property (nonatomic, strong, readonly) NSNumber *amount;
 
-/** Init Transaction with wallet1, Wallet2, ammount
+/*! Create Transaction object
  
- @param wallet1 - Wallet from
- @param wallet2 - Wallet to
- @param amount - Ammount
+ @param wallet1 - Source wallet
+ @param wallet2 - Target wallet
+ @param amount - Amount to transfer
  
  @return Returns Transaction object
  */
-- (BSTransfer *)initTransferWithSourceWallet:(BSWallet *)wallet1 destinationWallet:(BSWallet *)wallet2 withAmount:(NSNumber *)amount;
+- (BSTransfer *)initTransferWithSourceWallet:(BSWallet *)wallet1
+						   destinationWallet:(BSWallet *)wallet2
+								  withAmount:(NSNumber *)amount;
 
 @end

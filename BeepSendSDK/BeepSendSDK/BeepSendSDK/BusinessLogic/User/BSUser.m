@@ -103,18 +103,6 @@
 	return self;
 }
 
-- (BSUser *)initUserWithID:(NSString *)uID
-					  name:(NSString *)uName
-					 email:(NSString *)uEmail
-{
-	if (self = [super initWithID:uID andTitle:uName]) {
-		_userID = uID;
-		_name = uName;
-		_email = uEmail;
-	}
-	return self;
-}
-
 - (BSUser *)initUserWithEmail:(NSString *)uEmail
 				  andPassword:(NSString *)uPassword
 {

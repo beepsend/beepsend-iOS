@@ -11,58 +11,62 @@
 #import "BSPriceListDetails.h"
 #import "BSAccountManager.h"
 
+/*!
+ @class BSCustomer
+ @discussion As a user you belong to a customer. 
+ A customer is where your address, pay and pricelist information is stored.
+ */
 @interface BSCustomer : BSGeneralModel
 
-/** ID.
+/*! ID.
  */
 @property (nonatomic, strong, readonly) NSString *customerID;
 
-/** Name.
+/*! Name.
  */
 @property (nonatomic, strong, readonly) NSString *name;
 
-/** Phone number.
+/*! Phone number.
  */
 @property (nonatomic, strong, readonly) NSString *phoneNumber;
 
-/** Street address.
+/*! Street address.
  */
 @property (nonatomic, strong, readonly) NSString *address;
 
-/** City.
+/*! City.
  */
 @property (nonatomic, strong, readonly) NSString *city;
 
-/** Post code.
+/*! Post code.
  */
 @property (nonatomic, strong, readonly) NSString *postBox;
 
-/** Country.
+/*! Country.
  */
 @property (nonatomic, strong, readonly) NSString *country;
 
-/** VAT number.
+/*! VAT number.
  */
 @property (nonatomic, strong, readonly) NSString *vat;
 
-/** Email.
+/*! Email.
  */
 @property (nonatomic, strong, readonly) NSString *email;
 
-/** pre-pay or post-pay.
+/*! pre-pay or post-pay.
  */
 @property (nonatomic, strong, readonly) NSString *type;
 
-/** Customer account manager
+/*! Customer account manager.
  */
 @property (nonatomic, strong, readonly) BSAccountManager *accountManager;
 
-/** Pricelist details
+/*! Pricelist details.
  */
 @property (nonatomic, strong, readonly) BSPriceListDetails *priceListDetails;
 
-/** Init Customer with ID, name, phone, address, city, post box, country, vat,
-	email, invoice type, account manager, pricelist model
+/*! Create Customer object
  
  @param cID - Customer ID
  @param cName - Name

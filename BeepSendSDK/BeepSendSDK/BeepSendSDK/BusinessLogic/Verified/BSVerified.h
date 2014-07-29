@@ -8,36 +8,41 @@
 
 #import "BSGeneralModel.h"
 
+/*!
+ @class BSVerified
+ @discussion Verified model holds data that tells if user has verified phone numeber,
+ email and terms of service.
+ */
 @interface BSVerified : BSGeneralModel
 
-/** If the users email address is verified or not.
+/*! If the users email address is verified or not.
  */
 @property (nonatomic, strong, readonly) NSNumber *emailVerified;
 
-/** If the users phone number has been verified.
+/*! If the users phone number has been verified.
  */
 @property (nonatomic, strong, readonly) NSNumber *phoneVerified;
 
-/** True if the user has agreed to the terms & conditions.
+/*! True if the user has agreed to the terms & conditions.
  */
 @property (nonatomic, strong) NSNumber *termsVerified;
 
-/** Read only property of type BOOL
+/*! Read only property of type BOOL
 	If the users phone number has been verified.
  */
 @property (nonatomic, assign, readonly, getter = isVerifiedPhone) BOOL verifiedPhone;
 
-/** Read only property of type BOOL
+/*! Read only property of type BOOL
 	If the users email address is verified or not.
  */
 @property (nonatomic, assign, readonly, getter = isVerifiedEmail) BOOL verifiedEmail;
 
-/** Read only property of type BOOL
+/*! Read only property of type BOOL
 	True if the user has agreed to the terms & conditions.
  */
 @property (nonatomic, assign, readonly, getter = isVerifiedTerms) BOOL verifiedTerms;
 
-/** Init Verified with Terms verified
+/*! Init Verified with Terms verified
  
  @param termsVerified - Is terms verified
  
@@ -45,7 +50,7 @@
  */
 - (BSVerified *)initUserWithTermsVerified:(NSNumber *)termsVerified;
 
-/** Init Verified with Terms verified
+/*! Create Verified object
  
  @param emailVerified - Is email verified
  @param phoneVerified - Is phone verified

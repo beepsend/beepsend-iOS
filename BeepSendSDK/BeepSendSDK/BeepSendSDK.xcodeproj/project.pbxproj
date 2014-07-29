@@ -366,7 +366,6 @@
 		6EB96EE1195192A600AD77E2 /* BSAPCPriceListSchedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSAPCPriceListSchedule.m; path = Models/AutomatedParsing/APCPriceListSchedule/BSAPCPriceListSchedule.m; sourceTree = "<group>"; };
 		6EB96EE4195192C100AD77E2 /* BSAPCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAPCustomer.h; sourceTree = "<group>"; };
 		6EB96EE5195192C100AD77E2 /* BSAPCustomer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAPCustomer.m; sourceTree = "<group>"; };
-		6EB98E2D19811BA100CB0961 /* readme.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.markdown; sourceTree = "<group>"; };
 		6EBA76A5194AF28600941E85 /* BSBaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSBaseService.h; sourceTree = "<group>"; };
 		6EBA76A6194AF28600941E85 /* BSBaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSBaseService.m; sourceTree = "<group>"; };
 		6EBA76A9194AF28C00941E85 /* BSNetworkLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSNetworkLayer.h; sourceTree = "<group>"; };
@@ -505,7 +504,6 @@
 		6E65380B194730EB00FC6349 = {
 			isa = PBXGroup;
 			children = (
-				6EB98E2D19811BA100CB0961 /* readme.markdown */,
 				6E653819194730EB00FC6349 /* BeepSendSDK */,
 				6E65382D194730EB00FC6349 /* BeepSendSDKTests */,
 				6E653816194730EB00FC6349 /* Frameworks */,
@@ -1677,7 +1675,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/appledoc \\\n--project-name \"${PROJECT_NAME}\" \\\n--project-company \"BeepSend\" \\\n--company-id \"com.beepsend\" \\\n--output \"~/Documents/Projects/BeepSend-iOS\" \\\n--install-docset \\\n--logformat xcode \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--keep-intermediate-files \\\n--no-repeat-first-par \\\n--no-warn-invalid-crossref \\\n--merge-categories \\\n--exit-threshold 2 \\\n--docset-platform-family iphoneos \\\n--ignore \"*.m\" \\\n--ignore \"/Users/vladicapesic/Documents/Projects/BeepSend-iOS/BeepSendSDK/BeepSendSDK/BeepSendSDK/3rdParty\" \\\n--ignore \"/Users/vladicapesic/Documents/Projects/BeepSend-iOS/BeepSendSDK/BeepSendSDK/BeepSendSDK/Configuration\" \\\n--ignore \"/Users/vladicapesic/Documents/Projects/BeepSend-iOS/BeepSendSDK/BeepSendSDK/BeepSendSDK/Utilities\" \\\n--ignore \"/Users/vladicapesic/Documents/Projects/BeepSend-iOS/BeepSendSDK/BeepSendSDK/BeepSendSDK/Networking\" \\\n--ignore \"/Users/vladicapesic/Documents/Projects/BeepSend-iOS/BeepSendSDK/BeepSendSDK/BeepSendSDK/Models\" \\\n--ignore \"BeepSendSDK.h\" \\\n--ignore \"SupportingFiles\" \\\n--include \"/Users/vladicapesic/Documents/Projects/BeepSend-iOS/BeepSendSDK/BeepSendSDK/BeepSendSDK/BusinessLogic\" \\\n--index-desc \"${PROJECT_DIR}/readme.markdown\" \\\n--verbose 6 \\\n\"${PROJECT_DIR}/${PROJECT_NAME}\"\n";
+			shellScript = "/usr/local/bin/appledoc \\\n--project-name \"${PROJECT_NAME}\" \\\n--project-company \"BeepSend\" \\\n--company-id \"com.beepsend\" \\\n--output \"~/Documents/Projects/BeepSend-iOS\" \\\n--install-docset \\\n--logformat xcode \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--keep-intermediate-files \\\n--no-repeat-first-par \\\n--no-warn-invalid-crossref \\\n--merge-categories \\\n--docset-platform-family iphoneos \\\n--ignore \"*.m\" \\\n--ignore \"/Users/vladicapesic/Documents/Projects/BeepSend-iOS/BeepSendSDK/BeepSendSDK/BeepSendSDK/3rdParty\" \\\n--ignore \"/Users/vladicapesic/Documents/Projects/BeepSend-iOS/BeepSendSDK/BeepSendSDK/BeepSendSDK/Configuration\" \\\n--ignore \"/Users/vladicapesic/Documents/Projects/BeepSend-iOS/BeepSendSDK/BeepSendSDK/BeepSendSDK/Utilities\" \\\n--ignore \"/Users/vladicapesic/Documents/Projects/BeepSend-iOS/BeepSendSDK/BeepSendSDK/BeepSendSDK/Networking\" \\\n--ignore \"/Users/vladicapesic/Documents/Projects/BeepSend-iOS/BeepSendSDK/BeepSendSDK/BeepSendSDK/Models\" \\\n--ignore \"BeepSendSDK.h\" \\\n--ignore \"SupportingFiles\" \\\n--include \"/Users/vladicapesic/Documents/Projects/BeepSend-iOS/BeepSendSDK/BeepSendSDK/BeepSendSDK/BusinessLogic\" \\\n--index-desc \"${PROJECT_DIR}/readme.markdown\" \\\n--exit-threshold 2 \\\n--verbose 6 \\\n\"${PROJECT_DIR}/${PROJECT_NAME}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -1,2 +1,0 @@
-BeepSend Documentation
-======================

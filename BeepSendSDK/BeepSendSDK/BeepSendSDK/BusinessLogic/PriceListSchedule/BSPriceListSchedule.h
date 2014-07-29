@@ -8,21 +8,26 @@
 
 #import "BSGeneralModel.h"
 
+/*!
+ @class BSPriceListSchedule
+ @discussion Pricelist schedule is object that is received when fetching customer from server.
+ It tels how often pricelist will be mailed.
+ */
 @interface BSPriceListSchedule : BSGeneralModel
 
-/** Pricelist sendout schedule ID.
+/*! Pricelist sendout schedule ID.
  */
 @property (nonatomic, strong, readonly) NSString *pricelistScheduleID;
 
-/** Pricelist sendout schedule name. 
+/*! Pricelist sendout schedule name. 
 	How often new pricelist updates should be mailed out.
  */
 @property (nonatomic, strong, readonly) NSString *scheduleName;
 
-/** Init Pricelist schedule with ID, name
+/*! Create Pricelist object
  
- @param psID - Pricelist schedule ID
- @param psName - Name
+ @param psID - Pricelist sendout schedule ID
+ @param psName - Pricelist sendout schedule name
  
  @return Returns Pricelist schedule object
  */

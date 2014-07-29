@@ -190,22 +190,6 @@
 	return self;
 }
 
-- (BSConnection *)initConnectionWithID:(NSString *)cID
-									  label:(NSString *)cLabel
-								   systemID:(NSString *)cSystemID
-									   type:(BSConnectionType)cType
-{
-	if (self = [super initWithID:cID andTitle:cLabel]) {
-		_connectionID = cID;
-		_label = cLabel;
-		_systemID = cSystemID;
-		_type = cType;
-		_lookupPageLimit = kDefaultMessageCountForLookup;
-		
-	}
-	return self;
-}
-
 - (BSConnection *)init
 {
 	if (self = [super initWithID:@"0" andTitle:@"Connection"]) {

@@ -11,28 +11,35 @@
 @class BSMCCMNC;
 @class BSStatistics;
 
+/*!
+ @class BSNetworkDetails
+ @discussion Network details will give you granular delivery statistics 
+ for all messages sorted by each recipient network between two specified dates. 
+ */
 @interface BSNetworkDetails : BSGeneralModel
 
-/** MCC MNC for network
+/*! Mobile Country Code and Mobile Network Code
  */
 @property (nonatomic, strong, readonly) BSMCCMNC *mccmnc;
 
-/** Statistic
+/*! Statistic
  */
 @property (nonatomic, strong, readonly) BSStatistics *statistics;
 
-/** Total amount of messages for the MCC MNC
+/*! Total amount of messages for the MCC MNC
  */
 @property (nonatomic, strong, readonly) NSNumber *total;
 
-/** Init Network details with mccmnc, statistics, total
+/*! Create Network details object
  
- @param nMccmnc - AnalyticsBatch ID
- @param nStatistics - Label
- @param nTotal - Total
+ @param nMccmnc - Mobile Country Code and Mobile Network Code
+ @param nStatistics - Statistic
+ @param nTotal - Total amount of messages for the MCC MNC
  
  @return Returns Network details object
  */
-- (BSNetworkDetails *)initWithMCCMNC:(BSMCCMNC *)nMccmnc statistics:(BSStatistics *)nStatistics total:(NSNumber *)nTotal;
+- (BSNetworkDetails *)initWithMCCMNC:(BSMCCMNC *)nMccmnc
+						  statistics:(BSStatistics *)nStatistics
+							   total:(NSNumber *)nTotal;
 
 @end

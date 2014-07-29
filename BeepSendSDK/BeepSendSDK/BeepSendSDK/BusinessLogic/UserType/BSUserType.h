@@ -8,17 +8,22 @@
 
 #import "BSGeneralModel.h"
 
+/*!
+ @class BSUserType
+ @discussion User type presents type that applies to user
+ */
 @interface BSUserType : BSGeneralModel
 
-/** User type ID.
+/*! User type ID.
  */
 @property (nonatomic, strong, readonly) NSString *userTypeID;
 
-/** User type title.
+/*! User type title.
  */
 @property (nonatomic, strong, readonly) NSString *name;
 
-/** Init User type with ID
+/*! Create User type object
+ Used for initializing user type object when only user type id is known
  
  @param uID - User type ID
  
@@ -26,10 +31,11 @@
  */
 - (BSUserType *)initUserTypeWithID:(NSString *)uID;
 
-/** Init User type with ID and name
+/*! Create User type object
+ Used for initializing user type object with object received from server
  
  @param uID - User type ID
- @param uName - User type name
+ @param uName - User type title
  
  @return Returns UserType object
  */

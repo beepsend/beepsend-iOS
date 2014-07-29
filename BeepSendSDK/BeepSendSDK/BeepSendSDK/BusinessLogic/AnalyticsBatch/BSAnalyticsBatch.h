@@ -10,33 +10,40 @@
 
 @class BSStatistics;
 
+/*!
+ @class BSAnalyticsBatch
+ @discussion Batch details will give you delivery statistics for a whole batch.
+ */
 @interface BSAnalyticsBatch : BSGeneralModel
 
-/** Unique batch id
+/*! Unique batch id
  */
 @property (nonatomic, strong, readonly) NSString *batchID;
 
-/** Batch name
+/*! Batch name
   */
 @property (nonatomic, strong, readonly) NSString *label;
 
-/** Total amount of messages in the batch
+/*! Total amount of messages in the batch
  */
 @property (nonatomic, strong, readonly) NSNumber *total;
 
-/** Statistics
+/*! Statistics
  */
 @property (nonatomic, strong, readonly) BSStatistics *statistic;
 
-/** Init Analytics Batch with AnalyticsBatch ID, Label, Total, Statistics
+/*! Create Analytics Batch object
  
- @param abID - AnalyticsBatch ID
- @param abLabel - Label
- @param abTotal - Total
- @param abStats - Stats
+ @param abID - Unique batch id
+ @param abLabel - Batch name
+ @param abTotal - Total amount of messages in the batch
+ @param abStats - Statistics
  
  @return Returns Analytics Batch object
  */
-- (BSAnalyticsBatch *)initWithID:(NSString *)abID label:(NSString *)abLabel total:(NSNumber *)abTotal statistics:(BSStatistics *)abStats;
+- (BSAnalyticsBatch *)initWithID:(NSString *)abID
+						   label:(NSString *)abLabel
+						   total:(NSNumber *)abTotal
+					  statistics:(BSStatistics *)abStats;
 
 @end

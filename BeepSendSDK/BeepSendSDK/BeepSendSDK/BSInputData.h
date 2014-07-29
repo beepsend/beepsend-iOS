@@ -9,6 +9,8 @@
 #ifndef BeepSendSDK_BSInputData_h
 #define BeepSendSDK_BSInputData_h
 
+/** Enter User or Connection API token
+ */
 #define APIToken @""
 
 #endif

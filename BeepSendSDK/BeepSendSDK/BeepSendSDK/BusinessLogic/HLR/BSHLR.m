@@ -14,6 +14,7 @@
 
 @interface BSHLR ()
 
+@property (nonatomic, strong, readwrite) NSString *hlrID;
 @property (nonatomic, strong, readwrite) BSTimestamps *timestamps;
 @property (nonatomic, strong, readwrite) BSDLRReport *dlrReport;
 @property (nonatomic, strong, readwrite) BSMCCMNC *mccmnc;
@@ -30,6 +31,11 @@
 @implementation BSHLR
 
 #pragma mark - Properties
+
+- (NSString *)hlrID
+{
+	return [BSHelper isNilOrEmpty:_hlrID] ? @"0" : [_hlrID isKindOfClass:[NSNumber class]] ? [(NSNumber *)_hlrID stringValue] : _hlrID;
+}
 
 - (NSString *)imsi
 {
@@ -77,6 +83,7 @@
 			  withErrors:(NSArray *)errors
 {
 	if (self = [super initWithID:hlrID andTitle:@"HLR"]) {
+		_hlrID = hlrID;
 		_timestamps = hlrTimestamp;
 		_dlrReport = hlrDlrReport;
 		_mccmnc = hlrMccMnc;

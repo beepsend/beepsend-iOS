@@ -8,34 +8,40 @@
 
 #import "BSGeneralModel.h"
 
+/*!
+ @class BSBatch
+ @discussion When sending multiple messages to one or more receivers add batch label 
+ and later on you can use same batch for sending messages.
+ */
 @interface BSBatch : BSGeneralModel
 
-/** Batch id.
+/*! Batch id.
  */
 @property (nonatomic, strong, readonly) NSString *batchID;
 
-/** Batch name.
+/*! Batch name.
  */
 @property (nonatomic, strong, readonly) NSString *label;
 
-/** Creation time of batch.
+/*! Creation time of batch.
  */
 @property (nonatomic, strong) NSDate *createdAt;
 
-/** Last time the batch was used to send a message.
+/*! Last time the batch was used to send a message.
  */
 @property (nonatomic, strong) NSDate *lastUsed;
 
-/** Init Batch with ID, label
+/*! Create Batch object
  
- @param bID - Batch ID
- @param bLabel - Label
+ @param bID - Batch id
+ @param bLabel - Creation time of batch
  
  @return Returns Batch object
  */
-- (BSBatch *)initWithID:(NSString *)bID andLabel:(NSString *)bLabel;
+- (BSBatch *)initWithID:(NSString *)bID
+			   andLabel:(NSString *)bLabel;
 
-/** This call will give you delivery statistics for a whole batch.
+/*! This call will give you delivery statistics for a whole batch.
  
  @param block - Returns statistics list or error
  */

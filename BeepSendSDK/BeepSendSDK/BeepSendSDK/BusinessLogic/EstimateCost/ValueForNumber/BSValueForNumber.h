@@ -8,23 +8,29 @@
 
 #import "BSGeneralModel.h"
 
+/*!
+ @class BSLookup
+ @discussion Used for estimated cost of message. 
+ Contains number and cost for that number.
+ */
 @interface BSValueForNumber : BSGeneralModel
 
-/** Number
+/*! Number
  */
 @property (nonatomic, strong, readonly) NSString *value;
 
-/** Numbers cost
+/*! Numbers cost
  */
 @property (nonatomic, strong, readonly) NSNumber *cost;
 
-/** Init ValueForNumber with value, cost
+/*! Create ValueForNumber object
  
- @param value - Value
+ @param value - Number
  @param cost - Cost
  
- @return Returns ValueForNumber cost object
+ @return Returns ValueForNumber object
  */
-- (BSValueForNumber *)initWithValue:(NSString *)value cost:(NSNumber *)cost;
+- (BSValueForNumber *)initWithValue:(NSString *)value
+							   cost:(NSNumber *)cost;
 
 @end

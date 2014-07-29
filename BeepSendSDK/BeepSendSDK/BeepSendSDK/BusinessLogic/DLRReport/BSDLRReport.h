@@ -8,20 +8,24 @@
 
 #import "BSGeneralModel.h"
 
+/*!
+ @class BSDLRReport
+ @discussion DLR contains response code and response status
+ */
 @interface BSDLRReport : BSGeneralModel
 
-/** Response status.
+/*! Response status.
  */
 @property (nonatomic, strong, readonly) NSString *responseStatus;
 
-/** Response code.
+/*! Response code.
  */
 @property (nonatomic, strong, readonly) NSNumber *responseCode;
 
-/** Init DLR with status, code
+/*! Create DLR object
  
- @param rStatus - Status
- @param rCode - Code
+ @param rStatus - Response status
+ @param rCode - Response code
  
  @return Returns DLR object
  */

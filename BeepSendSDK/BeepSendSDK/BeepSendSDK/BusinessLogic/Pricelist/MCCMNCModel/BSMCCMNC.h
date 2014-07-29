@@ -8,17 +8,21 @@
 
 #import "BSGeneralModel.h"
 
+/*!
+ @class BSMCCMNC
+ @discussion MCC MNC is model that contains two properties: MCC and MNC.
+ */
 @interface BSMCCMNC : BSGeneralModel
 
-/** MNC of the network.
+/*! Mobile Network Code.
  */
 @property (nonatomic, strong, readonly) NSNumber *mnc;
 
-/** MCC of the network.
+/*! Mobile Country Code.
  */
 @property (nonatomic, strong, readonly) NSNumber *mcc;
 
-/** Init MCCMNC with mcc and mnc
+/*! Create MCCMNC object
  
  @param mnc - Mobile network code
  @param mcc - Mobile country code

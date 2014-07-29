@@ -10,20 +10,25 @@
 
 @class BSHLRReport;
 
+/*!
+ @class BSTimestamps
+ @discussion Timestamps model contains times when HLR reached BeepSend, 
+ when HLR response reached BeepSend and when callback was sent.
+ */
 @interface BSTimestamps : BSGeneralModel
 
-/** HLR timestamps
+/*! HLR timestamps.
  */
 @property (nonatomic, strong, readonly) BSHLRReport *hlr;
 
-/** When callback was sent.
+/*! When callback was sent.
  */
 @property (nonatomic, strong, readonly) NSDate *callbackSentAt;
 
-/** Init Timestamp with hlrReport, sDate
+/*! Create Timestamp object
  
- @param hlrReport - HLR Report
- @param sDate - Callback sent time
+ @param hlrReport - HLR timestamps
+ @param sDate - When callback was sent
  
  @return Returns Timestamp object
  */

@@ -8,35 +8,39 @@
 
 #import "BSGeneralModel.h"
 
+/*!
+ @class BSLog
+ @discussion Log is used to show transactions for given wallet.
+ */
 @interface BSLog : BSGeneralModel
 
-/** Transaction id.
+/*! Transaction id.
  */
 @property (nonatomic, strong, readonly) NSString *logID;
 
-/** Unix time when the transaction took place.
+/*! Unix time when the transaction took place.
  */
 @property (nonatomic, strong, readonly) NSDate *timeOfTransaction;
 
-/** Balance after the transaction.
+/*! Balance after the transaction.
  */
 @property (nonatomic, strong, readonly) NSNumber *balanceAfterTransaction;
 
-/** Amount that was added/deducted from the wallet.
+/*! Amount that was added/deducted from the wallet.
  */
 @property (nonatomic, strong, readonly) NSNumber *change;
 
-/** Comment attached to transaction.
+/*! Comment attached to transaction.
  */
 @property (nonatomic, strong, readonly) NSString *comment;
 
-/** Init Log with log ID, time, balance, change, comment
+/*! Create Log object
  
- @param logID - Log ID
- @param time - Time
- @param balance - Balance
- @param change - Change
- @param comment - Comment
+ @param logID - Transaction id
+ @param time - Unix time when the transaction took place
+ @param balance - Balance after the transaction
+ @param change - Amount that was added/deducted from the wallet
+ @param comment - Comment attached to transaction
  
  @return Returns Log object
  */

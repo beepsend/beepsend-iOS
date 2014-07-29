@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+/** Parent class
+ */
 @interface BSGeneralModel : NSObject
 
 /** Object ID

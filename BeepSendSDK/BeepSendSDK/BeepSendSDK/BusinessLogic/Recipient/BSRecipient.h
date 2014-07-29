@@ -8,28 +8,34 @@
 
 #import "BSGeneralModel.h"
 
+/*!
+ @class BSRecipient
+ @discussion Recipient is used when performing SMS lookup.
+ */
 @interface BSRecipient : BSGeneralModel
 
-/** Destination address.
+/*! Destination address.
  */
 @property (nonatomic, strong, readonly) NSString *destinationNumber;
 
-/** Type of number.
+/*! Type of number.
  */
 @property (nonatomic, strong, readonly) NSNumber *numberType;
 
-/** Number Plan Index.
+/*! Number Plan Index.
  */
 @property (nonatomic, strong, readonly) NSNumber *numberPlanIndex;
 
-/** Init Recipient with number, type, plan index
+/*! Create Recipient object
  
- @param number - Number
- @param nType - Number type
- @param nPlanIndex - Plan index
+ @param number - Destination address
+ @param nType - Type of number
+ @param nPlanIndex - Number Plan Index
  
  @return Returns Recipient object
  */
-- (BSRecipient *)initRecipientWithNumber:(NSString *)number numberType:(NSNumber *)nType planIndex:(NSNumber *)nPlanIndex;
+- (BSRecipient *)initRecipientWithNumber:(NSString *)nNumber
+							  numberType:(NSNumber *)nType
+							   planIndex:(NSNumber *)nPlanIndex;
 
 @end

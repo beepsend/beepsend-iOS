@@ -8,23 +8,29 @@
 
 #import "BSGeneralModel.h"
 
+/*!
+ @class BSError
+ @discussion Error model that is received in responses if there was an error in execution.
+ Usualy return value is array of error models.
+ */
 @interface BSError : BSGeneralModel
 
-/** Error code
+/*! Error code
  */
 @property (nonatomic, strong, readonly) NSNumber *code;
 
-/** Error description
+/*! Error description
  */
 @property (nonatomic, strong, readonly) NSString *errorDescription;
 
-/** Init Error with code and description
+/*! Create BSError model with code and description
  
  @param code - Code
  @param desc - Description
  
  @return Returns Error object
  */
-- (BSError *)initWithCode:(NSNumber *)code andDescription:(NSString *)desc;
+- (BSError *)initWithCode:(NSNumber *)code
+		   andDescription:(NSString *)desc;
 
 @end
