@@ -8,8 +8,6 @@
 
 #import "BSCustomerService.h"
 
-#import "BSAPIConfiguration.h"
-
 #import "BSAPCustomer.h"
 
 @implementation BSCustomerService
@@ -29,19 +27,28 @@
 #pragma mark - Public methods
 
 - (void)getCustomerOnCompletion:(void(^)(BSCustomer *customer, NSArray *errors))block {
-	[super executeGETForMethod:[BSAPIConfiguration customer]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  block([[BSAPCustomer classFromDict:response] convertToModel], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-					  
-				  }];
+	
+	NSDictionary *cust = @{ @"id" : @1 ,
+							@"phone" : @"46406007500" ,
+							@"name" : @"Beepsend AB" ,
+							@"address" : @"Gustav Adolfs Torg 12" ,
+							@"city" : @"Malmö" ,
+							@"post_box" : @"21139" ,
+							@"country" : @"Sweden" ,
+							@"vat" : @"" ,
+							@"email" : @"beepsend@beepsend.se" ,
+							@"invoice_type" : @"pre-pay" ,
+							@"account_manager" : @{ @"name" : @"Account Manager" ,
+													@"email" : @"account.manager@beepsend.se" } ,
+							@"pricelist_type" : @1,
+							@"pricelist_delimiter" : [NSNull null],
+							@"pricelist_schedule" : @{ @"id" : @1,
+													   @"name" : @"Immediately" } ,
+							@"pricelist_fields": @[] };
+	
+	BSAPCustomer *customer = [BSAPCustomer classFromDict:cust];
+	
+	block([customer convertToModel], nil);
 }
 
 @end

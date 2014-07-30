@@ -33,20 +33,8 @@
 
 - (void)getUserDetailsWithCompletionBlock:(void(^)(BSUser *user, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration userMe]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  if (!error) {
-						  
-						  BSUser *userModel = [[BSAPCUser classFromDict:response] convertToModel];
-						  
-						  block(userModel, nil);
-					  }
-					  else {
-			  
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	BSUser *userModel = [[BSAPCUser classFromDict:@{@"id":@4,@"name":@"Beep",@"email":@"beep@beepsend.com",@"phone":@"46736007518",@"customer":@"Beepsend AB",@"api_token":@"abc123",@"default_connection":@{@"id":@27,@"label":@"The Beep Connection",@"system_id":@"beep-connect",@"type":@1},@"user_types":@[@{@"id":@1,@"name":@"Technical Contact"}],@"max_level":@2,@"verified":@{@"email":@YES,@"phone":@NO,@"terms":@YES}}] convertToModel];
+	block(userModel, nil);
 }
 
 - (void)updateUserWithName:(NSString *)uName
@@ -56,144 +44,37 @@
 			 verifiedTerms:(NSNumber *)uVerifiedTerms
 	   withCompletionBlock:(void(^)(BSUser *user, NSArray *errors))block
 {
-	
-	BSConnection *connection = [[BSConnection alloc] initConnectionWithID:uConnection.connectionID];
-	
-	NSMutableArray *mArr = [@[] mutableCopy];
-	for (BSUserType *uType in uTypes) {
-		BSUserType *t = [[BSUserType alloc] initUserTypeWithID:uType.objectID];
-		[mArr addObject:t];
-	}
-	
-	BSVerified *verified = nil;
-	if (uVerifiedTerms) {
-		verified = [[BSVerified alloc] initUserWithTermsVerified:uVerifiedTerms];
-	}
-	
-	BSUser *userUpdate =
-	[[BSUser alloc] initWithName:uName
-						   phone:uPhone
-			   defaultConnection:connection
-					   userTypes:[NSArray arrayWithArray:mArr]
-						verified:verified];
-	
-	NSDictionary *userUpdateDictionary = [[BSAPCUser convertFromUserModel:userUpdate] dictFromClass];
-	
-	BSDLog(@"%@", userUpdateDictionary);
-	
-	[super executePUTForMethod:[BSAPIConfiguration userMe]
-				withParameters:userUpdateDictionary
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  
-						  BSUser *userModel = [[BSAPCUser classFromDict:response] convertToModel];
-						  
-						  block(userModel, nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	BSUser *userModel = [[BSAPCUser classFromDict:@{@"id":@4,@"name":uName,@"email":@"beep@beepsend.com",@"phone":uPhone,@"customer":@"Beepsend AB",@"api_token":@"abc123",@"default_connection":@{@"id":[NSNumber numberWithInteger:[uConnection.connectionID integerValue]],@"label":uConnection.label,@"system_id":uConnection.systemID,@"type":[NSNumber numberWithInteger:uConnection.type]},@"user_types":@[@{@"id":@1,@"name":@"Technical Contact"}],@"max_level":@2,@"verified":@{@"email":@YES,@"phone":@NO,@"terms":uVerifiedTerms}}] convertToModel];
+	block(userModel, nil);
 }
 
 - (void)updateUserEmail:(NSString *)newEmail
 		   userPassword:(NSString *)password
 	withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block
 {
-	BSUser *userUpdate = [[BSUser alloc] initUserWithEmail:newEmail andPassword:password];
-	
-	NSDictionary *userUpdateDictionary = [[BSAPCUser convertFromUserModel:userUpdate] dictFromClass];
-	
-	BSDLog(@"%@", userUpdateDictionary);
-	
-	[super executePUTForMethod:[BSAPIConfiguration updateUserEmail]
-				withParameters:userUpdateDictionary
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  block(YES, nil);
-					  }
-					  else {
-
-						  block(NO, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	block(YES, nil);
 }
 
 - (void)updateUserPassword:(NSString *)password
 		   userNewPassword:(NSString *)newPassword
 	   withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block
 {
-	BSUser *userUpdate = [[BSUser alloc] initUserWithPassword:password andNewPassword:newPassword];
-	
-	NSDictionary *userUpdateDictionary = [[BSAPCUser convertFromUserModel:userUpdate] dictFromClass];
-	
-	BSDLog(@"%@", userUpdateDictionary);
-	
-	[super executePUTForMethod:[BSAPIConfiguration updateUserPassword]
-				withParameters:userUpdateDictionary
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  block(YES, nil);
-					  }
-					  else {
-
-						  block(NO, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	block(YES, nil);
 }
 
 - (void)resetUserTokenUsingPassword:(NSString *)password withCompletionBlock:(void(^)(NSString *apiToken, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration resetTokenMe]
-				withParameters:@{@"password" : password}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  block(response[@"api_token"], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	block(@"NEW_TOKEN", nil);
 }
 
 - (void)verifyEmailWithHash:(NSString *)hash withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration verifyEmailWithHash:hash]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  block(YES, nil);
-					  }
-					  else {
-
-						  block(NO, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-					  
-				  }];
+	block(YES, nil);
 }
 
 - (void)verifyPhoneWithHash:(NSString *)hash withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration verifyPhoneWithHash:hash]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  block(YES, nil);
-					  }
-					  else {
-
-						  block(NO, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-					  
-				  }];
+	block(YES, nil);
 }
 
 @end

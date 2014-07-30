@@ -37,276 +37,67 @@
 
 - (void)sendMessage:(BSMessage *)messageRequest usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSMessage *message, NSArray *errors))block
 {
-	NSString *method;
-	if (messageRequest.groups) {
-		if (connection) {
-			method = [BSAPIConfiguration batchesForID:connection.objectID];
-		}
-		else {
-			method = [BSAPIConfiguration batches];
-		}
-	}
-	else {
-		if (connection) {
-			method = [BSAPIConfiguration smsForID:connection.objectID];
-		}
-		else {
-			method = [BSAPIConfiguration sms];
-		}
-	}
-	
 	NSDictionary *parameters = [[BSAPMessageRequest convertFromMessageRequestModel:messageRequest] dictFromClass];
 	
-	[super executePOSTForMethod:method
-				 withParameters:parameters
-				   onCompletion:^(id response, id error) {
-					   
-					   if ([response isKindOfClass:[NSArray class]]) {
-						   
-						   NSMutableArray *mArr = [@[] mutableCopy];
-						   for (BSAPMessage *msg in [BSAPMessage arrayOfObjectsFromArrayOfDictionaries:response]) {
-							   [mArr addObject:[msg convertToModel]];
-						   }
-						   
-						   BSMessage *m = mArr[0];
-						   
-						   if (m.errors.count>0) {
-							   block(nil, m.errors);
-						   }
-						   else {
-							   block(m, nil);
-						   }
-					   }
-					   else {
-
-						   block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					   }
-				   }];
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPMessage *msg in [BSAPMessage arrayOfObjectsFromArrayOfDictionaries:@[@{@"id":@"07595980013893439611559146736007518",@"batch":@{@"id":@3,@"label":@"My custom name for my batch"},@"to":messageRequest.recipient,@"from":messageRequest.sender,@"errors":[NSNull null]}]]) {
+		[mArr addObject:[msg convertToModel]];
+	}
+	block(mArr[0], nil);
 }
 
 - (void)sendMessages:(NSArray *)messages usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *array, NSArray *errors))block
 {
-	BOOL containGroups = NO;
-	NSMutableArray *parameters = [@[] mutableCopy];
-	for (BSAPMessageRequest *request in [BSAPMessageRequest arrayOfObjectsFromArrayOfModels:messages]) {
-		[parameters addObject:[request dictFromClass]];
-		if (request.groups) {
-			containGroups = YES;
-		}
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPMessage *msg in [BSAPMessage arrayOfObjectsFromArrayOfDictionaries:@[@{@"id":@"07595980013893439611559146736007518",@"batch":@{@"id":@3,@"label":@"My custom name for my batch"},@"to":@"222222",@"from":@"sender",@"errors":[NSNull null]},@{@"id":@"07595980013893439611559146736007518",@"batch":@{@"id":@3,@"label":@"My custom name for my batch"},@"to":@"222222",@"from":@"Sender",@"errors":[NSNull null]}]]) {
+		BSMessage *message = [msg convertToModel];
+		[mArr addObject:message];
 	}
-	
-	NSString *method;
-	if (containGroups) {
-		if (connection) {
-			method = [BSAPIConfiguration batchesForID:connection.objectID];
-		}
-		else {
-			method = [BSAPIConfiguration batches];
-		}
-	}
-	else {
-		if (connection) {
-			method = [BSAPIConfiguration smsForID:connection.objectID];
-		}
-		else {
-			method = [BSAPIConfiguration sms];
-		}
-	}
-	
-	[super executePOSTForMethod:method
-				 withParameters:parameters
-				   onCompletion:^(id response, id error) {
-					   
-					   if ([response isKindOfClass:[NSArray class]]) {
-						   
-						   NSMutableArray *mArr = [@[] mutableCopy];
-						   NSMutableArray *errors = [@[] mutableCopy];
-						   for (BSAPMessage *msg in [BSAPMessage arrayOfObjectsFromArrayOfDictionaries:response]) {
-							   BSMessage *message = [msg convertToModel];
-							   [mArr addObject:message];
-							   
-							   if (message.errors.count>0) {
-								   [errors addObjectsFromArray:message.errors];
-							   }
-						   }
-						   
-						   block([NSArray arrayWithArray:mArr], errors.count>0 ? errors : nil);
-					   }
-					   else {
-
-						   block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					   }
-				   }];
+	block([NSArray arrayWithArray:mArr], nil);
 }
 
 - (void)lookupSMS:(BSMessage *)sms withCompletionBlock:(void(^)(BSLookup *lookupResponse, NSArray *errors))block
 {
-	
-	[super executeGETForMethod:[BSAPIConfiguration smsLookupWithID:sms.messageID]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  
-						  BSLookup *smslookup = [[BSAPSMSLookup classFromDict:response] convertToModel];
-						  
-						  block(smslookup, nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	BSLookup *smslookup = [[BSAPSMSLookup classFromDict:@{@"id":@"12345",@"batch":@{@"id":@52,@"label":@"Super batch!"},@"body":@"Hello World!",@"connection":@{@"id":@7,@"label":@"superman-connection"},@"to":@{@"address":@"46406007500",@"ton":@1,@"npi":@1},@"from":@{@"address":@"Beepsend",@"ton":@1,@"npi":@1},@"validity_period":@"131102072704000",@"data_coding":@3,@"timestamps":@{@"sms":@{@"in":@1383225355,@"delivered":@1383225359},@"dlr_out":@1383225359},@"dlr":@{@"status":@"DELIVRD",@"error":@0},@"price":@0.068,@"mccmnc":@{@"mcc":@"240",@"mnc":@"01"}}] convertToModel];
+	block(smslookup, nil);
 }
 
 - (void)lookupMultipleSMSSentTo:(NSString *)recipient setnFrom:(NSString *)sender usingConnection:(BSConnection *)connection batch:(BSBatch *)batch sinceID:(NSString *)sinceID maxID:(NSString *)maxID afterDate:(NSDate *)afterDate beforeDate:(NSDate *)beforeDate count:(NSNumber *)count withCompletionBlock:(void(^)(NSArray *lookupResponse, NSArray *error))block
 {
-	NSMutableDictionary *parameters = [@{} mutableCopy];
-	if (recipient) {
-		[parameters setObject:recipient forKey:@"to"];
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPSMSLookup *msg in [BSAPSMSLookup arrayOfObjectsFromArrayOfDictionaries:@[@{@"id":@"12345",@"batch":@{@"id":@52,@"label":@"Super batch!"},@"body":@"Hello World!",@"connection":@{@"id":@7,@"label":@"superman-connection"},@"to":@{@"address":@"46406007500",@"ton":@1,@"npi":@1},@"from":@{@"address":@"Beepsend",@"ton":@1,@"npi":@1},@"validity_period":@"131102072704000",@"data_coding":@3,@"timestamps":@{@"sms":@{@"in":@1383225355,@"delivered":@1383225359},@"dlr_out":@1383225359},@"dlr":@{@"status":@"DELIVRD",@"error":@0},@"price":@0.068,@"mccmnc":@{@"mcc":@"240",@"mnc":@"01"}},@{@"id":@"12346",@"batch":@{@"id":@52,@"label":@"Super batch!"},@"body":@"Hello World!",@"connection":@{@"id":@7,@"label":@"superman-connection"},@"to":@{@"address":@"46406007500",@"ton":@1,@"npi":@1},@"from":@{@"address":@"Beepsend",@"ton":@1,@"npi":@1},@"validity_period":@"131102072704000",@"data_coding":@3,@"timestamps":@{@"sms":@{@"in":@1383225355,@"delivered":@1383225359},@"dlr_out":@1383225359},@"dlr":@{@"status":@"DELIVRD",@"error":@0},@"price":@0.068,@"mccmnc":@{@"mcc":@"240",@"mnc":@"01"}}]]) {
+		[mArr addObject:[msg convertToModel]];
 	}
-	if (sender) {
-		[parameters setObject:sender forKey:@"from"];
-	}
-	if (connection && ![connection.objectID isEqualToString:@"0"]) {
-		[parameters setObject:connection.objectID forKey:@"connection_id"];
-	}
-	if (batch && ![batch.objectID isEqualToString:@"0"]) {
-		[parameters setObject:batch.objectID forKey:@"batch_id"];
-	}
-	if (sinceID) {
-		[parameters setObject:sinceID forKey:@"since_id"];
-	}
-	if (maxID) {
-		[parameters setObject:maxID forKey:@"max_id"];
-	}
-	if (count) {
-		[parameters setObject:count forKey:@"count"];
-	}
-	if (afterDate) {
-		[parameters setObject:[NSString stringWithFormat:@"%f", [afterDate timeIntervalSince1970]] forKey:@"after_date"];
-	}
-	if (beforeDate) {
-		[parameters setObject:[NSString stringWithFormat:@"%f", [beforeDate timeIntervalSince1970]] forKey:@"before_date"];
-	}
-	
-	[super executePOSTForMethod:[BSAPIConfiguration sms]
-				 withParameters:parameters
-				   onCompletion:^(id response, id error) {
-					   
-					   if (!error) {
-						   
-						   NSMutableArray *mArr = [@[] mutableCopy];
-						   for (BSAPSMSLookup *msg in [BSAPSMSLookup arrayOfObjectsFromArrayOfDictionaries:response]) {
-							   [mArr addObject:[msg convertToModel]];
-						   }
-						   block([NSArray arrayWithArray:mArr], nil);
-					   }
-					   else {
-
-						   block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					   }
-				   }];
+	block([NSArray arrayWithArray:mArr], nil);
 }
 
 - (void)validateSMSForMessage:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, NSArray *errors))block
 {
-	NSDictionary *parameters = [[BSAPMessageRequest convertFromMessageRequestModel:message] dictFromClass];
-	BSDLog(@"%@", parameters);
-	
-	[super executePOSTForMethod:[BSAPIConfiguration validateSMS]
-				 withParameters:parameters
-				   onCompletion:^(id response, id error) {
-					   
-					   BSMessage *message = [[BSAPMessage classFromDict:response] convertToModel];
-					   
-					   if (!error) {
-						   
-						   block(message, nil);
-					   }
-					   else {
-						   
-						   if (message.errors.count>0) {
-							   block(nil, message.errors);
-						   }
-						   else {
-							   block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-						   }
-					   }
-
-				   }];
+	BSMessage *msg = [[BSAPMessage classFromDict:@{@"id":[NSNull null],@"batch_label":@"My custom name for my batch",@"to":message.recipient,@"from":message.sender,@"errors":[NSNull null]}] convertToModel];
+	block(msg, nil);
 }
 
 - (void)getPreviousBatchesWithCompletionBlock:(void(^)(NSArray *bathces, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration batches]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-
-						  NSMutableArray *mArr = [@[] mutableCopy];
-						  for (BSAPBatch *batch in [BSAPBatch arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  [mArr addObject:[batch convertToModel]];
-						  }
-						  block([NSArray arrayWithArray:mArr], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPBatch *batch in [BSAPBatch arrayOfObjectsFromArrayOfDictionaries:@[@{@"id":@4,@"label":@"batch testing",@"date_created":@1387457467,@"last_used":@1387457467},@{@"id":@5,@"label":@"batch testing2",@"date_created":@1387457467,@"last_used":@1387457467},@{@"id":@6,@"label":@"batch testing3",@"date_created":@1387457467,@"last_used":@1387457467}]]) {
+		[mArr addObject:[batch convertToModel]];
+	}
+	block([NSArray arrayWithArray:mArr], nil);
 }
 
 - (void)getDetailsForBatch:(NSString *)batchID withCompletionBlock:(void(^)(BSBatch *batch, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration batchesForID:batchID]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-
-						  block([[BSAPBatch classFromDict:response] convertToModel], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	block([[BSAPBatch classFromDict:@{@"id":@4,@"label":@"batch testing",@"date_created":@1387457467,@"last_used":@1387457467}] convertToModel], nil);
 }
 
 - (void)estimateCostForMessages:(NSArray *)messageRequest usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *response, NSArray *errors))block
 {
 	NSMutableArray *mArr = [@[] mutableCopy];
-	for (BSMessage *mrm in messageRequest) {
-		[mArr addObject:[[BSAPMessageRequest convertFromMessageRequestModel:mrm] dictFromClass]];
+	for (BSAPEstimatedCost *msg in [BSAPEstimatedCost arrayOfObjectsFromArrayOfDictionaries:@[@{@"total_cost":@0.0032,@"to":@[@{@"46736007518":@0.0032}]},@{@"total_cost":@358.57,@"groups":@[@{@"11": @13.45},@{@"34":@345.12}]}]]) {
+		[mArr addObject:[msg convertToModel]];
 	}
-	
-	[super executePOSTForMethod:connection?[BSAPIConfiguration smsCostEstimateForID:connection.objectID]:[BSAPIConfiguration smsCostEstimate]
-				 withParameters:[NSArray arrayWithArray:mArr]
-				   onCompletion:^(id response, id error) {
-					   
-					   if (!error) {
-						   NSArray *result;
-						   if (![response isKindOfClass:[NSArray class]]) {
-							   result = @[response];
-						   }
-						   else {
-							   result = [NSArray arrayWithArray:response];
-						   }
-						   
-						   NSMutableArray *mArr = [@[] mutableCopy];
-						   for (BSAPEstimatedCost *msg in [BSAPEstimatedCost arrayOfObjectsFromArrayOfDictionaries:result]) {
-							   [mArr addObject:[msg convertToModel]];
-						   }
-						   block([NSArray arrayWithArray:mArr], nil);
-					   }
-					   else {
-
-						   block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					   }
-				   }];
-
+	block([NSArray arrayWithArray:mArr], nil);
 }
 
 @end

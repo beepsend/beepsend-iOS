@@ -27,7 +27,6 @@
 {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-	#define TESTING @"TESTING"
 	_user = [BSUser currentUser];
 	
 }
@@ -42,7 +41,9 @@
 
 - (void)testUpdateUserWithConnectionsFetch
 {
-	BSDLog(@"%@", _user);
+	[_user getCustomerDetailsOnCompletion:^(BSCustomer *customer, NSArray *errors) {
+		
+	}];
 }
 
 /*

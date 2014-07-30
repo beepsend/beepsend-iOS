@@ -32,26 +32,11 @@
 
 - (void)getAllGroupsWithCompletionBlock:(void(^)(NSArray *groups, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration contactsGroups]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  
-						  NSMutableArray *mArr = [@[] mutableCopy];
-						  for (BSAPGroup *group in [BSAPGroup arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  [mArr addObject:[group convertToModel]];
-						  }
-						  
-						  BSDLog(@"%@", mArr);
-						  
-						  block([NSArray arrayWithArray:mArr], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPGroup *group in [BSAPGroup arrayOfObjectsFromArrayOfDictionaries:@[@{@"id":@1,@"name":@"Customers",@"contacts_count":@27,@"processing":@1},@{@"id":@2,@"name":@"Others",@"contacts_count":@2,@"processing":@0}]]) {
+		[mArr addObject:[group convertToModel]];
+	}
+	block([NSArray arrayWithArray:mArr], nil);
 }
 
 - (void)getAllGroupsSinceID:(NSString *)sinceID
@@ -59,141 +44,48 @@
 					  count:(NSNumber *)count
 		withCompletionBlock:(void(^)(NSArray *groups, NSArray *errors))block
 {
-	BSAPGroupsRequest *groupsRequest = [[BSAPGroupsRequest alloc] init];
-	groupsRequest.since_id = sinceID;
-	groupsRequest.max_id = maxID;
-	groupsRequest.count = count;
-	[super executeGETForMethod:[BSAPIConfiguration contactsGroups]
-				withParameters:[groupsRequest dictFromClass]
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  
-						  NSMutableArray *mArr = [@[] mutableCopy];
-						  for (BSAPGroup *group in [BSAPGroup arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  [mArr addObject:[group convertToModel]];
-						  }
-						  
-						  BSDLog(@"%@", mArr);
-						  
-						  block([NSArray arrayWithArray:mArr], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPGroup *group in [BSAPGroup arrayOfObjectsFromArrayOfDictionaries:@[@{@"id":@1,@"name":@"Customers",@"contacts_count":@27,@"processing":@1},@{@"id":@2,@"name":@"Others",@"contacts_count":@2,@"processing":@0}]]) {
+		[mArr addObject:[group convertToModel]];
+	}
+	block([NSArray arrayWithArray:mArr], nil);
 }
 
 - (void)getDetailsForGroup:(BSGroup *)group withCompletionBlock:(void(^)(BSGroup *group, NSArray *errors))block
 {
-	[self getDetailsForGroupID:group.objectID withCompletionBlock:^(BSGroup *group, id error) {
-		block(group, error);
-	}];
+	block(group, nil);
 }
 
 - (void)getDetailsForGroupID:(NSString *)groupID withCompletionBlock:(void(^)(BSGroup *group, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration contactsGroupsForID:groupID]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-	
-						  block([[BSAPGroup classFromDict:response] convertToModel], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	block([[BSGroup alloc] initGroupWithID:groupID name:@"nameg" contacts:@2], nil);
 }
 
 - (void)addGroupNamed:(NSString *)groupName withCompletionBlock:(void(^)(BSGroup *group, NSArray *errors))block
 {
-	NSDictionary *dict = [[BSAPGroup groupFromGroupModel:[[BSGroup alloc] initGroupWithName:groupName]] dictFromClass];
-	BSDLog(@"%@", dict);
-	
-	[super executePOSTForMethod:[BSAPIConfiguration contactsGroups]
-				 withParameters:dict
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  
-						  block([[BSAPGroup classFromDict:response] convertToModel], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	block([[BSGroup alloc] initGroupWithID:@1 name:groupName contacts:@2], nil);
 }
 
 - (void)updateName:(NSString *)gName inGroup:(BSGroup *)group withCompletionBlock:(void(^)(BSGroup *group, NSArray *errors))block
 {
-	NSDictionary *dict = [[BSAPGroup groupFromGroupModel:[[BSGroup alloc] initGroupWithName:gName]] dictFromClass];
-	BSDLog(@"%@", dict);
-	
-	[super executePUTForMethod:[BSAPIConfiguration contactsGroupsForID:group.objectID]
-				 withParameters:dict
-				   onCompletion:^(id response, id error) {
-					   
-					   if (!error) {
-						   
-						   block([[BSAPGroup classFromDict:response] convertToModel], nil);
-					   }
-					   else {
-
-						   block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					   }
-				   }];
+	group.name = gName;
+	block(group, nil);
 }
 
 - (void)deleteGroup:(BSGroup *)group withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block
 {
-	[super executeDELETEForMethod:[BSAPIConfiguration contactsGroupsForID:group.objectID]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  
-						  block(YES, nil);
-					  }
-					  else {
-
-						  block(NO, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	block(YES, nil);
 }
 
 - (void)searchContactGroups:(NSString *)query
 					  limit:(NSUInteger)limit
 		withCompletionBlock:(void(^)(NSArray *results, NSArray *errors))block
 {
-	NSMutableDictionary *parameters = [@{} mutableCopy];
-	[parameters setObject:query forKey:@"query"];
-	
-	if (limit != 0) {
-		[parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPContact *con in [BSAPContact arrayOfObjectsFromArrayOfDictionaries:@[@{@"id":@1,@"name":query,@"contacts_count":@27,@"processing":@1},@{@"id":@2,@"name":query,@"contacts_count":@2,@"processing":@0}]]) {
+		  [mArr addObject:[con convertToModel]];
 	}
-	
-	[super executeGETForMethod:[BSAPIConfiguration searchContactGroups]
-				withParameters:parameters
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  
-						  NSMutableArray *mArr = [@[] mutableCopy];
-						  for (BSAPContact *con in [BSAPContact arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  [mArr addObject:[con convertToModel]];
-						  }
-						  block([NSArray arrayWithArray:mArr], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	block([NSArray arrayWithArray:mArr], nil);
 }
 
 @end

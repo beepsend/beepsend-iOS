@@ -34,173 +34,62 @@
 
 - (void)getAllWalletsWithCompletionBlock:(void(^)(NSArray *wallets, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration wallets]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  NSMutableArray *mArr = [@[] mutableCopy];
-						  for (BSAPWallet *wallet in [BSAPWallet arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  [mArr addObject:[wallet convertToModel]];
-						  }
-						  block([NSArray arrayWithArray:mArr], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPWallet *wallet in [BSAPWallet arrayOfObjectsFromArrayOfDictionaries:@[@{@"id":@1,@"balance":@47.60858,@"name":@"Beepsend wallet",@"notify_limit":@0,@"connections":@[@{@"system_id":@"beepsend",@"name":@"beepsend-connection",@"id":@1}],@"users":@[@{@"email":@"user@beepsend.se",@"name":@"Beep Beepson",@"id":@1}]},@{@"id":@2,@"balance":@47.60858,@"name":@"Beepsend wallet 2",@"notify_limit":@0,@"connections":@[@{@"system_id":@"beepsend",@"name":@"beepsend-connection",@"id":@1}],@"users":@[@{@"email":@"user@beepsend.se",@"name":@"Beep Beepson",@"id":@1}]}]]) {
+	  [mArr addObject:[wallet convertToModel]];
+	}
+	block([NSArray arrayWithArray:mArr], nil);
 }
 
 - (void)getWalletDetailsForID:(NSString *)walletID withCompletionBlock:(void(^)(BSWallet *wallet, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration walletsForID:walletID]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-
-						  block([[BSAPWallet classFromDict:response] convertToModel], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	block([[BSAPWallet classFromDict:@{@"id":[NSNumber numberWithInteger:[walletID integerValue]],@"balance":@47.60858,@"name":@"Beepsend wallet",@"notify_limit":@0,@"connections":@[@{@"system_id":@"beepsend",@"name":@"beepsend-connection",@"id":@1}],@"users":@[@{@"email":@"user@beepsend.se",@"name":@"Beep Beepson",@"id":@1}]}] convertToModel], nil);
 }
 
 - (void)updateWallet:(BSWallet *)wallet withName:(NSString *)wName notifyLimit:(NSNumber *)wLimit withCompletionBlock:(void(^)(BSWallet *wallet, NSArray *errors))block
 {
-	NSDictionary *parameters = [[BSAPWallet convertFromWalletModel:[[BSWallet alloc] initWalletWithName:wName limit:wLimit]] dictFromClass];
+	wallet.name = wName;
+	wallet.minimumBalanceForNotification = wLimit;
 	
-	[super executePUTForMethod:[BSAPIConfiguration walletsForID:wallet.objectID]
-				withParameters:parameters
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  
-						  block([[BSAPWallet classFromDict:response] convertToModel], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	block(wallet, nil);
 }
 
 - (void)getEmailsForWallet:(BSWallet *)wallet withCompletionBlock:(void(^)(NSArray *emails, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration walletsEmailsForID:wallet.objectID]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  
-						  NSMutableArray *mArr = [@[] mutableCopy];
-						  for (BSAPEmail *mail in [BSAPEmail arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  [mArr addObject:[mail convertToModel]];
-						  }
-						  block([NSArray arrayWithArray:mArr], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPEmail *mail in [BSAPEmail arrayOfObjectsFromArrayOfDictionaries:@[@{@"id":@1,@"email":@"mailman@beepsend.com"},@{@"id":@2,@"email":@"mailman2@beepsend.com"},@{@"id":@3,@"email":@"mailman3@beepsend.com"}]]) {
+		[mArr addObject:[mail convertToModel]];
+	}
+	block([NSArray arrayWithArray:mArr], nil);
 }
 
 - (void)getEmailForWallet:(BSWallet *)wallet andEmailID:(NSString *)emailID withCompletionBlock:(void(^)(BSEmail *email, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration walletsEmailsForWalletID:wallet.objectID andEmailID:emailID]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  
-						  block([[BSAPEmail classFromDict:response] convertToModel], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	block(@{@"id":[NSNumber numberWithInteger:[emailID integerValue]],@"email":@"mailman@beepsend.com"}, nil);
 }
 
 - (void)addEmail:(NSString *)email toWallet:(BSWallet *)wallet withCompletionBlock:(void(^)(BSEmail *email, NSArray *errors))block
 {
-	[super executePOSTForMethod:[BSAPIConfiguration walletsEmailsForID:wallet.objectID]
-				withParameters:[[BSAPEmail convertFromEmailModel:[[BSEmail alloc] initEmailWithAddress:email]] dictFromClass]
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  
-						  block([[BSAPEmail classFromDict:response] convertToModel], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	block(@{@"id":@1,@"email":email}, nil);
 }
 
 - (void)deleteEmailInWallet:(BSWallet *)wallet email:(BSEmail *)email withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block
 {
-	[super executeDELETEForMethod:[BSAPIConfiguration walletsEmailsForWalletID:wallet.objectID andEmailID:email.objectID]
-				   withParameters:@{}
-					 onCompletion:^(id response, id error) {
-					   
-						 if (!error) {
-						   
-							 block(YES, nil);
-						 }
-						 else {
-
-							 block(NO, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-						 }
-					 }];
+	block(YES, nil);
 }
 
 - (void)getTransactionLogForWallet:(BSWallet *)wallet since:(NSString *)sinceID max:(NSString *)maxID count:(NSNumber *)count withCompletionBlock:(void(^)(NSArray *log, NSArray *errors))block
 {
-	BSAPWalletRequest *wRequest = [[BSAPWalletRequest alloc] init];
-	wRequest.since_id = sinceID;
-	wRequest.max_id = maxID;
-	wRequest.count = count;
-	
-	[super executeGETForMethod:[BSAPIConfiguration walletsTransactionForID:wallet.objectID]
-				withParameters:[wRequest dictFromClass]
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  
-						  NSMutableArray *mArr = [@[] mutableCopy];
-						  for (BSAPTransactionLog *log in [BSAPTransactionLog arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  [mArr addObject:[log convertToModel]];
-						  }
-						  block([NSArray arrayWithArray:mArr], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPTransactionLog *log in [BSAPTransactionLog arrayOfObjectsFromArrayOfDictionaries:@[@{@"id":@20,@"timestamp":@1388669449,@"new_balance":@8085.56838,@"change":@200},@{@"id":@21,@"timestamp":@1388669500,@"new_balance":@80.56838,@"change":@200},@{@"id":@22,@"timestamp":@1388669700,@"new_balance":@808.56838,@"change":@200}]]) {
+		[mArr addObject:[log convertToModel]];
+	}
+	block([NSArray arrayWithArray:mArr], nil);
 }
 
 - (void)transferFunds:(NSNumber *)ammount fromWallet:(BSWallet *)wallet1 toWallet:(BSWallet *)wallet2 withCompletionBlock:(void(^)(BSTransfer *transfer, NSArray *errors))block
 {
-	[super executePOSTForMethod:[BSAPIConfiguration walletsTransferFundsFromWallet:wallet1.objectID toWallet:wallet2.objectID]
-				 withParameters:@{@"amount" : ammount}
-				   onCompletion:^(id response, id error) {
-					   
-					   if (!error) {
-						   
-						   block([[BSAPTransfer classFromDict:response] convertToModel], nil);
-					   }
-					   else {
-
-						   block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					   }
-				   }];
+	block([[BSAPTransfer classFromDict:@{@"source_wallet":@{@"id":@1,@"name":@"wallet-1",@"balance":@273.45},@"target_wallet":@{@"id":@2,@"name":@"wallet-2",@"balance":@125},@"amount":@123.45}] convertToModel], nil);
 }
 
 @end

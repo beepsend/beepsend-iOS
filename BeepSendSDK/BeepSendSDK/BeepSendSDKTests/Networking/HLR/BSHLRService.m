@@ -1,4 +1,4 @@
-
+z
 //
 //  BSHLRService.m
 //  BeepSendSDK
@@ -34,59 +34,17 @@
 				 withConnection:(BSConnection *)connection
 			withCompletionBlock:(void(^)(BSHLR *hlr, NSArray *errors))block
 {
-	NSString *method = [BSAPIConfiguration hlrForNumber:number];
-	NSDictionary *params = connection ? @{ @"connection" : connection.objectID } : @{};
-	
-	[super executeGETForMethod:method
-				withParameters:params
-				  onCompletion:^(id response, id error) {
-					  
-					  BSHLR *hlr = [[BSAPHLR classFromDict:response] convertToModel];
-					  
-					  if (!error) {
+	BSHLR *hlr = [[BSAPHLR classFromDict:@{@"id":@"08087780013866630151559112345",@"timestamps":@{@"hlr":@{@"in":@1383225355,@"delivered":@1383225359},@"dlr_out":@1383225359},@"dlr":@{@"status":@"DELIVRD",@"error":@0},@"mccmnc":@{@"mcc":@"402",@"mnc":@"02"},@"imsi":@"423900000000000000000",@"ported":@YES,@"roaming":@YES,@"prefix":@{@"mcc":@"402",@"mnc":@"02"}}] convertToModel];
 
-						  block(hlr, nil);
-					  }
-					  else {
-						  
-						  if (hlr.errors.count>0) {
-							  block(nil, hlr.errors);
-						  }
-						  else {
-							  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-						  }
-					  }
-				  }];
+	block(hlr, nil);
 }
 
 - (void)validateHLRForNumber:(NSString *)number
 			  withConnection:(BSConnection *)connection
 		 withCompletionBlock:(void(^)(BSHLR *response, NSArray *errors))block
 {
-	NSString *method = [BSAPIConfiguration validateHLR];
-	
-	NSDictionary *params = connection ? @{ @"msisdn" : number , @"connection" : connection.objectID } : @{ @"msisdn" : number };
-	
-	[super executePOSTForMethod:method
-				 withParameters:params
-				  onCompletion:^(id response, id error) {
-					  
-					  BSHLR *hlr = [[BSAPHLRValidateResponse classFromDict:response] convertToModel];
-					  
-					  if (!error) {
-						  
-						  block(hlr, nil);
-					  }
-					  else {
-						  
-						  if (hlr.errors.count>0) {
-							  block(nil, hlr.errors);
-						  }
-						  else {
-							  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-						  }
-					  }
-				  }];
+	BSHLR *hlr = [[BSAPHLRValidateResponse classFromDict:@{@"id":[NSNull null],@"batch_label":@"My custom name for my batch",@"to":@"502040",@"from":@"lolboll",@"errors":[NSNull null]}] convertToModel];
+	block(hlr, nil);
 }
 
 @end

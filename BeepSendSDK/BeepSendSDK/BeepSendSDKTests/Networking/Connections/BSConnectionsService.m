@@ -30,38 +30,18 @@
 
 - (void)getAllAvailableConnectsionOnCompletion:(void(^)(NSArray *connections, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration connections]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  NSMutableArray *mArr = [@[] mutableCopy];
-						  for (BSAPConnection *conn in [BSAPConnection arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  [mArr addObject:[conn convertToModel]];
-						  }
-						  block([NSArray arrayWithArray:mArr], nil);
-					  }
-					  else {
 
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-	}];
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPConnection *conn in [BSAPConnection arrayOfObjectsFromArrayOfDictionaries:@[@{@"tlv_for_mcc_mnc":@0,@"type":@1,@"description":@"",@"id":@1,@"system_id":@"beepsend",@"label":@"beepsend-connection",@"api_token":@"abc123",@"callbacks":@{@"dlr":@"http://beepsend.com/dlr",@"mo":@"https://beepsend.com/mocallback",@"method":@"PUT"},@"users":@[@{@"username":@"beepsend-user",@"name":@"Beep Beepson",@"id":@1}],@"wallet":@{@"balance":@5028.14758,@"name":@"Beepsend wallet",@"id":@1},@"customer":@"Beepsend AB"},@{@"tlv_for_mcc_mnc":@0,@"type":@2,@"description":@"",@"id":@1,@"system_id":@"beepsend2",@"label":@"beepsend-connection2",@"api_token":@"abc1234",@"callbacks":@{@"dlr":@"http://beepsend.com/dlr",@"mo":@"https://beepsend.com/mocallback",@"method":@"PUT"},@"users":@[@{@"username":@"beepsend-user",@"name":@"Beep Beepson",@"id":@1}],@"wallet":@{@"balance":@5028.14758,@"name":@"Beepsend wallet",@"id":@2},@"customer":@"Beepsend AB"}]]) {
+	  [mArr addObject:[conn convertToModel]];
+	}
+	block([NSArray arrayWithArray:mArr], nil);
+
 }
 
 - (void)getMeConnectionOnCompletion:(void(^)(BSConnection *connection, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration connectionsMe]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-		
-					  if (!error) {
-						  block([[BSAPConnection classFromDict:response] convertToModel], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-	}];
+	block([[BSAPConnection classFromDict:@{@"tlv_for_mcc_mnc":@0,@"type":@1,@"description":@"",@"id":@1,@"system_id":@"beepsend",@"label":@"beepsend-connection",@"api_token":@"abc123",@"callbacks":@{@"dlr":@"http://beepsend.com/dlr",@"mo":@"https://beepsend.com/mocallback",@"method":@"PUT"},@"users":@[@{@"username":@"beepsend-user",@"name":@"Beep Beepson",@"id":@1}],@"wallet":@{@"balance":@5028.14758,@"name":@"Beepsend wallet",@"id":@1},@"customer":@"Beepsend AB"}] convertToModel], nil);
 }
 
 - (void)updateConnection:(BSConnection *)connection
@@ -73,71 +53,27 @@
 			 description:(NSString *)description
 	 withCompletionBlock:(void(^)(BSConnection *connection, NSArray *errors))block
 {
+	connection.callbackURLs.DLR = calbackDLR;
+	connection.callbackURLs.MO = callbackMO;
+	connection.callbackURLs.method = callbackMethod;
 	
-	BSAPConnection *conn = [[BSAPConnection alloc] init];
+	connection.systemID = systemID;
+	connection.label = label;
+	connection.description = description;
 	
-	BSAPCCallback *call = [[BSAPCCallback alloc] init];
-	call.dlr = calbackDLR;
-	call.mo = callbackMO;
-	call.method = callbackMethod;
-	
-	conn.callbacks = call;
-	conn.system_id = systemID;
-	conn.label = label;
-	conn.description = description;
-	
-	NSString *method = connection ? [BSAPIConfiguration connectionsWithID:connection.objectID] : [BSAPIConfiguration connectionsMe];
-	
-	[super executePUTForMethod:method
-				withParameters:[conn dictionaryFromClass]
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  block([[BSAPConnection classFromDict:response] convertToModel], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	block(connection, nil);
 }
 
 - (void)resetTokenForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSConnection *updatedModel, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration connectionResetForID:connection.objectID]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  BSConnection *newToken = [[BSConnection alloc] initWithConnectionModel:connection
-																				withNewToken:[[[BSAPConnection classFromDict:response] convertToModel] apiToken]];
-					  
-					  if (!error) {
-						  block(newToken, nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	BSConnection *newToken = [[BSConnection alloc] initWithConnectionModel:connection withNewToken:@"NEW_TOKEN"];
+	block(newToken, nil);
 }
 
 - (void)resetPasswordForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSConnection *updatedModel, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration connectionPasswordResetForID:connection.objectID]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  BSConnection *newPass = [[BSConnection alloc] initWithConnectionModel:connection
-																			withNewPassword:[[[BSAPConnection classFromDict:response] convertToModel] password]];
-					  
-					  if (!error) {
-						  block(newPass, nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	BSConnection *newPass = [[BSConnection alloc] initWithConnectionModel:connection withNewPassword:@"NEW_PASSWORD"];
+	block(newPass, nil);
 }
 
 @end

@@ -36,74 +36,29 @@
 
 - (void)getAnalyticsSummaryFromDate:(NSDate *)startDate toDate:(NSDate *)endDate usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *statistics, NSArray *errors))block
 {
-	BSAPAccumulatedStatisticsRequest *request = [[BSAPAccumulatedStatisticsRequest alloc] init];
-	request.from_date = startDate ? [NSString stringWithFormat:@"%f", [startDate timeIntervalSince1970]] : nil;
-	request.to_date = endDate ? [NSString stringWithFormat:@"%f", [endDate timeIntervalSince1970]] : nil;
-	NSDictionary *params = [request dictFromClass];
-	
-	[super executeGETForMethod:connection?[BSAPIConfiguration analyticsSummaryForID:connection.objectID]:[BSAPIConfiguration analyticsSummaryMe]
-				withParameters:params
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  NSMutableArray *mArr = [@[] mutableCopy];
-						  for (BSAPAccumulatedStatisticsResponse *con in [BSAPAccumulatedStatisticsResponse arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  [mArr addObject:[con convertToModel]];
-						  }
-						  block([NSArray arrayWithArray:mArr], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPAccumulatedStatisticsResponse *con in [BSAPAccumulatedStatisticsResponse arrayOfObjectsFromArrayOfDictionaries:@[@{@"connection":@"customer-1",@"count":@100,@"price":@4.38},@{@"connection":@"customer-2",@"count":@100,@"price":@4.38},@{@"connection":@"customer-3",@"count":@100,@"price":@4.38}]]) {
+		[mArr addObject:[con convertToModel]];
+	}
+	block([NSArray arrayWithArray:mArr], nil);
 }
 
 - (void)getNetworkDetailsFromDate:(NSDate *)startDate toDate:(NSDate *)endDate mccmnc:(BSMCCMNC *)mccmnc usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *networkDetails, NSArray *errors))block
 {
-	BSAPNetworkDetailsRequest *request = [[BSAPNetworkDetailsRequest alloc] init];
-	request.from_date = startDate ? [NSString stringWithFormat:@"%f", [startDate timeIntervalSince1970]] : nil;
-	request.to_date = endDate ? [NSString stringWithFormat:@"%f", [endDate timeIntervalSince1970]] : nil;
-	request.MCC = mccmnc ? mccmnc.mcc : nil;
-	request.MNC = mccmnc ? mccmnc.mnc : nil;
-	NSDictionary *params = [request dictFromClass];
-	
-	[super executeGETForMethod:connection?[BSAPIConfiguration analyticsNetworkForID:connection.objectID]:[BSAPIConfiguration analyticsNetworkMe]
-				withParameters:params
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  NSMutableArray *mArr = [@[] mutableCopy];
-						  for (BSAPNetworkDetailsResponse *con in [BSAPNetworkDetailsResponse arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  [mArr addObject:[con convertToModel]];
-						  }
-						  block([NSArray arrayWithArray:mArr], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPNetworkDetailsResponse *con in [BSAPNetworkDetailsResponse arrayOfObjectsFromArrayOfDictionaries:@[@{@"mccmnc":@{@"mcc":@"648",@"mnc":@"03"},@"statistics":@{@"delivered":@100,@"mo":@0,@"expired":@12,@"unknown":@20,@"rejected":@0,@"undelivered":@10,@"no_dlr":@0},@"total":@142},@{@"mccmnc":@{@"mcc":@"648",@"mnc":@"03"},@"statistics":@{@"delivered":@100,@"mo":@0,@"expired":@12,@"unknown":@20,@"rejected":@0,@"undelivered":@10,@"no_dlr":@0},@"total":@142}]]) {
+		[mArr addObject:[con convertToModel]];
+	}
+	block([NSArray arrayWithArray:mArr], nil);
 }
 
 - (void)getDeliveryStatisticsForBach:(BSBatch *)batch withCompletionBlock:(void(^)(NSArray *statistics, NSArray *errors))block
 {
-	[super executeGETForMethod:batch?[BSAPIConfiguration analyticsBatchesForID:batch.batchID]:[BSAPIConfiguration analyticsBatches]
-				withParameters:@[]
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  NSMutableArray *mArr = [@[] mutableCopy];
-						  for (BSAPAnalyticsBatch *con in [BSAPAnalyticsBatch arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  [mArr addObject:[con convertToModel]];
-						  }
-						  block([NSArray arrayWithArray:mArr], nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPAnalyticsBatch *con in [BSAPAnalyticsBatch arrayOfObjectsFromArrayOfDictionaries:@[@{@"id":@23,@"label":@"My batch",@"total":@142,@"statistics":@{@"delivered":@100,@"expired":@12,@"unknown":@20,@"rejected":@0,@"undelivered":@10,@"no_dlr":@0}},@{@"id":@24,@"label":@"My batch",@"total":@142,@"statistics":@{@"delivered":@100,@"expired":@12,@"unknown":@20,@"rejected":@0,@"undelivered":@10,@"no_dlr":@0}}]]) {
+		[mArr addObject:[con convertToModel]];
+	}
+	block([NSArray arrayWithArray:mArr], nil);
 }
 
 @end

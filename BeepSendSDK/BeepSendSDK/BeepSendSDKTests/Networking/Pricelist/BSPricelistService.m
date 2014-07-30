@@ -30,86 +30,32 @@
 
 - (void)getCurrentPricelistsForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSPricelist *pricelist, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration pricelistCurrentWithID:connection.connectionID]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  
-						  BSPricelist *pricelist = [[BSAPPricelist classFromDict:response] convertToModel];
-						  
-						  block(pricelist, nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	BSPricelist *pricelist = [[BSAPPricelist classFromDict:@{@"id":[NSNull null],@"batch_label":@"My custom name for my batch",@"to":@"502040",@"from":@"lolboll",@"errors":[NSNull null]}] convertToModel];
+	block(pricelist, nil);
 }
 
 - (void)getCurrentPricelistsForMeWithCompletionBlock:(void(^)(BSPricelist *pricelist, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration pricelistCurrentMe]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  
-						  BSPricelist *pricelist = [[BSAPPricelist classFromDict:response] convertToModel];
-						  
-						  block(pricelist, nil);
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	BSPricelist *pricelist = [[BSAPPricelist classFromDict:@{@"id":[NSNull null],@"batch_label":@"My custom name for my batch",@"to":@"502040",@"from":@"lolboll",@"errors":[NSNull null]}] convertToModel];
+	block(pricelist, nil);
 }
 
 - (void)getPricelistsForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *pricelists, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration pricelistAllForID:connection.connectionID]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  
-						  NSMutableArray *mArr = [@[] mutableCopy];
-						  for (BSAPPricelist *pricelist in [BSAPPricelist arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  
-							  [mArr addObject:[pricelist convertToModel]];
-						  }
-						  block([NSArray arrayWithArray:mArr], nil);
-						  
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPPricelist *pricelist in [BSAPPricelist arrayOfObjectsFromArrayOfDictionaries:@[@{@"networks_count":@980,@"id":@280290,@"timestamp":@1386085000,@"active":@YES,@"first_viewed":@1386228799},@{@"networks_count":@980,@"id":@280290,@"timestamp":@1386085000,@"active":@YES,@"first_viewed":@1386228799},@{@"networks_count":@980,@"id":@280290,@"timestamp":@1386085000,@"active":@YES,@"first_viewed":@1386228799}]]) {
+		[mArr addObject:[pricelist convertToModel]];
+	}
+	block([NSArray arrayWithArray:mArr], nil);
 }
 
 - (void)getPriceListsForMeWithCompletionBlock:(void(^)(NSArray *pricelists, NSArray *errors))block
 {
-	[super executeGETForMethod:[BSAPIConfiguration pricelistAllMe]
-				withParameters:@{}
-				  onCompletion:^(id response, id error) {
-					  
-					  if (!error) {
-						  
-						  NSMutableArray *mArr = [@[] mutableCopy];
-						  for (BSAPPricelist *pricelist in [BSAPPricelist arrayOfObjectsFromArrayOfDictionaries:response]) {
-							  
-							  [mArr addObject:[pricelist convertToModel]];
-						  }
-						  block([NSArray arrayWithArray:mArr], nil);
-						  
-					  }
-					  else {
-
-						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
-					  }
-				  }];
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPPricelist *pricelist in [BSAPPricelist arrayOfObjectsFromArrayOfDictionaries:@[@{@"networks_count":@980,@"id":@280290,@"timestamp":@1386085000,@"active":@YES,@"first_viewed":@1386228799},@{@"networks_count":@980,@"id":@280290,@"timestamp":@1386085000,@"active":@YES,@"first_viewed":@1386228799},@{@"networks_count":@980,@"id":@280290,@"timestamp":@1386085000,@"active":@YES,@"first_viewed":@1386228799}]]) {
+		[mArr addObject:[pricelist convertToModel]];
+	}
+	block([NSArray arrayWithArray:mArr], nil);
 }
 
 @end
