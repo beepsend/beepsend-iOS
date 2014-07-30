@@ -9,14 +9,15 @@
 #import "BSGeneralModel.h"
 #import "BSStructs.h"
 
-@class BSPricelist;
-@class BSCallbacks;
-@class BSBatch;
-@class BSEstimateCost;
-@class BSHLR;
-@class BSLookup;
-@class BSMCCMNC;
+#import "BSPricelist.h"
+#import "BSCallbacks.h"
+#import "BSBatch.h"
+#import "BSEstimateCost.h"
+#import "BSHLR.h"
+#import "BSLookup.h"
+#import "BSError.h"
 
+@class BSUser;
 @class BSMessage;
 @class BSWallet;
 

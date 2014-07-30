@@ -10,9 +10,14 @@
 
 #import "BSTestSemaphor.h"
 #import "BSHelper.h"
-#import "BSConnectionsService.h"
+
+#import "BeepSendSDK.h"
+
+
 
 @interface BeepSendSDKTests : XCTestCase
+
+@property (nonatomic, strong) BSUser *user;
 
 @end
 
@@ -22,6 +27,9 @@
 {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
+	#define TESTING @"TESTING"
+	_user = [BSUser currentUser];
+	
 }
 
 - (void)tearDown
@@ -32,13 +40,29 @@
 
 #pragma mark - Test methods
 
+- (void)testUpdateUserWithConnectionsFetch
+{
+	BSDLog(@"%@", _user);
+}
+
+/*
++ (BSUser *)currentUser;
+- (void)updateUserOnCompletion:(void(^)(NSArray *errors))block;
+- (void)updateUserEmailWithPassword:(NSString *)password
+					   onCompletion:(void(^)(NSArray *errors))block;
+- (void)changePassword:(NSString *)currentPassword
+	   withNewPassword:(NSString *)newPassword
+		  onCompletion:(void(^)(NSArray *errors))block;
+- (void)resetUserTokenWithPassword:(NSString *)password
+					  onCompletion:(void(^)(NSArray *errors))block;
+- (void)getAvailableConnectionsOnCompletion:(void(^)(NSArray *connections, NSArray *errors))block;
+- (NSArray *)getAvailableConnections;
+- (void)getCustomerDetailsOnCompletion:(void(^)(BSCustomer *customer, NSArray *errors))block;
+*/
+
 - (void)testConnectionsMe
 {
-	[[BSConnectionsService sharedService] getConnectionOnCompletion:^(id response, id error) {
-		BSLog(@"%@", response);
-		[[BSTestSemaphor sharedInstance] lift:@"GetConnectionsOnCompletion"];
-	}];
-	[[BSTestSemaphor sharedInstance] waitForKey:@"GetConnectionsOnCompletion"];
+
 }
 
 @end

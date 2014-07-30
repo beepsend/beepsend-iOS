@@ -8,6 +8,8 @@
 
 #import "BSGeneralModel.h"
 
+#import "BSError.h"
+
 /*!
  @class BSBatch
  @discussion When sending multiple messages to one or more receivers add batch label 

@@ -8,7 +8,7 @@
 
 #import "BSGeneralModel.h"
 
-@class BSNetwork;
+#import "BSNetwork.h"
 
 /*!
  @class BSPricelist

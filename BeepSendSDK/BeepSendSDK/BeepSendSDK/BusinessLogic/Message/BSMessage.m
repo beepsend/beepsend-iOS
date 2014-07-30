@@ -8,8 +8,6 @@
 
 #import "BSMessage.h"
 
-#import "BSBatch.h"
-
 @interface BSMessage ()
 
 @property (nonatomic, strong, readwrite) NSString *usedEncoding;

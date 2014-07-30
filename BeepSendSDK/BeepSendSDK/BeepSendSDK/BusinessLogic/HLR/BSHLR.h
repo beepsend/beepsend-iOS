@@ -8,9 +8,9 @@
 
 #import "BSGeneralModel.h"
 
-@class BSDLRReport;
-@class BSMCCMNC;
-@class BSTimestamps;
+#import "BSDLRReport.h"
+#import "BSMCCMNC.h"
+#import "BSTimestamps.h"
 
 /*!
  @class BSHLR

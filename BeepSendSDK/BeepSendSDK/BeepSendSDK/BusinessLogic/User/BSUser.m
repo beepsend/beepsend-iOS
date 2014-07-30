@@ -21,9 +21,6 @@
 #import "BSTestSemaphor.h"
 
 #import "BSConnection.h"
-#import "BSWallet.h"
-#import "BSVerified.h"
-#import "BSCustomer.h"
 
 @interface BSUser ()
 
@@ -221,7 +218,7 @@
 
 #pragma mark - Public methods
 
-- (void)updateUser
+- (void)updateUserOnCompletion:(void(^)(NSArray *errors))block
 {
 	if (!_currentUser) {
 		return; //User object can not be edited
@@ -240,84 +237,139 @@
 									defaultConnection:[_defaultConnection.connectionID isEqualToString:_currentUser.defaultConnection.objectID]?nil:_defaultConnection
 											userTypes:[_userTypes isEqualToArray:_currentUser.userTypes]?nil:_userTypes
 										verifiedTerms:_verified.isVerifiedTerms==_currentUser.verified.isVerifiedTerms?nil:_verified.termsVerified
-								  withCompletionBlock:^(BSUser *user, id error) {
+								  withCompletionBlock:^(BSUser *user, NSArray *errors) {
 									  
-									  _currentUser = user;
-									  
-									  _name = user.name;
-									  _phone = user.phone;
-									  
-									  _defaultConnection = user.defaultConnection;
-									  
-									  _userTypes = user.userTypes;
-									  
-									  _verified.termsVerified = user.verified.termsVerified;
+									  if (errors && errors.count>0) {
+										  block(errors);
+									  }
+									  else {
+										  _currentUser = user;
+										  
+										  _name = user.name;
+										  _phone = user.phone;
+										  
+										  _defaultConnection = user.defaultConnection;
+										  
+										  _userTypes = user.userTypes;
+										  
+										  _verified.termsVerified = user.verified.termsVerified;
+										  
+										  block(nil);
+									  }
 	}];
 }
 
-- (void)updateUserEmailWithPassword:(NSString *)password
+- (void)updateUserEmailWithPassword:(NSString *)password onCompletion:(void(^)(NSArray *errors))block
 {
 	if (!password) {
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Missing password", @"")];
+		block(@[error]);
+		
 		return;//Missing password
 	}
 	
 	if (_password) {
 		if (![_password isEqualToString:password]) {
+			BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Invalid password", @"")];
+			block(@[error]);
+			
 			return;//Invalid password
 		}
 	}
 	
 	if (![_email isEqualToString:_currentUser.email]) {
-		[[BSUserService sharedService] updateUserEmail:_email userPassword:password withCompletionBlock:^(BOOL success, id error) {
+		[[BSUserService sharedService] updateUserEmail:_email userPassword:password withCompletionBlock:^(BOOL success, NSArray *errors) {
 			if (success) {
 				_currentUser.email = _email;
 				_password = password;
+				
+				block(nil);
+			}
+			else {
+				block(errors);
 			}
 		}];
 	}
+	else {
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Email needs to be updated first", @"")];
+		block(@[error]);
+		
+		return;//Email needs to be updated first
+	}
 }
 
-- (void)changePassword:(NSString *)currentPassword withNewPassword:(NSString *)newPassword
+- (void)changePassword:(NSString *)currentPassword withNewPassword:(NSString *)newPassword onCompletion:(void(^)(NSArray *errors))block
 {
 	if (!currentPassword || !newPassword) {
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Missing password", @"")];
+		block(@[error]);
+		
 		return; //Missing password
 	}
 	
 	if ([currentPassword isEqualToString:newPassword]) {
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Passwords don't match", @"")];
+		block(@[error]);
+		
 		return; //Passwords don't match
 	}
 	
 	if (_password) {
 		if (![_password isEqualToString:currentPassword]) {
+			BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Invalid password", @"")];
+			block(@[error]);
+			
 			return; //Invalid password
 		}
 	}
 	
-	[[BSUserService sharedService] updateUserPassword:_password userNewPassword:_theNewPassword withCompletionBlock:^(BOOL success, id error) {
+	[[BSUserService sharedService] updateUserPassword:_password userNewPassword:_theNewPassword withCompletionBlock:^(BOOL success, NSArray *errors) {
 		if (success) {
 			_password = _theNewPassword;
 			_theNewPassword = nil;
+			
+			block(nil);
+		}
+		else {
+			block(errors);
 		}
 	}];
 }
 
-- (void)resetUserTokenWithPassword:(NSString *)password
+- (void)resetUserTokenWithPassword:(NSString *)password onCompletion:(void(^)(NSArray *errors))block
 {
-	[[BSUserService sharedService] resetUserTokenUsingPassword:password withCompletionBlock:^(NSString *apiToken, id error) {
-		[[NSUserDefaults standardUserDefaults] setObject:apiToken forKey:@"API_TOKEN"];
-		[[NSUserDefaults standardUserDefaults] synchronize];
+	if (_password) {
+		if (![_password isEqualToString:password]) {
+			BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Invalid password", @"")];
+			block(@[error]);
+			
+			return; //Invalid password
+		}
+	}
+	
+	[[BSUserService sharedService] resetUserTokenUsingPassword:password withCompletionBlock:^(NSString *apiToken, NSArray *errors) {
 		
-		_apiToken = apiToken;
+		if (errors && errors.count>0) {
+			block(errors);
+		}
+		else {
+			[[NSUserDefaults standardUserDefaults] setObject:apiToken forKey:@"API_TOKEN"];
+			[[NSUserDefaults standardUserDefaults] synchronize];
+			
+			_apiToken = apiToken;
+			
+			block(nil);
+		}
 	}];
 }
 
-- (void)getAvailableConnectionsOnCompletion:(void(^)(NSArray *connections))block
+- (void)getAvailableConnectionsOnCompletion:(void(^)(NSArray *connections, NSArray *errors))block
 {
-	[[BSConnectionsService sharedService] getAllAvailableConnectsionOnCompletion:^(NSArray *connections, id error) {
+	[[BSConnectionsService sharedService] getAllAvailableConnectsionOnCompletion:^(NSArray *connections, NSArray *errors) {
 	
 		_connections = connections;
 		
-		block(_connections);
+		block(_connections, errors);
 	}];
 }
 
@@ -327,10 +379,15 @@
 		return _connections;
 	}
 	else {
-		[[BSConnectionsService sharedService] getAllAvailableConnectsionOnCompletion:^(NSArray *connections, id error) {
+		[[BSConnectionsService sharedService] getAllAvailableConnectsionOnCompletion:^(NSArray *connections, NSArray *errors) {
 			[[BSTestSemaphor sharedInstance] lift:@"FetchConnections"];
 			
-			_connections = connections;
+			if (errors && errors.count>0) {
+				_connections = nil;
+			}
+			else {
+				_connections = connections;
+			}
 			
 		}];
 		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchConnections"];

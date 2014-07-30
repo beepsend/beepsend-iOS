@@ -12,7 +12,7 @@
 
 /*!
  @class BSTransfer
- @discussion Transfer model is used when you want to make transaction between two wallets.
+ @discussion Transfer model is response when funds are transfered between wallets.
  */
 @interface BSTransfer : BSGeneralModel
 

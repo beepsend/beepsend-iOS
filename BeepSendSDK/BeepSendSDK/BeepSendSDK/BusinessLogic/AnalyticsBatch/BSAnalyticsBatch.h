@@ -8,7 +8,7 @@
 
 #import "BSGeneralModel.h"
 
-@class BSStatistics;
+#import "BSStatistics.h"
 
 /*!
  @class BSAnalyticsBatch

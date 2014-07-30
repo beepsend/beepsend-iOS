@@ -8,7 +8,7 @@
 
 #import "BSGeneralModel.h"
 
-@class BSBatch;
+#import "BSBatch.h"
 
 /*!
  @class BSMessage

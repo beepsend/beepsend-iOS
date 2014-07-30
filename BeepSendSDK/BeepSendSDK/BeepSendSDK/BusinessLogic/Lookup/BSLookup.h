@@ -8,11 +8,12 @@
 
 #import "BSGeneralModel.h"
 
-@class BSBatch;
-@class BSTimestamps;
-@class BSMCCMNC;
-@class BSRecipient;
-@class BSDLRReport;
+#import "BSDLRReport.h"
+#import "BSRecipient.h"
+#import "BSMCCMNC.h"
+#import "BSTimestamps.h"
+#import "BSBatch.h"
+
 @class BSConnection;
 
 /*!

@@ -8,11 +8,14 @@
 
 #import "BSGeneralModel.h"
 
-@class BSCustomer;
-@class BSVerified;
+#import "BSWallet.h"
+#import "BSVerified.h"
+#import "BSCustomer.h"
+#import "BSGroup.h"
+#import "BSContact.h"
+#import	"BSMCCMNC.h"
+
 @class BSConnection;
-@class BSGroup;
-@class BSMCCMNC;
 
 /*!
  @class BSUser
@@ -158,34 +161,42 @@
 
 /*! If changes were made to user use update method to save changes.
 	Available properties to update: name, phone or defaultConnection
+ 
+ @param block - Returns error if update failed
  */
-- (void)updateUser;
+- (void)updateUserOnCompletion:(void(^)(NSArray *errors))block;
 
 /*! For updateing email address user needs to enter password
  
  @param password - Users password
+ @param block - Returns error if update failed
  */
-- (void)updateUserEmailWithPassword:(NSString *)password;
+- (void)updateUserEmailWithPassword:(NSString *)password
+					   onCompletion:(void(^)(NSArray *errors))block;
 
 /*! Method for changing password
  
  @param currentPassword - Current users password
  @param newPassword - New user password
+ @param block - Returns error if update failed
  */
 - (void)changePassword:(NSString *)currentPassword
-	   withNewPassword:(NSString *)newPassword;
+	   withNewPassword:(NSString *)newPassword
+		  onCompletion:(void(^)(NSArray *errors))block;
 
 /*! If API token is compromised use this method for token reset
  
  @param password - Users password
+ @param block - Returns error if update failed
  */
-- (void)resetUserTokenWithPassword:(NSString *)password;
+- (void)resetUserTokenWithPassword:(NSString *)password
+					  onCompletion:(void(^)(NSArray *errors))block;
 
 /*! Async method for retrieving all user connections
  
- @param block - Returns array of user connections
+ @param block - Returns array of user connections or errors if any
  */
-- (void)getAvailableConnectionsOnCompletion:(void(^)(NSArray *connections))block;
+- (void)getAvailableConnectionsOnCompletion:(void(^)(NSArray *connections, NSArray *errors))block;
 
 /*! Sync method for retrieving all user connections
  

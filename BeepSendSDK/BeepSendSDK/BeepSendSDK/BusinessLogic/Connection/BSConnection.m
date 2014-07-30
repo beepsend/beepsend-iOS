@@ -18,14 +18,9 @@
 #import "BSHLRService.h"
 #import "BSAnalyticsService.h"
 
-#import "BSPricelist.h"
-#import "BSCallbacks.h"
-#import "BSBatch.h"
-#import "BSEstimateCost.h"
-#import "BSHLR.h"
-#import "BSLookup.h"
-#import "BSUser.h"
 #import "BSMessage.h"
+#import "BSWallet.h"
+#import "BSUser.h"
 
 #define kDefaultMessageCountForLookup @100
 

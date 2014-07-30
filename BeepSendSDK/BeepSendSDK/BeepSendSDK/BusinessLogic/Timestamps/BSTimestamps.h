@@ -8,7 +8,7 @@
 
 #import "BSGeneralModel.h"
 
-@class BSHLRReport;
+#import "BSHLRReport.h"
 
 /*!
  @class BSTimestamps

@@ -8,7 +8,8 @@
 
 #import "BSGeneralModel.h"
 
-@class BSEmail;
+#import "BSEmail.h"
+#import "BSTransfer.h"
 
 /*!
  @class BSWallet

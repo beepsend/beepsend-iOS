@@ -137,7 +137,7 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
 	
 	//Collect all available connections for user
-	[[BSUser currentUser] getAvailableConnectionsOnCompletion:^(NSArray *connections) {
+	[[BSUser currentUser] getAvailableConnectionsOnCompletion:^(NSArray *connections, NSArray *errors) {
 		_dataSourceConnections = connections;
 		[_tableViewConnections reloadData];
 		
@@ -249,7 +249,9 @@
 		
 		[BSUser currentUser].name = _textFieldName.text;
 		
-		[[BSUser currentUser] updateUser];
+		[[BSUser currentUser] updateUserOnCompletion:^(NSArray *errors) {
+			
+		}];
 	}
 	
 	if ([_textFieldPhone isFirstResponder]) {
@@ -257,7 +259,9 @@
 		
 		[BSUser currentUser].phone = _textFieldPhone.text;
 		
-		[[BSUser currentUser] updateUser];
+		[[BSUser currentUser] updateUserOnCompletion:^(NSArray *errors) {
+			
+		}];
 	}
 	
 	if ([_textFieldEmail isFirstResponder]) {
@@ -364,7 +368,9 @@
 		case 1:
 		{
 			NSString *password = [alertView textFieldAtIndex:0].text;
-			[[BSUser currentUser] updateUserEmailWithPassword:password];
+			[[BSUser currentUser] updateUserEmailWithPassword:password onCompletion:^(NSArray *errors) {
+				
+			}];
 		}
 			break;
 		default:

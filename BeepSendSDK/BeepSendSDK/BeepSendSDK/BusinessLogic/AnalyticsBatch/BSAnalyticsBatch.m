@@ -8,8 +8,6 @@
 
 #import "BSAnalyticsBatch.h"
 
-#import "BSStatistics.h"
-
 @interface BSAnalyticsBatch ()
 
 @property (nonatomic, strong, readwrite) NSString *batchID;
