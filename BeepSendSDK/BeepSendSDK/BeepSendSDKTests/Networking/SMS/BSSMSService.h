@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSBaseService.h"
+#import <Foundation/Foundation.h>
 
 #import "BSLookup.h"
 #import "BSEstimateCost.h"
@@ -15,7 +15,7 @@
 #import "BSBatch.h"
 #import "BSError.h"
 
-@interface BSSMSService : BSBaseService
+@interface BSSMSService : NSObject
 
 /*
 	Sends SMS

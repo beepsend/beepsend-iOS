@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSBaseService.h"
+#import <Foundation/Foundation.h>
 
 #import "BSPricelist.h"
 #import "BSConnection.h"
 #import "BSError.h"
 
-@interface BSPricelistService : BSBaseService
+@interface BSPricelistService : NSObject
 
 - (void)getCurrentPricelistsForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSPricelist *pricelist, NSArray *errors))block;
 - (void)getCurrentPricelistsForMeWithCompletionBlock:(void(^)(BSPricelist *pricelist, NSArray *errors))block;

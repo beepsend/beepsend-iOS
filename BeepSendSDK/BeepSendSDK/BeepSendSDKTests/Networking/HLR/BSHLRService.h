@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSBaseService.h"
+#import <Foundation/Foundation.h>
 
 #import "BSHLR.h"
 #import "BSConnection.h"
 #import "BSError.h"
 
-@interface BSHLRService : BSBaseService
+@interface BSHLRService : NSObject
 
 /*
  

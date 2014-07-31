@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSBaseService.h"
+#import <Foundation/Foundation.h>
 
 #import "BSGroup.h"
 #import "BSContact.h"
 #import "BSError.h"
 
-@interface BSGroupsService : BSBaseService
+@interface BSGroupsService : NSObject
 
 - (void)getAllGroupsWithCompletionBlock:(void(^)(NSArray *groups, NSArray *errors))block;
 - (void)getAllGroupsSinceID:(NSString *)sinceID

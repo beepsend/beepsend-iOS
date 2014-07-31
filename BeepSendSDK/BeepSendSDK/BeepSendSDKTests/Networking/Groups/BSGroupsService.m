@@ -63,7 +63,7 @@
 
 - (void)addGroupNamed:(NSString *)groupName withCompletionBlock:(void(^)(BSGroup *group, NSArray *errors))block
 {
-	block([[BSGroup alloc] initGroupWithID:@1 name:groupName contacts:@2], nil);
+	block([[BSGroup alloc] initGroupWithID:@"1" name:groupName contacts:@2], nil);
 }
 
 - (void)updateName:(NSString *)gName inGroup:(BSGroup *)group withCompletionBlock:(void(^)(BSGroup *group, NSArray *errors))block

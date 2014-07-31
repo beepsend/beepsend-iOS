@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSBaseService.h"
+#import <Foundation/Foundation.h>
 
 #import "BSCustomer.h"
 #import "BSError.h"
 
-@interface BSCustomerService : BSBaseService
+@interface BSCustomerService : NSObject
 
 - (void)getCustomerOnCompletion:(void(^)(BSCustomer *customer, NSArray *errors))block;
 

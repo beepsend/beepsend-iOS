@@ -37,8 +37,6 @@
 
 - (void)sendMessage:(BSMessage *)messageRequest usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSMessage *message, NSArray *errors))block
 {
-	NSDictionary *parameters = [[BSAPMessageRequest convertFromMessageRequestModel:messageRequest] dictFromClass];
-	
 	NSMutableArray *mArr = [@[] mutableCopy];
 	for (BSAPMessage *msg in [BSAPMessage arrayOfObjectsFromArrayOfDictionaries:@[@{@"id":@"07595980013893439611559146736007518",@"batch":@{@"id":@3,@"label":@"My custom name for my batch"},@"to":messageRequest.recipient,@"from":messageRequest.sender,@"errors":[NSNull null]}]]) {
 		[mArr addObject:[msg convertToModel]];

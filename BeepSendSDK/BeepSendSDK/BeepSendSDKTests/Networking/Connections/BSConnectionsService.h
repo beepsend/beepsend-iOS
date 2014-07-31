@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSBaseService.h"
+#import <Foundation/Foundation.h>
 
 #import "BSConnection.h"
 #import "BSError.h"
 
-@interface BSConnectionsService : BSBaseService
+@interface BSConnectionsService : NSObject
 
 - (void)getAllAvailableConnectsionOnCompletion:(void(^)(NSArray *connections, NSArray *errors))block;
 - (void)getMeConnectionOnCompletion:(void(^)(BSConnection *connection, NSArray *errors))block;

@@ -65,12 +65,12 @@
 
 - (void)getEmailForWallet:(BSWallet *)wallet andEmailID:(NSString *)emailID withCompletionBlock:(void(^)(BSEmail *email, NSArray *errors))block
 {
-	block(@{@"id":[NSNumber numberWithInteger:[emailID integerValue]],@"email":@"mailman@beepsend.com"}, nil);
+	block([[BSAPEmail classFromDict:@{@"id":[NSNumber numberWithInteger:[emailID integerValue]],@"email":@"mailman@beepsend.com"}] convertToModel], nil);
 }
 
 - (void)addEmail:(NSString *)email toWallet:(BSWallet *)wallet withCompletionBlock:(void(^)(BSEmail *email, NSArray *errors))block
 {
-	block(@{@"id":@1,@"email":email}, nil);
+	block([[BSAPEmail classFromDict:@{@"id":@1,@"email":email}] convertToModel], nil);
 }
 
 - (void)deleteEmailInWallet:(BSWallet *)wallet email:(BSEmail *)email withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block

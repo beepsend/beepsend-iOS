@@ -14,6 +14,7 @@
 #import "BSGroup.h"
 #import "BSContact.h"
 #import	"BSMCCMNC.h"
+#import "BSError.h"
 
 @class BSConnection;
 

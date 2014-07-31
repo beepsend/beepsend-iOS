@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSBaseService.h"
+#import <Foundation/Foundation.h>
 
 #import "BSWallet.h"
 #import "BSEmail.h"
@@ -14,7 +14,7 @@
 #import "BSLog.h"
 #import "BSError.h"
 
-@interface BSWalletService : BSBaseService
+@interface BSWalletService : NSObject
 
 - (void)getAllWalletsWithCompletionBlock:(void(^)(NSArray *wallets, NSArray *errors))block;
 

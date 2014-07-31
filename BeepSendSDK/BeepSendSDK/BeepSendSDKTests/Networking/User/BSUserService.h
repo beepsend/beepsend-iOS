@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSBaseService.h"
+#import <Foundation/Foundation.h>
 
 #import "BSUser.h"
 #import "BSUserType.h"
 #import "BSConnection.h"
 #import "BSError.h"
 
-@interface BSUserService : BSBaseService
+@interface BSUserService : NSObject
 
 - (void)getUserDetailsWithCompletionBlock:(void(^)(BSUser *user, NSArray *errors))block;
 

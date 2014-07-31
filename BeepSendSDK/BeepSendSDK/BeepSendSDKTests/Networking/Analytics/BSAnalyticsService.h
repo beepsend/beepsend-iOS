@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 BeepSend. All rights reserved.
 //
 
-#import "BSBaseService.h"
+#import <Foundation/Foundation.h>
 
 #import "BSConnection.h"
 #import "BSAccumulatedStatistics.h"
@@ -16,7 +16,7 @@
 #import "BSBatch.h"
 #import "BSError.h"
 
-@interface BSAnalyticsService : BSBaseService
+@interface BSAnalyticsService : NSObject
 
 - (void)getAnalyticsSummaryFromDate:(NSDate *)startDate toDate:(NSDate *)endDate usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *statistics, NSArray *errors))block;
 

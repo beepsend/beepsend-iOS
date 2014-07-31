@@ -174,7 +174,6 @@
 		6EBC71C61988E752005245E8 /* BSStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD84101973CE70004FD8AF /* BSStatistics.m */; };
 		6EBC71C71988E752005245E8 /* BSError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC77E6E19814DF7007BCCA3 /* BSError.m */; };
 		6EBC71EA1988FEBA005245E8 /* BSAnalyticsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC71CB1988FEBA005245E8 /* BSAnalyticsService.m */; };
-		6EBC71EB1988FEBA005245E8 /* BSBaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC71CE1988FEBA005245E8 /* BSBaseService.m */; };
 		6EBC71EC1988FEBA005245E8 /* BSConnectionsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC71D11988FEBA005245E8 /* BSConnectionsService.m */; };
 		6EBC71ED1988FEBA005245E8 /* BSContactsService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC71D41988FEBA005245E8 /* BSContactsService.m */; };
 		6EBC71EE1988FEBA005245E8 /* BSCustomerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC71D71988FEBA005245E8 /* BSCustomerService.m */; };
@@ -432,8 +431,6 @@
 		6EBADD1E196BEFBC00315EA4 /* BSMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSMessage.m; path = BusinessLogic/Message/BSMessage.m; sourceTree = "<group>"; };
 		6EBC71CA1988FEBA005245E8 /* BSAnalyticsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAnalyticsService.h; sourceTree = "<group>"; };
 		6EBC71CB1988FEBA005245E8 /* BSAnalyticsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSAnalyticsService.m; sourceTree = "<group>"; };
-		6EBC71CD1988FEBA005245E8 /* BSBaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSBaseService.h; sourceTree = "<group>"; };
-		6EBC71CE1988FEBA005245E8 /* BSBaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSBaseService.m; sourceTree = "<group>"; };
 		6EBC71D01988FEBA005245E8 /* BSConnectionsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSConnectionsService.h; sourceTree = "<group>"; };
 		6EBC71D11988FEBA005245E8 /* BSConnectionsService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSConnectionsService.m; sourceTree = "<group>"; };
 		6EBC71D31988FEBA005245E8 /* BSContactsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSContactsService.h; sourceTree = "<group>"; };
@@ -1245,7 +1242,6 @@
 			isa = PBXGroup;
 			children = (
 				6EBC71C91988FEBA005245E8 /* Analytics */,
-				6EBC71CC1988FEBA005245E8 /* BaseService */,
 				6EBC71CF1988FEBA005245E8 /* Connections */,
 				6EBC71D21988FEBA005245E8 /* Contacts */,
 				6EBC71D51988FEBA005245E8 /* Customer */,
@@ -1266,15 +1262,6 @@
 				6EBC71CB1988FEBA005245E8 /* BSAnalyticsService.m */,
 			);
 			path = Analytics;
-			sourceTree = "<group>";
-		};
-		6EBC71CC1988FEBA005245E8 /* BaseService */ = {
-			isa = PBXGroup;
-			children = (
-				6EBC71CD1988FEBA005245E8 /* BSBaseService.h */,
-				6EBC71CE1988FEBA005245E8 /* BSBaseService.m */,
-			);
-			path = BaseService;
 			sourceTree = "<group>";
 		};
 		6EBC71CF1988FEBA005245E8 /* Connections */ = {
@@ -1978,7 +1965,6 @@
 				6EBC719E1988E752005245E8 /* BSAPNetworkDetailsRequest.m in Sources */,
 				6EBC719F1988E752005245E8 /* BSAPAccumulatedStatisticsResponse.m in Sources */,
 				6EBC71A01988E752005245E8 /* BSAPAccumulatedStatisticsRequest.m in Sources */,
-				6EBC71EB1988FEBA005245E8 /* BSBaseService.m in Sources */,
 				6EBC71A11988E752005245E8 /* BSAPEstimatedCost.m in Sources */,
 				6EBC71A21988E752005245E8 /* BSAPSMSLookup.m in Sources */,
 				6EBC71A31988E752005245E8 /* BSAPRecipient.m in Sources */,

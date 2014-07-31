@@ -1,4 +1,3 @@
-z
 //
 //  BSHLRService.m
 //  BeepSendSDK
