@@ -231,9 +231,13 @@
 #pragma mark - Public methods
 
 //After made changes it is necessary to call method updateConnection
-- (void)updateConnection
+- (void)updateConnectionOnCompletion:(void(^)(NSArray *errors))block
 {
 	if (!_connectionModel) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Connection can't be edited!", @"")];
+		block(@[error]);
+		
 		return; //Connection object can't be edited
 	}
 	
@@ -243,6 +247,9 @@
 		[_systemID isEqualToString:_connectionModel.systemID] &&
 		[_label isEqualToString:_connectionModel.label] &&
 		[_description isEqualToString:_connectionModel.description]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"No changes were made!", @"")];
+		block(@[error]);
 		
 		return; //No changes were made
 	}
@@ -254,27 +261,33 @@
 												  systemID:[_systemID isEqualToString:_connectionModel.systemID] ? nil : _systemID
 													 label:[_label isEqualToString:_connectionModel.label] ? nil : _label
 											   description:[_description isEqualToString:_connectionModel.description] ? nil : _description
-									   withCompletionBlock:^(BSConnection *connection, id error) {
+									   withCompletionBlock:^(BSConnection *connection, NSArray *errors) {
 	
-										   _connectionModel = connection;
-										   
-										   _callbackURLs.DLR = connection.callbackURLs.DLR;
-										   _callbackURLs.MO = connection.callbackURLs.MO;
-										   _callbackURLs.method = connection.callbackURLs.method;
-										   
-										   _systemID = connection.systemID;
-										   _label = connection.label;
-										   _description = connection.description;
-										   
+										   if (errors && errors.count>0) {
+											   block(errors);
+										   }
+										   else {
+											   _connectionModel = connection;
+											   
+											   _callbackURLs.DLR = connection.callbackURLs.DLR;
+											   _callbackURLs.MO = connection.callbackURLs.MO;
+											   _callbackURLs.method = connection.callbackURLs.method;
+											   
+											   _systemID = connection.systemID;
+											   _label = connection.label;
+											   _description = connection.description;
+											   
+											   block(nil);
+										   }
 									   }];
 }
 
 //If API token is compromised use this method for token reset
-- (void)resetConnectionToken
+- (void)resetConnectionTokenOnCompletion:(void(^)(NSArray *errors))block
 {
-	[[BSConnectionsService sharedService] resetTokenForConnection:_connectionModel withCompletionBlock:^(BSConnection *updatedModel, id error) {
+	[[BSConnectionsService sharedService] resetTokenForConnection:_connectionModel withCompletionBlock:^(BSConnection *updatedModel, NSArray *errors) {
 		
-		if (!error) {
+		if (!errors || errors.count == 0) {
 			//If previously saved API token is equal to connection token
 			//then overwrite it. Otherwise saved token is User token.
 			if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"API_TOKEN"] isEqualToString:_connectionModel.apiToken]) {
@@ -283,41 +296,55 @@
 			
 			_connectionModel = updatedModel;
 			_apiToken = updatedModel.apiToken;
+			
+			block(nil);
+		}
+		else {
+			block(errors);
 		}
 	}];
 }
 
 //Returns pricelists
-- (void)getPricelistsOnCompletion:(void(^)(NSArray *pricelists))block
+- (void)getPricelistsOnCompletion:(void(^)(NSArray *pricelists, NSArray *errors))block
 {
 	if (_pricelists) {
-		block(_pricelists);
+		block(_pricelists, nil);
 	}
 	
-	[[BSPricelistService sharedService] getPricelistsForConnection:_connectionModel withCompletionBlock:^(NSArray *pricelists, id error) {
+	[[BSPricelistService sharedService] getPricelistsForConnection:_connectionModel withCompletionBlock:^(NSArray *pricelists, NSArray *errors) {
 		
-		if (!_pricelists) {
-			block(pricelists);
+		if (errors && errors.count > 0) {
+			block(nil, errors);
 		}
-		_pricelists = pricelists;
+		else {
 		
+			if (!_pricelists) {
+				block(pricelists, nil);
+			}
+			_pricelists = pricelists;
+		}
 	}];
 }
 
 //Returns current pricelists
-- (void)getCurrentPricelistOnCompletion:(void(^)(BSPricelist *pricelist))block
+- (void)getCurrentPricelistOnCompletion:(void(^)(BSPricelist *pricelist, NSArray *errors))block
 {
 	if (_currentPricelist) {
-		block(_currentPricelist);
+		block(_currentPricelist, nil);
 	}
 	
-	[[BSPricelistService sharedService] getCurrentPricelistsForConnection:_connectionModel withCompletionBlock:^(BSPricelist *pricelist, id error) {
+	[[BSPricelistService sharedService] getCurrentPricelistsForConnection:_connectionModel withCompletionBlock:^(BSPricelist *pricelist, NSArray *errors) {
 		
-		if (!_currentPricelist) {
-			block(pricelist);
+		if (errors && errors.count > 0) {
+			block(nil, errors);
 		}
-		_currentPricelist = pricelist;
-		
+		else {
+			if (!_currentPricelist) {
+				block(pricelist, nil);
+			}
+			_currentPricelist = pricelist;
+		}
 	}];
 }
 

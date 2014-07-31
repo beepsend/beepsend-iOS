@@ -281,7 +281,7 @@ Using a connection you can send SMS and HLR requests.
 <dl>
 <dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/addMultipleContacts:onCompletion:" target="_top">-addMultipleContacts:onCompletion:</a></tt></dt>
 <dd></dd>
-<dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/changePassword:withNewPassword:" target="_top">-changePassword:withNewPassword:</a></tt></dt>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/changePassword:withNewPassword:onCompletion:" target="_top">-changePassword:withNewPassword:onCompletion:</a></tt></dt>
 <dd></dd>
 <dt><tt><a href="index.html#//apple_ref/occ/clm/BSUser/currentUser" target="_top">+currentUser</a></tt></dt>
 <dd></dd>
@@ -319,15 +319,15 @@ Using a connection you can send SMS and HLR requests.
 <dd></dd>
 <dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/initWithUserID:" target="_top">-initWithUserID:</a></tt></dt>
 <dd></dd>
-<dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/resetUserTokenWithPassword:" target="_top">-resetUserTokenWithPassword:</a></tt></dt>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/resetUserTokenWithPassword:onCompletion:" target="_top">-resetUserTokenWithPassword:onCompletion:</a></tt></dt>
 <dd></dd>
 <dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/searchContactsWithQuery:inGroup:limit:onCompletion:" target="_top">-searchContactsWithQuery:inGroup:limit:onCompletion:</a></tt></dt>
 <dd></dd>
 <dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/searchGroupsWithQuery:limit:onCompletion:" target="_top">-searchGroupsWithQuery:limit:onCompletion:</a></tt></dt>
 <dd></dd>
-<dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/updateUser" target="_top">-updateUser</a></tt></dt>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/updateUserEmailWithPassword:onCompletion:" target="_top">-updateUserEmailWithPassword:onCompletion:</a></tt></dt>
 <dd></dd>
-<dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/updateUserEmailWithPassword:" target="_top">-updateUserEmailWithPassword:</a></tt></dt>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/updateUserOnCompletion:" target="_top">-updateUserOnCompletion:</a></tt></dt>
 <dd></dd>
 </dl>
 <hr class="betweenAPIEntries">
@@ -359,34 +359,40 @@ Using a connection you can send SMS and HLR requests.
 </p>
 <!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/addMultipleContacts:onCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
-<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSUser/changePassword:withNewPassword:;   name=BSUser::changePassword:withNewPassword: --><a name="//apple_ref/occ/instm/BSUser/changePassword:withNewPassword:"></a>
-<h3><a name="changePassword:withNewPassword:">changePassword:withNewPassword:</a></h3>
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSUser/changePassword:withNewPassword:onCompletion:;   name=BSUser::changePassword:withNewPassword:onCompletion: --><a name="//apple_ref/occ/instm/BSUser/changePassword:withNewPassword:onCompletion:"></a>
+<h3><a name="changePassword:withNewPassword:onCompletion:">changePassword:withNewPassword:onCompletion:</a></h3>
 <hr class="afterName">
 <div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/changePassword:withNewPassword:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSUser/changePassword:withNewPassword:" logicalPath="//apple_ref/occ/instm/BSUser/changePassword" target="_top"><span class="function">changePassword</span></a>:(<!-- a logicalPath="//apple_ref/occ/cl/NSString //apple_ref/occ/tdef/NSString //apple_ref/occ/tag/NSString //apple_ref/occ/struct/NSString //apple_ref/occ/intf/NSString //apple_ref/doc/anysymbol/NSString" machineGenerated="true" --><span class="type">NSString</span><!-- /a --> <span class="type">*</span>)<span class="param">currentPassword</span> 
-        <!-- a logicalPath="//apple_ref/occ/instm/BSUser/withNewPassword //apple_ref/occ/clm/BSUser/withNewPassword //apple_ref/occ/intfcm/BSUser/withNewPassword //apple_ref/occ/intfm/BSUser/withNewPassword //apple_ref/occ/func/withNewPassword //apple_ref/occ/ftmplt/BSUser/withNewPassword //apple_ref/occ/defn/withNewPassword //apple_ref/occ/macro/withNewPassword //apple_ref/doc/anysymbol/withNewPassword" machineGenerated="true" --><span class="function">withNewPassword</span><!-- /a -->:(<!-- a logicalPath="//apple_ref/occ/cl/NSString //apple_ref/occ/tdef/NSString //apple_ref/occ/tag/NSString //apple_ref/occ/struct/NSString //apple_ref/occ/intf/NSString //apple_ref/doc/anysymbol/NSString" machineGenerated="true" --><span class="type">NSString</span><!-- /a --> <span class="type">*</span>)<!-- a logicalPath="//apple_ref/occ/econst/newPassword //apple_ref/occ/data/BSUser/newPassword //apple_ref/occ/data/newPassword //apple_ref/occ/clconst/BSUser/newPassword " machineGenerated="true" --><span class="var">newPassword</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/changePassword:withNewPassword:;name=end --></pre>
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/changePassword:withNewPassword:onCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSUser/changePassword:withNewPassword:onCompletion:" logicalPath="//apple_ref/occ/instm/BSUser/changePassword" target="_top"><span class="function">changePassword</span></a>:(<!-- a logicalPath="//apple_ref/occ/cl/NSString //apple_ref/occ/tdef/NSString //apple_ref/occ/tag/NSString //apple_ref/occ/struct/NSString //apple_ref/occ/intf/NSString //apple_ref/doc/anysymbol/NSString" machineGenerated="true" --><span class="type">NSString</span><!-- /a --> <span class="type">*</span>)<span class="param">currentPassword</span> 
+        <!-- a logicalPath="//apple_ref/occ/instm/BSUser/withNewPassword //apple_ref/occ/clm/BSUser/withNewPassword //apple_ref/occ/intfcm/BSUser/withNewPassword //apple_ref/occ/intfm/BSUser/withNewPassword //apple_ref/occ/func/withNewPassword //apple_ref/occ/ftmplt/BSUser/withNewPassword //apple_ref/occ/defn/withNewPassword //apple_ref/occ/macro/withNewPassword //apple_ref/doc/anysymbol/withNewPassword" machineGenerated="true" --><span class="function">withNewPassword</span><!-- /a -->:(<!-- a logicalPath="//apple_ref/occ/cl/NSString //apple_ref/occ/tdef/NSString //apple_ref/occ/tag/NSString //apple_ref/occ/struct/NSString //apple_ref/occ/intf/NSString //apple_ref/doc/anysymbol/NSString" machineGenerated="true" --><span class="type">NSString</span><!-- /a --> <span class="type">*</span>)<span class="param">newPassword</span> <!-- a logicalPath="//apple_ref/occ/instm/BSUser/onCompletion //apple_ref/occ/clm/BSUser/onCompletion //apple_ref/occ/intfcm/BSUser/onCompletion //apple_ref/occ/intfm/BSUser/onCompletion //apple_ref/occ/func/onCompletion //apple_ref/occ/ftmplt/BSUser/onCompletion //apple_ref/occ/defn/onCompletion //apple_ref/occ/macro/onCompletion //apple_ref/doc/anysymbol/onCompletion" machineGenerated="true" --><span class="function">onCompletion</span><!-- /a -->:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSUser/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSUser/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/changePassword:withNewPassword:onCompletion:;name=end --></pre>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
 <div class="param_indent">
 <dl>
 <dt>
-<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/changePassword:withNewPassword:/currentPassword;   name=changePassword:withNewPassword:::currentPassword -->
-<a name="//apple_ref/doc/methodparam/BSUser/changePassword:withNewPassword:/currentPassword"></a>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/changePassword:withNewPassword:onCompletion:/currentPassword;   name=changePassword:withNewPassword:onCompletion:::currentPassword -->
+<a name="//apple_ref/doc/methodparam/BSUser/changePassword:withNewPassword:onCompletion:/currentPassword"></a>
 <code>currentPassword</code>
 </dt>
 <dd><p>- Current users password</p></dd>
 <dt>
-<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/changePassword:withNewPassword:/newPassword;   name=changePassword:withNewPassword:::newPassword -->
-<a name="//apple_ref/doc/methodparam/BSUser/changePassword:withNewPassword:/newPassword"></a>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/changePassword:withNewPassword:onCompletion:/newPassword;   name=changePassword:withNewPassword:onCompletion:::newPassword -->
+<a name="//apple_ref/doc/methodparam/BSUser/changePassword:withNewPassword:onCompletion:/newPassword"></a>
 <code>newPassword</code>
 </dt>
 <dd><p>- New user password</p></dd>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/changePassword:withNewPassword:onCompletion:/block;   name=changePassword:withNewPassword:onCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSUser/changePassword:withNewPassword:onCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns error if update failed</p></dd>
 </dl>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
-<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/changePassword:withNewPassword:;name=start --><p>Method for changing password
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/changePassword:withNewPassword:onCompletion:;name=start --><p>Method for changing password
 </p>
-<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/changePassword:withNewPassword:;name=end --><!-- end discussion -->
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/changePassword:withNewPassword:onCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
 <!-- headerDoc=clm;  uid=//apple_ref/occ/clm/BSUser/currentUser;   name=BSUser::currentUser --><a name="//apple_ref/occ/clm/BSUser/currentUser"></a>
 <h3><a name="currentUser">currentUser</a></h3>
@@ -536,7 +542,7 @@ and should merely be used for aggregated views on traffic.
 <h3><a name="getAvailableConnectionsOnCompletion:">getAvailableConnectionsOnCompletion:</a></h3>
 <hr class="afterName">
 <div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/getAvailableConnectionsOnCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSUser/getAvailableConnectionsOnCompletion:" logicalPath="//apple_ref/occ/instm/BSUser/getAvailableConnectionsOnCompletion" target="_top"><span class="function">getAvailableConnectionsOnCompletion</span></a>:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSWallet_h/Classes/BSWallet/index.html#//apple_ref/occ/instp/BSWallet/connections" logicalPath="//apple_ref/occ/cl/connections //apple_ref/occ/tdef/connections //apple_ref/occ/tag/connections //apple_ref/occ/struct/connections //apple_ref/occ/intf/connections //apple_ref/doc/anysymbol/connections" target="_top"><span class="type">connections</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSUser/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSUser/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/getAvailableConnectionsOnCompletion:;name=end --></pre>
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/getAvailableConnectionsOnCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSUser/getAvailableConnectionsOnCompletion:" logicalPath="//apple_ref/occ/instm/BSUser/getAvailableConnectionsOnCompletion" target="_top"><span class="function">getAvailableConnectionsOnCompletion</span></a>:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><span class="param">connections</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSUser/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSUser/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/getAvailableConnectionsOnCompletion:;name=end --></pre>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
 <div class="param_indent">
@@ -546,7 +552,7 @@ and should merely be used for aggregated views on traffic.
 <a name="//apple_ref/doc/methodparam/BSUser/getAvailableConnectionsOnCompletion:/block"></a>
 <code>block</code>
 </dt>
-<dd><p>- Returns array of user connections</p></dd>
+<dd><p>- Returns array of user connections or errors if any</p></dd>
 </dl>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
@@ -916,30 +922,38 @@ Used for initializing user object with object received from server
 <!-- end return value --></p>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
 <!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/initWithUserID:;name=start --><p>Create User object
+Used when only users id is known
 </p>
 <!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/initWithUserID:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
-<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSUser/resetUserTokenWithPassword:;   name=BSUser::resetUserTokenWithPassword: --><a name="//apple_ref/occ/instm/BSUser/resetUserTokenWithPassword:"></a>
-<h3><a name="resetUserTokenWithPassword:">resetUserTokenWithPassword:</a></h3>
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSUser/resetUserTokenWithPassword:onCompletion:;   name=BSUser::resetUserTokenWithPassword:onCompletion: --><a name="//apple_ref/occ/instm/BSUser/resetUserTokenWithPassword:onCompletion:"></a>
+<h3><a name="resetUserTokenWithPassword:onCompletion:">resetUserTokenWithPassword:onCompletion:</a></h3>
 <hr class="afterName">
 <div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/resetUserTokenWithPassword:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSUser/resetUserTokenWithPassword:" logicalPath="//apple_ref/occ/instm/BSUser/resetUserTokenWithPassword" target="_top"><span class="function">resetUserTokenWithPassword</span></a>:(<!-- a logicalPath="//apple_ref/occ/cl/NSString //apple_ref/occ/tdef/NSString //apple_ref/occ/tag/NSString //apple_ref/occ/struct/NSString //apple_ref/occ/intf/NSString //apple_ref/doc/anysymbol/NSString" machineGenerated="true" --><span class="type">NSString</span><!-- /a --> <span class="type">*</span>)<!-- a logicalPath="//apple_ref/occ/econst/password //apple_ref/occ/data/BSUser/password //apple_ref/occ/data/password //apple_ref/occ/clconst/BSUser/password " machineGenerated="true" --><span class="var">password</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/resetUserTokenWithPassword:;name=end --></pre>
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/resetUserTokenWithPassword:onCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSUser/resetUserTokenWithPassword:onCompletion:" logicalPath="//apple_ref/occ/instm/BSUser/resetUserTokenWithPassword" target="_top"><span class="function">resetUserTokenWithPassword</span></a>:(<!-- a logicalPath="//apple_ref/occ/cl/NSString //apple_ref/occ/tdef/NSString //apple_ref/occ/tag/NSString //apple_ref/occ/struct/NSString //apple_ref/occ/intf/NSString //apple_ref/doc/anysymbol/NSString" machineGenerated="true" --><span class="type">NSString</span><!-- /a --> <span class="type">*</span>)<span class="param">password</span> 
+        <!-- a logicalPath="//apple_ref/occ/instm/BSUser/onCompletion //apple_ref/occ/clm/BSUser/onCompletion //apple_ref/occ/intfcm/BSUser/onCompletion //apple_ref/occ/intfm/BSUser/onCompletion //apple_ref/occ/func/onCompletion //apple_ref/occ/ftmplt/BSUser/onCompletion //apple_ref/occ/defn/onCompletion //apple_ref/occ/macro/onCompletion //apple_ref/doc/anysymbol/onCompletion" machineGenerated="true" --><span class="function">onCompletion</span><!-- /a -->:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSUser/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSUser/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/resetUserTokenWithPassword:onCompletion:;name=end --></pre>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
 <div class="param_indent">
 <dl>
 <dt>
-<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/resetUserTokenWithPassword:/password;   name=resetUserTokenWithPassword:::password -->
-<a name="//apple_ref/doc/methodparam/BSUser/resetUserTokenWithPassword:/password"></a>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/resetUserTokenWithPassword:onCompletion:/password;   name=resetUserTokenWithPassword:onCompletion:::password -->
+<a name="//apple_ref/doc/methodparam/BSUser/resetUserTokenWithPassword:onCompletion:/password"></a>
 <code>password</code>
 </dt>
 <dd><p>- Users password</p></dd>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/resetUserTokenWithPassword:onCompletion:/block;   name=resetUserTokenWithPassword:onCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSUser/resetUserTokenWithPassword:onCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns error if update failed</p></dd>
 </dl>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
-<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/resetUserTokenWithPassword:;name=start --><p>If API token is compromised use this method for token reset
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/resetUserTokenWithPassword:onCompletion:;name=start --><p>If API token is compromised use this method for token reset
 </p>
-<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/resetUserTokenWithPassword:;name=end --><!-- end discussion -->
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/resetUserTokenWithPassword:onCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
 <!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSUser/searchContactsWithQuery:inGroup:limit:onCompletion:;   name=BSUser::searchContactsWithQuery:inGroup:limit:onCompletion: --><a name="//apple_ref/occ/instm/BSUser/searchContactsWithQuery:inGroup:limit:onCompletion:"></a>
 <h3><a name="searchContactsWithQuery:inGroup:limit:onCompletion:">searchContactsWithQuery:inGroup:limit:onCompletion:</a></h3>
@@ -1017,39 +1031,57 @@ Used for initializing user object with object received from server
 </p>
 <!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/searchGroupsWithQuery:limit:onCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
-<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSUser/updateUser;   name=BSUser::updateUser --><a name="//apple_ref/occ/instm/BSUser/updateUser"></a>
-<h3><a name="updateUser">updateUser</a></h3>
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSUser/updateUserEmailWithPassword:onCompletion:;   name=BSUser::updateUserEmailWithPassword:onCompletion: --><a name="//apple_ref/occ/instm/BSUser/updateUserEmailWithPassword:onCompletion:"></a>
+<h3><a name="updateUserEmailWithPassword:onCompletion:">updateUserEmailWithPassword:onCompletion:</a></h3>
 <hr class="afterName">
 <div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/updateUser;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<!-- a logicalPath="//apple_ref/occ/econst/updateUser //apple_ref/occ/data/BSUser/updateUser //apple_ref/occ/data/updateUser //apple_ref/occ/clconst/BSUser/updateUser " machineGenerated="true" --><span class="var">updateUser</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/updateUser;name=end --></pre>
-</div>
-<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
-<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/updateUser;name=start --><p>If changes were made to user use update method to save changes.
-Available properties to update: name, phone or defaultConnection
-<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/updateUser;name=end --><!-- end discussion -->
-</p>
-<hr class="betweenAPIEntries">
-<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSUser/updateUserEmailWithPassword:;   name=BSUser::updateUserEmailWithPassword: --><a name="//apple_ref/occ/instm/BSUser/updateUserEmailWithPassword:"></a>
-<h3><a name="updateUserEmailWithPassword:">updateUserEmailWithPassword:</a></h3>
-<hr class="afterName">
-<div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/updateUserEmailWithPassword:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSUser/updateUserEmailWithPassword:" logicalPath="//apple_ref/occ/instm/BSUser/updateUserEmailWithPassword" target="_top"><span class="function">updateUserEmailWithPassword</span></a>:(<!-- a logicalPath="//apple_ref/occ/cl/NSString //apple_ref/occ/tdef/NSString //apple_ref/occ/tag/NSString //apple_ref/occ/struct/NSString //apple_ref/occ/intf/NSString //apple_ref/doc/anysymbol/NSString" machineGenerated="true" --><span class="type">NSString</span><!-- /a --> <span class="type">*</span>)<!-- a logicalPath="//apple_ref/occ/econst/password //apple_ref/occ/data/BSUser/password //apple_ref/occ/data/password //apple_ref/occ/clconst/BSUser/password " machineGenerated="true" --><span class="var">password</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/updateUserEmailWithPassword:;name=end --></pre>
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/updateUserEmailWithPassword:onCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSUser/updateUserEmailWithPassword:onCompletion:" logicalPath="//apple_ref/occ/instm/BSUser/updateUserEmailWithPassword" target="_top"><span class="function">updateUserEmailWithPassword</span></a>:(<!-- a logicalPath="//apple_ref/occ/cl/NSString //apple_ref/occ/tdef/NSString //apple_ref/occ/tag/NSString //apple_ref/occ/struct/NSString //apple_ref/occ/intf/NSString //apple_ref/doc/anysymbol/NSString" machineGenerated="true" --><span class="type">NSString</span><!-- /a --> <span class="type">*</span>)<span class="param">password</span> 
+        <!-- a logicalPath="//apple_ref/occ/instm/BSUser/onCompletion //apple_ref/occ/clm/BSUser/onCompletion //apple_ref/occ/intfcm/BSUser/onCompletion //apple_ref/occ/intfm/BSUser/onCompletion //apple_ref/occ/func/onCompletion //apple_ref/occ/ftmplt/BSUser/onCompletion //apple_ref/occ/defn/onCompletion //apple_ref/occ/macro/onCompletion //apple_ref/doc/anysymbol/onCompletion" machineGenerated="true" --><span class="function">onCompletion</span><!-- /a -->:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSUser/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSUser/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/updateUserEmailWithPassword:onCompletion:;name=end --></pre>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
 <div class="param_indent">
 <dl>
 <dt>
-<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/updateUserEmailWithPassword:/password;   name=updateUserEmailWithPassword:::password -->
-<a name="//apple_ref/doc/methodparam/BSUser/updateUserEmailWithPassword:/password"></a>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/updateUserEmailWithPassword:onCompletion:/password;   name=updateUserEmailWithPassword:onCompletion:::password -->
+<a name="//apple_ref/doc/methodparam/BSUser/updateUserEmailWithPassword:onCompletion:/password"></a>
 <code>password</code>
 </dt>
 <dd><p>- Users password</p></dd>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/updateUserEmailWithPassword:onCompletion:/block;   name=updateUserEmailWithPassword:onCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSUser/updateUserEmailWithPassword:onCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns error if update failed</p></dd>
 </dl>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
-<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/updateUserEmailWithPassword:;name=start --><p>For updateing email address user needs to enter password
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/updateUserEmailWithPassword:onCompletion:;name=start --><p>For updateing email address user needs to enter password
 </p>
-<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/updateUserEmailWithPassword:;name=end --><!-- end discussion -->
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/updateUserEmailWithPassword:onCompletion:;name=end --><!-- end discussion -->
+<hr class="betweenAPIEntries">
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSUser/updateUserOnCompletion:;   name=BSUser::updateUserOnCompletion: --><a name="//apple_ref/occ/instm/BSUser/updateUserOnCompletion:"></a>
+<h3><a name="updateUserOnCompletion:">updateUserOnCompletion:</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/updateUserOnCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSUser/updateUserOnCompletion:" logicalPath="//apple_ref/occ/instm/BSUser/updateUserOnCompletion" target="_top"><span class="function">updateUserOnCompletion</span></a>:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSUser/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSUser/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/updateUserOnCompletion:;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/updateUserOnCompletion:/block;   name=updateUserOnCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSUser/updateUserOnCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns error if update failed</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/updateUserOnCompletion:;name=start --><p>If changes were made to user use update method to save changes.
+Available properties to update: name, phone or defaultConnection
+</p>
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/updateUserOnCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenSections">
 <a name="HeaderDoc_props"></a>
 <h2 class="h2tight">Properties</h2>
@@ -1249,7 +1281,7 @@ Accessible only if customer details are enquired
 <p class="gapBeforeFooter">&nbsp;</p>
 <hr class="afterFooter">
 <div class="hd_copyright_and_timestamp">
-<p class="hd_timestamp">Last Updated: Tuesday, July 29, 2014
+<p class="hd_timestamp">Last Updated: Thursday, July 31, 2014
 </p>
 </div>
 </td>

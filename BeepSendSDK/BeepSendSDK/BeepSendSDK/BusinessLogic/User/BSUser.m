@@ -221,6 +221,9 @@
 - (void)updateUserOnCompletion:(void(^)(NSArray *errors))block
 {
 	if (!_currentUser) {
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"User can't be edited", @"")];
+		block(@[error]);
+		
 		return; //User object can not be edited
 	}
 	
@@ -229,6 +232,10 @@
 		[_defaultConnection.connectionID isEqualToString:_currentUser.defaultConnection.objectID] &&
 		[_userTypes isEqualToArray:_currentUser.userTypes] &&
 		_verified.isVerifiedTerms==_currentUser.verified.isVerifiedTerms) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"No changes were made", @"")];
+		block(@[error]);
+		
 		return; //No changes were made
 	}
 	

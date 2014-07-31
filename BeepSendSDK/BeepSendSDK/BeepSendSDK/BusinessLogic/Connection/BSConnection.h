@@ -159,26 +159,34 @@
 + (BSConnection *)currentConnection;
 
 /*! If changes were made to connection use update method to save changes.
+ 
+ @param block - Returns error if update failed
  */
-- (void)updateConnection;
+- (void)updateConnectionOnCompletion:(void(^)(NSArray *errors))block;
 
 /*! If you think that the connection token used for authenticating with 
 	the Beepsend API has been compromised you can use this method 
 	(with a user token) to reset the connection token.
+ 
+ @param block - Returns error if token reset failed
  */
-- (void)resetConnectionToken;
+- (void)resetConnectionTokenOnCompletion:(void(^)(NSArray *errors))block;
 
 /*! Receive all price lists revisions for a specific connection 
 	related to the authenticated user. 
 	A connection ID or alias tag "me" must be provided as reference.
+ 
+ @param block - Returns pricelists or error on fail
  */
-- (void)getPricelistsOnCompletion:(void(^)(NSArray *pricelists))block;
+- (void)getPricelistsOnCompletion:(void(^)(NSArray *pricelists, NSArray *errors))block;
 
 /*! Instead of fetching all revisions and then using the latest revision id to
 	get the current price list the following can be used for both 
 	User and Connection authentifications
+ 
+ @param block - Returns pricelist or error on fail
  */
-- (void)getCurrentPricelistOnCompletion:(void(^)(BSPricelist *pricelist))block;
+- (void)getCurrentPricelistOnCompletion:(void(^)(BSPricelist *pricelist, NSArray *errors))block;
 
 /*! Method sends message and returns number of messages
  
