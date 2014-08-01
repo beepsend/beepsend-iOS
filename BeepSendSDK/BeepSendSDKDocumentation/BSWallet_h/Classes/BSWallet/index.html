@@ -278,7 +278,7 @@ and lists of users and connections linked with wallet.
 <br><a name="HeaderDoc_methods"></a>
 <h2 class="h2tight">Methods</h2>
 <dl>
-<dt><tt><a href="index.html#//apple_ref/occ/instm/BSWallet/addEmail:" target="_top">-addEmail:</a></tt></dt>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSWallet/addEmail:onCompletion:" target="_top">-addEmail:onCompletion:</a></tt></dt>
 <dd></dd>
 <dt><tt><a href="index.html#//apple_ref/occ/instm/BSWallet/getEmailsOnCompletion:" target="_top">-getEmailsOnCompletion:</a></tt></dt>
 <dd></dd>
@@ -290,45 +290,51 @@ and lists of users and connections linked with wallet.
 <dd></dd>
 <dt><tt><a href="index.html#//apple_ref/occ/instm/BSWallet/initWalletWithName:limit:" target="_top">-initWalletWithName:limit:</a></tt></dt>
 <dd></dd>
-<dt><tt><a href="index.html#//apple_ref/occ/instm/BSWallet/removeEmail:" target="_top">-removeEmail:</a></tt></dt>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSWallet/removeEmail:onCompletion:" target="_top">-removeEmail:onCompletion:</a></tt></dt>
 <dd></dd>
 <dt><tt><a href="index.html#//apple_ref/occ/instm/BSWallet/setMaximumLogCount:" target="_top">-setMaximumLogCount:</a></tt></dt>
 <dd></dd>
-<dt><tt><a href="index.html#//apple_ref/occ/instm/BSWallet/transferFunds:fromWallet:" target="_top">-transferFunds:fromWallet:</a></tt></dt>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSWallet/transferFunds:fromWallet:onCompletion:" target="_top">-transferFunds:fromWallet:onCompletion:</a></tt></dt>
 <dd></dd>
-<dt><tt><a href="index.html#//apple_ref/occ/instm/BSWallet/transferFunds:toWallet:" target="_top">-transferFunds:toWallet:</a></tt></dt>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSWallet/transferFunds:toWallet:onCompletion:" target="_top">-transferFunds:toWallet:onCompletion:</a></tt></dt>
 <dd></dd>
-<dt><tt><a href="index.html#//apple_ref/occ/instm/BSWallet/updateWallet" target="_top">-updateWallet</a></tt></dt>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSWallet/updateWalletOnCompletion:" target="_top">-updateWalletOnCompletion:</a></tt></dt>
 <dd></dd>
 </dl>
 <hr class="betweenAPIEntries">
-<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSWallet/addEmail:;   name=BSWallet::addEmail: --><a name="//apple_ref/occ/instm/BSWallet/addEmail:"></a>
-<h3><a name="addEmail:">addEmail:</a></h3>
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSWallet/addEmail:onCompletion:;   name=BSWallet::addEmail:onCompletion: --><a name="//apple_ref/occ/instm/BSWallet/addEmail:onCompletion:"></a>
+<h3><a name="addEmail:onCompletion:">addEmail:onCompletion:</a></h3>
 <hr class="afterName">
 <div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/addEmail:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSWallet/addEmail:" logicalPath="//apple_ref/occ/instm/BSWallet/addEmail" target="_top"><span class="function">addEmail</span></a>:(<!-- a logicalPath="//apple_ref/occ/cl/NSString //apple_ref/occ/tdef/NSString //apple_ref/occ/tag/NSString //apple_ref/occ/struct/NSString //apple_ref/occ/intf/NSString //apple_ref/doc/anysymbol/NSString" machineGenerated="true" --><span class="type">NSString</span><!-- /a --> <span class="type">*</span>)<!-- a logicalPath="//apple_ref/occ/econst/email //apple_ref/occ/data/BSWallet/email //apple_ref/occ/data/email //apple_ref/occ/clconst/BSWallet/email " machineGenerated="true" --><span class="var">email</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/addEmail:;name=end --></pre>
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/addEmail:onCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSWallet/addEmail:onCompletion:" logicalPath="//apple_ref/occ/instm/BSWallet/addEmail" target="_top"><span class="function">addEmail</span></a>:(<!-- a logicalPath="//apple_ref/occ/cl/NSString //apple_ref/occ/tdef/NSString //apple_ref/occ/tag/NSString //apple_ref/occ/struct/NSString //apple_ref/occ/intf/NSString //apple_ref/doc/anysymbol/NSString" machineGenerated="true" --><span class="type">NSString</span><!-- /a --> <span class="type">*</span>)<span class="param">email</span> <!-- a logicalPath="//apple_ref/occ/instm/BSWallet/onCompletion //apple_ref/occ/clm/BSWallet/onCompletion //apple_ref/occ/intfcm/BSWallet/onCompletion //apple_ref/occ/intfm/BSWallet/onCompletion //apple_ref/occ/func/onCompletion //apple_ref/occ/ftmplt/BSWallet/onCompletion //apple_ref/occ/defn/onCompletion //apple_ref/occ/macro/onCompletion //apple_ref/doc/anysymbol/onCompletion" machineGenerated="true" --><span class="function">onCompletion</span><!-- /a -->:(void(^)(<a machinegenerated="true" href="../../../BSEmail_h/Classes/BSEmail/index.html#//apple_ref/occ/cl/BSEmail" logicalPath="//apple_ref/occ/cl/BSEmail" target="_top"><span class="type">BSEmail</span></a> <span class="type">*</span><span class="param">email</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSWallet/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSWallet/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/addEmail:onCompletion:;name=end --></pre>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
 <div class="param_indent">
 <dl>
 <dt>
-<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSWallet/addEmail:/email;   name=addEmail:::email -->
-<a name="//apple_ref/doc/methodparam/BSWallet/addEmail:/email"></a>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSWallet/addEmail:onCompletion:/email;   name=addEmail:onCompletion:::email -->
+<a name="//apple_ref/doc/methodparam/BSWallet/addEmail:onCompletion:/email"></a>
 <code>email</code>
 </dt>
 <dd><p>- Email to add to wallet</p></dd>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSWallet/addEmail:onCompletion:/block;   name=addEmail:onCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSWallet/addEmail:onCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns true is success or false and error list on failure</p></dd>
 </dl>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
-<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/addEmail:;name=start --><p>Adds new email to wallet email listing
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/addEmail:onCompletion:;name=start --><p>Adds new email to wallet email listing
 </p>
-<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/addEmail:;name=end --><!-- end discussion -->
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/addEmail:onCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
 <!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSWallet/getEmailsOnCompletion:;   name=BSWallet::getEmailsOnCompletion: --><a name="//apple_ref/occ/instm/BSWallet/getEmailsOnCompletion:"></a>
 <h3><a name="getEmailsOnCompletion:">getEmailsOnCompletion:</a></h3>
 <hr class="afterName">
 <div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/getEmailsOnCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSWallet/getEmailsOnCompletion:" logicalPath="//apple_ref/occ/instm/BSWallet/getEmailsOnCompletion" target="_top"><span class="function">getEmailsOnCompletion</span></a>:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><!-- a logicalPath="//apple_ref/occ/cl/emails //apple_ref/occ/tdef/emails //apple_ref/occ/tag/emails //apple_ref/occ/struct/emails //apple_ref/occ/intf/emails //apple_ref/doc/anysymbol/emails" machineGenerated="true" --><span class="type">emails</span><!-- /a -->))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSWallet/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSWallet/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/getEmailsOnCompletion:;name=end --></pre>
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/getEmailsOnCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSWallet/getEmailsOnCompletion:" logicalPath="//apple_ref/occ/instm/BSWallet/getEmailsOnCompletion" target="_top"><span class="function">getEmailsOnCompletion</span></a>:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><span class="param">emails</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSWallet/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSWallet/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/getEmailsOnCompletion:;name=end --></pre>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
 <div class="param_indent">
@@ -351,7 +357,7 @@ and lists of users and connections linked with wallet.
 <hr class="afterName">
 <div class="declaration_indent">
 <pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/getTransactionLogForNextPage:onCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSWallet/getTransactionLogForNextPage:onCompletion:" logicalPath="//apple_ref/occ/instm/BSWallet/getTransactionLogForNextPage" target="_top"><span class="function">getTransactionLogForNextPage</span></a>:(<!-- a logicalPath="//apple_ref/occ/cl/BOOL //apple_ref/occ/tdef/BOOL //apple_ref/occ/tag/BOOL //apple_ref/occ/struct/BOOL //apple_ref/occ/intf/BOOL //apple_ref/doc/anysymbol/BOOL" machineGenerated="true" --><span class="type">BOOL</span><!-- /a -->)<span class="param">nextPage</span> 
-        <!-- a logicalPath="//apple_ref/occ/instm/BSWallet/onCompletion //apple_ref/occ/clm/BSWallet/onCompletion //apple_ref/occ/intfcm/BSWallet/onCompletion //apple_ref/occ/intfm/BSWallet/onCompletion //apple_ref/occ/func/onCompletion //apple_ref/occ/ftmplt/BSWallet/onCompletion //apple_ref/occ/defn/onCompletion //apple_ref/occ/macro/onCompletion //apple_ref/doc/anysymbol/onCompletion" machineGenerated="true" --><span class="function">onCompletion</span><!-- /a -->:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><!-- a logicalPath="//apple_ref/occ/cl/log //apple_ref/occ/tdef/log //apple_ref/occ/tag/log //apple_ref/occ/struct/log //apple_ref/occ/intf/log //apple_ref/doc/anysymbol/log" machineGenerated="true" --><span class="type">log</span><!-- /a -->))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSWallet/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSWallet/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/getTransactionLogForNextPage:onCompletion:;name=end --></pre>
+        <!-- a logicalPath="//apple_ref/occ/instm/BSWallet/onCompletion //apple_ref/occ/clm/BSWallet/onCompletion //apple_ref/occ/intfcm/BSWallet/onCompletion //apple_ref/occ/intfm/BSWallet/onCompletion //apple_ref/occ/func/onCompletion //apple_ref/occ/ftmplt/BSWallet/onCompletion //apple_ref/occ/defn/onCompletion //apple_ref/occ/macro/onCompletion //apple_ref/doc/anysymbol/onCompletion" machineGenerated="true" --><span class="function">onCompletion</span><!-- /a -->:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><span class="param">log</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSWallet/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSWallet/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/getTransactionLogForNextPage:onCompletion:;name=end --></pre>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
 <div class="param_indent">
@@ -511,27 +517,33 @@ Used for initializing wallet when name and wallet balance are known
 </p>
 <!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/initWalletWithName:limit:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
-<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSWallet/removeEmail:;   name=BSWallet::removeEmail: --><a name="//apple_ref/occ/instm/BSWallet/removeEmail:"></a>
-<h3><a name="removeEmail:">removeEmail:</a></h3>
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSWallet/removeEmail:onCompletion:;   name=BSWallet::removeEmail:onCompletion: --><a name="//apple_ref/occ/instm/BSWallet/removeEmail:onCompletion:"></a>
+<h3><a name="removeEmail:onCompletion:">removeEmail:onCompletion:</a></h3>
 <hr class="afterName">
 <div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/removeEmail:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSWallet/removeEmail:" logicalPath="//apple_ref/occ/instm/BSWallet/removeEmail" target="_top"><span class="function">removeEmail</span></a>:(<a machinegenerated="true" href="../../../BSEmail_h/Classes/BSEmail/index.html#//apple_ref/occ/cl/BSEmail" logicalPath="//apple_ref/occ/cl/BSEmail" target="_top"><span class="type">BSEmail</span></a> <span class="type">*</span>)<!-- a logicalPath="//apple_ref/occ/econst/email //apple_ref/occ/data/BSWallet/email //apple_ref/occ/data/email //apple_ref/occ/clconst/BSWallet/email " machineGenerated="true" --><span class="var">email</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/removeEmail:;name=end --></pre>
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/removeEmail:onCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSWallet/removeEmail:onCompletion:" logicalPath="//apple_ref/occ/instm/BSWallet/removeEmail" target="_top"><span class="function">removeEmail</span></a>:(<a machinegenerated="true" href="../../../BSEmail_h/Classes/BSEmail/index.html#//apple_ref/occ/cl/BSEmail" logicalPath="//apple_ref/occ/cl/BSEmail" target="_top"><span class="type">BSEmail</span></a> <span class="type">*</span>)<span class="param">email</span> <!-- a logicalPath="//apple_ref/occ/instm/BSWallet/onCompletion //apple_ref/occ/clm/BSWallet/onCompletion //apple_ref/occ/intfcm/BSWallet/onCompletion //apple_ref/occ/intfm/BSWallet/onCompletion //apple_ref/occ/func/onCompletion //apple_ref/occ/ftmplt/BSWallet/onCompletion //apple_ref/occ/defn/onCompletion //apple_ref/occ/macro/onCompletion //apple_ref/doc/anysymbol/onCompletion" machineGenerated="true" --><span class="function">onCompletion</span><!-- /a -->:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/BOOL //apple_ref/occ/tdef/BOOL //apple_ref/occ/tag/BOOL //apple_ref/occ/struct/BOOL //apple_ref/occ/intf/BOOL //apple_ref/doc/anysymbol/BOOL" machineGenerated="true" --><span class="type">BOOL</span><!-- /a --> <span class="param">success</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSWallet/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSWallet/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/removeEmail:onCompletion:;name=end --></pre>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
 <div class="param_indent">
 <dl>
 <dt>
-<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSWallet/removeEmail:/email;   name=removeEmail:::email -->
-<a name="//apple_ref/doc/methodparam/BSWallet/removeEmail:/email"></a>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSWallet/removeEmail:onCompletion:/email;   name=removeEmail:onCompletion:::email -->
+<a name="//apple_ref/doc/methodparam/BSWallet/removeEmail:onCompletion:/email"></a>
 <code>email</code>
 </dt>
 <dd><p>- Email to remove from wallet</p></dd>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSWallet/removeEmail:onCompletion:/block;   name=removeEmail:onCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSWallet/removeEmail:onCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns true if success or false and error list on failure</p></dd>
 </dl>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
-<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/removeEmail:;name=start --><p>Method for removing email from wallet email listing
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/removeEmail:onCompletion:;name=start --><p>Method for removing email from wallet email listing
 </p>
-<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/removeEmail:;name=end --><!-- end discussion -->
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/removeEmail:onCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
 <!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSWallet/setMaximumLogCount:;   name=BSWallet::setMaximumLogCount: --><a name="//apple_ref/occ/instm/BSWallet/setMaximumLogCount:"></a>
 <h3><a name="setMaximumLogCount:">setMaximumLogCount:</a></h3>
@@ -555,71 +567,85 @@ Used for initializing wallet when name and wallet balance are known
 </p>
 <!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/setMaximumLogCount:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
-<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSWallet/transferFunds:fromWallet:;   name=BSWallet::transferFunds:fromWallet: --><a name="//apple_ref/occ/instm/BSWallet/transferFunds:fromWallet:"></a>
-<h3><a name="transferFunds:fromWallet:">transferFunds:fromWallet:</a></h3>
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSWallet/transferFunds:fromWallet:onCompletion:;   name=BSWallet::transferFunds:fromWallet:onCompletion: --><a name="//apple_ref/occ/instm/BSWallet/transferFunds:fromWallet:onCompletion:"></a>
+<h3><a name="transferFunds:fromWallet:onCompletion:">transferFunds:fromWallet:onCompletion:</a></h3>
 <hr class="afterName">
 <div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/transferFunds:fromWallet:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSWallet/transferFunds:toWallet:" logicalPath="//apple_ref/occ/instm/BSWallet/transferFunds" target="_top"><span class="function">transferFunds</span></a>:(<!-- a logicalPath="//apple_ref/occ/cl/NSNumber //apple_ref/occ/tdef/NSNumber //apple_ref/occ/tag/NSNumber //apple_ref/occ/struct/NSNumber //apple_ref/occ/intf/NSNumber //apple_ref/doc/anysymbol/NSNumber" machineGenerated="true" --><span class="type">NSNumber</span><!-- /a --> <span class="type">*</span>)<span class="param">funds</span> <!-- a logicalPath="//apple_ref/occ/instm/BSWallet/fromWallet //apple_ref/occ/clm/BSWallet/fromWallet //apple_ref/occ/intfcm/BSWallet/fromWallet //apple_ref/occ/intfm/BSWallet/fromWallet //apple_ref/occ/func/fromWallet //apple_ref/occ/ftmplt/BSWallet/fromWallet //apple_ref/occ/defn/fromWallet //apple_ref/occ/macro/fromWallet //apple_ref/doc/anysymbol/fromWallet" machineGenerated="true" --><span class="function">fromWallet</span><!-- /a -->:(<a machinegenerated="true" href="index.html#//apple_ref/occ/cl/BSWallet" logicalPath="//apple_ref/occ/cl/BSWallet" target="_top"><span class="type">BSWallet</span></a> <span class="type">*</span>)<!-- a logicalPath="//apple_ref/occ/econst/wallet //apple_ref/occ/data/BSWallet/wallet //apple_ref/occ/data/wallet //apple_ref/occ/clconst/BSWallet/wallet " machineGenerated="true" --><span class="var">wallet</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/transferFunds:fromWallet:;name=end --></pre>
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/transferFunds:fromWallet:onCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSWallet/transferFunds:toWallet:onCompletion:" logicalPath="//apple_ref/occ/instm/BSWallet/transferFunds" target="_top"><span class="function">transferFunds</span></a>:(<!-- a logicalPath="//apple_ref/occ/cl/NSNumber //apple_ref/occ/tdef/NSNumber //apple_ref/occ/tag/NSNumber //apple_ref/occ/struct/NSNumber //apple_ref/occ/intf/NSNumber //apple_ref/doc/anysymbol/NSNumber" machineGenerated="true" --><span class="type">NSNumber</span><!-- /a --> <span class="type">*</span>)<span class="param">funds</span> <!-- a logicalPath="//apple_ref/occ/instm/BSWallet/fromWallet //apple_ref/occ/clm/BSWallet/fromWallet //apple_ref/occ/intfcm/BSWallet/fromWallet //apple_ref/occ/intfm/BSWallet/fromWallet //apple_ref/occ/func/fromWallet //apple_ref/occ/ftmplt/BSWallet/fromWallet //apple_ref/occ/defn/fromWallet //apple_ref/occ/macro/fromWallet //apple_ref/doc/anysymbol/fromWallet" machineGenerated="true" --><span class="function">fromWallet</span><!-- /a -->:(<a machinegenerated="true" href="index.html#//apple_ref/occ/cl/BSWallet" logicalPath="//apple_ref/occ/cl/BSWallet" target="_top"><span class="type">BSWallet</span></a> <span class="type">*</span>)<span class="param">wallet</span> 
+        <!-- a logicalPath="//apple_ref/occ/instm/BSWallet/onCompletion //apple_ref/occ/clm/BSWallet/onCompletion //apple_ref/occ/intfcm/BSWallet/onCompletion //apple_ref/occ/intfm/BSWallet/onCompletion //apple_ref/occ/func/onCompletion //apple_ref/occ/ftmplt/BSWallet/onCompletion //apple_ref/occ/defn/onCompletion //apple_ref/occ/macro/onCompletion //apple_ref/doc/anysymbol/onCompletion" machineGenerated="true" --><span class="function">onCompletion</span><!-- /a -->:(void(^)(<a machinegenerated="true" href="../../../BSTransfer_h/Classes/BSTransfer/index.html#//apple_ref/occ/cl/BSTransfer" logicalPath="//apple_ref/occ/cl/BSTransfer" target="_top"><span class="type">BSTransfer</span></a> <span class="type">*</span><span class="param">transfer</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSWallet/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSWallet/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/transferFunds:fromWallet:onCompletion:;name=end --></pre>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
 <div class="param_indent">
 <dl>
 <dt>
-<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSWallet/transferFunds:fromWallet:/funds;   name=transferFunds:fromWallet:::funds -->
-<a name="//apple_ref/doc/methodparam/BSWallet/transferFunds:fromWallet:/funds"></a>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSWallet/transferFunds:fromWallet:onCompletion:/funds;   name=transferFunds:fromWallet:onCompletion:::funds -->
+<a name="//apple_ref/doc/methodparam/BSWallet/transferFunds:fromWallet:onCompletion:/funds"></a>
 <code>funds</code>
 </dt>
 <dd><p>- How much money you wish to transfer</p></dd>
 <dt>
-<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSWallet/transferFunds:fromWallet:/wallet;   name=transferFunds:fromWallet:::wallet -->
-<a name="//apple_ref/doc/methodparam/BSWallet/transferFunds:fromWallet:/wallet"></a>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSWallet/transferFunds:fromWallet:onCompletion:/wallet;   name=transferFunds:fromWallet:onCompletion:::wallet -->
+<a name="//apple_ref/doc/methodparam/BSWallet/transferFunds:fromWallet:onCompletion:/wallet"></a>
 <code>wallet</code>
 </dt>
 <dd><p>- Wallet from which you want to transfer money</p></dd>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSWallet/transferFunds:fromWallet:onCompletion:/block;   name=transferFunds:fromWallet:onCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSWallet/transferFunds:fromWallet:onCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns transfer or error list on failure</p></dd>
 </dl>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
-<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/transferFunds:fromWallet:;name=start --><p>Method for transfering funds to current wallet
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/transferFunds:fromWallet:onCompletion:;name=start --><p>Method for transfering funds to current wallet
 </p>
-<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/transferFunds:fromWallet:;name=end --><!-- end discussion -->
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/transferFunds:fromWallet:onCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
-<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSWallet/transferFunds:toWallet:;   name=BSWallet::transferFunds:toWallet: --><a name="//apple_ref/occ/instm/BSWallet/transferFunds:toWallet:"></a>
-<h3><a name="transferFunds:toWallet:">transferFunds:toWallet:</a></h3>
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSWallet/transferFunds:toWallet:onCompletion:;   name=BSWallet::transferFunds:toWallet:onCompletion: --><a name="//apple_ref/occ/instm/BSWallet/transferFunds:toWallet:onCompletion:"></a>
+<h3><a name="transferFunds:toWallet:onCompletion:">transferFunds:toWallet:onCompletion:</a></h3>
 <hr class="afterName">
 <div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/transferFunds:toWallet:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSWallet/transferFunds:toWallet:" logicalPath="//apple_ref/occ/instm/BSWallet/transferFunds" target="_top"><span class="function">transferFunds</span></a>:(<!-- a logicalPath="//apple_ref/occ/cl/NSNumber //apple_ref/occ/tdef/NSNumber //apple_ref/occ/tag/NSNumber //apple_ref/occ/struct/NSNumber //apple_ref/occ/intf/NSNumber //apple_ref/doc/anysymbol/NSNumber" machineGenerated="true" --><span class="type">NSNumber</span><!-- /a --> <span class="type">*</span>)<span class="param">funds</span> <!-- a logicalPath="//apple_ref/occ/instm/BSWallet/toWallet //apple_ref/occ/clm/BSWallet/toWallet //apple_ref/occ/intfcm/BSWallet/toWallet //apple_ref/occ/intfm/BSWallet/toWallet //apple_ref/occ/func/toWallet //apple_ref/occ/ftmplt/BSWallet/toWallet //apple_ref/occ/defn/toWallet //apple_ref/occ/macro/toWallet //apple_ref/doc/anysymbol/toWallet" machineGenerated="true" --><span class="function">toWallet</span><!-- /a -->:(<a machinegenerated="true" href="index.html#//apple_ref/occ/cl/BSWallet" logicalPath="//apple_ref/occ/cl/BSWallet" target="_top"><span class="type">BSWallet</span></a> <span class="type">*</span>)<!-- a logicalPath="//apple_ref/occ/econst/wallet //apple_ref/occ/data/BSWallet/wallet //apple_ref/occ/data/wallet //apple_ref/occ/clconst/BSWallet/wallet " machineGenerated="true" --><span class="var">wallet</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/transferFunds:toWallet:;name=end --></pre>
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/transferFunds:toWallet:onCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSWallet/transferFunds:toWallet:onCompletion:" logicalPath="//apple_ref/occ/instm/BSWallet/transferFunds" target="_top"><span class="function">transferFunds</span></a>:(<!-- a logicalPath="//apple_ref/occ/cl/NSNumber //apple_ref/occ/tdef/NSNumber //apple_ref/occ/tag/NSNumber //apple_ref/occ/struct/NSNumber //apple_ref/occ/intf/NSNumber //apple_ref/doc/anysymbol/NSNumber" machineGenerated="true" --><span class="type">NSNumber</span><!-- /a --> <span class="type">*</span>)<span class="param">funds</span> <!-- a logicalPath="//apple_ref/occ/instm/BSWallet/toWallet //apple_ref/occ/clm/BSWallet/toWallet //apple_ref/occ/intfcm/BSWallet/toWallet //apple_ref/occ/intfm/BSWallet/toWallet //apple_ref/occ/func/toWallet //apple_ref/occ/ftmplt/BSWallet/toWallet //apple_ref/occ/defn/toWallet //apple_ref/occ/macro/toWallet //apple_ref/doc/anysymbol/toWallet" machineGenerated="true" --><span class="function">toWallet</span><!-- /a -->:(<a machinegenerated="true" href="index.html#//apple_ref/occ/cl/BSWallet" logicalPath="//apple_ref/occ/cl/BSWallet" target="_top"><span class="type">BSWallet</span></a> <span class="type">*</span>)<span class="param">wallet</span> 
+        <!-- a logicalPath="//apple_ref/occ/instm/BSWallet/onCompletion //apple_ref/occ/clm/BSWallet/onCompletion //apple_ref/occ/intfcm/BSWallet/onCompletion //apple_ref/occ/intfm/BSWallet/onCompletion //apple_ref/occ/func/onCompletion //apple_ref/occ/ftmplt/BSWallet/onCompletion //apple_ref/occ/defn/onCompletion //apple_ref/occ/macro/onCompletion //apple_ref/doc/anysymbol/onCompletion" machineGenerated="true" --><span class="function">onCompletion</span><!-- /a -->:(void(^)(<a machinegenerated="true" href="../../../BSTransfer_h/Classes/BSTransfer/index.html#//apple_ref/occ/cl/BSTransfer" logicalPath="//apple_ref/occ/cl/BSTransfer" target="_top"><span class="type">BSTransfer</span></a> <span class="type">*</span><span class="param">transfer</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSWallet/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSWallet/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/transferFunds:toWallet:onCompletion:;name=end --></pre>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
 <div class="param_indent">
 <dl>
 <dt>
-<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSWallet/transferFunds:toWallet:/funds;   name=transferFunds:toWallet:::funds -->
-<a name="//apple_ref/doc/methodparam/BSWallet/transferFunds:toWallet:/funds"></a>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSWallet/transferFunds:toWallet:onCompletion:/funds;   name=transferFunds:toWallet:onCompletion:::funds -->
+<a name="//apple_ref/doc/methodparam/BSWallet/transferFunds:toWallet:onCompletion:/funds"></a>
 <code>funds</code>
 </dt>
 <dd><p>- How much money you wish to transfer</p></dd>
 <dt>
-<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSWallet/transferFunds:toWallet:/wallet;   name=transferFunds:toWallet:::wallet -->
-<a name="//apple_ref/doc/methodparam/BSWallet/transferFunds:toWallet:/wallet"></a>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSWallet/transferFunds:toWallet:onCompletion:/wallet;   name=transferFunds:toWallet:onCompletion:::wallet -->
+<a name="//apple_ref/doc/methodparam/BSWallet/transferFunds:toWallet:onCompletion:/wallet"></a>
 <code>wallet</code>
 </dt>
 <dd><p>- Wallet to which you want to transfer money</p></dd>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSWallet/transferFunds:toWallet:onCompletion:/block;   name=transferFunds:toWallet:onCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSWallet/transferFunds:toWallet:onCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns transfer or error list on failure</p></dd>
 </dl>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
-<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/transferFunds:toWallet:;name=start --><p>Method for transfering funds from current wallet
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/transferFunds:toWallet:onCompletion:;name=start --><p>Method for transfering funds from current wallet
 </p>
-<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/transferFunds:toWallet:;name=end --><!-- end discussion -->
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/transferFunds:toWallet:onCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
-<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSWallet/updateWallet;   name=BSWallet::updateWallet --><a name="//apple_ref/occ/instm/BSWallet/updateWallet"></a>
-<h3><a name="updateWallet">updateWallet</a></h3>
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSWallet/updateWalletOnCompletion:;   name=BSWallet::updateWalletOnCompletion: --><a name="//apple_ref/occ/instm/BSWallet/updateWalletOnCompletion:"></a>
+<h3><a name="updateWalletOnCompletion:">updateWalletOnCompletion:</a></h3>
 <hr class="afterName">
 <div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/updateWallet;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<!-- a logicalPath="//apple_ref/occ/econst/updateWallet //apple_ref/occ/data/BSWallet/updateWallet //apple_ref/occ/data/updateWallet //apple_ref/occ/clconst/BSWallet/updateWallet " machineGenerated="true" --><span class="var">updateWallet</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/updateWallet;name=end --></pre>
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/updateWalletOnCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSWallet/updateWalletOnCompletion:" logicalPath="//apple_ref/occ/instm/BSWallet/updateWalletOnCompletion" target="_top"><span class="function">updateWalletOnCompletion</span></a>:(void(^)(<a machinegenerated="true" href="index.html#//apple_ref/occ/cl/BSWallet" logicalPath="//apple_ref/occ/cl/BSWallet" target="_top"><span class="type">BSWallet</span></a> <span class="type">*</span><span class="param">wallet</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSWallet/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSWallet/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSWallet/updateWalletOnCompletion:;name=end --></pre>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
-<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/updateWallet;name=start --><p>If changes were made to wallet use update method to save changes.
-<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/updateWallet;name=end --><!-- end discussion -->
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/updateWalletOnCompletion:;name=start --><p>If changes were made to wallet use update method to save changes.
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSWallet/updateWalletOnCompletion:;name=end --><!-- end discussion -->
 </p>
 <hr class="betweenSections">
 <a name="HeaderDoc_props"></a>
@@ -718,7 +744,7 @@ email will be sent to all listed users.
 <p class="gapBeforeFooter">&nbsp;</p>
 <hr class="afterFooter">
 <div class="hd_copyright_and_timestamp">
-<p class="hd_timestamp">Last Updated: Thursday, July 31, 2014
+<p class="hd_timestamp">Last Updated: Friday, August 01, 2014
 </p>
 </div>
 </td>

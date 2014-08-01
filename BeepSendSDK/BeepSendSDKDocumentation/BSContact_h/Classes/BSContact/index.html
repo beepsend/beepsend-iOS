@@ -283,11 +283,11 @@ Contacts can be added, edited or removed.
 <dd></dd>
 <dt><tt><a href="index.html#//apple_ref/occ/instm/BSContact/initContactWithPhoneNumber:firstName:lastName:group:" target="_top">-initContactWithPhoneNumber:firstName:lastName:group:</a></tt></dt>
 <dd></dd>
-<dt><tt><a href="index.html#//apple_ref/occ/instm/BSContact/removeContact" target="_top">-removeContact</a></tt></dt>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSContact/removeContactOnCompletion:" target="_top">-removeContactOnCompletion:</a></tt></dt>
 <dd></dd>
-<dt><tt><a href="index.html#//apple_ref/occ/instm/BSContact/saveContact" target="_top">-saveContact</a></tt></dt>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSContact/saveContactOnCompletion:" target="_top">-saveContactOnCompletion:</a></tt></dt>
 <dd></dd>
-<dt><tt><a href="index.html#//apple_ref/occ/instm/BSContact/updateContact" target="_top">-updateContact</a></tt></dt>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSContact/updateContactOnCompletion:" target="_top">-updateContactOnCompletion:</a></tt></dt>
 <dd></dd>
 </dl>
 <hr class="betweenAPIEntries">
@@ -399,38 +399,71 @@ When create contact make sure you call saveContact method to save it on server
 </p>
 <!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSContact/initContactWithPhoneNumber:firstName:lastName:group:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
-<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSContact/removeContact;   name=BSContact::removeContact --><a name="//apple_ref/occ/instm/BSContact/removeContact"></a>
-<h3><a name="removeContact">removeContact</a></h3>
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSContact/removeContactOnCompletion:;   name=BSContact::removeContactOnCompletion: --><a name="//apple_ref/occ/instm/BSContact/removeContactOnCompletion:"></a>
+<h3><a name="removeContactOnCompletion:">removeContactOnCompletion:</a></h3>
 <hr class="afterName">
 <div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSContact/removeContact;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<!-- a logicalPath="//apple_ref/occ/econst/removeContact //apple_ref/occ/data/BSContact/removeContact //apple_ref/occ/data/removeContact //apple_ref/occ/clconst/BSContact/removeContact " machineGenerated="true" --><span class="var">removeContact</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSContact/removeContact;name=end --></pre>
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSContact/removeContactOnCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSContact/removeContactOnCompletion:" logicalPath="//apple_ref/occ/instm/BSContact/removeContactOnCompletion" target="_top"><span class="function">removeContactOnCompletion</span></a>:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/BOOL //apple_ref/occ/tdef/BOOL //apple_ref/occ/tag/BOOL //apple_ref/occ/struct/BOOL //apple_ref/occ/intf/BOOL //apple_ref/doc/anysymbol/BOOL" machineGenerated="true" --><span class="type">BOOL</span><!-- /a --> <span class="param">success</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="index.html#//apple_ref/occ/instp/BSContact/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSContact/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSContact/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSContact/removeContactOnCompletion:;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSContact/removeContactOnCompletion:/block;   name=removeContactOnCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSContact/removeContactOnCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns true on success or error list on fail</p></dd>
+</dl>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
-<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSContact/removeContact;name=start --><p>When contact needs to be removed use remove method to delete it
-<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSContact/removeContact;name=end --><!-- end discussion -->
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSContact/removeContactOnCompletion:;name=start --><p>When contact needs to be removed use remove method to delete it
 </p>
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSContact/removeContactOnCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
-<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSContact/saveContact;   name=BSContact::saveContact --><a name="//apple_ref/occ/instm/BSContact/saveContact"></a>
-<h3><a name="saveContact">saveContact</a></h3>
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSContact/saveContactOnCompletion:;   name=BSContact::saveContactOnCompletion: --><a name="//apple_ref/occ/instm/BSContact/saveContactOnCompletion:"></a>
+<h3><a name="saveContactOnCompletion:">saveContactOnCompletion:</a></h3>
 <hr class="afterName">
 <div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSContact/saveContact;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<!-- a logicalPath="//apple_ref/occ/econst/saveContact //apple_ref/occ/data/BSContact/saveContact //apple_ref/occ/data/saveContact //apple_ref/occ/clconst/BSContact/saveContact " machineGenerated="true" --><span class="var">saveContact</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSContact/saveContact;name=end --></pre>
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSContact/saveContactOnCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSContact/saveContactOnCompletion:" logicalPath="//apple_ref/occ/instm/BSContact/saveContactOnCompletion" target="_top"><span class="function">saveContactOnCompletion</span></a>:(void(^)(<a machinegenerated="true" href="index.html#//apple_ref/occ/cl/BSContact" logicalPath="//apple_ref/occ/cl/BSContact" target="_top"><span class="type">BSContact</span></a> <span class="type">*</span><span class="param">contact</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="index.html#//apple_ref/occ/instp/BSContact/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSContact/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSContact/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSContact/saveContactOnCompletion:;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSContact/saveContactOnCompletion:/block;   name=saveContactOnCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSContact/saveContactOnCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns contact on success or error list on fail</p></dd>
+</dl>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
-<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSContact/saveContact;name=start --><p>When new contact is created use save method to save contact
-<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSContact/saveContact;name=end --><!-- end discussion -->
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSContact/saveContactOnCompletion:;name=start --><p>When new contact is created use save method to save contact
 </p>
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSContact/saveContactOnCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
-<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSContact/updateContact;   name=BSContact::updateContact --><a name="//apple_ref/occ/instm/BSContact/updateContact"></a>
-<h3><a name="updateContact">updateContact</a></h3>
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSContact/updateContactOnCompletion:;   name=BSContact::updateContactOnCompletion: --><a name="//apple_ref/occ/instm/BSContact/updateContactOnCompletion:"></a>
+<h3><a name="updateContactOnCompletion:">updateContactOnCompletion:</a></h3>
 <hr class="afterName">
 <div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSContact/updateContact;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<!-- a logicalPath="//apple_ref/occ/econst/updateContact //apple_ref/occ/data/BSContact/updateContact //apple_ref/occ/data/updateContact //apple_ref/occ/clconst/BSContact/updateContact " machineGenerated="true" --><span class="var">updateContact</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSContact/updateContact;name=end --></pre>
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSContact/updateContactOnCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSContact/updateContactOnCompletion:" logicalPath="//apple_ref/occ/instm/BSContact/updateContactOnCompletion" target="_top"><span class="function">updateContactOnCompletion</span></a>:(void(^)(<a machinegenerated="true" href="index.html#//apple_ref/occ/cl/BSContact" logicalPath="//apple_ref/occ/cl/BSContact" target="_top"><span class="type">BSContact</span></a> <span class="type">*</span><span class="param">contact</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="index.html#//apple_ref/occ/instp/BSContact/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSContact/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSContact/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSContact/updateContactOnCompletion:;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSContact/updateContactOnCompletion:/block;   name=updateContactOnCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSContact/updateContactOnCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns contact on success or error list on fail</p></dd>
+</dl>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
-<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSContact/updateContact;name=start --><p>If changes were made to contact use update method to save changes.
-<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSContact/updateContact;name=end --><!-- end discussion -->
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSContact/updateContactOnCompletion:;name=start --><p>If changes were made to contact use update method to save changes.
 </p>
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSContact/updateContactOnCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenSections">
 <a name="HeaderDoc_props"></a>
 <h2 class="h2tight">Properties</h2>
@@ -525,7 +558,7 @@ When create contact make sure you call saveContact method to save it on server
 <p class="gapBeforeFooter">&nbsp;</p>
 <hr class="afterFooter">
 <div class="hd_copyright_and_timestamp">
-<p class="hd_timestamp">Last Updated: Thursday, July 31, 2014
+<p class="hd_timestamp">Last Updated: Friday, August 01, 2014
 </p>
 </div>
 </td>

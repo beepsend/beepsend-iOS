@@ -308,7 +308,7 @@ If authenticated using a User token there can be one or several connections acce
 <dd></dd>
 <dt><tt><a href="index.html#//apple_ref/occ/instm/BSConnection/initWithConnectionModel:withNewToken:" target="_top">-initWithConnectionModel:withNewToken:</a></tt></dt>
 <dd></dd>
-<dt><tt><a href="index.html#//apple_ref/occ/instm/BSConnection/resetConnectionToken" target="_top">-resetConnectionToken</a></tt></dt>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSConnection/resetConnectionTokenOnCompletion:" target="_top">-resetConnectionTokenOnCompletion:</a></tt></dt>
 <dd></dd>
 <dt><tt><a href="index.html#//apple_ref/occ/instm/BSConnection/sendMultipleSMS:withCompletionBlock:" target="_top">-sendMultipleSMS:withCompletionBlock:</a></tt></dt>
 <dd></dd>
@@ -320,7 +320,7 @@ If authenticated using a User token there can be one or several connections acce
 <dd></dd>
 <dt><tt><a href="index.html#//apple_ref/occ/instm/BSConnection/smsCountForMessages:" target="_top">-smsCountForMessages:</a></tt></dt>
 <dd></dd>
-<dt><tt><a href="index.html#//apple_ref/occ/instm/BSConnection/updateConnection" target="_top">-updateConnection</a></tt></dt>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSConnection/updateConnectionOnCompletion:" target="_top">-updateConnectionOnCompletion:</a></tt></dt>
 <dd></dd>
 <dt><tt><a href="index.html#//apple_ref/occ/instm/BSConnection/validateHLRForNumber:onCompletion:" target="_top">-validateHLRForNumber:onCompletion:</a></tt></dt>
 <dd></dd>
@@ -417,14 +417,25 @@ and should merely be used for aggregated views on traffic.
 <h3><a name="getCurrentPricelistOnCompletion:">getCurrentPricelistOnCompletion:</a></h3>
 <hr class="afterName">
 <div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/getCurrentPricelistOnCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSConnection/getCurrentPricelistOnCompletion:" logicalPath="//apple_ref/occ/instm/BSConnection/getCurrentPricelistOnCompletion" target="_top"><span class="function">getCurrentPricelistOnCompletion</span></a>:(void(^)(<a machinegenerated="true" href="../../../BSPricelist_h/Classes/BSPricelist/index.html#//apple_ref/occ/cl/BSPricelist" logicalPath="//apple_ref/occ/cl/BSPricelist" target="_top"><span class="type">BSPricelist</span></a> <span class="type">*</span><!-- a logicalPath="//apple_ref/occ/cl/pricelist //apple_ref/occ/tdef/pricelist //apple_ref/occ/tag/pricelist //apple_ref/occ/struct/pricelist //apple_ref/occ/intf/pricelist //apple_ref/doc/anysymbol/pricelist" machineGenerated="true" --><span class="type">pricelist</span><!-- /a -->))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSConnection/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSConnection/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/getCurrentPricelistOnCompletion:;name=end --></pre>
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/getCurrentPricelistOnCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSConnection/getCurrentPricelistOnCompletion:" logicalPath="//apple_ref/occ/instm/BSConnection/getCurrentPricelistOnCompletion" target="_top"><span class="function">getCurrentPricelistOnCompletion</span></a>:(void(^)(<a machinegenerated="true" href="../../../BSPricelist_h/Classes/BSPricelist/index.html#//apple_ref/occ/cl/BSPricelist" logicalPath="//apple_ref/occ/cl/BSPricelist" target="_top"><span class="type">BSPricelist</span></a> <span class="type">*</span><span class="param">pricelist</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSConnection/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSConnection/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/getCurrentPricelistOnCompletion:;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSConnection/getCurrentPricelistOnCompletion:/block;   name=getCurrentPricelistOnCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSConnection/getCurrentPricelistOnCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns pricelist or error on fail</p></dd>
+</dl>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
 <!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/getCurrentPricelistOnCompletion:;name=start --><p>Instead of fetching all revisions and then using the latest revision id to
 get the current price list the following can be used for both 
 User and Connection authentifications
-<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/getCurrentPricelistOnCompletion:;name=end --><!-- end discussion -->
 </p>
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/getCurrentPricelistOnCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
 <!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSConnection/getDetailsForBatch:onCompletion:;   name=BSConnection::getDetailsForBatch:onCompletion: --><a name="//apple_ref/occ/instm/BSConnection/getDetailsForBatch:onCompletion:"></a>
 <h3><a name="getDetailsForBatch:onCompletion:">getDetailsForBatch:onCompletion:</a></h3>
@@ -611,14 +622,25 @@ no matter if you submitted it via SMPP or HTTP
 <h3><a name="getPricelistsOnCompletion:">getPricelistsOnCompletion:</a></h3>
 <hr class="afterName">
 <div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/getPricelistsOnCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSConnection/getPricelistsOnCompletion:" logicalPath="//apple_ref/occ/instm/BSConnection/getPricelistsOnCompletion" target="_top"><span class="function">getPricelistsOnCompletion</span></a>:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><!-- a logicalPath="//apple_ref/occ/cl/pricelists //apple_ref/occ/tdef/pricelists //apple_ref/occ/tag/pricelists //apple_ref/occ/struct/pricelists //apple_ref/occ/intf/pricelists //apple_ref/doc/anysymbol/pricelists" machineGenerated="true" --><span class="type">pricelists</span><!-- /a -->))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSConnection/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSConnection/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/getPricelistsOnCompletion:;name=end --></pre>
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/getPricelistsOnCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSConnection/getPricelistsOnCompletion:" logicalPath="//apple_ref/occ/instm/BSConnection/getPricelistsOnCompletion" target="_top"><span class="function">getPricelistsOnCompletion</span></a>:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><span class="param">pricelists</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSConnection/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSConnection/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/getPricelistsOnCompletion:;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSConnection/getPricelistsOnCompletion:/block;   name=getPricelistsOnCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSConnection/getPricelistsOnCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns pricelists or error on fail</p></dd>
+</dl>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
 <!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/getPricelistsOnCompletion:;name=start --><p>Receive all price lists revisions for a specific connection 
 related to the authenticated user. 
 A connection ID or alias tag "me" must be provided as reference.
-<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/getPricelistsOnCompletion:;name=end --><!-- end discussion -->
 </p>
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/getPricelistsOnCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
 <!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSConnection/immediateHLRForNumber:onCompletion:;   name=BSConnection::immediateHLRForNumber:onCompletion: --><a name="//apple_ref/occ/instm/BSConnection/immediateHLRForNumber:onCompletion:"></a>
 <h3><a name="immediateHLRForNumber:onCompletion:">immediateHLRForNumber:onCompletion:</a></h3>
@@ -852,18 +874,29 @@ Used for initializing connection object with object received from server
 </p>
 <!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/initWithConnectionModel:withNewToken:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
-<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSConnection/resetConnectionToken;   name=BSConnection::resetConnectionToken --><a name="//apple_ref/occ/instm/BSConnection/resetConnectionToken"></a>
-<h3><a name="resetConnectionToken">resetConnectionToken</a></h3>
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSConnection/resetConnectionTokenOnCompletion:;   name=BSConnection::resetConnectionTokenOnCompletion: --><a name="//apple_ref/occ/instm/BSConnection/resetConnectionTokenOnCompletion:"></a>
+<h3><a name="resetConnectionTokenOnCompletion:">resetConnectionTokenOnCompletion:</a></h3>
 <hr class="afterName">
 <div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/resetConnectionToken;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<!-- a logicalPath="//apple_ref/occ/econst/resetConnectionToken //apple_ref/occ/data/BSConnection/resetConnectionToken //apple_ref/occ/data/resetConnectionToken //apple_ref/occ/clconst/BSConnection/resetConnectionToken " machineGenerated="true" --><span class="var">resetConnectionToken</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/resetConnectionToken;name=end --></pre>
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/resetConnectionTokenOnCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSConnection/resetConnectionTokenOnCompletion:" logicalPath="//apple_ref/occ/instm/BSConnection/resetConnectionTokenOnCompletion" target="_top"><span class="function">resetConnectionTokenOnCompletion</span></a>:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSConnection/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSConnection/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/resetConnectionTokenOnCompletion:;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSConnection/resetConnectionTokenOnCompletion:/block;   name=resetConnectionTokenOnCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSConnection/resetConnectionTokenOnCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns error if token reset failed</p></dd>
+</dl>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
-<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/resetConnectionToken;name=start --><p>If you think that the connection token used for authenticating with 
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/resetConnectionTokenOnCompletion:;name=start --><p>If you think that the connection token used for authenticating with 
 the Beepsend API has been compromised you can use this method 
 (with a user token) to reset the connection token.
-<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/resetConnectionToken;name=end --><!-- end discussion -->
 </p>
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/resetConnectionTokenOnCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
 <!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSConnection/sendMultipleSMS:withCompletionBlock:;   name=BSConnection::sendMultipleSMS:withCompletionBlock: --><a name="//apple_ref/occ/instm/BSConnection/sendMultipleSMS:withCompletionBlock:"></a>
 <h3><a name="sendMultipleSMS:withCompletionBlock:">sendMultipleSMS:withCompletionBlock:</a></h3>
@@ -1011,16 +1044,27 @@ Message count is sum of calculated message count for every message in array
 </p>
 <!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/smsCountForMessages:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
-<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSConnection/updateConnection;   name=BSConnection::updateConnection --><a name="//apple_ref/occ/instm/BSConnection/updateConnection"></a>
-<h3><a name="updateConnection">updateConnection</a></h3>
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSConnection/updateConnectionOnCompletion:;   name=BSConnection::updateConnectionOnCompletion: --><a name="//apple_ref/occ/instm/BSConnection/updateConnectionOnCompletion:"></a>
+<h3><a name="updateConnectionOnCompletion:">updateConnectionOnCompletion:</a></h3>
 <hr class="afterName">
 <div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/updateConnection;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<!-- a logicalPath="//apple_ref/occ/econst/updateConnection //apple_ref/occ/data/BSConnection/updateConnection //apple_ref/occ/data/updateConnection //apple_ref/occ/clconst/BSConnection/updateConnection " machineGenerated="true" --><span class="var">updateConnection</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/updateConnection;name=end --></pre>
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/updateConnectionOnCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSConnection/updateConnectionOnCompletion:" logicalPath="//apple_ref/occ/instm/BSConnection/updateConnectionOnCompletion" target="_top"><span class="function">updateConnectionOnCompletion</span></a>:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSConnection/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSConnection/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/updateConnectionOnCompletion:;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSConnection/updateConnectionOnCompletion:/block;   name=updateConnectionOnCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSConnection/updateConnectionOnCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns error if update failed</p></dd>
+</dl>
 </div>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
-<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/updateConnection;name=start --><p>If changes were made to connection use update method to save changes.
-<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/updateConnection;name=end --><!-- end discussion -->
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/updateConnectionOnCompletion:;name=start --><p>If changes were made to connection use update method to save changes.
 </p>
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/updateConnectionOnCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
 <!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSConnection/validateHLRForNumber:onCompletion:;   name=BSConnection::validateHLRForNumber:onCompletion: --><a name="//apple_ref/occ/instm/BSConnection/validateHLRForNumber:onCompletion:"></a>
 <h3><a name="validateHLRForNumber:onCompletion:">validateHLRForNumber:onCompletion:</a></h3>
@@ -1292,7 +1336,7 @@ Message count is sum of calculated message count for every message in array
 <p class="gapBeforeFooter">&nbsp;</p>
 <hr class="afterFooter">
 <div class="hd_copyright_and_timestamp">
-<p class="hd_timestamp">Last Updated: Thursday, July 31, 2014
+<p class="hd_timestamp">Last Updated: Friday, August 01, 2014
 </p>
 </div>
 </td>
