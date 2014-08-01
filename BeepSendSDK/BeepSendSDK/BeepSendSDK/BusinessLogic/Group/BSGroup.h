@@ -72,39 +72,49 @@
 					contacts:(NSNumber *)gContactsCount;
 
 /*! If changes were made to group use update method to save changes.
+ 
+ @param block - Return group on success or errors on failure
  */
-- (void)updateGroup;
+- (void)updateGroupOnCompletion:(void(^)(BSGroup *group, NSArray *errors))block;
 
 /*! When new group is created use save method to save group
+ 
+ @param block - Return group on success or errors on failure
  */
-- (void)saveGroup;
+- (void)saveGroupOnCompletion:(void(^)(BSGroup *group, NSArray *errors))block;
 
 /*! When group needs to be removed use remove method to delete it
+ 
+ @param block - Return true on success or errors on failure
  */
-- (void)removeGroup;
+- (void)removeGroupOnCompletion:(void(^)(BOOL success, NSArray *errors))block;
 
 /*! Method for adding new contact to group
  
  @param contact - Contact to add to group
+ @param block - Return contact on success or errors on failure
  */
-- (void)addContact:(BSContact *)contact;
+- (void)addContact:(BSContact *)contact onCompletion:(void(^)(BSContact *contact, NSArray *errors))block;
 
 /*! Method for adding contact list to group
  
  @param contacts - Contacts to add to group
+ @param block - Return contacts on success or errors on failure
  */
-- (void)addContacts:(NSArray *)contacts;
+- (void)addContacts:(NSArray *)contacts onCompletion:(void(^)(NSArray *contacts, NSArray *errors))block;
 
 /*! Method for removing contact from group
  
  @param contact - Contact to remove from group
+ @param block - Return true on success or errors on failure
  */
-- (void)removeContact:(BSContact *)contact;
+- (void)removeContact:(BSContact *)contact onCompletion:(void(^)(BOOL success, NSArray *errors))block;
 
 /*! Method for removing contact list from group
  
  @param contacts - Contacts to remove from group
+ @param block - Return true on success or errors on failure
  */
-- (void)removeContacts:(NSArray *)contacts;
+- (void)removeContacts:(NSArray *)contacts onCompletion:(void(^)(BOOL success, NSArray *errors))block;;
 
 @end

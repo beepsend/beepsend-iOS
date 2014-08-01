@@ -80,15 +80,15 @@
 }
 
 - (NSString *)label {
-	return _connectionModel ? _connectionModel.label : _label;
+	return _label;
 }
 
 - (NSString *)description {
-	return _connectionModel ? _connectionModel.description : _description;
+	return _description;
 }
 
 - (NSString *)systemID {
-	return _connectionModel ? _connectionModel.systemID : _systemID;
+	return _systemID;
 }
 
 #pragma mark - Initialization
@@ -267,7 +267,6 @@
 											   block(errors);
 										   }
 										   else {
-											   _connectionModel = connection;
 											   
 											   _callbackURLs.DLR = connection.callbackURLs.DLR;
 											   _callbackURLs.MO = connection.callbackURLs.MO;
@@ -276,6 +275,8 @@
 											   _systemID = connection.systemID;
 											   _label = connection.label;
 											   _description = connection.description;
+											   
+											   _connectionModel = connection;
 											   
 											   block(nil);
 										   }
@@ -358,7 +359,7 @@
 	__block BSMessage *msg = message;
 	[[BSSMSService sharedService] sendMessage:message usingConnection:_connectionModel withCompletionBlock:^(BSMessage *mesage, NSArray *errors) {
 		
-		if (errors && errors.count == 0) {
+		if (!errors || errors.count == 0) {
 			block([[BSMessage alloc] initMessageWithID:[message messageID] andErrors:[message errors] forMessage:msg], nil);
 		}
 		else {
@@ -511,7 +512,12 @@
 {
 	[[BSSMSService sharedService] estimateCostForMessages:messages usingConnection:self withCompletionBlock:^(NSArray *response, NSArray *errors) {
 		
-		block(response, errors);
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(response, nil);
+		}
 	}];
 }
 

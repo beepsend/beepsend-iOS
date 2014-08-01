@@ -51,11 +51,11 @@
 }
 
 - (NSString *)name {
-	return _currentWallet ? _currentWallet.name : _name;
+	return _name;
 }
 
 - (NSNumber *)minimumBalanceForNotification {
-	return _currentWallet ? _currentWallet.minimumBalanceForNotification : _minimumBalanceForNotification;
+	return  _minimumBalanceForNotification;
 }
 
 #pragma mark - Initialization
@@ -114,9 +114,12 @@
 
 #pragma mark - Public methods
 
-- (void)updateWallet
+- (void)updateWalletOnCompletion:(void (^)(BSWallet *, NSArray *))block
 {
-	if (!_currentWallet) {
+	if ([BSHelper isNilOrEmpty:_walletID]) {
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:@"Wallet can't be updated!"];
+		block(nil, @[error]);
+		
 		return;
 	}
 	
@@ -125,15 +128,21 @@
 									  notifyLimit:![_currentWallet.minimumBalanceForNotification isEqualToNumber:_minimumBalanceForNotification]?_minimumBalanceForNotification:nil
 							  withCompletionBlock:^(BSWallet *wallet, NSArray *errors) {
 								  
-								  _currentWallet = wallet;
-								  
-								  _name = _currentWallet.name;
-								  _minimumBalanceForNotification = _currentWallet.minimumBalanceForNotification;
-								  
+								  if (errors && errors.count > 0) {
+									  block(nil, errors);
+								  }
+								  else {
+									  _currentWallet = wallet;
+									  
+									  _name = _currentWallet.name;
+									  _minimumBalanceForNotification = _currentWallet.minimumBalanceForNotification;
+									  
+									  block(_currentWallet, nil);
+								  }
 							  }];
 }
 
-- (void)getTransactionLogForNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *log))block
+- (void)getTransactionLogForNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *log, NSArray *errors))block
 {
 	NSString *maxID = nil;
 	if (_log) {
@@ -146,11 +155,16 @@
 	
 	[[BSWalletService sharedService] getTransactionLogForWallet:self since:nil max:nextPage ? maxID : nil count:nextPage ? [NSNumber numberWithInteger:([_count integerValue]+1)] : _count withCompletionBlock:^(NSArray *log, NSArray *errors) {
 		
-		NSMutableArray *mArr = [NSMutableArray arrayWithArray:_log];
-		[mArr removeLastObject];
-		_log = [mArr arrayByAddingObjectsFromArray:log];
-		
-		block(_log);
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			NSMutableArray *mArr = [NSMutableArray arrayWithArray:_log];
+			[mArr removeLastObject];
+			_log = [mArr arrayByAddingObjectsFromArray:log];
+			
+			block(_log, nil);
+		}
 	}];
 }
 
@@ -167,38 +181,38 @@
 	_count = logCount;
 }
 
-- (void)transferFunds:(NSNumber *)funds toWallet:(BSWallet *)wallet
+- (void)transferFunds:(NSNumber *)funds toWallet:(BSWallet *)wallet onCompletion:(void (^)(BSTransfer *, NSArray *))block
 {
 	[[BSWalletService sharedService] transferFunds:funds fromWallet:self toWallet:wallet withCompletionBlock:^(BSTransfer *transfer, NSArray *errors) {
-		
+		block(transfer, errors);
 	}];
 }
 
-- (void)transferFunds:(NSNumber *)funds fromWallet:(BSWallet *)wallet
+- (void)transferFunds:(NSNumber *)funds fromWallet:(BSWallet *)wallet onCompletion:(void (^)(BSTransfer *, NSArray *))block
 {
 	[[BSWalletService sharedService] transferFunds:funds fromWallet:wallet toWallet:self withCompletionBlock:^(BSTransfer *transfer, NSArray *errors) {
-		
+		block(transfer, errors);
 	}];
 }
 
-- (void)getEmailsOnCompletion:(void(^)(NSArray *emails))block
+- (void)getEmailsOnCompletion:(void(^)(NSArray *emails, NSArray *errors))block
 {
 	[[BSWalletService sharedService] getEmailsForWallet:self withCompletionBlock:^(NSArray *emails, NSArray *errors) {
-		block(emails);
+		block(emails, errors);
 	}];
 }
 
-- (void)addEmail:(NSString *)email
+- (void)addEmail:(NSString *)email onCompletion:(void (^)(BSEmail *email, NSArray *errors))block
 {
 	[[BSWalletService sharedService] addEmail:email toWallet:self withCompletionBlock:^(BSEmail *email, NSArray *errors) {
-		
+		block(email, errors);
 	}];
 }
 
-- (void)removeEmail:(BSEmail *)email
+- (void)removeEmail:(BSEmail *)email onCompletion:(void (^)(BOOL success, NSArray *errors))block
 {
 	[[BSWalletService sharedService] deleteEmailInWallet:self email:email withCompletionBlock:^(BOOL success, NSArray *errors) {
-		
+		block(success, errors);
 	}];
 }
 

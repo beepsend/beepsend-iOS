@@ -44,7 +44,28 @@
 			 verifiedTerms:(NSNumber *)uVerifiedTerms
 	   withCompletionBlock:(void(^)(BSUser *user, NSArray *errors))block
 {
-	BSUser *userModel = [[BSAPCUser classFromDict:@{@"id":@4,@"name":uName,@"email":@"beep@beepsend.com",@"phone":uPhone,@"customer":@"Beepsend AB",@"api_token":@"abc123",@"default_connection":@{@"id":[NSNumber numberWithInteger:[uConnection.connectionID integerValue]],@"label":uConnection.label,@"system_id":uConnection.systemID,@"type":[NSNumber numberWithInteger:uConnection.type]},@"user_types":@[@{@"id":@1,@"name":@"Technical Contact"}],@"max_level":@2,@"verified":@{@"email":@YES,@"phone":@NO,@"terms":uVerifiedTerms}}] convertToModel];
+	BSUser *userModel = [[BSAPCUser classFromDict:
+  @{
+	@"id":@4,
+	@"name":uName,
+	@"email":@"beep@beepsend.com",
+	@"phone":uPhone,
+	@"customer":@"Beepsend AB",
+	@"api_token":@"abc123",
+	@"default_connection":@{
+			@"id":[NSNumber numberWithInteger:[uConnection.connectionID integerValue]],
+			@"label":uConnection.label,
+			@"system_id":uConnection.systemID,
+			@"type":[NSNumber numberWithInteger:uConnection.type]},
+	@"user_types":@[
+  @{@"id":@1,
+	@"name":@"Technical Contact"}
+  ],
+	@"max_level":@2,
+	@"verified":@{
+			@"email":@YES,
+			@"phone":@NO,
+			@"terms":@YES}}] convertToModel];
 	block(userModel, nil);
 }
 

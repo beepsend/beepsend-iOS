@@ -17,6 +17,11 @@
 
 @property (nonatomic, strong) BSUser *user;
 @property (nonatomic, strong) BSConnection *connection;
+@property (nonatomic, strong) BSWallet *wallet1;
+@property (nonatomic, strong) BSWallet *wallet2;
+
+@property (nonatomic, strong) BSContact *contact;
+@property (nonatomic, strong) BSGroup *group;
 
 @end
 
@@ -29,6 +34,22 @@
 	
 	_user = [BSUser currentUser];
 	_connection = [BSConnection currentConnection];
+	
+	NSArray *wallets = [_user getAvailableWallets];
+	_wallet1 = wallets[0];
+	_wallet2 = wallets[1];
+	
+	_contact = [[BSContact alloc] initContactWithID:@"123" firstName:@"First" lastName:@"Last" phoneNumber:@"123456789000" group:nil errors:nil];
+	[_contact saveContactOnCompletion:^(BSContact *contact, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"contactsave"];
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"contactsave"];
+	
+	_group = [[BSGroup alloc] initGroupWithID:@"1234" name:@"Group name" contacts:@0];
+	[_group saveGroupOnCompletion:^(BSGroup *group, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"groupsave"];
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"groupsave"];
 }
 
 - (void)tearDown
@@ -288,6 +309,14 @@
 				BSDLog(@"\nWallet connections: %@", wallet.connections);
 				
 				BSDLog(@"\n------------------------\n");
+			}
+			
+			if (wallets.count >= 2) {
+				_wallet1 = wallets[0];
+				_wallet2 = wallets[1];
+			}
+			else if (wallets.count == 1) {
+				_wallet1 = wallets[0];
 			}
 		}
 		else {
@@ -900,7 +929,7 @@
 				if (connection.type == BSConnectionTypeSMS) {
 					
 					[connection validateSMS:sms onCompletion:^(BSMessage *message, NSArray *errors) {
-						[[BSTestSemaphor sharedInstance] waitForKey:@"testValidateMessage"];
+						[[BSTestSemaphor sharedInstance] lift:@"testValidateMessage"];
 						
 						NSAssert(message!=nil, @"Message not sent!");
 						
@@ -1118,8 +1147,7 @@
 				if (connection.type == BSConnectionTypeSMS) {
 					
 					[connection estimateSMSCostForMessages:@[sms] onCompletion:^(NSArray *cost, NSArray *errors) {
-						
-						[[BSTestSemaphor sharedInstance] waitForKey:@"testEstimateMessageCost"];
+						[[BSTestSemaphor sharedInstance] lift:@"testEstimateMessageCost"];
 						
 						NSAssert(cost!=nil, @"Message cost not fetched!");
 						
@@ -1161,9 +1189,6 @@
 	[[BSTestSemaphor sharedInstance] waitForKey:@"testGetAllConnectionsESTIMATE"];
 }
 
-//[[BSTestSemaphor sharedInstance] lift:@"key"];
-//[[BSTestSemaphor sharedInstance] waitForKey:@"key"];
-
 - (void)testImmediateHLR
 {
 	[_user getAvailableConnectionsOnCompletion:^(NSArray *connections, NSArray *errors) {
@@ -1178,7 +1203,7 @@
 				if (connection.type == BSConnectionTypeHLR) {
 					
 					[connection immediateHLRForNumber:@"123456789012" onCompletion:^(BSHLR *hlr, NSArray *errors) {
-						[[BSTestSemaphor sharedInstance] waitForKey:@"testImmediateHLR"];
+						[[BSTestSemaphor sharedInstance] lift:@"testImmediateHLR"];
 						
 						NSAssert(hlr!=nil, @"HLR not performed!");
 						
@@ -1233,7 +1258,7 @@
 					
 					[connection validateHLRForNumber:@"123456789012" onCompletion:^(BSHLR *hlr, NSArray *errors) {
 						
-						[[BSTestSemaphor sharedInstance] waitForKey:@"testValidateHLR"];
+						[[BSTestSemaphor sharedInstance] lift:@"testValidateHLR"];
 						
 						NSAssert(hlr!=nil, @"HLR not performed!");
 						
@@ -1275,99 +1300,587 @@
 
 - (void)testConnectionAnalyticSummary
 {
-//	- (void)getAnalyticsSummaryFromDate:(NSDate *)startDate toDate:(NSDate *)endDate withCompletionBlock:(void(^)(NSArray *statistics, NSArray *errors))block;
+	[_connection getAnalyticsSummaryFromDate:[NSDate date] toDate:[NSDate date] withCompletionBlock:^(NSArray *statistics, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testConnectionAnalyticSummary"];
+		
+		NSAssert(statistics!=nil, @"Statistic not fetched!");
+		
+		if (!errors || errors.count == 0) {
+			
+			for (BSAccumulatedStatistics *acStat in statistics) {
+				
+				BSDLog(@"\nAccumulated statistics account: %@", acStat.account);
+				BSDLog(@"\nAccumulated statistics count: %@", acStat.count);
+				BSDLog(@"\nAccumulated statistics price: %@", acStat.price);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testConnectionAnalyticSummary"];
 }
 
 - (void)testConnectionNetworkDetails
 {
-//	- (void)getNetworkDetailsFromDate:(NSDate *)startDate toDate:(NSDate *)endDate mccmnc:(BSMCCMNC *)mccmnc withCompletionBlock:(void(^)(NSArray *networkDetails, NSArray *errors))block;
+	[_connection getNetworkDetailsFromDate:[NSDate date] toDate:[NSDate date] mccmnc:nil withCompletionBlock:^(NSArray *networkDetails, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testConnectionNetworkDetails"];
+		
+		NSAssert(networkDetails!=nil, @"Network details not fetched!");
+		
+		if (!errors || errors.count == 0) {
+			
+			for (BSNetworkDetails *nDetails in networkDetails) {
+				
+				BSDLog(@"\nNetwork details MCC MNC: MCC: %@; MNC: %@;", nDetails.mccmnc.mcc, nDetails.mccmnc.mnc);
+				BSDLog(@"\nNetwork details statistic: Delivered: %@; Incoming: %@; Expired: %@; FailedNoError: %@; Rejected: %@; Failed: %@; InProcess: %@;", nDetails.statistics.deliveredMessages, nDetails.statistics.incomingMessagesFromOperator, nDetails.statistics.expiredMessages, nDetails.statistics.failedMessagesWithoutError, nDetails.statistics.rejectedMessagesByOperator, nDetails.statistics.failedMessagesWithError, nDetails.statistics.messagesInProcessOfSending);
+				BSDLog(@"\nNetwork details total: %@", nDetails.total);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testConnectionNetworkDetails"];
 }
 
 - (void)testGetDeliveryStatistics
 {
-//	- (void)getDeliveryStatisticsWithCompletionBlock:(void(^)(NSArray *statistics, NSArray *errors))block;
+	[_connection getPreviousBatchesOnCompletion:^(NSArray *batches, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testGetBatchesDeliveryStatistics"];
+		
+		NSAssert(batches!=nil, @"Batches not fetched!");
+		
+		if (!errors || errors.count == 0) {
+			
+			for (BSBatch *batch in batches) {
+				
+				[batch getDeliveryStatisticsWithCompletionBlock:^(NSArray *statistics, NSArray *errors) {
+					[[BSTestSemaphor sharedInstance] lift:@"testGetDeliveryStatistics"];
+					
+					NSAssert(statistics!=nil, @"Delivery statistics not fetched!");
+					
+					if (!errors || errors.count == 0) {
+						
+						for (BSAnalyticsBatch *analytic in statistics) {
+							
+							BSDLog(@"\nAnalytic batch ID: %@", analytic.batchID);
+							BSDLog(@"\nAnalytic batch label: %@", analytic.label);
+							BSDLog(@"\nAnalytic batch total: %@", analytic.total);
+							BSDLog(@"\nAnalytic batch detail statistic: Delivered: %@; Incoming: %@; Expired: %@; FailedNoError: %@; Rejected: %@; Failed: %@; InProcess: %@;", analytic.statistic.deliveredMessages, analytic.statistic.incomingMessagesFromOperator, analytic.statistic.expiredMessages, analytic.statistic.failedMessagesWithoutError, analytic.statistic.rejectedMessagesByOperator, analytic.statistic.failedMessagesWithError, analytic.statistic.messagesInProcessOfSending);
+							
+							BSDLog(@"\n------------------------\n");
+							
+						}
+					}
+					else {
+						
+						for (BSError *error in errors) {
+							
+							BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+							
+							BSDLog(@"\n------------------------\n");
+						}
+					}
+				}];
+				[[BSTestSemaphor sharedInstance] waitForKey:@"testGetDeliveryStatistics"];
+			}
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testGetBatchesDeliveryStatistics"];
 }
 
 - (void)testUpdateWallet
 {
-//	- (void)updateWallet;
+	NSAssert(_wallet1!=nil, @"Wallet not set");
+	
+	_wallet1.name = @"New wallet name";
+	_wallet1.minimumBalanceForNotification = @3;
+	
+	[_wallet1 updateWalletOnCompletion:^(BSWallet *wallet, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testUpdateWallet"];
+		
+		NSAssert(wallet!=nil, @"Wallet not updated");
+		
+		if (!errors || errors.count == 0) {
+
+			BSDLog(@"\nWallet ID: %@", wallet.walletID);
+			BSDLog(@"\nWallet name: %@", wallet.name);
+			BSDLog(@"\nWallet minimum balance: %@", wallet.minimumBalanceForNotification);
+			BSDLog(@"\nWallet balance: %@;", wallet.balance);
+			
+			BSDLog(@"\n------------------------\n");
+
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testUpdateWallet"];
 }
 
 - (void)testGetTransactionLog
 {
-//	- (void)getTransactionLogForNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *log))block;
-//	- (void)setMaximumLogCount:(NSNumber *)logCount;
+	NSAssert(_wallet1!=nil, @"Wallet not set");
+	
+	[_wallet1 getTransactionLogForNextPage:NO onCompletion:^(NSArray *log, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testGetTransactionLog"];
+		
+		NSAssert(log!=nil, @"Transaction log not fetched");
+		
+		if (!errors || errors.count == 0) {
+			
+			for (BSLog *tLog in log) {
+			
+				BSDLog(@"\nLog ID: %@", tLog.logID);
+				BSDLog(@"\nLog comment: %@", tLog.comment);
+				BSDLog(@"\nLog change: %@", tLog.change);
+				BSDLog(@"\nLog balance after transaction: %@;", tLog.balanceAfterTransaction);
+				BSDLog(@"\nLog transaction time: %@;", tLog.timeOfTransaction);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testGetTransactionLog"];
 }
 
 - (void)testTransferFunds
 {
-//	- (void)transferFunds:(NSNumber *)funds toWallet:(BSWallet *)wallet;
-//	- (void)transferFunds:(NSNumber *)funds fromWallet:(BSWallet *)wallet;
+	NSAssert(_wallet1!=nil, @"Wallet 1 not set");
+	NSAssert(_wallet2!=nil, @"Wallet 2 not set");
+	
+	[_wallet1 transferFunds:@10 fromWallet:_wallet2 onCompletion:^(BSTransfer *transfer, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testTransferFunds"];
+		
+		NSAssert(transfer!=nil, @"Transfer failed");
+		
+		if (!errors || errors.count == 0) {
+
+			BSDLog(@"\nSource wallet: ID: %@; Name: %@; Balance: %@;", transfer.source.walletID, transfer.source.name, transfer.source.balance);
+			BSDLog(@"\nTarget wallet: ID: %@; Name: %@; Balance: %@;", transfer.target.walletID, transfer.target.name, transfer.target.balance);
+			BSDLog(@"\nAmount: %@", transfer.amount);
+			
+			BSDLog(@"\n------------------------\n");
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testTransferFunds"];
 }
 
 - (void)testGetEmails
 {
-//	- (void)getEmailsOnCompletion:(void(^)(NSArray *emails))block;
+	NSAssert(_wallet1!=nil, @"Wallet 1 not set");
+	
+	[_wallet1 getEmailsOnCompletion:^(NSArray *emails, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testGetEmails"];
+		
+		NSAssert(emails!=nil, @"Emails failed to fetch");
+		
+		if (!errors || errors.count == 0) {
+			
+			for (BSEmail *email in emails) {
+				
+				BSDLog(@"\nEmail ID: %@", email.emailID);
+				BSDLog(@"\nEmail address: %@", email.address);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testGetEmails"];
 }
 
 - (void)testAddEmail
 {
-//	- (void)addEmail:(NSString *)email;
+	NSAssert(_wallet1!=nil, @"Wallet 1 not set");
+	
+	[_wallet1 addEmail:@"mail@email.com" onCompletion:^(BSEmail *email, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testAddEmail"];
+		
+		NSAssert(email!=nil, @"Email failed to add");
+		
+		if (!errors || errors.count == 0) {
+			
+			BSDLog(@"\nEmail ID: %@", email.emailID);
+			BSDLog(@"\nEmail address: %@", email.address);
+				
+			BSDLog(@"\n------------------------\n");
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testAddEmail"];
 }
 
 - (void)testRemoveEmail
 {
-//	- (void)removeEmail:(BSEmail *)email;
+	NSAssert(_wallet1!=nil, @"Wallet 1 not set");
+	
+	[_wallet1 addEmail:@"mail@email.com" onCompletion:^(BSEmail *email, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testAddEmailRemove"];
+		
+		NSAssert(email!=nil, @"Email failed to add");
+		
+		if (!errors || errors.count == 0) {
+			
+			[_wallet1 removeEmail:email onCompletion:^(BOOL success, NSArray *errors) {
+				[[BSTestSemaphor sharedInstance] lift:@"testRemoveEmail"];
+				
+				if (errors && errors.count > 0) {
+					
+					for (BSError *error in errors) {
+						
+						BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+						
+						BSDLog(@"\n------------------------\n");
+					}
+				}
+			}];
+			[[BSTestSemaphor sharedInstance] waitForKey:@"testRemoveEmail"];
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+		
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testAddEmailRemove"];
 }
 
 - (void)testSaveContact
 {
-	//	- (void)saveContact;
+	[_contact saveContactOnCompletion:^(BSContact *contact, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testSaveContact"];
+		
+		NSAssert(contact!=nil, @"Contact not saved!");
+		
+		if (!errors || errors.count == 0) {
+			
+			
+			if (contact.errors && contact.errors.count > 0) {
+				
+				for (BSError *error in contact.errors) {
+					
+					BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+					
+					BSDLog(@"\n------------------------\n");
+				}
+			}
+			else {
+				BSDLog(@"\nContact ID: %@", contact.contactID);
+				BSDLog(@"\nContact first name: %@", contact.firstName);
+				BSDLog(@"\nContact last name: %@", contact.lastName);
+				BSDLog(@"\nContact phone number: %@", contact.phoneNumber);
+				BSDLog(@"\nContact group: %@", contact.group.name);
+				
+				BSDLog(@"\n------------------------\n");
+				
+				_contact = contact;
+			}
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testSaveContact"];
 }
 
 - (void)testUpdateContact
 {
-//	- (void)updateContact;
-}
-
-- (void)testRemoveContact
-{
-//	- (void)removeContact;
+	NSAssert(_contact!=nil, @"Contact not set");
+	
+	_contact.firstName = @"Contact first name";
+	_contact.lastName = @"Contact last name";
+	
+	[_contact updateContactOnCompletion:^(BSContact *contact, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testUpdateContact"];
+		
+		NSAssert(contact!=nil, @"Contact not updated!");
+		
+		if (!errors || errors.count == 0) {
+			
+			
+			if (contact.errors && contact.errors.count > 0) {
+				
+				for (BSError *error in contact.errors) {
+					
+					BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+					
+					BSDLog(@"\n------------------------\n");
+				}
+			}
+			else {
+				BSDLog(@"\nContact ID: %@", contact.contactID);
+				BSDLog(@"\nContact first name: %@", contact.firstName);
+				BSDLog(@"\nContact last name: %@", contact.lastName);
+				BSDLog(@"\nContact phone number: %@", contact.phoneNumber);
+				BSDLog(@"\nContact group: %@", contact.group.name);
+				
+				BSDLog(@"\n------------------------\n");
+				
+				_contact = contact;
+			}
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testUpdateContact"];
 }
 
 - (void)testSaveGroup
 {
-//	- (void)saveGroup;
+	[_group saveGroupOnCompletion:^(BSGroup *group, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testSaveGroup"];
+		
+		NSAssert(group!=nil, @"Group not saved!");
+		
+		if (!errors || errors.count == 0) {
+			
+			BSDLog(@"\nGroup ID: %@", group.groupID);
+			BSDLog(@"\nGroup name: %@", group.name);
+			BSDLog(@"\nGroup contact count: %@", group.contactsCount);
+				
+			BSDLog(@"\n------------------------\n");
+				
+			_group = group;
+
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testSaveGroup"];
 }
 
 - (void)testUpdateGroup
 {
-//	- (void)updateGroup;
-}
-
-- (void)testRemoveGroup
-{
-//	- (void)removeGroup;
+	NSAssert(_group!=nil, @"Group not set");
+	
+	_group.name = @"Group name new";
+	
+	[_group updateGroupOnCompletion:^(BSGroup *group, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testUpdateGroup"];
+		
+		NSAssert(group!=nil, @"Group not updated!");
+		
+		if (!errors || errors.count == 0) {
+			
+			BSDLog(@"\nGroup ID: %@", group.groupID);
+			BSDLog(@"\nGroup name: %@", group.name);
+			BSDLog(@"\nGroup contact count: %@", group.contactsCount);
+			
+			BSDLog(@"\n------------------------\n");
+			
+			_group = group;
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testUpdateGroup"];
 }
 
 - (void)testAddContactToGroup
 {
-//	- (void)addContact:(BSContact *)contact;
-}
-
-- (void)testAddContactsToGroup
-{
-//	- (void)addContacts:(NSArray *)contacts;
+	NSAssert(_contact!=nil, @"Contact not set");
+	NSAssert(_group!=nil, @"Contact not set");
+	
+	[_group addContact:_contact onCompletion:^(BSContact *contact, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testAddContactToGroup"];
+		
+		NSAssert(contact!=nil, @"Contact not added to group!");
+		
+		if (!errors || errors.count == 0) {
+			
+			if (contact.errors && contact.errors.count > 0) {
+				
+				for (BSError *error in contact.errors) {
+					
+					BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+					
+					BSDLog(@"\n------------------------\n");
+				}
+			}
+			else {
+				BSDLog(@"\nContact ID: %@", contact.contactID);
+				BSDLog(@"\nContact first name: %@", contact.firstName);
+				BSDLog(@"\nContact last name: %@", contact.lastName);
+				BSDLog(@"\nContact phone number: %@", contact.phoneNumber);
+				BSDLog(@"\nContact group: %@", contact.group.name);
+				
+				BSDLog(@"\n------------------------\n");
+				
+				_contact = contact;
+			}
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testAddContactToGroup"];
 }
 
 - (void)testRemoveContactFromGroup
 {
-//	- (void)removeContact:(BSContact *)contact;
+	NSAssert(_contact!=nil, @"Contact not set");
+	NSAssert(_group!=nil, @"Contact not set");
+	
+	[_group removeContact:_contact onCompletion:^(BOOL success, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testRemoveContactFromGroup"];
+		
+		if (errors && errors.count > 0) {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testRemoveContactFromGroup"];
 }
 
-- (void)testRemoveContactsFromGroup
+- (void)testRemoveContact
 {
-//	- (void)removeContacts:(NSArray *)contacts;
+	NSAssert(_contact!=nil, @"Contact not set");
+	
+	[_contact removeContactOnCompletion:^(BOOL success, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testRemoveContact"];
+		
+		if (errors && errors.count > 0) {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testRemoveContact"];
+}
+
+- (void)testRemoveGroup
+{
+	NSAssert(_group!=nil, @"Group not set");
+	
+	[_group removeGroupOnCompletion:^(BOOL success, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testRemoveGroup"];
+		
+		if (errors && errors.count > 0) {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testRemoveGroup"];
 }
 
 @end

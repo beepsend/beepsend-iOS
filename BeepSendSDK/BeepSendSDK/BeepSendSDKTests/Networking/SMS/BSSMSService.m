@@ -38,7 +38,15 @@
 - (void)sendMessage:(BSMessage *)messageRequest usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSMessage *message, NSArray *errors))block
 {
 	NSMutableArray *mArr = [@[] mutableCopy];
-	for (BSAPMessage *msg in [BSAPMessage arrayOfObjectsFromArrayOfDictionaries:@[@{@"id":@"07595980013893439611559146736007518",@"batch":@{@"id":@3,@"label":@"My custom name for my batch"},@"to":messageRequest.recipient,@"from":messageRequest.sender,@"errors":[NSNull null]}]]) {
+	for (BSAPMessage *msg in [BSAPMessage arrayOfObjectsFromArrayOfDictionaries:@[
+  @{@"id":@"07595980013893439611559146736007518",
+	@"batch":@{
+			@"id":@3,
+			@"label":@"My custom name for my batch"
+			},
+	@"to":messageRequest.recipient,
+	@"from":messageRequest.sender,
+	@"errors":[NSNull null]}]]) {
 		[mArr addObject:[msg convertToModel]];
 	}
 	block(mArr[0], nil);
@@ -92,7 +100,7 @@
 - (void)estimateCostForMessages:(NSArray *)messageRequest usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *response, NSArray *errors))block
 {
 	NSMutableArray *mArr = [@[] mutableCopy];
-	for (BSAPEstimatedCost *msg in [BSAPEstimatedCost arrayOfObjectsFromArrayOfDictionaries:@[@{@"total_cost":@0.0032,@"to":@[@{@"46736007518":@0.0032}]},@{@"total_cost":@358.57,@"groups":@[@{@"11": @13.45},@{@"34":@345.12}]}]]) {
+	for (BSAPEstimatedCost *msg in [BSAPEstimatedCost arrayOfObjectsFromArrayOfDictionaries:@[@{@"total_cost":@0.0032,@"to":@{@"46736007518":@0.0032}},@{@"total_cost":@358.57,@"groups":@{@"11":@13.45,@"34":@345.12}}]]) {
 		[mArr addObject:[msg convertToModel]];
 	}
 	block([NSArray arrayWithArray:mArr], nil);

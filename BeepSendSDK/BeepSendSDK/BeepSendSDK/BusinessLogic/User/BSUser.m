@@ -72,15 +72,15 @@
 }
 
 - (NSString *)name {
-	return _currentUser ? _currentUser.name : _name;
+	return _name;
 }
 
 - (NSString *)phone {
-	return _currentUser ? _currentUser.phone : _phone;
+	return _phone;
 }
 
 - (NSString *)email {
-	return _currentUser ? _currentUser.email : _email;
+	return _email;
 }
 
 - (BSConnection *)defaultConnection {
@@ -250,8 +250,7 @@
 										  block(errors);
 									  }
 									  else {
-										  _currentUser = user;
-										  
+
 										  _name = user.name;
 										  _phone = user.phone;
 										  
@@ -260,6 +259,8 @@
 										  _userTypes = user.userTypes;
 										  
 										  _verified.termsVerified = user.verified.termsVerified;
+										  
+										  _currentUser = user;
 										  
 										  block(nil);
 									  }
@@ -483,8 +484,8 @@
 
 - (void)addMultipleContacts:(NSArray *)contacts onCompletion:(void(^)(NSArray *response, NSArray *errors))block
 {
-	[[BSContactsService sharedService] addContacts:contacts withCompletionBlock:^(NSArray *contacts, NSArray *errors) {
-		block(contacts, errors);
+	[[BSContactsService sharedService] addContacts:contacts withCompletionBlock:^(NSArray *cts, NSArray *errors) {
+		block(cts, errors);
 	}];
 }
 

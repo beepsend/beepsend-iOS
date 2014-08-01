@@ -153,7 +153,9 @@
 		{
 			NSString *groupName = [alertView textFieldAtIndex:0].text;
 			BSGroup *group = [[BSGroup alloc] initGroupWithName:groupName];
-			[group saveGroup];
+			[group saveGroupOnCompletion:^(BSGroup *group, NSArray *errors) {
+				
+			}];
 			
 			NSMutableArray *mArr = [_dataSourceGroups mutableCopy];
 			[mArr addObject:group];

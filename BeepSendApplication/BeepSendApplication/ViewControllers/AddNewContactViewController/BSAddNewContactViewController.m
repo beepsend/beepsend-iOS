@@ -141,7 +141,9 @@
 															 firstName:_textFieldFirstName.text
 															  lastName:_textFieldLastName.text
 																 group:_selectedGroup];
-	[contact saveContact];
+	[contact saveContactOnCompletion:^(BSContact *contact, NSArray *errors) {
+		
+	}];
 	
 }
 

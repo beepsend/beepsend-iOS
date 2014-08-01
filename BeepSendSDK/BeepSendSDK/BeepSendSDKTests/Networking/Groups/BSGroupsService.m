@@ -82,7 +82,17 @@
 		withCompletionBlock:(void(^)(NSArray *results, NSArray *errors))block
 {
 	NSMutableArray *mArr = [@[] mutableCopy];
-	for (BSAPContact *con in [BSAPContact arrayOfObjectsFromArrayOfDictionaries:@[@{@"id":@1,@"name":query,@"contacts_count":@27,@"processing":@1},@{@"id":@2,@"name":query,@"contacts_count":@2,@"processing":@0}]]) {
+	for (BSAPGroup *con in [BSAPGroup arrayOfObjectsFromArrayOfDictionaries:
+  @[@{
+		@"id":@1,
+		@"name":query,
+		@"contacts_count":@27,
+		@"processing":@1},@{
+		@"id":@2,
+		@"name":query,
+		@"contacts_count":@2,
+		@"processing":@0}]]) {
+		
 		  [mArr addObject:[con convertToModel]];
 	}
 	block([NSArray arrayWithArray:mArr], nil);

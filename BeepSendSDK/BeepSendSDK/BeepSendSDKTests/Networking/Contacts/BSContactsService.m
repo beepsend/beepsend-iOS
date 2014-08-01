@@ -56,11 +56,12 @@
 - (void)addContact:(BSContact *)contact
 withCompletionBlock:(void(^)(BSContact *contact, NSArray *errors))block
 {
-	block(contact, nil);
+	BSContact *co = [[BSContact alloc] initContactWithID:@"213" firstName:contact.firstName lastName:contact.lastName phoneNumber:contact.phoneNumber group:nil errors:nil];
+	block(co, nil);
 }
 
 - (void)addContacts:(NSArray *)contacts
-withCompletionBlock:(void(^)(NSArray *contacts, NSArray *errors))block
+withCompletionBlock:(void(^)(NSArray *cts, NSArray *errors))block
 {
 	block(contacts, nil);
 }
@@ -92,7 +93,27 @@ withCompletionBlock:(void(^)(NSArray *contacts, NSArray *errors))block
   withCompletionBlock:(void(^)(NSArray *results, NSArray *errors))block
 {
 	NSMutableArray *mArr = [@[] mutableCopy];
-	for (BSAPContact *con in [BSAPContact arrayOfObjectsFromArrayOfDictionaries:@[@{@"id":@22594418,@"msisdn":@"46736007518",@"name":query,@"group_id":group.groupID,@"group_name":group.name},@{@"id":@22594419,@"msisdn":@"46736007519",@"name":query,@"group_id":group.groupID,@"group_name":group.name},@{@"id":@22594420,@"msisdn":@"46736007520",@"name":query,@"group_id":group.groupID,@"group_name":group.name}]]) {
+	for (BSAPContact *con in [BSAPContact arrayOfObjectsFromArrayOfDictionaries:
+  @[
+  @{
+	  @"id":@22594418,
+	  @"msisdn":@"46736007518",
+	  @"name":query,
+	  @"group_id":[NSNull null],
+	  @"group_name":[NSNull null]
+	  },@{
+	  @"id":@22594419,
+	  @"msisdn":@"46736007519",
+	  @"name":query,
+	  @"group_id":[NSNull null],
+	  @"group_name":[NSNull null]
+	  },@{
+	  @"id":@22594420,
+	  @"msisdn":@"46736007520",
+	  @"name":query,
+	  @"group_id":[NSNull null],
+	  @"group_name":[NSNull null]
+	  }]]) {
 		[mArr addObject:[con convertToModel]];
 	}
 	block([NSArray arrayWithArray:mArr], nil);

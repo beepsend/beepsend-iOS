@@ -77,15 +77,21 @@
 									group:(BSGroup *)group;
 
 /*! If changes were made to contact use update method to save changes.
+ 
+ @param block - Returns contact on success or error list on fail
  */
-- (void)updateContact;
+- (void)updateContactOnCompletion:(void(^)(BSContact *contact, NSArray *errors))block;
 
 /*! When new contact is created use save method to save contact
+ 
+ @param block - Returns contact on success or error list on fail
  */
-- (void)saveContact;
+- (void)saveContactOnCompletion:(void(^)(BSContact *contact, NSArray *errors))block;
 
 /*! When contact needs to be removed use remove method to delete it
+ 
+ @param block - Returns true on success or error list on fail
  */
-- (void)removeContact;
+- (void)removeContactOnCompletion:(void(^)(BOOL success, NSArray *errors))block;
 
 @end

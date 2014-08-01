@@ -10,6 +10,7 @@
 
 #import "BSEmail.h"
 #import "BSTransfer.h"
+#import "BSLog.h"
 
 /*!
  @class BSWallet
@@ -89,7 +90,7 @@
 
 /*! If changes were made to wallet use update method to save changes.
  */
-- (void)updateWallet;
+- (void)updateWalletOnCompletion:(void(^)(BSWallet *wallet, NSArray *errors))block;
 
 /*! Fetch transaction log for wallet
  
@@ -97,7 +98,7 @@
  @param block - Block that will return array of logs
  */
 - (void)getTransactionLogForNextPage:(BOOL)nextPage
-						onCompletion:(void(^)(NSArray *log))block;
+						onCompletion:(void(^)(NSArray *log, NSArray *errors))block;
 
 /*! Set how many logs you wish to receive per page
  
@@ -109,34 +110,42 @@
  
  @param funds - How much money you wish to transfer
  @param wallet - Wallet to which you want to transfer money
+ @param block - Returns transfer or error list on failure
  */
 - (void)transferFunds:(NSNumber *)funds
-			 toWallet:(BSWallet *)wallet;
+			 toWallet:(BSWallet *)wallet
+		 onCompletion:(void(^)(BSTransfer *transfer, NSArray *errors))block;
 
 /*! Method for transfering funds to current wallet
  
  @param funds - How much money you wish to transfer
  @param wallet - Wallet from which you want to transfer money
+ @param block - Returns transfer or error list on failure
  */
 - (void)transferFunds:(NSNumber *)funds
-		   fromWallet:(BSWallet *)wallet;
+		   fromWallet:(BSWallet *)wallet
+		 onCompletion:(void(^)(BSTransfer *transfer, NSArray *errors))block;
 
 /*! Method for fetching emails associated with wallet
  
  @param block - Block that will return array of emails
  */
-- (void)getEmailsOnCompletion:(void(^)(NSArray *emails))block;
+- (void)getEmailsOnCompletion:(void(^)(NSArray *emails, NSArray *errors))block;
 
 /*! Adds new email to wallet email listing
  
  @param email - Email to add to wallet
+ @param block - Returns true is success or false and error list on failure
  */
-- (void)addEmail:(NSString *)email;
+- (void)addEmail:(NSString *)email
+	onCompletion:(void(^)(BSEmail *email, NSArray *errors))block;
 
 /*! Method for removing email from wallet email listing
  
  @param email - Email to remove from wallet
+ @param block - Returns true if success or false and error list on failure
  */
-- (void)removeEmail:(BSEmail *)email;
+- (void)removeEmail:(BSEmail *)email
+	   onCompletion:(void(^)(BOOL success, NSArray *errors))block;
 
 @end

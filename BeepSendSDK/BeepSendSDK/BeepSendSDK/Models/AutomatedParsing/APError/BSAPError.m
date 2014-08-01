@@ -43,6 +43,10 @@
 
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array
 {
+	if ([array isEqual:[NSNull null]]) {
+		return @[];
+	}
+	
 	NSMutableArray *results = [@[] mutableCopy];
 	for (id object in array) {
 		[results addObject:[BSAPError classFromDict:object]];
