@@ -65,7 +65,7 @@
 	
 	[self setupTitles];
 	
-	[[BSUser currentUser] getAllGroupsOnCompletion:^(NSArray *groups, id error) {
+	[[BSUser currentUser] getAllGroupsForNextPage:NO onCompletion:^(NSArray *groups, NSArray *errors) {
 		_dataSourceGroups = groups;
 		[_tableViewGroups reloadData];
 	}];
