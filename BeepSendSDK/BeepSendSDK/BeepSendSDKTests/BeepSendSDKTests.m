@@ -334,7 +334,7 @@
 
 - (void)testGetContacts
 {
-	[_user getAllContactsOnCompletion:^(NSArray *contacts, NSArray *errors) {
+	[_user getAllContactsfromGroup:nil sorted:nil forNextPage:NO onCompletion:^(NSArray *contacts, NSArray *errors) {
 		[[BSTestSemaphor sharedInstance] lift:@"testGetContacts"];
 		
 		NSAssert(contacts!=nil, @"Contacts not fetched!");
@@ -470,7 +470,7 @@
 
 - (void)testGetAllGroups
 {
-	[_user getAllGroupsOnCompletion:^(NSArray *groups, NSArray *errors) {
+	[_user getAllGroupsForNextPage:NO onCompletion:^(NSArray *groups, NSArray *errors) {
 		[[BSTestSemaphor sharedInstance] lift:@"testGetAllGroups"];
 		
 		NSAssert(groups!=nil, @"Groups not fetched!");
@@ -502,7 +502,7 @@
 
 - (void)testGetContactsInGroup
 {
-	[_user getAllGroupsOnCompletion:^(NSArray *groups, NSArray *errors) {
+	[_user getAllGroupsForNextPage:NO onCompletion:^(NSArray *groups, NSArray *errors) {
 		[[BSTestSemaphor sharedInstance] lift:@"testGetContactsInGroupGROUP"];
 		
 		NSAssert(groups!=nil, @"Groups not fetched!");
@@ -511,14 +511,14 @@
 			
 			for (BSGroup *group in groups) {
 				
-				[_user getContactsInGroup:group onCompletion:^(NSArray *results, NSArray *errors) {
+				[_user getAllContactsfromGroup:group sorted:nil forNextPage:NO onCompletion:^(NSArray *contacts, NSArray *errors) {
 					[[BSTestSemaphor sharedInstance] lift:@"testGetContactsInGroup"];
 					
-					NSAssert(results!=nil, @"Contacts not fetched!");
+					NSAssert(contacts!=nil, @"Contacts not fetched!");
 					
 					if (!errors || errors.count == 0) {
 						
-						for (BSContact *contact in results) {
+						for (BSContact *contact in contacts) {
 							
 							if (contact.errors && contact.errors.count > 0) {
 								
@@ -1619,7 +1619,9 @@
 
 - (void)testSaveContact
 {
-	[_contact saveContactOnCompletion:^(BSContact *contact, NSArray *errors) {
+	BSContact *c1 = [[BSContact alloc] initContactWithPhoneNumber:@"111111" firstName:@"C1" lastName:@"C1" group:nil];
+	
+	[c1 saveContactOnCompletion:^(BSContact *contact, NSArray *errors) {
 		[[BSTestSemaphor sharedInstance] lift:@"testSaveContact"];
 		
 		NSAssert(contact!=nil, @"Contact not saved!");
@@ -1712,7 +1714,9 @@
 
 - (void)testSaveGroup
 {
-	[_group saveGroupOnCompletion:^(BSGroup *group, NSArray *errors) {
+	BSGroup *g1 = [[BSGroup alloc] initGroupWithName:@"Group name"];
+	
+	[g1 saveGroupOnCompletion:^(BSGroup *group, NSArray *errors) {
 		[[BSTestSemaphor sharedInstance] lift:@"testSaveGroup"];
 		
 		NSAssert(group!=nil, @"Group not saved!");

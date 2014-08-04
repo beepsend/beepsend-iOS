@@ -47,7 +47,25 @@
 		  withCompletionBlock:(void(^)(NSArray *contacts, NSArray *errors))block
 {
 	NSMutableArray *mArr = [@[] mutableCopy];
-	for (BSAPContact *con in [BSAPContact arrayOfObjectsFromArrayOfDictionaries:@[@{@"id":@22594418,@"msisdn":@"46736007518",@"name":@"Phone",@"group_id":groupID,@"group_name":@"nameg"},@{@"id":@22594419,@"msisdn":@"46736007519",@"name":@"Phone",@"group_id":groupID,@"group_name":@"nameg"},@{@"id":@22594420,@"msisdn":@"46736007520",@"name":@"Phone",@"group_id":groupID,@"group_name":@"nameg"}]]) {
+	for (BSAPContact *con in [BSAPContact arrayOfObjectsFromArrayOfDictionaries:@[
+  @{
+	  @"id":@22594418,
+	  @"msisdn":@"46736007518",
+	  @"name":@"Phone",
+	  @"group_id":groupID?groupID:@"",
+	  @"group_name":@"nameg"
+	  },@{
+	  @"id":@22594419,
+	  @"msisdn":@"46736007519",
+	  @"name":@"Phone",
+	  @"group_id":groupID?groupID:@"",
+	  @"group_name":@"nameg"
+	  },@{
+	  @"id":@22594420,
+	  @"msisdn":@"46736007520",
+	  @"name":@"Phone",
+	  @"group_id":groupID?groupID:@"",
+	  @"group_name":@"nameg"}]]) {
 		[mArr addObject:[con convertToModel]];
 	}
 	block([NSArray arrayWithArray:mArr], nil);

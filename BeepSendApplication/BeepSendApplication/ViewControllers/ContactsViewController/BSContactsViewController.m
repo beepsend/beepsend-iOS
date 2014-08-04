@@ -69,7 +69,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 	
-	[[BSUser currentUser] getAllGroupsOnCompletion:^(NSArray *groups, NSArray *errors) {
+	[[BSUser currentUser] getAllGroupsForNextPage:NO onCompletion:^(NSArray *groups, NSArray *errors) {
 
 		NSMutableDictionary *mDict = [@{} mutableCopy];
 		for (BSGroup *g in groups) {
@@ -95,7 +95,7 @@
 	
 	[_tableViewContacts deselectRowAtIndexPath:[_tableViewContacts indexPathForSelectedRow] animated:YES];
 
-	[[BSUser currentUser] getAllContactsOnCompletion:^(NSArray *contacts, NSArray *errors) {
+	[[BSUser currentUser] getAllContactsfromGroup:nil sorted:nil forNextPage:NO onCompletion:^(NSArray *contacts, NSArray *errors) {
 		_dataSourceContacts = contacts;
 		[_tableViewContacts reloadData];
 	}];
