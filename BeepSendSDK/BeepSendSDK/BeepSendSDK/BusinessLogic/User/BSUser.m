@@ -386,6 +386,18 @@
 	}];
 }
 
+- (void)resetUserPasswordOnCompletion:(void(^)(BOOL success, NSArray *errors))block
+{
+	[[BSUserService sharedService] resetUserPasswordForEmail:_email withCompletionBlock:^(BOOL success, NSArray *errors) {
+		if (success) {
+			block(YES, nil);
+		}
+		else {
+			block(NO, nil);
+		}
+	}];
+}
+
 - (void)getAvailableConnectionsOnCompletion:(void(^)(NSArray *connections, NSArray *errors))block
 {
 	[[BSConnectionsService sharedService] getAllAvailableConnectsionOnCompletion:^(NSArray *connections, NSArray *errors) {

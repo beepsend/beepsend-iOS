@@ -162,6 +162,22 @@
 				  }];
 }
 
+- (void)resetUserPasswordForEmail:(NSString *)email withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration resetPassword]
+				withParameters:@{@"email" : email}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  block(YES, nil);
+					  }
+					  else {
+						  
+						  block(NO, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
+					  }
+				  }];
+}
+
 - (void)verifyEmailWithHash:(NSString *)hash withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration verifyEmailWithHash:hash]

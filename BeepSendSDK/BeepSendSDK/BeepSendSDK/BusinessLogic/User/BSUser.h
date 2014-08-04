@@ -193,6 +193,15 @@
 - (void)resetUserTokenWithPassword:(NSString *)password
 					  onCompletion:(void(^)(NSArray *errors))block;
 
+/*! If you have forgotten or in other ways lost control over your password, 
+	you can issue a reset. 
+	When doing so, Beepsend will send an email with a link to where you can get 
+	your new password.
+ 
+ @param block - Returns true on success or errors on failure
+ */
+- (void)resetUserPasswordOnCompletion:(void(^)(BOOL success, NSArray *errors))block;
+
 /*! Async method for retrieving all user connections
  
  @param block - Returns array of user connections or errors if any
