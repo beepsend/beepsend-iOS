@@ -22,6 +22,9 @@
 
 #import "BSConnection.h"
 
+#define kDefaultContactCount @200
+#define kDefaultGroupCount @200
+
 @interface BSUser ()
 
 @property (nonatomic, strong, readwrite) NSString *userID;
@@ -38,6 +41,9 @@
 
 @property (nonatomic, strong) NSArray *contacts;
 @property (nonatomic, strong) NSArray *groups;
+
+@property (nonatomic, strong) NSNumber *contactPageLimit;
+@property (nonatomic, strong) NSNumber *groupPageLimit;
 
 @end
 
@@ -161,6 +167,9 @@
 		_userTypes = uUserTypes;
 		_maxLevel = uMaxLevel;
 		_verified = uVerified;
+		
+		_contactPageLimit = kDefaultContactCount;
+		_groupPageLimit = kDefaultGroupCount;
 	}
 	return self;
 }
@@ -169,6 +178,9 @@
 {
 	if (self = [super initWithID:@"0" andTitle:@"User"]) {
 		_userID = uID;
+		
+		_contactPageLimit = kDefaultContactCount;
+		_groupPageLimit = kDefaultGroupCount;
 	}
 	return self;
 }
@@ -198,6 +210,9 @@
 			_verified = user.verified;
 			
 			_defaultConnection = [BSConnection currentConnection];
+			
+			_contactPageLimit = kDefaultContactCount;
+			_groupPageLimit = kDefaultGroupCount;
 			
 		}];
 //		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchUser"];
@@ -448,20 +463,51 @@
 	}
 }
 
-- (void)getAllContactsOnCompletion:(void(^)(NSArray *contacts, NSArray *errors))block
+- (void)getAllContactsfromGroup:(BSGroup *)group sorted:(NSString *)sort forNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *contacts, NSArray *errors))block
 {
+	NSString *maxID = nil;
 	if (_contacts) {
-		block(_contacts, nil);
+		maxID = [_contacts lastObject] ? [[_contacts lastObject] objectID] : nil;
 	}
 	
-	[[BSContactsService sharedService] getAllContactsWithCompletionBlock:^(NSArray *contacts, NSArray *errors) {
-			
-		if (!_contacts || _contacts.count!=contacts.count) {
-			block(contacts, errors);
-		}
-		
-		_contacts = contacts;
-	}];
+	if (!nextPage) {
+		_contacts = @[];
+	}
+	
+	[[BSContactsService sharedService] getAllContactsInGroup:group.groupID
+													 sinceID:nil
+													   maxID:nextPage ? maxID : nil
+												contactCount:_contactPageLimit
+													  offset:nil
+														sort:sort
+										 withCompletionBlock:^(NSArray *contacts, NSArray *errors) {
+											 
+											 if (errors && errors.count > 0) {
+												 block(nil, errors);
+											 }
+											 else {
+												 NSMutableArray *mArr = [NSMutableArray arrayWithArray:_contacts];
+												 if (!errors || errors.count==0) {
+													 [mArr removeLastObject];
+													 _contacts = [mArr arrayByAddingObjectsFromArray:contacts];
+												 }
+												 
+												 block(_contacts, nil);
+											 }
+										 }];
+}
+
+- (void)setContactCount:(NSNumber *)cCount
+{
+	if ([cCount integerValue] > 200) {
+		_contactPageLimit = @200;
+	}
+	
+	if ([cCount integerValue] < 1) {
+		_contactPageLimit = @1;
+	}
+	
+	_contactPageLimit = cCount;
 }
 
 - (NSArray *)getAllContacts
@@ -484,8 +530,8 @@
 
 - (void)addMultipleContacts:(NSArray *)contacts onCompletion:(void(^)(NSArray *response, NSArray *errors))block
 {
-	[[BSContactsService sharedService] addContacts:contacts withCompletionBlock:^(NSArray *cts, NSArray *errors) {
-		block(cts, errors);
+	[[BSContactsService sharedService] addContacts:contacts withCompletionBlock:^(NSArray *cts, NSArray *err) {
+		block(cts, err);
 	}];
 }
 
@@ -496,34 +542,48 @@
 	}];
 }
 
-- (void)getContactsInGroup:(BSGroup *)group onCompletion:(void(^)(NSArray *results, NSArray *errors))block
+- (void)getAllGroupsForNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *groups, NSArray *errors))block
 {
-	[[BSContactsService sharedService] getAllContactsInGroup:group.groupID
-													 sinceID:nil
-													   maxID:nil
-												contactCount:nil
-													  offset:nil
-														sort:nil
-										 withCompletionBlock:^(NSArray *contacts, NSArray *errors) {
-		
-											 block(contacts, errors);
-	}];
-}
-
-- (void)getAllGroupsOnCompletion:(void(^)(NSArray *groups, NSArray *errors))block
-{
+	NSString *maxID = nil;
 	if (_groups) {
-		block(_groups, nil);
+		maxID = [_groups lastObject] ? [[_groups lastObject] objectID] : nil;
 	}
 	
-	[[BSGroupsService sharedService] getAllGroupsWithCompletionBlock:^(NSArray *groups, NSArray *errors) {
-		
-		if (!_groups || _groups.count!=groups.count) {
-			block(groups, errors);
-		}
-		
-		_groups = groups;
-	}];
+	if (!nextPage) {
+		_groups = @[];
+	}
+	
+	[[BSGroupsService sharedService] getAllGroupsSinceID:nil
+												   maxID:nextPage ? maxID : nil
+												   count:_groupPageLimit
+									 withCompletionBlock:^(NSArray *groups, NSArray *errors) {
+										 
+										 if (errors && errors.count > 0) {
+											 block(nil, errors);
+										 }
+										 else {
+											 NSMutableArray *mArr = [NSMutableArray arrayWithArray:_groups];
+											 if (!errors || errors.count==0) {
+												 [mArr removeLastObject];
+												 _groups = [mArr arrayByAddingObjectsFromArray:groups];
+											 }
+											 
+											 block(_groups, nil);
+										 }
+									 }];
+}
+
+- (void)setGroupCount:(NSNumber *)gCount
+{
+	if ([gCount integerValue] > 200) {
+		_groupPageLimit = @200;
+	}
+	
+	if ([gCount integerValue] < 1) {
+		_groupPageLimit = @1;
+	}
+	
+	_groupPageLimit = gCount;
 }
 
 - (NSArray *)getAllGroups

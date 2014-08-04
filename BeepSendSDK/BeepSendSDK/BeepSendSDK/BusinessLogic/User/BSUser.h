@@ -225,13 +225,23 @@
 
 /*! Async method for retrieving user contacts
  
+ @param group - Group from where you want to fetch contacts, pass nil if want to search all groups
+ @param sort - "+" for ascending, "-" for descending, pass nil if no sorting is necessary
+ @param nextPage - Tells if contacts should be fetched for first page or next page in raw
  @param block - Returns array of user contacts
  */
-- (void)getAllContactsOnCompletion:(void(^)(NSArray *contacts, NSArray *errors))block;
+- (void)getAllContactsfromGroup:(BSGroup *)group sorted:(NSString *)sort forNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *contacts, NSArray *errors))block;
+
+/*! How many contacts to fetch per page
+ 
+ @param cCount - Maximum 200, default 200.
+ */
+- (void)setContactCount:(NSNumber *)cCount;
 
 /*! Sync method for retrieving user contacts
+	Maximum return count 200.
  
- @return Returns all contacts
+ @return Returns maximum 200 contacts
  */
 - (NSArray *)getAllContacts;
 
@@ -255,19 +265,17 @@
 						  limit:(NSNumber *)limit
 				   onCompletion:(void(^)(NSArray *results, NSArray *errors))block;
 
-/*! Async method for retrieving user contacts from one group
- 
- @param group - Group from which are contacts retrieved
- @param block - Returns array of user contacts
- */
-- (void)getContactsInGroup:(BSGroup *)group
-			  onCompletion:(void(^)(NSArray *results, NSArray *errors))block;
-
 /*! Async method for retrieving user groups
  
  @param block - Returns array of user groups
  */
-- (void)getAllGroupsOnCompletion:(void(^)(NSArray *groups, NSArray *errors))block;
+- (void)getAllGroupsForNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *groups, NSArray *errors))block;
+
+/*! How many groups to fetch per page
+ 
+ @param gCount - Maximum 200, default 200.
+ */
+- (void)setGroupCount:(NSNumber *)gCount;
 
 /*! Sync method for retrieving user groups
  

@@ -465,14 +465,18 @@
 													count:nextPage ? [NSNumber numberWithInteger:(_lookupPageLimit.integerValue+1)] : _lookupPageLimit
 									  withCompletionBlock:^(NSArray *lookupResponse, NSArray *errors) {
 										  
-										  
-										  NSMutableArray *mArr = [NSMutableArray arrayWithArray:_lookups];
-										  if (!errors || errors.count==0) {
-											  [mArr removeLastObject];
-											  _lookups = [mArr arrayByAddingObjectsFromArray:lookupResponse];
+										  if (errors && errors.count > 0) {
+											  block(nil, errors);
 										  }
-										  
-										  block(_lookups, errors);
+										  else {
+											  NSMutableArray *mArr = [NSMutableArray arrayWithArray:_lookups];
+											  if (!errors || errors.count==0) {
+												  [mArr removeLastObject];
+												  _lookups = [mArr arrayByAddingObjectsFromArray:lookupResponse];
+											  }
+											  
+											  block(_lookups, nil);
+										  }
 	}];
 }
 
