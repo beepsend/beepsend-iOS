@@ -116,13 +116,6 @@
 
 - (void)updateWalletOnCompletion:(void (^)(BSWallet *, NSArray *))block
 {
-	if ([BSHelper isNilOrEmpty:_walletID]) {
-		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:@"Wallet can't be updated!"];
-		block(nil, @[error]);
-		
-		return;
-	}
-	
 	[[BSWalletService sharedService] updateWallet:self
 										 withName:![_currentWallet.name isEqualToString:_name]?_name:nil
 									  notifyLimit:![_currentWallet.minimumBalanceForNotification isEqualToNumber:_minimumBalanceForNotification]?_minimumBalanceForNotification:nil
@@ -183,36 +176,113 @@
 
 - (void)transferFunds:(NSNumber *)funds toWallet:(BSWallet *)wallet onCompletion:(void (^)(BSTransfer *, NSArray *))block
 {
+	if (!wallet || [BSHelper isNilOrEmpty:wallet.walletID]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Target wallet missing!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	if ([funds doubleValue] <= 0.0) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Funds for transfer must be grater than 0.0!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
 	[[BSWalletService sharedService] transferFunds:funds fromWallet:self toWallet:wallet withCompletionBlock:^(BSTransfer *transfer, NSArray *errors) {
-		block(transfer, errors);
+		
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			block(transfer, nil);
+		}
 	}];
 }
 
 - (void)transferFunds:(NSNumber *)funds fromWallet:(BSWallet *)wallet onCompletion:(void (^)(BSTransfer *, NSArray *))block
 {
+	if (!wallet || [BSHelper isNilOrEmpty:wallet.walletID]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Source wallet missing!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	if ([funds doubleValue] <= 0.0) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Funds for transfer must be grater than 0.0!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
 	[[BSWalletService sharedService] transferFunds:funds fromWallet:wallet toWallet:self withCompletionBlock:^(BSTransfer *transfer, NSArray *errors) {
-		block(transfer, errors);
+		
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			block(transfer, nil);
+		}
 	}];
 }
 
 - (void)getEmailsOnCompletion:(void(^)(NSArray *emails, NSArray *errors))block
 {
 	[[BSWalletService sharedService] getEmailsForWallet:self withCompletionBlock:^(NSArray *emails, NSArray *errors) {
-		block(emails, errors);
+		
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			block(emails, nil);
+		}
 	}];
 }
 
 - (void)addEmail:(NSString *)email onCompletion:(void (^)(BSEmail *email, NSArray *errors))block
 {
+	if ([BSHelper isNilOrEmpty:email]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Enter email address!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
 	[[BSWalletService sharedService] addEmail:email toWallet:self withCompletionBlock:^(BSEmail *email, NSArray *errors) {
-		block(email, errors);
+		
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			block(email, nil);
+		}
 	}];
 }
 
 - (void)removeEmail:(BSEmail *)email onCompletion:(void (^)(BOOL success, NSArray *errors))block
 {
+	if (!email || [BSHelper isNilOrEmpty:email.emailID]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Enter valid email!", @"")];
+		block(NO, @[error]);
+		
+		return;
+	}
+	
 	[[BSWalletService sharedService] deleteEmailInWallet:self email:email withCompletionBlock:^(BOOL success, NSArray *errors) {
-		block(success, errors);
+		if (errors && errors.count > 0) {
+			block(NO, errors);
+		}
+		else {
+			block(YES, nil);
+		}
 	}];
 }
 

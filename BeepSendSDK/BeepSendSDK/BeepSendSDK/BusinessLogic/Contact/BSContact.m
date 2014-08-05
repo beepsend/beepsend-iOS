@@ -148,7 +148,7 @@
 										 _oldLastName = _lastName;
 										 _oldPhoneNumber = _phoneNumber;
 										 
-										 block(contact, errors);
+										 block(contact, nil);
 									 }
 	}];
 }

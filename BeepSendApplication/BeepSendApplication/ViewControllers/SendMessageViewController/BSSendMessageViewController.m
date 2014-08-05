@@ -190,10 +190,7 @@
 	[self.view addSubview:viewLoader];
 	[self.view addSubview:activityIndicator];
 	
-	[_connection estimateSMSCostForMessages:@[message] onCompletion:^(NSArray *cost, NSArray *errors) {
-		
-	}];
-	/*validateSMS:message onCompletion:^(BSMessage *message, NSArray *errors) {
+	[_connection validateSMS:message onCompletion:^(BSMessage *message, NSArray *errors) {
 		
 		[viewLoader removeFromSuperview];
 		[activityIndicator stopAnimating];
@@ -205,7 +202,7 @@
 		else {
 			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:NSLocalizedString(@"There was an error while validating message! Try again.", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
 		}
-	}];*/
+	}];
 	
 }
 

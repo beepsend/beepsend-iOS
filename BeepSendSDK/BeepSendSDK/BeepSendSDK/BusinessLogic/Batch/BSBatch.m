@@ -53,11 +53,21 @@
 - (void)getDeliveryStatisticsWithCompletionBlock:(void (^)(NSArray *statistisc, NSArray *errors))block
 {
 	if (!_batchID || [BSHelper isNilOrEmpty:_batchID]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Batch ID missing!", @"")];
+		block(nil, @[error]);
+		
 		return; //Batch id can't be nil
 	}
 	
 	[[BSAnalyticsService sharedService] getDeliveryStatisticsForBach:self withCompletionBlock:^(NSArray *statistics, NSArray *errors) {
-		block(statistics, errors);
+		
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			block(statistics, nil);
+		}
 	}];
 }
 

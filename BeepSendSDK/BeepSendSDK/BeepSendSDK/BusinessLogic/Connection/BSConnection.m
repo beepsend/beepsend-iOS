@@ -191,29 +191,30 @@
 		
 		[[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"API_TOKEN" : APIToken }];
 		
-		[[BSConnectionsService sharedService] getMeConnectionOnCompletion:^(BSConnection *connection, id error) {
-//			[[BSTestSemaphor sharedInstance] lift:@"FetchConnection"];
+		[[BSConnectionsService sharedService] getMeConnectionOnCompletion:^(BSConnection *connection, NSArray *errors) {
 			
-			_connectionModel = connection;
-			
-			_connectionID = connection.objectID;
-			_type = connection.type;
-			_label = connection.label;
-			_description = connection.description;
-			_systemID = connection.systemID;
-			
-			_users = connection.users;
-			
-			_wallet = connection.wallet;
-			_apiToken = connection.apiToken;
-			_callbackURLs = connection.callbackURLs;
-			_customer = connection.customer;
-			_TLVForMCCAndMNC = connection.TLVForMCCAndMNC;
-			_whitelist = connection.whitelist;
-			_password = connection.password;
-			_lookupPageLimit = kDefaultMessageCountForLookup;
+			if (!errors || errors.count == 0) {
+				_connectionModel = connection;
+				
+				_connectionID = connection.objectID;
+				_type = connection.type;
+				_label = connection.label;
+				_description = connection.description;
+				_systemID = connection.systemID;
+				
+				_users = connection.users;
+				
+				_wallet = connection.wallet;
+				_apiToken = connection.apiToken;
+				_callbackURLs = connection.callbackURLs;
+				_customer = connection.customer;
+				_TLVForMCCAndMNC = connection.TLVForMCCAndMNC;
+				_whitelist = connection.whitelist;
+				_password = connection.password;
+				
+				_lookupPageLimit = kDefaultMessageCountForLookup;
+			}
 		}];
-//		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchConnection"];
 	}
 	return self;
 }
@@ -233,14 +234,6 @@
 //After made changes it is necessary to call method updateConnection
 - (void)updateConnectionOnCompletion:(void(^)(NSArray *errors))block
 {
-	if (!_connectionModel) {
-		
-		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Connection can't be edited!", @"")];
-		block(@[error]);
-		
-		return; //Connection object can't be edited
-	}
-	
 	if ([_callbackURLs.DLR isEqualToString:_connectionModel.callbackURLs.DLR] &&
 		[_callbackURLs.MO isEqualToString:_connectionModel.callbackURLs.MO] &&
 		[_callbackURLs.method isEqualToString:_connectionModel.callbackURLs.method] &&
@@ -353,7 +346,43 @@
 - (NSInteger)sendSMS:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, NSArray *errors))block
 {
 	if (_type != BSConnectionTypeSMS) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Connection can't send sms messages!", @"")];
+		block(nil, @[error]);
+		
 		return 0; //This connection can't send SMS
+	}
+	
+	if (!message) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message must be specified!", @"")];
+		block(nil, @[error]);
+		
+		return 0;
+	}
+	
+	if ([BSHelper isNilOrEmpty:message.message]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message body can't be empty!", @"")];
+		block(nil, @[error]);
+		
+		return 0;
+	}
+	
+	if ([BSHelper isNilOrEmpty:message.recipient] || message.recipients.count==0 || message.groups.count==0) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message recipient must be specified!", @"")];
+		block(nil, @[error]);
+		
+		return 0;
+	}
+	
+	if ([BSHelper isNilOrEmpty:message.sender]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message sender must be specified!", @"")];
+		block(nil, @[error]);
+		
+		return 0;
 	}
 	
 	__block BSMessage *msg = message;
@@ -374,7 +403,54 @@
 - (NSInteger)sendMultipleSMS:(NSArray *)messages withCompletionBlock:(void(^)(NSArray *messages, NSArray *errors))block
 {
 	if (_type != BSConnectionTypeSMS) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Connection can't send sms messages!", @"")];
+		block(nil, @[error]);
+		
 		return 0; //This connection can't send SMS
+	}
+	
+	BOOL nonMessageObject = NO;
+	for (id object in messages) {
+		if ([object isKindOfClass:[BSMessage class]]) {
+			
+			if ([BSHelper isNilOrEmpty:[(BSMessage *)object message]]) {
+				
+				BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message body can't be empty!", @"")];
+				block(nil, @[error]);
+				
+				return 0;
+			}
+			
+			if ([BSHelper isNilOrEmpty:[(BSMessage *)object recipient]] ||
+				 [[(BSMessage *)object recipients] count]==0 ||
+				 [[(BSMessage *)object  groups] count]==0) {
+				
+				BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message recipient must be specified!", @"")];
+				block(nil, @[error]);
+				
+				return 0;
+			}
+			
+			if ([BSHelper isNilOrEmpty:[(BSMessage *)object sender]]) {
+				
+				BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message sender must be specified!", @"")];
+				block(nil, @[error]);
+				
+				return 0;
+			}
+		}
+		else {
+			nonMessageObject = YES;
+			break;
+		}
+	}
+	if (nonMessageObject) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Only message objects can be sent!", @"")];
+		block(nil, @[error]);
+		
+		return 0;
 	}
 	
 	__block NSArray *msgs = messages;
@@ -382,10 +458,12 @@
 		
 		if (array.count > 0) {
 			NSMutableArray *mArr = [@[] mutableCopy];
+			NSMutableArray *err = [@[] mutableCopy];
 			for (BSMessage *m in array) {
 				[mArr addObject:[[BSMessage alloc] initMessageWithID:m.messageID andErrors:m.errors forMessage:msgs[[array indexOfObject:m]]]];
+				[err addObjectsFromArray:m.errors];
 			}
-			block([NSArray arrayWithArray:msgs], errors);
+			block([NSArray arrayWithArray:msgs], err.count>0 ? [NSArray arrayWithArray:err] : nil);
 		}
 		else {
 			block(nil, errors);
@@ -421,12 +499,53 @@
 - (void)validateSMS:(BSMessage *)message onCompletion:(void(^)(BSMessage *message, NSArray *errors))block
 {
 	if (_type != BSConnectionTypeSMS) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Connection can't send sms messages!", @"")];
+		block(nil, @[error]);
+		
 		return; //This connection can't send SMS
+	}
+	
+	if (!message) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message must be specified!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	if ([BSHelper isNilOrEmpty:message.message]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message body can't be empty!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	if ([BSHelper isNilOrEmpty:message.recipient] && message.recipients.count==0 && message.groups.count==0) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message recipient must be specified!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	if ([BSHelper isNilOrEmpty:message.sender]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message sender must be specified!", @"")];
+		block(nil, @[error]);
+		
+		return;
 	}
 	
 	[[BSSMSService sharedService] validateSMSForMessage:message withCompletionBlock:^(BSMessage *message, NSArray *errors) {
 		
-		block(message, errors);
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			block(message, nil);
+		}
 	}];
 }
 
@@ -434,12 +553,30 @@
 - (void)getDetailsForSMS:(BSMessage *)message onCompletion:(void(^)(BSLookup *lookup, NSArray *errors))block
 {
 	if (_type != BSConnectionTypeSMS) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Connection can't send sms messages!", @"")];
+		block(nil, @[error]);
+		
 		return; //This connection can't send SMS
+	}
+	
+	if ([BSHelper isNilOrEmpty:message.messageID]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message ID missing!", @"")];
+		block(nil, @[error]);
+		
+		return;
 	}
 	
 	[[BSSMSService sharedService] lookupSMS:message withCompletionBlock:^(BSLookup *lookupResponse, NSArray *errors) {
 		
-		block(lookupResponse, errors);
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			block(lookupResponse, nil);
+		}
+		
 	}];
 }
 
@@ -496,9 +633,22 @@
 //Get batch details
 - (void)getDetailsForBatch:(BSBatch *)batch onCompletion:(void(^)(BSBatch *batch, NSArray *errors))block
 {
+	if (!batch || [BSHelper isNilOrEmpty:batch.batchID]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Batch missing!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
 	[[BSSMSService sharedService] getDetailsForBatch:batch.batchID withCompletionBlock:^(BSBatch *batch, NSArray *errors) {
 		
-		block(batch, errors);
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			block(batch, nil);
+		}
 	}];
 }
 
@@ -507,13 +657,69 @@
 {
 	[[BSSMSService sharedService] getPreviousBatchesWithCompletionBlock:^(NSArray *bathces, NSArray *errors) {
 		
-		block(bathces, errors);
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			block(bathces, nil);
+		}
 	}];
 }
 
 //Estimates message cost (not necessarily accurate)
 - (void)estimateSMSCostForMessages:(NSArray *)messages onCompletion:(void(^)(NSArray *cost, NSArray *errors))block
 {
+	if (_type != BSConnectionTypeSMS) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Connection can't send sms messages!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	BOOL nonMessageObject = NO;
+	for (id object in messages) {
+		if ([object isKindOfClass:[BSMessage class]]) {
+			
+			if ([BSHelper isNilOrEmpty:[(BSMessage *)object message]]) {
+				
+				BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message body can't be empty!", @"")];
+				block(nil, @[error]);
+				
+				return;
+			}
+			
+			if ([BSHelper isNilOrEmpty:[(BSMessage *)object recipient]] ||
+				[[(BSMessage *)object recipients] count]==0 ||
+				[[(BSMessage *)object  groups] count]==0) {
+				
+				BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message recipient must be specified!", @"")];
+				block(nil, @[error]);
+				
+				return;
+			}
+			
+			if ([BSHelper isNilOrEmpty:[(BSMessage *)object sender]]) {
+				
+				BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message sender must be specified!", @"")];
+				block(nil, @[error]);
+				
+				return;
+			}
+		}
+		else {
+			nonMessageObject = YES;
+			break;
+		}
+	}
+	if (nonMessageObject) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Only message objects can be sent!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
 	[[BSSMSService sharedService] estimateCostForMessages:messages usingConnection:self withCompletionBlock:^(NSArray *response, NSArray *errors) {
 		
 		if (errors && errors.count>0) {
@@ -529,43 +735,102 @@
 - (void)immediateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, NSArray *errors))block
 {
 	if (_type != BSConnectionTypeHLR) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Connection can't send HLR request!", @"")];
+		block(nil, @[error]);
+		
 		return; //This connection can't send HLR
+	}
+	
+	if ([BSHelper isNilOrEmpty:phoneNumber]) {
+	
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Phone number must be specified!", @"")];
+		block(nil, @[error]);
+		
+		return;
 	}
 	
 	[[BSHLRService sharedService] doImmediateHLRForNumber:phoneNumber withConnection:self withCompletionBlock:^(BSHLR *hlr, NSArray *errors) {
 		
-		block(hlr, errors);
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(hlr, nil);
+		}
 	}];
 }
 
 //Validate HLR for phone number
-- (void)validateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, NSArray *errors))black
+- (void)validateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, NSArray *errors))block
 {
 	if (_type != BSConnectionTypeHLR) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Connection can't send HLR request!", @"")];
+		block(nil, @[error]);
+		
 		return; //This connection can't send HLR
+	}
+	
+	if ([BSHelper isNilOrEmpty:phoneNumber]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Phone number must be specified!", @"")];
+		block(nil, @[error]);
+		
+		return;
 	}
 	
 	[[BSHLRService sharedService] validateHLRForNumber:phoneNumber withConnection:self withCompletionBlock:^(BSHLR *response, NSArray *errors) {
 		
-		black(response, errors);
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(response, nil);
+		}
 	}];
 }
 
 - (void)getAnalyticsSummaryFromDate:(NSDate *)startDate toDate:(NSDate *)endDate withCompletionBlock:(void(^)(NSArray *statistics, NSArray *errors))block
 {
+	if ((startDate!=nil && endDate!=nil) && [[startDate laterDate:endDate] isEqualToDate:startDate]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Start date must be before end date", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
 	[[BSAnalyticsService sharedService] getAnalyticsSummaryFromDate:startDate toDate:endDate usingConnection:self withCompletionBlock:^(NSArray *statistics, NSArray *errors) {
 		
-		block(statistics, errors);
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(statistics, nil);
+		}
 		
 	}];
 }
 
 - (void)getNetworkDetailsFromDate:(NSDate *)startDate toDate:(NSDate *)endDate mccmnc:(BSMCCMNC *)mccmnc withCompletionBlock:(void(^)(NSArray *networkDetails, NSArray *errors))block
 {
+	if ((startDate!=nil && endDate!=nil) && [[startDate laterDate:endDate] isEqualToDate:startDate]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Start date must be before end date", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
 	[[BSAnalyticsService sharedService] getNetworkDetailsFromDate:startDate toDate:endDate mccmnc:mccmnc usingConnection:self withCompletionBlock:^(NSArray *networkDetails, NSArray *errors) {
 		
-		block(networkDetails, errors);
-		
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(networkDetails, nil);
+		}
 	}];
 }
 

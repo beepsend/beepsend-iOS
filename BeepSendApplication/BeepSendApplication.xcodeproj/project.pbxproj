@@ -36,7 +36,7 @@
 		6EB741F4197E79AB00D3A7DA /* BSGroupSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB741F3197E79AB00D3A7DA /* BSGroupSelectionViewController.m */; };
 		6EB871EB19700C9D0006CE29 /* BSUserTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB871EA19700C9D0006CE29 /* BSUserTypeTableViewCell.m */; };
 		6EB871EE19700CC20006CE29 /* BSConnectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB871ED19700CC20006CE29 /* BSConnectionTableViewCell.m */; };
-		6EBC77DD194EE9BF00666099 /* libBeepSendSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBC77DA194EE98100666099 /* libBeepSendSDK.a */; };
+		6EBAD66C19910E87008A3FEE /* libBeepSendSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBAD64619910E87008A3FEE /* libBeepSendSDK.a */; };
 		6EBC77F1194EF60800666099 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBC77F0194EF60800666099 /* SystemConfiguration.framework */; };
 		6EBD2F56196D453400F89C52 /* BSSendMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD2F55196D453400F89C52 /* BSSendMessageView.m */; };
 		6EBD2F5A196D45FB00F89C52 /* BSSendMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD2F59196D45FB00F89C52 /* BSSendMessageViewController.m */; };
@@ -51,27 +51,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6E6537D819472BD700FC6349;
 			remoteInfo = BeepSendApplication;
-		};
-		6EBC77D9194EE98100666099 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6EBC77D4194EE98100666099 /* BeepSendSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6E653814194730EB00FC6349;
-			remoteInfo = BeepSendSDK;
-		};
-		6EBC77DB194EE98100666099 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6EBC77D4194EE98100666099 /* BeepSendSDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6E653824194730EB00FC6349;
-			remoteInfo = BeepSendSDKTests;
-		};
-		6EBC77DE194EE9EA00666099 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6EBC77D4194EE98100666099 /* BeepSendSDK.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6E653813194730EB00FC6349;
-			remoteInfo = BeepSendSDK;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -126,7 +105,42 @@
 		6EB871EA19700C9D0006CE29 /* BSUserTypeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSUserTypeTableViewCell.m; path = TableViewCells/TableViewCellUserType/BSUserTypeTableViewCell.m; sourceTree = "<group>"; };
 		6EB871EC19700CC20006CE29 /* BSConnectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSConnectionTableViewCell.h; path = TableViewCells/TableViewCellConnection/BSConnectionTableViewCell.h; sourceTree = "<group>"; };
 		6EB871ED19700CC20006CE29 /* BSConnectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSConnectionTableViewCell.m; path = TableViewCells/TableViewCellConnection/BSConnectionTableViewCell.m; sourceTree = "<group>"; };
-		6EBC77D4194EE98100666099 /* BeepSendSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BeepSendSDK.xcodeproj; path = ../BeepSendSDK/BeepSendSDK/BeepSendSDK.xcodeproj; sourceTree = "<group>"; };
+		6EBAD64619910E87008A3FEE /* libBeepSendSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBeepSendSDK.a; sourceTree = "<group>"; };
+		6EBAD64919910E87008A3FEE /* BeepSendSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeepSendSDK.h; sourceTree = "<group>"; };
+		6EBAD64A19910E87008A3FEE /* BSAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAccountManager.h; sourceTree = "<group>"; };
+		6EBAD64B19910E87008A3FEE /* BSAccumulatedStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAccumulatedStatistics.h; sourceTree = "<group>"; };
+		6EBAD64C19910E87008A3FEE /* BSAnalyticsBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAnalyticsBatch.h; sourceTree = "<group>"; };
+		6EBAD64D19910E87008A3FEE /* BSBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSBatch.h; sourceTree = "<group>"; };
+		6EBAD64E19910E87008A3FEE /* BSCallbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCallbacks.h; sourceTree = "<group>"; };
+		6EBAD64F19910E87008A3FEE /* BSConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSConnection.h; sourceTree = "<group>"; };
+		6EBAD65019910E87008A3FEE /* BSContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSContact.h; sourceTree = "<group>"; };
+		6EBAD65119910E87008A3FEE /* BSCountry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCountry.h; sourceTree = "<group>"; };
+		6EBAD65219910E87008A3FEE /* BSCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCustomer.h; sourceTree = "<group>"; };
+		6EBAD65319910E87008A3FEE /* BSDLRReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSDLRReport.h; sourceTree = "<group>"; };
+		6EBAD65419910E87008A3FEE /* BSEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSEmail.h; sourceTree = "<group>"; };
+		6EBAD65519910E87008A3FEE /* BSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSError.h; sourceTree = "<group>"; };
+		6EBAD65619910E87008A3FEE /* BSEstimateCost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSEstimateCost.h; sourceTree = "<group>"; };
+		6EBAD65719910E87008A3FEE /* BSGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSGroup.h; sourceTree = "<group>"; };
+		6EBAD65819910E87008A3FEE /* BSHLR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSHLR.h; sourceTree = "<group>"; };
+		6EBAD65919910E87008A3FEE /* BSHLRReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSHLRReport.h; sourceTree = "<group>"; };
+		6EBAD65A19910E87008A3FEE /* BSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSLog.h; sourceTree = "<group>"; };
+		6EBAD65B19910E87008A3FEE /* BSLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSLookup.h; sourceTree = "<group>"; };
+		6EBAD65C19910E87008A3FEE /* BSMCCMNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSMCCMNC.h; sourceTree = "<group>"; };
+		6EBAD65D19910E87008A3FEE /* BSMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSMessage.h; sourceTree = "<group>"; };
+		6EBAD65E19910E87008A3FEE /* BSNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSNetwork.h; sourceTree = "<group>"; };
+		6EBAD65F19910E87008A3FEE /* BSNetworkDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSNetworkDetails.h; sourceTree = "<group>"; };
+		6EBAD66019910E87008A3FEE /* BSPricelist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPricelist.h; sourceTree = "<group>"; };
+		6EBAD66119910E87008A3FEE /* BSPriceListDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPriceListDetails.h; sourceTree = "<group>"; };
+		6EBAD66219910E87008A3FEE /* BSPriceListSchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPriceListSchedule.h; sourceTree = "<group>"; };
+		6EBAD66319910E87008A3FEE /* BSRecipient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSRecipient.h; sourceTree = "<group>"; };
+		6EBAD66419910E87008A3FEE /* BSStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSStatistics.h; sourceTree = "<group>"; };
+		6EBAD66519910E87008A3FEE /* BSTimestamps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTimestamps.h; sourceTree = "<group>"; };
+		6EBAD66619910E87008A3FEE /* BSTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTransfer.h; sourceTree = "<group>"; };
+		6EBAD66719910E87008A3FEE /* BSUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSUser.h; sourceTree = "<group>"; };
+		6EBAD66819910E87008A3FEE /* BSUserType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSUserType.h; sourceTree = "<group>"; };
+		6EBAD66919910E87008A3FEE /* BSValueForNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSValueForNumber.h; sourceTree = "<group>"; };
+		6EBAD66A19910E87008A3FEE /* BSVerified.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSVerified.h; sourceTree = "<group>"; };
+		6EBAD66B19910E87008A3FEE /* BSWallet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSWallet.h; sourceTree = "<group>"; };
 		6EBC77F0194EF60800666099 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6EBD2F54196D453400F89C52 /* BSSendMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSSendMessageView.h; path = Views/SendMessageView/BSSendMessageView.h; sourceTree = "<group>"; };
 		6EBD2F55196D453400F89C52 /* BSSendMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSSendMessageView.m; path = Views/SendMessageView/BSSendMessageView.m; sourceTree = "<group>"; };
@@ -144,8 +158,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EBC77F1194EF60800666099 /* SystemConfiguration.framework in Frameworks */,
-				6EBC77DD194EE9BF00666099 /* libBeepSendSDK.a in Frameworks */,
 				6EB6446F194894DF004A1818 /* QuartzCore.framework in Frameworks */,
+				6EBAD66C19910E87008A3FEE /* libBeepSendSDK.a in Frameworks */,
 				6E6537DF19472BD700FC6349 /* CoreGraphics.framework in Frameworks */,
 				6E6537E119472BD700FC6349 /* UIKit.framework in Frameworks */,
 				6E6537DD19472BD700FC6349 /* Foundation.framework in Frameworks */,
@@ -187,7 +201,7 @@
 		6E6537D019472BD700FC6349 = {
 			isa = PBXGroup;
 			children = (
-				6EBC77D4194EE98100666099 /* BeepSendSDK.xcodeproj */,
+				6EBAD64519910E7A008A3FEE /* BeepSendSDK */,
 				6E6537E219472BD700FC6349 /* BeepSendApplication */,
 				6E6537FB19472BD700FC6349 /* BeepSendApplicationTests */,
 				6E6537DB19472BD700FC6349 /* Frameworks */,
@@ -454,13 +468,64 @@
 			name = TableViewCellConnection;
 			sourceTree = "<group>";
 		};
-		6EBC77D5194EE98100666099 /* Products */ = {
+		6EBAD64519910E7A008A3FEE /* BeepSendSDK */ = {
 			isa = PBXGroup;
 			children = (
-				6EBC77DA194EE98100666099 /* libBeepSendSDK.a */,
-				6EBC77DC194EE98100666099 /* BeepSendSDKTests.xctest */,
+				6EBAD64619910E87008A3FEE /* libBeepSendSDK.a */,
+				6EBAD64719910E87008A3FEE /* include */,
 			);
-			name = Products;
+			name = BeepSendSDK;
+			path = BeepSendApplication/BeepSendSDK;
+			sourceTree = "<group>";
+		};
+		6EBAD64719910E87008A3FEE /* include */ = {
+			isa = PBXGroup;
+			children = (
+				6EBAD64819910E87008A3FEE /* BeepSendSDK */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		6EBAD64819910E87008A3FEE /* BeepSendSDK */ = {
+			isa = PBXGroup;
+			children = (
+				6EBAD64919910E87008A3FEE /* BeepSendSDK.h */,
+				6EBAD64A19910E87008A3FEE /* BSAccountManager.h */,
+				6EBAD64B19910E87008A3FEE /* BSAccumulatedStatistics.h */,
+				6EBAD64C19910E87008A3FEE /* BSAnalyticsBatch.h */,
+				6EBAD64D19910E87008A3FEE /* BSBatch.h */,
+				6EBAD64E19910E87008A3FEE /* BSCallbacks.h */,
+				6EBAD64F19910E87008A3FEE /* BSConnection.h */,
+				6EBAD65019910E87008A3FEE /* BSContact.h */,
+				6EBAD65119910E87008A3FEE /* BSCountry.h */,
+				6EBAD65219910E87008A3FEE /* BSCustomer.h */,
+				6EBAD65319910E87008A3FEE /* BSDLRReport.h */,
+				6EBAD65419910E87008A3FEE /* BSEmail.h */,
+				6EBAD65519910E87008A3FEE /* BSError.h */,
+				6EBAD65619910E87008A3FEE /* BSEstimateCost.h */,
+				6EBAD65719910E87008A3FEE /* BSGroup.h */,
+				6EBAD65819910E87008A3FEE /* BSHLR.h */,
+				6EBAD65919910E87008A3FEE /* BSHLRReport.h */,
+				6EBAD65A19910E87008A3FEE /* BSLog.h */,
+				6EBAD65B19910E87008A3FEE /* BSLookup.h */,
+				6EBAD65C19910E87008A3FEE /* BSMCCMNC.h */,
+				6EBAD65D19910E87008A3FEE /* BSMessage.h */,
+				6EBAD65E19910E87008A3FEE /* BSNetwork.h */,
+				6EBAD65F19910E87008A3FEE /* BSNetworkDetails.h */,
+				6EBAD66019910E87008A3FEE /* BSPricelist.h */,
+				6EBAD66119910E87008A3FEE /* BSPriceListDetails.h */,
+				6EBAD66219910E87008A3FEE /* BSPriceListSchedule.h */,
+				6EBAD66319910E87008A3FEE /* BSRecipient.h */,
+				6EBAD66419910E87008A3FEE /* BSStatistics.h */,
+				6EBAD66519910E87008A3FEE /* BSTimestamps.h */,
+				6EBAD66619910E87008A3FEE /* BSTransfer.h */,
+				6EBAD66719910E87008A3FEE /* BSUser.h */,
+				6EBAD66819910E87008A3FEE /* BSUserType.h */,
+				6EBAD66919910E87008A3FEE /* BSValueForNumber.h */,
+				6EBAD66A19910E87008A3FEE /* BSVerified.h */,
+				6EBAD66B19910E87008A3FEE /* BSWallet.h */,
+			);
+			path = BeepSendSDK;
 			sourceTree = "<group>";
 		};
 		6EBD2F52196D450000F89C52 /* SendMessageView */ = {
@@ -514,7 +579,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6EBC77DF194EE9EA00666099 /* PBXTargetDependency */,
 			);
 			name = BeepSendApplication;
 			productName = BeepSendApplication;
@@ -564,12 +628,6 @@
 			mainGroup = 6E6537D019472BD700FC6349;
 			productRefGroup = 6E6537DA19472BD700FC6349 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 6EBC77D5194EE98100666099 /* Products */;
-					ProjectRef = 6EBC77D4194EE98100666099 /* BeepSendSDK.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				6E6537D819472BD700FC6349 /* BeepSendApplication */,
@@ -577,23 +635,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		6EBC77DA194EE98100666099 /* libBeepSendSDK.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libBeepSendSDK.a;
-			remoteRef = 6EBC77D9194EE98100666099 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6EBC77DC194EE98100666099 /* BeepSendSDKTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = BeepSendSDKTests.xctest;
-			remoteRef = 6EBC77DB194EE98100666099 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6E6537D719472BD700FC6349 /* Resources */ = {
@@ -660,11 +701,6 @@
 			isa = PBXTargetDependency;
 			target = 6E6537D819472BD700FC6349 /* BeepSendApplication */;
 			targetProxy = 6E6537F919472BD700FC6349 /* PBXContainerItemProxy */;
-		};
-		6EBC77DF194EE9EA00666099 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = BeepSendSDK;
-			targetProxy = 6EBC77DE194EE9EA00666099 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -774,7 +810,10 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "BeepSendApplication/BeepSendApplication-Info.plist";
-				LIBRARY_SEARCH_PATHS = "$(TARGET_BUILD_DIR)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(TARGET_BUILD_DIR)",
+					"$(PROJECT_DIR)/BeepSendApplication/BeepSendSDK",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-Objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -798,7 +837,10 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "BeepSendApplication/BeepSendApplication-Info.plist";
-				LIBRARY_SEARCH_PATHS = "$(TARGET_BUILD_DIR)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(TARGET_BUILD_DIR)",
+					"$(PROJECT_DIR)/BeepSendApplication/BeepSendSDK",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-Objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -895,7 +937,10 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "BeepSendApplication/BeepSendApplication-Info.plist";
-				LIBRARY_SEARCH_PATHS = "$(TARGET_BUILD_DIR)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(TARGET_BUILD_DIR)",
+					"$(PROJECT_DIR)/BeepSendApplication/BeepSendSDK",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-Objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";

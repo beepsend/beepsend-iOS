@@ -144,6 +144,14 @@
 		return; //Group already exists
 	}
 	
+	if ([BSHelper isNilOrEmpty:_name]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:@"Enter group name!"];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
 	[[BSGroupsService sharedService] addGroupNamed:_name
 							   withCompletionBlock:^(BSGroup *group, NSArray *errors) {
 		
@@ -184,11 +192,23 @@
 
 - (void)addContact:(BSContact *)contact onCompletion:(void (^)(BSContact *, NSArray *))block
 {
+	if (!contact) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:@"Contact missing!"];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
 	contact.group = self;
 	[contact updateContactOnCompletion:^(BSContact *contact, NSArray *errors) {
 		
-		block(contact, errors);
-		
+		if (!errors || errors.count==0) {
+			block(contact, nil);
+		}
+		else {
+			block(nil, errors);
+		}
 	}];
 	
 	_contactsCount = [NSNumber numberWithInteger:(_contactsCount.integerValue+1)];
@@ -196,8 +216,33 @@
 
 - (void)addContacts:(NSArray *)contacts onCompletion:(void (^)(NSArray *, NSArray *))block
 {
+	if (!contacts || contacts.count <= 0) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:@"Contacts missing!"];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	BOOL nonContactObject = NO;
+	for (id object in contacts) {
+		if (!([object isKindOfClass:[BSContact class]])) {
+			nonContactObject = YES;
+		}
+	}
+	if (nonContactObject) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:@"Only contact objects can be added!"];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
 	if (_processingContacts) {
-		block(nil,nil);
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:@"Processing contacts..."];
+		block(nil, @[error]);
+		
 		return;
 	}
 	
@@ -220,6 +265,7 @@
 			}
 			
 			if (contacts.count == _contactsToAdd.count+_errorCount) {
+				
 				block(_contactsToAdd, _errors);
 				
 				_processingContacts = NO;
@@ -232,6 +278,14 @@
 
 - (void)removeContact:(BSContact *)contact onCompletion:(void (^)(BOOL, NSArray *))block
 {
+	if (!contact || [contact.contactID isEqualToString:@"0"] || [contact.contactID isEqualToString:@"-1"]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:@"Contacts missing!"];
+		block(NO, @[error]);
+		
+		return;
+	}
+	
 	contact.group = nil;
 	[contact updateContactOnCompletion:^(BSContact *contact, NSArray *errors) {
 		if (errors && errors.count>0) {
@@ -247,8 +301,34 @@
 
 - (void)removeContacts:(NSArray *)contacts onCompletion:(void (^)(BOOL, NSArray *))block
 {
+	if (!contacts || contacts.count <= 0) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:@"Contacts missing!"];
+		block(NO, @[error]);
+		
+		return;
+	}
+	
+	BOOL nonContactObject = NO;
+	for (id object in contacts) {
+		if (!([object isKindOfClass:[BSContact class]])) {
+			nonContactObject = YES;
+		}
+	}
+	if (nonContactObject) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:@"Only contact objects can be deleted!"];
+		block(NO, @[error]);
+		
+		return;
+	}
+	
+	
 	if (_processingContacts) {
-		block(NO,nil);
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:@"Processing contacts..."];
+		block(NO, @[error]);
+
 		return;
 	}
 	

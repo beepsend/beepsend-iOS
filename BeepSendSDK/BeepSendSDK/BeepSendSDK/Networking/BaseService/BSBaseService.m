@@ -90,7 +90,7 @@
 				onCompletion:(void(^)(id response, id error))block
 {
 	BSNetworkLayer *layer = [BSNetworkLayer networkLayerWithBaseStringURL:[BSAPIConfiguration baseURL]];
-	
+
 	[layer executeHTTPMethod:HTTPMethodPOST
 	   withRequestSerializer:RequestSerializerJSON
 	   andResponseSerializer:ResponseSerializerJSON
