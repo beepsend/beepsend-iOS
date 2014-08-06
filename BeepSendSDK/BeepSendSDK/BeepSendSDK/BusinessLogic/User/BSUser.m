@@ -8,8 +8,6 @@
 
 #import "BSUser.h"
 
-#import "BSInputData.h"
-
 #import "BSUserService.h"
 #import "BSConnectionsService.h"
 #import "BSCustomerService.h"
@@ -189,7 +187,10 @@
 {
 	if (self = [super initWithID:@"0" andTitle:@"User"]) {
 		
-		[[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"API_TOKEN" : APIToken }];
+		if (![[NSUserDefaults standardUserDefaults] objectForKey:@"API_TOKEN"]) {
+			NSString *apiToken = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"BeepSendToken"];
+			[[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"API_TOKEN" : apiToken }];
+		}
 		
 		[[BSUserService sharedService] getUserDetailsWithCompletionBlock:^(BSUser *user, NSArray *errors) {
 		
