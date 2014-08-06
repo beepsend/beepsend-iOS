@@ -21,7 +21,7 @@
 		6E6537F819472BD700FC6349 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E6537E019472BD700FC6349 /* UIKit.framework */; };
 		6E65380019472BD700FC6349 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E6537FE19472BD700FC6349 /* InfoPlist.strings */; };
 		6E65380219472BD700FC6349 /* BeepSendApplicationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E65380119472BD700FC6349 /* BeepSendApplicationTests.m */; };
-		6E9D6F37199218510064DA4B /* libBeepSendSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E9D6F36199218510064DA4B /* libBeepSendSDK.a */; };
+		6E9D6F5F19921CBD0064DA4B /* libBeepSendSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E9D6F3819921CBD0064DA4B /* libBeepSendSDK.a */; };
 		6EB6446A19488C8C004A1818 /* BSRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6446919488C8C004A1818 /* BSRootViewController.m */; };
 		6EB6446D19488E17004A1818 /* BSRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB6446C19488E17004A1818 /* BSRootView.m */; };
 		6EB6446F194894DF004A1818 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB6446E194894DF004A1818 /* QuartzCore.framework */; };
@@ -75,44 +75,44 @@
 		6E6537FD19472BD700FC6349 /* BeepSendApplicationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BeepSendApplicationTests-Info.plist"; sourceTree = "<group>"; };
 		6E6537FF19472BD700FC6349 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6E65380119472BD700FC6349 /* BeepSendApplicationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BeepSendApplicationTests.m; sourceTree = "<group>"; };
-		6E9D6F11199218510064DA4B /* BeepSendSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeepSendSDK.h; sourceTree = "<group>"; };
-		6E9D6F12199218510064DA4B /* BSAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAccountManager.h; sourceTree = "<group>"; };
-		6E9D6F13199218510064DA4B /* BSAccumulatedStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAccumulatedStatistics.h; sourceTree = "<group>"; };
-		6E9D6F14199218510064DA4B /* BSAnalyticsBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAnalyticsBatch.h; sourceTree = "<group>"; };
-		6E9D6F15199218510064DA4B /* BSBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSBatch.h; sourceTree = "<group>"; };
-		6E9D6F16199218510064DA4B /* BSCallbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCallbacks.h; sourceTree = "<group>"; };
-		6E9D6F17199218510064DA4B /* BSConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSConnection.h; sourceTree = "<group>"; };
-		6E9D6F18199218510064DA4B /* BSContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSContact.h; sourceTree = "<group>"; };
-		6E9D6F19199218510064DA4B /* BSCountry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCountry.h; sourceTree = "<group>"; };
-		6E9D6F1A199218510064DA4B /* BSCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCustomer.h; sourceTree = "<group>"; };
-		6E9D6F1B199218510064DA4B /* BSDLRReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSDLRReport.h; sourceTree = "<group>"; };
-		6E9D6F1C199218510064DA4B /* BSEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSEmail.h; sourceTree = "<group>"; };
-		6E9D6F1D199218510064DA4B /* BSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSError.h; sourceTree = "<group>"; };
-		6E9D6F1E199218510064DA4B /* BSEstimateCost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSEstimateCost.h; sourceTree = "<group>"; };
-		6E9D6F1F199218510064DA4B /* BSGeneralModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSGeneralModel.h; sourceTree = "<group>"; };
-		6E9D6F20199218510064DA4B /* BSGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSGroup.h; sourceTree = "<group>"; };
-		6E9D6F21199218510064DA4B /* BSHLR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSHLR.h; sourceTree = "<group>"; };
-		6E9D6F22199218510064DA4B /* BSHLRReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSHLRReport.h; sourceTree = "<group>"; };
-		6E9D6F23199218510064DA4B /* BSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSLog.h; sourceTree = "<group>"; };
-		6E9D6F24199218510064DA4B /* BSLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSLookup.h; sourceTree = "<group>"; };
-		6E9D6F25199218510064DA4B /* BSMCCMNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSMCCMNC.h; sourceTree = "<group>"; };
-		6E9D6F26199218510064DA4B /* BSMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSMessage.h; sourceTree = "<group>"; };
-		6E9D6F27199218510064DA4B /* BSNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSNetwork.h; sourceTree = "<group>"; };
-		6E9D6F28199218510064DA4B /* BSNetworkDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSNetworkDetails.h; sourceTree = "<group>"; };
-		6E9D6F29199218510064DA4B /* BSPricelist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPricelist.h; sourceTree = "<group>"; };
-		6E9D6F2A199218510064DA4B /* BSPriceListDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPriceListDetails.h; sourceTree = "<group>"; };
-		6E9D6F2B199218510064DA4B /* BSPriceListSchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPriceListSchedule.h; sourceTree = "<group>"; };
-		6E9D6F2C199218510064DA4B /* BSRecipient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSRecipient.h; sourceTree = "<group>"; };
-		6E9D6F2D199218510064DA4B /* BSStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSStatistics.h; sourceTree = "<group>"; };
-		6E9D6F2E199218510064DA4B /* BSStructs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSStructs.h; sourceTree = "<group>"; };
-		6E9D6F2F199218510064DA4B /* BSTimestamps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTimestamps.h; sourceTree = "<group>"; };
-		6E9D6F30199218510064DA4B /* BSTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTransfer.h; sourceTree = "<group>"; };
-		6E9D6F31199218510064DA4B /* BSUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSUser.h; sourceTree = "<group>"; };
-		6E9D6F32199218510064DA4B /* BSUserType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSUserType.h; sourceTree = "<group>"; };
-		6E9D6F33199218510064DA4B /* BSValueForNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSValueForNumber.h; sourceTree = "<group>"; };
-		6E9D6F34199218510064DA4B /* BSVerified.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSVerified.h; sourceTree = "<group>"; };
-		6E9D6F35199218510064DA4B /* BSWallet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSWallet.h; sourceTree = "<group>"; };
-		6E9D6F36199218510064DA4B /* libBeepSendSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBeepSendSDK.a; sourceTree = "<group>"; };
+		6E9D6F3819921CBD0064DA4B /* libBeepSendSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libBeepSendSDK.a; sourceTree = "<group>"; };
+		6E9D6F3A19921CBD0064DA4B /* BeepSendSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeepSendSDK.h; sourceTree = "<group>"; };
+		6E9D6F3B19921CBD0064DA4B /* BSAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAccountManager.h; sourceTree = "<group>"; };
+		6E9D6F3C19921CBD0064DA4B /* BSAccumulatedStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAccumulatedStatistics.h; sourceTree = "<group>"; };
+		6E9D6F3D19921CBD0064DA4B /* BSAnalyticsBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSAnalyticsBatch.h; sourceTree = "<group>"; };
+		6E9D6F3E19921CBD0064DA4B /* BSBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSBatch.h; sourceTree = "<group>"; };
+		6E9D6F3F19921CBD0064DA4B /* BSCallbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCallbacks.h; sourceTree = "<group>"; };
+		6E9D6F4019921CBD0064DA4B /* BSConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSConnection.h; sourceTree = "<group>"; };
+		6E9D6F4119921CBD0064DA4B /* BSContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSContact.h; sourceTree = "<group>"; };
+		6E9D6F4219921CBD0064DA4B /* BSCountry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCountry.h; sourceTree = "<group>"; };
+		6E9D6F4319921CBD0064DA4B /* BSCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSCustomer.h; sourceTree = "<group>"; };
+		6E9D6F4419921CBD0064DA4B /* BSDLRReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSDLRReport.h; sourceTree = "<group>"; };
+		6E9D6F4519921CBD0064DA4B /* BSEmail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSEmail.h; sourceTree = "<group>"; };
+		6E9D6F4619921CBD0064DA4B /* BSError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSError.h; sourceTree = "<group>"; };
+		6E9D6F4719921CBD0064DA4B /* BSEstimateCost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSEstimateCost.h; sourceTree = "<group>"; };
+		6E9D6F4819921CBD0064DA4B /* BSGeneralModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSGeneralModel.h; sourceTree = "<group>"; };
+		6E9D6F4919921CBD0064DA4B /* BSGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSGroup.h; sourceTree = "<group>"; };
+		6E9D6F4A19921CBD0064DA4B /* BSHLR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSHLR.h; sourceTree = "<group>"; };
+		6E9D6F4B19921CBD0064DA4B /* BSHLRReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSHLRReport.h; sourceTree = "<group>"; };
+		6E9D6F4C19921CBD0064DA4B /* BSLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSLog.h; sourceTree = "<group>"; };
+		6E9D6F4D19921CBD0064DA4B /* BSLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSLookup.h; sourceTree = "<group>"; };
+		6E9D6F4E19921CBD0064DA4B /* BSMCCMNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSMCCMNC.h; sourceTree = "<group>"; };
+		6E9D6F4F19921CBD0064DA4B /* BSMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSMessage.h; sourceTree = "<group>"; };
+		6E9D6F5019921CBD0064DA4B /* BSNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSNetwork.h; sourceTree = "<group>"; };
+		6E9D6F5119921CBD0064DA4B /* BSNetworkDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSNetworkDetails.h; sourceTree = "<group>"; };
+		6E9D6F5219921CBD0064DA4B /* BSPricelist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPricelist.h; sourceTree = "<group>"; };
+		6E9D6F5319921CBD0064DA4B /* BSPriceListDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPriceListDetails.h; sourceTree = "<group>"; };
+		6E9D6F5419921CBD0064DA4B /* BSPriceListSchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPriceListSchedule.h; sourceTree = "<group>"; };
+		6E9D6F5519921CBD0064DA4B /* BSRecipient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSRecipient.h; sourceTree = "<group>"; };
+		6E9D6F5619921CBD0064DA4B /* BSStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSStatistics.h; sourceTree = "<group>"; };
+		6E9D6F5719921CBD0064DA4B /* BSStructs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSStructs.h; sourceTree = "<group>"; };
+		6E9D6F5819921CBD0064DA4B /* BSTimestamps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTimestamps.h; sourceTree = "<group>"; };
+		6E9D6F5919921CBD0064DA4B /* BSTransfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTransfer.h; sourceTree = "<group>"; };
+		6E9D6F5A19921CBD0064DA4B /* BSUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSUser.h; sourceTree = "<group>"; };
+		6E9D6F5B19921CBD0064DA4B /* BSUserType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSUserType.h; sourceTree = "<group>"; };
+		6E9D6F5C19921CBD0064DA4B /* BSValueForNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSValueForNumber.h; sourceTree = "<group>"; };
+		6E9D6F5D19921CBD0064DA4B /* BSVerified.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSVerified.h; sourceTree = "<group>"; };
+		6E9D6F5E19921CBD0064DA4B /* BSWallet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSWallet.h; sourceTree = "<group>"; };
 		6EB6446819488C8C004A1818 /* BSRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSRootViewController.h; path = ViewControllers/RootViewController/BSRootViewController.h; sourceTree = "<group>"; };
 		6EB6446919488C8C004A1818 /* BSRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSRootViewController.m; path = ViewControllers/RootViewController/BSRootViewController.m; sourceTree = "<group>"; };
 		6EB6446B19488E17004A1818 /* BSRootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSRootView.h; path = Views/RootView/BSRootView.h; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 			files = (
 				6EBC77F1194EF60800666099 /* SystemConfiguration.framework in Frameworks */,
 				6EB6446F194894DF004A1818 /* QuartzCore.framework in Frameworks */,
-				6E9D6F37199218510064DA4B /* libBeepSendSDK.a in Frameworks */,
+				6E9D6F5F19921CBD0064DA4B /* libBeepSendSDK.a in Frameworks */,
 				6E6537DF19472BD700FC6349 /* CoreGraphics.framework in Frameworks */,
 				6E6537E119472BD700FC6349 /* UIKit.framework in Frameworks */,
 				6E6537DD19472BD700FC6349 /* Foundation.framework in Frameworks */,
@@ -277,46 +277,46 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		6E9D6F10199218510064DA4B /* Headers */ = {
+		6E9D6F3919921CBD0064DA4B /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				6E9D6F11199218510064DA4B /* BeepSendSDK.h */,
-				6E9D6F12199218510064DA4B /* BSAccountManager.h */,
-				6E9D6F13199218510064DA4B /* BSAccumulatedStatistics.h */,
-				6E9D6F14199218510064DA4B /* BSAnalyticsBatch.h */,
-				6E9D6F15199218510064DA4B /* BSBatch.h */,
-				6E9D6F16199218510064DA4B /* BSCallbacks.h */,
-				6E9D6F17199218510064DA4B /* BSConnection.h */,
-				6E9D6F18199218510064DA4B /* BSContact.h */,
-				6E9D6F19199218510064DA4B /* BSCountry.h */,
-				6E9D6F1A199218510064DA4B /* BSCustomer.h */,
-				6E9D6F1B199218510064DA4B /* BSDLRReport.h */,
-				6E9D6F1C199218510064DA4B /* BSEmail.h */,
-				6E9D6F1D199218510064DA4B /* BSError.h */,
-				6E9D6F1E199218510064DA4B /* BSEstimateCost.h */,
-				6E9D6F1F199218510064DA4B /* BSGeneralModel.h */,
-				6E9D6F20199218510064DA4B /* BSGroup.h */,
-				6E9D6F21199218510064DA4B /* BSHLR.h */,
-				6E9D6F22199218510064DA4B /* BSHLRReport.h */,
-				6E9D6F23199218510064DA4B /* BSLog.h */,
-				6E9D6F24199218510064DA4B /* BSLookup.h */,
-				6E9D6F25199218510064DA4B /* BSMCCMNC.h */,
-				6E9D6F26199218510064DA4B /* BSMessage.h */,
-				6E9D6F27199218510064DA4B /* BSNetwork.h */,
-				6E9D6F28199218510064DA4B /* BSNetworkDetails.h */,
-				6E9D6F29199218510064DA4B /* BSPricelist.h */,
-				6E9D6F2A199218510064DA4B /* BSPriceListDetails.h */,
-				6E9D6F2B199218510064DA4B /* BSPriceListSchedule.h */,
-				6E9D6F2C199218510064DA4B /* BSRecipient.h */,
-				6E9D6F2D199218510064DA4B /* BSStatistics.h */,
-				6E9D6F2E199218510064DA4B /* BSStructs.h */,
-				6E9D6F2F199218510064DA4B /* BSTimestamps.h */,
-				6E9D6F30199218510064DA4B /* BSTransfer.h */,
-				6E9D6F31199218510064DA4B /* BSUser.h */,
-				6E9D6F32199218510064DA4B /* BSUserType.h */,
-				6E9D6F33199218510064DA4B /* BSValueForNumber.h */,
-				6E9D6F34199218510064DA4B /* BSVerified.h */,
-				6E9D6F35199218510064DA4B /* BSWallet.h */,
+				6E9D6F3A19921CBD0064DA4B /* BeepSendSDK.h */,
+				6E9D6F3B19921CBD0064DA4B /* BSAccountManager.h */,
+				6E9D6F3C19921CBD0064DA4B /* BSAccumulatedStatistics.h */,
+				6E9D6F3D19921CBD0064DA4B /* BSAnalyticsBatch.h */,
+				6E9D6F3E19921CBD0064DA4B /* BSBatch.h */,
+				6E9D6F3F19921CBD0064DA4B /* BSCallbacks.h */,
+				6E9D6F4019921CBD0064DA4B /* BSConnection.h */,
+				6E9D6F4119921CBD0064DA4B /* BSContact.h */,
+				6E9D6F4219921CBD0064DA4B /* BSCountry.h */,
+				6E9D6F4319921CBD0064DA4B /* BSCustomer.h */,
+				6E9D6F4419921CBD0064DA4B /* BSDLRReport.h */,
+				6E9D6F4519921CBD0064DA4B /* BSEmail.h */,
+				6E9D6F4619921CBD0064DA4B /* BSError.h */,
+				6E9D6F4719921CBD0064DA4B /* BSEstimateCost.h */,
+				6E9D6F4819921CBD0064DA4B /* BSGeneralModel.h */,
+				6E9D6F4919921CBD0064DA4B /* BSGroup.h */,
+				6E9D6F4A19921CBD0064DA4B /* BSHLR.h */,
+				6E9D6F4B19921CBD0064DA4B /* BSHLRReport.h */,
+				6E9D6F4C19921CBD0064DA4B /* BSLog.h */,
+				6E9D6F4D19921CBD0064DA4B /* BSLookup.h */,
+				6E9D6F4E19921CBD0064DA4B /* BSMCCMNC.h */,
+				6E9D6F4F19921CBD0064DA4B /* BSMessage.h */,
+				6E9D6F5019921CBD0064DA4B /* BSNetwork.h */,
+				6E9D6F5119921CBD0064DA4B /* BSNetworkDetails.h */,
+				6E9D6F5219921CBD0064DA4B /* BSPricelist.h */,
+				6E9D6F5319921CBD0064DA4B /* BSPriceListDetails.h */,
+				6E9D6F5419921CBD0064DA4B /* BSPriceListSchedule.h */,
+				6E9D6F5519921CBD0064DA4B /* BSRecipient.h */,
+				6E9D6F5619921CBD0064DA4B /* BSStatistics.h */,
+				6E9D6F5719921CBD0064DA4B /* BSStructs.h */,
+				6E9D6F5819921CBD0064DA4B /* BSTimestamps.h */,
+				6E9D6F5919921CBD0064DA4B /* BSTransfer.h */,
+				6E9D6F5A19921CBD0064DA4B /* BSUser.h */,
+				6E9D6F5B19921CBD0064DA4B /* BSUserType.h */,
+				6E9D6F5C19921CBD0064DA4B /* BSValueForNumber.h */,
+				6E9D6F5D19921CBD0064DA4B /* BSVerified.h */,
+				6E9D6F5E19921CBD0064DA4B /* BSWallet.h */,
 			);
 			path = Headers;
 			sourceTree = "<group>";
@@ -517,8 +517,8 @@
 		6EBAD64519910E7A008A3FEE /* BeepSendSDK */ = {
 			isa = PBXGroup;
 			children = (
-				6E9D6F10199218510064DA4B /* Headers */,
-				6E9D6F36199218510064DA4B /* libBeepSendSDK.a */,
+				6E9D6F3819921CBD0064DA4B /* libBeepSendSDK.a */,
+				6E9D6F3919921CBD0064DA4B /* Headers */,
 			);
 			name = BeepSendSDK;
 			path = BeepSendApplication/BeepSendSDK;
@@ -810,7 +810,7 @@
 					"$(TARGET_BUILD_DIR)",
 					"$(PROJECT_DIR)/BeepSendApplication/BeepSendSDK",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-Objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -837,7 +837,7 @@
 					"$(TARGET_BUILD_DIR)",
 					"$(PROJECT_DIR)/BeepSendApplication/BeepSendSDK",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-Objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -937,7 +937,7 @@
 					"$(TARGET_BUILD_DIR)",
 					"$(PROJECT_DIR)/BeepSendApplication/BeepSendSDK",
 				);
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-Objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "";
