@@ -37,6 +37,6 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>BeepSendToken</key>
-	<string>093498d9a0a09c393c2d1ae457d2e0c7870ab3e8affca20d1a3d25b8ad92075a</string>
+	<string>TOKEN</string>
 </dict>
 </plist>

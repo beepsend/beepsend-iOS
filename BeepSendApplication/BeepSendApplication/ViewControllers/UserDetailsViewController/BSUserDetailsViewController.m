@@ -232,8 +232,21 @@
 
 - (void)buttonDefaultConnectionClicked:(UIButton *)sender
 {
-	BSSendMessageViewController *msgVC = [[BSSendMessageViewController alloc] initWithConnection:[BSUser currentUser].defaultConnection];
-	[self.navigationController pushViewController:msgVC animated:YES];
+	BSConnection *connection = [BSUser currentUser].defaultConnection;
+	
+	if (!connection) {
+		return;
+	}
+	
+	id vc;
+	if (connection.type == BSConnectionTypeSMS) {
+		vc = [[BSSendMessageViewController alloc] initWithConnection:connection];
+	}
+	else {
+		vc = [[BSHLRViewController alloc] initWithConnection:connection];
+	}
+	
+	[self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)buttonContactsClicked:(UIButton *)sender

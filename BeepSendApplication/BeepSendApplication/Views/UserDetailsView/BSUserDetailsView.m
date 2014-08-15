@@ -231,6 +231,11 @@
 		
 		[_scrollViewContainer addSubview:_buttonContacts];
 		
+		////////////////////////////////////////////////////////////////////////
+		//Constraints
+//		NSLayoutConstraint *scrollViewConstraint = [NSLayoutConstraint constraintWithItem:_scrollViewContainer attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0];
+//		[self addConstraint:scrollViewConstraint];
+		
     }
     return self;
 }

@@ -155,6 +155,8 @@
 - (BSUser *)initWithUserID:(NSString *)uID;
 
 /*! User associated with entered API token
+	If user API token is entered user object will be available, 
+	otherwise if connection API token is entered user object will be nil
  
  @return Returns User object
  */
