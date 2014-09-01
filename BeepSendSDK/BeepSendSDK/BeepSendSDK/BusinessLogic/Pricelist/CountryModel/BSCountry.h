@@ -34,8 +34,9 @@
  
  @return Returns Country object
  */
-- (BSCountry *)initCountryNamed:(NSString *)cName
-				withCountryCode:(NSString *)cCountryCode
-				 andCallingCode:(NSNumber *)cCallingCode;
+- (BSCountry *)initCountryWithID:(NSString *)cID
+						   named:(NSString *)cName
+				 withCountryCode:(NSString *)cCountryCode
+				  andCallingCode:(NSNumber *)cCallingCode;
 
 @end

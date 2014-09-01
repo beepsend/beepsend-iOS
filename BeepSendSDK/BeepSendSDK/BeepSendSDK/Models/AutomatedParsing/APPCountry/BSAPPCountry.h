@@ -10,6 +10,7 @@
 
 @interface BSAPPCountry : BSSerializableObject
 
+@property (nonatomic, strong) NSString *id;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSNumber *prefix;
 @property (nonatomic, strong) NSString *code;

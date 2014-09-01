@@ -29,4 +29,6 @@
 
 - (void)resetPasswordForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSConnection *updatedModel, NSArray *errors))block;
 
+- (void)getRecipientNumbersOnCompletion:(void(^)(NSArray *recipientNumbers, NSArray *errors))block;
+
 @end

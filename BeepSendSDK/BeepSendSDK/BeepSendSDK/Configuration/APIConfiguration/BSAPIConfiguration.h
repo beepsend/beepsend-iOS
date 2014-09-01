@@ -98,6 +98,17 @@
  */
 + (NSString *)connectionPasswordResetForID:(NSString *)connectionID;
 
+#pragma mark - Recipient Numbers
+
+/*
+	As a user you will have associated connections. 
+	These connections have access to recipient numbers, 
+	which can receive mobile originated messages. 
+	The recipient numbers are registered in specific countries,
+	which this endpoint will also list.
+ */
++ (NSString *)recipientNumbers;
+
 #pragma mark - Pricelist
 
 /*

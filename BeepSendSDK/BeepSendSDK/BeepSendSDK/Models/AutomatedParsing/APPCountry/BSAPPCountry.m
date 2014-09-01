@@ -16,7 +16,7 @@
 
 - (id)convertToModel
 {
-	return [[BSCountry alloc] initCountryNamed:_name?_name:@"" withCountryCode:_code?_code:@"" andCallingCode:_prefix?_prefix:@0];
+	return [[BSCountry alloc] initCountryWithID:_id?_id:nil named:_name?_name:@"" withCountryCode:_code?_code:@"" andCallingCode:_prefix?_prefix:@0];
 }
 
 @end

@@ -79,6 +79,13 @@
 	return [NSString stringWithFormat:@"/connections/%@/passwordreset", connectionID];
 }
 
+#pragma mark - Recipient numbers
+
++ (NSString *)recipientNumbers
+{
+	return @"/numbers/";
+}
+
 #pragma mark - Pricelist
 
 + (NSString *)pricelistCurrentWithID:(NSString *)connectionID

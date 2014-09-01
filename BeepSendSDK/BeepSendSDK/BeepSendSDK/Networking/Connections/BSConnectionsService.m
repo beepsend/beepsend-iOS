@@ -140,4 +140,15 @@
 				  }];
 }
 
+- (void)getRecipientNumbersOnCompletion:(void(^)(NSArray *recipientNumbers, NSArray *errors))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration recipientNumbers]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					 
+					  
+					  
+				  }];
+}
+
 @end

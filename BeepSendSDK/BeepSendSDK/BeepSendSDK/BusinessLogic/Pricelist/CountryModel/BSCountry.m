@@ -45,11 +45,12 @@
 	return self;
 }
 
-- (BSCountry *)initCountryNamed:(NSString *)cName
-				withCountryCode:(NSString *)cCountryCode
-				 andCallingCode:(NSNumber *)cCallingCode
+- (BSCountry *)initCountryWithID:(NSString *)cID
+						   named:(NSString *)cName
+				 withCountryCode:(NSString *)cCountryCode
+				  andCallingCode:(NSNumber *)cCallingCode
 {
-	if (self = [super initWithID:@"0" andTitle:cName]) {
+	if (self = [super initWithID:cID?cID:@"0" andTitle:cName]) {
 		_name = cName;
 		_callingCode = cCallingCode;
 		_code = cCountryCode;
