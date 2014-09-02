@@ -19,5 +19,15 @@
 	return [[BSNumber alloc] initWithID:_id country:[_country convertToModel] connection:[_connection convertToModel] andRecipientNumber:_number];
 }
 
+#pragma mark - Public methods
+
++ (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array
+{
+	NSMutableArray *results = [@[] mutableCopy];
+	for (id object in array) {
+		[results addObject:[BSAPNumber classFromDict:object]];
+	}
+	return [NSArray arrayWithArray:results];
+}
 
 @end

@@ -11,6 +11,7 @@
 #import "BSAPIConfiguration.h"
 
 #import "BSAPConnection.h"
+#import "BSAPNumber.h"
 
 @implementation BSConnectionsService
 
@@ -149,7 +150,19 @@
 				withParameters:@{}
 				  onCompletion:^(id response, id error) {
 					 
-					  
+					  if (!error) {
+						  
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  for (BSAPNumber *n in [BSAPNumber arrayOfObjectsFromArrayOfDictionaries:response]) {
+							  [mArr addObject:[n convertToModel]];
+						  }
+						  
+						  block(mArr, nil);
+					  }
+					  else {
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
+					  }
+
 					  
 				  }];
 }

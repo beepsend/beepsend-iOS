@@ -519,6 +519,29 @@
 	}
 }
 
+- (void)getWalletDetailsForID:(NSString *)walletID onCompletion:(void(^)(BSWallet *wallet, NSArray *errors))block
+{
+	if ([BSHelper isNilOrEmpty:walletID]) {
+	
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"You must specify wallet ID", @"")];
+		block(nil, @[error]);
+	
+		return;
+	}
+	
+	[[BSWalletService sharedService] getWalletDetailsForID:walletID withCompletionBlock:^(BSWallet *wallet, NSArray *errors) {
+		
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(wallet, nil);
+		}
+		
+	}];
+	
+}
+
 - (void)getAllContactsfromGroup:(BSGroup *)group sorted:(NSString *)sort forNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *contacts, NSArray *errors))block
 {
 	NSString *maxID = nil;

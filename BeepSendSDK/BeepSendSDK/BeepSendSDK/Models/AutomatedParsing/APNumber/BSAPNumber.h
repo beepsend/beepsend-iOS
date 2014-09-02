@@ -18,4 +18,6 @@
 @property (nonatomic, strong) NSString *id;
 @property (nonatomic, strong) NSNumber *number;
 
++ (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
+
 @end

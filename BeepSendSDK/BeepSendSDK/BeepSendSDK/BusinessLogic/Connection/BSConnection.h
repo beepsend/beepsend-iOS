@@ -172,6 +172,14 @@
  */
 - (void)resetConnectionTokenOnCompletion:(void(^)(NSArray *errors))block;
 
+/*! If you wish to use our legacy HTTP API, you need to supply your connection
+	username as well as password for each request. If you don't have your
+	connection password, you can request a new one with this method.
+ 
+ @param block - Returns password or error if password reset failed
+ */
+- (void)resetConnectionPasswordOnCompletion:(void(^)(NSString *password, NSArray *errors))block;
+
 /*! Receive all price lists revisions for a specific connection 
 	related to the authenticated user. 
 	A connection ID or alias tag "me" must be provided as reference.

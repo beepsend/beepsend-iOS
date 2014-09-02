@@ -234,6 +234,13 @@
  */
 - (NSArray *)getAvailableWallets;
 
+/*! Method for retrieving wallet details based on id
+ 
+ @param walletID - Wallet ID
+ @param block - block that returns wallet details or errors
+ */
+- (void)getWalletDetailsForID:(NSString *)walletID onCompletion:(void(^)(BSWallet *wallet, NSArray *errors))block;
+
 /*! Async method for retrieving user contacts
  
  @param group - Group from where you want to fetch contacts, pass nil if want to search all groups

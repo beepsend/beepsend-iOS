@@ -10,6 +10,7 @@
 
 #import "BSConnection.h"
 #import "BSError.h"
+#import "BSNumber.h"
 
 @interface BSConnectionsService : BSBaseService
 

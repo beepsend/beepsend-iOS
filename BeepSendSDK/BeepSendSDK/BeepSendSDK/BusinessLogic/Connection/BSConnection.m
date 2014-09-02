@@ -304,6 +304,24 @@
 	}];
 }
 
+- (void)resetConnectionPasswordOnCompletion:(void(^)(NSString *password, NSArray *errors))block
+{
+	[[BSConnectionsService sharedService] resetPasswordForConnection:_connectionModel withCompletionBlock:^(BSConnection *updatedModel, NSArray *errors) {
+		
+		if (!errors || errors.count == 0) {
+
+			_connectionModel.password = updatedModel.password;
+			_password = updatedModel.password;
+			
+			block(updatedModel.password, nil);
+		}
+		else {
+			block(nil, errors);
+		}
+		
+	}];
+}
+
 //Returns pricelists
 - (void)getPricelistsOnCompletion:(void(^)(NSArray *pricelists, NSArray *errors))block
 {
