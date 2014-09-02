@@ -25,4 +25,6 @@
 @property (nonatomic, strong) NSString *msisdn;
 @property (nonatomic, strong) NSArray *errors;
 
++ (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
+
 @end

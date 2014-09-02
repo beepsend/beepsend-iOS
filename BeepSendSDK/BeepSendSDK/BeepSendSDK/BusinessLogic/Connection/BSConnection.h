@@ -84,7 +84,7 @@
 
 /*! Connection password
  */
-@property (nonatomic, strong, readonly) NSString *password;
+@property (nonatomic, strong) NSString *password;
 
 /*! Create Connection object
  Used only when ID of connection is available.
@@ -298,6 +298,14 @@
  */
 - (void)immediateHLRForNumber:(NSString *)phoneNumber
 				 onCompletion:(void(^)(BSHLR *hlr, NSArray *errors))block;
+
+/*! Method that performs bulk HLR lookup
+ (takes some time)
+ 
+ @param phoneNumbers - Array of phone numbers to perform HLR
+ @param block - Returns HLR response or error
+ */
+- (void)bulkHLRForNumbers:(NSArray *)phoneNumbers onCompletion:(void(^)(NSArray *hlrs, NSArray *errors))block;
 
 /*! Method that performs a dry run of HLR lookup
 	(takes some time)

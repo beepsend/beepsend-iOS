@@ -212,6 +212,8 @@
  */
 + (NSString *)hlrForNumber:(NSString *)number;
 
++ (NSString *)hlr;
+
 #pragma mark - Validation
 
 /*

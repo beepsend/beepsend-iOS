@@ -245,6 +245,20 @@
 	}];
 }
 
+- (void)getEmailWithID:(NSString *)emailID onCompletion:(void(^)(BSEmail *email, NSArray *errors))block
+{
+	[[BSWalletService sharedService] getEmailForWallet:self andEmailID:emailID withCompletionBlock:^(BSEmail *email, NSArray *errors) {
+		
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			block(email, nil);
+		}
+		
+	}];
+}
+
 - (void)addEmail:(NSString *)email onCompletion:(void (^)(BSEmail *email, NSArray *errors))block
 {
 	if ([BSHelper isNilOrEmpty:email]) {

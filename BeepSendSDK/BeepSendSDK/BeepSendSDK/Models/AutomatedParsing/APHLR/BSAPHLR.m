@@ -45,4 +45,13 @@
 
 #pragma mark - Public methods
 
++ (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array
+{
+	NSMutableArray *results = [@[] mutableCopy];
+	for (id object in array) {
+		[results addObject:[BSAPHLR classFromDict:object]];
+	}
+	return [NSArray arrayWithArray:results];
+}
+
 @end

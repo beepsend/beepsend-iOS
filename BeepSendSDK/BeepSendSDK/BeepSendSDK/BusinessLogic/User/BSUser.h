@@ -294,6 +294,15 @@
  */
 - (NSArray *)getAllGroups;
 
+/*! Method for retrieving user group details
+ 
+ @param groupID - ID of a group which details we need
+ @param block - Returns group details or error
+ 
+ @return Returns all groups
+ */
+- (void)getGroupDetails:(NSString *)groupID onCompletion:(void(^)(BSGroup *group, NSArray *errors))block;
+
 /*! Search groups
  
  @param query - Will search entries with matching name.

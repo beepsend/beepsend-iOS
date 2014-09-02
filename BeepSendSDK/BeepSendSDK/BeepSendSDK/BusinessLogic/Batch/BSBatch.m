@@ -50,6 +50,14 @@
 	return self;
 }
 
+- (BSBatch *)initWithLabel:(NSString *)bLabel
+{
+	if (self = [super initWithID:@"0" andTitle:bLabel]) {
+		_label = bLabel;
+	}
+	return self;
+}
+
 - (void)getDeliveryStatisticsWithCompletionBlock:(void (^)(NSArray *statistisc, NSArray *errors))block
 {
 	if (!_batchID || [BSHelper isNilOrEmpty:_batchID]) {

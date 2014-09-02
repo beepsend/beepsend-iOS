@@ -23,6 +23,7 @@
 				systemID:(NSString *)systemID
 				   label:(NSString *)label
 			 description:(NSString *)description
+				password:(NSString *)password
 	 withCompletionBlock:(void(^)(BSConnection *connection, NSArray *errors))block;
 
 - (void)resetTokenForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSConnection *updatedModel, NSArray *errors))block;

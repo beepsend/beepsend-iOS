@@ -59,6 +59,41 @@
 				  }];
 }
 
+- (void)doBulkHLRForNumbers:(NSArray *)numbers
+			 withConnection:(BSConnection *)connection
+		withCompletionBlock:(void(^)(NSArray *hlrs, NSArray *errors))block
+{
+	NSString *method = [BSAPIConfiguration hlr];
+	NSDictionary *params = connection ? @{ @"connection" : connection.objectID , @"msisdn" : numbers } : @{ @"msisdn" : numbers };
+	
+	[super executeGETForMethod:method
+				withParameters:params
+				  onCompletion:^(id response, id error) {
+					  
+					  if ([response isKindOfClass:[NSArray class]]) {
+						  
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  NSMutableArray *mErr = [@[] mutableCopy];
+						  for (BSAPHLR *hlr in [BSAPHLR arrayOfObjectsFromArrayOfDictionaries:response]) {
+							  BSHLR *h = [hlr convertToModel];
+							  [mArr addObject:h];
+							  [mErr addObjectsFromArray:h.errors];
+						  }
+						  
+						  if (mErr.count > 0) {
+							  block(nil, mErr);
+						  }
+						  else {
+							  block(mArr, nil);
+						  }
+					  }
+					  else {
+						  
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
+					  }
+				  }];
+}
+
 - (void)validateHLRForNumber:(NSString *)number
 			  withConnection:(BSConnection *)connection
 		 withCompletionBlock:(void(^)(BSHLR *response, NSArray *errors))block

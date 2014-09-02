@@ -240,7 +240,8 @@
 		[_callbackURLs.method isEqualToString:_connectionModel.callbackURLs.method] &&
 		[_systemID isEqualToString:_connectionModel.systemID] &&
 		[_label isEqualToString:_connectionModel.label] &&
-		[_description isEqualToString:_connectionModel.description]) {
+		[_description isEqualToString:_connectionModel.description] &&
+		[_password isEqualToString:_connectionModel.password]) {
 		
 		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"No changes were made!", @"")];
 		block(@[error]);
@@ -255,6 +256,7 @@
 												  systemID:[_systemID isEqualToString:_connectionModel.systemID] ? nil : _systemID
 													 label:[_label isEqualToString:_connectionModel.label] ? nil : _label
 											   description:[_description isEqualToString:_connectionModel.description] ? nil : _description
+												  password:[_password isEqualToString:_connectionModel.password] ? nil : _password
 									   withCompletionBlock:^(BSConnection *connection, NSArray *errors) {
 	
 										   if (errors && errors.count>0) {
@@ -269,6 +271,8 @@
 											   _systemID = connection.systemID;
 											   _label = connection.label;
 											   _description = connection.description;
+											   
+											   _password = connection.password;
 											   
 											   _connectionModel = connection;
 											   
@@ -758,6 +762,35 @@
 		}
 		else {
 			block(hlr, nil);
+		}
+	}];
+}
+
+- (void)bulkHLRForNumbers:(NSArray *)phoneNumbers onCompletion:(void(^)(NSArray *hlrs, NSArray *errors))block
+{
+	if (_type != BSConnectionTypeHLR) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Connection can't send HLR request!", @"")];
+		block(nil, @[error]);
+		
+		return; //This connection can't send HLR
+	}
+	
+	if (phoneNumbers.count>0) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Phone number must be specified!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	[[BSHLRService sharedService] doBulkHLRForNumbers:phoneNumbers withConnection:self withCompletionBlock:^(NSArray *hlrs, NSArray *errors) {
+		
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(hlrs, nil);
 		}
 	}];
 }

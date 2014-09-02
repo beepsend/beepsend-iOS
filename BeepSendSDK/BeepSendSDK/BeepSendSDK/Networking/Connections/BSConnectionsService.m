@@ -71,6 +71,7 @@
 				systemID:(NSString *)systemID
 				   label:(NSString *)label
 			 description:(NSString *)description
+				password:(NSString *)password
 	 withCompletionBlock:(void(^)(BSConnection *connection, NSArray *errors))block
 {
 	
@@ -85,6 +86,8 @@
 	conn.system_id = systemID;
 	conn.label = label;
 	conn.description = description;
+	
+	conn.password = password;
 	
 	NSString *method = connection ? [BSAPIConfiguration connectionsWithID:connection.objectID] : [BSAPIConfiguration connectionsMe];
 	

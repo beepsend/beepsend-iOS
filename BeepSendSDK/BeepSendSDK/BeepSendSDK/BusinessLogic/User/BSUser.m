@@ -722,6 +722,28 @@
 	}
 }
 
+- (void)getGroupDetails:(NSString *)groupID onCompletion:(void(^)(BSGroup *group, NSArray *errors))block
+{
+	if ([BSHelper isNilOrEmpty:groupID]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Must specify group ID", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	[[BSGroupsService sharedService] getDetailsForGroupID:groupID withCompletionBlock:^(BSGroup *group, NSArray *errors) {
+		
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(group, nil);
+		}
+		
+	}];
+}
+
 - (void)searchGroupsWithQuery:(NSString *)query limit:(NSNumber *)limit onCompletion:(void(^)(NSArray *results, NSArray *errors))block
 {
 	if ([limit integerValue] < 1) {

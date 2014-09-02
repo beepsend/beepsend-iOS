@@ -176,6 +176,11 @@
 	return [@"/hlr/" stringByAppendingString:number];
 }
 
++ (NSString *)hlr
+{
+	return @"/hlr/";
+}
+
 #pragma mark - Validation
 
 + (NSString *)validateSMS
