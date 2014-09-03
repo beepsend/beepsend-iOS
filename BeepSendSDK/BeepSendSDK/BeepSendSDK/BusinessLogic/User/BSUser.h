@@ -343,5 +343,13 @@
 						   mccmnc:(BSMCCMNC *)mccmnc
 			  withCompletionBlock:(void(^)(NSArray *networkDetails, NSArray *errors))block;
 
+/*!	As a user you will have associated connections. 
+	These connections have access to recipient numbers, which can receive 
+	mobile originated messages. The recipient numbers are registered in 
+	specific countries, which this endpoint will also list.
+ 
+ @param block - Returns numbers or error list
+ */
+- (void)getRecipientNumbersOnCompletion:(void(^)(NSArray *numbers, NSArray *errors))block;
 
 @end

@@ -838,4 +838,18 @@
 	}];
 }
 
+- (void)getRecipientNumbersOnCompletion:(void(^)(NSArray *numbers, NSArray *errors))block
+{
+	[[BSConnectionsService sharedService] getRecipientNumbersOnCompletion:^(NSArray *recipientNumbers, NSArray *errors) {
+		
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(recipientNumbers, nil);
+		}
+		
+	}];
+}
+
 @end
