@@ -14,6 +14,7 @@
 #import "BSMessage.h"
 #import "BSBatch.h"
 #import "BSError.h"
+#import "BSTwoWayBatch.h"
 
 @interface BSSMSService : BSBaseService
 
@@ -57,6 +58,8 @@
 	Get details for a specific batch.
  */
 - (void)getDetailsForBatch:(NSString *)batchID withCompletionBlock:(void(^)(BSBatch *batch, NSArray *errors))block;
+
+- (void)getTwoWayBatchForBatchID:(NSString *)batchID onCompletion:(void(^)(NSArray *batches, NSArray *errors))block;
 
 /*
 	Estimate message/s price.

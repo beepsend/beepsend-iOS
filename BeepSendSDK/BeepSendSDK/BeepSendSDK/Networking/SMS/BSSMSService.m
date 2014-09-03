@@ -15,6 +15,8 @@
 #import "BSAPBatch.h"
 #import "BSAPSMSLookup.h"
 #import "BSAPEstimatedCost.h"
+#import "BSAPTwoWayBatch.h"
+
 #import "BSConnection.h"
 
 #import "BSGroup.h"
@@ -270,6 +272,36 @@
 					  }
 					  else {
 
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
+					  }
+				  }];
+}
+
+- (void)getTwoWayBatchForBatchID:(NSString *)batchID onCompletion:(void(^)(NSArray *batches, NSArray *errors))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration twoWayBatchesForID:batchID]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  
+						  NSArray *result;
+						  if (![response isKindOfClass:[NSArray class]]) {
+							  result = @[response];
+						  }
+						  else {
+							  result = [NSArray arrayWithArray:response];
+						  }
+						  
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  for (BSAPTwoWayBatch *twb in [BSAPTwoWayBatch arrayOfObjectsFromArrayOfDictionaries:result]) {
+							  [mArr addObject:[twb convertToModel]];
+						  }
+						  
+						  block([NSArray arrayWithArray:mArr], nil);
+					  }
+					  else {
+						  
 						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];

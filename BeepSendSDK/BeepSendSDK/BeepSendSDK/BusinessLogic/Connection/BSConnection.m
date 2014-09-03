@@ -730,6 +730,19 @@
 	}];
 }
 
+- (void)getTwoWayBatchForID:(NSString *)batchID onCompletion:(void(^)(NSArray *batches, NSArray *errors))block
+{
+	[[BSSMSService sharedService] getTwoWayBatchForBatchID:batchID onCompletion:^(NSArray *batches, NSArray *errors) {
+		
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			block(batches, nil);
+		}
+	}];
+}
+
 //Estimates message cost (not necessarily accurate)
 - (void)estimateSMSCostForMessages:(NSArray *)messages onCompletion:(void(^)(NSArray *cost, NSArray *errors))block
 {

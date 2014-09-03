@@ -244,6 +244,11 @@
  */
 + (NSString *)batchesForID:(NSString *)batchID;
 
+/*
+	Two way batches
+ */
++ (NSString *)twoWayBatchesForID:(NSString *)batchID;
+
 #pragma mark - Analytics
 
 /*

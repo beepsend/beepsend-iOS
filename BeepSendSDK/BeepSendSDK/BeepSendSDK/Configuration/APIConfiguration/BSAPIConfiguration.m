@@ -215,6 +215,11 @@
 	return [@"/batches/" stringByAppendingString:batchID];
 }
 
++ (NSString *)twoWayBatchesForID:(NSString *)batchID
+{
+	return [NSString stringWithFormat:@"/batches/%@/messages/", batchID];
+}
+
 #pragma mark - Analytics
 
 + (NSString *)analyticsSummary

@@ -312,6 +312,15 @@
  */
 - (void)getPreviousBatchesOnCompletion:(void(^)(NSArray *batches, NSArray *errors))block;
 
+/*! This call will give a paginated overview of messages in a batch, 
+	complete with sent and recieved message body. The mobile terminated
+	messages are matched with their mobile originated counterpart
+ 
+ @param batchID - batch ID
+ @param block - Returns array of batches or errors
+ */
+- (void)getTwoWayBatchForID:(NSString *)batchID onCompletion:(void(^)(NSArray *batches, NSArray *errors))block;
+
 /*! Estimates message cost (not necessarily accurate)
  
  @param messages - Messages to estimate price for
