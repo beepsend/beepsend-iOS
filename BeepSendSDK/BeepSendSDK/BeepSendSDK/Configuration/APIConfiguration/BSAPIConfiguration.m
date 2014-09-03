@@ -113,6 +113,16 @@
 	return [NSString stringWithFormat:@"/pricelists/%@.csv", connectionID];
 }
 
++ (NSString *)pricelistDiffForConnectionID:(NSString *)connectionID rev1:(NSString *)pricelist1ID rev2:(NSString *)pricelist2ID
+{
+	return [NSString stringWithFormat:@"/pricelists/%@/%@..%@/diff", connectionID, pricelist1ID, pricelist2ID];
+}
+
++ (NSString *)pricelistDiffAsCSVForConnectionID:(NSString *)connectionID rev1:(NSString *)pricelist1ID rev2:(NSString *)pricelist2ID
+{
+	return [NSString stringWithFormat:@"/pricelists/%@/%@..%@/diff.csv", connectionID, pricelist1ID, pricelist2ID];
+}
+
 #pragma mark - Users
 
 + (NSString *)userMe

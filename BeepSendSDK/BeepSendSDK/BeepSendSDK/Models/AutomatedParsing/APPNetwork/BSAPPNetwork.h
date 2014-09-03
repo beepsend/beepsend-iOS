@@ -18,6 +18,9 @@
 @property (nonatomic, strong) BSAPPCountry *country;
 @property (nonatomic, strong) NSString *operator;
 
+@property (nonatomic, strong) NSNumber *old_price;
+@property (nonatomic, strong) NSString *diff;
+
 + (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
 
 @end

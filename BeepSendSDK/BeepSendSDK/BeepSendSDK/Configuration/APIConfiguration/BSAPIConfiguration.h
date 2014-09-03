@@ -141,6 +141,16 @@
  */
 + (NSString *)pricelistCSVForID:(NSString *)connectionID;
 
+/*
+	Pricelist diff
+ */
++ (NSString *)pricelistDiffForConnectionID:(NSString *)connectionID rev1:(NSString *)pricelist1ID rev2:(NSString *)pricelist2ID;
+
+/*
+	Pricelist diff as csv
+ */
++ (NSString *)pricelistDiffAsCSVForConnectionID:(NSString *)connectionID rev1:(NSString *)pricelist1ID rev2:(NSString *)pricelist2ID;
+
 #pragma mark - Users
 
 /*

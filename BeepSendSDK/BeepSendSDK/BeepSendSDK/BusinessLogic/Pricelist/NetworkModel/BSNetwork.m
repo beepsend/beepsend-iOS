@@ -15,6 +15,8 @@
 @property (nonatomic, strong, readwrite) NSNumber *price;
 @property (nonatomic, strong, readwrite) BSCountry *country;
 @property (nonatomic, strong, readwrite) NSString *operatorName;
+@property (nonatomic, strong, readwrite) NSNumber *oldPrice;
+@property (nonatomic, strong, readwrite) NSString *difference;
 
 @end
 
@@ -42,6 +44,16 @@
 	return [BSHelper isNilOrEmpty:_operatorName] ? @"" : _operatorName;
 }
 
+- (NSNumber *)oldPrice
+{
+	return _oldPrice ? _oldPrice : @0;
+}
+
+- (NSString *)difference
+{
+	return [BSHelper isNilOrEmpty:_difference] ? @"" : _difference;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithID:(NSString *)objectID andTitle:(NSString *)title
@@ -53,10 +65,12 @@
 }
 
 - (BSNetwork *)initNetworkWithMCCMNC:(NSArray *)nMCCMNC
-							  withComment:(NSString *)nComment
-									price:(NSNumber *)nPrice
-							  fromCountry:(BSCountry *)nCountry
-								 operator:(NSString *)nOperatorName
+						 withComment:(NSString *)nComment
+							   price:(NSNumber *)nPrice
+						 fromCountry:(BSCountry *)nCountry
+							operator:(NSString *)nOperatorName
+							oldPrice:(NSNumber *)nOldPrice
+						  difference:(NSString *)nDifference
 {
 	if (self = [super initWithID:@"0" andTitle:nOperatorName]) {
 		_mccmnc = nMCCMNC;
@@ -64,6 +78,8 @@
 		_price = nPrice;
 		_country = nCountry;
 		_operatorName = nOperatorName;
+		_oldPrice = nOldPrice;
+		_difference = nDifference;
 	}
 	return self;
 }

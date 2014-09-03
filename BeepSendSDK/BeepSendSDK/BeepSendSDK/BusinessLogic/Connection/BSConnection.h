@@ -196,6 +196,28 @@
  */
 - (void)getCurrentPricelistOnCompletion:(void(^)(BSPricelist *pricelist, NSArray *errors))block;
 
+/*! Fetch pricelist as csv
+ 
+ @param block - Returns pricelist as csv or error list
+ */
+- (void)getPricelistsAsCsvOnCompletion:(void(^)(NSString *pricelist, NSArray *errors))block;
+
+/*! Fetch pricelist diff
+ 
+ @param pl1 - Pricelist 1
+ @param pl2 - Pricelist 2
+ @param block - Returns pricelist diff or error list
+ */
+- (void)getPricelistsDiffForPricelist:(BSPricelist *)pl1 andPricelist:(BSPricelist *)pl2 onCompletion:(void(^)(BSNetwork *pricelistDiff, NSArray *errors))block;
+
+/*! Fetch pricelist diff as csv
+ 
+ @param pl1 - Pricelist 1
+ @param pl2 - Pricelist 2
+ @param block - Returns pricelist as csv or error list
+ */
+- (void)getPricelistsDiffAsCsvForPricelist:(BSPricelist *)pl1 andPricelist:(BSPricelist *)pl2 onCompletion:(void(^)(NSString *pricelist, NSArray *errors))block;
+
 /*! Method sends message and returns number of messages
  
  @param message - Message object for sending

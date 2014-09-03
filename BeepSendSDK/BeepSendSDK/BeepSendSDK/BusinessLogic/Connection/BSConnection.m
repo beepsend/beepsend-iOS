@@ -365,6 +365,47 @@
 	}];
 }
 
+- (void)getPricelistsAsCsvOnCompletion:(void(^)(NSString *pricelist, NSArray *errors))block
+{
+	[[BSPricelistService sharedService] getPricelistAsCSVForConnection:_connectionModel onCompletion:^(NSString *pricelist, NSArray *errors) {
+		
+		if (!errors || errors.count == 0) {
+			block(pricelist, nil);
+		}
+		else {
+			block(nil, errors);
+		}
+		
+	}];
+}
+
+- (void)getPricelistsDiffForPricelist:(BSPricelist *)pl1 andPricelist:(BSPricelist *)pl2 onCompletion:(void(^)(BSNetwork *pricelistDiff, NSArray *errors))block
+{
+	[[BSPricelistService sharedService] getPricelistDiffForConnection:_connectionModel withPricelist1:pl1 andPricelist2:pl2 onCompletion:^(BSNetwork *diff, NSArray *errors) {
+		
+		if (!errors || errors.count == 0) {
+			block(diff, nil);
+		}
+		else {
+			block(nil, errors);
+		}
+	}];
+}
+
+- (void)getPricelistsDiffAsCsvForPricelist:(BSPricelist *)pl1 andPricelist:(BSPricelist *)pl2 onCompletion:(void(^)(NSString *pricelist, NSArray *errors))block
+{
+	[[BSPricelistService sharedService] getPricelistDiffAsCSVForConnection:_connectionModel withPricelist1:pl1 andPricelist2:pl2 onCompletion:^(NSString *diff, NSArray *errors) {
+		
+		if (!errors || errors.count == 0) {
+			block(diff, nil);
+		}
+		else {
+			block(nil, errors);
+		}
+		
+	}];
+}
+
 //Send message
 - (NSInteger)sendSMS:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, NSArray *errors))block
 {
