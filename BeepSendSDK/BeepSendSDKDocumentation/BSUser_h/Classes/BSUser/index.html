@@ -303,9 +303,19 @@ Using a connection you can send SMS and HLR requests.
 <dd></dd>
 <dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/getAvailableWalletsOnCompletion:" target="_top">-getAvailableWalletsOnCompletion:</a></tt></dt>
 <dd></dd>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/getConversationsOnCompletion:" target="_top">-getConversationsOnCompletion:</a></tt></dt>
+<dd></dd>
 <dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/getCustomerDetailsOnCompletion:" target="_top">-getCustomerDetailsOnCompletion:</a></tt></dt>
 <dd></dd>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/getDetailsForConversation:onCompletion:" target="_top">-getDetailsForConversation:onCompletion:</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/getGroupDetails:onCompletion:" target="_top">-getGroupDetails:onCompletion:</a></tt></dt>
+<dd></dd>
 <dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/getNetworkDetailsFromDate:toDate:mccmnc:withCompletionBlock:" target="_top">-getNetworkDetailsFromDate:toDate:mccmnc:withCompletionBlock:</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/getRecipientNumbersOnCompletion:" target="_top">-getRecipientNumbersOnCompletion:</a></tt></dt>
+<dd></dd>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/getWalletDetailsForID:onCompletion:" target="_top">-getWalletDetailsForID:onCompletion:</a></tt></dt>
 <dd></dd>
 <dt><tt><a href="index.html#//apple_ref/occ/instm/BSUser/initUserWithEmail:andPassword:" target="_top">-initUserWithEmail:andPassword:</a></tt></dt>
 <dd></dd>
@@ -411,6 +421,8 @@ Using a connection you can send SMS and HLR requests.
 <!-- end return value --></p>
 <h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
 <!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/clm/BSUser/currentUser;name=start --><p>User associated with entered API token
+If user API token is entered user object will be available, 
+otherwise if connection API token is entered user object will be nil
 </p>
 <!-- headerDoc=discussion;uid=//apple_ref/occ/clm/BSUser/currentUser;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
@@ -622,6 +634,28 @@ and should merely be used for aggregated views on traffic.
 </p>
 <!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/getAvailableWalletsOnCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSUser/getConversationsOnCompletion:;   name=BSUser::getConversationsOnCompletion: --><a name="//apple_ref/occ/instm/BSUser/getConversationsOnCompletion:"></a>
+<h3><a name="getConversationsOnCompletion:">getConversationsOnCompletion:</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/getConversationsOnCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSUser/getConversationsOnCompletion:" logicalPath="//apple_ref/occ/instm/BSUser/getConversationsOnCompletion" target="_top"><span class="function">getConversationsOnCompletion</span></a>:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><span class="param">conversations</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSUser/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSUser/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/getConversationsOnCompletion:;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/getConversationsOnCompletion:/block;   name=getConversationsOnCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSUser/getConversationsOnCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns list of conversations or errors</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/getConversationsOnCompletion:;name=start --><p>List your user conversations.
+</p>
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/getConversationsOnCompletion:;name=end --><!-- end discussion -->
+<hr class="betweenAPIEntries">
 <!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSUser/getCustomerDetailsOnCompletion:;   name=BSUser::getCustomerDetailsOnCompletion: --><a name="//apple_ref/occ/instm/BSUser/getCustomerDetailsOnCompletion:"></a>
 <h3><a name="getCustomerDetailsOnCompletion:">getCustomerDetailsOnCompletion:</a></h3>
 <hr class="afterName">
@@ -643,6 +677,63 @@ and should merely be used for aggregated views on traffic.
 <!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/getCustomerDetailsOnCompletion:;name=start --><p>Method for retrieving customer details
 </p>
 <!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/getCustomerDetailsOnCompletion:;name=end --><!-- end discussion -->
+<hr class="betweenAPIEntries">
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSUser/getDetailsForConversation:onCompletion:;   name=BSUser::getDetailsForConversation:onCompletion: --><a name="//apple_ref/occ/instm/BSUser/getDetailsForConversation:onCompletion:"></a>
+<h3><a name="getDetailsForConversation:onCompletion:">getDetailsForConversation:onCompletion:</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/getDetailsForConversation:onCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSUser/getDetailsForConversation:onCompletion:" logicalPath="//apple_ref/occ/instm/BSUser/getDetailsForConversation" target="_top"><span class="function">getDetailsForConversation</span></a>:(<!-- a logicalPath="//apple_ref/occ/cl/BSConversation //apple_ref/occ/tdef/BSConversation //apple_ref/occ/tag/BSConversation //apple_ref/occ/struct/BSConversation //apple_ref/occ/intf/BSConversation //apple_ref/doc/anysymbol/BSConversation" machineGenerated="true" --><span class="type">BSConversation</span><!-- /a --> <span class="type">*</span>)<span class="param">conversation</span> 
+        <!-- a logicalPath="//apple_ref/occ/instm/BSUser/onCompletion //apple_ref/occ/clm/BSUser/onCompletion //apple_ref/occ/intfcm/BSUser/onCompletion //apple_ref/occ/intfm/BSUser/onCompletion //apple_ref/occ/func/onCompletion //apple_ref/occ/ftmplt/BSUser/onCompletion //apple_ref/occ/defn/onCompletion //apple_ref/occ/macro/onCompletion //apple_ref/doc/anysymbol/onCompletion" machineGenerated="true" --><span class="function">onCompletion</span><!-- /a -->:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/BSConversation //apple_ref/occ/tdef/BSConversation //apple_ref/occ/tag/BSConversation //apple_ref/occ/struct/BSConversation //apple_ref/occ/intf/BSConversation //apple_ref/doc/anysymbol/BSConversation" machineGenerated="true" --><span class="type">BSConversation</span><!-- /a --> <span class="type">*</span><span class="param">fullConversation</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSUser/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSUser/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/getDetailsForConversation:onCompletion:;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/getDetailsForConversation:onCompletion:/block;   name=getDetailsForConversation:onCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSUser/getDetailsForConversation:onCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns full conversation or error list</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/getDetailsForConversation:onCompletion:;name=start --><p>List all messages sent back and forth in to a single contact/number.
+The items list is paginated and this endpoint accepts the same parameters as sms lookup.
+</p>
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/getDetailsForConversation:onCompletion:;name=end --><!-- end discussion -->
+<hr class="betweenAPIEntries">
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSUser/getGroupDetails:onCompletion:;   name=BSUser::getGroupDetails:onCompletion: --><a name="//apple_ref/occ/instm/BSUser/getGroupDetails:onCompletion:"></a>
+<h3><a name="getGroupDetails:onCompletion:">getGroupDetails:onCompletion:</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/getGroupDetails:onCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSUser/getGroupDetails:onCompletion:" logicalPath="//apple_ref/occ/instm/BSUser/getGroupDetails" target="_top"><span class="function">getGroupDetails</span></a>:(<!-- a logicalPath="//apple_ref/occ/cl/NSString //apple_ref/occ/tdef/NSString //apple_ref/occ/tag/NSString //apple_ref/occ/struct/NSString //apple_ref/occ/intf/NSString //apple_ref/doc/anysymbol/NSString" machineGenerated="true" --><span class="type">NSString</span><!-- /a --> <span class="type">*</span>)<span class="param">groupID</span> <!-- a logicalPath="//apple_ref/occ/instm/BSUser/onCompletion //apple_ref/occ/clm/BSUser/onCompletion //apple_ref/occ/intfcm/BSUser/onCompletion //apple_ref/occ/intfm/BSUser/onCompletion //apple_ref/occ/func/onCompletion //apple_ref/occ/ftmplt/BSUser/onCompletion //apple_ref/occ/defn/onCompletion //apple_ref/occ/macro/onCompletion //apple_ref/doc/anysymbol/onCompletion" machineGenerated="true" --><span class="function">onCompletion</span><!-- /a -->:(void(^)(<a machinegenerated="true" href="../../../BSGroup_h/Classes/BSGroup/index.html#//apple_ref/occ/cl/BSGroup" logicalPath="//apple_ref/occ/cl/BSGroup" target="_top"><span class="type">BSGroup</span></a> <span class="type">*</span><span class="param">group</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSUser/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSUser/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/getGroupDetails:onCompletion:;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/getGroupDetails:onCompletion:/groupID;   name=getGroupDetails:onCompletion:::groupID -->
+<a name="//apple_ref/doc/methodparam/BSUser/getGroupDetails:onCompletion:/groupID"></a>
+<code>groupID</code>
+</dt>
+<dd><p>- ID of a group which details we need</p></dd>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/getGroupDetails:onCompletion:/block;   name=getGroupDetails:onCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSUser/getGroupDetails:onCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns group details or error</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Return Value</font></h5>
+<p><!-- begin return value --></p>
+<p>Returns all groups
+
+<!-- end return value --></p>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/getGroupDetails:onCompletion:;name=start --><p>Method for retrieving user group details
+</p>
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/getGroupDetails:onCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
 <!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSUser/getNetworkDetailsFromDate:toDate:mccmnc:withCompletionBlock:;   name=BSUser::getNetworkDetailsFromDate:toDate:mccmnc:withCompletionBlock: --><a name="//apple_ref/occ/instm/BSUser/getNetworkDetailsFromDate:toDate:mccmnc:withCompletionBlock:"></a>
 <h3><a name="getNetworkDetailsFromDate:toDate:mccmnc:withCompletionBlock:">getNetworkDetailsFromDate:toDate:mccmnc:withCompletionBlock:</a></h3>
@@ -684,6 +775,60 @@ and should merely be used for aggregated views on traffic.
 <!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/getNetworkDetailsFromDate:toDate:mccmnc:withCompletionBlock:;name=start --><p>The call supports a summary for available connections on used token.
 </p>
 <!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/getNetworkDetailsFromDate:toDate:mccmnc:withCompletionBlock:;name=end --><!-- end discussion -->
+<hr class="betweenAPIEntries">
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSUser/getRecipientNumbersOnCompletion:;   name=BSUser::getRecipientNumbersOnCompletion: --><a name="//apple_ref/occ/instm/BSUser/getRecipientNumbersOnCompletion:"></a>
+<h3><a name="getRecipientNumbersOnCompletion:">getRecipientNumbersOnCompletion:</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/getRecipientNumbersOnCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSUser/getRecipientNumbersOnCompletion:" logicalPath="//apple_ref/occ/instm/BSUser/getRecipientNumbersOnCompletion" target="_top"><span class="function">getRecipientNumbersOnCompletion</span></a>:(void(^)(<!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><span class="param">numbers</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSUser/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSUser/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/getRecipientNumbersOnCompletion:;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/getRecipientNumbersOnCompletion:/block;   name=getRecipientNumbersOnCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSUser/getRecipientNumbersOnCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns numbers or error list</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/getRecipientNumbersOnCompletion:;name=start --><p>As a user you will have associated connections. 
+These connections have access to recipient numbers, which can receive 
+mobile originated messages. The recipient numbers are registered in 
+specific countries, which this endpoint will also list.
+</p>
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/getRecipientNumbersOnCompletion:;name=end --><!-- end discussion -->
+<hr class="betweenAPIEntries">
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSUser/getWalletDetailsForID:onCompletion:;   name=BSUser::getWalletDetailsForID:onCompletion: --><a name="//apple_ref/occ/instm/BSUser/getWalletDetailsForID:onCompletion:"></a>
+<h3><a name="getWalletDetailsForID:onCompletion:">getWalletDetailsForID:onCompletion:</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/getWalletDetailsForID:onCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSUser/getWalletDetailsForID:onCompletion:" logicalPath="//apple_ref/occ/instm/BSUser/getWalletDetailsForID" target="_top"><span class="function">getWalletDetailsForID</span></a>:(<!-- a logicalPath="//apple_ref/occ/cl/NSString //apple_ref/occ/tdef/NSString //apple_ref/occ/tag/NSString //apple_ref/occ/struct/NSString //apple_ref/occ/intf/NSString //apple_ref/doc/anysymbol/NSString" machineGenerated="true" --><span class="type">NSString</span><!-- /a --> <span class="type">*</span>)<span class="param">walletID</span> 
+        <!-- a logicalPath="//apple_ref/occ/instm/BSUser/onCompletion //apple_ref/occ/clm/BSUser/onCompletion //apple_ref/occ/intfcm/BSUser/onCompletion //apple_ref/occ/intfm/BSUser/onCompletion //apple_ref/occ/func/onCompletion //apple_ref/occ/ftmplt/BSUser/onCompletion //apple_ref/occ/defn/onCompletion //apple_ref/occ/macro/onCompletion //apple_ref/doc/anysymbol/onCompletion" machineGenerated="true" --><span class="function">onCompletion</span><!-- /a -->:(void(^)(<a machinegenerated="true" href="../../../BSWallet_h/Classes/BSWallet/index.html#//apple_ref/occ/cl/BSWallet" logicalPath="//apple_ref/occ/cl/BSWallet" target="_top"><span class="type">BSWallet</span></a> <span class="type">*</span><span class="param">wallet</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSUser/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSUser/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSUser/getWalletDetailsForID:onCompletion:;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/getWalletDetailsForID:onCompletion:/walletID;   name=getWalletDetailsForID:onCompletion:::walletID -->
+<a name="//apple_ref/doc/methodparam/BSUser/getWalletDetailsForID:onCompletion:/walletID"></a>
+<code>walletID</code>
+</dt>
+<dd><p>- Wallet ID</p></dd>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSUser/getWalletDetailsForID:onCompletion:/block;   name=getWalletDetailsForID:onCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSUser/getWalletDetailsForID:onCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- block that returns wallet details or errors</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/getWalletDetailsForID:onCompletion:;name=start --><p>Method for retrieving wallet details based on id
+</p>
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSUser/getWalletDetailsForID:onCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenAPIEntries">
 <!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSUser/initUserWithEmail:andPassword:;   name=BSUser::initUserWithEmail:andPassword: --><a name="//apple_ref/occ/instm/BSUser/initUserWithEmail:andPassword:"></a>
 <h3><a name="initUserWithEmail:andPassword:">initUserWithEmail:andPassword:</a></h3>
@@ -1346,7 +1491,7 @@ Accessible only if customer details are enquired
 <p class="gapBeforeFooter">&nbsp;</p>
 <hr class="afterFooter">
 <div class="hd_copyright_and_timestamp">
-<p class="hd_timestamp">Last Updated: Monday, August 04, 2014
+<p class="hd_timestamp">Last Updated: Thursday, September 04, 2014
 </p>
 </div>
 </td>
