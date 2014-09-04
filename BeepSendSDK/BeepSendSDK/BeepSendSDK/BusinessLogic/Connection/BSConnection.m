@@ -433,7 +433,7 @@
 		return 0;
 	}
 	
-	if ([BSHelper isNilOrEmpty:message.recipient] || message.recipients.count==0 || message.groups.count==0) {
+	if ([BSHelper isNilOrEmpty:message.recipient] && message.recipients.count==0 && message.groups.count==0) {
 		
 		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message recipient must be specified!", @"")];
 		block(nil, @[error]);
@@ -486,8 +486,8 @@
 				return 0;
 			}
 			
-			if ([BSHelper isNilOrEmpty:[(BSMessage *)object recipient]] ||
-				 [[(BSMessage *)object recipients] count]==0 ||
+			if ([BSHelper isNilOrEmpty:[(BSMessage *)object recipient]] &&
+				 [[(BSMessage *)object recipients] count]==0 &&
 				 [[(BSMessage *)object  groups] count]==0) {
 				
 				BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message recipient must be specified!", @"")];
@@ -766,8 +766,8 @@
 				return;
 			}
 			
-			if ([BSHelper isNilOrEmpty:[(BSMessage *)object recipient]] ||
-				[[(BSMessage *)object recipients] count]==0 ||
+			if ([BSHelper isNilOrEmpty:[(BSMessage *)object recipient]] &&
+				[[(BSMessage *)object recipients] count]==0 &&
 				[[(BSMessage *)object  groups] count]==0) {
 				
 				BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message recipient must be specified!", @"")];
@@ -848,7 +848,7 @@
 		return; //This connection can't send HLR
 	}
 	
-	if (phoneNumbers.count>0) {
+	if (phoneNumbers.count<=0) {
 		
 		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Phone number must be specified!", @"")];
 		block(nil, @[error]);

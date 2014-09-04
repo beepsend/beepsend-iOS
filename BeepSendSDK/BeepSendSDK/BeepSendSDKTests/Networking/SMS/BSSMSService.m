@@ -16,6 +16,8 @@
 #import "BSAPSMSLookup.h"
 #import "BSAPEstimatedCost.h"
 #import "BSConnection.h"
+#import "BSAPConversation.h"
+#import "BSAPTwoWayBatch.h"
 
 #import "BSGroup.h"
 
@@ -104,6 +106,32 @@
 		[mArr addObject:[msg convertToModel]];
 	}
 	block([NSArray arrayWithArray:mArr], nil);
+}
+
+- (void)getTwoWayBatchForBatchID:(NSString *)batchID onCompletion:(void(^)(NSArray *batches, NSArray *errors))block
+{
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPTwoWayBatch *twb in [BSAPTwoWayBatch arrayOfObjectsFromArrayOfDictionaries:@[@{@"mt_sms_id":@"889000680270500421",@"mt_body":@"What is your name?",@"mo_sms_id":@"889000680270500422",@"mo_body":@"Sir Lancelot",@"dlr_stat":@"DELIVRD"},@{@"mt_sms_id":@"889000680141388005",@"mt_body":@"What is your quest?",@"mo_sms_id":@"889000680141388006",@"mo_body":@"To seek the holy grail",@"dlr_stat":@"DELIVRD"},@{@"mt_sms_id":@"889000680141388005",@"mt_body":@"What is your favorite color?",@"mo_sms_id":@"889000680141388006",@"mo_body":@"BLUE!",@"dlr_stat":@"DELIVRD"}]]) {
+		[mArr addObject:[twb convertToModel]];
+	}
+
+	block([NSArray arrayWithArray:mArr], nil);
+
+}
+
+- (void)getConversationsOnCompletion:(void(^)(NSArray *conversations, NSArray *errors))block
+{
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPConversation *conv in [BSAPConversation arrayOfObjectsFromArrayOfDictionaries:@[@{@"id":@"46736007500-46736000005",@"to":@"46736007500",@"from":@{@"number":@"46736000005",@"contact":@{@"id":@10,@"firstname":@"Foo",@"lastname":@"Bar"}},@"body":@"Hi. This is a test message.",@"timestamp":@1383225355}]]) {
+		[mArr addObject:[conv convertToModel]];
+	}
+	
+	block([NSArray arrayWithArray:mArr], nil);
+}
+
+- (void)getFullConversation:(BSConversation *)conversation onCompletion:(void(^)(BSConversation *fConversation, NSArray *errors))block
+{
+	block([[BSAPConversation classFromDict:@{@"id":@"46736007500-46736000005",@"to":@"46736007500",@"from":@{@"number":@"46736000005",@"contact":@{@"id":@10,@"firstname":@"Foo",@"lastname":@"Bar"}},@"body":@"Hi. This is a test message.",@"timestamp":@1383225355,@"items":@[@{@"id":@"12345",@"batch":[NSNull null],@"body":@"Hello World!",@"connection":@{@"id":@7,@"label":@"superman-connection"},@"to":@{@"address":@"46406007500",@"ton":@1,@"npi":@1},@"from":@{@"address":@"Beepsend",@"ton":@1,@"npi":@1},@"validity_period":@"131102072704000-",@"data_coding":@3,@"timestamps":@{@"sms":@{@"in":@1383225355,@"delivered":[NSNull null]},@"dlr_out":[NSNull null]},@"dlr":@{@"status":[NSNull null],@"error":[NSNull null]},@"price":@0.068,@"mccmnc":@{@"mcc":@"240",@"mnc":@"01"}}]}] convertToModel], nil);
 }
 
 @end

@@ -16,6 +16,7 @@
 #import "BSHLR.h"
 #import "BSLookup.h"
 #import "BSError.h"
+#import "BSTwoWayBatch.h"
 
 @class BSUser;
 @class BSMessage;

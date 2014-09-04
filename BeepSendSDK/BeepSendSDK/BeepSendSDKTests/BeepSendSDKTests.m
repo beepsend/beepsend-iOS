@@ -1243,6 +1243,177 @@
 	[[BSTestSemaphor sharedInstance] waitForKey:@"testGetAllConnectionsHLR"];
 }
 
+- (void)testBulkHLR
+{
+	[_user getAvailableConnectionsOnCompletion:^(NSArray *connections, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testBulkHLRConnections"];
+		
+		NSAssert(connections!=nil, @"Connections not fetched!");
+		
+		if (!errors || errors.count == 0) {
+			
+			for (BSConnection *connection in connections) {
+				
+				if (connection.type == BSConnectionTypeHLR) {
+					
+					[connection bulkHLRForNumbers:@[@"123456789012",@"123456789013"] onCompletion:^(NSArray *hlrs, NSArray *errors) {
+						[[BSTestSemaphor sharedInstance] lift:@"testBulkHLR"];
+						
+						NSAssert(hlrs!=nil, @"HLR not performed!");
+						
+						if (!errors || errors.count == 0) {
+							
+							for (BSHLR *hlr in hlrs) {
+								
+								BSDLog(@"\nHLR ID: %@", hlr.hlrID);
+								BSDLog(@"\nHLR imsi: %@", hlr.imsi);
+								BSDLog(@"\nHLR phone number: %@", hlr.phoneNumber);
+								
+								BSDLog(@"\n------------------------\n");
+							}
+						
+							BSDLog(@"\n------------------------\n");
+						}
+						else {
+							
+							for (BSError *error in errors) {
+								
+								BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+								
+								BSDLog(@"\n------------------------\n");
+							}
+						}
+					}];
+					[[BSTestSemaphor sharedInstance] waitForKey:@"testBulkHLR"];
+				}
+			}
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+		
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testBulkHLRConnections"];
+}
+
+- (void)testTwoWayBatch
+{
+	[_connection getTwoWayBatchForID:@"1234" onCompletion:^(NSArray *batches, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testTwoWayBatch"];
+		
+		NSAssert(batches!=nil, @"Batches not fetched!");
+		
+		if (!errors || errors.count == 0) {
+			
+			for (BSTwoWayBatch *batch in batches) {
+				
+				BSDLog(@"\nBatch MO body: %@", batch.moBody);
+				BSDLog(@"\nBatch MT body: %@", batch.mtBody);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testTwoWayBatch"];
+}
+
+- (void)testPricelistAsCSV
+{
+	[_connection getPricelistsAsCsvOnCompletion:^(NSString *pricelist, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testPricelistAsCSV"];
+		
+		NSAssert(pricelist!=nil, @"Pricelist not fetched!");
+		
+		if (!errors || errors.count == 0) {
+			
+			BSDLog(@"%@", pricelist);
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testPricelistAsCSV"];
+}
+
+- (void)testPricelistDiffAsCSV
+{
+	BSPricelist *p1 = [[BSPricelist alloc] initPricelistWithID:@"1234" networks:nil networkCount:nil timeOfSave:nil active:nil timeOfFirstView:nil];
+	BSPricelist *p2 = [[BSPricelist alloc] initPricelistWithID:@"1235" networks:nil networkCount:nil timeOfSave:nil active:nil timeOfFirstView:nil];
+	
+	[_connection getPricelistsDiffAsCsvForPricelist:p1 andPricelist:p2 onCompletion:^(NSString *pricelist, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testPricelistDiffAsCSV"];
+		
+		NSAssert(pricelist!=nil, @"Pricelist diff not fetched!");
+		
+		if (!errors || errors.count == 0) {
+			
+			BSDLog(@"%@", pricelist);
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testPricelistDiffAsCSV"];
+}
+
+- (void)testPricelistDiff
+{
+	BSPricelist *p1 = [[BSPricelist alloc] initPricelistWithID:@"1234" networks:nil networkCount:nil timeOfSave:nil active:nil timeOfFirstView:nil];
+	BSPricelist *p2 = [[BSPricelist alloc] initPricelistWithID:@"1235" networks:nil networkCount:nil timeOfSave:nil active:nil timeOfFirstView:nil];
+	
+	[_connection getPricelistsDiffForPricelist:p1 andPricelist:p2 onCompletion:^(BSNetwork *pricelistDiff, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testPricelistDiff"];
+		
+		NSAssert(pricelistDiff!=nil, @"Pricelist diff not fetched!");
+		
+		if (!errors || errors.count == 0) {
+			
+			BSDLog(@"\nBatch MO body: %@", pricelistDiff.comment);
+			BSDLog(@"\nBatch MT body: %@", pricelistDiff.country);
+				
+			BSDLog(@"\n------------------------\n");
+
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testPricelistDiff"];
+}
+
 - (void)testValidateHLR
 {
 	[_user getAvailableConnectionsOnCompletion:^(NSArray *connections, NSArray *errors) {
@@ -1577,6 +1748,53 @@
 	[[BSTestSemaphor sharedInstance] waitForKey:@"testAddEmail"];
 }
 
+- (void)testGetEmail
+{
+	NSAssert(_wallet1!=nil, @"Wallet 1 not set");
+	
+	[_wallet1 addEmail:@"mail@email.com" onCompletion:^(BSEmail *email, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testGetEmailAdd"];
+	
+		NSAssert(email!=nil, @"Email failed to add");
+		
+		if (!errors || errors.count == 0) {
+			
+			[_wallet1 getEmailWithID:email.emailID onCompletion:^(BSEmail *eml, NSArray *err) {
+				[[BSTestSemaphor sharedInstance] lift:@"testGetEmail"];
+				
+				if (err && err.count > 0) {
+					
+					for (BSError *error in err) {
+						
+						BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+						
+						BSDLog(@"\n------------------------\n");
+					}
+				}
+				else {
+					BSDLog(@"\nEmail ID: %@", eml.emailID);
+					BSDLog(@"\nEmail address: %@", eml.address);
+					
+					BSDLog(@"\n------------------------\n");
+				}
+				
+			}];
+			[[BSTestSemaphor sharedInstance] waitForKey:@"testGetEmail"];
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+		
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testGetEmailAdd"];
+}
+
 - (void)testRemoveEmail
 {
 	NSAssert(_wallet1!=nil, @"Wallet 1 not set");
@@ -1826,6 +2044,59 @@
 	[[BSTestSemaphor sharedInstance] waitForKey:@"testAddContactToGroup"];
 }
 
+- (void)testAddContactsToGroup
+{
+	NSAssert(_contact!=nil, @"Contact not set");
+	NSAssert(_group!=nil, @"Contact not set");
+	
+	BSContact *c1 = [[BSContact alloc] initContactWithPhoneNumber:@"111111" firstName:@"C1" lastName:@"C1" group:nil];
+	BSContact *c2 = [[BSContact alloc] initContactWithPhoneNumber:@"222222" firstName:@"C2" lastName:@"C2" group:nil];
+	BSContact *c3 = [[BSContact alloc] initContactWithPhoneNumber:@"333333" firstName:@"C3" lastName:@"C3" group:nil];
+	
+	[_group addContacts:@[c1, c2, c3] onCompletion:^(NSArray *contacts, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testAddContactsToGroup"];
+		
+		NSAssert(contacts!=nil, @"Contacts not added to group!");
+		
+		if (!errors || errors.count == 0) {
+			
+			for (BSContact *contact in contacts) {
+				
+				if (contact.errors && contact.errors.count > 0) {
+					
+					for (BSError *error in contact.errors) {
+						
+						BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+						
+						BSDLog(@"\n------------------------\n");
+					}
+				}
+				else {
+					BSDLog(@"\nContact ID: %@", contact.contactID);
+					BSDLog(@"\nContact first name: %@", contact.firstName);
+					BSDLog(@"\nContact last name: %@", contact.lastName);
+					BSDLog(@"\nContact phone number: %@", contact.phoneNumber);
+					BSDLog(@"\nContact group: %@", contact.group.name);
+					
+					BSDLog(@"\n------------------------\n");
+					
+					_contact = contact;
+				}
+			}
+		}
+		else {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testAddContactsToGroup"];
+}
+
 - (void)testRemoveContactFromGroup
 {
 	NSAssert(_contact!=nil, @"Contact not set");
@@ -1845,6 +2116,31 @@
 		}
 	}];
 	[[BSTestSemaphor sharedInstance] waitForKey:@"testRemoveContactFromGroup"];
+}
+
+- (void)testRemoveContactsFromGroup
+{
+	NSAssert(_contact!=nil, @"Contact not set");
+	NSAssert(_group!=nil, @"Contact not set");
+	
+	BSContact *c1 = [[BSContact alloc] initContactWithID:@"12345" firstName:@"C1" lastName:@"C1" phoneNumber:@"1234567890" group:nil errors:nil];
+	BSContact *c2 = [[BSContact alloc] initContactWithID:@"12346" firstName:@"C2" lastName:@"C2" phoneNumber:@"1234567891" group:nil errors:nil];
+	BSContact *c3 = [[BSContact alloc] initContactWithID:@"12347" firstName:@"C3" lastName:@"C3" phoneNumber:@"1234567892" group:nil errors:nil];
+	
+	[_group removeContacts:@[c1, c2, c3] onCompletion:^(BOOL success, NSArray *errors) {
+		[[BSTestSemaphor sharedInstance] lift:@"testRemoveContactsFromGroup"];
+		
+		if (errors && errors.count > 0) {
+			
+			for (BSError *error in errors) {
+				
+				BSDLog(@"%@ - %@", [error code], [error errorDescription]);
+				
+				BSDLog(@"\n------------------------\n");
+			}
+		}
+	}];
+	[[BSTestSemaphor sharedInstance] waitForKey:@"testRemoveContactsFromGroup"];
 }
 
 - (void)testRemoveContact

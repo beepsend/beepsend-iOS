@@ -11,6 +11,7 @@
 #import "BSAPIConfiguration.h"
 
 #import "BSAPConnection.h"
+#import "BSAPNumber.h"
 
 @implementation BSConnectionsService
 
@@ -51,6 +52,7 @@
 				systemID:(NSString *)systemID
 				   label:(NSString *)label
 			 description:(NSString *)description
+				password:(NSString *)password
 	 withCompletionBlock:(void(^)(BSConnection *connection, NSArray *errors))block
 {
 	connection.callbackURLs.DLR = calbackDLR;
@@ -60,6 +62,8 @@
 	connection.systemID = systemID;
 	connection.label = label;
 	connection.description = description;
+	
+	connection.password = password;
 	
 	block(connection, nil);
 }
@@ -74,6 +78,15 @@
 {
 	BSConnection *newPass = [[BSConnection alloc] initWithConnectionModel:connection withNewPassword:@"NEW_PASSWORD"];
 	block(newPass, nil);
+}
+
+- (void)getRecipientNumbersOnCompletion:(void(^)(NSArray *recipientNumbers, NSArray *errors))block
+{
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPNumber *num in [BSAPNumber arrayOfObjectsFromArrayOfDictionaries:@[@{@"connection":@{@"id":@1,@"name":@"your-account"},@"country":@{@"id":@1,@"name":@"Denmark"},@"id":@350,@"number":@"1272"},@{@"connection":@{@"id":@1,@"name":@"your-account"},@"country":@{@"id":@2,@"name":@"Sweden"},@"id":@351,@"number":@"1272"}]]) {
+		[mArr addObject:[num convertToModel]];
+	}
+	block([NSArray arrayWithArray:mArr], nil);
 }
 
 @end

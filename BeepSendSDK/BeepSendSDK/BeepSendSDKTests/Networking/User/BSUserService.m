@@ -98,4 +98,9 @@
 	block(YES, nil);
 }
 
+- (void)resetUserPasswordForEmail:(NSString *)email withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block
+{
+	block(YES, nil);
+}
+
 @end

@@ -11,6 +11,7 @@
 #import "BSAPIConfiguration.h"
 
 #import "BSAPPricelist.h"
+#import "BSAPPNetwork.h"
 
 @implementation BSPricelistService
 
@@ -56,6 +57,34 @@
 		[mArr addObject:[pricelist convertToModel]];
 	}
 	block([NSArray arrayWithArray:mArr], nil);
+}
+
+- (void)getPricelistAsCSVForConnection:(BSConnection *)connection onCompletion:(void(^)(NSString *pricelist, NSArray *errors))block
+{
+	NSString *csvString = @"mcc;mnc;operator;price240;;Default;0.08240;01;\"TeliaSonera Mobile Networks AB Sweden (TeliaSonera Mobile Networks)\";0.068";
+	block(csvString, nil);
+}
+
+- (void)getPricelistDiffForConnection:(BSConnection *)connection withPricelist1:(BSPricelist *)pricelist1 andPricelist2:(BSPricelist *)pricelist2 onCompletion:(void(^)(BSNetwork *diff, NSArray *error))block
+{
+
+	NSMutableArray *mArr = [@[] mutableCopy];
+	for (BSAPPNetwork *pricelist in [BSAPPNetwork arrayOfObjectsFromArrayOfDictionaries:@[@{@"country":@{@"name":@"Zimbabwe",@"prefix":@263,@"code":@"ZW"},@"operator":@"Telecel Zimbabwe (PVT) Ltd (TELECEL)",@"mccmnc":@[@{@"mnc":@"03",@"mcc":@"648"}],@"comment":@"",@"price":@0.006,@"old_price":@0.022,@"diff":@"price"}]]) {
+		[mArr addObject:[pricelist convertToModel]];
+	}
+						  
+	if (mArr.count>0) {
+		block(mArr[0], nil);
+	}
+	else {
+		block(nil, nil);
+	}
+}
+
+- (void)getPricelistDiffAsCSVForConnection:(BSConnection *)connection withPricelist1:(BSPricelist *)pricelist1 andPricelist2:(BSPricelist *)pricelist2 onCompletion:(void(^)(NSString *diff, NSArray *error))block
+{
+	NSString *csvString = @"mcc;mnc;operator;price;price_diff;diff240;;Default;0.08;0.011;price240;01;\"TeliaSonera Mobile Networks AB Sweden (TeliaSonera Mobile Networks)\";;0;removed";
+	block(csvString, nil);
 }
 
 @end

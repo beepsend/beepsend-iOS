@@ -232,6 +232,12 @@
 		6EC31686195030D0004D8F87 /* BSSMSService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC31685195030D0004D8F87 /* BSSMSService.m */; };
 		6EC3168D19504CEB004D8F87 /* BSGeneralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC3168C19504CEB004D8F87 /* BSGeneralModel.m */; };
 		6EC3168E19504CEB004D8F87 /* BSGeneralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC3168C19504CEB004D8F87 /* BSGeneralModel.m */; };
+		6EC3E5E119B8A14C00062B68 /* BSAPConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD41DA19B74DB1008E912D /* BSAPConversation.m */; };
+		6EC3E5E219B8A14C00062B68 /* BSAPSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD41D619B74D7C008E912D /* BSAPSender.m */; };
+		6EC3E5E319B8A14C00062B68 /* BSAPTwoWayBatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD41CE19B731CB008E912D /* BSAPTwoWayBatch.m */; };
+		6EC3E5E419B8A14C00062B68 /* BSConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD41E719B75170008E912D /* BSConversation.m */; };
+		6EC3E5E519B8A14C00062B68 /* BSSender.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD41E419B75146008E912D /* BSSender.m */; };
+		6EC3E5E619B8A14C00062B68 /* BSTwoWayBatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD41D219B73B67008E912D /* BSTwoWayBatch.m */; };
 		6EC77E6619814007007BCCA3 /* BSAPContactsRequests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC77E6519814007007BCCA3 /* BSAPContactsRequests.m */; };
 		6EC77E6B19814D87007BCCA3 /* BSAPError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC77E6A19814D87007BCCA3 /* BSAPError.m */; };
 		6EC77E6F19814DF7007BCCA3 /* BSError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC77E6E19814DF7007BCCA3 /* BSError.m */; };
@@ -327,7 +333,7 @@
 		6E653814194730EB00FC6349 /* libBeepSendSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBeepSendSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E653817194730EB00FC6349 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6E65381B194730EB00FC6349 /* BeepSendSDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BeepSendSDK-Prefix.pch"; sourceTree = "<group>"; };
-		6E65381C194730EB00FC6349 /* BeepSendSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BeepSendSDK.h; sourceTree = "<group>"; };
+		6E65381C194730EB00FC6349 /* BeepSendSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BeepSendSDK.h; path = ../../BeepSendSDK/BeepSendSDK.h; sourceTree = "<group>"; };
 		6E653824194730EB00FC6349 /* BeepSendSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BeepSendSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E653825194730EB00FC6349 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6E65382F194730EB00FC6349 /* BeepSendSDKTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BeepSendSDKTests-Info.plist"; sourceTree = "<group>"; };
@@ -653,7 +659,6 @@
 				6EB685421949ED7F0010FC73 /* Networking */,
 				6EBC77CA194EE04E00666099 /* Models */,
 				6EBADD0D196BCF2C00315EA4 /* BusinessLogic */,
-				6E65381C194730EB00FC6349 /* BeepSendSDK.h */,
 				6E65381A194730EB00FC6349 /* Supporting Files */,
 			);
 			path = BeepSendSDK;
@@ -1297,6 +1302,7 @@
 		6EBC71C81988FEBA005245E8 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				6E65381C194730EB00FC6349 /* BeepSendSDK.h */,
 				6EBC71C91988FEBA005245E8 /* Analytics */,
 				6EBC71CF1988FEBA005245E8 /* Connections */,
 				6EBC71D21988FEBA005245E8 /* Contacts */,
@@ -2065,6 +2071,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EC3E5E119B8A14C00062B68 /* BSAPConversation.m in Sources */,
+				6EC3E5E219B8A14C00062B68 /* BSAPSender.m in Sources */,
+				6EC3E5E319B8A14C00062B68 /* BSAPTwoWayBatch.m in Sources */,
+				6EC3E5E419B8A14C00062B68 /* BSConversation.m in Sources */,
+				6EC3E5E519B8A14C00062B68 /* BSSender.m in Sources */,
+				6EC3E5E619B8A14C00062B68 /* BSTwoWayBatch.m in Sources */,
 				6EBC718B1988E752005245E8 /* BSHelper.m in Sources */,
 				6EBC71931988E752005245E8 /* BSAPError.m in Sources */,
 				6EBC71F41988FEBA005245E8 /* BSWalletService.m in Sources */,

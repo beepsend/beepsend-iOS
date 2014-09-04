@@ -23,12 +23,12 @@
 				 withConnection:(BSConnection *)connection
 			withCompletionBlock:(void(^)(BSHLR *hlr, NSArray *errors))block;
 
-- (void)doBulkHLRForNumbers:(NSArray *)numbers
-			 withConnection:(BSConnection *)connection
-		withCompletionBlock:(void(^)(NSArray *hlrs, NSArray *errors))block;
-
 - (void)validateHLRForNumber:(NSString *)number
 			  withConnection:(BSConnection *)connection
 		 withCompletionBlock:(void(^)(BSHLR *response, NSArray *errors))block;
+
+- (void)doBulkHLRForNumbers:(NSArray *)numbers
+			 withConnection:(BSConnection *)connection
+		withCompletionBlock:(void(^)(NSArray *hlrs, NSArray *errors))block;
 
 @end

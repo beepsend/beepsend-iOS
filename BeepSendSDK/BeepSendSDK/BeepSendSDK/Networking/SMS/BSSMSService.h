@@ -60,14 +60,15 @@
  */
 - (void)getDetailsForBatch:(NSString *)batchID withCompletionBlock:(void(^)(BSBatch *batch, NSArray *errors))block;
 
-- (void)getTwoWayBatchForBatchID:(NSString *)batchID onCompletion:(void(^)(NSArray *batches, NSArray *errors))block;
-
 /*
 	Estimate message/s price.
  */
 - (void)estimateCostForMessages:(NSArray *)messageRequest usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *response, NSArray *errors))block;
 
+- (void)getTwoWayBatchForBatchID:(NSString *)batchID onCompletion:(void(^)(NSArray *batches, NSArray *errors))block;
+
 - (void)getConversationsOnCompletion:(void(^)(NSArray *conversations, NSArray *errors))block;
+
 - (void)getFullConversation:(BSConversation *)conversation onCompletion:(void(^)(BSConversation *fConversation, NSArray *errors))block;
 
 @end

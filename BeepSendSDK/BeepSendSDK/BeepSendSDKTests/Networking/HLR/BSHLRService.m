@@ -46,4 +46,20 @@
 	block(hlr, nil);
 }
 
+- (void)doBulkHLRForNumbers:(NSArray *)numbers
+			 withConnection:(BSConnection *)connection
+		withCompletionBlock:(void(^)(NSArray *hlrs, NSArray *errors))block
+{
+	
+	NSMutableArray *mArr = [@[] mutableCopy];
+	NSMutableArray *mErr = [@[] mutableCopy];
+	for (BSAPHLR *hlr in [BSAPHLR arrayOfObjectsFromArrayOfDictionaries:@[@{@"id":@"08087780013866630151559112345",@"msisdn":@"46736007518",@"errors":[NSNull null]},@{@"id":@"08087780013866301515591123456",@"msisdn":@"46736007505",@"errors":[NSNull null]},@{@"id":[NSNull null],@"msisdn":@"046736007512",@"errors":@[@{@"code":@1031,@"description":@"\"msisdn\" can't have leading zeroes or pluses"}]}]]) {
+		BSHLR *h = [hlr convertToModel];
+		[mArr addObject:h];
+		[mErr addObjectsFromArray:h.errors];
+	}
+	
+	block(mArr, nil);
+}
+
 @end

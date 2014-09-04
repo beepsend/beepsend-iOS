@@ -15,6 +15,7 @@
 @interface BSConnectionsService : BSBaseService
 
 - (void)getAllAvailableConnectsionOnCompletion:(void(^)(NSArray *connections, NSArray *errors))block;
+
 - (void)getMeConnectionOnCompletion:(void(^)(BSConnection *connection, NSArray *errors))block;
 
 - (void)updateConnection:(BSConnection *)connection
