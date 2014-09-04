@@ -132,6 +132,13 @@
  */
 - (void)getEmailsOnCompletion:(void(^)(NSArray *emails, NSArray *errors))block;
 
+/*! Method for fetching email with given ID
+ 
+ @param emailID - emailID to receive email address
+ @param block - Block that will return email or errors
+ */
+- (void)getEmailWithID:(NSString *)emailID onCompletion:(void(^)(BSEmail *email, NSArray *errors))block;
+
 /*! Adds new email to wallet email listing
  
  @param email - Email to add to wallet

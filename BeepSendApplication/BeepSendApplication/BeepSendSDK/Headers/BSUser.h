@@ -15,6 +15,7 @@
 #import "BSContact.h"
 #import	"BSMCCMNC.h"
 #import "BSError.h"
+#import "BSConversation.h"
 
 @class BSConnection;
 
@@ -155,6 +156,8 @@
 - (BSUser *)initWithUserID:(NSString *)uID;
 
 /*! User associated with entered API token
+	If user API token is entered user object will be available, 
+	otherwise if connection API token is entered user object will be nil
  
  @return Returns User object
  */
@@ -232,6 +235,13 @@
  */
 - (NSArray *)getAvailableWallets;
 
+/*! Method for retrieving wallet details based on id
+ 
+ @param walletID - Wallet ID
+ @param block - block that returns wallet details or errors
+ */
+- (void)getWalletDetailsForID:(NSString *)walletID onCompletion:(void(^)(BSWallet *wallet, NSArray *errors))block;
+
 /*! Async method for retrieving user contacts
  
  @param group - Group from where you want to fetch contacts, pass nil if want to search all groups
@@ -292,6 +302,15 @@
  */
 - (NSArray *)getAllGroups;
 
+/*! Method for retrieving user group details
+ 
+ @param groupID - ID of a group which details we need
+ @param block - Returns group details or error
+ 
+ @return Returns all groups
+ */
+- (void)getGroupDetails:(NSString *)groupID onCompletion:(void(^)(BSGroup *group, NSArray *errors))block;
+
 /*! Search groups
  
  @param query - Will search entries with matching name.
@@ -325,5 +344,26 @@
 						   mccmnc:(BSMCCMNC *)mccmnc
 			  withCompletionBlock:(void(^)(NSArray *networkDetails, NSArray *errors))block;
 
+/*!	As a user you will have associated connections. 
+	These connections have access to recipient numbers, which can receive 
+	mobile originated messages. The recipient numbers are registered in 
+	specific countries, which this endpoint will also list.
+ 
+ @param block - Returns numbers or error list
+ */
+- (void)getRecipientNumbersOnCompletion:(void(^)(NSArray *numbers, NSArray *errors))block;
+
+/*! List your user conversations.
+ 
+ @param block - Returns list of conversations or errors
+ */
+- (void)getConversationsOnCompletion:(void(^)(NSArray *conversations, NSArray *errors))block;
+
+/*! List all messages sent back and forth in to a single contact/number.
+	The items list is paginated and this endpoint accepts the same parameters as sms lookup.
+ 
+ @param block - Returns full conversation or error list
+ */
+- (void)getDetailsForConversation:(BSConversation *)conversation onCompletion:(void(^)(BSConversation *fullConversation, NSArray *errors))block;
 
 @end

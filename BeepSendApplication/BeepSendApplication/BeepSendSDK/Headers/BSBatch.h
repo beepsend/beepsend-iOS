@@ -36,12 +36,20 @@
 /*! Create Batch object
  
  @param bID - Batch id
- @param bLabel - Creation time of batch
+ @param bLabel - Batch label
  
  @return Returns Batch object
  */
 - (BSBatch *)initWithID:(NSString *)bID
 			   andLabel:(NSString *)bLabel;
+
+/*! Create Batch object
+ 
+ @param bLabel - Batch label
+ 
+ @return Returns Batch object
+ */
+- (BSBatch *)initWithLabel:(NSString *)bLabel;
 
 /*! This call will give you delivery statistics for a whole batch.
  

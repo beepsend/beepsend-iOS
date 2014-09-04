@@ -84,7 +84,7 @@
 
 /*! Connection password
  */
-@property (nonatomic, strong, readonly) NSString *password;
+@property (nonatomic, strong) NSString *password;
 
 /*! Create Connection object
  Used only when ID of connection is available.
@@ -172,6 +172,14 @@
  */
 - (void)resetConnectionTokenOnCompletion:(void(^)(NSArray *errors))block;
 
+/*! If you wish to use our legacy HTTP API, you need to supply your connection
+	username as well as password for each request. If you don't have your
+	connection password, you can request a new one with this method.
+ 
+ @param block - Returns password or error if password reset failed
+ */
+- (void)resetConnectionPasswordOnCompletion:(void(^)(NSString *password, NSArray *errors))block;
+
 /*! Receive all price lists revisions for a specific connection 
 	related to the authenticated user. 
 	A connection ID or alias tag "me" must be provided as reference.
@@ -187,6 +195,28 @@
  @param block - Returns pricelist or error on fail
  */
 - (void)getCurrentPricelistOnCompletion:(void(^)(BSPricelist *pricelist, NSArray *errors))block;
+
+/*! Fetch pricelist as csv
+ 
+ @param block - Returns pricelist as csv or error list
+ */
+- (void)getPricelistsAsCsvOnCompletion:(void(^)(NSString *pricelist, NSArray *errors))block;
+
+/*! Fetch pricelist diff
+ 
+ @param pl1 - Pricelist 1
+ @param pl2 - Pricelist 2
+ @param block - Returns pricelist diff or error list
+ */
+- (void)getPricelistsDiffForPricelist:(BSPricelist *)pl1 andPricelist:(BSPricelist *)pl2 onCompletion:(void(^)(BSNetwork *pricelistDiff, NSArray *errors))block;
+
+/*! Fetch pricelist diff as csv
+ 
+ @param pl1 - Pricelist 1
+ @param pl2 - Pricelist 2
+ @param block - Returns pricelist as csv or error list
+ */
+- (void)getPricelistsDiffAsCsvForPricelist:(BSPricelist *)pl1 andPricelist:(BSPricelist *)pl2 onCompletion:(void(^)(NSString *pricelist, NSArray *errors))block;
 
 /*! Method sends message and returns number of messages
  
@@ -282,6 +312,15 @@
  */
 - (void)getPreviousBatchesOnCompletion:(void(^)(NSArray *batches, NSArray *errors))block;
 
+/*! This call will give a paginated overview of messages in a batch, 
+	complete with sent and recieved message body. The mobile terminated
+	messages are matched with their mobile originated counterpart
+ 
+ @param batchID - batch ID
+ @param block - Returns array of batches or errors
+ */
+- (void)getTwoWayBatchForID:(NSString *)batchID onCompletion:(void(^)(NSArray *batches, NSArray *errors))block;
+
 /*! Estimates message cost (not necessarily accurate)
  
  @param messages - Messages to estimate price for
@@ -298,6 +337,14 @@
  */
 - (void)immediateHLRForNumber:(NSString *)phoneNumber
 				 onCompletion:(void(^)(BSHLR *hlr, NSArray *errors))block;
+
+/*! Method that performs bulk HLR lookup
+ (takes some time)
+ 
+ @param phoneNumbers - Array of phone numbers to perform HLR
+ @param block - Returns HLR response or error
+ */
+- (void)bulkHLRForNumbers:(NSArray *)phoneNumbers onCompletion:(void(^)(NSArray *hlrs, NSArray *errors))block;
 
 /*! Method that performs a dry run of HLR lookup
 	(takes some time)
