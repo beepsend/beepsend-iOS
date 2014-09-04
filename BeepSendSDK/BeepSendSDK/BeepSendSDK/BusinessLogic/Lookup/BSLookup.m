@@ -75,6 +75,7 @@
 							  valid:(NSDate *)lValidTo
 {
 	if (self = [super initWithID:lID andTitle:@"SMS lookup"]) {
+		_lookupID = lID;
 		_batch = lBatch;
 		_messageBody = lMessage;
 		_usedConnection = lConnection;

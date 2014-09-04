@@ -262,6 +262,18 @@
 	return [@"/analytics/batches/" stringByAppendingString:batchID];
 }
 
+#pragma mark - Conversations
+
++ (NSString *)conversation
+{
+	return @"/conversations/";
+}
+
++ (NSString *)conversationForID:(NSString *)cID
+{
+	return [@"/conversations/" stringByAppendingString:cID];
+}
+
 #pragma mark - Contacts
 
 + (NSString *)contactsForID:(NSString *)contactID

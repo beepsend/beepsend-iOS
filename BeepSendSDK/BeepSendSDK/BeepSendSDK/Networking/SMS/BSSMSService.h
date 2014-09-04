@@ -15,6 +15,7 @@
 #import "BSBatch.h"
 #import "BSError.h"
 #import "BSTwoWayBatch.h"
+#import "BSConversation.h"
 
 @interface BSSMSService : BSBaseService
 
@@ -65,5 +66,8 @@
 	Estimate message/s price.
  */
 - (void)estimateCostForMessages:(NSArray *)messageRequest usingConnection:(BSConnection *)connection withCompletionBlock:(void(^)(NSArray *response, NSArray *errors))block;
+
+- (void)getConversationsOnCompletion:(void(^)(NSArray *conversations, NSArray *errors))block;
+- (void)getFullConversation:(BSConversation *)conversation onCompletion:(void(^)(BSConversation *fConversation, NSArray *errors))block;
 
 @end

@@ -15,6 +15,7 @@
 #import "BSContactsService.h"
 #import "BSGroupsService.h"
 #import "BSAnalyticsService.h"
+#import "BSSMSService.h"
 
 #import "BSTestSemaphor.h"
 
@@ -847,6 +848,41 @@
 		}
 		else {
 			block(recipientNumbers, nil);
+		}
+		
+	}];
+}
+
+- (void)getConversationsOnCompletion:(void(^)(NSArray *conversations, NSArray *errors))block
+{
+	[[BSSMSService sharedService] getConversationsOnCompletion:^(NSArray *conversations, NSArray *errors) {
+		
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(conversations, nil);
+		}
+		
+	}];
+}
+
+- (void)getDetailsForConversation:(BSConversation *)conversation onCompletion:(void(^)(BSConversation *fullConversation, NSArray *errors))block
+{
+	if (conversation == nil || [BSHelper isNilOrEmpty:conversation.conversationID]) {
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"You must specify conversation.", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	[[BSSMSService sharedService] getFullConversation:conversation onCompletion:^(BSConversation *fConversation, NSArray *errors) {
+		
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(fConversation, nil);
 		}
 		
 	}];

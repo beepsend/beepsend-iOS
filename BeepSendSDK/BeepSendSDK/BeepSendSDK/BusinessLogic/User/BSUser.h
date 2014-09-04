@@ -15,6 +15,7 @@
 #import "BSContact.h"
 #import	"BSMCCMNC.h"
 #import "BSError.h"
+#import "BSConversation.h"
 
 @class BSConnection;
 
@@ -351,5 +352,18 @@
  @param block - Returns numbers or error list
  */
 - (void)getRecipientNumbersOnCompletion:(void(^)(NSArray *numbers, NSArray *errors))block;
+
+/*! List your user conversations.
+ 
+ @param block - Returns list of conversations or errors
+ */
+- (void)getConversationsOnCompletion:(void(^)(NSArray *conversations, NSArray *errors))block;
+
+/*! List all messages sent back and forth in to a single contact/number.
+	The items list is paginated and this endpoint accepts the same parameters as sms lookup.
+ 
+ @param block - Returns full conversation or error list
+ */
+- (void)getDetailsForConversation:(BSConversation *)conversation onCompletion:(void(^)(BSConversation *fullConversation, NSArray *errors))block;
 
 @end

@@ -299,6 +299,12 @@
 
 + (NSString *)analyticsBatchesForID:(NSString *)batchID;
 
+#pragma mark - Conversations
+
++ (NSString *)conversation;
+
++ (NSString *)conversationForID:(NSString *)cID;
+
 #pragma mark - Contacts
 
 /*

@@ -16,6 +16,7 @@
 #import "BSAPSMSLookup.h"
 #import "BSAPEstimatedCost.h"
 #import "BSAPTwoWayBatch.h"
+#import "BSAPConversation.h"
 
 #import "BSConnection.h"
 
@@ -339,6 +340,52 @@
 					   }
 				   }];
 
+}
+
+- (void)getConversationsOnCompletion:(void(^)(NSArray *conversations, NSArray *errors))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration conversation]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  NSArray *result;
+						  if (![response isKindOfClass:[NSArray class]]) {
+							  result = @[response];
+						  }
+						  else {
+							  result = [NSArray arrayWithArray:response];
+						  }
+						  
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  for (BSAPConversation *conv in [BSAPConversation arrayOfObjectsFromArrayOfDictionaries:result]) {
+							  [mArr addObject:[conv convertToModel]];
+						  }
+						  block([NSArray arrayWithArray:mArr], nil);
+					  }
+					  else {
+						  
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
+					  }
+					  
+				  }];
+}
+
+- (void)getFullConversation:(BSConversation *)conversation onCompletion:(void(^)(BSConversation *fConversation, NSArray *errors))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration conversationForID:conversation.conversationID]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  block([[BSAPConversation classFromDict:response] convertToModel], nil);
+					  }
+					  else {
+						  
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
+					  }
+					  
+				  }];
 }
 
 @end
