@@ -143,6 +143,16 @@
 																 group:_selectedGroup];
 	[contact saveContactOnCompletion:^(BSContact *contact, NSArray *errors) {
 		
+		if (errors && errors.count>0 ) {
+			
+			NSString *errorMessages = @"";
+			for (BSError *error in errors) {
+				errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+			}
+			
+			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+		}
+		
 	}];
 	
 }

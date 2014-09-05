@@ -138,10 +138,23 @@
 	
 	//Collect all available connections for user
 	[[BSUser currentUser] getAvailableConnectionsOnCompletion:^(NSArray *connections, NSArray *errors) {
-		_dataSourceConnections = connections;
-		[_tableViewConnections reloadData];
 		
-		[_buttonDefaultConnection setTitle:[BSUser currentUser].defaultConnection.label forState:UIControlStateNormal];
+		if (!errors || errors.count==0 ) {
+			
+			_dataSourceConnections = connections;
+			[_tableViewConnections reloadData];
+			
+			[_buttonDefaultConnection setTitle:[BSUser currentUser].defaultConnection.label forState:UIControlStateNormal];
+		}
+		else {
+		
+			NSString *errorMessages = @"";
+			for (BSError *error in errors) {
+				errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+			}
+			
+			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+		}
 	}];
 	
 	//Reload user types table view
@@ -264,6 +277,16 @@
 		
 		[[BSUser currentUser] updateUserOnCompletion:^(NSArray *errors) {
 			
+			if (errors && errors.count>0 ) {
+				
+				NSString *errorMessages = @"";
+				for (BSError *error in errors) {
+					errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+				}
+				
+				[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+			}
+			
 		}];
 	}
 	
@@ -273,6 +296,16 @@
 		[BSUser currentUser].phone = _textFieldPhone.text;
 		
 		[[BSUser currentUser] updateUserOnCompletion:^(NSArray *errors) {
+			
+			if (errors && errors.count>0 ) {
+				
+				NSString *errorMessages = @"";
+				for (BSError *error in errors) {
+					errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+				}
+				
+				[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+			}
 			
 		}];
 	}
@@ -382,6 +415,16 @@
 		{
 			NSString *password = [alertView textFieldAtIndex:0].text;
 			[[BSUser currentUser] updateUserEmailWithPassword:password onCompletion:^(NSArray *errors) {
+				
+				if (errors && errors.count>0 ) {
+					
+					NSString *errorMessages = @"";
+					for (BSError *error in errors) {
+						errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+					}
+					
+					[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+				}
 				
 			}];
 		}

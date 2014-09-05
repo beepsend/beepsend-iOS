@@ -127,8 +127,14 @@
 		[activityIndicator stopAnimating];
 		[activityIndicator removeFromSuperview];
 		
-		if (errors && errors.count>0) {
-			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") message:NSLocalizedString(@"There was an error validating HLR for given number", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+		if (errors && errors.count>0 ) {
+			
+			NSString *errorMessages = @"";
+			for (BSError *error in errors) {
+				errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+			}
+			
+			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
 		}
 		else {
 			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success", @"") message:NSLocalizedString(@"HLR validation performed successfully", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
@@ -162,8 +168,14 @@
 		[activityIndicator stopAnimating];
 		[activityIndicator removeFromSuperview];
 		
-		if (errors && errors.count>0) {
-			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") message:NSLocalizedString(@"There was an error performing HLR for given number", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+		if (errors && errors.count>0 ) {
+			
+			NSString *errorMessages = @"";
+			for (BSError *error in errors) {
+				errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+			}
+			
+			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
 		}
 		else {
 			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success", @"") message:NSLocalizedString(@"HLR performed successfully", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];

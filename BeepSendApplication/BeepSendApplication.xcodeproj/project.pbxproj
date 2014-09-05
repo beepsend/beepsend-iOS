@@ -148,6 +148,10 @@
 		6EBD2F55196D453400F89C52 /* BSSendMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSSendMessageView.m; path = Views/SendMessageView/BSSendMessageView.m; sourceTree = "<group>"; };
 		6EBD2F58196D45FB00F89C52 /* BSSendMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSSendMessageViewController.h; path = ViewControllers/SendMessageViewController/BSSendMessageViewController.h; sourceTree = "<group>"; };
 		6EBD2F59196D45FB00F89C52 /* BSSendMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSSendMessageViewController.m; path = ViewControllers/SendMessageViewController/BSSendMessageViewController.m; sourceTree = "<group>"; };
+		6EBDD54819B9946E00DFA2B4 /* BSConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSConversation.h; sourceTree = "<group>"; };
+		6EBDD54919B9946E00DFA2B4 /* BSNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSNumber.h; sourceTree = "<group>"; };
+		6EBDD54A19B9946E00DFA2B4 /* BSSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSSender.h; sourceTree = "<group>"; };
+		6EBDD54B19B9946E00DFA2B4 /* BSTwoWayBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSTwoWayBatch.h; sourceTree = "<group>"; };
 		6EC74F8719750DCC007A0356 /* BSUserDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSUserDetailsViewController.h; sourceTree = "<group>"; };
 		6EC74F8819750DCC007A0356 /* BSUserDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSUserDetailsViewController.m; sourceTree = "<group>"; };
 		6EC74F8B19750E08007A0356 /* BSUserDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSUserDetailsView.h; path = Views/UserDetailsView/BSUserDetailsView.h; sourceTree = "<group>"; };
@@ -280,6 +284,10 @@
 		6E9D6F3919921CBD0064DA4B /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				6EBDD54819B9946E00DFA2B4 /* BSConversation.h */,
+				6EBDD54919B9946E00DFA2B4 /* BSNumber.h */,
+				6EBDD54A19B9946E00DFA2B4 /* BSSender.h */,
+				6EBDD54B19B9946E00DFA2B4 /* BSTwoWayBatch.h */,
 				6E9D6F3A19921CBD0064DA4B /* BeepSendSDK.h */,
 				6E9D6F3B19921CBD0064DA4B /* BSAccountManager.h */,
 				6E9D6F3C19921CBD0064DA4B /* BSAccumulatedStatistics.h */,

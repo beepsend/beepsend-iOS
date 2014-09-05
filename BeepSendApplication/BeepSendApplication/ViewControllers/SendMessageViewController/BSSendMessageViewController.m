@@ -200,7 +200,13 @@
 			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success!", @"") message:NSLocalizedString(@"Message was successfully validated!", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
 		}
 		else {
-			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:NSLocalizedString(@"There was an error while validating message! Try again.", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+			
+			NSString *errorMessages = @"";
+			for (BSError *error in errors) {
+				errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+			}
+			
+			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
 		}
 	}];
 	
@@ -233,7 +239,13 @@
 			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success!", @"") message:NSLocalizedString(@"Message was successfully sent!", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
 		}
 		else {
-			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:NSLocalizedString(@"There was an error while sending message! Try again.", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+			
+			NSString *errorMessages = @"";
+			for (BSError *error in errors) {
+				errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+			}
+			
+			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
 		}
 	}];
 }

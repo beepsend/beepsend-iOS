@@ -71,13 +71,25 @@
 	
 	[[BSUser currentUser] getAllGroupsForNextPage:NO onCompletion:^(NSArray *groups, NSArray *errors) {
 
-		NSMutableDictionary *mDict = [@{} mutableCopy];
-		for (BSGroup *g in groups) {
-			[mDict setObject:g forKey:g.groupID];
+		if (errors && errors.count>0 ) {
+			
+			NSString *errorMessages = @"";
+			for (BSError *error in errors) {
+				errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+			}
+			
+			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
 		}
-		_dataSourceGroups = [NSDictionary dictionaryWithDictionary:mDict];
+		else {
 		
-		[_tableViewContacts reloadData];
+			NSMutableDictionary *mDict = [@{} mutableCopy];
+			for (BSGroup *g in groups) {
+				[mDict setObject:g forKey:g.groupID];
+			}
+			_dataSourceGroups = [NSDictionary dictionaryWithDictionary:mDict];
+			
+			[_tableViewContacts reloadData];
+		}
 	}];
 	
 	[self setupTitles];
@@ -96,8 +108,22 @@
 	[_tableViewContacts deselectRowAtIndexPath:[_tableViewContacts indexPathForSelectedRow] animated:YES];
 
 	[[BSUser currentUser] getAllContactsfromGroup:nil sorted:nil forNextPage:NO onCompletion:^(NSArray *contacts, NSArray *errors) {
-		_dataSourceContacts = contacts;
-		[_tableViewContacts reloadData];
+		
+		if (errors && errors.count>0 ) {
+			
+			NSString *errorMessages = @"";
+			for (BSError *error in errors) {
+				errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+			}
+			
+			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+		}
+		else {
+			
+			_dataSourceContacts = contacts;
+			[_tableViewContacts reloadData];
+				
+		}
 	}];
 }
 

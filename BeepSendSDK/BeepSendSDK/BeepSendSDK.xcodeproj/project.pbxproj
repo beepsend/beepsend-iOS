@@ -225,6 +225,10 @@
 		6EBD84131973CE70004FD8AF /* BSNetworkDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD840D1973CE70004FD8AF /* BSNetworkDetails.m */; };
 		6EBD84141973CE70004FD8AF /* BSStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD84101973CE70004FD8AF /* BSStatistics.m */; };
 		6EBD84181973D099004FD8AF /* BSGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBD84171973D099004FD8AF /* BSGroup.m */; };
+		6EBDD54419B9942000DFA2B4 /* BSConversation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD41E619B75170008E912D /* BSConversation.h */; };
+		6EBDD54519B9942000DFA2B4 /* BSSender.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD41E319B75146008E912D /* BSSender.h */; };
+		6EBDD54619B9942000DFA2B4 /* BSNumber.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6E0607FE19B4761300BA74A9 /* BSNumber.h */; };
+		6EBDD54719B9942000DFA2B4 /* BSTwoWayBatch.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6EBD41D119B73B67008E912D /* BSTwoWayBatch.h */; };
 		6EBE6B3419668D1800F59310 /* BSAPWallet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE6B3319668D1800F59310 /* BSAPWallet.m */; };
 		6EBE6B3D1966988800F59310 /* BSWalletService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE6B3C1966988800F59310 /* BSWalletService.m */; };
 		6EBE6B421966AFCE00F59310 /* BSAPEmail.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBE6B411966AFCE00F59310 /* BSAPEmail.m */; };
@@ -281,6 +285,10 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				6EBDD54419B9942000DFA2B4 /* BSConversation.h in CopyFiles */,
+				6EBDD54519B9942000DFA2B4 /* BSSender.h in CopyFiles */,
+				6EBDD54619B9942000DFA2B4 /* BSNumber.h in CopyFiles */,
+				6EBDD54719B9942000DFA2B4 /* BSTwoWayBatch.h in CopyFiles */,
 				6E9D6F0F199218140064DA4B /* BSStructs.h in CopyFiles */,
 				6E9D6EE71992175F0064DA4B /* BSGeneralModel.h in CopyFiles */,
 				6E7E45A619829A2000B8C08A /* BSError.h in CopyFiles */,

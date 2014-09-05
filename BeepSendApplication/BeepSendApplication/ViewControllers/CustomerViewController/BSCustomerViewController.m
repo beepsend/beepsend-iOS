@@ -124,25 +124,36 @@
 	
 	[[BSUser currentUser] getCustomerDetailsOnCompletion:^(BSCustomer *customer, NSArray *errors) {
 		
-		_labelName.text = customer.name;
-		_labelPhone.text = customer.phoneNumber;
-		
-		_labelAddress.text = customer.address;
-		
-		_labelCity.text = customer.city;
-		
-		_labelPostBox.text = customer.postBox;
-		
-		_labelCountry.text = customer.country;
-
-		_labelVat.text = customer.vat;
-		
-		_labelEmail.text = customer.email;
-
-		_labelInvoiceType.text = customer.type;
-
-		_labelAccountManagerName.text = customer.accountManager.name;
-		_labelAccountManagerEmail.text = customer.accountManager.email;
+		if (errors && errors.count>0 ) {
+			
+			NSString *errorMessages = @"";
+			for (BSError *error in errors) {
+				errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+			}
+			
+			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+		}
+		else {
+			_labelName.text = customer.name;
+			_labelPhone.text = customer.phoneNumber;
+			
+			_labelAddress.text = customer.address;
+			
+			_labelCity.text = customer.city;
+			
+			_labelPostBox.text = customer.postBox;
+			
+			_labelCountry.text = customer.country;
+			
+			_labelVat.text = customer.vat;
+			
+			_labelEmail.text = customer.email;
+			
+			_labelInvoiceType.text = customer.type;
+			
+			_labelAccountManagerName.text = customer.accountManager.name;
+			_labelAccountManagerEmail.text = customer.accountManager.email;
+		}
 		
 		[viewLoader removeFromSuperview];
 		[activityIndicator stopAnimating];

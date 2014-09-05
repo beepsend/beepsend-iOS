@@ -66,8 +66,19 @@
 	[self setupTitles];
 	
 	[[BSUser currentUser] getAllGroupsForNextPage:NO onCompletion:^(NSArray *groups, NSArray *errors) {
-		_dataSourceGroups = groups;
-		[_tableViewGroups reloadData];
+		if (errors && errors.count>0 ) {
+			
+			NSString *errorMessages = @"";
+			for (BSError *error in errors) {
+				errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+			}
+			
+			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+		}
+		else {
+			_dataSourceGroups = groups;
+			[_tableViewGroups reloadData];
+		}
 	}];
 }
 
