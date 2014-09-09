@@ -90,7 +90,7 @@
 				onCompletion:(void(^)(id response, id error))block
 {
 	BSNetworkLayer *layer = [BSNetworkLayer networkLayerWithBaseStringURL:[BSAPIConfiguration baseURL]];
-	
+
 	[layer executeHTTPMethod:HTTPMethodPOST
 	   withRequestSerializer:RequestSerializerJSON
 	   andResponseSerializer:ResponseSerializerJSON
@@ -142,6 +142,24 @@
 					block(response, error);
 					
 				}];
+}
+
+- (void)executeGETForMethod:(NSString *)method
+ forCSVDownloadOnCompletion:(RequestCompletionBLock)block
+{
+	BSNetworkLayer *layer = [BSNetworkLayer networkLayerWithBaseStringURL:[BSAPIConfiguration baseURL]];
+	
+	[layer executeHTTPMethod:HTTPMethodGET
+	   withRequestSerializer:RequestSerializerJSON
+	   andResponseSerializer:ResponseSerializerHTTP
+				   forMethod:method
+			  withParameters:@{}
+		   additionalHeaders:[BSAPIConfiguration authorizationHeader]
+				onCompletion:^(id response, id error) {
+					
+					block(response, error);
+					
+	}];
 }
 
 @end

@@ -133,6 +133,9 @@
 															  andResponseSerializer:responseSerializer];
 	NSURL *methodURL = [self urlWithMethod:method];
 	
+	BSDLog(@"\n----------REQUEST----------\n");
+	BSDLog(@"\nEndpoint: %@\nParameters: %@\n", method, parameters);
+	
 	switch (HTTPmethod) {
 		case HTTPMethodGET:
 		{
@@ -141,6 +144,9 @@
 		 headerParameters:headers
 				 response:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
 			 
+					 BSDLog(@"\n----------RESPONSE----------\n");
+					 BSDLog(@"\nResponse: %@\nErrors: %@\n", responseObject, error);
+					 
 					 block(responseObject, error);
 				 }];
 		}
@@ -151,6 +157,9 @@
 				parameters:parameters
 		  headerParameters:headers
 				  response:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+					  
+					  BSDLog(@"\n----------RESPONSE----------\n");
+					  BSDLog(@"\nResponse: %@\nErrors: %@\n", responseObject, error);
 					  
 					  block(responseObject, error);
 				  }];
@@ -163,6 +172,9 @@
 		 headerParameters:headers
 				 response:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
 
+					 BSDLog(@"\n----------RESPONSE----------\n");
+					 BSDLog(@"\nResponse: %@\nErrors: %@\n", responseObject, error);
+					 
 					 block(responseObject, error);
 				 }];
 		}
@@ -173,6 +185,9 @@
 				  parameters:parameters
 			headerParameters:headers
 					response:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+						
+						BSDLog(@"\n----------RESPONSE----------\n");
+						BSDLog(@"\nResponse: %@\nErrors: %@\n", responseObject, error);
 						
 						block(responseObject, error);
 					}];

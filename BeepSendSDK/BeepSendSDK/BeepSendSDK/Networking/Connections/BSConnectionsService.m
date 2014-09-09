@@ -11,6 +11,7 @@
 #import "BSAPIConfiguration.h"
 
 #import "BSAPConnection.h"
+#import "BSAPNumber.h"
 
 @implementation BSConnectionsService
 
@@ -28,7 +29,7 @@
 
 #pragma mark - Public methods
 
-- (void)getAllAvailableConnectsionOnCompletion:(void(^)(NSArray *connections, id error))block
+- (void)getAllAvailableConnectsionOnCompletion:(void(^)(NSArray *connections, NSArray *errors))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration connections]
 				withParameters:@{}
@@ -39,27 +40,27 @@
 						  for (BSAPConnection *conn in [BSAPConnection arrayOfObjectsFromArrayOfDictionaries:response]) {
 							  [mArr addObject:[conn convertToModel]];
 						  }
-						  block([NSArray arrayWithArray:mArr], error);
+						  block([NSArray arrayWithArray:mArr], nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 	}];
 }
 
-- (void)getMeConnectionOnCompletion:(void(^)(BSConnection *connection, id error))block
+- (void)getMeConnectionOnCompletion:(void(^)(BSConnection *connection, NSArray *errors))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration connectionsMe]
 				withParameters:@{}
 				  onCompletion:^(id response, id error) {
 		
 					  if (!error) {
-						  block([[BSAPConnection classFromDict:response] convertToModel], error);
+						  block([[BSAPConnection classFromDict:response] convertToModel], nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 	}];
 }
@@ -71,7 +72,8 @@
 				systemID:(NSString *)systemID
 				   label:(NSString *)label
 			 description:(NSString *)description
-	 withCompletionBlock:(void(^)(BSConnection *connection, id error))block
+				password:(NSString *)password
+	 withCompletionBlock:(void(^)(BSConnection *connection, NSArray *errors))block
 {
 	
 	BSAPConnection *conn = [[BSAPConnection alloc] init];
@@ -86,6 +88,8 @@
 	conn.label = label;
 	conn.description = description;
 	
+	conn.password = password;
+	
 	NSString *method = connection ? [BSAPIConfiguration connectionsWithID:connection.objectID] : [BSAPIConfiguration connectionsMe];
 	
 	[super executePUTForMethod:method
@@ -93,16 +97,16 @@
 				  onCompletion:^(id response, id error) {
 					  
 					  if (!error) {
-						  block([[BSAPConnection classFromDict:response] convertToModel], error);
+						  block([[BSAPConnection classFromDict:response] convertToModel], nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, error);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }
 
-- (void)resetTokenForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSConnection *updatedModel, id error))block
+- (void)resetTokenForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSConnection *updatedModel, NSArray *errors))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration connectionResetForID:connection.objectID]
 				withParameters:@{}
@@ -112,16 +116,16 @@
 																				withNewToken:[[[BSAPConnection classFromDict:response] convertToModel] apiToken]];
 					  
 					  if (!error) {
-						  block(newToken, error);
+						  block(newToken, nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, error);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }
 
-- (void)resetPasswordForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSConnection *updatedModel, id error))block
+- (void)resetPasswordForConnection:(BSConnection *)connection withCompletionBlock:(void(^)(BSConnection *updatedModel, NSArray *errors))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration connectionPasswordResetForID:connection.objectID]
 				withParameters:@{}
@@ -131,12 +135,35 @@
 																			withNewPassword:[[[BSAPConnection classFromDict:response] convertToModel] password]];
 					  
 					  if (!error) {
-						  block(newPass, error);
+						  block(newPass, nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, error);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
+				  }];
+}
+
+- (void)getRecipientNumbersOnCompletion:(void(^)(NSArray *recipientNumbers, NSArray *errors))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration recipientNumbers]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					 
+					  if (!error) {
+						  
+						  NSMutableArray *mArr = [@[] mutableCopy];
+						  for (BSAPNumber *n in [BSAPNumber arrayOfObjectsFromArrayOfDictionaries:response]) {
+							  [mArr addObject:[n convertToModel]];
+						  }
+						  
+						  block(mArr, nil);
+					  }
+					  else {
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
+					  }
+
+					  
 				  }];
 }
 

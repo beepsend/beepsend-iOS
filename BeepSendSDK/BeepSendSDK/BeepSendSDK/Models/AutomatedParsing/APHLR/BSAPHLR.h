@@ -22,5 +22,9 @@
 @property (nonatomic, strong) NSNumber *ported;
 @property (nonatomic, strong) NSNumber *roaming;
 @property (nonatomic, strong) BSAPPMCCMNC *prefix;
+@property (nonatomic, strong) NSString *msisdn;
+@property (nonatomic, strong) NSArray *errors;
+
++ (NSArray *)arrayOfObjectsFromArrayOfDictionaries:(NSArray *)array;
 
 @end

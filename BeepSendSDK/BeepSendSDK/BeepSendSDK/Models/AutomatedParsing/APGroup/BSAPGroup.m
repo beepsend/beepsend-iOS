@@ -39,9 +39,9 @@
 	}
 	
 	group.id = [groupModel.groupID isEqualToString:@"0"] ? nil : groupModel.groupID;
-	group.name = groupModel.name;
-	group.contacts_count = groupModel.contactsCount;
-	group.processing = groupModel.processing;
+	group.name = [groupModel.name isEqualToString:@""] ? nil : groupModel.name;
+	group.contacts_count = [groupModel.contactsCount isEqual:@0] ? nil : groupModel.contactsCount;
+	group.processing = [groupModel.processing isEqual:@0] ? nil : groupModel.processing;
 	
 	return group;
 }

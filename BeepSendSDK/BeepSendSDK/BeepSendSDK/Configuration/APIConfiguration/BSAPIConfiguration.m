@@ -79,6 +79,13 @@
 	return [NSString stringWithFormat:@"/connections/%@/passwordreset", connectionID];
 }
 
+#pragma mark - Recipient numbers
+
++ (NSString *)recipientNumbers
+{
+	return @"/numbers/";
+}
+
 #pragma mark - Pricelist
 
 + (NSString *)pricelistCurrentWithID:(NSString *)connectionID
@@ -104,6 +111,16 @@
 + (NSString *)pricelistCSVForID:(NSString *)connectionID
 {
 	return [NSString stringWithFormat:@"/pricelists/%@.csv", connectionID];
+}
+
++ (NSString *)pricelistDiffForConnectionID:(NSString *)connectionID rev1:(NSString *)pricelist1ID rev2:(NSString *)pricelist2ID
+{
+	return [NSString stringWithFormat:@"/pricelists/%@/%@..%@/diff", connectionID, pricelist1ID, pricelist2ID];
+}
+
++ (NSString *)pricelistDiffAsCSVForConnectionID:(NSString *)connectionID rev1:(NSString *)pricelist1ID rev2:(NSString *)pricelist2ID
+{
+	return [NSString stringWithFormat:@"/pricelists/%@/%@..%@/diff.csv", connectionID, pricelist1ID, pricelist2ID];
 }
 
 #pragma mark - Users
@@ -169,6 +186,11 @@
 	return [@"/hlr/" stringByAppendingString:number];
 }
 
++ (NSString *)hlr
+{
+	return @"/hlr/";
+}
+
 #pragma mark - Validation
 
 + (NSString *)validateSMS
@@ -178,7 +200,7 @@
 
 + (NSString *)validateHLR
 {
-	return @"/hlr/validate";
+	return @"/hlr/validate/";
 }
 
 #pragma mark - Batches
@@ -191,6 +213,11 @@
 + (NSString *)batchesForID:(NSString *)batchID
 {
 	return [@"/batches/" stringByAppendingString:batchID];
+}
+
++ (NSString *)twoWayBatchesForID:(NSString *)batchID
+{
+	return [NSString stringWithFormat:@"/batches/%@/messages/", batchID];
 }
 
 #pragma mark - Analytics
@@ -233,6 +260,18 @@
 + (NSString *)analyticsBatchesForID:(NSString *)batchID
 {
 	return [@"/analytics/batches/" stringByAppendingString:batchID];
+}
+
+#pragma mark - Conversations
+
++ (NSString *)conversation
+{
+	return @"/conversations/";
+}
+
++ (NSString *)conversationForID:(NSString *)cID
+{
+	return [@"/conversations/" stringByAppendingString:cID];
 }
 
 #pragma mark - Contacts
@@ -315,6 +354,18 @@
 + (NSString *)smsCostEstimateForID:(NSString *)connectionID
 {
 	return [@"/sms/costestimate/" stringByAppendingString:connectionID];
+}
+
+#pragma mark - Verify email and phone number
+
++ (NSString *)verifyEmailWithHash:(NSString *)hash
+{
+	return [@"/users/email/" stringByAppendingString:hash];
+}
+
++ (NSString *)verifyPhoneWithHash:(NSString *)hash
+{
+	return [@"/users/phone/" stringByAppendingString:hash];
 }
 
 @end

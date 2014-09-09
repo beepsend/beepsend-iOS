@@ -8,8 +8,6 @@
 
 #import "BSPricelist.h"
 
-#import "BSNetwork.h"
-
 @interface BSPricelist ()
 
 @property (nonatomic, strong, readwrite) NSString *pricelistID;

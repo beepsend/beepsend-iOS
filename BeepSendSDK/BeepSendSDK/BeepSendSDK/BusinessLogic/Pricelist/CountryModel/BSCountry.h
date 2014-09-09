@@ -8,14 +8,35 @@
 
 #import "BSGeneralModel.h"
 
+/*!
+ @class BSCountry
+ @discussion Country in which network resides in
+ */
 @interface BSCountry : BSGeneralModel
 
+/*! Name of the country this network resides in.
+ */
 @property (nonatomic, strong, readonly) NSString *name;
+
+/*! Country calling code.
+ */
 @property (nonatomic, strong, readonly) NSNumber *callingCode;
+
+/*! Country code (ISO-3166-1).
+ */
 @property (nonatomic, strong, readonly) NSString *code;
 
-- (BSCountry *)initCountryNamed:(NSString *)cName
-				withCountryCode:(NSString *)cCountryCode
-				 andCallingCode:(NSNumber *)cCallingCode;
+/*! Create Country object
+ 
+ @param cName - Name of the country this network resides in
+ @param cCountryCode - Country code (ISO-3166-1)
+ @param cCallingCode - Country calling code
+ 
+ @return Returns Country object
+ */
+- (BSCountry *)initCountryWithID:(NSString *)cID
+						   named:(NSString *)cName
+				 withCountryCode:(NSString *)cCountryCode
+				  andCallingCode:(NSNumber *)cCallingCode;
 
 @end

@@ -9,7 +9,6 @@
 #import "BSWallet.h"
 
 #import "BSWalletService.h"
-#import "BSEmail.h"
 
 #define kDefaultCount @100
 
@@ -52,11 +51,11 @@
 }
 
 - (NSString *)name {
-	return _currentWallet ? _currentWallet.name : _name;
+	return _name;
 }
 
 - (NSNumber *)minimumBalanceForNotification {
-	return _currentWallet ? _currentWallet.minimumBalanceForNotification : _minimumBalanceForNotification;
+	return  _minimumBalanceForNotification;
 }
 
 #pragma mark - Initialization
@@ -115,26 +114,28 @@
 
 #pragma mark - Public methods
 
-- (void)updateWallet
+- (void)updateWalletOnCompletion:(void (^)(BSWallet *, NSArray *))block
 {
-	if (!_currentWallet) {
-		return;
-	}
-	
 	[[BSWalletService sharedService] updateWallet:self
 										 withName:![_currentWallet.name isEqualToString:_name]?_name:nil
 									  notifyLimit:![_currentWallet.minimumBalanceForNotification isEqualToNumber:_minimumBalanceForNotification]?_minimumBalanceForNotification:nil
-							  withCompletionBlock:^(BSWallet *wallet, id error) {
+							  withCompletionBlock:^(BSWallet *wallet, NSArray *errors) {
 								  
-								  _currentWallet = wallet;
-								  
-								  _name = _currentWallet.name;
-								  _minimumBalanceForNotification = _currentWallet.minimumBalanceForNotification;
-								  
+								  if (errors && errors.count > 0) {
+									  block(nil, errors);
+								  }
+								  else {
+									  _currentWallet = wallet;
+									  
+									  _name = _currentWallet.name;
+									  _minimumBalanceForNotification = _currentWallet.minimumBalanceForNotification;
+									  
+									  block(_currentWallet, nil);
+								  }
 							  }];
 }
 
-- (void)getTransactionLogForNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *log))block
+- (void)getTransactionLogForNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *log, NSArray *errors))block
 {
 	NSString *maxID = nil;
 	if (_log) {
@@ -145,13 +146,18 @@
 		_log = @[];
 	}
 	
-	[[BSWalletService sharedService] getTransactionLogForWallet:self since:nil max:nextPage ? maxID : nil count:nextPage ? [NSNumber numberWithInteger:([_count integerValue]+1)] : _count withCompletionBlock:^(NSArray *log, id error) {
+	[[BSWalletService sharedService] getTransactionLogForWallet:self since:nil max:nextPage ? maxID : nil count:nextPage ? [NSNumber numberWithInteger:([_count integerValue]+1)] : _count withCompletionBlock:^(NSArray *log, NSArray *errors) {
 		
-		NSMutableArray *mArr = [NSMutableArray arrayWithArray:_log];
-		[mArr removeLastObject];
-		_log = [mArr arrayByAddingObjectsFromArray:log];
-		
-		block(_log);
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			NSMutableArray *mArr = [NSMutableArray arrayWithArray:_log];
+			[mArr removeLastObject];
+			_log = [mArr arrayByAddingObjectsFromArray:log];
+			
+			block(_log, nil);
+		}
 	}];
 }
 
@@ -168,38 +174,129 @@
 	_count = logCount;
 }
 
-- (void)transferFunds:(NSNumber *)funds toWallet:(BSWallet *)wallet
+- (void)transferFunds:(NSNumber *)funds toWallet:(BSWallet *)wallet onCompletion:(void (^)(BSTransfer *, NSArray *))block
 {
-	[[BSWalletService sharedService] transferFunds:funds fromWallet:self toWallet:wallet withCompletionBlock:^(BSTransfer *transfer, id error) {
+	if (!wallet || [BSHelper isNilOrEmpty:wallet.walletID]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Target wallet missing!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	if ([funds doubleValue] <= 0.0) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Funds for transfer must be grater than 0.0!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	[[BSWalletService sharedService] transferFunds:funds fromWallet:self toWallet:wallet withCompletionBlock:^(BSTransfer *transfer, NSArray *errors) {
+		
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			block(transfer, nil);
+		}
+	}];
+}
+
+- (void)transferFunds:(NSNumber *)funds fromWallet:(BSWallet *)wallet onCompletion:(void (^)(BSTransfer *, NSArray *))block
+{
+	if (!wallet || [BSHelper isNilOrEmpty:wallet.walletID]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Source wallet missing!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	if ([funds doubleValue] <= 0.0) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Funds for transfer must be grater than 0.0!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	[[BSWalletService sharedService] transferFunds:funds fromWallet:wallet toWallet:self withCompletionBlock:^(BSTransfer *transfer, NSArray *errors) {
+		
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			block(transfer, nil);
+		}
+	}];
+}
+
+- (void)getEmailsOnCompletion:(void(^)(NSArray *emails, NSArray *errors))block
+{
+	[[BSWalletService sharedService] getEmailsForWallet:self withCompletionBlock:^(NSArray *emails, NSArray *errors) {
+		
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			block(emails, nil);
+		}
+	}];
+}
+
+- (void)getEmailWithID:(NSString *)emailID onCompletion:(void(^)(BSEmail *email, NSArray *errors))block
+{
+	[[BSWalletService sharedService] getEmailForWallet:self andEmailID:emailID withCompletionBlock:^(BSEmail *email, NSArray *errors) {
+		
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			block(email, nil);
+		}
 		
 	}];
 }
 
-- (void)transferFunds:(NSNumber *)funds fromWallet:(BSWallet *)wallet
+- (void)addEmail:(NSString *)email onCompletion:(void (^)(BSEmail *email, NSArray *errors))block
 {
-	[[BSWalletService sharedService] transferFunds:funds fromWallet:wallet toWallet:self withCompletionBlock:^(BSTransfer *transfer, id error) {
+	if ([BSHelper isNilOrEmpty:email]) {
 		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Enter email address!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	[[BSWalletService sharedService] addEmail:email toWallet:self withCompletionBlock:^(BSEmail *email, NSArray *errors) {
+		
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			block(email, nil);
+		}
 	}];
 }
 
-- (void)getEmailsOnCompletion:(void(^)(NSArray *emails))block
+- (void)removeEmail:(BSEmail *)email onCompletion:(void (^)(BOOL success, NSArray *errors))block
 {
-	[[BSWalletService sharedService] getEmailsForWallet:self withCompletionBlock:^(NSArray *emails, id error) {
-		block(emails);
-	}];
-}
-
-- (void)addEmail:(NSString *)email
-{
-	[[BSWalletService sharedService] addEmail:email toWallet:self withCompletionBlock:^(BSEmail *email, id error) {
+	if (!email || [BSHelper isNilOrEmpty:email.emailID]) {
 		
-	}];
-}
-
-- (void)removeEmail:(BSEmail *)email
-{
-	[[BSWalletService sharedService] deleteEmailInWallet:self email:email withCompletionBlock:^(BOOL success, id error) {
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Enter valid email!", @"")];
+		block(NO, @[error]);
 		
+		return;
+	}
+	
+	[[BSWalletService sharedService] deleteEmailInWallet:self email:email withCompletionBlock:^(BOOL success, NSArray *errors) {
+		if (errors && errors.count > 0) {
+			block(NO, errors);
+		}
+		else {
+			block(YES, nil);
+		}
 	}];
 }
 

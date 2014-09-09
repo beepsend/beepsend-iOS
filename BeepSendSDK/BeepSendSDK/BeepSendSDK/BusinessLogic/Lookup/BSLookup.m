@@ -9,14 +9,10 @@
 #import "BSLookup.h"
 
 #import "BSConnection.h"
-#import "BSDLRReport.h"
-#import "BSRecipient.h"
-#import "BSMCCMNC.h"
-#import "BSTimestamps.h"
-#import "BSBatch.h"
 
 @interface BSLookup ()
 
+@property (nonatomic, strong, readwrite) NSString *lookupID;
 @property (nonatomic, strong, readwrite) BSBatch *batch;
 @property (nonatomic, strong, readwrite) NSString *messageBody;
 @property (nonatomic, strong, readwrite) BSConnection *usedConnection;
@@ -34,6 +30,11 @@
 @implementation BSLookup
 
 #pragma mark - Properties
+
+- (NSString *)lookupID
+{
+	return [BSHelper isNilOrEmpty:_lookupID] ? @"0" : [_lookupID isKindOfClass:[NSNumber class]] ? [(NSNumber *)_lookupID stringValue] : _lookupID;
+}
 
 - (NSString *)messageBody
 {
@@ -74,6 +75,7 @@
 							  valid:(NSDate *)lValidTo
 {
 	if (self = [super initWithID:lID andTitle:@"SMS lookup"]) {
+		_lookupID = lID;
 		_batch = lBatch;
 		_messageBody = lMessage;
 		_usedConnection = lConnection;

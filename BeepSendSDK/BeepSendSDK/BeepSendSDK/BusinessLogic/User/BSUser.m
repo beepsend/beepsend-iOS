@@ -8,21 +8,21 @@
 
 #import "BSUser.h"
 
-#import "BSInputData.h"
-
 #import "BSUserService.h"
 #import "BSConnectionsService.h"
 #import "BSCustomerService.h"
 #import "BSWalletService.h"
 #import "BSContactsService.h"
 #import "BSGroupsService.h"
+#import "BSAnalyticsService.h"
+#import "BSSMSService.h"
 
 #import "BSTestSemaphor.h"
 
 #import "BSConnection.h"
-#import "BSWallet.h"
-#import "BSVerified.h"
-#import "BSCustomer.h"
+
+#define kDefaultContactCount @200
+#define kDefaultGroupCount @200
 
 @interface BSUser ()
 
@@ -40,6 +40,9 @@
 
 @property (nonatomic, strong) NSArray *contacts;
 @property (nonatomic, strong) NSArray *groups;
+
+@property (nonatomic, strong) NSNumber *contactPageLimit;
+@property (nonatomic, strong) NSNumber *groupPageLimit;
 
 @end
 
@@ -74,15 +77,15 @@
 }
 
 - (NSString *)name {
-	return _currentUser ? _currentUser.name : _name;
+	return _name;
 }
 
 - (NSString *)phone {
-	return _currentUser ? _currentUser.phone : _phone;
+	return _phone;
 }
 
 - (NSString *)email {
-	return _currentUser ? _currentUser.email : _email;
+	return _email;
 }
 
 - (BSConnection *)defaultConnection {
@@ -98,18 +101,6 @@
 {
 	if (self = [super initWithID:@"-1" andTitle:@"Irregular user"]) {
 		
-	}
-	return self;
-}
-
-- (BSUser *)initUserWithID:(NSString *)uID
-					  name:(NSString *)uName
-					 email:(NSString *)uEmail
-{
-	if (self = [super initWithID:uID andTitle:uName]) {
-		_userID = uID;
-		_name = uName;
-		_email = uEmail;
 	}
 	return self;
 }
@@ -175,6 +166,9 @@
 		_userTypes = uUserTypes;
 		_maxLevel = uMaxLevel;
 		_verified = uVerified;
+		
+		_contactPageLimit = kDefaultContactCount;
+		_groupPageLimit = kDefaultGroupCount;
 	}
 	return self;
 }
@@ -183,6 +177,9 @@
 {
 	if (self = [super initWithID:@"0" andTitle:@"User"]) {
 		_userID = uID;
+		
+		_contactPageLimit = kDefaultContactCount;
+		_groupPageLimit = kDefaultGroupCount;
 	}
 	return self;
 }
@@ -191,31 +188,36 @@
 {
 	if (self = [super initWithID:@"0" andTitle:@"User"]) {
 		
-		[[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"API_TOKEN" : APIToken }];
+		if (![[NSUserDefaults standardUserDefaults] objectForKey:@"API_TOKEN"]) {
+			NSString *apiToken = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"BeepSendToken"];
+			[[NSUserDefaults standardUserDefaults] registerDefaults:@{ @"API_TOKEN" : apiToken }];
+		}
 		
-		[[BSUserService sharedService] getUserDetailsWithCompletionBlock:^(BSUser *user, id error) {
-//			[[BSTestSemaphor sharedInstance] lift:@"FetchUser"];
+		[[BSUserService sharedService] getUserDetailsWithCompletionBlock:^(BSUser *user, NSArray *errors) {
+		
+			if (!errors || errors.count == 0) {
 			
-			_currentUser = user;
+				_currentUser = user;
 			
-			_name = user.name;
-			_email = user.email;
-			_phone = user.phone;
-			
-			_userID = user.userID;
+				_name = user.name;
+				_email = user.email;
+				_phone = user.phone;
+				
+				_userID = user.userID;
 
-			_customerName = user.customerName;
-			_apiToken = user.apiToken;
+				_customerName = user.customerName;
+				_apiToken = user.apiToken;
 
-			_userTypes = user.userTypes;
-			_maxLevel = user.maxLevel;
-			_verified = user.verified;
-			
-			_defaultConnection = [BSConnection currentConnection];
-			
+				_userTypes = user.userTypes;
+				_maxLevel = user.maxLevel;
+				_verified = user.verified;
+				
+				_defaultConnection = [BSConnection currentConnection];
+				
+				_contactPageLimit = kDefaultContactCount;
+				_groupPageLimit = kDefaultGroupCount;
+			}
 		}];
-//		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchUser"];
-		
 	}
 	return self;
 }
@@ -232,9 +234,13 @@
 
 #pragma mark - Public methods
 
-- (void)updateUser
+- (void)updateUserOnCompletion:(void(^)(NSArray *errors))block
 {
 	if (!_currentUser) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"User can't be edited", @"")];
+		block(@[error]);
+		
 		return; //User object can not be edited
 	}
 	
@@ -243,6 +249,10 @@
 		[_defaultConnection.connectionID isEqualToString:_currentUser.defaultConnection.objectID] &&
 		[_userTypes isEqualToArray:_currentUser.userTypes] &&
 		_verified.isVerifiedTerms==_currentUser.verified.isVerifiedTerms) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"No changes were made", @"")];
+		block(@[error]);
+		
 		return; //No changes were made
 	}
 	
@@ -251,84 +261,181 @@
 									defaultConnection:[_defaultConnection.connectionID isEqualToString:_currentUser.defaultConnection.objectID]?nil:_defaultConnection
 											userTypes:[_userTypes isEqualToArray:_currentUser.userTypes]?nil:_userTypes
 										verifiedTerms:_verified.isVerifiedTerms==_currentUser.verified.isVerifiedTerms?nil:_verified.termsVerified
-								  withCompletionBlock:^(BSUser *user, id error) {
+								  withCompletionBlock:^(BSUser *user, NSArray *errors) {
 									  
-									  _currentUser = user;
-									  
-									  _name = user.name;
-									  _phone = user.phone;
-									  
-									  _defaultConnection = user.defaultConnection;
-									  
-									  _userTypes = user.userTypes;
-									  
-									  _verified.termsVerified = user.verified.termsVerified;
+									  if (errors && errors.count>0) {
+										  block(errors);
+									  }
+									  else {
+
+										  _name = user.name;
+										  _phone = user.phone;
+										  
+										  _defaultConnection = user.defaultConnection;
+										  
+										  _userTypes = user.userTypes;
+										  
+										  _verified.termsVerified = user.verified.termsVerified;
+										  
+										  _currentUser = user;
+										  
+										  block(nil);
+									  }
 	}];
 }
 
-- (void)updateUserEmailWithPassword:(NSString *)password
+- (void)updateUserEmailWithPassword:(NSString *)password onCompletion:(void(^)(NSArray *errors))block
 {
-	if (!password) {
+	if ([BSHelper isNilOrEmpty:password]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Missing password", @"")];
+		block(@[error]);
+		
 		return;//Missing password
 	}
 	
 	if (_password) {
 		if (![_password isEqualToString:password]) {
+			
+			BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Invalid password", @"")];
+			block(@[error]);
+			
 			return;//Invalid password
 		}
 	}
 	
 	if (![_email isEqualToString:_currentUser.email]) {
-		[[BSUserService sharedService] updateUserEmail:_email userPassword:password withCompletionBlock:^(BOOL success, id error) {
+		[[BSUserService sharedService] updateUserEmail:_email userPassword:password withCompletionBlock:^(BOOL success, NSArray *errors) {
 			if (success) {
 				_currentUser.email = _email;
 				_password = password;
+				
+				block(nil);
+			}
+			else {
+				block(errors);
 			}
 		}];
 	}
+	else {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"No changes were made", @"")];
+		block(@[error]);
+		
+		return;//Email needs to be updated first
+	}
 }
 
-- (void)changePassword:(NSString *)currentPassword withNewPassword:(NSString *)newPassword
+- (void)changePassword:(NSString *)currentPassword withNewPassword:(NSString *)newPassword onCompletion:(void(^)(NSArray *errors))block
 {
-	if (!currentPassword || !newPassword) {
+	if ([BSHelper isNilOrEmpty:currentPassword] || [BSHelper isNilOrEmpty:newPassword]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Missing password", @"")];
+		block(@[error]);
+		
 		return; //Missing password
 	}
 	
 	if ([currentPassword isEqualToString:newPassword]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Passwords don't match", @"")];
+		block(@[error]);
+		
 		return; //Passwords don't match
 	}
 	
 	if (_password) {
+		
 		if (![_password isEqualToString:currentPassword]) {
+			
+			BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Invalid password", @"")];
+			block(@[error]);
+			
 			return; //Invalid password
 		}
 	}
 	
-	[[BSUserService sharedService] updateUserPassword:_password userNewPassword:_theNewPassword withCompletionBlock:^(BOOL success, id error) {
+	[[BSUserService sharedService] updateUserPassword:_password userNewPassword:_theNewPassword withCompletionBlock:^(BOOL success, NSArray *errors) {
 		if (success) {
+			
 			_password = _theNewPassword;
 			_theNewPassword = nil;
+			
+			block(nil);
+		}
+		else {
+			block(errors);
 		}
 	}];
 }
 
-- (void)resetUserTokenWithPassword:(NSString *)password
+- (void)resetUserTokenWithPassword:(NSString *)password onCompletion:(void(^)(NSArray *errors))block
 {
-	[[BSUserService sharedService] resetUserTokenUsingPassword:password withCompletionBlock:^(NSString *apiToken, id error) {
-		[[NSUserDefaults standardUserDefaults] setObject:apiToken forKey:@"API_TOKEN"];
-		[[NSUserDefaults standardUserDefaults] synchronize];
+	if ([BSHelper isNilOrEmpty:password]) {
 		
-		_apiToken = apiToken;
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Missing password", @"")];
+		block(@[error]);
+		
+		return;//Missing password
+	}
+	
+	if (_password) {
+		
+		if (![_password isEqualToString:password]) {
+			
+			BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Invalid password", @"")];
+			block(@[error]);
+			
+			return; //Invalid password
+		}
+	}
+	
+	[[BSUserService sharedService] resetUserTokenUsingPassword:password withCompletionBlock:^(NSString *apiToken, NSArray *errors) {
+		
+		if (errors && errors.count>0) {
+			block(errors);
+		}
+		else {
+			[[NSUserDefaults standardUserDefaults] setObject:apiToken forKey:@"API_TOKEN"];
+			[[NSUserDefaults standardUserDefaults] synchronize];
+			
+			_apiToken = apiToken;
+			_password = password;
+			
+			block(nil);
+		}
 	}];
 }
 
-- (void)getAvailableConnectionsOnCompletion:(void(^)(NSArray *connections))block
+- (void)resetUserPasswordOnCompletion:(void(^)(BOOL success, NSArray *errors))block
 {
-	[[BSConnectionsService sharedService] getAllAvailableConnectsionOnCompletion:^(NSArray *connections, id error) {
+	[[BSUserService sharedService] resetUserPasswordForEmail:_email withCompletionBlock:^(BOOL success, NSArray *errors) {
+		if (success) {
+			
+			_password = nil;
+			
+			block(YES, nil);
+		}
+		else {
+			block(NO, errors);
+		}
+	}];
+}
+
+- (void)getAvailableConnectionsOnCompletion:(void(^)(NSArray *connections, NSArray *errors))block
+{
+	[[BSConnectionsService sharedService] getAllAvailableConnectsionOnCompletion:^(NSArray *connections, NSArray *errors) {
 	
-		_connections = connections;
-		
-		block(_connections);
+		if (errors && errors.count > 0) {
+			_connections = nil;
+			
+			block(@[], nil);
+		}
+		else {
+			_connections = connections;
+			
+			block(_connections, nil);
+		}
 	}];
 }
 
@@ -338,10 +445,15 @@
 		return _connections;
 	}
 	else {
-		[[BSConnectionsService sharedService] getAllAvailableConnectsionOnCompletion:^(NSArray *connections, id error) {
+		[[BSConnectionsService sharedService] getAllAvailableConnectsionOnCompletion:^(NSArray *connections, NSArray *errors) {
 			[[BSTestSemaphor sharedInstance] lift:@"FetchConnections"];
 			
-			_connections = connections;
+			if (errors && errors.count>0) {
+				_connections = nil;
+			}
+			else {
+				_connections = connections;
+			}
 			
 		}];
 		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchConnections"];
@@ -350,29 +462,38 @@
 	}
 }
 
-- (void)getCustomerDetailsOnCompletion:(void(^)(BSCustomer *customer, id error))block
+- (void)getCustomerDetailsOnCompletion:(void(^)(BSCustomer *customer, NSArray *errors))block
 {
 	if (_customer) {
 		block(_customer, nil);
+		
+		return;
 	}
 	
-	[[BSCustomerService sharedService] getCustomerOnCompletion:^(BSCustomer *customer, id error) {
+	[[BSCustomerService sharedService] getCustomerOnCompletion:^(BSCustomer *customer, NSArray *errors) {
 		
 		if (!_customer) {
-			block(customer, error);
+			block(customer, errors);
 		}
 		
 		_customer = customer;
 	}];
 }
 
-- (void)getAvailableWalletsOnCompletion:(void(^)(NSArray *wallets, id error))block
+- (void)getAvailableWalletsOnCompletion:(void(^)(NSArray *wallets, NSArray *errors))block
 {
-	[[BSWalletService sharedService] getAllWalletsWithCompletionBlock:^(NSArray *wallets, id error) {
+	[[BSWalletService sharedService] getAllWalletsWithCompletionBlock:^(NSArray *wallets, NSArray *errors) {
 		
-		_wallets = wallets;
-		
-		block(wallets, error);
+		if (errors && errors.count > 0) {
+			_wallets = nil;
+			
+			block(@[], nil);
+		}
+		else {
+			_wallets = wallets;
+			
+			block(_wallets, nil);
+		}
 	}];
 }
 
@@ -382,10 +503,15 @@
 		return _wallets;
 	}
 	else {
-		[[BSWalletService sharedService] getAllWalletsWithCompletionBlock:^(NSArray *wallets, id error) {
+		[[BSWalletService sharedService] getAllWalletsWithCompletionBlock:^(NSArray *wallets, NSArray *errors) {
 			[[BSTestSemaphor sharedInstance] lift:@"FetchWallets"];
 			
-			_wallets = wallets;
+			if (errors && errors.count>0) {
+				_wallets = nil;
+			}
+			else {
+				_wallets = wallets;
+			}
 			
 		}];
 		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchWallets"];
@@ -394,20 +520,76 @@
 	}
 }
 
-- (void)getAllContactsOnCompletion:(void(^)(NSArray *contacts, id error))block
+- (void)getWalletDetailsForID:(NSString *)walletID onCompletion:(void(^)(BSWallet *wallet, NSArray *errors))block
 {
-	if (_contacts) {
-		block(_contacts, nil);
+	if ([BSHelper isNilOrEmpty:walletID]) {
+	
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"You must specify wallet ID", @"")];
+		block(nil, @[error]);
+	
+		return;
 	}
 	
-	[[BSContactsService sharedService] getAllContactsWithCompletionBlock:^(NSArray *contacts, id error) {
-			
-		if (!_contacts) {
-			block(contacts, error);
+	[[BSWalletService sharedService] getWalletDetailsForID:walletID withCompletionBlock:^(BSWallet *wallet, NSArray *errors) {
+		
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(wallet, nil);
 		}
 		
-		_contacts = contacts;
 	}];
+	
+}
+
+- (void)getAllContactsfromGroup:(BSGroup *)group sorted:(NSString *)sort forNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *contacts, NSArray *errors))block
+{
+	NSString *maxID = nil;
+	if (_contacts) {
+		maxID = [_contacts lastObject] ? [[_contacts lastObject] objectID] : nil;
+	}
+	
+	if (!nextPage) {
+		_contacts = @[];
+	}
+	
+	[[BSContactsService sharedService] getAllContactsInGroup:group.groupID
+													 sinceID:nil
+													   maxID:nextPage ? maxID : nil
+												contactCount:_contactPageLimit
+													  offset:nil
+														sort:sort
+										 withCompletionBlock:^(NSArray *contacts, NSArray *errors) {
+											 
+											 if (errors && errors.count > 0) {
+												 
+												 block(nil, errors);
+											 }
+											 else {
+												 
+												 NSMutableArray *mArr = [NSMutableArray arrayWithArray:_contacts];
+												 if (!errors || errors.count==0) {
+													 [mArr removeLastObject];
+													 _contacts = [mArr arrayByAddingObjectsFromArray:contacts];
+												 }
+												 
+												 block(_contacts, nil);
+											 }
+										 }];
+}
+
+- (void)setContactCount:(NSNumber *)cCount
+{
+	if ([cCount integerValue] > 200) {
+		_contactPageLimit = @200;
+	}
+	
+	if ([cCount integerValue] < 1) {
+		_contactPageLimit = @1;
+	}
+	
+	_contactPageLimit = cCount;
 }
 
 - (NSArray *)getAllContacts
@@ -416,10 +598,15 @@
 		return _contacts;
 	}
 	else {
-		[[BSContactsService sharedService] getAllContactsWithCompletionBlock:^(NSArray *contacts, id error) {
+		[[BSContactsService sharedService] getAllContactsWithCompletionBlock:^(NSArray *contacts, NSArray *errors) {
 			[[BSTestSemaphor sharedInstance] lift:@"FetchContacts"];
 			
-			_contacts = contacts;
+			if (errors && errors.count>0) {
+				_contacts = nil;
+			}
+			else {
+				_contacts = contacts;
+			}
 			
 		}];
 		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchContacts"];
@@ -428,34 +615,112 @@
 	}
 }
 
-- (void)addMultipleContacts:(NSArray *)contacts onCompletion:(void(^)(NSArray *response, id error))block
+- (void)addMultipleContacts:(NSArray *)contacts onCompletion:(void(^)(NSArray *response, NSArray *errors))block
 {
-	[[BSContactsService sharedService] addContacts:contacts withCompletionBlock:^(NSArray *contacts, id error) {
-		block(contacts, error);
-	}];
-}
-
-- (void)searchContactsWithQuery:(NSString *)query inGroup:(BSGroup *)group limit:(NSNumber *)limit onCompletion:(void(^)(NSArray *results, id error))block
-{
-	[[BSContactsService sharedService] searchContact:query inGroup:group limit:limit.integerValue withCompletionBlock:^(NSArray *results, id error) {
-		block(results, error);
-	}];
-}
-
-- (void)getAllGroupsOnCompletion:(void(^)(NSArray *groups, id error))block
-{
-	if (_groups) {
-		block(_groups, nil);
+	if (!contacts || contacts.count < 1) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"No contacts to add", @"")];
+		block(nil, @[error]);
+	
+		return;
 	}
 	
-	[[BSGroupsService sharedService] getAllGroupsWithCompletionBlock:^(NSArray *groups, id error) {
-		
-		if (!_groups) {
-			block(groups, error);
+	BOOL nonContactObjectFound = NO;
+	for (id object in contacts) {
+		if (![object isKindOfClass:[BSContact class]]) {
+			nonContactObjectFound = YES;
 		}
+	}
+	if (nonContactObjectFound) {
 		
-		_groups = groups;
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Only contact objects can be added", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	[[BSContactsService sharedService] addContacts:contacts withCompletionBlock:^(NSArray *cts, NSArray *errors) {
+		
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(cts, nil);
+		}
 	}];
+}
+
+- (void)searchContactsWithQuery:(NSString *)query inGroup:(BSGroup *)group limit:(NSNumber *)limit onCompletion:(void(^)(NSArray *results, NSArray *errors))block
+{
+	if ([limit integerValue] < 1) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Limit must be positive number", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	if ([BSHelper isNilOrEmpty:query]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Enter query for search", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	[[BSContactsService sharedService] searchContact:query inGroup:group limit:limit.integerValue withCompletionBlock:^(NSArray *results, NSArray *errors) {
+		
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(results, nil);
+		}
+	}];
+}
+
+- (void)getAllGroupsForNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *groups, NSArray *errors))block
+{
+	NSString *maxID = nil;
+	if (_groups) {
+		maxID = [_groups lastObject] ? [[_groups lastObject] objectID] : nil;
+	}
+	
+	if (!nextPage) {
+		_groups = @[];
+	}
+	
+	[[BSGroupsService sharedService] getAllGroupsSinceID:nil
+												   maxID:nextPage ? maxID : nil
+												   count:_groupPageLimit
+									 withCompletionBlock:^(NSArray *groups, NSArray *errors) {
+										 
+										 if (errors && errors.count > 0) {
+											 block(nil, errors);
+										 }
+										 else {
+											 NSMutableArray *mArr = [NSMutableArray arrayWithArray:_groups];
+											 if (!errors || errors.count==0) {
+												 [mArr removeLastObject];
+												 _groups = [mArr arrayByAddingObjectsFromArray:groups];
+											 }
+											 
+											 block(_groups, nil);
+										 }
+									 }];
+}
+
+- (void)setGroupCount:(NSNumber *)gCount
+{
+	if ([gCount integerValue] > 200) {
+		_groupPageLimit = @200;
+	}
+	
+	if ([gCount integerValue] < 1) {
+		_groupPageLimit = @1;
+	}
+	
+	_groupPageLimit = gCount;
 }
 
 - (NSArray *)getAllGroups
@@ -464,10 +729,15 @@
 		return _groups;
 	}
 	else {
-		[[BSGroupsService sharedService] getAllGroupsWithCompletionBlock:^(NSArray *groups, id error) {
+		[[BSGroupsService sharedService] getAllGroupsWithCompletionBlock:^(NSArray *groups, NSArray *errors) {
 			[[BSTestSemaphor sharedInstance] lift:@"FetchGroups"];
 			
-			_groups = groups;
+			if (errors && errors.count>0) {
+				_groups = nil;
+			}
+			else {
+				_groups = groups;
+			}
 			
 		}];
 		[[BSTestSemaphor sharedInstance] waitForKey:@"FetchGroups"];
@@ -476,11 +746,145 @@
 	}
 }
 
-- (void)searchGroupsWithQuery:(NSString *)query limit:(NSNumber *)limit onCompletion:(void(^)(NSArray *results, id error))block
+- (void)getGroupDetails:(NSString *)groupID onCompletion:(void(^)(BSGroup *group, NSArray *errors))block
 {
-	[[BSGroupsService sharedService] searchContactGroups:query limit:limit.integerValue withCompletionBlock:^(NSArray *results, id error) {
+	if ([BSHelper isNilOrEmpty:groupID]) {
 		
-		block(results, error);
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Must specify group ID", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	[[BSGroupsService sharedService] getDetailsForGroupID:groupID withCompletionBlock:^(BSGroup *group, NSArray *errors) {
+		
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(group, nil);
+		}
+		
+	}];
+}
+
+- (void)searchGroupsWithQuery:(NSString *)query limit:(NSNumber *)limit onCompletion:(void(^)(NSArray *results, NSArray *errors))block
+{
+	if ([limit integerValue] < 1) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Limit must be positive number", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	if ([BSHelper isNilOrEmpty:query]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Enter query for search", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	[[BSGroupsService sharedService] searchContactGroups:query limit:limit.integerValue withCompletionBlock:^(NSArray *results, NSArray *errors) {
+		
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(results, nil);
+		}
+	}];
+}
+
+- (void)getAnalyticsSummaryFromDate:(NSDate *)startDate toDate:(NSDate *)endDate withCompletionBlock:(void(^)(NSArray *statistics, NSArray *errors))block
+{
+	if ((startDate!=nil && endDate!=nil) && [[startDate laterDate:endDate] isEqualToDate:startDate]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Start date must be before end date", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	[[BSAnalyticsService sharedService] getAnalyticsSummaryFromDate:startDate toDate:endDate usingConnection:nil withCompletionBlock:^(NSArray *statistics, NSArray *errors) {
+		
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(statistics, nil);
+		}
+	}];
+}
+
+- (void)getNetworkDetailsFromDate:(NSDate *)startDate toDate:(NSDate *)endDate mccmnc:(BSMCCMNC *)mccmnc withCompletionBlock:(void(^)(NSArray *networkDetails, NSArray *errors))block
+{
+	if ((startDate!=nil && endDate!=nil) && [[startDate laterDate:endDate] isEqualToDate:startDate]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Start date must be before end date", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	[[BSAnalyticsService sharedService] getNetworkDetailsFromDate:startDate toDate:endDate mccmnc:mccmnc usingConnection:nil withCompletionBlock:^(NSArray *networkDetails, NSArray *errors) {
+		
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(networkDetails, nil);
+		}
+	}];
+}
+
+- (void)getRecipientNumbersOnCompletion:(void(^)(NSArray *numbers, NSArray *errors))block
+{
+	[[BSConnectionsService sharedService] getRecipientNumbersOnCompletion:^(NSArray *recipientNumbers, NSArray *errors) {
+		
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(recipientNumbers, nil);
+		}
+		
+	}];
+}
+
+- (void)getConversationsOnCompletion:(void(^)(NSArray *conversations, NSArray *errors))block
+{
+	[[BSSMSService sharedService] getConversationsOnCompletion:^(NSArray *conversations, NSArray *errors) {
+		
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(conversations, nil);
+		}
+		
+	}];
+}
+
+- (void)getDetailsForConversation:(BSConversation *)conversation onCompletion:(void(^)(BSConversation *fullConversation, NSArray *errors))block
+{
+	if (conversation == nil || [BSHelper isNilOrEmpty:conversation.conversationID]) {
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"You must specify conversation.", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	[[BSSMSService sharedService] getFullConversation:conversation onCompletion:^(BSConversation *fConversation, NSArray *errors) {
+		
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(fConversation, nil);
+		}
+		
 	}];
 }
 

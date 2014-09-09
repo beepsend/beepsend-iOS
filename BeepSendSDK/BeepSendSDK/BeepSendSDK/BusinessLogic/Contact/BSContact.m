@@ -106,16 +106,24 @@
 
 #pragma mark - Public methods
 
-- (void)updateContact
+- (void)updateContactOnCompletion:(void (^)(BSContact *, NSArray *))block
 {
 	if (!_contactID || [_contactID isEqualToString:@"0"]) {
-		return; //Group needs to be saved first
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:@"Contact needs to be saved first!"];
+		block(nil, @[error]);
+		
+		return; //Contact needs to be saved first
 	}
 	
 	if ([_phoneNumber isEqualToString:_phoneNumber] &&
 		[_firstName isEqualToString:_oldFirstName] &&
 		[_lastName isEqualToString:_oldLastName] &&
 		[_group.groupID isEqualToString:_oldGroup.groupID]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:@"No changes were made to this contact!"];
+		block(nil, @[error]);
+		
 		return; //No changes were made
 	}
 	
@@ -124,45 +132,67 @@
 										   firstName:_firstName
 											lastName:_lastName
 											 groupID:_group.groupID
-								 withCompletionBlock:^(BSContact *contact, id error) {
+								 withCompletionBlock:^(BSContact *contact, NSArray *errors) {
 									 
-									 if (error) {
+									 if (errors && errors.count>0) {
 										 _phoneNumber = _oldPhoneNumber;
 										 _firstName = _oldFirstName;
 										 _lastName = _oldLastName;
 										 _group = _oldGroup;
+										 
+										 block(nil, errors);
 									 }
 									 else {
 										 _oldGroup = _group;
 										 _oldFirstName = _firstName;
 										 _oldLastName = _lastName;
 										 _oldPhoneNumber = _phoneNumber;
+										 
+										 block(contact, nil);
 									 }
 	}];
 }
 
-- (void)saveContact
+- (void)saveContactOnCompletion:(void (^)(BSContact *, NSArray *))block
 {
 	if (_contactID && ![_contactID isEqualToString:@"0"]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:@"Contact already exist!"];
+		block(nil, @[error]);
+		
 		return; //Contact already exists
 	}
 	
-	[[BSContactsService sharedService] addContact:self withCompletionBlock:^(BSContact *contact, id error) {
-		if (!error) {
+	[[BSContactsService sharedService] addContact:self withCompletionBlock:^(BSContact *contact, NSArray *errors) {
+		if (!errors || errors.count==0) {
 			_contactID = contact.contactID;
+			
+			block(contact, nil);
+		}
+		else {
+			block(nil, errors);
 		}
 	}];
 }
 
-- (void)removeContact
+- (void)removeContactOnCompletion:(void (^)(BOOL, NSArray *))block
 {
 	if (!_contactID	|| [_contactID isEqualToString:@"0"]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:@"Contact doesn't exist!"];
+		block(NO, @[error]);
+		
 		return; //Contact needs to be saved first
 	}
 	
-	[[BSContactsService sharedService] deleteContact:self withCompletionBlock:^(BOOL success, id error) {
-		if (!error) {
+	[[BSContactsService sharedService] deleteContact:self withCompletionBlock:^(BOOL success, NSArray *errors) {
+		if (!errors || errors.count==0) {
 			_contactID = @"0";
+			
+			block(YES, nil);
+		}
+		else {
+			block(NO, errors);
 		}
 	}];
 }

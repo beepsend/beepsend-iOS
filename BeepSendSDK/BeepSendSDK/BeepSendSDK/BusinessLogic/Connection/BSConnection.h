@@ -9,56 +9,112 @@
 #import "BSGeneralModel.h"
 #import "BSStructs.h"
 
-@class BSPricelist;
-@class BSCallbacks;
-@class BSBatch;
-@class BSEstimateCost;
-@class BSHLR;
-@class BSLookup;
+#import "BSPricelist.h"
+#import "BSCallbacks.h"
+#import "BSBatch.h"
+#import "BSEstimateCost.h"
+#import "BSHLR.h"
+#import "BSLookup.h"
+#import "BSError.h"
+#import "BSTwoWayBatch.h"
 
+@class BSUser;
 @class BSMessage;
 @class BSWallet;
 
+/*!
+ @class BSConnection
+ @discussion If authenticated using a Connection token only one connect object is accessible.
+ If authenticated using a User token there can be one or several connections accessible.
+ */
 @interface BSConnection : BSGeneralModel
 
-//Connection ID
+/*! Connection ID.
+ */
 @property (nonatomic, strong, readonly) NSString *connectionID;
-//Connection type: HLR connection or SMS connection
+
+/*! Type of connection, 1 for SMS connection or 2 for HLR connection.
+ */
 @property (nonatomic, assign, readonly) BSConnectionType type;
 
-//Users who have privileges to read/write connection
+/*! List of users with read-write access to this connection.
+ */
 @property (nonatomic, strong, readonly) NSArray *users;
-//Wallet that belongs to connection
+
+/*! Wallet that belongs to connection
+ */
 @property (nonatomic, strong, readonly) BSWallet *wallet;
 
 //Properties that can be edited by user
-@property (nonatomic, strong) NSString *label;
-@property (nonatomic, strong) NSString *description;
-@property (nonatomic, strong) NSString *systemID;//Login name
 
-//Specifies if connection is default
+/*! Connection label.
+ */
+@property (nonatomic, strong) NSString *label;
+
+/*! (Optional) Description of this connection.
+ */
+@property (nonatomic, strong) NSString *description;
+
+/*! Login name.
+ */
+@property (nonatomic, strong) NSString *systemID;
+
+/*! Specifies if connection is default
+ */
 @property (nonatomic, assign) BOOL defaultConnection;
 
-//Connection API token
+/*! API Token belonging to this connection.
+ */
 @property (nonatomic, strong, readonly) NSString *apiToken;
 
-//Callbacks URLs
+/*! Connection callbacks.
+ */
 @property (nonatomic, strong) BSCallbacks *callbackURLs;
 
-//Customer that ownes connection
+/*! Customer name.
+ */
 @property (nonatomic, strong, readonly) NSString *customer;
 
-//Tag-Length-Value field for returning mcc and mnc in DLR.
+/*! Tag-Length-Value field for returning mcc and mnc in DLR.
+ */
 @property (nonatomic, strong, readonly) NSNumber *TLVForMCCAndMNC;
 
-//Whitelist
+/*! Whitelisted urls for connection
+ */
 @property (nonatomic, strong, readonly) NSArray *whitelist;
 
-//Connection password
-@property (nonatomic, strong, readonly) NSString *password;
+/*! Connection password
+ */
+@property (nonatomic, strong) NSString *password;
 
+/*! Create Connection object
+ Used only when ID of connection is available.
+ 
+ @param cID - Connection ID
+ 
+ @return Returns Connection object
+ */
 - (BSConnection *)initConnectionWithID:(NSString *)cID;
 
+/*! Create Connection object
+ Used for initializing connection object with object received from server
+ 
+ @param cID - Connection ID
+ @param cAPIToken - API token
+ @param cCallbacks - Callbacks
+ @param cCustomer - Customer
+ @param cDescription - Description
+ @param cLabel - Label
+ @param cSystemID - System ID
+ @param cTlvformccandmnc - Tag-Length-Value field for returning mcc and mnc in DLR.
+ @param cType - Connection type
+ @param cUsers - Users
+ @param cWallet - Wallet
+ @param cWhitelist - Whitelist
+ @param password - Password
+ 
+ @return Returns Connection object
+ */
 - (BSConnection *)initConnectionWithID:(NSString *)cID
 							  apiToken:(NSString *)cAPIToken
 							 callbacks:(BSCallbacks *)cCallbacks
@@ -73,72 +129,254 @@
 							 whitelist:(NSArray *)cWhitelist
 							  password:(NSString *)password;
 
-//Copy constructor with new API token
+/*! Copy constructor with new API token
+ 
+ @param connectionModel - Connection
+ @param newToken - New API token
+ 
+ @return Returns Connection object
+ */
 - (BSConnection *)initWithConnectionModel:(BSConnection *)connectionModel
 							 withNewToken:(NSString *)newToken;
 
-//Copy constructor with new password
+/*! Copy constructor with new password
+ 
+ @param connectionModel - Connection
+ @param newPassword - New password
+ 
+ @return Returns Connection object
+ */
 - (BSConnection *)initWithConnectionModel:(BSConnection *)connectionModel
 						  withNewPassword:(NSString *)newPassword;
 
-- (BSConnection *)initConnectionWithID:(NSString *)cID
-								 label:(NSString *)cLabel
-							  systemID:(NSString *)cSystemID
-								  type:(BSConnectionType)cType;
-
-//Initiate connection with API token
+/*! If Connection token is entered current connection will return connection for 
+	given API token.
+ 
+	If User token is entered current connection will return default connection 
+	for that user.
+ 
+ @return Returns Connection object
+ */
 + (BSConnection *)currentConnection;
 
-//After made changes it is necessary to call method updateConnection
-- (void)updateConnection;
+/*! If changes were made to connection use update method to save changes.
+ 
+ @param block - Returns error if update failed
+ */
+- (void)updateConnectionOnCompletion:(void(^)(NSArray *errors))block;
 
-//If API token is compromised use this method for token reset
-- (void)resetConnectionToken;
+/*! If you think that the connection token used for authenticating with 
+	the Beepsend API has been compromised you can use this method 
+	(with a user token) to reset the connection token.
+ 
+ @param block - Returns error if token reset failed
+ */
+- (void)resetConnectionTokenOnCompletion:(void(^)(NSArray *errors))block;
 
-//Returns pricelists
-- (void)getPricelistsOnCompletion:(void(^)(NSArray *pricelists))block;
+/*! If you wish to use our legacy HTTP API, you need to supply your connection
+	username as well as password for each request. If you don't have your
+	connection password, you can request a new one with this method.
+ 
+ @param block - Returns password or error if password reset failed
+ */
+- (void)resetConnectionPasswordOnCompletion:(void(^)(NSString *password, NSArray *errors))block;
 
-//Returns current pricelists
-- (void)getCurrentPricelistOnCompletion:(void(^)(BSPricelist *pricelist))block;
+/*! Receive all price lists revisions for a specific connection 
+	related to the authenticated user. 
+	A connection ID or alias tag "me" must be provided as reference.
+ 
+ @param block - Returns pricelists or error on fail
+ */
+- (void)getPricelistsOnCompletion:(void(^)(NSArray *pricelists, NSArray *errors))block;
 
-//Send message
-//Returns number of messages
-- (NSInteger)sendSMS:(BSMessage *)message withCompletionBlock:(void(^)(BSMessage *message, id error))block;
+/*! Instead of fetching all revisions and then using the latest revision id to
+	get the current price list the following can be used for both 
+	User and Connection authentifications
+ 
+ @param block - Returns pricelist or error on fail
+ */
+- (void)getCurrentPricelistOnCompletion:(void(^)(BSPricelist *pricelist, NSArray *errors))block;
 
-//Send messages
-//Returns number of messages
-- (NSInteger)sendMultipleSMS:(NSArray *)messages withCompletionBlock:(void(^)(NSArray *messages, id error))block;
+/*! Fetch pricelist as csv
+ 
+ @param block - Returns pricelist as csv or error list
+ */
+- (void)getPricelistsAsCsvOnCompletion:(void(^)(NSString *pricelist, NSArray *errors))block;
 
+/*! Fetch pricelist diff
+ 
+ @param pl1 - Pricelist 1
+ @param pl2 - Pricelist 2
+ @param block - Returns pricelist diff or error list
+ */
+- (void)getPricelistsDiffForPricelist:(BSPricelist *)pl1 andPricelist:(BSPricelist *)pl2 onCompletion:(void(^)(BSNetwork *pricelistDiff, NSArray *errors))block;
+
+/*! Fetch pricelist diff as csv
+ 
+ @param pl1 - Pricelist 1
+ @param pl2 - Pricelist 2
+ @param block - Returns pricelist as csv or error list
+ */
+- (void)getPricelistsDiffAsCsvForPricelist:(BSPricelist *)pl1 andPricelist:(BSPricelist *)pl2 onCompletion:(void(^)(NSString *pricelist, NSArray *errors))block;
+
+/*! Method sends message and returns number of messages
+ 
+ @param message - Message object for sending
+ @param block - Block object that returns message if sending was successfull or error
+ 
+ @return Returns number of messages
+ */
+- (NSInteger)sendSMS:(BSMessage *)message
+ withCompletionBlock:(void(^)(BSMessage *message, NSArray *errors))block;
+
+/*! Method sends multiple messages and returns number of messages
+ 
+ @param messages - Array of message objects for sending
+ @param block - Block object that returns array of messages if sending was successfull or errors
+ 
+ @return Returns number on messages
+ */
+- (NSInteger)sendMultipleSMS:(NSArray *)messages
+		 withCompletionBlock:(void(^)(NSArray *messages, NSArray *errors))block;
+
+/*! Method that calculates number of messages for message
+	based on character count and encoding
+ 
+ @param message - Message object to calculate message count
+ 
+ @return Returns number of messages
+ */
 - (NSInteger)smsCountForMessage:(BSMessage *)message;
+
+/*! Method that calculates number of messages for array of messages
+	based on character count and encoding
+	Message count is sum of calculated message count for every message in array
+ 
+ @param messages - Array of message objects to calculate message count
+ 
+ @return Returns number of messages
+ */
 - (NSInteger)smsCountForMessages:(NSArray *)messages;
 
-//Validate SMS
-- (void)validateSMS:(BSMessage *)message onCompletion:(void(^)(BSMessage *message, id error))block;
+/*! Method that performs a dry run of SMS sending
+ 
+ @param message - Message to validate
+ @param block - Returns message without ID or error if validation failed
+ */
+- (void)validateSMS:(BSMessage *)message
+	   onCompletion:(void(^)(BSMessage *message, NSArray *errors))block;
 
-//Get sms details
-- (void)getDetailsForSMS:(BSMessage *)message onCompletion:(void(^)(BSLookup *lookup, id error))block;
+/*! The API can be utilized to get details of any message sent through Beepsend 
+	no matter if you submitted it via SMPP or HTTP
+ 
+ @param message - Message to lookup
+ @param block - Returns message lookup or error if lookup failed
+ */
+- (void)getDetailsForSMS:(BSMessage *)message
+			onCompletion:(void(^)(BSLookup *lookup, NSArray *errors))block;
 
-//Get sms details based on filters
-- (void)getDetailsForMessagesSentTo:(NSString *)recipient sentFrom:(NSString *)sender usedBatch:(BSBatch *)batch beforeDate:(NSDate *)bDate afterDate:(NSDate *)aDate forNextPage:(BOOL)nextPage onCompletion:(void(^)(NSArray *lookups, id error))block;
+/*! Get details regarding multiple sent messages with filters.
+ 
+ @param recipient - MSISDN (phone number), the to address.
+ @param sender - Sender id. The from address.
+ @param batch - Will return every message sent with the same batch.
+ @param bDate - Filter messages sent before this date.
+ @param aDate - Filter messages sent after this date.
+ @param nextPage - If YES then new page with results will be loaded
+ @param block - Returns array of found messages or error
+ */
+- (void)getDetailsForMessagesSentTo:(NSString *)recipient
+						   sentFrom:(NSString *)sender
+						  usedBatch:(BSBatch *)batch
+						 beforeDate:(NSDate *)bDate
+						  afterDate:(NSDate *)aDate
+						forNextPage:(BOOL)nextPage
+					   onCompletion:(void(^)(NSArray *lookups, NSArray *errors))block;
 
-//How many SMS objects to fetch. Maximum 200, default 100.
+/*! How many SMS objects to fetch.
+ 
+ @param lookupPageLimit - Maximum 200, default 100.
+ */
 - (void)setLookupPageLimit:(NSNumber *)lookupPageLimit;
 
-//Get batch details
-- (void)getDetailsForBatch:(BSBatch *)batch onCompletion:(void(^)(BSBatch *batch, id error))block;
+/*! Get batch details
+ 
+ @param batch - Batch with ID
+ @param block - Returns batch details
+ */
+- (void)getDetailsForBatch:(BSBatch *)batch
+			  onCompletion:(void(^)(BSBatch *batch, NSArray *errors))block;
 
-//Get previous batches
-- (void)getPreviousBatchesOnCompletion:(void(^)(NSArray *batches, id error))block;
+/*! Get previous batches
+ 
+ @param block - Returns array of previous batches
+ */
+- (void)getPreviousBatchesOnCompletion:(void(^)(NSArray *batches, NSArray *errors))block;
 
-//Estimates message cost (not necessarily accurate)
-- (void)estimateSMSCostForMessages:(NSArray *)messages onCompletion:(void(^)(NSArray *cost, id error))block;
+/*! This call will give a paginated overview of messages in a batch, 
+	complete with sent and recieved message body. The mobile terminated
+	messages are matched with their mobile originated counterpart
+ 
+ @param batchID - batch ID
+ @param block - Returns array of batches or errors
+ */
+- (void)getTwoWayBatchForID:(NSString *)batchID onCompletion:(void(^)(NSArray *batches, NSArray *errors))block;
 
-//Do immediate HLR for given number
-- (void)immediateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, id error))block;
+/*! Estimates message cost (not necessarily accurate)
+ 
+ @param messages - Messages to estimate price for
+ @param block - Returns array of cost per message
+ */
+- (void)estimateSMSCostForMessages:(NSArray *)messages
+					  onCompletion:(void(^)(NSArray *cost, NSArray *errors))block;
 
-//Validate HLR for phone number
-- (void)validateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, id error))black;
+/*! Method that performs immediate HLR lookup
+	(takes some time)
+ 
+ @param phoneNumber - Phone number to perform HLR
+ @param block - Returns HLR response or error
+ */
+- (void)immediateHLRForNumber:(NSString *)phoneNumber
+				 onCompletion:(void(^)(BSHLR *hlr, NSArray *errors))block;
 
+/*! Method that performs bulk HLR lookup
+ (takes some time)
+ 
+ @param phoneNumbers - Array of phone numbers to perform HLR
+ @param block - Returns HLR response or error
+ */
+- (void)bulkHLRForNumbers:(NSArray *)phoneNumbers onCompletion:(void(^)(NSArray *hlrs, NSArray *errors))block;
 
+/*! Method that performs a dry run of HLR lookup
+	(takes some time)
+ 
+ @param phoneNumber - Phone number to perform HLR
+ @param block - Returns HLR response or error
+ */
+- (void)validateHLRForNumber:(NSString *)phoneNumber
+				onCompletion:(void(^)(BSHLR *hlr, NSArray *errors))block;
+
+/*! This call does not consider delivery statistics
+	and should merely be used for aggregated views on traffic. 
+
+ @param startDate - Begin Date in Unix time.
+ @param endDate - End dates in Unix time.
+ @param block - Returns statistics or error
+ */
+- (void)getAnalyticsSummaryFromDate:(NSDate *)startDate
+							 toDate:(NSDate *)endDate
+				withCompletionBlock:(void(^)(NSArray *statistics, NSArray *errors))block;
+
+/*! The call supports a summary for available connections on used token. 
+ 
+ @param startDate - Begin Date in Unix time.
+ @param endDate - End dates in Unix time.
+ @param mccmnc - Mobile Country Code
+ @param block - Returns network details or error
+ */
+- (void)getNetworkDetailsFromDate:(NSDate *)startDate
+						   toDate:(NSDate *)endDate
+						   mccmnc:(BSMCCMNC *)mccmnc
+			  withCompletionBlock:(void(^)(NSArray *networkDetails, NSArray *errors))block;
 
 @end

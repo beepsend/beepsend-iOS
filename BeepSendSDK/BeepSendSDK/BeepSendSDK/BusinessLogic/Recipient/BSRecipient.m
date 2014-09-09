@@ -45,12 +45,12 @@
 	return self;
 }
 
-- (BSRecipient *)initRecipientWithNumber:(NSString *)number
+- (BSRecipient *)initRecipientWithNumber:(NSString *)nNumber
 							  numberType:(NSNumber *)nType
 							   planIndex:(NSNumber *)nPlanIndex
 {
 	if (self = [super initWithID:@"0" andTitle:@"Recipient"]) {
-		_destinationNumber = number;
+		_destinationNumber = nNumber;
 		_numberType = nType;
 		_numberPlanIndex = nPlanIndex;
 	}

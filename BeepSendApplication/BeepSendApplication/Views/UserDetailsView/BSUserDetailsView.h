@@ -31,6 +31,10 @@
 @property (nonatomic, strong) UIButton *buttonVerifiedPhone;
 @property (nonatomic, strong) UIButton *buttonVerifiedEmail;
 
+@property (nonatomic, strong) UIButton *buttonContacts;
+
 @property (nonatomic, strong) UITableView *tableViewConnections;
+
+@property (nonatomic, weak) UIButton *buttonDone;
 
 @end

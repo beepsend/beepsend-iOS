@@ -9,9 +9,10 @@
 #import "BSBaseService.h"
 
 #import "BSCustomer.h"
+#import "BSError.h"
 
 @interface BSCustomerService : BSBaseService
 
-- (void)getCustomerOnCompletion:(void(^)(BSCustomer *customer, id error))block;
+- (void)getCustomerOnCompletion:(void(^)(BSCustomer *customer, NSArray *errors))block;
 
 @end

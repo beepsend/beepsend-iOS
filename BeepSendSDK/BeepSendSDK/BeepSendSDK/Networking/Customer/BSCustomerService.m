@@ -28,17 +28,17 @@
 
 #pragma mark - Public methods
 
-- (void)getCustomerOnCompletion:(void(^)(BSCustomer *customer, id error))block {
+- (void)getCustomerOnCompletion:(void(^)(BSCustomer *customer, NSArray *errors))block {
 	[super executeGETForMethod:[BSAPIConfiguration customer]
 				withParameters:@{}
 				  onCompletion:^(id response, id error) {
 					  
 					  if (!error) {
-						  block([[BSAPCustomer classFromDict:response] convertToModel], error);
+						  block([[BSAPCustomer classFromDict:response] convertToModel], nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 					  
 				  }];

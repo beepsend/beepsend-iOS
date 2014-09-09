@@ -15,11 +15,10 @@
 
 #import "BSCustomerViewController.h"
 #import "BSSendMessageViewController.h"
+#import "BSContactsViewController.h"
+#import "BSHLRViewController.h"
 
-#import "BSUser.h"
-#import "BSConnection.h"
-
-@interface BSUserDetailsViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface BSUserDetailsViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (nonatomic, weak) UIScrollView *scrollView;
 
@@ -42,6 +41,10 @@
 
 @property (nonatomic, weak) UITableView *tableViewConnections;
 
+@property (nonatomic, weak) UIButton *buttonContacts;
+
+@property (nonatomic, weak) UIButton *buttonDone;
+
 @property (nonatomic, strong) NSArray *dataSourceConnections;
 
 - (void)setupViewElements;
@@ -53,6 +56,9 @@
 
 - (void)buttonCustomerClicked:(UIButton *)sender;
 - (void)buttonDefaultConnectionClicked:(UIButton *)sender;
+- (void)buttonContactsClicked:(UIButton *)sender;
+
+- (void)buttonDoneClicked:(UIButton *)sender;
 
 @end
 
@@ -110,6 +116,12 @@
 	_tableViewConnections.dataSource = self;
 	_tableViewConnections.delegate = self;
 	
+	_buttonContacts = rootView.buttonContacts;
+	[_buttonContacts addTarget:self action:@selector(buttonContactsClicked:) forControlEvents:UIControlEventTouchUpInside];
+	
+	_buttonDone = rootView.buttonDone;
+	[_buttonDone addTarget:self action:@selector(buttonDoneClicked:) forControlEvents:UIControlEventTouchUpInside];
+	
 	self.view = rootView;
 }
 
@@ -125,11 +137,24 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
 	
 	//Collect all available connections for user
-	[[BSUser currentUser] getAvailableConnectionsOnCompletion:^(NSArray *connections) {
-		_dataSourceConnections = connections;
-		[_tableViewConnections reloadData];
+	[[BSUser currentUser] getAvailableConnectionsOnCompletion:^(NSArray *connections, NSArray *errors) {
 		
-		[_buttonDefaultConnection setTitle:[BSUser currentUser].defaultConnection.label forState:UIControlStateNormal];
+		if (!errors || errors.count==0 ) {
+			
+			_dataSourceConnections = connections;
+			[_tableViewConnections reloadData];
+			
+			[_buttonDefaultConnection setTitle:[BSUser currentUser].defaultConnection.label forState:UIControlStateNormal];
+		}
+		else {
+		
+			NSString *errorMessages = @"";
+			for (BSError *error in errors) {
+				errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+			}
+			
+			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+		}
 	}];
 	
 	//Reload user types table view
@@ -148,6 +173,13 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	
+	[_tableViewConnections deselectRowAtIndexPath:[_tableViewConnections indexPathForSelectedRow] animated:animated];
+}
+
 #pragma mark - Private methods
 
 - (void)setupViewElements
@@ -164,6 +196,10 @@
 	
 	[_buttonCustomer setTitle:u.customerName forState:UIControlStateNormal];
 	[_buttonDefaultConnection setTitle:u.defaultConnection.label forState:UIControlStateNormal];
+	
+	[_buttonContacts setTitle:@"Contacts" forState:UIControlStateNormal];
+	
+	[_buttonDone setTitle:NSLocalizedString(@"Update", @"") forState:UIControlStateNormal];
 }
 
 - (void)keyboardBecameActive:(NSNotification *)notification
@@ -209,8 +245,83 @@
 
 - (void)buttonDefaultConnectionClicked:(UIButton *)sender
 {
-	BSSendMessageViewController *msgVC = [[BSSendMessageViewController alloc] initWithConnection:[BSUser currentUser].defaultConnection];
-	[self.navigationController pushViewController:msgVC animated:YES];
+	BSConnection *connection = [BSUser currentUser].defaultConnection;
+	
+	if (!connection) {
+		return;
+	}
+	
+	id vc;
+	if (connection.type == BSConnectionTypeSMS) {
+		vc = [[BSSendMessageViewController alloc] initWithConnection:connection];
+	}
+	else {
+		vc = [[BSHLRViewController alloc] initWithConnection:connection];
+	}
+	
+	[self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)buttonContactsClicked:(UIButton *)sender
+{
+	BSContactsViewController *contactsVC = [[BSContactsViewController alloc] init];
+	[self.navigationController pushViewController:contactsVC animated:YES];
+}
+
+- (void)buttonDoneClicked:(UIButton *)sender
+{
+	if ([_textFieldName isFirstResponder]) {
+		[_textFieldName resignFirstResponder];
+		
+		[BSUser currentUser].name = _textFieldName.text;
+		
+		[[BSUser currentUser] updateUserOnCompletion:^(NSArray *errors) {
+			
+			if (errors && errors.count>0 ) {
+				
+				NSString *errorMessages = @"";
+				for (BSError *error in errors) {
+					errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+				}
+				
+				[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+			}
+			
+		}];
+	}
+	
+	if ([_textFieldPhone isFirstResponder]) {
+		[_textFieldPhone resignFirstResponder];
+		
+		[BSUser currentUser].phone = _textFieldPhone.text;
+		
+		[[BSUser currentUser] updateUserOnCompletion:^(NSArray *errors) {
+			
+			if (errors && errors.count>0 ) {
+				
+				NSString *errorMessages = @"";
+				for (BSError *error in errors) {
+					errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+				}
+				
+				[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+			}
+			
+		}];
+	}
+	
+	if ([_textFieldEmail isFirstResponder]) {
+		[_textFieldEmail resignFirstResponder];
+		
+		[BSUser currentUser].email = _textFieldEmail.text;
+		
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Enter password to update email", @"")
+															  message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+		alert.alertViewStyle = UIAlertViewStyleSecureTextInput;
+		[alert show];
+	}
+	
+	
 }
 
 #pragma mark - UITableView data source
@@ -267,8 +378,17 @@
 {
 	if ([tableView isEqual:_tableViewConnections]) {
 		
-		BSSendMessageViewController *msgVC = [[BSSendMessageViewController alloc] initWithConnection:_dataSourceConnections[indexPath.row]];
-		[self.navigationController pushViewController:msgVC animated:YES];
+		BSConnection *connection = _dataSourceConnections[indexPath.row];
+		
+		id vc;
+		if (connection.type == BSConnectionTypeSMS) {
+			vc = [[BSSendMessageViewController alloc] initWithConnection:connection];
+		}
+		else {
+			vc = [[BSHLRViewController alloc] initWithConnection:connection];
+		}
+		
+		[self.navigationController pushViewController:vc animated:YES];
 		
 	}
 }
@@ -279,6 +399,39 @@
 {
 	[textField resignFirstResponder];
 	return YES;
+}
+
+#pragma mark - UIAlertView delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	switch (buttonIndex) {
+		case 0:
+		{
+			
+		}
+			break;
+		case 1:
+		{
+			NSString *password = [alertView textFieldAtIndex:0].text;
+			[[BSUser currentUser] updateUserEmailWithPassword:password onCompletion:^(NSArray *errors) {
+				
+				if (errors && errors.count>0 ) {
+					
+					NSString *errorMessages = @"";
+					for (BSError *error in errors) {
+						errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+					}
+					
+					[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+				}
+				
+			}];
+		}
+			break;
+		default:
+			break;
+	}
 }
 
 @end

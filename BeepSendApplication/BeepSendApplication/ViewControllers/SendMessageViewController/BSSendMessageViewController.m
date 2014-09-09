@@ -10,15 +10,10 @@
 
 #import "BSSendMessageView.h"
 
-//TODO: IMPORT SDK FOR TESTING
-#import "BSUser.h"
-#import "BSConnection.h"
-#import "BSMessage.h"
-#import "BSWallet.h"
-
 @interface BSSendMessageViewController () <UITextFieldDelegate>
 
 @property (nonatomic, strong) BSConnection *connection;
+@property (nonatomic, strong) BSContact *contact;
 
 @property (nonatomic, weak) UIScrollView *scrollView;
 
@@ -27,7 +22,9 @@
 
 @property (nonatomic, weak) UITextView *textViewMessageBox;
 
-@property (nonatomic, weak) UIButton *buttonCheckDestinationNumber;
+@property (nonatomic, weak) UIButton *buttonValidateSMS;
+@property (nonatomic, weak) UIButton *buttonSendSMS;
+
 @property (nonatomic, weak) UIButton *buttonDone;
 
 @property (nonatomic, weak) UIButton *buttonBack;
@@ -35,14 +32,17 @@
 
 - (void)setupViewElements;
 
-- (void)buttonDoneClicked;
-- (void)buttonCheckClicked;
+- (void)buttonDoneClicked:(UIButton *)sender;
+- (void)buttonValidateClicked:(UIButton *)sender;
+- (void)buttonSendClicked:(UIButton *)sender;
 
 - (void)keyboardBecameActive:(NSNotification *)notification;
 - (void)keyboardBecameInactive:(NSNotification *)notification;
 
 - (void)buttonBackClicked:(UIButton *)sender;
 - (void)segmentedControlChangedValue:(UISegmentedControl *)sender;
+
+- (BSMessage *)messageToSend;
 
 @end
 
@@ -70,6 +70,18 @@
     return self;
 }
 
+- (BSSendMessageViewController *)initWithConnection:(BSConnection *)connection forContact:(BSContact *)contact
+{
+	self = [super init];
+    if (self) {
+        // Custom initialization
+		
+		_connection = connection;
+		_contact = contact;
+    }
+    return self;
+}
+
 #pragma mark - View lifecycle
 
 - (void)loadView
@@ -83,21 +95,19 @@
 	
 	_textViewMessageBox = sendMessageView.textViewMessageBox;
 	
-	_buttonCheckDestinationNumber = sendMessageView.buttonCheckDestinationNumber;
+	_buttonValidateSMS = sendMessageView.buttonValidateSMS;
 	_buttonDone = sendMessageView.buttonDone;
+	_buttonSendSMS = sendMessageView.buttonSendSMS;
 	
-	[_buttonCheckDestinationNumber addTarget:self action:@selector(buttonCheckClicked) forControlEvents:UIControlEventTouchUpInside];
-	[_buttonDone addTarget:self action:@selector(buttonDoneClicked) forControlEvents:UIControlEventTouchUpInside];
+	[_buttonValidateSMS addTarget:self action:@selector(buttonValidateClicked:) forControlEvents:UIControlEventTouchUpInside];
+	[_buttonSendSMS addTarget:self action:@selector(buttonSendClicked:) forControlEvents:UIControlEventTouchUpInside];
+	[_buttonDone addTarget:self action:@selector(buttonDoneClicked:) forControlEvents:UIControlEventTouchUpInside];
 	
 	_buttonBack = sendMessageView.buttonBack;
 	[_buttonBack addTarget:self action:@selector(buttonBackClicked:) forControlEvents:UIControlEventTouchUpInside];
 	
 	_segmentedControlMessageType = sendMessageView.segmentedControlMessageType;
-	[_segmentedControlMessageType insertSegmentWithTitle:NSLocalizedString(@"Normal", @"") atIndex:0 animated:YES];
-	[_segmentedControlMessageType insertSegmentWithTitle:NSLocalizedString(@"Binary", @"") atIndex:1 animated:YES];
-	[_segmentedControlMessageType insertSegmentWithTitle:NSLocalizedString(@"Flash", @"") atIndex:2 animated:YES];
-	[_segmentedControlMessageType setSelectedSegmentIndex:0];
-	
+
 	self.view = sendMessageView;
 }
 
@@ -112,23 +122,9 @@
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameActive:) name:UIKeyboardWillShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardBecameInactive:) name:UIKeyboardWillHideNotification object:nil];
 	
-	if (_connection.type == BSConnectionTypeSMS) {
-		_buttonCheckDestinationNumber.enabled = NO;
-		_buttonCheckDestinationNumber.alpha = 0.3;
-		
-		_textFieldTo.placeholder = NSLocalizedString(@"To whom is message sent?", @"");
+	if (_contact) {
+		_textFieldTo.text = _contact.phoneNumber;
 	}
-	else {
-		_textFieldFrom.enabled = NO;
-		_textFieldFrom.alpha = 0.3;
-		_textViewMessageBox.userInteractionEnabled = NO;
-		_textViewMessageBox.alpha = 0.3;
-		_segmentedControlMessageType.enabled = NO;
-		_segmentedControlMessageType.alpha = 0.3;
-		
-		_textFieldTo.placeholder = NSLocalizedString(@"Enter number to perform HLR", @"");
-	}
-	
 }
 
 - (void)didReceiveMemoryWarning
@@ -153,74 +149,105 @@
 	_textFieldTo.placeholder = NSLocalizedString(@"To whom is message sent?", @"");
 	_textFieldTo.delegate = self;
 	
+	[_buttonValidateSMS setTitle:NSLocalizedString(@"Validate message", @"") forState:UIControlStateNormal];
+	[_buttonSendSMS setTitle:NSLocalizedString(@"Send message", @"") forState:UIControlStateNormal];
+	
+	[_segmentedControlMessageType insertSegmentWithTitle:NSLocalizedString(@"Normal", @"") atIndex:0 animated:YES];
+	[_segmentedControlMessageType insertSegmentWithTitle:NSLocalizedString(@"Binary", @"") atIndex:1 animated:YES];
+	[_segmentedControlMessageType insertSegmentWithTitle:NSLocalizedString(@"Flash", @"") atIndex:2 animated:YES];
+	[_segmentedControlMessageType setSelectedSegmentIndex:0];
 }
 
-- (void)buttonDoneClicked
+- (void)buttonDoneClicked:(UIButton *)sender
 {
-	if (_connection.type == BSConnectionTypeHLR) {
-		
-		[_textFieldTo resignFirstResponder];
-		return;
-	}
-	
 	if ([_textFieldFrom isFirstResponder]) {
 		[_textFieldFrom resignFirstResponder];
 	}
-	else if ([_textFieldTo isFirstResponder]) {
+	
+	if ([_textFieldTo isFirstResponder]) {
 		[_textFieldTo resignFirstResponder];
 	}
-	else if ([_textViewMessageBox isFirstResponder]) {
-		[_textViewMessageBox resignFirstResponder];
-	}
 	
-	if (![Helper isNilOrEmpty:_textFieldFrom.text] &&
-		![Helper isNilOrEmpty:_textFieldTo.text] &&
-		![Helper isNilOrEmpty:_textViewMessageBox.text]) {
-		
-		BSMessage *message;
-		switch (_segmentedControlMessageType.selectedSegmentIndex) {
-			case 0://Normal message
-			{
-				message = [BSMessage messageWithBody:_textViewMessageBox.text from:_textFieldFrom.text to:_textFieldTo.text];
-			}
-				break;
-			case 1://Binary message
-			{
-				message = [BSMessage binaryMessageWithBody:_textViewMessageBox.text from:_textFieldFrom.text to:_textFieldTo.text];
-			}
-				break;
-			case 2://Flash message
-			{
-				message = [BSMessage flashMessageWithBody:_textViewMessageBox.text from:_textFieldFrom.text to:_textFieldTo.text];
-			}
-				break;
-			default:
-				break;
-		}
-		
-		[_connection sendSMS:message withCompletionBlock:^(BSMessage *message, id error) {
-			
-			if (!error) {
-				[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success!", @"") message:NSLocalizedString(@"Message was successfully sent!", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
-			}
-			else {
-				[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:NSLocalizedString(@"There was an error while sending message! Try again.", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
-			}
-		}];
+	if ([_textViewMessageBox isFirstResponder]) {
+		[_textViewMessageBox resignFirstResponder];
 	}
 }
 
-- (void)buttonCheckClicked {
+- (void)buttonValidateClicked:(UIButton *)sender {
 	
-	if ([Helper isNilOrEmpty:_textFieldTo.text]) {
-		[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Warning!", @"") message:NSLocalizedString(@"You must enter number to perform HLR request.", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
-		return; //Enter number to perform hlr
+	BSMessage *message = [self messageToSend];
+	
+	if (!message) {
+		return; //Message not valid
 	}
 	
-	[_connection immediateHLRForNumber:_textFieldTo.text onCompletion:^(BSHLR *hlr, id error) {
-		//TODO: show result
+	__block UIView *viewLoader = [[UIView alloc] initWithFrame:self.view.bounds];
+	[viewLoader setBackgroundColor:[UIColor blackColor]];
+	viewLoader.alpha = 0.6;
+	__block UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	activityIndicator.center = self.view.center;
+	[activityIndicator startAnimating];
+	[self.view addSubview:viewLoader];
+	[self.view addSubview:activityIndicator];
+	
+	[_connection validateSMS:message onCompletion:^(BSMessage *message, NSArray *errors) {
+		
+		[viewLoader removeFromSuperview];
+		[activityIndicator stopAnimating];
+		[activityIndicator removeFromSuperview];
+		
+		if (!errors || errors.count == 0) {
+			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success!", @"") message:NSLocalizedString(@"Message was successfully validated!", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+		}
+		else {
+			
+			NSString *errorMessages = @"";
+			for (BSError *error in errors) {
+				errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+			}
+			
+			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+		}
 	}];
 	
+}
+
+- (void)buttonSendClicked:(UIButton *)sender
+{
+	BSMessage *message = [self messageToSend];
+	
+	if (!message) {
+		return; //Message not valid
+	}
+	
+	__block UIView *viewLoader = [[UIView alloc] initWithFrame:self.view.bounds];
+	[viewLoader setBackgroundColor:[UIColor blackColor]];
+	viewLoader.alpha = 0.6;
+	__block UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	activityIndicator.center = self.view.center;
+	[activityIndicator startAnimating];
+	[self.view addSubview:viewLoader];
+	[self.view addSubview:activityIndicator];
+	
+	[_connection sendSMS:message withCompletionBlock:^(BSMessage *message, NSArray *errors) {
+		
+		[viewLoader removeFromSuperview];
+		[activityIndicator stopAnimating];
+		[activityIndicator removeFromSuperview];
+		
+		if (!errors || errors.count == 0) {
+			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success!", @"") message:NSLocalizedString(@"Message was successfully sent!", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+		}
+		else {
+			
+			NSString *errorMessages = @"";
+			for (BSError *error in errors) {
+				errorMessages = [[errorMessages stringByAppendingString:error.errorDescription] stringByAppendingString:@"\n"];
+			}
+			
+			[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error!", @"") message:errorMessages delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", @"") otherButtonTitles:nil] show];
+		}
+	}];
 }
 
 - (void)keyboardBecameActive:(NSNotification *)notification
@@ -267,10 +294,57 @@
 	
 }
 
+- (BSMessage *)messageToSend
+{
+	if ([_textFieldFrom isFirstResponder]) {
+		[_textFieldFrom resignFirstResponder];
+	}
+	else if ([_textFieldTo isFirstResponder]) {
+		[_textFieldTo resignFirstResponder];
+	}
+	else if ([_textViewMessageBox isFirstResponder]) {
+		[_textViewMessageBox resignFirstResponder];
+	}
+	
+	if (![Helper isNilOrEmpty:_textFieldFrom.text] &&
+		![Helper isNilOrEmpty:_textFieldTo.text] &&
+		![Helper isNilOrEmpty:_textViewMessageBox.text]) {
+		
+		BSMessage *message;
+		switch (_segmentedControlMessageType.selectedSegmentIndex) {
+			case 0://Normal message
+			{
+				message = [BSMessage messageWithBody:_textViewMessageBox.text from:_textFieldFrom.text to:_textFieldTo.text];
+			}
+				break;
+			case 1://Binary message
+			{
+				message = [BSMessage binaryMessageWithBody:_textViewMessageBox.text from:_textFieldFrom.text to:_textFieldTo.text];
+			}
+				break;
+			case 2://Flash message
+			{
+				message = [BSMessage flashMessageWithBody:_textViewMessageBox.text from:_textFieldFrom.text to:_textFieldTo.text];
+			}
+				break;
+			default:
+				break;
+		}
+	
+		return message;
+	}
+	
+	return nil;
+}
+
 #pragma mark - UITextField delegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+	if ([textField isEqual:_textFieldTo] && _contact) {
+		return NO;
+	}
+	
 	if ([textField isEqual:_textViewMessageBox]) {
 		[_buttonDone setTitle:NSLocalizedString(@"Send", @"") forState:UIControlStateNormal];
 	}

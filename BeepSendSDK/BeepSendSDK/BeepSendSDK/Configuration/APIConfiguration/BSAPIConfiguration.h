@@ -98,6 +98,17 @@
  */
 + (NSString *)connectionPasswordResetForID:(NSString *)connectionID;
 
+#pragma mark - Recipient Numbers
+
+/*
+	As a user you will have associated connections. 
+	These connections have access to recipient numbers, 
+	which can receive mobile originated messages. 
+	The recipient numbers are registered in specific countries,
+	which this endpoint will also list.
+ */
++ (NSString *)recipientNumbers;
+
 #pragma mark - Pricelist
 
 /*
@@ -129,6 +140,16 @@
 	Receive price list (.csv) for given connection.
  */
 + (NSString *)pricelistCSVForID:(NSString *)connectionID;
+
+/*
+	Pricelist diff
+ */
++ (NSString *)pricelistDiffForConnectionID:(NSString *)connectionID rev1:(NSString *)pricelist1ID rev2:(NSString *)pricelist2ID;
+
+/*
+	Pricelist diff as csv
+ */
++ (NSString *)pricelistDiffAsCSVForConnectionID:(NSString *)connectionID rev1:(NSString *)pricelist1ID rev2:(NSString *)pricelist2ID;
 
 #pragma mark - Users
 
@@ -201,6 +222,8 @@
  */
 + (NSString *)hlrForNumber:(NSString *)number;
 
++ (NSString *)hlr;
+
 #pragma mark - Validation
 
 /*
@@ -220,6 +243,11 @@
 	Get details for a specific batch.
  */
 + (NSString *)batchesForID:(NSString *)batchID;
+
+/*
+	Two way batches
+ */
++ (NSString *)twoWayBatchesForID:(NSString *)batchID;
 
 #pragma mark - Analytics
 
@@ -270,6 +298,12 @@
 + (NSString *)analyticsBatches;
 
 + (NSString *)analyticsBatchesForID:(NSString *)batchID;
+
+#pragma mark - Conversations
+
++ (NSString *)conversation;
+
++ (NSString *)conversationForID:(NSString *)cID;
 
 #pragma mark - Contacts
 
@@ -353,15 +387,30 @@
 #pragma mark - Estimate SMS cost
 
 /*
- Each estimation require a token either assigned to a Connection or a User
- that has a default connection set up. By specifying a label of a different
- Connection belonging to your Company this will instead be used, granted
- the User has access-rights to this Connection. If authenticated by
- User token and no Connection is specified, the default assigned Connection
- will be used.
+	Each estimation require a token either assigned to a Connection or a User
+	that has a default connection set up. By specifying a label of a different
+	Connection belonging to your Company this will instead be used, granted
+	the User has access-rights to this Connection. If authenticated by
+	User token and no Connection is specified, the default assigned Connection
+	will be used.
  */
 + (NSString *)smsCostEstimate;
 
 + (NSString *)smsCostEstimateForID:(NSString *)connectionID;
+
+#pragma mark - Verify email and phone number
+
+/*
+	An email will be sent out after changing your email address asking you
+	to verify that you have indeed changed it. Use the unique hash in the 
+	verification link to perform the verification.
+ */
++ (NSString *)verifyEmailWithHash:(NSString *)hash;
+
+/*
+	After changing your phone number. An SMS will be sent out asking you 
+	to verify the change. Use the unique hash to verify.
+ */
++ (NSString *)verifyPhoneWithHash:(NSString *)hash;
 
 @end

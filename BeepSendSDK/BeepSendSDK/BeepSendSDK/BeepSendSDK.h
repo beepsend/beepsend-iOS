@@ -2,12 +2,37 @@
 //  BeepSendSDK.h
 //  BeepSendSDK
 //
-//  Created by Vladica Pesic on 6/10/14.
-//  Copyright (c) 2014 BeepSend. All rights reserved.
-//
 
-#import <Foundation/Foundation.h>
-
-@interface BeepSendSDK : NSObject
-
-@end
+#import "BSUser.h"
+#import "BSConnection.h"
+#import "BSVerified.h"
+#import "BSUserType.h"
+#import "BSMessage.h"
+#import "BSBatch.h"
+#import "BSPricelist.h"
+#import "BSCountry.h"
+#import "BSMCCMNC.h"
+#import "BSNetwork.h"
+#import "BSWallet.h"
+#import "BSEmail.h"
+#import "BSLog.h"
+#import "BSTransfer.h"
+#import "BSAccountManager.h"
+#import "BSCustomer.h"
+#import "BSPriceListDetails.h"
+#import "BSPriceListSchedule.h"
+#import "BSContact.h"
+#import "BSGroup.h"
+#import "BSEstimateCost.h"
+#import "BSLookup.h"
+#import "BSRecipient.h"
+#import "BSCallbacks.h"
+#import "BSDLRReport.h"
+#import "BSHLR.h"
+#import "BSHLRReport.h"
+#import "BSTimestamps.h"
+#import "BSAccumulatedStatistics.h"
+#import "BSAnalyticsBatch.h"
+#import "BSNetworkDetails.h"
+#import "BSStatistics.h"
+#import "BSError.h"

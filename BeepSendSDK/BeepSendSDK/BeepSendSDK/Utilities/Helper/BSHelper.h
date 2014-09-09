@@ -114,4 +114,6 @@ _Bool is_utf8(const char * string)
 
 + (BOOL)isNilOrEmpty:(NSString*)string;
 
++ (NSArray *)handleErrorWithResponse:(id)response andOptionalError:(id)error;
+
 @end

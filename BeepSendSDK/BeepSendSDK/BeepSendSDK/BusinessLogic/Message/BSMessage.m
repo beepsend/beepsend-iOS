@@ -8,9 +8,11 @@
 
 #import "BSMessage.h"
 
-#import "BSBatch.h"
+#import "BSGroup.h"
 
 @interface BSMessage ()
+
+@property (nonatomic, strong, readwrite) NSString *usedEncoding;
 
 //Message response parameters
 @property (nonatomic, strong, readwrite) NSString *messageID;
@@ -21,6 +23,19 @@
 @implementation BSMessage
 
 #pragma mark - Properties
+
+- (NSString *)usedEncoding
+{
+	BOOL isUTF8;
+	
+#ifdef TARGET_IPHONE_SIMULATOR
+	isUTF8 = YES;
+#else
+	isUTF8 = is_utf8([message.message cStringUsingEncoding:NSUTF16BigEndianStringEncoding]);
+#endif
+	
+	return _usedEncoding ? _usedEncoding : isUTF8 ? @"UTF-8" : @"Unicode";
+}
 
 - (NSString *)messageID
 {
@@ -215,31 +230,53 @@
 
 - (void)receiveDeliveryReportWithOption:(NSInteger)receive
 {
-	if (receive < 0 || receive > 2) {
-		return;
-	}
-	
-	_shouldReceiveDeliveryReport = receive;
+	_shouldReceiveDeliveryReport = receive < 0 ? 0 : receive > 2 ? 2 : receive;
 }
 
 - (void)setValidityPeriod:(NSDate *)validUntil
 {
-	_validTo = validUntil;
+	if ((validUntil != nil) && [[validUntil earlierDate:[NSDate date]] isEqualToDate:validUntil]) {
+		_validTo = nil;
+	}
+	else {
+		_validTo = validUntil;
+	}
 }
 
 - (void)scheduleSendingAtTime:(NSDate *)sendingTime
 {
-	_sendTime = sendingTime;
+	if ((sendingTime != nil) && [[sendingTime earlierDate:[NSDate date]] isEqualToDate:sendingTime]) {
+		_sendTime = nil;
+	}
+	else {
+		_sendTime = sendingTime;
+	}
 }
 
 - (void)setEncoding:(NSString *)encoding
 {
-	_usedEncoding = encoding;
+	if ([encoding isEqualToString:@"UTF-8"] ||
+		[encoding isEqualToString:@"ISO-8859-15"] ||
+		[encoding isEqualToString:@"Unicode"]) {
+		
+		_usedEncoding = encoding;
+	}
 }
 
 - (void)addGroupsRecipients:(NSArray *)groups
 {
-	_groups = groups;
+	BOOL nonGroupObject = NO;
+	for (id object in groups) {
+		if (!([object isKindOfClass:[BSGroup class]] || [object isKindOfClass:[NSString class]])) {
+			nonGroupObject = YES;
+		}
+	}
+	if (nonGroupObject) {
+		_groups = nil;
+	}
+	else {
+		_groups = groups;
+	}
 }
 
 @end

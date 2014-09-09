@@ -75,11 +75,11 @@
 	request.to = msgRequest.recipient ? msgRequest.recipient : msgRequest.recipients;
 	request.message = msgRequest.message;
 	request.from = msgRequest.sender;
-	request.batch_id = msgRequest.batch.batchID;
-	request.batch_label = msgRequest.batch.label;
+	request.batch_id = [msgRequest.batch.batchID isEqualToString:@"0"] ? nil : msgRequest.batch.batchID;
+	request.batch_label = [msgRequest.batch.label isEqualToString:@""] ? nil : msgRequest.batch.label;
 	request.send_time = msgRequest.sendTime ? [NSString stringWithFormat:@"%f", [msgRequest.sendTime timeIntervalSince1970]] : nil;
-	request.encoding = msgRequest.usedEncoding;
-	request.message_type = msgRequest.messageType;
+	request.encoding = [msgRequest.usedEncoding isEqualToString:@""] ? nil : msgRequest.usedEncoding;
+	request.message_type = [msgRequest.messageType isEqualToString:@""] ? nil : msgRequest.messageType;
 	request.validity_period = msgRequest.validTo ? [NSString stringWithFormat:@"%f", [msgRequest.validTo timeIntervalSince1970]] : nil;
 	request.receive_dlr = [NSNumber numberWithInteger:msgRequest.shouldReceiveDeliveryReport];
 	
@@ -98,8 +98,8 @@
 	}
 	request.groups = groupsID.count>0?[NSArray arrayWithArray:groupsID]:nil;
 	
-	request.udh = msgRequest.userDataHeader;
-	request.dcs = msgRequest.dataCodingSettings;
+	request.udh = [msgRequest.userDataHeader isEqualToString:@""] ? nil : msgRequest.userDataHeader;
+	request.dcs = [msgRequest.dataCodingSettings isEqualToString:@""] ? nil : msgRequest.dataCodingSettings;
 	
 	return request;
 }

@@ -48,4 +48,7 @@
 					   headers:(NSDictionary *)headers
 				  onCompletion:(void(^)(id response, id error))block;
 
+- (void)executeGETForMethod:(NSString *)method
+ forCSVDownloadOnCompletion:(void(^)(id response, id error))block;
+
 @end

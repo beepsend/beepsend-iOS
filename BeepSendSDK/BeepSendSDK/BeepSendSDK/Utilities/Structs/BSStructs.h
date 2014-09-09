@@ -9,6 +9,12 @@
 #ifndef BeepSendSDK_BSStructs_h
 #define BeepSendSDK_BSStructs_h
 
+/*!
+ @typedef BSConnectionType
+ @abstract Connection type can be SMS and HLR.
+ @constant BSConnectionTypeSMS Tells that connection can send SMS messages.
+ @constant BSConnectionTypeHLR Tells that connection can perform HLR requests.
+ */
 typedef enum {
 	BSConnectionTypeSMS = 1,
 	BSConnectionTypeHLR = 2

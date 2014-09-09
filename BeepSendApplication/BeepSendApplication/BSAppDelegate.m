@@ -10,8 +10,6 @@
 
 #import "BSRootViewController.h"
 
-#import "BSUser.h"
-
 @interface BSAppDelegate ()
 
 @property (nonatomic, strong) UINavigationController *navigationController;

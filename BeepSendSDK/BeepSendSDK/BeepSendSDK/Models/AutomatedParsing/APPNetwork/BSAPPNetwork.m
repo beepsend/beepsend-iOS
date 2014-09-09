@@ -40,7 +40,7 @@
 		[mArr addObject:[mccmnc convertToModel]];
 	}
 	
-	return [[BSNetwork alloc] initNetworkWithMCCMNC:[NSArray arrayWithArray:mArr] withComment:_comment?_comment:@"" price:_price?_price:@0 fromCountry:[_country convertToModel] operator:_operator?_operator:@""];
+	return [[BSNetwork alloc] initNetworkWithMCCMNC:[NSArray arrayWithArray:mArr] withComment:_comment?_comment:@"" price:_price?_price:@0 fromCountry:[_country convertToModel] operator:_operator?_operator:@"" oldPrice:_old_price?_old_price:@0 difference:_diff?_diff:@""];
 }
 
 #pragma mark - Public methods

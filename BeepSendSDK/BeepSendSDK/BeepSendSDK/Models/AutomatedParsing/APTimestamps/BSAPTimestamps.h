@@ -14,5 +14,6 @@
 
 @property (nonatomic, strong) NSString *dlr_out;
 @property (nonatomic, strong) BSAPHLRReport *hlr;
+@property (nonatomic, strong) BSAPHLRReport *sms;
 
 @end

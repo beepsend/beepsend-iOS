@@ -31,21 +31,20 @@
 
 #pragma mark - Public methods
 
-- (void)getUserDetailsWithCompletionBlock:(void(^)(BSUser *user, id error))block
+- (void)getUserDetailsWithCompletionBlock:(void(^)(BSUser *user, NSArray *errors))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration userMe]
 				withParameters:@{}
 				  onCompletion:^(id response, id error) {
-					  
 					  if (!error) {
 						  
 						  BSUser *userModel = [[BSAPCUser classFromDict:response] convertToModel];
 						  
-						  block(userModel, error);
+						  block(userModel, nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+			  
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }
@@ -55,7 +54,7 @@
 		 defaultConnection:(BSConnection *)uConnection
 				 userTypes:(NSArray *)uTypes
 			 verifiedTerms:(NSNumber *)uVerifiedTerms
-	   withCompletionBlock:(void(^)(BSUser *user, id error))block
+	   withCompletionBlock:(void(^)(BSUser *user, NSArray *errors))block
 {
 	
 	BSConnection *connection = [[BSConnection alloc] initConnectionWithID:uConnection.connectionID];
@@ -90,18 +89,18 @@
 						  
 						  BSUser *userModel = [[BSAPCUser classFromDict:response] convertToModel];
 						  
-						  block(userModel, error);
+						  block(userModel, nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }
 
 - (void)updateUserEmail:(NSString *)newEmail
 		   userPassword:(NSString *)password
-	withCompletionBlock:(void(^)(BOOL success, id error))block
+	withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block
 {
 	BSUser *userUpdate = [[BSUser alloc] initUserWithEmail:newEmail andPassword:password];
 	
@@ -114,18 +113,18 @@
 				  onCompletion:^(id response, id error) {
 					  
 					  if (!error) {
-						  block(YES, error);
+						  block(YES, nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(NO, response);
+
+						  block(NO, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }
 
 - (void)updateUserPassword:(NSString *)password
 		   userNewPassword:(NSString *)newPassword
-	   withCompletionBlock:(void(^)(BOOL success, id error))block
+	   withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block
 {
 	BSUser *userUpdate = [[BSUser alloc] initUserWithPassword:password andNewPassword:newPassword];
 	
@@ -138,28 +137,78 @@
 				  onCompletion:^(id response, id error) {
 					  
 					  if (!error) {
-						  block(YES, error);
+						  block(YES, nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(NO, response);
+
+						  block(NO, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
 				  }];
 }
 
-- (void)resetUserTokenUsingPassword:(NSString *)password withCompletionBlock:(void(^)(NSString *apiToken, id error))block
+- (void)resetUserTokenUsingPassword:(NSString *)password withCompletionBlock:(void(^)(NSString *apiToken, NSArray *errors))block
 {
 	[super executeGETForMethod:[BSAPIConfiguration resetTokenMe]
-				withParameters:@{@"password":password}
+				withParameters:@{@"password" : password}
 				  onCompletion:^(id response, id error) {
 					  
 					  if (!error) {
-						  block(response[@"api_token"], error);
+						  block(response[@"api_token"], nil);
 					  }
 					  else {
-						  //TODO: Create error handling
-						  block(nil, response);
+
+						  block(nil, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
 					  }
+				  }];
+}
+
+- (void)resetUserPasswordForEmail:(NSString *)email withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration resetPassword]
+				withParameters:@{@"email" : email}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  block(YES, nil);
+					  }
+					  else {
+						  
+						  block(NO, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
+					  }
+				  }];
+}
+
+- (void)verifyEmailWithHash:(NSString *)hash withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration verifyEmailWithHash:hash]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  block(YES, nil);
+					  }
+					  else {
+
+						  block(NO, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
+					  }
+					  
+				  }];
+}
+
+- (void)verifyPhoneWithHash:(NSString *)hash withCompletionBlock:(void(^)(BOOL success, NSArray *errors))block
+{
+	[super executeGETForMethod:[BSAPIConfiguration verifyPhoneWithHash:hash]
+				withParameters:@{}
+				  onCompletion:^(id response, id error) {
+					  
+					  if (!error) {
+						  block(YES, nil);
+					  }
+					  else {
+
+						  block(NO, [BSHelper handleErrorWithResponse:response andOptionalError:error]);
+					  }
+					  
 				  }];
 }
 

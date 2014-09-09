@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class BSConnection;
-
 @interface BSSendMessageViewController : UIViewController
 
 - (BSSendMessageViewController *)initWithConnection:(BSConnection *)connection;
+- (BSSendMessageViewController *)initWithConnection:(BSConnection *)connection forContact:(BSContact *)contact;
 
 @end

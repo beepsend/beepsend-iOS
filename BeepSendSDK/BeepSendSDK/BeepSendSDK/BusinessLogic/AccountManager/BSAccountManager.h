@@ -8,12 +8,28 @@
 
 #import "BSGeneralModel.h"
 
+/*!
+ @class BSAccountManager
+ @discussion Used to identify customers account manager
+ */
 @interface BSAccountManager : BSGeneralModel
 
+/*! Name of customer account manager.
+ */
 @property (nonatomic, strong, readonly) NSString *name;
+
+/*! Email of customer account manager.
+ */
 @property (nonatomic, strong, readonly) NSString *email;
 
-- (BSAccountManager *)initAccountManagerWithName:(NSString *)amName
-										andEmail:(NSString *)amEmail;
+/*! Creates account manager with name and email
+ 
+ @param accountManagerName - Account manager name
+ @param accountManagerEmail - Account manager email
+ 
+ @return - Returns BSAccountManager object
+ */
+- (BSAccountManager *)initAccountManagerWithName:(NSString *)accountManagerName
+										andEmail:(NSString *)accountManagerEmail;
 
 @end

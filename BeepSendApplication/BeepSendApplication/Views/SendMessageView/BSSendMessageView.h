@@ -17,7 +17,9 @@
 @property (nonatomic, strong) BSTextFieldCustomTextInset *textFieldFrom;
 @property (nonatomic, strong) BSTextFieldCustomTextInset *textFieldTo;
 @property (nonatomic, strong) UITextView *textViewMessageBox;
-@property (nonatomic, strong) UIButton *buttonCheckDestinationNumber;
+
+@property (nonatomic, strong) UIButton *buttonValidateSMS;
+@property (nonatomic, strong) UIButton *buttonSendSMS;
 
 @property (nonatomic, weak) UIButton *buttonDone;
 

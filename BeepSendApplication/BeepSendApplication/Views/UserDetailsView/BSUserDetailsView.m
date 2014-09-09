@@ -8,6 +8,8 @@
 
 #import "BSUserDetailsView.h"
 
+#import "BSInputAccessoryView.h"
+
 @implementation BSUserDetailsView
 
 #pragma mark - Initialization
@@ -33,6 +35,11 @@
 		maskLayer.strokeColor = [[UIColor orangeColor] CGColor];
 		
 		[self.layer addSublayer:maskLayer];
+		
+		////////////////////////////////////////////////////////////////////////
+		//Setup textField input accessory view
+		BSInputAccessoryView *accessoryView = [BSInputAccessoryView inputAccessoryViewWithDoneButton];
+		_buttonDone = accessoryView.buttonDone;
 		
 		////////////////////////////////////////////////////////////////////////
 		//Scroll view
@@ -68,6 +75,7 @@
 																							NSFontAttributeName:[UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultPlaceholderSize]
 																							}];
 		
+		_textFieldName.inputAccessoryView = accessoryView;
 		
 		_textFieldName.layer.borderColor = [UIColor orangeColor].CGColor;
 		_textFieldName.layer.borderWidth = kDefaultBorderWidth;
@@ -98,6 +106,7 @@
 																							 NSFontAttributeName:[UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultPlaceholderSize]
 																							 }];
 		
+		_textFieldEmail.inputAccessoryView = accessoryView;
 		
 		_textFieldEmail.layer.borderColor = [UIColor orangeColor].CGColor;
 		_textFieldEmail.layer.borderWidth = kDefaultBorderWidth;
@@ -128,6 +137,7 @@
 																							 NSFontAttributeName:[UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultPlaceholderSize]
 																							 }];
 		
+		_textFieldPhone.inputAccessoryView = accessoryView;
 		
 		_textFieldPhone.layer.borderColor = [UIColor orangeColor].CGColor;
 		_textFieldPhone.layer.borderWidth = kDefaultBorderWidth;
@@ -137,7 +147,7 @@
 		
 		////////////////////////////////////////////////////////////////////////
 		//User types table view
-		_tableViewUserTypes = [[UITableView alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, CGRectGetMaxY(_labelPhone.frame) + kSeparatorDefaultSpacing, frame.size.width/2 - 2*kViewDefaultBorderInset, 2.0*kDefaultTableViewCellHeight)];
+		_tableViewUserTypes = [[UITableView alloc] initWithFrame:CGRectMake(kViewDefaultBorderInset, CGRectGetMaxY(_labelPhone.frame) + kSeparatorDefaultSpacing, frame.size.width/2 - 3*kViewDefaultBorderInset, 2.0*kDefaultTableViewCellHeight)];
 		[_tableViewUserTypes setBackgroundColor:[UIColor whiteColor]];
 		[_tableViewUserTypes setSeparatorColor:[UIColor darkGrayColor]];
 		[_tableViewUserTypes setSeparatorStyle:UITableViewCellSeparatorStyleSingleLine];
@@ -154,7 +164,7 @@
 		
 		////////////////////////////////////////////////////////////////////////
 		//Buttons customer and default connection
-		_buttonCustomer = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_tableViewUserTypes.frame) + 2*kViewDefaultBorderInset, CGRectGetMinY(_tableViewUserTypes.frame), CGRectGetWidth(_tableViewUserTypes.frame), CGRectGetHeight(_tableViewUserTypes.frame)/2.0 - kSeparatorDefaultSpacing)];
+		_buttonCustomer = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_tableViewUserTypes.frame) + kSeparatorDefaultSpacing, CGRectGetMinY(_tableViewUserTypes.frame), CGRectGetWidth(_tableViewUserTypes.frame), CGRectGetHeight(_tableViewUserTypes.frame)/2.0 - kSeparatorDefaultSpacing)];
 		
 		_buttonCustomer.backgroundColor = [UIColor lightGrayColor];
 		_buttonCustomer.showsTouchWhenHighlighted = YES;
@@ -169,7 +179,7 @@
 		
 		[_scrollViewContainer addSubview:_buttonCustomer];
 		
-		_buttonDefaultConnection = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(_buttonCustomer.frame), CGRectGetMaxY(_buttonCustomer.frame) + kSeparatorDefaultSpacing, CGRectGetWidth(_buttonCustomer.frame), CGRectGetHeight(_buttonCustomer.frame))];
+		_buttonDefaultConnection = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMinX(_buttonCustomer.frame), CGRectGetMaxY(_buttonCustomer.frame) + 2*kSeparatorDefaultSpacing, CGRectGetWidth(_buttonCustomer.frame), CGRectGetHeight(_buttonCustomer.frame))];
 		
 		_buttonDefaultConnection.backgroundColor = [UIColor lightGrayColor];
 		_buttonDefaultConnection.showsTouchWhenHighlighted = YES;
@@ -203,6 +213,28 @@
 		//		@property (nonatomic, strong) UIButton *buttonVerifiedTerms;
 		//		@property (nonatomic, strong) UIButton *buttonVerifiedPhone;
 		//		@property (nonatomic, strong) UIButton *buttonVerifiedEmail;
+		
+		////////////////////////////////////////////////////////////////////////
+		//Contacts button
+		_buttonContacts = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_buttonCustomer.frame) + kSeparatorDefaultSpacing, CGRectGetMinY(_buttonCustomer.frame), frame.size.width - 2*kSeparatorDefaultSpacing - CGRectGetWidth(_buttonCustomer.frame) - CGRectGetWidth(_tableViewUserTypes.frame) - 2*kViewDefaultBorderInset, CGRectGetHeight(_tableViewUserTypes.frame))];
+		
+		_buttonContacts.backgroundColor = [UIColor lightGrayColor];
+		_buttonContacts.showsTouchWhenHighlighted = YES;
+		_buttonContacts.clipsToBounds = YES;
+		[_buttonContacts setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		[_buttonContacts setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+		_buttonContacts.titleLabel.font = [UIFont fontWithName:kDefaultTextFontName size:kTextFieldDefaultTextSize/1.6];
+		
+		_buttonContacts.layer.cornerRadius = kDefaultButtonCornerRadius;
+		_buttonContacts.layer.borderWidth = kDefaultBorderWidth;
+		_buttonContacts.layer.borderColor = [UIColor orangeColor].CGColor;
+		
+		[_scrollViewContainer addSubview:_buttonContacts];
+		
+		////////////////////////////////////////////////////////////////////////
+		//Constraints
+//		NSLayoutConstraint *scrollViewConstraint = [NSLayoutConstraint constraintWithItem:_scrollViewContainer attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0];
+//		[self addConstraint:scrollViewConstraint];
 		
     }
     return self;

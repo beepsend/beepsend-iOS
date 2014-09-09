@@ -22,7 +22,7 @@
 	:
 	nil;
 	
-	return [[BSTimestamps alloc] initReportWithHLRReport:[_hlr convertToModel] andCallbackSentTime:whenCallbackWasSent];
+	return [[BSTimestamps alloc] initReportWithHLRReport:_hlr?[_hlr convertToModel]:_sms?[_sms convertToModel]:nil andCallbackSentTime:whenCallbackWasSent];
 }
 
 @end
