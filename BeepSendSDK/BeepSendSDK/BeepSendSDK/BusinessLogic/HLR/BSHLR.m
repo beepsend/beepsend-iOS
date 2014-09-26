@@ -8,6 +8,8 @@
 
 #import "BSHLR.h"
 
+#import "BSHLRService.h"
+
 @interface BSHLR ()
 
 @property (nonatomic, strong, readwrite) NSString *hlrID;
@@ -99,6 +101,36 @@
 		_errors = errors;
 	}
 	return self;
+}
+
+- (BSHLR *)initHLRWithNumber:(NSString *)phoneNumber
+{
+	if (self = [super initWithID:@"0" andTitle:@"HLR"]) {
+		_phoneNumber = phoneNumber;
+	}
+	return self;
+}
+
+//Validate HLR for phone number
+- (void)validateHLRForNumberOnCompletion:(void(^)(BSHLR *hlr, NSArray *errors))block
+{
+	if ([BSHelper isNilOrEmpty:_phoneNumber]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Phone number must be specified!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	[[BSHLRService sharedService] validateHLRForNumber:_phoneNumber withConnection:nil withCompletionBlock:^(BSHLR *response, NSArray *errors) {
+		
+		if (errors && errors.count>0) {
+			block(nil, errors);
+		}
+		else {
+			block(response, nil);
+		}
+	}];
 }
 
 @end

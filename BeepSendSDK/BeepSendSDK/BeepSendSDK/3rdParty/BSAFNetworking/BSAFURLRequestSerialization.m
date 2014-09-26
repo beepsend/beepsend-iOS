@@ -678,6 +678,8 @@ NSTimeInterval const kBSAFUploadStream3GSuggestedDelay = 0.2;
 @end
 
 @implementation BSAFMultipartBodyStream
+@synthesize streamStatus;
+@synthesize streamError;
 
 - (id)initWithStringEncoding:(NSStringEncoding)encoding {
     self = [super init];

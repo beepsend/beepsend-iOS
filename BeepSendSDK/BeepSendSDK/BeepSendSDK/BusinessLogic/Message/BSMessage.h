@@ -311,4 +311,11 @@
  */
 - (void)addGroupsRecipients:(NSArray *)groups;
 
+/*! Method that performs a dry run of SMS sending
+ 
+ @param message - Message to validate
+ @param block - Returns message without ID or error if validation failed
+ */
+- (void)validateMessageOnCompletion:(void(^)(BSMessage *message, NSArray *errors))block;
+
 @end

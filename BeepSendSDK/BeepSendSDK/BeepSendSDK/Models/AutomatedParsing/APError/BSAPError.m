@@ -11,6 +11,7 @@
 #import "BSError.h"
 
 @implementation BSAPError
+@synthesize description = _description;
 
 #pragma mark - Inherited methods
 

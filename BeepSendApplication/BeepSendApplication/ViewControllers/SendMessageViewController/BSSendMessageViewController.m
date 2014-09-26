@@ -190,7 +190,7 @@
 	[self.view addSubview:viewLoader];
 	[self.view addSubview:activityIndicator];
 	
-	[_connection validateSMS:message onCompletion:^(BSMessage *message, NSArray *errors) {
+	[message validateMessageOnCompletion:^(BSMessage *message, NSArray *errors) {
 		
 		[viewLoader removeFromSuperview];
 		[activityIndicator stopAnimating];

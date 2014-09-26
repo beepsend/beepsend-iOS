@@ -16,6 +16,7 @@
 #import "BSUser.h"
 
 @implementation BSAPConnection
+@synthesize description = _description;
 
 #pragma mark - Inherited methods
 

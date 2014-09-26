@@ -44,6 +44,7 @@
 @end
 
 @implementation BSConnection
+@synthesize description = _description;
 
 #pragma mark - Properties
 
@@ -559,60 +560,6 @@
 	return messageCount;
 }
 
-//Validate SMS
-- (void)validateSMS:(BSMessage *)message onCompletion:(void(^)(BSMessage *message, NSArray *errors))block
-{
-	if (_type != BSConnectionTypeSMS) {
-		
-		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Connection can't send sms messages!", @"")];
-		block(nil, @[error]);
-		
-		return; //This connection can't send SMS
-	}
-	
-	if (!message) {
-		
-		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message must be specified!", @"")];
-		block(nil, @[error]);
-		
-		return;
-	}
-	
-	if ([BSHelper isNilOrEmpty:message.message]) {
-		
-		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message body can't be empty!", @"")];
-		block(nil, @[error]);
-		
-		return;
-	}
-	
-	if ([BSHelper isNilOrEmpty:message.recipient] && message.recipients.count==0 && message.groups.count==0) {
-		
-		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message recipient must be specified!", @"")];
-		block(nil, @[error]);
-		
-		return;
-	}
-	
-	if ([BSHelper isNilOrEmpty:message.sender]) {
-		
-		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message sender must be specified!", @"")];
-		block(nil, @[error]);
-		
-		return;
-	}
-	
-	[[BSSMSService sharedService] validateSMSForMessage:message withCompletionBlock:^(BSMessage *message, NSArray *errors) {
-		
-		if (errors && errors.count > 0) {
-			block(nil, errors);
-		}
-		else {
-			block(message, nil);
-		}
-	}];
-}
-
 //Get sms details
 - (void)getDetailsForSMS:(BSMessage *)message onCompletion:(void(^)(BSLookup *lookup, NSArray *errors))block
 {
@@ -863,36 +810,6 @@
 		}
 		else {
 			block(hlrs, nil);
-		}
-	}];
-}
-
-//Validate HLR for phone number
-- (void)validateHLRForNumber:(NSString *)phoneNumber onCompletion:(void(^)(BSHLR *hlr, NSArray *errors))block
-{
-	if (_type != BSConnectionTypeHLR) {
-		
-		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Connection can't send HLR request!", @"")];
-		block(nil, @[error]);
-		
-		return; //This connection can't send HLR
-	}
-	
-	if ([BSHelper isNilOrEmpty:phoneNumber]) {
-		
-		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Phone number must be specified!", @"")];
-		block(nil, @[error]);
-		
-		return;
-	}
-	
-	[[BSHLRService sharedService] validateHLRForNumber:phoneNumber withConnection:self withCompletionBlock:^(BSHLR *response, NSArray *errors) {
-		
-		if (errors && errors.count>0) {
-			block(nil, errors);
-		}
-		else {
-			block(response, nil);
 		}
 	}];
 }

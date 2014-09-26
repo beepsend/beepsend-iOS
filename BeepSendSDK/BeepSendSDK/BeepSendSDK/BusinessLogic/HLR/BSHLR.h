@@ -93,4 +93,21 @@
 - (BSHLR *)initHLRWithNumber:(NSString *)phoneNumber
 				   andErrors:(NSArray *)errors;
 
+/*! Create HLR object
+ Used when HLR request return errors or when performing HLR validation
+ 
+ @param phoneNumber - Phone number
+ 
+ @return Returns HLR object
+ */
+- (BSHLR *)initHLRWithNumber:(NSString *)phoneNumber;
+
+/*! Method that performs a dry run of HLR lookup
+	(takes some time)
+ 
+ @param phoneNumber - Phone number to perform HLR
+ @param block - Returns HLR response or error
+ */
+- (void)validateHLRForNumberOnCompletion:(void(^)(BSHLR *hlr, NSArray *errors))block;
+
 @end
