@@ -312,6 +312,8 @@ or when you receive details for some already sent message.
 <dd></dd>
 <dt><tt><a href="index.html#//apple_ref/occ/instm/BSMessage/setValidityPeriod:" target="_top">-setValidityPeriod:</a></tt></dt>
 <dd></dd>
+<dt><tt><a href="index.html#//apple_ref/occ/instm/BSMessage/validateMessageOnCompletion:" target="_top">-validateMessageOnCompletion:</a></tt></dt>
+<dd></dd>
 </dl>
 <hr class="betweenAPIEntries">
 <!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSMessage/addGroupsRecipients:;   name=BSMessage::addGroupsRecipients: --><a name="//apple_ref/occ/instm/BSMessage/addGroupsRecipients:"></a>
@@ -999,6 +1001,34 @@ If this expires, the message won't continue to be routed.
 Default is infinite.
 </p>
 <!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSMessage/setValidityPeriod:;name=end --><!-- end discussion -->
+<hr class="betweenAPIEntries">
+<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSMessage/validateMessageOnCompletion:;   name=BSMessage::validateMessageOnCompletion: --><a name="//apple_ref/occ/instm/BSMessage/validateMessageOnCompletion:"></a>
+<h3><a name="validateMessageOnCompletion:">validateMessageOnCompletion:</a></h3>
+<hr class="afterName">
+<div class="declaration_indent">
+<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSMessage/validateMessageOnCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSMessage/validateMessageOnCompletion:" logicalPath="//apple_ref/occ/instm/BSMessage/validateMessageOnCompletion" target="_top"><span class="function">validateMessageOnCompletion</span></a>:(void(^)(<a machinegenerated="true" href="index.html#//apple_ref/occ/cl/BSMessage" logicalPath="//apple_ref/occ/cl/BSMessage" target="_top"><span class="type">BSMessage</span></a> <span class="type">*</span><span class="param">message</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSMessage/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSMessage/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSMessage/validateMessageOnCompletion:;name=end --></pre>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
+<div class="param_indent">
+<dl>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSMessage/validateMessageOnCompletion:/message;   name=validateMessageOnCompletion:::message -->
+<a name="//apple_ref/doc/methodparam/BSMessage/validateMessageOnCompletion:/message"></a>
+<code>message</code>
+</dt>
+<dd><p>- Message to validate</p></dd>
+<dt>
+<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSMessage/validateMessageOnCompletion:/block;   name=validateMessageOnCompletion:::block -->
+<a name="//apple_ref/doc/methodparam/BSMessage/validateMessageOnCompletion:/block"></a>
+<code>block</code>
+</dt>
+<dd><p>- Returns message without ID or error if validation failed</p></dd>
+</dl>
+</div>
+<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
+<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSMessage/validateMessageOnCompletion:;name=start --><p>Method that performs a dry run of SMS sending
+</p>
+<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSMessage/validateMessageOnCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenSections">
 <a name="HeaderDoc_props"></a>
 <h2 class="h2tight">Properties</h2>
@@ -1243,7 +1273,7 @@ Default is infinite.
 <p class="gapBeforeFooter">&nbsp;</p>
 <hr class="afterFooter">
 <div class="hd_copyright_and_timestamp">
-<p class="hd_timestamp">Last Updated: Thursday, September 04, 2014
+<p class="hd_timestamp">Last Updated: Friday, September 26, 2014
 </p>
 </div>
 </td>

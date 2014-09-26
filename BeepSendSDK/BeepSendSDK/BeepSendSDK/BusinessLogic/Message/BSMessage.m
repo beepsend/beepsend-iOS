@@ -10,6 +10,8 @@
 
 #import "BSGroup.h"
 
+#import "BSSMSService.h"
+
 @interface BSMessage ()
 
 @property (nonatomic, strong, readwrite) NSString *usedEncoding;
@@ -277,6 +279,44 @@
 	else {
 		_groups = groups;
 	}
+}
+
+//Validate SMS
+- (void)validateMessageOnCompletion:(void(^)(BSMessage *message, NSArray *errors))block
+{
+	if ([BSHelper isNilOrEmpty:_message]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message body can't be empty!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	if ([BSHelper isNilOrEmpty:_recipient] && _recipients.count==0 && _groups.count==0) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message recipient must be specified!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	if ([BSHelper isNilOrEmpty:_sender]) {
+		
+		BSError *error = [[BSError alloc] initWithCode:@0 andDescription:NSLocalizedString(@"Message sender must be specified!", @"")];
+		block(nil, @[error]);
+		
+		return;
+	}
+	
+	[[BSSMSService sharedService] validateSMSForMessage:self withCompletionBlock:^(BSMessage *message, NSArray *errors) {
+		
+		if (errors && errors.count > 0) {
+			block(nil, errors);
+		}
+		else {
+			block(message, nil);
+		}
+	}];
 }
 
 @end

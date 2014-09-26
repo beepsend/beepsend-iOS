@@ -258,14 +258,6 @@
  */
 - (NSInteger)smsCountForMessages:(NSArray *)messages;
 
-/*! Method that performs a dry run of SMS sending
- 
- @param message - Message to validate
- @param block - Returns message without ID or error if validation failed
- */
-- (void)validateSMS:(BSMessage *)message
-	   onCompletion:(void(^)(BSMessage *message, NSArray *errors))block;
-
 /*! The API can be utilized to get details of any message sent through Beepsend 
 	no matter if you submitted it via SMPP or HTTP
  
@@ -346,15 +338,6 @@
  @param block - Returns HLR response or error
  */
 - (void)bulkHLRForNumbers:(NSArray *)phoneNumbers onCompletion:(void(^)(NSArray *hlrs, NSArray *errors))block;
-
-/*! Method that performs a dry run of HLR lookup
-	(takes some time)
- 
- @param phoneNumber - Phone number to perform HLR
- @param block - Returns HLR response or error
- */
-- (void)validateHLRForNumber:(NSString *)phoneNumber
-				onCompletion:(void(^)(BSHLR *hlr, NSArray *errors))block;
 
 /*! This call does not consider delivery statistics
 	and should merely be used for aggregated views on traffic. 

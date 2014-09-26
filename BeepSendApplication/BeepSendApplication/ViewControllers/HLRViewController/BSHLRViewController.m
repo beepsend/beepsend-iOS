@@ -120,7 +120,9 @@
 	[_textFieldNumberToCheck resignFirstResponder];
 	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-	[_connection validateHLRForNumber:_textFieldNumberToCheck.text onCompletion:^(BSHLR *hlr, NSArray *errors) {
+	BSHLR *hlr = [[BSHLR alloc] initHLRWithNumber:_textFieldNumberToCheck.text];
+	
+	[hlr validateHLRForNumberOnCompletion:^(BSHLR *hlr, NSArray *errors) {
 		[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 		
 		[viewLoader removeFromSuperview];

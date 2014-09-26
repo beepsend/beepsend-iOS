@@ -18,7 +18,7 @@
 @property (nonatomic, strong) NSString *api_token;
 @property (nonatomic, strong) BSAPCCallback *callbacks;
 @property (nonatomic, strong) NSString *customer;
-@property (nonatomic, strong) NSString *description;
+@property (nonatomic, strong, readwrite) NSString *description;
 @property (nonatomic, strong) NSString *id;
 @property (nonatomic, strong) NSString *label;
 @property (nonatomic, strong) NSString *system_id;

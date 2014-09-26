@@ -334,10 +334,6 @@ If authenticated using a User token there can be one or several connections acce
 <dd></dd>
 <dt><tt><a href="index.html#//apple_ref/occ/instm/BSConnection/updateConnectionOnCompletion:" target="_top">-updateConnectionOnCompletion:</a></tt></dt>
 <dd></dd>
-<dt><tt><a href="index.html#//apple_ref/occ/instm/BSConnection/validateHLRForNumber:onCompletion:" target="_top">-validateHLRForNumber:onCompletion:</a></tt></dt>
-<dd></dd>
-<dt><tt><a href="index.html#//apple_ref/occ/instm/BSConnection/validateSMS:onCompletion:" target="_top">-validateSMS:onCompletion:</a></tt></dt>
-<dd></dd>
 </dl>
 <hr class="betweenAPIEntries">
 <!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSConnection/bulkHLRForNumbers:onCompletion:;   name=BSConnection::bulkHLRForNumbers:onCompletion: --><a name="//apple_ref/occ/instm/BSConnection/bulkHLRForNumbers:onCompletion:"></a>
@@ -1253,64 +1249,6 @@ Message count is sum of calculated message count for every message in array
 <!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/updateConnectionOnCompletion:;name=start --><p>If changes were made to connection use update method to save changes.
 </p>
 <!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/updateConnectionOnCompletion:;name=end --><!-- end discussion -->
-<hr class="betweenAPIEntries">
-<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSConnection/validateHLRForNumber:onCompletion:;   name=BSConnection::validateHLRForNumber:onCompletion: --><a name="//apple_ref/occ/instm/BSConnection/validateHLRForNumber:onCompletion:"></a>
-<h3><a name="validateHLRForNumber:onCompletion:">validateHLRForNumber:onCompletion:</a></h3>
-<hr class="afterName">
-<div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/validateHLRForNumber:onCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSConnection/validateHLRForNumber:onCompletion:" logicalPath="//apple_ref/occ/instm/BSConnection/validateHLRForNumber" target="_top"><span class="function">validateHLRForNumber</span></a>:(<!-- a logicalPath="//apple_ref/occ/cl/NSString //apple_ref/occ/tdef/NSString //apple_ref/occ/tag/NSString //apple_ref/occ/struct/NSString //apple_ref/occ/intf/NSString //apple_ref/doc/anysymbol/NSString" machineGenerated="true" --><span class="type">NSString</span><!-- /a --> <span class="type">*</span>)<span class="param">phoneNumber</span> 
-        <!-- a logicalPath="//apple_ref/occ/instm/BSConnection/onCompletion //apple_ref/occ/clm/BSConnection/onCompletion //apple_ref/occ/intfcm/BSConnection/onCompletion //apple_ref/occ/intfm/BSConnection/onCompletion //apple_ref/occ/func/onCompletion //apple_ref/occ/ftmplt/BSConnection/onCompletion //apple_ref/occ/defn/onCompletion //apple_ref/occ/macro/onCompletion //apple_ref/doc/anysymbol/onCompletion" machineGenerated="true" --><span class="function">onCompletion</span><!-- /a -->:(void(^)(<a machinegenerated="true" href="../../../BSHLR_h/Classes/BSHLR/index.html#//apple_ref/occ/cl/BSHLR" logicalPath="//apple_ref/occ/cl/BSHLR" target="_top"><span class="type">BSHLR</span></a> <span class="type">*</span><span class="param">hlr</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSConnection/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSConnection/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/validateHLRForNumber:onCompletion:;name=end --></pre>
-</div>
-<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
-<div class="param_indent">
-<dl>
-<dt>
-<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSConnection/validateHLRForNumber:onCompletion:/phoneNumber;   name=validateHLRForNumber:onCompletion:::phoneNumber -->
-<a name="//apple_ref/doc/methodparam/BSConnection/validateHLRForNumber:onCompletion:/phoneNumber"></a>
-<code>phoneNumber</code>
-</dt>
-<dd><p>- Phone number to perform HLR</p></dd>
-<dt>
-<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSConnection/validateHLRForNumber:onCompletion:/block;   name=validateHLRForNumber:onCompletion:::block -->
-<a name="//apple_ref/doc/methodparam/BSConnection/validateHLRForNumber:onCompletion:/block"></a>
-<code>block</code>
-</dt>
-<dd><p>- Returns HLR response or error</p></dd>
-</dl>
-</div>
-<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
-<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/validateHLRForNumber:onCompletion:;name=start --><p>Method that performs a dry run of HLR lookup
-(takes some time)
-</p>
-<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/validateHLRForNumber:onCompletion:;name=end --><!-- end discussion -->
-<hr class="betweenAPIEntries">
-<!-- headerDoc=instm;  uid=//apple_ref/occ/instm/BSConnection/validateSMS:onCompletion:;   name=BSConnection::validateSMS:onCompletion: --><a name="//apple_ref/occ/instm/BSConnection/validateSMS:onCompletion:"></a>
-<h3><a name="validateSMS:onCompletion:">validateSMS:onCompletion:</a></h3>
-<hr class="afterName">
-<div class="declaration_indent">
-<pre><!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/validateSMS:onCompletion:;name=start -->- (<!-- a logicalPath="//apple_ref/occ/cl/void //apple_ref/occ/tdef/void //apple_ref/occ/tag/void //apple_ref/occ/struct/void //apple_ref/occ/intf/void //apple_ref/doc/anysymbol/void" machineGenerated="true" --><span class="type">void</span><!-- /a -->)<a machinegenerated="true" href="index.html#//apple_ref/occ/instm/BSConnection/validateSMS:onCompletion:" logicalPath="//apple_ref/occ/instm/BSConnection/validateSMS" target="_top"><span class="function">validateSMS</span></a>:(<a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/cl/BSMessage" logicalPath="//apple_ref/occ/cl/BSMessage" target="_top"><span class="type">BSMessage</span></a> <span class="type">*</span>)<span class="param">message</span> <!-- a logicalPath="//apple_ref/occ/instm/BSConnection/onCompletion //apple_ref/occ/clm/BSConnection/onCompletion //apple_ref/occ/intfcm/BSConnection/onCompletion //apple_ref/occ/intfm/BSConnection/onCompletion //apple_ref/occ/func/onCompletion //apple_ref/occ/ftmplt/BSConnection/onCompletion //apple_ref/occ/defn/onCompletion //apple_ref/occ/macro/onCompletion //apple_ref/doc/anysymbol/onCompletion" machineGenerated="true" --><span class="function">onCompletion</span><!-- /a -->:(void(^)(<a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/cl/BSMessage" logicalPath="//apple_ref/occ/cl/BSMessage" target="_top"><span class="type">BSMessage</span></a> <span class="type">*</span><span class="param">message</span>, <!-- a logicalPath="//apple_ref/occ/cl/NSArray //apple_ref/occ/tdef/NSArray //apple_ref/occ/tag/NSArray //apple_ref/occ/struct/NSArray //apple_ref/occ/intf/NSArray //apple_ref/doc/anysymbol/NSArray" machineGenerated="true" --><span class="type">NSArray</span><!-- /a --> <span class="type">*</span><a machinegenerated="true" href="../../../BSMessage_h/Classes/BSMessage/index.html#//apple_ref/occ/instp/BSMessage/errors" logicalPath="//apple_ref/occ/cl/errors //apple_ref/occ/tdef/errors //apple_ref/occ/tag/errors //apple_ref/occ/struct/errors //apple_ref/occ/intf/errors //apple_ref/doc/anysymbol/errors" target="_top"><span class="type">errors</span></a>))<!-- a logicalPath="//apple_ref/occ/econst/block //apple_ref/occ/data/BSConnection/block //apple_ref/occ/data/block //apple_ref/occ/clconst/BSConnection/block " machineGenerated="true" --><span class="var">block</span><!-- /a -->; <!-- headerDoc=declaration;uid=//apple_ref/occ/instm/BSConnection/validateSMS:onCompletion:;name=end --></pre>
-</div>
-<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Parameters</font></h5>
-<div class="param_indent">
-<dl>
-<dt>
-<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSConnection/validateSMS:onCompletion:/message;   name=validateSMS:onCompletion:::message -->
-<a name="//apple_ref/doc/methodparam/BSConnection/validateSMS:onCompletion:/message"></a>
-<code>message</code>
-</dt>
-<dd><p>- Message to validate</p></dd>
-<dt>
-<!-- headerDoc=methodparam;  uid=//apple_ref/doc/methodparam/BSConnection/validateSMS:onCompletion:/block;   name=validateSMS:onCompletion:::block -->
-<a name="//apple_ref/doc/methodparam/BSConnection/validateSMS:onCompletion:/block"></a>
-<code>block</code>
-</dt>
-<dd><p>- Returns message without ID or error if validation failed</p></dd>
-</dl>
-</div>
-<h5 class="tight"><font face="Lucida Grande,Helvetica,Arial">Discussion</font></h5>
-<!-- begin discussion --><!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/validateSMS:onCompletion:;name=start --><p>Method that performs a dry run of SMS sending
-</p>
-<!-- headerDoc=discussion;uid=//apple_ref/occ/instm/BSConnection/validateSMS:onCompletion:;name=end --><!-- end discussion -->
 <hr class="betweenSections">
 <a name="HeaderDoc_props"></a>
 <h2 class="h2tight">Properties</h2>
@@ -1523,7 +1461,7 @@ Message count is sum of calculated message count for every message in array
 <p class="gapBeforeFooter">&nbsp;</p>
 <hr class="afterFooter">
 <div class="hd_copyright_and_timestamp">
-<p class="hd_timestamp">Last Updated: Thursday, September 04, 2014
+<p class="hd_timestamp">Last Updated: Friday, September 26, 2014
 </p>
 </div>
 </td>
